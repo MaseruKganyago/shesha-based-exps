@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Boxfusion.Health.His.Admissions</name>
+    </assembly>
+    <members>
+        <member name="T:Boxfusion.Health.His.Admissions.Authorization.HisAdminAuthorizationProvider">
+            <summary>
+            Health.His Authorization Provider
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Authorization.HisAdminAuthorizationProvider.SetPermissions(Abp.Authorization.IPermissionDefinitionContext)">
+            <summary>
+            Register permissions declared in the <see cref="T:Boxfusion.Health.His.Admissions.Authorization.PermissionNames"/> class
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Authorization.HisAdminPermissionChecker">
+            <summary>
+            Health.His Permission checker
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Authorization.HisAdminPermissionChecker.#ctor(Abp.Domain.Repositories.IRepository{Shesha.Domain.Person,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointmentEntity,System.Guid})">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Authorization.HisAdminPermissionChecker.IsGrantedAsync(System.Int64,System.String)">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Authorization.HisAdminPermissionChecker.IsInAnyOfRoles(Shesha.Domain.Person,System.String[])">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Authorization.HisAdminPermissionChecker.IsDataAdministrator(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Authorization.IHisAdminPermissionChecker">
+            <summary>
+            Health.His Permission checker
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Authorization.IHisAdminPermissionChecker.IsDataAdministrator(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Authorization.PermissionNames">
+            <summary>
+            Health.His Permission names
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Authorization.PermissionNames.GeneralDashboard">
+            <summary>
+            Pages: General Dashboard
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Authorization.RoleNames">
+            <summary>
+            Health.His Role Names
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Authorization.RoleNames.DataAdministrator">
+            <summary>
+            Data Administrator
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdminSettingNames">
+            <summary>
+            Contains setting names for Health.Hiss
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdminSettingProvider">
+            <summary>
+            Defines Health.His settings
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdminSettingsAppService.Update(Boxfusion.Health.His.Admissions.Configuration.HisAdminSettingsDto)">
+            <summary>
+            Updates Health.His settings
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdminSettingsAppService.Get">
+            <summary>
+            Returns Health.His settings
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdminSettingsAppService.ChangeSettingAsync(System.String,System.String)">
+            <summary>
+            Changes setting for tenant with fallback to application
+            </summary>
+            <param name="name">Setting name</param>
+            <param name="value">Setting value</param>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdminSettingsDto">
+            <summary>
+            Health.His settings DTO
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.HisAdminModule">
+            <summary>
+            Health.His Module
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.HisAdminModule.Initialize">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.HisAdminModule.PreInitialize">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.HisAdminModule.PostInitialize">
+            inheritedDoc
+        </member>
+    </members>
+</doc>
