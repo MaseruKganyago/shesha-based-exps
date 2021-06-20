@@ -14,9 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Shesha.Application" Version="0.0.1" />
-    <PackageReference Include="Shesha.NHibernate" Version="0.0.1" />
-    <ProjectReference Include="..\..\src\Boxfusion.Health.His\Boxfusion.Health.His.Admissions.csproj" />
+    <PackageReference Include="Shesha.Application" Version="0.0.8" />
+    <PackageReference Include="Shesha.NHibernate" Version="0.0.8" />
   </ItemGroup>
 	<ItemGroup>
     <PackageReference Include="Microsoft.Identity.Client" Version="4.9.0" />
@@ -35,5 +34,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.2" />
     <PackageReference Include="Castle.Core" Version="4.4.0" />
   </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.csproj" />
+	</ItemGroup>
 
 </Project>

@@ -1,0 +1,2862 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Boxfusion.Health.His.Administration</name>
+    </assembly>
+    <members>
+        <member name="T:Boxfusion.Health.Domain.Authorization.HealthDomainAuthorizationProvider">
+            <summary>
+            HealthDomain Authorization Provider
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.Domain.Authorization.HealthDomainAuthorizationProvider.SetPermissions(Abp.Authorization.IPermissionDefinitionContext)">
+            <summary>
+            Register permissions declared in the <see cref="T:Boxfusion.Health.Domain.Authorization.PermissionNames"/> class
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Authorization.HealthDomainPermissionChecker">
+            <summary>
+            HealthDomain Permission checker
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.Domain.Authorization.HealthDomainPermissionChecker.#ctor(Abp.Domain.Repositories.IRepository{Shesha.Domain.Person,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointmentEntity,System.Guid})">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.Domain.Authorization.HealthDomainPermissionChecker.IsGrantedAsync(System.Int64,System.String)">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.Domain.Authorization.HealthDomainPermissionChecker.IsInAnyOfRoles(Shesha.Domain.Person,System.String[])">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.Domain.Authorization.HealthDomainPermissionChecker.IsDataAdministrator(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Authorization.IHealthDomainPermissionChecker">
+            <summary>
+            HealthDomain Permission checker
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.Domain.Authorization.IHealthDomainPermissionChecker.IsDataAdministrator(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Authorization.PermissionNames">
+            <summary>
+            HealthDomain Permission names
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Authorization.PermissionNames.GeneralDashboard">
+            <summary>
+            Pages: General Dashboard
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Authorization.RoleNames">
+            <summary>
+            HealthDomain Role Names
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Authorization.RoleNames.DataAdministrator">
+            <summary>
+            Data Administrator
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Configuration.HealthDomainSettingNames">
+            <summary>
+            Contains setting names for HealthDomain
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Configuration.HealthDomainSettingProvider">
+            <summary>
+            Defines HealthDomain settings
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.Domain.Configuration.HealthDomainSettingsAppService.Update(Boxfusion.Health.Domain.Configuration.HealthDomainSettingsDto)">
+            <summary>
+            Updates HealthDomain settings
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.Domain.Configuration.HealthDomainSettingsAppService.Get">
+            <summary>
+            Returns HealthDomain settings
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.Domain.Configuration.HealthDomainSettingsAppService.ChangeSettingAsync(System.String,System.String)">
+            <summary>
+            Changes setting for tenant with fallback to application
+            </summary>
+            <param name="name">Setting name</param>
+            <param name="value">Setting value</param>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Configuration.HealthDomainSettingsDto">
+            <summary>
+            HealthDomain settings DTO
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.ClassHistory`2">
+            <summary>
+            The class history permits the tracking of the encounters transitions without needing to go through the resource history. 
+            This would be used for a case where an admission starts of as an emergency encounter, then transitions into an inpatient scenario. 
+            Doing this and not restarting a new encounter ensures that any lab/diagnostic results can more easily follow the patient and not require 
+            re-processing and not get lost or cancelled during a kind of discharge from emergency to inpatient.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.ClassHistory`2.Class">
+            <summary>
+            Domain provides codes that qualify the ActEncounterClass (ENC)
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.ClassHistory`2.Period">
+            <summary>
+            The time that the episode was in the specified status
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.ClassHistory`2.OwnerId">
+            <summary>
+            The Id of the entity this audit entry relates to.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.ClassHistory`2.OwnerType">
+            <summary>
+            The Type of entity this audit entry relates to.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Clinic">
+            <summary>
+            Clinic facility inherits from Shesha facility
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Condition`1">
+            <summary>
+            Patient's condition or diagnoses
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Condition`1.Identifier">
+            <summary>
+            Business identifiers assigned to this condition by the performer or other systems which remain constant as the resource is updated and propagates from server to server.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Condition`1.RecordedDate">
+            <summary>
+            The recordedDate represents when this particular Condition record was created in the system, which is often a system-generated date.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Condition`1.ClinicalStatus">
+            <summary>
+            The clinical status of the condition.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Condition`1.VerificationStatus">
+            <summary>
+            The verification status to support the clinical status of the condition.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Condition`1.Category">
+            <summary>
+            A category assigned to the condition.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Condition`1.Severity">
+            <summary>
+            A subjective assessment of the severity of the condition as evaluated by the clinician.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Condition`1.Code">
+            <summary>
+            dentification of the condition, problem or diagnosis.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Condition`1.BodySite">
+            <summary>
+            The anatomical location where this condition manifests itself.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Condition`1.Subject">
+            <summary>
+            Indicates the patient or group who the condition record is associated with.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Condition`1.Encounter">
+            <summary>
+            The Encounter during which this Condition was created or to which the creation of this record is tightly associated.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Condition`1.Recorder">
+            <summary>
+            Individual who recorded the record and takes responsibility for its content.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Condition`1.Asserter">
+            <summary>
+            Individual who is making the condition statement.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Condition`1.Note">
+            <summary>
+            Additional information about the Condition. This is a general notes/comments entry for description of the Condition, its diagnosis and prognosis.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.DataTypes.Identifier`1">
+            <summary>
+            An identifier intended for computation
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.DataTypes.Identifier`1.Use">
+            <summary>
+            usual | official | temp | secondary | old (If known)
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.DataTypes.Identifier`1.Type">
+            <summary>
+            A coded type for an identifier that can be used to determine which identifier to use for a specific purpose.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.DataTypes.Identifier`1.System">
+            <summary>
+            The namespace for the identifier value
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.DataTypes.Identifier`1.Value">
+            <summary>
+            The value that is unique
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.DataTypes.Identifier`1.Period">
+            <summary>
+            Time period when id is/was valid for use
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.DataTypes.Identifier`1.Assigner">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.DataTypes.Identifier`1.OwnerId">
+            <summary>
+            The Id of the entity this audit entry relates to.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.DataTypes.Identifier`1.OwnerType">
+            <summary>
+            The Type of entity this audit entry relates to.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.DataTypes.ResourceReference`1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Diagnosis`1">
+            <summary>
+            The list of diagnosis relevant to this encounter.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Diagnosis`1.Condition">
+            <summary>
+            The diagnosis or procedure relevant to the encounter
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Diagnosis`1.Use">
+            <summary>
+            Role that this diagnosis has within the encounter (e.g. admission, billing, discharge …)
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Diagnosis`1.Rank">
+            <summary>
+            Ranking of the diagnosis (for each role type)
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Diagnosis`1.Encounter">
+            <summary>
+            Encouter that triggered this diagnosis
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Encounter`1">
+            <summary>
+            The parent encouter from which all other encounters inherit from
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.Identifier">
+            <summary>
+            Identifier(s) by which this encounter is known. (This is a business identifier, not a resource identifier)
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.Status">
+            <summary>
+            Current state of the encounter (e.g. planned | arrived | triaged | in-progress | onleave | finished | cancelled +.)
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.Class">
+            <summary>
+            Concepts representing classification of patient encounter such as ambulatory (outpatient), inpatient, emergency, home health or others due to local variations.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.Type">
+            <summary>
+            Specific type of encounter (e.g. e-mail consultation, surgical day-care, skilled nursing, rehabilitation).
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.ServiceType">
+            <summary>
+            Broad categorization of the service that is to be provided (e.g. cardiology).
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.Priority">
+            <summary>
+            Indicates the urgency of the encounter.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.Subject">
+            <summary>
+            The patient or group present at the encounter
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.EpisodeOfCare">
+            <summary>
+            Episode(s) of care that this encounter should be recorded against
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.BasedOn">
+            <summary>
+            The ServiceRequest that initiated this encounter
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.Appointment">
+            <summary>
+            The appointment that scheduled this encounter
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.Period">
+            <summary>
+            The start and end time of the encounter
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.Length">
+            <summary>
+            Quantity of time the encounter lasted (less time absent)
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.ReasonCode">
+            <summary>
+            Coded reason the encounter takes place
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.ReasonReference">
+            <summary>
+            Reason the encounter takes place (reference)
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.Account">
+            <summary>
+            The set of accounts that may be used for billing for this Encounter
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.EncounterDate">
+            <summary>
+            the date that the encounter took place
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Encounter`1.ServiceProvider">
+            <summary>
+            The practitioner (not necessarily a doctor or nurse, even admin clerk) that was responsible for the encounter
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.FHIR.CodableConceptLists.BodySite">
+            <summary>
+            This value set includes all codes from SNOMED CT for BodyStructure
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.FHIR.CodableConceptLists.ICDCode">
+            <summary>
+            International Statistical Classification of Diseases and Related Health Problems
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListClinicalStatus">
+            <summary>
+            The clinical status of the condition.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListClinicalStatus.Active">
+            <summary>
+            The subject is currently experiencing the symptoms of the condition or there is evidence of the condition.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListClinicalStatus.Recurrence">
+            <summary>
+            The subject is experiencing a re-occurence or repeating of a previously resolved condition, e.g. urinary tract infection, pancreatitis, cholangitis, conjunctivitis.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListClinicalStatus.Relapse">
+            <summary>
+            The subject is experiencing a return of a condition, or signs and symptoms after a period of improvement or remission, e.g. relapse of cancer, multiple sclerosis, rheumatoid arthritis, systemic lupus erythematosus, bipolar disorder, [psychotic relapse of] schizophrenia, etc.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListClinicalStatus.Inactive">
+            <summary>
+            The subject is no longer experiencing the symptoms of the condition or there is no longer evidence of the condition.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListClinicalStatus.Remission">
+            <summary>
+            The subject is no longer experiencing the symptoms of the condition, but there is a risk of the symptoms returning.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListClinicalStatus.Resolved">
+            <summary>
+            The subject is no longer experiencing the symptoms of the condition and there is a negligible perceived risk of the symptoms returning.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListConditionCategory">
+            <summary>
+            A category assigned to the condition.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListConditionCategory.ProblemListItem">
+            <summary>
+            An item on a problem list that can be managed over time and can be expressed by a practitioner (e.g. physician, nurse), patient, or related person.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListConditionCategory.EncounterDiagnosis">
+            <summary>
+            A point in time diagnosis (e.g. from a physician or nurse) in context of an encounter.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListConditionSeverity">
+            <summary>
+            A subjective assessment of the severity of the condition as evaluated by the clinician.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListConditionSeverity.Severe">
+            <summary>
+            Condition is severe.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListConditionSeverity.Moderate">
+            <summary>
+            Condition is moderate.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListConditionSeverity.Mild">
+            <summary>
+            Condition is mild.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListConditionVerificationStatus">
+            <summary>
+            The verification status to support or decline the clinical status of the condition or diagnosis.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListConditionVerificationStatus.Unconfirmed">
+            <summary>
+            There is not sufficient diagnostic and/or clinical evidence to treat this as a confirmed condition.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListConditionVerificationStatus.Provisional">
+            <summary>
+            This is a tentative diagnosis - still a candidate that is under consideration.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListConditionVerificationStatus.Differential">
+            <summary>
+            One of a set of potential (and typically mutually exclusive) diagnoses asserted to further guide the diagnostic process and preliminary treatment.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListConditionVerificationStatus.Confirmed">
+            <summary>
+            There is sufficient diagnostic and/or clinical evidence to treat this as a confirmed condition.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListConditionVerificationStatus.Refuted">
+            <summary>
+            This condition has been ruled out by diagnostic and clinical evidence.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListConditionVerificationStatus.EnteredInError">
+            <summary>
+            The statement was entered in error and is not valid.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListCountry">
+            <summary>
+            Enum list of all countries in the world
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Afghanistan">
+            <summary>
+            Afghanistan country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Albania">
+            <summary>
+            Albania country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Algeria">
+            <summary>
+            Algeria country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Andorra">
+            <summary>
+            Andorra country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Angola">
+            <summary>
+            Angola country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.AntiguaAndBarbuda">
+            <summary>
+            Antigua and Barbuda country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Argentina">
+            <summary>
+            Argentina country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Armenia">
+            <summary>
+            Armenia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Australia">
+            <summary>
+            Australia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Austria">
+            <summary>
+            Austria country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Azerbaijan">
+            <summary>
+            Azerbaijan country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Bahamas">
+            <summary>
+            Bahamas country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Bahrain">
+            <summary>
+            Bahrain country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Bangladesh">
+            <summary>
+            Bangladesh country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Barbados">
+            <summary>
+            Barbados country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Belarus">
+            <summary>
+            Belarus country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Belgium">
+            <summary>
+            Belgium country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Belize">
+            <summary>
+            Belize country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Benin">
+            <summary>
+            Benin country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Bhutan">
+            <summary>
+            Bhutan country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Bolivia">
+            <summary>
+            Bolivia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.BosniaAndHerzegovina">
+            <summary>
+            Bosnia and Herzegovina country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Botswana">
+            <summary>
+            Botswana country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Brazil">
+            <summary>
+            Brazil country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.BruneiDarussalam">
+            <summary>
+            Brunei Darussalam country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Bulgaria">
+            <summary>
+            Bulgaria country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.BurkinaFaso">
+            <summary>
+            Burkina Faso country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Burundi">
+            <summary>
+            Burundi country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.CapeVerde">
+            <summary>
+            Cape Verde country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Cambodia">
+            <summary>
+            Cambodia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Cameroon">
+            <summary>
+            Cameroon country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Canada">
+            <summary>
+            Canada country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.CentralAfricanRepublic">
+            <summary>
+            Central African Republic country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Chad">
+            <summary>
+            Chad country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Chile">
+            <summary>
+            Chile country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.China">
+            <summary>
+            China country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Colombia">
+            <summary>
+            Colombia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Comoros">
+            <summary>
+            Comoros country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Congo">
+            <summary>
+            Congo country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.CostaRica">
+            <summary>
+            Costa Rica country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.CôtedIvoire">
+            <summary>
+            Côte d'Ivoire country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Croatia">
+            <summary>
+            Croatia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Cuba">
+            <summary>
+            Cuba country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Cyprus">
+            <summary>
+            Cyprus country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Czechia">
+            <summary>
+            Czechia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.DemocraticPeoplesRepublicOfKorea">
+            <summary>
+            Democratic People's Republic of Korea country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.DemocraticRepublicOfTheCongo">
+            <summary>
+            Democratic Republic of the Congo country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Denmark">
+            <summary>
+            Denmark country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Djibouti">
+            <summary>
+            Djibouti country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Dominica">
+            <summary>
+            Dominica country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.DominicanRepublic">
+            <summary>
+            Dominican Republic country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Ecuador">
+            <summary>
+            Ecuador country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Egypt">
+            <summary>
+            Egypt country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.ElSalvador">
+            <summary>
+            El Salvador country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.EquatorialGuinea">
+            <summary>
+            Equatorial Guinea country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Eritrea">
+            <summary>
+            Eritrea country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Estonia">
+            <summary>
+            Estonia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Eswatini">
+            <summary>
+            Eswatini country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Ethiopia">
+            <summary>
+            Ethiopia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Fiji">
+            <summary>
+            Fiji country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Finland">
+            <summary>
+            Finland country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.France">
+            <summary>
+            France country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Gabon">
+            <summary>
+            Gabon country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Gambia">
+            <summary>
+            Gambia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Georgia">
+            <summary>
+            Georgia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Germany">
+            <summary>
+            Germany country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Ghana">
+            <summary>
+            Ghana country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Greece">
+            <summary>
+            Greece country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Grenada">
+            <summary>
+            Grenada country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Guatemala">
+            <summary>
+            Guatemala country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Guinea">
+            <summary>
+            Guinea country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.GuineaBissau">
+            <summary>
+            Guinea-Bissau country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Guyana">
+            <summary>
+            Guyana country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Haiti">
+            <summary>
+            Haiti country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Honduras">
+            <summary>
+            Honduras country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Hungary">
+            <summary>
+            Hungary country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Iceland">
+            <summary>
+            Iceland country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.India">
+            <summary>
+            India country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Indonesia">
+            <summary>
+            Indonesia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Iran">
+            <summary>
+            Iran country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Iraq">
+            <summary>
+            Iraq country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Ireland">
+            <summary>
+            Ireland country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Israel">
+            <summary>
+            Israel country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Italy">
+            <summary>
+            Italy country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Jamaica">
+            <summary>
+            Jamaica country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Japan">
+            <summary>
+            Japan country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Jordan">
+            <summary>
+            Jordan country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Kazakhstan">
+            <summary>
+            Kazakhstan country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Kenya">
+            <summary>
+            Kenya country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Kiribati">
+            <summary>
+            Kiribati country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Kuwait">
+            <summary>
+            Kuwait country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Kyrgyzstan">
+            <summary>
+            Kyrgyzstan country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.LaoPeopleDemocraticRepublic">
+            <summary>
+            Lao People's Democratic Republic country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Latvia">
+            <summary>
+            Latvia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Lebanon">
+            <summary>
+            Lebanon country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Lesotho">
+            <summary>
+            Lesotho country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Liberia">
+            <summary>
+            Liberia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Libya">
+            <summary>
+            Libya country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Liechtenstein">
+            <summary>
+            Liechtenstein country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Lithuania">
+            <summary>
+            Lithuania country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Luxembourg">
+            <summary>
+            Luxembourg country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Madagascar">
+            <summary>
+            Madagascar country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Malawi">
+            <summary>
+            Malawi country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Malaysia">
+            <summary>
+            Malaysia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Maldives">
+            <summary>
+            Maldives country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Mali">
+            <summary>
+            Mali country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Malta">
+            <summary>
+            Malta country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.MarshallIslands">
+            <summary>
+            Marshall Islands country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Mauritania">
+            <summary>
+            Mauritania country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Mauritius">
+            <summary>
+            Mauritius country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Mexico">
+            <summary>
+            Mexico country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Micronesia">
+            <summary>
+            Micronesia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Monaco">
+            <summary>
+            Monaco country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Mongolia">
+            <summary>
+            Mongolia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Montenegro">
+            <summary>
+            Montenegro country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Morocco">
+            <summary>
+            Morocco country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Mozambique">
+            <summary>
+            Mozambique country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Myanmar">
+            <summary>
+            Myanmar country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Namibia">
+            <summary>
+            Namibia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Nauru">
+            <summary>
+            Nauru country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Nepal">
+            <summary>
+            Nepal country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Netherlands">
+            <summary>
+            Netherlands country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.NewZealand">
+            <summary>
+            New Zealand countrey
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Nicaragua">
+            <summary>
+            Nicaragua country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Niger">
+            <summary>
+            Niger country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Nigeria">
+            <summary>
+            Nigeria country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.NorthMacedonia">
+            <summary>
+            North Macedonia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Norway">
+            <summary>
+            Norway country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Oman">
+            <summary>
+            Oman country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Pakistan">
+            <summary>
+            Pakistan country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Palau">
+            <summary>
+            Palau country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Panama">
+            <summary>
+            Panama country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.PapuaNewGuinea">
+            <summary>
+            Papua New Guinea country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Paraguay">
+            <summary>
+            Paraguay country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Peru">
+            <summary>
+            Peru country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Philippines">
+            <summary>
+            Philippines country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Poland">
+            <summary>
+            Poland country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Portugal">
+            <summary>
+            Portugal country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Qatar">
+            <summary>
+            Qatar country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.RepublicOfKorea">
+            <summary>
+            Republic of Korea country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.RepublicOfMoldova">
+            <summary>
+            Republic of Moldova country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Romania">
+            <summary>
+            Romania country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.RussianFederation">
+            <summary>
+            Russian Federation country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Rwanda">
+            <summary>
+            Rwanda country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.SaintKittsAndNevis">
+            <summary>
+            Saint Kitts and Nevis country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.SaintLucia">
+            <summary>
+            Saint Lucia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.SaintVincentAndTheGrenadines">
+            <summary>
+            Saint Vincent and the Grenadines country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Samoa">
+            <summary>
+            Samoa country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.SanMarino">
+            <summary>
+            San Marino country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.SaoTomeAndPrincipe">
+            <summary>
+            Sao Tome and Principe country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.SaudiArabia">
+            <summary>
+            Saudi Arabia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Senegal">
+            <summary>
+            Senegal country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Serbia">
+            <summary>
+            Serbia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Seychelles">
+            <summary>
+            Seychelles country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.SierraLeone">
+            <summary>
+            Sierra Leone country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Singapore">
+            <summary>
+            Singapore country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Slovakia">
+            <summary>
+            Slovakia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Slovenia">
+            <summary>
+            Slovenia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.SolomonIslands">
+            <summary>
+            Solomon Islands country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Somalia">
+            <summary>
+            Somalia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.SouthAfrica">
+            <summary>
+            South Africa country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.SouthSudan">
+            <summary>
+            South Sudan country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Spain">
+            <summary>
+            Spain country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.SriLanka">
+            <summary>
+            Sri Lanka country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Sudan">
+            <summary>
+            Sudan country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Suriname">
+            <summary>
+            Suriname country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Sweden">
+            <summary>
+            Sweden country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Switzerland">
+            <summary>
+            Switzerland country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.SyrianArabRepublic">
+            <summary>
+            Syrian Arab Republic country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Tajikistan">
+            <summary>
+            Tajikistan country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Thailand">
+            <summary>
+            Thailand country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.TimorLeste">
+            <summary>
+            Timor-Leste country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Togo">
+            <summary>
+            Togo country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Tonga">
+            <summary>
+            Tonga country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.TrinidadAndTobago">
+            <summary>
+            Trinidad and Tobago country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Tunisia">
+            <summary>
+            Tunisia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Turkey">
+            <summary>
+            Turkey country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Turkmenistan">
+            <summary>
+            Turkmenistan country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Tuvalu">
+            <summary>
+            Tuvalu country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Uganda">
+            <summary>
+            Uganda country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Ukraine">
+            <summary>
+            Ukraine country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.UnitedArabEmirates">
+            <summary>
+            United Arab Emirates country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.UnitedKingdomOfGreatBritainAndNorthernIreland">
+            <summary>
+            United Kingdom of Great Britain and Northern Ireland country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.UnitedRepublicOfTanzania">
+            <summary>
+            United Republic of Tanzania country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.UnitedStatesOfAmerica">
+            <summary>
+            United States of America country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Uruguay">
+            <summary>
+            Uruguay country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Uzbekistan">
+            <summary>
+            Uzbekistan country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Vanuatu">
+            <summary>
+            Vanuatu country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Venezuela">
+            <summary>
+            Venezuela country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Vietnam">
+            <summary>
+            Vietnam country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Yemen">
+            <summary>
+            Yemen country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Zambia">
+            <summary>
+            Zambia country
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListCountry.Zimbabwe">
+            <summary>
+            Zimbabwe country
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListDiagnosisRole">
+            <summary>
+            This value set defines a set of codes that can be used to express the role of a diagnosis on the Encounter or EpisodeOfCare record.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListDiagnosisRole.AD">
+            <summary>
+            Admission diagnosis
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListDiagnosisRole.DD">
+            <summary>
+            Discharge diagnosis
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListDiagnosisRole.CC">
+            <summary>
+            Chief complaint
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListDiagnosisRole.CM">
+            <summary>
+            Comorbidity diagnosis
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListDiagnosisRole.Preop">
+            <summary>
+            pre-op diagnosis
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListDiagnosisRole.Postop">
+            <summary>
+            Post-op diagnosis
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListDiagnosisRole.Billing">
+            <summary>
+            Billing
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterAdmitSource">
+            <summary>
+            This value set defines a set of codes that can be used to indicate from where the patient came in.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterAdmitSource.hospTrans">
+            <summary>
+            The Patient has been transferred from another hospital for this encounter.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterAdmitSource.emd">
+            <summary>
+            The patient has been transferred from the emergency department within the hospital. This is typically used in the transition to an 
+            inpatient encounter
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterAdmitSource.outp">
+            <summary>
+            The patient has been transferred from an outpatient department within the hospital.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterAdmitSource.gp">
+            <summary>
+            The patient has been admitted due to a referred from a General Practitioner.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterAdmitSource.mp">
+            <summary>
+            The patient has been admitted due to a referred from a Specialist (as opposed to a General Practitioner).
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterAdmitSource.nursing">
+            <summary>
+            The patient has been transferred from a nursing home.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterAdmitSource.psych">
+            <summary>
+            The patient has been transferred from a psychiatric facility.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterAdmitSource.rehab">
+            <summary>
+            The patient has been transferred from a rehabilitation facility or clinic.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterAdmitSource.other">
+            <summary>
+            The patient has been admitted from a source otherwise not specified here.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterClass">
+            <summary>
+            A category assigned to the condition.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterClass.AMB">
+            <summary>
+            A comprehensive term for health care provided in a healthcare facility (e.g. a practitioneraTMs office, clinic setting, or hospital) on a nonresident basis. 
+            The term ambulatory usually implies that the patient has 
+            come to the location and is not assigned to a bed. Sometimes referred to as an outpatient encounter.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterClass.EMER">
+            <summary>
+            A patient encounter that takes place at a dedicated healthcare service delivery location where the patient receives immediate evaluation and treatment, 
+            provided until the patient can be discharged or responsibility for the patient's care is transferred elsewhere (for example, the patient could be 
+            admitted as an inpatient or transferred to another facility.)
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterClass.FLD">
+            <summary>
+            A patient encounter that takes place both outside a dedicated service delivery location and outside a patient's residence. Example locations might include 
+            an accident site and at a supermarket.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterClass.HH">
+            <summary>
+            Healthcare encounter that takes place in the residence of the patient or a designee
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterClass.IMP">
+            <summary>
+            A patient encounter where a patient is admitted by a hospital or equivalent facility, assigned to a location where patients generally stay at least overnight 
+            and provided with room, board, and continuous nursing service.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterClass.ACUTE">
+            <summary>
+            An acute inpatient encounter.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterClass.NONAC">
+            <summary>
+            Any category of inpatient encounter except 'acute'
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterClass.OBSENC">
+            <summary>
+            An encounter where the patient usually will start in different encounter, such as one in the emergency department (EMER) but then transition to this type of 
+            encounter because they require a significant period of treatment and monitoring to determine whether or not their condition warrants an inpatient 
+            admission or discharge. In the majority of cases the decision about admission or discharge will occur within a time period determined by local, regional or 
+            national regulation, often between 24 and 48 hours.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterClass.PRENC">
+            <summary>
+            A patient encounter where patient is scheduled or planned to receive service delivery in the future, and the patient is given a pre-admission account number. 
+            When the patient comes back for subsequent service, the pre-admission encounter is selected and is encapsulated into the service registration, and a new account number 
+            is generated. Usage Note: This is intended to be used in advance of encounter types such as ambulatory, inpatient encounter, virtual, etc.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterClass.SS">
+            <summary>
+            An encounter where the patient is admitted to a health care facility for a predetermined length of time, usually less than 24 hours.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterClass.VR">
+            <summary>
+            A patient encounter where the patient and the practitioner(s) are not in the same physical location. Examples include telephone conference, email exchange, 
+            robotic surgery, and televideo conference.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterDiet">
+            <summary>
+            This value set defines a set of codes that can be used to indicate dietary preferences or restrictions a patient may have.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterDiet.vegetarian">
+            <summary>
+            Food without meat, poultry or seafood.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterDiet.dairyFree">
+            <summary>
+            Excludes dairy products.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterDiet.nutFree">
+            <summary>
+            Excludes ingredients containing nuts.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterDiet.glutenFree">
+            <summary>
+            Excludes ingredients containing gluten.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterDiet.vegan">
+            <summary>
+            Food without meat, poultry, seafood, eggs, dairy products and other animal-derived substances.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterDiet.halal">
+            <summary>
+            Foods that conform to Islamic law.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterDiet.kosher">
+            <summary>
+            Foods that conform to Jewish dietary law.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterParticipantType">
+            <summary>
+            Ward speciality e.g. medicine, surgery etc. A speciality can have more than one ward
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterParticipantType.ADM">
+            <summary>
+            The practitioner who is responsible for admitting a patient to a patient encounter.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterParticipantType.ATND">
+            <summary>
+            The practitioner that has responsibility for overseeing a patient's care during a patient encounter.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterParticipantType.CALLBCK">
+            <summary>
+            A person or organization who should be contacted for follow-up questions about the act in place of the author.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterParticipantType.CON">
+            <summary>
+            An advisor participating in the service by performing evaluations and making recommendations.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterParticipantType.DIS">
+            <summary>
+            The practitioner who is responsible for the discharge of a patient from a patient encounter.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterParticipantType.ESC">
+            <summary>
+            Only with Transportation services. A person who escorts the patient.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterParticipantType.REF">
+            <summary>
+            A person having referred the subject of the service to the performer (referring physician). Typically, a referring physician will receive a report.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterParticipantType.SPRF">
+            <summary>
+            A person assisting in an act through his substantial presence and involvement This includes: assistants, technicians, associates, or whatever the job titles may be.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterParticipantType.PPRF">
+            <summary>
+            The principal or primary performer of the act.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterParticipantType.PART">
+            <summary>
+            Indicates that the target of the participation is involved in some manner in the act, but does not qualify how.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterParticipantType.Translator">
+            <summary>
+            A translator who is facilitating communication with the patient during the encounter.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterParticipantType.Emergency">
+            <summary>
+            A person to be contacted in case of an emergency during the encounter.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority">
+            <summary>
+            Indicates the urgency of the encounter.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.A">
+            <summary>
+            As soon as possible, next highest priority after stat.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.CR">
+            <summary>
+            Filler should contact the placer as soon as results are available, even for preliminary results. (Was "C" in HL7 version 2.3's reporting priority.)
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.CS">
+            <summary>
+            Filler should contact the placer (or target) to schedule the service. (Was "C" in HL7 version 2.3's TQ-priority component.)
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.CSP">
+            <summary>
+            Filler should contact the placer to schedule the service. (Was "C" in HL7 version 2.3's TQ-priority component.)
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.CSR">
+            <summary>
+            Filler should contact the service recipient (target) to schedule the service. (Was "C" in HL7 version 2.3's TQ-priority component.)
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.EL">
+            <summary>
+            Beneficial to the patient but not essential for survival.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.EM">
+            <summary>
+            An unforeseen combination of circumstances or the resulting state that calls for immediate action.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.P">
+            <summary>
+            Used to indicate that a service is to be performed prior to a scheduled surgery. When ordering a service and using the pre-op priority, a check is done to see the amount of time that must be allowed for performance of the service. When the order is placed, a message can be generated indicating the time needed for the service so that it is not ordered in conflict with a scheduled operation.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.PRN">
+            <summary>
+            An "as needed" order should be accompanied by a description of what constitutes a need. This description is represented by an observation service predicate as a precondition.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.R">
+            <summary>
+            Routine service, do at usual work hours.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.RR">
+            <summary>
+            A report should be prepared and sent as quickly as possible.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.S">
+            <summary>
+            With highest priority (e.g., emergency).
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.T">
+            <summary>
+            It is critical to come as close as possible to the requested time (e.g., for a through antimicrobial level).
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.UD">
+            <summary>
+            Drug is to be used as directed by the prescriber.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterPriority.UR">
+            <summary>
+            Calls for prompt action.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterReAdmission">
+            <summary>
+            Whether this hospitalization is a readmission and why if known.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterReAdmission.R">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterStatus">
+            <summary>
+            Current state of the encounter.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterStatus.Planned">
+            <summary>
+            The Encounter has not yet started.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterStatus.Arrived">
+            <summary>
+            The Patient is present for the encounter, however is not currently meeting with a practitioner.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterStatus.Triaged">
+            <summary>
+            The patient has been assessed for the priority of their treatment based on the severity of their condition.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterStatus.InProgress">
+            <summary>
+            The Encounter has begun and the patient is present / the practitioner and the patient are meeting.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterStatus.OnLeave">
+            <summary>
+            The Encounter has begun, but the patient is temporarily on leave.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterStatus.Finished">
+            <summary>
+            The Encounter has ended.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterStatus.Cancelled">
+            <summary>
+            The Encounter has ended before it has begun.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterStatus.EnteredInError">
+            <summary>
+            This instance should not have been part of this patient's medical record.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterStatus.Unknown">
+            <summary>
+            The encounter status is unknown. Note that "unknown" is a value of last resort and every attempt should be made to provide a meaningful value other than "unknown".
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterType">
+            <summary>
+            This example value set defines a set of codes that can be used to indicate the type of encounter: a specific code indicating type of service provided.
+            Specific type of encounter (e.g. e-mail consultation, surgical day-care, skilled nursing, rehabilitation).
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterType.ADMS">
+            <summary>
+            Annual diabetes mellitus screening
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterType.BDBMclin">
+            <summary>
+            Bone drilling/bone marrow punction in clinic
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterType.CCS60">
+            <summary>
+            Infant colon screening - 60 minutes
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListEncounterType.OKI">
+            <summary>
+            Outpatient Kenacort injection
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListIdentificationType">
+            <summary>
+            Type's of person's nationality identification
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentificationType.IdentityNumber">
+            <summary>
+            South African Identity document
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentificationType.PassportNumber">
+            <summary>
+            Passport identification document
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentificationType.ImmigrantNumber">
+            <summary>
+            Immigration identification document
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentificationType.AsylumNumber">
+            <summary>
+            Asylum identification document
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentificationType.NotProvided">
+            <summary>
+            No identification document provided
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentificationType.Other">
+            <summary>
+            Other form of identification provided
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType">
+            <summary>
+            A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.AC">
+            <summary>
+            Accreditation/Certification Identifier
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.ACSN">
+            <summary>
+            Accession Identifier
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.AM">
+            <summary>
+            Deprecated and replaced by BC in v 2.5.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.AMA">
+            <summary>
+            A physician identifier assigned by the AMA.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.AN">
+            <summary>
+            An identifier that is unique to an account.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.ANC">
+            <summary>
+            Class: Financial A more precise definition of an account number: sometimes two distinct account numbers must be 
+            transmitted in the same message, one as the creditor, the other as the debitor. Kreditorenkontonummer
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.AND">
+            <summary>
+            Class: Financial A more precise definition of an account number: sometimes two distinct account numbers must be 
+            transmitted in the same message, one as the creditor, the other as the debitor. Debitorenkontonummer
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.ANON">
+            <summary>
+            An identifier for a living subject whose real identity is protected or suppressed Justification: For public health 
+            reporting purposes, anonymous identifiers are occasionally used for protecting patient identity in reporting certain 
+            results. For instance, a state health department may choose to use a scheme for generating an anonymous identifier 
+            for reporting a patient that has had a positive human immunodeficiency virus antibody test. Anonymous identifiers can 
+            be used in PID 3 by replacing the medical record number or other non-anonymous identifier. The assigning authority for 
+            an anonymous identifier would be the state/local health department.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.ANT">
+            <summary>
+            Class: Financial Temporary version of an Account Number. Use Case: An ancillary system that does not normally assign 
+            account numbers is the first time to register a patient. This ancillary system will generate a temporary account number 
+            that will only be used until an official account number is assigned.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.APRN">
+            <summary>
+            An identifier that is unique to an advanced practice registered nurse within the jurisdiction of a certifying board
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.ASID">
+            <summary>
+            A unique identifier for the ancestor specimen. All child, grandchild, etc. specimens of the ancestor specimen share the 
+            same Ancestor Specimen ID.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.BA">
+            <summary>
+            Class: Financial
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.BC">
+            <summary>
+            Class: Financial An identifier that is unique to a person's bank card. Replaces AM, DI, DS, MS, and VS beginning in v 2.5.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.BCFN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.BCT">
+            <summary>
+            A number associated with a document identifying the event of a person's birth.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.BR">
+            <summary>
+            A number associated with a document identifying the event of a person's birth.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.BRN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.BSNR">
+            <summary>
+            Betriebsstättennummer - for use in the German realm.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.CC">
+            <summary>
+            Class: Financial Use Case: needed especially for transmitting information about invoices.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.CONM">
+            <summary>
+            A number associated with a document identifying a person's legal change of name.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.CY">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.CZ">
+            <summary>
+            A number assigned by a person's country of residence to identify a person's citizenship.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.DC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.DCFN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.DDS">
+            <summary>
+            An identifier that is unique to a dentist within the jurisdiction of the licensing board
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.DEA">
+            <summary>
+            An identifier for an individual or organization relative to controlled substance regulation and transactions. 
+            Use case: This is a registration number that identifies an individual or organization relative to controlled substance 
+            regulation and transactions. A DEA number has a very precise and widely accepted meaning within the United States. 
+            Surprisingly, the US Drug Enforcement Administration does not solely assign DEA numbers in the United States. 
+            Hospitals have the authority to issue DEA numbers to their medical residents. These DEA numbers are based upon the 
+            hospital’s DEA number, but the authority rests with the hospital on the assignment to the residents. Thus, DEA as an 
+            Identifier Type is necessary in addition to DEA as an Assigning Authority.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.DFN">
+            <summary>
+            An identifier issued to a health care provider authorizing the person to write drug orders Use Case: A nurse practitioner 
+            has authorization to furnish or prescribe pharmaceutical substances; this identifier is in component 1.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.DI">
+            <summary>
+            Deprecated and replaced by BC in v 2.5.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.DL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.DN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.DO">
+            <summary>
+            An identifier that is unique to an osteopath within the jurisdiction of a licensing board.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.DP">
+            <summary>
+            A number assigned to a diplomatic passport.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.DPM">
+            <summary>
+            An identifier that is unique to a podiatrist within the jurisdiction of the licensing board.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.DR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.DS">
+            <summary>
+            Deprecated and replaced by BC in v 2.5.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.EI">
+            <summary>
+            A number that uniquely identifies an employee to an employer.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.EN">
+            <summary>
+            A number that uniquely identifies an employee to an employer.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.ESN">
+            <summary>
+            An identifier that is unique to a staff member within an enterprise (as identified by the Assigning Authority).
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.FDR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.FDRFN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.FI">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.FILL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.GI">
+            <summary>
+            Class: Financial
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.GL">
+            <summary>
+            Class: Financial
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.GN">
+            <summary>
+            Class: Financial
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.HC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.IND">
+            <summary>
+            A number assigned to a member of an indigenous or aboriginal group outside of Canada.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.JHN">
+            <summary>
+            Class: Insurance 2 uses: a) UK jurisdictional CHI number; b) Canadian provincial health card number:
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.LACSN">
+            <summary>
+            A laboratory accession id is used in the laboratory domain. The concept of accession is used in other domains such as 
+            radiology, so the LACSN is used to distinguish a lab accession id from an radiology accession id
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.LANR">
+            <summary>
+            Lifelong physician number
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.LI">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.LN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.LR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.MA">
+            <summary>
+            Class: Insurance
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.MB">
+            <summary>
+            An identifier for the insured of an insurance policy (this insured always has a subscriber), usually assigned by the 
+            insurance carrier. Use Case: Person is covered by an insurance policy. This person may or may not be the subscriber of 
+            the policy.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.MC">
+            <summary>
+            Class: Insurance
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.MCD">
+            <summary>
+            Class: Insurance
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.MCN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.MCR">
+            <summary>
+            Class: Insurance
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.MCT">
+            <summary>
+            A number associated with a document identifying the event of a person's marriage.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.MD">
+            <summary>
+            An identifier that is unique to a medical doctor within the jurisdiction of a licensing board. Use Case: These license 
+            numbers are sometimes used as identifiers. In some states, the same authority issues all three identifiers, 
+            e.g., medical, osteopathic, and physician assistant licenses all issued by one state medical board. For this case, 
+            the CX data type requires distinct identifier types to accurately interpret component 1. Additionally, the distinction 
+            among these license types is critical in most health care settings (this is not to convey full licensing information, 
+            which requires a segment to support all related attributes).
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.MI">
+            <summary>
+            A number assigned to an individual who has had military duty, but is not currently on active duty. The number is 
+            assigned by the DOD or Veterans' Affairs (VA).
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.MR">
+            <summary>
+            An identifier that is unique to a patient within a set of medical records, not necessarily unique within an application.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.MRT">
+            <summary>
+            Temporary version of a Medical Record Number Use Case: An ancillary system that does not normally assign medical record 
+            numbers is the first time to register a patient. This ancillary system will generate a temporary medical record number that 
+            will only be used until an official medical record number is assigned.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.MS">
+            <summary>
+            Deprecated and replaced by BC in v 2.5.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.NBSNR">
+            <summary>
+            Nebenbetriebsstättennummer - for use in the German realm.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.NCT">
+            <summary>
+            A number associated with a document identifying a person's retention of citizenship in a particular country.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.NE">
+            <summary>
+            In the US, the Assigning Authority for this value is typically CMS, but it may be used by all providers and insurance 
+            companies in HIPAA related transactions.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.NH">
+            <summary>
+            Class: Insurance Used for the UK NHS national identifier. In the US, the Assigning Authority for this value is typically 
+            CMS, but it may be used by all providers and insurance companies in HIPAA related transactions.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.NI">
+            <summary>
+            Class: Insurance In the US, the Assigning Authority for this value is typically CMS, but it may be used by all providers 
+            and insurance companies in HIPAA related transactions.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.NII">
+            <summary>
+            Class: Insurance In Germany a national identifier for an insurance company. It is printed on the insurance card 
+            (health card). It is not to be confused with the health card number itself. Krankenkassen-ID der KV-Karte
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.NIIP">
+            <summary>
+            Class: Insurance In Germany the insurance identifier addressed as the payor. Krankenkassen-ID des Rechnungsempfängers 
+            Use case: a subdivision issues the card with their identifier, but the main division is going to pay the invoices.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.NNZAF">
+            <summary>
+            National Person Identifier
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.NP">
+            <summary>
+            An identifier that is unique to a nurse practitioner within the jurisdiction of a certifying board.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.NPI">
+            <summary>
+            Class: Insurance In the US, the Assigning Authority for this value is typically CMS, but it may be used by all providers 
+            and insurance companies in HIPAA related transactions.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.OBI">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.OD">
+            <summary>
+            A number that is unique to an individual optometrist within the jurisdiction of the licensing board.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PA">
+            <summary>
+            An identifier that is unique to a physician assistant within the jurisdiction of a licensing board
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PC">
+            <summary>
+            A number identifying a person on parole.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PCN">
+            <summary>
+            A number assigned to individual who is incarcerated.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PE">
+            <summary>
+            An identifier that is unique to a living subject within an enterprise (as identified by the Assigning Authority).
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PEN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PHC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PHE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PHO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PI">
+            <summary>
+            A number that is unique to a patient within an Assigning Authority.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PLAC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PN">
+            <summary>
+            A number that is unique to a living subject within an Assigning Authority.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PNT">
+            <summary>
+            Temporary version of a Lining Subject Number.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PPIN">
+            <summary>
+            Class: Insurance
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PPN">
+            <summary>
+            A unique number assigned to the document affirming that a person is a citizen of the country. In the US this number is 
+            issued only by the State Department.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PRC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PRN">
+            <summary>
+            A number that is unique to an individual provider, a provider group or an organization within an Assigning Authority. 
+            Use case: This allows PRN to represent either an individual (a nurse) or a group/organization (orthopedic surgery team).
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.PT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.QA">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.RI">
+            <summary>
+            A generalized resource identifier. Use Case: An identifier type is needed to accommodate what are commonly known as 
+            resources. The resources can include human (e.g. a respiratory therapist), non-human (e.g., a companion animal), 
+            inanimate object (e.g., an exam room), organization (e.g., diabetic education class) or any other physical or logical 
+            entity.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.RN">
+            <summary>
+            An identifier that is unique to a registered nurse within the jurisdiction of the licensing board.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.RPH">
+            <summary>
+            An identifier that is unique to a pharmacist within the jurisdiction of the licensing board.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.RR">
+            <summary>
+            An identifier for an individual enrolled with the Railroad Retirement Administration. Analogous to, but distinct from, 
+            a Social Security Number
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.RRI">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.RRP">
+            <summary>
+            Class: Insurance
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.SB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.SID">
+            <summary>
+            Identifier for a specimen. Used when it is not known if the specimen ID is a unique specimen ID (USID) or an ancestor ID 
+            (ASID).
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.SL">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.SN">
+            <summary>
+            Class: Insurance An identifier for a subscriber of an insurance policy which is unique for, and usually assigned by, 
+            the insurance carrier. Use Case: A person is the subscriber of an insurance policy. The person’s family may be plan 
+            members, but are not the subscriber.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.SNBSN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.SNO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.SP">
+            <summary>
+            A number associated with a permit identifying a person who is a resident of a jurisdiction for the purpose of education.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.SR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.SS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.STN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.TAX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.TN">
+            <summary>
+            A number assigned to a member of an indigenous group in Canada. Use Case: First Nation.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.TPR">
+            <summary>
+            Temporary Permanent Resident (Canada)
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.TRL">
+            <summary>
+            Temporary Permanent Resident (Canada)
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.U">
+            <summary>
+            Temporary Permanent Resident (Canada)
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.UDI">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.UPIN">
+            <summary>
+            Class: Insurance An identifier for a provider within the CMS/Medicare program. A globally unique identifier for 
+            the provider in the Medicare program.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.USID">
+            <summary>
+            A unique identifier for a specimen.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.VN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.VP">
+            <summary>
+            A number associated with a document identifying a person as a visitor of a jurisdiction or country.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.VS">
+            <summary>
+            Deprecated and replaced by BC in v 2.5.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.WC">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.WCN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.WP">
+            <summary>
+            A number associated with a permit for a person who is granted permission to work in a country for a specified time period.
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.XV">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierType.XX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierUse">
+            <summary>
+            Identifies the purpose for this identifier, if known .
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierUse.usual">
+            <summary>
+            Usual
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierUse.official">
+            <summary>
+            Official
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierUse.temp">
+            <summary>
+            Temp
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierUse.secondary">
+            <summary>
+            Secondary
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListIdentifierUse.old">
+            <summary>
+            Old (If known)
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListProvince">
+            <summary>
+            Enum list of all South African provinces
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListProvince.GP">
+            <summary>
+            Gauteng province
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListProvince.WC">
+            <summary>
+            Western Cape Province
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListProvince.EC">
+            <summary>
+            Eastern Cape Province
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListProvince.NC">
+            <summary>
+            Northern Cape Province
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListProvince.KZN">
+            <summary>
+            KwaZulu Nata province
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListProvince.FS">
+            <summary>
+            Free State province
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListProvince.NW">
+            <summary>
+            North West province
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListProvince.MP">
+            <summary>
+            Mpumalanga province
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListProvince.LP">
+            <summary>
+            Limpopo province
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Enums.RefListWardSpeciality">
+            <summary>
+            Ward speciality e.g. medicine, surgery etc. A speciality can have more than one ward
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListWardSpeciality.Medicine">
+            <summary>
+            Medicine speciality
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListWardSpeciality.Orthopaedics">
+            <summary>
+            Orthopaedics speciality
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListWardSpeciality.Surgery">
+            <summary>
+            Surgery speciality
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListWardSpeciality.Gynaecology">
+            <summary>
+            Gynaecology speciality
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListWardSpeciality.Maternity">
+            <summary>
+            Maternity speciality
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListWardSpeciality.Paediatrics">
+            <summary>
+            Paediatrics speciality
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.Domain.Domain.Enums.RefListWardSpeciality.Psychiatry">
+            <summary>
+            Psychiatry  speciality
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Hospital">
+            <summary>
+            Hospital facility inherits from Shesha facility
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Hospital.Province">
+            <summary>
+            Province under which the hospital fall under
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Hospital.TotalNumberOfBeds">
+            <summary>
+            Total number of beds inside a facility
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Patient`1">
+            <summary>
+            Patient resource inherits from shesha person
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Patient`1.Identifier">
+            <summary>
+            Identifier(s) by which this encounter is known. (This is a business identifier, not a resource identifier)
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Patient`1.OrganisationPatientNumber">
+            <summary>
+            Patient number issued by the hospital or clinic or private practice etc.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Patient`1.IdentificationType">
+            <summary>
+            The patient's identification number issued by the South African government
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Patient`1.PassportNumber">
+            <summary>
+            Passport number issued by any government
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Patient`1.ImmigrationNumber">
+            <summary>
+            Immigration number issued by the South African government to all legal foreign nationals
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Patient`1.AsylumNumber">
+            <summary>
+            Asylum seeker number issued to all persons seeking asylum in South Africa
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Patient`1.OtherIdentificationNumber">
+            <summary>
+            Other for of identification number
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Patient`1.PatientProvince">
+            <summary>
+            Patient's province of residence
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Patient`1.Nationality">
+            <summary>
+            Patient's nationality
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.StatusHistory`2">
+            <summary>
+            The status history permits the encounter resource to contain the status history without needing to read through the 
+            historical versions of the resource, or even have the server store them.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.StatusHistory`2.Status">
+            <summary>
+            Historic state of the encounter (e.g. planned | arrived | triaged | in-progress | onleave | finished | cancelled +.)
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.StatusHistory`2.Period">
+            <summary>
+            The time that the episode was in the specified status
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.StatusHistory`2.OwnerId">
+            <summary>
+            The Id of the entity this audit entry relates to.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.StatusHistory`2.OwnerType">
+            <summary>
+            The Type of entity this audit entry relates to.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.Domain.Ward">
+            <summary>
+            Ward belongs to a specific facility
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Ward.Number">
+            <summary>
+            Ward number
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Ward.Description">
+            <summary>
+            Ward description
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Ward.Hospital">
+            <summary>
+            Hospital to which the ward belongs to
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.Domain.Domain.Ward.Speciality">
+            <summary>
+            Speciality that the ward falls under
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.Domain.HealthDomainModule">
+            <summary>
+            HealthDomain Module
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.Domain.HealthDomainModule.Initialize">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.Domain.HealthDomainModule.PreInitialize">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.Domain.HealthDomainModule.PostInitialize">
+            inheritedDoc
+        </member>
+    </members>
+</doc>

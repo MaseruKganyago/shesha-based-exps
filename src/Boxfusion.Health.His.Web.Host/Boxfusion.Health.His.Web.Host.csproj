@@ -37,7 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ElmahCore" Version="2.0.6" />
-    <PackageReference Include="Shesha.Elmah" Version="0.0.1" />
+    <PackageReference Include="Shesha.Elmah" Version="0.0.8" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Abp.Castle.Log4Net" Version="5.0.0" />
