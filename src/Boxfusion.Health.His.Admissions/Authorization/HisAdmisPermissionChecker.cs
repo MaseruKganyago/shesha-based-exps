@@ -63,5 +63,10 @@ namespace Boxfusion.Health.His.Admissions.Authorization
         {
             return await IsInAnyOfRoles(person, RoleNames.DataAdministrator);
         }
+
+        public bool IsGranted(long userId, string permissionName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

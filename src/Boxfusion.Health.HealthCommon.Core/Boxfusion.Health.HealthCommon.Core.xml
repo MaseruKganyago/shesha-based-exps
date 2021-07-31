@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Boxfusion.Health.HealthCommon.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.HealthCommonModule">
+            <summary>
+            TeleHealth Module
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.HealthCommonModule.Initialize">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.HealthCommonModule.PreInitialize">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.HealthCommonModule.PostInitialize">
+            inheritedDoc
+        </member>
+    </members>
+</doc>

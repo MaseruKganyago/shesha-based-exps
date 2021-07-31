@@ -70,6 +70,11 @@
             Data Administrator
             </summary>
         </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Authorization.RoleNames.SystemAdministrator">
+            <summary>
+            System Administrator
+            </summary>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmisSettingsAppService.Update(Boxfusion.Health.His.Admissions.Configuration.HisAdmisSettingsDto)">
             <summary>
             Updates Health.His settings

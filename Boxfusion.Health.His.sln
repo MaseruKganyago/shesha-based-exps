@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admiss
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Tests", "test\Boxfusion.Health.His.Tests\Boxfusion.Health.His.Tests.csproj", "{CCD6D1E2-5DE4-4FDD-BCBA-B47D022F7488}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boxfusion.Health.Domain", "src\Boxfusion.Health.Domain\Boxfusion.Health.Domain.csproj", "{607866A0-C059-4BD9-9AA5-FD6FF0FF006E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boxfusion.Health.HealthCommon.Core", "src\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj", "{607866A0-C059-4BD9-9AA5-FD6FF0FF006E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

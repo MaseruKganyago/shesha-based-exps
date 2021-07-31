@@ -10,6 +10,9 @@
         /// </summary>
         public const string DataAdministrator = "Data Administrator";
 
+        /// <summary>
+        /// System Administrator
+        /// </summary>
         public const string SystemAdministrator = "System Administrator";
     }
 }
