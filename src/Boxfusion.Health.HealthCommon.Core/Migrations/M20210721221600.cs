@@ -10,7 +10,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
     public class M20210721221600 : Migration
     {
         public override void Up()
-        {
+        {         
             //Boxfusion.Health.HealthCommon.Core.Domain.Fhir.FhirOrganisation
             Create.Table("Fhir_FhirOrganisations")
                 .WithIdAsGuid()

@@ -8,6 +8,7 @@ using Boxfusion.Health.His.Admissions.Configuration;
 using Boxfusion.Health.His.Admissions.Localization;
 using Shesha;
 using Shesha.Authorization;
+using Boxfusion.Health.HealthCommon.Core;
 
 namespace Boxfusion.Health.His.Admissions
 {
@@ -15,6 +16,7 @@ namespace Boxfusion.Health.His.Admissions
     /// Health.His Module
     /// </summary>
     [DependsOn(
+        typeof(HealthCommonModule),
         typeof(SheshaCoreModule)
     )]
     public class HisAdmisModule : AbpModule

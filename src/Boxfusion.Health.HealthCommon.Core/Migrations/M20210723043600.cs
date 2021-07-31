@@ -11,6 +11,10 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
     {
         public override void Up()
         {
+            //Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Practitioner
+            Alter.Table("Core_Persons")
+                .AddColumn("PracticeSANCNumber").AsString().Nullable();
+
             Delete.Column("PracticeSANCNumber").FromTable("Core_Persons");
 
             //Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Practitioner
