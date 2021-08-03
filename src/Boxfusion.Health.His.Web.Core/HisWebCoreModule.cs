@@ -7,7 +7,6 @@ using Abp.AutoMapper;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using Abp.Zero.Configuration;
-//using Boxfusion.Health.Domain;
 using Boxfusion.Health.His.Admissions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -36,9 +35,7 @@ namespace Boxfusion.Health.His.Admissions
          typeof(AbpAspNetCoreModule),
          typeof(AbpAspNetCoreSignalRModule),
          typeof(AbpAutoMapperModule),
-         typeof(HisAdmisModule),
-         //typeof(HealthDomainModule),
-
+         typeof(HisModule),
          typeof(SheshaSchedulerModule),
          typeof(SheshaImportModule),
          typeof(SheshaWebControlsModule),
@@ -46,7 +43,6 @@ namespace Boxfusion.Health.His.Admissions
          typeof(SheshaAzureADModule),
          typeof(SheshaFirebaseModule),
          typeof(SheshaElmahModule),
-
          typeof(SheshaClickatellModule),
          typeof(SheshaBulkSmsModule),
          typeof(SheshaXml2SmsModule),

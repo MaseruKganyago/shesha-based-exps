@@ -3,7 +3,7 @@
     /// <summary>
     /// Health.His settings DTO
     /// </summary>
-    public class HisAdmisSettingsDto
+    public class HisAdmissSettingsDto
     {
     }
 }

@@ -1,12 +1,12 @@
 ﻿using Shesha.Domain;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Admissions.Authorization
+namespace Boxfusion.Health.His.Authorization
 {
     /// <summary>
     /// Health.His Permission checker
     /// </summary>
-    public interface IHisAdmisPermissionChecker
+    public interface IHisPermissionChecker
     {
         /// <summary>
         /// 
@@ -14,5 +14,12 @@ namespace Boxfusion.Health.His.Admissions.Authorization
         /// <param name="person"></param>
         /// <returns></returns>
         Task<bool> IsDataAdministrator(Person person);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="person"></param>
+        /// <returns></returns>
+        Task<bool> IsSystemAdministrator(Person person);
     }
 }

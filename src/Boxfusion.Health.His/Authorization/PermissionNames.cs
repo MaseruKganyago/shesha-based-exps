@@ -1,4 +1,4 @@
-﻿namespace Boxfusion.Health.His.Admissions.Authorization
+﻿namespace Boxfusion.Health.His.Authorization
 {
     /// <summary>
     /// Health.His Permission names
@@ -8,6 +8,6 @@
         /// <summary>
         /// Pages: Admission Dashboard
         /// </summary>
-        public const string AdmissionDashboard = "pages:admissionDashboard";
+        public const string hisDashboard = "pages:hisDashboard";
     }
 }

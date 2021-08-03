@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Boxfusion.Health.His.Administration</name>
+    </assembly>
+    <members>
+        <member name="T:Boxfusion.Health.His.Administration.Configuration.HisAdminSettingNames">
+            <summary>
+            Contains setting names for Health.Hiss
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Administration.Configuration.HisAdminSettingProvider">
+            <summary>
+            Defines Health.His settings
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisAdminSettingsAppService.Update(Boxfusion.Health.His.Administration.Configuration.HisAdminSettingsDto)">
+            <summary>
+            Updates Health.His settings
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisAdminSettingsAppService.Get">
+            <summary>
+            Returns Health.His settings
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisAdminSettingsAppService.ChangeSettingAsync(System.String,System.String)">
+            <summary>
+            Changes setting for tenant with fallback to application
+            </summary>
+            <param name="name">Setting name</param>
+            <param name="value">Setting value</param>
+        </member>
+        <member name="T:Boxfusion.Health.His.Administration.Configuration.HisAdminSettingsDto">
+            <summary>
+            Health.His settings DTO
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Administration.HisAdminModule">
+            <summary>
+            Health.His Module
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.HisAdminModule.Initialize">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.HisAdminModule.PreInitialize">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.HisAdminModule.PostInitialize">
+            inheritedDoc
+        </member>
+    </members>
+</doc>

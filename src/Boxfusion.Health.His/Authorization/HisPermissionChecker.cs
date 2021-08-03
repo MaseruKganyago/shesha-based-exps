@@ -6,12 +6,12 @@ using NHibernate.Linq;
 using Shesha.Authorization;
 using Shesha.Domain;
 
-namespace Boxfusion.Health.His.Admissions.Authorization
+namespace Boxfusion.Health.His.Authorization
 {
     /// <summary>
     /// Health.His Permission checker
     /// </summary>
-    public class HisAdmisPermissionChecker : ICustomPermissionChecker, IHisAdmisPermissionChecker
+    public class HisPermissionChecker : ICustomPermissionChecker, IHisPermissionChecker
     {
         private readonly IRepository<Person, Guid> _personRepository;
         private readonly IRepository<ShaRoleAppointedPerson, Guid> _rolePersonRepository;
@@ -20,7 +20,7 @@ namespace Boxfusion.Health.His.Admissions.Authorization
         /// <summary>
         /// Default constructor
         /// </summary>
-        public HisAdmisPermissionChecker(IRepository<Person, Guid> personRepository, IRepository<ShaRoleAppointedPerson, Guid> rolePersonRepository, IRepository<ShaRoleAppointmentEntity, Guid> appEntityRepository)
+        public HisPermissionChecker(IRepository<Person, Guid> personRepository, IRepository<ShaRoleAppointedPerson, Guid> rolePersonRepository, IRepository<ShaRoleAppointmentEntity, Guid> appEntityRepository)
         {
             _personRepository = personRepository;
             _rolePersonRepository = rolePersonRepository;
@@ -62,6 +62,16 @@ namespace Boxfusion.Health.His.Admissions.Authorization
         public async Task<bool> IsDataAdministrator(Person person)
         {
             return await IsInAnyOfRoles(person, RoleNames.DataAdministrator);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="person"></param>
+        /// <returns></returns>
+        public async Task<bool> IsSystemAdministrator(Person person)
+        {
+            return await IsInAnyOfRoles(person, RoleNames.SystemAdministrator);
         }
 
         public bool IsGranted(long userId, string permissionName)

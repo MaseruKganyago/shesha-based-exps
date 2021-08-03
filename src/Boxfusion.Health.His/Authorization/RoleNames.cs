@@ -1,4 +1,4 @@
-﻿namespace Boxfusion.Health.His.Admissions.Authorization
+﻿namespace Boxfusion.Health.His.Authorization
 {
     /// <summary>
     /// Health.His Role Names

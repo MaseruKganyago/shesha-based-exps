@@ -7,7 +7,7 @@ using Shesha.Attributes;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Boxfusion.Health.HealthCommon.Core")]
+[assembly: AssemblyProduct("Boxfusion.Health.His")]
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -16,6 +16,6 @@ using Shesha.Attributes;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("807A18D7-3AC8-4278-9C3B-A79612A7D8D5")]
+[assembly: Guid("3F9545C0-FAC0-40FB-9219-E53A22D5E80A")]
 
-[assembly: TablePrefix("Fhir_")]
+[assembly: TablePrefix("His_")]

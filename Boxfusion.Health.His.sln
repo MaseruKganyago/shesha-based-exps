@@ -16,9 +16,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Web.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admissions", "src\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.csproj", "{CEA41403-B987-4352-9DF5-015DA76F3F65}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Administration", "src\Boxfusion.Health.His.Administration\Boxfusion.Health.His.Administration.csproj", "{BD99AA63-0DA3-4AE2-A1B4-DEF4F3A19753}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His", "src\Boxfusion.Health.His\Boxfusion.Health.His.csproj", "{9C902D4B-70BF-4E74-8015-7FE7B7AA4B51}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Tests", "test\Boxfusion.Health.His.Tests\Boxfusion.Health.His.Tests.csproj", "{CCD6D1E2-5DE4-4FDD-BCBA-B47D022F7488}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boxfusion.Health.HealthCommon.Core", "src\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj", "{607866A0-C059-4BD9-9AA5-FD6FF0FF006E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.HealthCommon.Core", "src\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj", "{607866A0-C059-4BD9-9AA5-FD6FF0FF006E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +42,14 @@ Global
 		{CEA41403-B987-4352-9DF5-015DA76F3F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEA41403-B987-4352-9DF5-015DA76F3F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEA41403-B987-4352-9DF5-015DA76F3F65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD99AA63-0DA3-4AE2-A1B4-DEF4F3A19753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD99AA63-0DA3-4AE2-A1B4-DEF4F3A19753}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD99AA63-0DA3-4AE2-A1B4-DEF4F3A19753}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD99AA63-0DA3-4AE2-A1B4-DEF4F3A19753}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C902D4B-70BF-4E74-8015-7FE7B7AA4B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C902D4B-70BF-4E74-8015-7FE7B7AA4B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C902D4B-70BF-4E74-8015-7FE7B7AA4B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C902D4B-70BF-4E74-8015-7FE7B7AA4B51}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CCD6D1E2-5DE4-4FDD-BCBA-B47D022F7488}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CCD6D1E2-5DE4-4FDD-BCBA-B47D022F7488}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCD6D1E2-5DE4-4FDD-BCBA-B47D022F7488}.Release|Any CPU.ActiveCfg = Release|Any CPU

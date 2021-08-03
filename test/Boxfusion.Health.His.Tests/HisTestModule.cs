@@ -30,7 +30,7 @@ namespace Boxfusion.Health.His.Tests
         typeof(SheshaApplicationModule),
         typeof(SheshaNHibernateModule),
         typeof(SheshaFrameworkModule),
-        typeof(HisAdmisModule)
+        typeof(HisAdmissModule)
         )]
     public class HisTestModule : AbpModule
     {

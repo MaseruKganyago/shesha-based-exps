@@ -7,11 +7,11 @@ namespace Boxfusion.Health.His.Admissions.Configuration
     /// <summary>
     /// Defines Health.His settings
     /// </summary>
-    public class HisAdmisSettingProvider : SettingProvider
+    public class HisAdmissSettingProvider : SettingProvider
     {
         protected string LocalizationSourceName { get; set; }
 
-        public HisAdmisSettingProvider()
+        public HisAdmissSettingProvider()
         {
             LocalizationSourceName = "HisAdmis";
         }

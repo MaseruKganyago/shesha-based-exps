@@ -5,11 +5,11 @@ using Shesha;
 
 namespace Boxfusion.Health.His.Admissions.Configuration
 {
-    public class HisAdmisSettingsAppService: SheshaAppServiceBase
+    public class HisAdmissSettingsAppService: SheshaAppServiceBase
     {
         private readonly ISettingManager _settingManager;
         
-        public HisAdmisSettingsAppService(ISettingManager settingManager)
+        public HisAdmissSettingsAppService(ISettingManager settingManager)
         {
             _settingManager = settingManager;
         }
@@ -18,16 +18,16 @@ namespace Boxfusion.Health.His.Admissions.Configuration
         /// Updates Health.His settings
         /// </summary>
         [HttpPost]
-        public async Task Update(HisAdmisSettingsDto input)
+        public async Task Update(HisAdmissSettingsDto input)
         {
         }        
 
         /// <summary>
         /// Returns Health.His settings
         /// </summary>
-        public async Task<HisAdmisSettingsDto> Get()
+        public async Task<HisAdmissSettingsDto> Get()
         {
-            var result = new HisAdmisSettingsDto()
+            var result = new HisAdmissSettingsDto()
             {
             };
 

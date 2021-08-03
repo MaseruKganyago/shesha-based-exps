@@ -11,28 +11,20 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath></OutputPath>
-    <DocumentationFile>.\Boxfusion.Health.His.Admissions.xml</DocumentationFile>
+    <DocumentationFile>.\Boxfusion.Health.His.Administration.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>.\Boxfusion.Health.His.Admissions.xml</DocumentationFile>
+    <DocumentationFile>.\Boxfusion.Health.His.Administration.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Services\Admissions\EncountersAppService.cs" />
-    <Compile Remove="Services\Admissions\IEncountersAppService.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="..\..\..\..\..\.nuget\packages\hl7.fhir.specification.r4\3.3.0\contentFiles\any\any\specification.zip" Link="Services\Separations\specification.zip">
-      <Private>True</Private>
-      <NuGetPackageVersion>3.3.0</NuGetPackageVersion>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <NuGetItemType>Content</NuGetItemType>
-      <TargetPath>specification.zip</TargetPath>
-      <NuGetPackageId>Hl7.Fhir.Specification.R4</NuGetPackageId>
-      <Pack>false</Pack>
-    </Content>
+    <Compile Remove="Services\Admissions\**" />
+    <Compile Remove="Services\Separations\**" />
+    <EmbeddedResource Remove="Services\Admissions\**" />
+    <EmbeddedResource Remove="Services\Separations\**" />
+    <None Remove="Services\Admissions\**" />
+    <None Remove="Services\Separations\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,12 +41,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Admissions\Helpers\" />
-    <Folder Include="Services\Separations\" />
+    <ProjectReference Include="..\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

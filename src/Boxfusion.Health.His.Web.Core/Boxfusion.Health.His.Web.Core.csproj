@@ -46,6 +46,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.csproj" />
+    <ProjectReference Include="..\Boxfusion.Health.His\Boxfusion.Health.His.csproj" />
   </ItemGroup>
 </Project>

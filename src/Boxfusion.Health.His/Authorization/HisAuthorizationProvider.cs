@@ -4,12 +4,12 @@ using System.Reflection;
 using Abp.Authorization;
 using Abp.Localization;
 
-namespace Boxfusion.Health.His.Admissions.Authorization
+namespace Boxfusion.Health.His.Authorization
 {
     /// <summary>
     /// Health.His Authorization Provider
     /// </summary>
-    public class HisAdmisAuthorizationProvider : AuthorizationProvider
+    public class HisAuthorizationProvider : AuthorizationProvider
     {
         /// <summary>
         /// Register permissions declared in the <see cref="PermissionNames"/> class
@@ -35,7 +35,7 @@ namespace Boxfusion.Health.His.Admissions.Authorization
 
         private static ILocalizableString L(string name)
         {
-            return new LocalizableString(name, "HisAdmis");
+            return new LocalizableString(name, "His");
         }
     }
 }

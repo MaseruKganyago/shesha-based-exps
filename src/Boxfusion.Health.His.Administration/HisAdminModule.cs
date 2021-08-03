@@ -3,14 +3,13 @@ using Abp.AspNetCore.Configuration;
 using Abp.AutoMapper;
 using Abp.Modules;
 using Castle.MicroKernel.Registration;
-using Boxfusion.Health.His.Admissions.Authorization;
-using Boxfusion.Health.His.Admissions.Configuration;
-using Boxfusion.Health.His.Admissions.Localization;
+using Boxfusion.Health.His.Administration.Configuration;
+using Boxfusion.Health.His.Administration.Localization;
 using Shesha;
 using Shesha.Authorization;
 using Boxfusion.Health.HealthCommon.Core;
 
-namespace Boxfusion.Health.His.Admissions
+namespace Boxfusion.Health.His.Administration
 {
     /// <summary>
     /// Health.His Module
@@ -19,16 +18,11 @@ namespace Boxfusion.Health.His.Admissions
         typeof(HealthCommonModule),
         typeof(SheshaCoreModule)
     )]
-    public class HisAdmisModule : AbpModule
+    public class HisAdminModule : AbpModule
     {
         /// inheritedDoc
         public override void Initialize()
         {
-            IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-            IocManager.IocContainer.Register(
-              Component.For<ICustomPermissionChecker>().Forward<IHisAdmisPermissionChecker>().Forward<HisAdmisPermissionChecker>().ImplementedBy<HisAdmisPermissionChecker>().LifestyleTransient()
-          );
-
             var thisAssembly = Assembly.GetExecutingAssembly();
             IocManager.RegisterAssemblyByConvention(thisAssembly);
 
@@ -43,18 +37,18 @@ namespace Boxfusion.Health.His.Admissions
         {
             base.PreInitialize();
 
-            Configuration.Settings.Providers.Add<HisAdmisSettingProvider>();
-            Configuration.Authorization.Providers.Add<HisAdmisAuthorizationProvider>();
+            Configuration.Modules.AbpAutoMapper().Configurators.Add(config =>
+            {
 
-            HisAdmisLocalizationConfigurer.Configure(Configuration.Localization);
+            });
         }
 
         /// inheritedDoc
         public override void PostInitialize()
         {
             Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
-                typeof(HisAdmisModule).Assembly,
-                moduleName: "HisAdmis",
+                typeof(HisAdminModule).Assembly,
+                moduleName: "HisAdmin",
                 useConventionalHttpVerbs: true);
         }
     }
