@@ -7,7 +7,7 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum
 {
 	[ReferenceList("Cmd", "TimesOfDay")]
-	public enum RefListTimesOfDay: int
+	public enum RefListTimesOfDay: long
 	{
 		[Description("00:00")]
 		t0000 = 1,

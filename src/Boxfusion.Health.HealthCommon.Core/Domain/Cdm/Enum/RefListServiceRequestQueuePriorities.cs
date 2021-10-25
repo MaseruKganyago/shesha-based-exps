@@ -7,7 +7,7 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum
 {
 	[ReferenceList("Cdm", "ServiceRequestQueuePriorities")]
-	public enum RefListServiceRequestQueuePriorities: int
+	public enum RefListServiceRequestQueuePriorities: long
 	{
 		[Description("High")]
 		high = 1,

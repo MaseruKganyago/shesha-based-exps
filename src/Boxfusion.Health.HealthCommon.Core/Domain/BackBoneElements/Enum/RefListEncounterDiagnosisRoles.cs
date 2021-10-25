@@ -22,6 +22,8 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum
         [Description("Post-op diagnosis")]
         postop = 6,
         [Description("Billing")]
-        bill = 7
+        bill = 7,
+        [Description("Tele Consultation")]
+        teleConsultation = 8
     }
 }

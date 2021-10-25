@@ -19,6 +19,9 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Health.HealthCommon.Core.Helpers.ProcessFile
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class SaveFileDocument : ISaveFileDocument, ITransientDependency
     {
         private readonly IUnitOfWorkManager _unitOfWork;
@@ -30,6 +33,16 @@ namespace Boxfusion.Health.HealthCommon.Core.Helpers.ProcessFile
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="unitOfWork"></param>
+        /// <param name="dynamicRepository"></param>
+        /// <param name="fileService"></param>
+        /// <param name="fileRepository"></param>
+        /// <param name="fileVersionRepository"></param>
+        /// <param name="mapper"></param>
+        /// <param name="httpContextAccessor"></param>
         public SaveFileDocument(
             IUnitOfWorkManager unitOfWork,
             IDynamicRepository dynamicRepository,
@@ -42,12 +55,17 @@ namespace Boxfusion.Health.HealthCommon.Core.Helpers.ProcessFile
             _unitOfWork = unitOfWork;
             _dynamicRepository = dynamicRepository;
             _fileService = fileService;
-            _fileRepository = _fileRepository;
+            _fileRepository = fileRepository;
             _fileVersionRepository = fileVersionRepository;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<StoredFileDto> UploadFile(UploadFileInput input)
         {
             if (string.IsNullOrWhiteSpace(input.OwnerType))
@@ -122,16 +140,19 @@ namespace Boxfusion.Health.HealthCommon.Core.Helpers.ProcessFile
             return uploadedFile;
         }
 
-        private void MapStoredFile(StoredFile file, StoredFileDto fileDto)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="fileDto"></param>
+        public void MapStoredFile(StoredFile file, StoredFileDto fileDto)
         {
             fileDto.Id = file.Id;
             fileDto.FileCategory = file.Category;
             fileDto.Name = file.FileName;
-            fileDto.Url = _httpContextAccessor.HttpContext.Request.Host.Value + "/api/StoredFile/Download?id=" + file.Id;
+            fileDto.Url = file.GetFileUrl(); 
             fileDto.Size = file.LastVersion()?.FileSize ?? 0;
-            fileDto.Type = !string.IsNullOrWhiteSpace(file.FileName)
-                ? Path.GetExtension(file.FileName)
-                : null;
+            fileDto.Type = !string.IsNullOrWhiteSpace(file.FileName) ? Path.GetExtension(file.FileName)  : null;
         }
     }
 }

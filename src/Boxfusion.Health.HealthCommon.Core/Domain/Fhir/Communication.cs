@@ -1,12 +1,16 @@
 ﻿using Abp.Domain.Entities.Auditing;
+using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Shesha.Domain.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 {
 	[Entity(TypeShortAlias = "HealthCommon.Core.Communication")]
+	[Table("Fhir_Communications")]
+	[Discriminator]
 	public class Communication: FullAuditedEntity<Guid>
 	{
 		public virtual string Identifier { get; set; }
@@ -15,19 +19,18 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 		public virtual string PartOfOwnerId { get; set; }
 		public virtual string PartOfOwnerType { get; set; }
 		public virtual Communication InResponseTo { get; set; }
-		[ReferenceList("Fhir", "EvantStatuses")]
-		public virtual int? Status { get; set; }
+		public virtual RefListEventStatuses? Status { get; set; }
 		[ReferenceList("Fhir", "CommunicationNotDoneReasons")]
 		public virtual int? StatusReason { get; set; }
 		[ReferenceList("Fhir", "CommunicationCategories")]
 		public virtual int? Category { get; set; }
 		[ReferenceList("Fhir", "RequestPriosities")]
-		public virtual int? Priority { get; set; }
+		public virtual RefListRequestPriorities? Priority { get; set; }
 		[MultiValueReferenceList("Fhir", "ParticipationModes")]
-		public virtual int? Medium { get; set; }
+		public virtual RefListParticipationModes? Medium { get; set; }
 		public virtual Patient Subject { get; set; }
 		[ReferenceList("Fhir", "CommunicationTopics")]
-		public virtual int? Topic { get; set; }
+		public virtual RefListCommunicationTopics? Topic { get; set; }
 		public virtual string AboutOwnerId { get; set; }
 		public virtual string AboutOwnerType { get; set; }
 		public virtual Encounter Encounter { get; set; }

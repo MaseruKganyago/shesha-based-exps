@@ -7,7 +7,7 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum
 {
 	[ReferenceList("Fhir", "CommunicationNotDoneReasons")]
-	public enum RefListCommunicationNotDoneReasons: int
+	public enum RefListCommunicationNotDoneReasons: long
 	{
 		[Description("Unknown")]
 		unknown = 1,

@@ -6,8 +6,11 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	[ReferenceList("Cdm", "ComponentValues")]
-	public enum RefListComponentValues: int
+	public enum RefListComponentValues: long
 	{
 	}
 }

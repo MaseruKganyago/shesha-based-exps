@@ -7,7 +7,7 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum
 {
 	[ReferenceList("Fhir", "SNOMEDCTAdministrationMethodCodes")]
-	public enum RefListSNOMEDCTAdministrationMethodCodes: int
+	public enum RefListSNOMEDCTAdministrationMethodCodes: long
 	{
 		[Description("Apply")]
 		apply = 417924000,

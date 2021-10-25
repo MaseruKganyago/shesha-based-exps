@@ -7,7 +7,7 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum
 {
 	[ReferenceList("Fhir", "ServiceRequestStatuses")]
-	public enum RefListServiceRequestStatuses : int
+	public enum RefListServiceRequestStatuses : long
 	{
 		[Description("Draft")]
 		draft = 1,
@@ -21,7 +21,9 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum
 		completed = 5,
 		[Description("Entered in Error")]
 		enteredInError = 6,
+		[Description("Cancelled")]
+		cancelled = 7,
 		[Description("Unknown")]
-		unknown = 7
+		unknown = 8
 	}
 }

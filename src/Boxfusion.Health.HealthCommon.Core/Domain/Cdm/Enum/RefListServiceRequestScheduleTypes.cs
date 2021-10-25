@@ -7,7 +7,7 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum
 {
 	[ReferenceList("Cdm", "ServiceRequestScheduleTypes")]
-	public enum RefListServiceRequestScheduleTypes: int
+	public enum RefListServiceRequestScheduleTypes: long
 	{
 		[Description("Queue")]
 		queue = 1,

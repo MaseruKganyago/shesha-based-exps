@@ -4,7 +4,9 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Shesha.AutoMapper.Dto;
+using Shesha.Notes.Dto;
 using System;
+using System.Collections.Generic;
 
 namespace Boxfusion.Health.HealthCommon.Core.Dtos
 {
@@ -16,7 +18,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Dtos
         public  string PartOfOwnerId { get; set; }
         public  string PartOfOwnerType { get; set; }
         public  ReferenceListItemValueDto Status { get; set; }
-        public  ReferenceListItemValueDto StatusReason { get; set; }
+        public  List<ReferenceListItemValueDto> StatusReason { get; set; }
         public  ReferenceListItemValueDto Category { get; set; }
         public  ReferenceListItemValueDto MedicationCodeableConcept { get; set; }
         public EntityWithDisplayNameDto<Guid?> MedicationReference { get; set; }
@@ -31,10 +33,10 @@ namespace Boxfusion.Health.HealthCommon.Core.Dtos
         public EntityWithDisplayNameDto<Guid?> InformationSource { get; set; }
         public  string DerivedFromOwnerId { get; set; }
         public  string DerivedFromOwnerType { get; set; }
-        public  ReferenceListItemValueDto ReasonCode { get; set; }
+        public List<ReferenceListItemValueDto> ReasonCode { get; set; }
         public  string ReasonReferenceOwnerId { get; set; }
         public  string ReasonReferenceOwnerType { get; set; }
-        //public   Note                                                                {get;set;}
-        public EntityWithDisplayNameDto<Guid?> Dosage { get; set; }
+		public List<NoteDto>  Notes { get; set; }
+		public List<DosageResponse> Dosage { get; set; }
     }
 }

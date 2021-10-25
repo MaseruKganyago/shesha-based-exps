@@ -7,15 +7,15 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum
 {
 	[ReferenceList("Cdm", "VisitTypes")]
-	public enum RefListVisitTypes: int
+	public enum RefListVisitTypes: long
 	{
 		[Description("Checkup")]
 		checkUp = 1,
 		[Description("Education & Health Promotion")]
 		educationAndHealthPromotion = 2,
 		[Description("Clinical Management")]
-		clinicalManagement = 3,
+		clinicalManagement = 4,
 		[Description("Administration")]
-		administration = 4
+		administration = 8
 	}
 }

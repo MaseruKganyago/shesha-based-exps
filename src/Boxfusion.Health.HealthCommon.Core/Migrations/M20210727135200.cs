@@ -6,9 +6,15 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Migration(20210727135200)]
     public class M20210727135200 : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Up()
         {
             //Delete Foreign Key
@@ -29,18 +35,21 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .WithFullAuditColumns()
                 .WithColumn("OwnerId").AsString().Nullable()
                 .WithColumn("OwnerType").AsString().Nullable()
-                .WithColumn("RelationshipLkp").AsInt32().Nullable()
+                .WithColumn("RelationshipLkp").AsInt64().Nullable()
                 .WithColumn("Name").AsString().Nullable()
                 .WithColumn("MobileNumber").AsString().Nullable()
                 .WithColumn("OfficeNumber").AsString().Nullable()
                 .WithColumn("FaxNumber").AsString().Nullable()
                 .WithColumn("EmailAddress").AsString().Nullable()
                 .WithColumn("Address").AsString(500).Nullable()
-                .WithColumn("GenderLkp").AsInt32().Nullable()
+                .WithColumn("GenderLkp").AsInt64().Nullable()
                 .WithForeignKeyColumn("OrganisationId", "Core_Organisations")
                 .WithColumn("StartDateTime").AsDateTime().Nullable()
                 .WithColumn("EndDateTime").AsDateTime().Nullable();
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Down()
         {
             throw new NotImplementedException();

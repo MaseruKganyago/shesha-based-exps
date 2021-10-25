@@ -6,9 +6,15 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Migration(20210721221000)]
     public class M20210721221000 : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Up()
         {
             //Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Schedule
@@ -23,18 +29,21 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
 
             //Boxfusion.Health.HealthCommon.Core.Domain.Cmd.CdmServiceRequest
            Alter.Table("Fhir_ServiceRequests")
-                .AddColumn("ScheduleTypeLkp").AsInt32().Nullable()
+                .AddColumn("ScheduleTypeLkp").AsInt64().Nullable()
                 .AddForeignKeyColumn("ServiceQueueId", "Fhir_Schedules")
-                .AddColumn("ServiceQueuePostion").AsDecimal().Nullable()
-                .AddColumn("ServiceQueuePriorityLkp").AsInt32().Nullable()
+                .AddColumn("ServiceQueuePosition").AsDecimal().Nullable()
+                .AddColumn("ServiceQueuePriorityLkp").AsInt64().Nullable()
                 .AddForeignKeyColumn("BookingSlotId", "Fhir_Slots")
-                .AddColumn("ConsultServiceRequestStatusLkp").AsInt32().Nullable()
+                .AddColumn("ConsultServiceRequestStatusLkp").AsInt64().Nullable()
                 .AddColumn("TimeJoinedQueue").AsDateTime().Nullable()
                 .AddColumn("TimeCancelled").AsDateTime().Nullable()
                 .AddColumn("AllocatedTime").AsDateTime().Nullable()
                 .AddForeignKeyColumn("EncounterInitiatedId", "Fhir_Encounters");
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Down()
         {
             throw new NotImplementedException();

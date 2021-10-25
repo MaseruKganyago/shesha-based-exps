@@ -6,9 +6,15 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Migration(20210726201900)]
     public class M20210726201900 : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Up()
         {
             //Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CoditionIcdTenCode
@@ -27,11 +33,11 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .WithColumn("BasedOnOwnerType").AsString().Nullable()
                 .WithColumn("PartOfOwnerId").AsString().Nullable()
                 .WithColumn("PartOfOwnerType").AsString().Nullable()
-                .WithColumn("StatusLkp").AsInt32().Nullable()
-                .WithColumn("StatusReasonLkp").AsInt32().Nullable()
-                .WithColumn("CategoryLkp").AsInt32().Nullable()
-                .WithColumn("CodingSystemLkp").AsInt32().Nullable()
-                .WithColumn("CodeValueLkp").AsInt32().Nullable()
+                .WithColumn("StatusLkp").AsInt64().Nullable()
+                .WithColumn("StatusReasonLkp").AsInt64().Nullable()
+                .WithColumn("CategoryLkp").AsInt64().Nullable()
+                .WithColumn("CodingSystemLkp").AsInt64().Nullable()
+                .WithColumn("CodeValueLkp").AsInt64().Nullable()
                 .WithColumn("CodeText").AsString().Nullable()
                 .WithForeignKeyColumn("SubjectId", "Core_Persons")
                 .WithForeignKeyColumn("EncounterId", "Fhir_Encounters")
@@ -43,24 +49,25 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .WithColumn("PerformedRangeHigh").AsDecimal().Nullable()
                 .WithForeignKeyColumn("RecorderId", "Core_Persons")
                 .WithForeignKeyColumn("AsserterId", "Core_Persons")
-                .WithColumn("PerformerFunctionLkp").AsInt32().Nullable()
+                .WithColumn("PerformerFunctionLkp").AsInt64().Nullable()
                 .WithColumn("PerformerActorOwnerId").AsString().Nullable()
                 .WithColumn("PerformerActorOwnerType").AsString().Nullable()
                 .WithForeignKeyColumn("PerformerOnBehalfOfId", "Core_Organisations")
                 .WithForeignKeyColumn("LocationId", "Core_Facilities")
-                .WithColumn("ReasonCodeLkp").AsInt32().Nullable()
+                .WithColumn("ReasonCodeLkp").AsInt64().Nullable()
                 .WithColumn("ReasonReferenceOwnerId").AsString().Nullable()
                 .WithColumn("ReasonReferenceOwnerType").AsString().Nullable()
-                .WithColumn("BodySiteLkp").AsInt32().Nullable()
-                .WithColumn("OutcomeLkp").AsInt32().Nullable()
+                .WithColumn("BodySiteLkp").AsInt64().Nullable()
+                .WithColumn("OutcomeLkp").AsInt64().Nullable()
                 .WithColumn("ReportOwnerId").AsString().Nullable()
                 .WithColumn("ReportOwnerType").AsString().Nullable()
-                .WithColumn("ComplicationLkp").AsInt32().Nullable()
+                .WithColumn("ComplicationLkp").AsInt64().Nullable()
                 .WithForeignKeyColumn("ComplicationDetailId", "Fhir_Conditions")
-                .WithColumn("FollowUpLkp").AsInt32().Nullable();
-                
-                
+                .WithColumn("FollowUpLkp").AsInt64().Nullable();           
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Down()
         {
             throw new NotImplementedException();

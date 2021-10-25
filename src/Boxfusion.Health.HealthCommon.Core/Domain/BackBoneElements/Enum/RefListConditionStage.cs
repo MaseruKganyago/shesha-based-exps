@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [ReferenceList("Fhir", "ConditionStage")]
     public enum RefListConditionStage: long
     {

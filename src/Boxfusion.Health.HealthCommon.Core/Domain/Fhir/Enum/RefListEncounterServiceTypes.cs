@@ -6,9 +6,15 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	[ReferenceList("Fhir", "EncounterServiceTypes")]
-	public enum RefListEncounterServiceTypes : int
+	public enum RefListEncounterServiceTypes : long
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		[Description("General Practice")]
 		generalPractice = 1
 	}

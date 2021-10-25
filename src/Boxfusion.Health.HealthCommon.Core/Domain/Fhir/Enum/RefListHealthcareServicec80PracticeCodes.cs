@@ -7,7 +7,7 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum
 {
     [ReferenceList("Fhir", "HealthcareServicec80PracticeCodes")]
-    public enum RefListHealthcareServicec80PracticeCodes
+    public enum RefListHealthcareServicec80PracticeCodes: long
     {
 
         [Description("Adult mental illness")]

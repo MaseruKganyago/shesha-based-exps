@@ -7,21 +7,23 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum
 {
 	[ReferenceList("Fhir", "ProcedureCategories")]
-	public enum RefListProcedureCategories : int
+	public enum RefListProcedureCategories : long
 	{
 		[Description("Psychiatry procedure or service")]
-		psychiatryProcedureOrService = 24642003,
+		psychiatryProcedureOrService = 1,
 		[Description("Counselling")]
-		counselling = 409063005,
-		[Description("Education")]
-		education = 409073007,
+		counselling = 2,
+		[Description("Patient Specified")]
+		patientSpecified = 4,
 		[Description("Surgical procedure")]
-		surgicalProcedure = 387713003,
+		surgicalProcedure = 8,
 		[Description("Diagnostic procedure")]
-		diagnosticProcedure = 103693007,
+		diagnosticProcedure = 16,
 		[Description("Chiropractic manipulation")]
-		chiropracticManipulation = 46947000,
+		chiropracticManipulation = 32,
 		[Description("Social service procedure")]
-		socialServiceProcedure = 410606002
+		socialServiceProcedure = 64,
+		[Description("Education")]
+		education = 128
 	}
 }

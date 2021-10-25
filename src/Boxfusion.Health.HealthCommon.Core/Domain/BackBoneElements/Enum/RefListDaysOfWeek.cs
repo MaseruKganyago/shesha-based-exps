@@ -7,7 +7,7 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum
 {
     [ReferenceList("Fhir", "DaysOfWeek")]
-    public enum RefListDaysOfWeek
+    public enum RefListDaysOfWeek: long
     {
         [Description("Monday")]
         mon = 1,

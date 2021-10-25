@@ -6,9 +6,15 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Migration(20210722215800)]
     public class M20210722215800 : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Up()
         {
             //Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Observation
@@ -20,9 +26,9 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .WithColumn("BasedOnOwnerType").AsString().Nullable()
                 .WithColumn("PartOfOwnerId").AsString().Nullable()
                 .WithColumn("PartOfOwnerType").AsString().Nullable()
-                .WithColumn("StatusLkp").AsInt32().Nullable()
-                .WithColumn("CategoryLkp").AsInt32().Nullable()
-                .WithColumn("CodeLkp").AsInt32().Nullable()
+                .WithColumn("StatusLkp").AsInt64().Nullable()
+                .WithColumn("CategoryLkp").AsInt64().Nullable()
+                .WithColumn("CodeLkp").AsInt64().Nullable()
                 .WithForeignKeyColumn("SubjectId", "Core_Persons")
                 .WithForeignKeyColumn("EncounterId", "Fhir_Encounters")
                 .WithColumn("FocusOwnerId").AsString().Nullable()
@@ -33,10 +39,10 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .WithColumn("Issued").AsDateTime().Nullable()
                 .WithColumn("PerformerOwnerId").AsString().Nullable()
                 .WithColumn("PerformerOwnerType").AsString().Nullable()
-                .WithColumn("DataAbsentReasonLkp").AsInt32().Nullable()
-                .WithColumn("InterpretationLkp").AsInt32().Nullable()
-                .WithColumn("BodySiteLkp").AsInt32().Nullable()
-                .WithColumn("MethodLkp").AsInt32().Nullable()
+                .WithColumn("DataAbsentReasonLkp").AsInt64().Nullable()
+                .WithColumn("InterpretationLkp").AsInt64().Nullable()
+                .WithColumn("BodySiteLkp").AsInt64().Nullable()
+                .WithColumn("MethodLkp").AsInt64().Nullable()
                 .WithForeignKeyColumn("SpecimenId", "Fhir_Specimens")
                 .WithColumn("DeviceOwnerId").AsString().Nullable()
                 .WithColumn("DeviceOwnerType").AsString().Nullable()
@@ -50,7 +56,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .WithIdAsGuid()
                 .WithFullAuditColumns()
                 .WithColumn("ValueQuantity").AsDecimal().Nullable()
-                .WithColumn("ValueCodeableConceptLkp").AsInt32().Nullable()
+                .WithColumn("ValueCodeableConceptLkp").AsInt64().Nullable()
                 .WithColumn("ValueString").AsString().Nullable()
                 .WithColumn("ValueBoolean").AsBoolean()
                 .WithColumn("ValueInteger").AsInt32().Nullable()
@@ -65,6 +71,9 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .WithForeignKeyColumn("ObservationId", "Fhir_Observations");
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Down()
         {
             throw new NotImplementedException();

@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [ReferenceList("Fhir", "AllergyIntoleranceCriticality")]
     public enum RefListAllergyIntoleranceCriticality: long
     {

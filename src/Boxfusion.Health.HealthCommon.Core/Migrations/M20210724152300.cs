@@ -6,9 +6,15 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Migration(20210724152300)]
     public class M20210724152300 : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Up()
         {
             //Boxfusion.Health.HealthCommon.Core.Domain.Fhir.EpisodeOfCare
@@ -29,18 +35,18 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
             //Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Encounter
             Alter.Table("Fhir_Encounters")
                 .AddColumn("Identifier").AsString().Nullable()
-                .AddColumn("StatusLkp").AsInt32().Nullable()
-                .AddColumn("ClassLkp").AsInt32().Nullable()
-                .AddColumn("TypeLkp").AsInt32().Nullable()
-                .AddColumn("ServiceTypeLkp").AsInt32().Nullable()
-                .AddColumn("PriorityLkp").AsInt32().Nullable()
+                .AddColumn("StatusLkp").AsInt64().Nullable()
+                .AddColumn("ClassLkp").AsInt64().Nullable()
+                .AddColumn("TypeLkp").AsInt64().Nullable()
+                .AddColumn("ServiceTypeLkp").AsInt64().Nullable()
+                .AddColumn("PriorityLkp").AsInt64().Nullable()
                 .AddForeignKeyColumn("SubjectId", "Core_Persons")
                 .AddForeignKeyColumn("EpisodeOfCareId", "Fhir_EpisodeOfCares")
                 .AddForeignKeyColumn("BasedOnId", "Fhir_ServiceRequests")
                 .AddForeignKeyColumn("PerformerId", "Core_Persons")
                 .AddColumn("StartDateTime").AsDateTime().Nullable()
                 .AddColumn("EndDateTime").AsDateTime().Nullable()
-                .AddColumn("ReasonCodeLkp").AsInt32().Nullable()
+                .AddColumn("ReasonCodeLkp").AsInt64().Nullable()
                 .AddColumn("ReasonReferenceOwnerId").AsString().Nullable()
                 .AddColumn("ReasonReferenceOwnerType").AsString().Nullable()
                 .AddForeignKeyColumn("ServiceProviderId", "Core_Organisations")
@@ -55,12 +61,12 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .WithFullAuditColumns()
                 .WithColumn("OwnerId").AsString().Nullable()
                 .WithColumn("OwnerType").AsString().Nullable()
-                .WithColumn("TypeLkp").AsInt32().Nullable()
+                .WithColumn("TypeLkp").AsInt64().Nullable()
                 .WithColumn("StartDateTime").AsDateTime().Nullable()
                 .WithColumn("EndDateTime").AsDateTime().Nullable()
                 .WithForeignKeyColumn("IndividualId", "Core_Persons")
-                .WithColumn("RequiredLkp").AsInt32().Nullable()
-                .WithColumn("StatusLkp").AsInt32().Nullable();
+                .WithColumn("RequiredLkp").AsInt64().Nullable()
+                .WithColumn("StatusLkp").AsInt64().Nullable();
 
             //Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis
             Create.Table("Fhir_Diagnoses")
@@ -69,7 +75,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .WithColumn("OwnerId").AsString().Nullable()
                 .WithColumn("OwnerType").AsString().Nullable()
                 .WithForeignKeyColumn("ConditionId", "Fhir_Conditions")
-                .WithColumn("UseLkp").AsInt32().Nullable()
+                .WithColumn("UseLkp").AsInt64().Nullable()
                 .WithColumn("Rank").AsInt32().Nullable();
 
             //Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.EncounterLocations
@@ -79,13 +85,14 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .WithColumn("OwnerId").AsString().Nullable()
                 .WithColumn("OwnerType").AsString().Nullable()
                 .WithForeignKeyColumn("LocationId", "Core_Facilities")
-                .WithColumn("StatusLkp").AsInt32().Nullable()
-                .WithColumn("PhysicalTypeLkp").AsInt32().Nullable()
+                .WithColumn("StatusLkp").AsInt64().Nullable()
+                .WithColumn("PhysicalTypeLkp").AsInt64().Nullable()
                 .WithColumn("StartDateTime").AsDateTime().Nullable()
                 .WithColumn("EndDateTime").AsDateTime().Nullable();
-
-
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Down()
         {
             throw new NotImplementedException();

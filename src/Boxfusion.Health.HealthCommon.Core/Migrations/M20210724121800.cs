@@ -6,9 +6,15 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Migration(20210724121800)]
     public class M20210724121800 : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Up()
         {
             //Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Patient
@@ -19,6 +25,9 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .AddColumn("Fhir_MedicalAidName").AsString().Nullable()
                 .AddColumn("Fhir_MedicalAidNumber").AsString().Nullable();
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Down()
         {
             throw new NotImplementedException();

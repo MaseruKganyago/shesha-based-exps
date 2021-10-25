@@ -7,7 +7,7 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum
 {
 	[ReferenceList("Fhir", "MedicationStatementStatus")]
-	public enum RefListMedicationStatementStatus: int
+	public enum RefListMedicationStatementStatus: long
 	{
 		[Description("Active")]
 		active = 1,

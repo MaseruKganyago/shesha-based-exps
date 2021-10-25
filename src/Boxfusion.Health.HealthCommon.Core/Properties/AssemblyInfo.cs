@@ -16,6 +16,6 @@ using Shesha.Attributes;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("807A18D7-3AC8-4278-9C3B-A79612A7D8D5")]
+[assembly: Guid("807a18d7-3ac8-4278-9c3b-a79612a7d8d5")]
 
 [assembly: TablePrefix("Fhir_")]

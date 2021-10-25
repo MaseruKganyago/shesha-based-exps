@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Cdm
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Entity(TypeShortAlias = "HealthCommon.Core.CdmAddress")]
     public class CdmAddress : FhirAddress
     {

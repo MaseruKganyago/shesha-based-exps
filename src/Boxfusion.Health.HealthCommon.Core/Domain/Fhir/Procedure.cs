@@ -1,7 +1,9 @@
 ﻿using Abp.Domain.Entities.Auditing;
+using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Shesha.Domain.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
@@ -26,7 +28,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
         public virtual int? StatusReason { get; set; }
 
         [MultiValueReferenceList("Fhir", "ProcedureCategories")]
-        public virtual int? Category { get; set; }
+        public virtual RefListProcedureCategories Category { get; set; }
 
         [ReferenceList("Cdm", "ProcedureCodingSystem")]
         public virtual int? CodingSystem { get; set; }
@@ -76,14 +78,14 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
         public virtual FhirLocation Location { get; set; }
 
         [MultiValueReferenceList("Fhir", "ConditionProblemDiagnosisCodes")]
-        public virtual int? ReasonCode { get; set; }
+        public virtual RefListConditionProblemDiagnosisCodes ReasonCode { get; set; }
 
         public virtual string ReasonReferenceOwnerId { get; set; }
 
         public virtual string ReasonReferenceOwnerType { get; set; }
 
-        [MultiValueReferenceList("Fhir", "BodySites")]
-        public virtual int? BodySite { get; set; }
+        [MultiValueReferenceList("Fhir", "BodySite")]
+        public virtual RefListBodySite BodySite { get; set; }
 
         [ReferenceList("Fhir", "ProcedureOutcomes")]
         public virtual int? Outcome { get; set; }
@@ -93,11 +95,11 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
         public virtual string ReportOwnerType { get; set; }
 
         [MultiValueReferenceList("Fhir", "ConditionProblemDiagnosisCodes")]
-        public virtual int? Complication { get; set; }
+        public virtual RefListConditionProblemDiagnosisCodes Complication { get; set; }
 
         public virtual Condition ComplicationDetail { get; set; }
 
         [MultiValueReferenceList("Fhir", "ProcedureFollowUpCodes")]
-        public virtual int? FollowUp { get; set; }
+        public virtual RefListProcedureFollowUp FollowUp { get; set; }
     }
 }

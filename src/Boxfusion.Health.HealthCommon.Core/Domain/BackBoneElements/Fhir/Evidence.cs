@@ -11,7 +11,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir
     [Entity(TypeShortAlias = "HealthCommon.Core.Evidence")]
     public class Evidence : FullAuditedEntity<Guid>
     {
-        public virtual RefListCode Code { get; set; }
+        public virtual RefListAllergyIntoleranceSubstanceProductConditionNegationCodes Code { get; set; }
         public virtual string DetailOwnerId { get; set; }
         public virtual string DetailOwnerType { get; set; }
         public virtual Condition Condition { get; set; }

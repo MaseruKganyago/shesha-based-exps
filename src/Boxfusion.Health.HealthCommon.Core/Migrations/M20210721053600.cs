@@ -6,9 +6,15 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Migration(20210721053600)]
     public class M20210721053600 : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Up()
         {
             //Boxfusion.Health.HealthCommon.Core.IcdTenCode
@@ -41,6 +47,9 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .WithColumn("Comment").AsString().Nullable();
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Down()
         {
             throw new NotImplementedException();

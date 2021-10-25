@@ -7,7 +7,7 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum
 {
 	[ReferenceList("Fhir", "DocumentClassValueSets")]
-	public enum RefListDocumentClassValueSets: UInt64
+	public enum RefListDocumentClassValueSets: long
 	{
 		[Description("History of Immunization")]
 		historyOfImmunization = 1,

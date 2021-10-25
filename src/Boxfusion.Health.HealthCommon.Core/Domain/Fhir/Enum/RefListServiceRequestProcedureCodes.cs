@@ -6,9 +6,15 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	[ReferenceList("Fhir", "ServiceRequestProcedureCodes")]
-	public enum RefListServiceRequestProcedureCodes: int
+	public enum RefListServiceRequestProcedureCodes: long
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		[Description("Excision of lesion of patella")]
 		excisionOfLesionOfPatella = 104001
 	}

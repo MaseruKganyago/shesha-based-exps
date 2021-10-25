@@ -6,7 +6,7 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum
 {
 	[ReferenceList("Fhir", "UnitsOfTimes")]
-	public enum RefListUnitsOfTimes: int
+	public enum RefListUnitsOfTimes: long
 	{
 	}
 }

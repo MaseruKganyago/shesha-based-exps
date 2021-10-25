@@ -6,9 +6,15 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Migration(20210726170500)]
     public class M20210726170500 : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Up()
         {
             //Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Schedule
@@ -34,6 +40,9 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .WithForeignKeyColumn("Fhir_ServiceQueueCapacitiesId", "Core_Areas")
                 .WithColumn("SlotSizeInMinutes").AsInt32().Nullable();
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Down()
         {
             throw new NotImplementedException();

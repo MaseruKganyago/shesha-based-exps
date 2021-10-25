@@ -7,7 +7,7 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum
 {
 	[ReferenceList("Fhir", "DoseAndRateTypes")]
-	public enum RefListDoseAndRateTypes: int
+	public enum RefListDoseAndRateTypes: long
 	{
 		[Description("Calculated")]
 		calculated = 1,

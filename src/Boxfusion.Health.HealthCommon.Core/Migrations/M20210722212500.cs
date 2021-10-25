@@ -11,7 +11,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
     {
         public override void Up()
         {
-            Delete.Table("Fhir_FhirAddresses");
+            //Delete.Table("Fhir_FhirAddresses");
         }
         public override void Down()
         {

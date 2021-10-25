@@ -7,7 +7,7 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum
 {
 	[ReferenceList("Fhir", "EncounterClasses")]
-	public enum RefListRefListEncounterClasses : int
+	public enum RefListRefListEncounterClasses : long
 	{
 		[Description("Ambulatory")]
 		AMB = 1,

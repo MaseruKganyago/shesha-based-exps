@@ -40,15 +40,16 @@
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
-    <PackageReference Include="Shesha.Application" Version="0.0.14" />
-    <PackageReference Include="Shesha.Core" Version="0.0.14" />
-    <PackageReference Include="Shesha.Framework" Version="0.0.14" />
-    <PackageReference Include="Shesha.NHibernate" Version="0.0.14" />
-    <PackageReference Include="Shesha.Scheduler" Version="0.0.14" />
-    <PackageReference Include="Shesha.Web.Controls" Version="0.0.14" />
+    <PackageReference Include="Shesha.Application" Version="0.0.15" />
+    <PackageReference Include="Shesha.Core" Version="0.0.15" />
+    <PackageReference Include="Shesha.Framework" Version="0.0.15" />
+    <PackageReference Include="Shesha.NHibernate" Version="0.0.15" />
+    <PackageReference Include="Shesha.Scheduler" Version="0.0.15" />
+    <PackageReference Include="Shesha.Web.Controls" Version="0.0.15" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Domain\" />
     <Folder Include="Services\Admissions\Helpers\" />
     <Folder Include="Services\Separations\" />
   </ItemGroup>

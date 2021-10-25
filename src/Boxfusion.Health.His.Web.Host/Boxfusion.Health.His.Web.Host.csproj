@@ -37,7 +37,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ElmahCore" Version="2.0.6" />
-    <PackageReference Include="Shesha.Elmah" Version="0.0.14" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Abp.Castle.Log4Net" Version="5.0.0" />
@@ -53,6 +52,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.2" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
+    <PackageReference Include="Shesha.Elmah" Version="0.0.15" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>

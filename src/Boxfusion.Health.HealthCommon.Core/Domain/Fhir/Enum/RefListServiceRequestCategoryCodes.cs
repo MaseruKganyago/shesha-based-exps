@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum
 {
-	[ReferenceList("Fhir", "RefListServiceRequestCategoryCodes")]
-	public enum RefListServiceRequestCategoryCodes: int
+	[ReferenceList("Fhir", "ServiceRequestCategoryCodes")]
+	public enum RefListServiceRequestCategoryCodes: long
 	{
 
 	}

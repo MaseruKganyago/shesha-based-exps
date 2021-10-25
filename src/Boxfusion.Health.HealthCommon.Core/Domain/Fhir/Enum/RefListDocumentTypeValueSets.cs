@@ -6,10 +6,36 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	[ReferenceList("Fhir", "DocumentTypeValueSets")]
-	public enum RefListDocumentTypeValueSets: int
+	public enum RefListDocumentTypeValueSets: long
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		[Description("Sick Note")]
-		sickNote = 1
-	}
+		SickNote = 1,
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("Covid-19")]
+        Covid19 = 2,
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("eScript")]
+        eScript = 3,
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("Referral to Facility")]
+        ReferralToFacility = 4,
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("Consultation Report")]
+        ConsultationReport = 5
+    }
 }

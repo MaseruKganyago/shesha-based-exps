@@ -6,9 +6,15 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Migration(20210728213500)]
     public class M20210728213500 : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Up()
         {
             //Delete Foreign Key
@@ -29,6 +35,9 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .AddColumn("Fhir_Center").AsString().Nullable()
                 .AddColumn("Fhir_AreaCategoryLkp").AsInt64().Nullable();
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Down()
         {
             throw new NotImplementedException();
