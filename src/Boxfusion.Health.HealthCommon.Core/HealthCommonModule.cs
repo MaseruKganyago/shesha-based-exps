@@ -12,6 +12,7 @@ using Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Services.Locations.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Services.Organisations.Helper;
 using Boxfusion.Health.HealthCommon.Core.Services.ServiceRequests.Helpers;
+using Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers;
 using Castle.MicroKernel.Registration;
 using EasyNetQ;
 using EasyNetQ.AutoSubscribe;
@@ -68,6 +69,10 @@ namespace Boxfusion.Health.HealthCommon.Core
 
             IocManager.Register(typeof(IOrganisationCrudHelper<,>),
               typeof(OrganisationCrudHelper<,>),
+              DependencyLifeStyle.Transient);
+
+            IocManager.Register(typeof(IPersonFhirBaseCrudHelper<,>),
+              typeof(PersonFhirBaseCrudHelper<,>),
               DependencyLifeStyle.Transient);
 
             Configuration.Modules.AbpAutoMapper().Configurators.Add(

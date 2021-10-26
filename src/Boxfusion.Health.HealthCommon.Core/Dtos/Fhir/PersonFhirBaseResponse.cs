@@ -67,11 +67,6 @@ namespace Boxfusion.Health.HealthCommon.Core.Dtos.Fhir
         /// <summary>
         /// 
         /// </summary>
-        public StoredFileDto IDDocument { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public ReferenceListItemValueDto IdentityVerificationStatus { get; set; }
 
         /// <summary>
@@ -103,11 +98,6 @@ namespace Boxfusion.Health.HealthCommon.Core.Dtos.Fhir
         /// 
         /// </summary>
         public EntityWithDisplayNameDto<Guid?> Supervisor { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public StoredFile Photo { get; set; }
 
         /// <summary>
         /// 
@@ -147,12 +137,12 @@ namespace Boxfusion.Health.HealthCommon.Core.Dtos.Fhir
         /// <summary>
         /// 
         /// </summary>
-        public List<HospitalResponse> Hospitals { get; set; }
+        public List<EntityWithDisplayNameDto<Guid>> Hospitals { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public List<WardResponse> Wards { get; set; }
+        public List<EntityWithDisplayNameDto<Guid>> Wards { get; set; }
 
         /// <summary>
         /// 

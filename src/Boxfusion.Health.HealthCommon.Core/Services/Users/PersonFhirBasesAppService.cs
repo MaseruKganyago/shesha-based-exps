@@ -1,10 +1,12 @@
 ﻿using Abp.Authorization;
 using Abp.UI;
+using Boxfusion.Health.HealthCommon.Core.Domain.Dashboard;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using Shesha.Web.DataTable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,20 +35,16 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Users
             _personFhirBaseCrudHelper = personFhirBaseCrudHelper;
         }
 
-        //public static DataTableConfig IndexTable()
-        //{
-        //    var table = new DataTableConfig<AgentItems, Guid>("Agents_Index");
+        public static DataTableConfig IndexTable()
+        {
+            var table = new DataTableConfig<UserItems, Guid>("MidnightCensusUsers_Index");
 
-        //    table.AddProperty(e => e.FirstName, d => d.Caption("Name"));
-        //    table.AddProperty(e => e.LastName, d => d.Caption("Surname"));
-        //    table.AddProperty(e => e.Roles, d => d.Caption("Roles"));
-        //    table.AddProperty(e => e.UserName, d => d.Caption("Username"));
-        //    table.AddProperty(e => e.EmailAddress1, d => d.Caption("Email Address"));
-        //    table.AddProperty(e => e.MobileNumber1, d => d.Caption("Mobile Number"));
-
-        //    table.OnRequestToFilter = (criteria, form) => { };
-        //    return table;
-        //}
+            table.AddProperty(e => e.FirstName, d => d.Caption("Name"));
+            table.AddProperty(e => e.LastName, d => d.Caption("Surname"));
+            table.AddProperty(e => e.Supervisor, d => d.Caption("Supervisor"));
+            table.OnRequestToFilter = (criteria, form) => { };
+            return table;
+        }
 
         /// <summary>
         /// 
@@ -95,9 +93,9 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Users
             Validation.ValidateText(input?.User?.UserName, "Username");
             Validation.ValidateText(input?.User?.Password, "Password");
             Validation.ValidateText(input?.ConfirmPassword, "ConfirmPassword");
-            Validation.ValidateHospital(input?.Hospitals);
-            Validation.ValidateWard(input);
-            Validation.ValidateRole(input.Roles);
+            Validation.ValidateEntityWithDisplayNameDto(input?.Hospitals, "Hospital");
+            Validation.ValidateEntityWithDisplayNameDto(input?.Wards, "Ward");
+            Validation.ValidateEntityWithDisplayNameDto(input.Roles, "Role");
             Validation.ValidateConfirmPassword(input?.User?.Password, input?.ConfirmPassword);
             Validation.ValidateNumberOfHospitalsForNonCEO(input);
             Validation.ValidateRolesNotToAssignWard(input);
@@ -121,9 +119,9 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Users
             Validation.ValidateText(input?.User?.UserName, "Username");
             Validation.ValidateText(input?.User?.Password, "Password");
             Validation.ValidateText(input?.ConfirmPassword, "ConfirmPassword");
-            Validation.ValidateHospital(input?.Hospitals);
-            Validation.ValidateWard(input);
-            Validation.ValidateRole(input.Roles);
+            Validation.ValidateEntityWithDisplayNameDto(input?.Hospitals, "Hospital");
+            Validation.ValidateEntityWithDisplayNameDto(input?.Wards, "Ward");
+            Validation.ValidateEntityWithDisplayNameDto(input.Roles, "Role");
             Validation.ValidateConfirmPassword(input?.User?.Password, input?.ConfirmPassword);
             Validation.ValidateNumberOfHospitalsForNonCEO(input);
             Validation.ValidateRolesNotToAssignWard(input);

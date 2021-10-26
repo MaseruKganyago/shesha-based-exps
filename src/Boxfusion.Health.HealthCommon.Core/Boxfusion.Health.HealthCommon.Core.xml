@@ -26262,6 +26262,101 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.HospitalItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.HospitalItems.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.HospitalItems.Type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.HospitalItems.Address">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.HospitalItems.Latitude">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.HospitalItems.Longitude">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.HospitalItems.PrimaryContactTelephone">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.SpecialityItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.SpecialityItems.Speciality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.SpecialityItems.NumberOfBedsInSpeciality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.UserItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.UserItems.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.UserItems.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.UserItems.Supervisor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.WardItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.WardItems.Speciality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.WardItems.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.WardItems.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Domain.Dashboard.WardItems.NumberOfBeds">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.HealthCommon.Core.BackBoneElements.Domain.Fhir.SubstanceIngredient">
             <summary>
             
@@ -30627,11 +30722,6 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Fhir.PersonFhirBaseInput.IDDocument">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Fhir.PersonFhirBaseInput.IdentityVerificationStatus">
             <summary>
             
@@ -30667,11 +30757,6 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Fhir.PersonFhirBaseInput.Photo">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Fhir.PersonFhirBaseInput.PrimaryOrganisation">
             <summary>
             
@@ -30693,11 +30778,6 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Fhir.PersonFhirBaseInput.PreferredContactMethod">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Fhir.PersonFhirBaseInput.Initials">
             <summary>
             
             </summary>
@@ -30772,11 +30852,6 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Fhir.PersonFhirBaseResponse.IDDocument">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Fhir.PersonFhirBaseResponse.IdentityVerificationStatus">
             <summary>
             
@@ -30808,11 +30883,6 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Fhir.PersonFhirBaseResponse.Supervisor">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Fhir.PersonFhirBaseResponse.Photo">
             <summary>
             
             </summary>
@@ -32119,23 +32189,12 @@
             <param name="input"></param>
             <param name="inputName"></param>
         </member>
-        <member name="M:Boxfusion.Health.HealthCommon.Core.Helpers.Validations.Validation.ValidateRole(System.Collections.Generic.List{Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Guid}})">
-            <summary>
-            
-            </summary>
-            <param name="roles"></param>
-        </member>
-        <member name="M:Boxfusion.Health.HealthCommon.Core.Helpers.Validations.Validation.ValidateHospital(System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput})">
-            <summary>
-            
-            </summary>
-            <param name="hospitals"></param>
-        </member>
-        <member name="M:Boxfusion.Health.HealthCommon.Core.Helpers.Validations.Validation.ValidateWard(Boxfusion.Health.HealthCommon.Core.Dtos.Fhir.PersonFhirBaseInput)">
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Helpers.Validations.Validation.ValidateEntityWithDisplayNameDto(System.Collections.Generic.List{Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Guid}},System.String)">
             <summary>
             
             </summary>
             <param name="input"></param>
+            <param name="name"></param>
         </member>
         <member name="M:Boxfusion.Health.HealthCommon.Core.Helpers.Validations.Validation.ValidateNumberOfHospitalsForNonCEO(Boxfusion.Health.HealthCommon.Core.Dtos.Fhir.PersonFhirBaseInput)">
             <summary>
@@ -33361,6 +33420,96 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211025084600.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026103500">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026103500.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026103500.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026112000">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026112000.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026112000.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026122000">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026122000.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026122000.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026123700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026123700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026123700.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026130600">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026130600.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026130600.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026135300">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026135300.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211026135300.Down">
             <summary>
             
             </summary>
@@ -36089,6 +36238,18 @@
             
             </summary>
             <param name="WardCrudHelper"></param>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Locations.Wards.WardsAppService.IndexTable">
+            <summary>
+            Ward index table
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Locations.Wards.WardsAppService.SpecialityIndexTable">
+            <summary>
+            Speciality
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Locations.Wards.WardsAppService.GetWardsAsync">
             <summary>
@@ -39058,7 +39219,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.PersonFhirBaseCrudHelper`2.CreateWardRoleAppointedPerson``1(Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Guid},Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.WardInput,``0)">
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.PersonFhirBaseCrudHelper`2.CreateWardRoleAppointedPerson``1(Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Guid},Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Guid},``0)">
             <summary>
             
             </summary>
@@ -39068,7 +39229,7 @@
             <param name="ownerEntity"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.PersonFhirBaseCrudHelper`2.CreateHospitalRoleAppointedPerson``1(Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Guid},Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput,``0)">
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.PersonFhirBaseCrudHelper`2.CreateHospitalRoleAppointedPerson``1(Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Guid},Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Guid},``0)">
             <summary>
             
             </summary>

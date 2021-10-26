@@ -68,11 +68,6 @@ namespace Boxfusion.Health.HealthCommon.Core.Dtos.Fhir
         /// <summary>
         /// 
         /// </summary>
-        public StoredFileDto IDDocument { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public ReferenceListItemValueDto IdentityVerificationStatus { get; set; }
 
         /// <summary>
@@ -108,11 +103,6 @@ namespace Boxfusion.Health.HealthCommon.Core.Dtos.Fhir
         /// <summary>
         /// 
         /// </summary>
-        public StoredFile Photo { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public EntityWithDisplayNameDto<Guid?> PrimaryOrganisation { get; set; }
 
         /// <summary>
@@ -138,22 +128,17 @@ namespace Boxfusion.Health.HealthCommon.Core.Dtos.Fhir
         /// <summary>
         /// 
         /// </summary>
-        public string Initials { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public List<EntityWithDisplayNameDto<Guid>> Roles { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public List<HospitalInput> Hospitals { get; set; }
+        public List<EntityWithDisplayNameDto<Guid>> Hospitals { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public List<WardInput> Wards { get; set; }
+        public List<EntityWithDisplayNameDto<Guid>> Wards { get; set; }
 
         /// <summary>
         /// 

@@ -104,35 +104,36 @@ namespace Boxfusion.Health.HealthCommon.Core.Helpers.Validations
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="roles"></param>
-        public static void ValidateRole(List<EntityWithDisplayNameDto<Guid>> roles)
-        {
-            if ((roles.Any(x => x?.Id == null)))
-                throw new UserFriendlyException("Role Id cannot be empty");
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="hospitals"></param>
-        public static void ValidateHospital(List<HospitalInput> hospitals)
-        {
-            if ((hospitals.Any(x => x?.Id == null)))
-                throw new UserFriendlyException("Facility Id cannot be empty");
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="input"></param>
-        public static void ValidateWard(PersonFhirBaseInput input)
+        /// <param name="name"></param>
+        public static void ValidateEntityWithDisplayNameDto(List<EntityWithDisplayNameDto<Guid>> input, string name)
         {
-            if (input.Roles.Select(x => x.Id).ToList().Intersect(CdmRoleIds.ClinicalIds).Count() > 0)
-            {
-                if ((input.Wards.Any(x => x?.Id == null)))
-                    throw new UserFriendlyException("Ward Id cannot be empty");
-            }
+            if ((input.Any(x => x?.Id == null)))
+                throw new UserFriendlyException($"{name} Id cannot be empty");
         }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="hospitals"></param>
+        //public static void ValidateHospital(List<HospitalInput> hospitals)
+        //{
+        //    if ((hospitals.Any(x => x?.Id == null)))
+        //        throw new UserFriendlyException("Facility Id cannot be empty");
+        //}
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="input"></param>
+        //public static void ValidateWard(PersonFhirBaseInput input)
+        //{
+        //    if (input.Roles.Select(x => x.Id).ToList().Intersect(CdmRoleIds.ClinicalIds).Count() > 0)
+        //    {
+        //        if ((input.Wards.Any(x => x?.Id == null)))
+        //            throw new UserFriendlyException("Ward Id cannot be empty");
+        //    }
+        //}
 
         /// <summary>
         /// 

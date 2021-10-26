@@ -130,23 +130,25 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers
         {
             var personFhirBase = await _repository.InsertAsync(entity);
 
-            List<EntityWithDisplayNameDto<Guid?>> shaRoleAppointedPersonResponses = null;
+            List<EntityWithDisplayNameDto<Guid?>> shaRoleAppointedPersonResponses = new List<EntityWithDisplayNameDto<Guid?>>();
             if (input?.Roles != null && input?.Roles.Count() > 0)
             {
                 foreach (var ward in input?.Wards)
                 {
-                    var taskWardRoleAppointedPersons = new List<Task<EntityWithDisplayNameDto<Guid?>>>(); //Tasks lists to handle batch insert into database
+                    var taskWardRoleAppointedPersons = new List<Task<WardRoleAppointedPerson>>(); //Tasks lists to handle batch insert into database
                     input.Roles.ForEach((wardRoleAppointedInput) => taskWardRoleAppointedPersons.Add(CreateWardRoleAppointedPerson(wardRoleAppointedInput, ward, personFhirBase)));
-                    var wardRoleAppointedPersons = ((IList<EntityWithDisplayNameDto<Guid?>>)await Task.WhenAll(taskWardRoleAppointedPersons)); //save identifiers to db
-                    shaRoleAppointedPersonResponses.AddRange(wardRoleAppointedPersons.ToList());
+                    var wardRoleAppointedPersons = ((IList<WardRoleAppointedPerson>)await Task.WhenAll(taskWardRoleAppointedPersons)); //save identifiers to db
+                    shaRoleAppointedPersonResponses.AddRange(_mapper.Map<List<EntityWithDisplayNameDto<Guid?>>>(wardRoleAppointedPersons.ToList()));
                 }
 
                 foreach (var hospital in input?.Hospitals)
                 {
-                    var taskHospitalRoleAppointedPersons = new List<Task<EntityWithDisplayNameDto<Guid?>>>(); //Tasks lists to handle batch insert into database
+                    var taskHospitalRoleAppointedPersons = new List<Task<HospitalRoleAppointedPerson>>(); //Tasks lists to handle batch insert into database
                     input.Roles.ForEach((hospitalRoleAppointedInput) => taskHospitalRoleAppointedPersons.Add(CreateHospitalRoleAppointedPerson(hospitalRoleAppointedInput, hospital, personFhirBase)));
-                    var hospitalRoleAppointedPersons = ((IList<EntityWithDisplayNameDto<Guid?>>)await Task.WhenAll(taskHospitalRoleAppointedPersons)); //save identifiers to db
-                    shaRoleAppointedPersonResponses.AddRange( hospitalRoleAppointedPersons.ToList());
+                    var hospitalRoleAppointedPersons = ((IList<HospitalRoleAppointedPerson>)await Task.WhenAll(taskHospitalRoleAppointedPersons)); //save identifiers to db
+
+
+                    shaRoleAppointedPersonResponses.AddRange(_mapper.Map<List<EntityWithDisplayNameDto<Guid?>>>(hospitalRoleAppointedPersons.ToList()));
                 }
             }
 
@@ -196,6 +198,8 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers
             UtilityHelper.TrySetProperty(personFhirBaseResponse, "ContactPoints", contactPointResponses);
             UtilityHelper.TrySetProperty(personFhirBaseResponse, "Contacts", contactResponses);
             UtilityHelper.TrySetProperty(personFhirBaseResponse, "Roles", shaRoleAppointedPersonResponses);
+            UtilityHelper.TrySetProperty(personFhirBaseResponse, "Wards", input?.Wards);
+            UtilityHelper.TrySetProperty(personFhirBaseResponse, "Hospitals", input?.Hospitals);
 
             //Additional logic from sub classes
             if (action != null) await action.Invoke();
@@ -215,7 +219,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers
             _mapper.Map(input, dbPersonFhirBase);
             var updatedPersonFhirBase = await _repository.UpdateAsync(dbPersonFhirBase);
 
-            List<EntityWithDisplayNameDto<Guid?>> shaRoleAppointedPersonResponses = null;
+            List<EntityWithDisplayNameDto<Guid?>> shaRoleAppointedPersonResponses = new List<EntityWithDisplayNameDto<Guid?>>();
             if (input?.Roles != null && input?.Roles.Count() > 0)
             {
                 //Delete old ShaRoleAppointmentPerson when deleting
@@ -227,18 +231,20 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers
 
                 foreach (var ward in input?.Wards)
                 {
-                    var taskWardRoleAppointedPersons = new List<Task<EntityWithDisplayNameDto<Guid?>>>(); //Tasks lists to handle batch insert into database
+                    var taskWardRoleAppointedPersons = new List<Task<WardRoleAppointedPerson>>(); //Tasks lists to handle batch insert into database
                     input.Roles.ForEach((wardRoleAppointedInput) => taskWardRoleAppointedPersons.Add(CreateWardRoleAppointedPerson(wardRoleAppointedInput, ward, dbPersonFhirBase)));
-                    var wardRoleAppointedPersons = ((IList<EntityWithDisplayNameDto<Guid?>>)await Task.WhenAll(taskWardRoleAppointedPersons)); //save identifiers to db
-                    shaRoleAppointedPersonResponses.AddRange(wardRoleAppointedPersons.ToList());
+                    var wardRoleAppointedPersons = ((IList<WardRoleAppointedPerson>)await Task.WhenAll(taskWardRoleAppointedPersons)); //save identifiers to db
+                    shaRoleAppointedPersonResponses.AddRange(_mapper.Map<List<EntityWithDisplayNameDto<Guid?>>>(wardRoleAppointedPersons.ToList()));
                 }
 
                 foreach (var hospital in input?.Hospitals)
                 {
-                    var taskHospitalRoleAppointedPersons = new List<Task<EntityWithDisplayNameDto<Guid?>>>(); //Tasks lists to handle batch insert into database
+                    var taskHospitalRoleAppointedPersons = new List<Task<HospitalRoleAppointedPerson>>(); //Tasks lists to handle batch insert into database
                     input.Roles.ForEach((hospitalRoleAppointedInput) => taskHospitalRoleAppointedPersons.Add(CreateHospitalRoleAppointedPerson(hospitalRoleAppointedInput, hospital, dbPersonFhirBase)));
-                    var hospitalRoleAppointedPersons = ((IList<EntityWithDisplayNameDto<Guid?>>)await Task.WhenAll(taskHospitalRoleAppointedPersons)); //save identifiers to db
-                    shaRoleAppointedPersonResponses.AddRange(hospitalRoleAppointedPersons.ToList());
+                    var hospitalRoleAppointedPersons = ((IList<HospitalRoleAppointedPerson>)await Task.WhenAll(taskHospitalRoleAppointedPersons)); //save identifiers to db
+
+
+                    shaRoleAppointedPersonResponses.AddRange(_mapper.Map< List < EntityWithDisplayNameDto<Guid?> > >(hospitalRoleAppointedPersons.ToList()));
                 }
             }
 
@@ -313,6 +319,8 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers
             UtilityHelper.TrySetProperty(personFhirBaseResponse, "ContactPoints", contactPointResponses);
             UtilityHelper.TrySetProperty(personFhirBaseResponse, "Contacts", contactResponses);
             UtilityHelper.TrySetProperty(personFhirBaseResponse, "Roles", shaRoleAppointedPersonResponses);
+            UtilityHelper.TrySetProperty(personFhirBaseResponse, "Wards", input?.Wards);
+            UtilityHelper.TrySetProperty(personFhirBaseResponse, "Hospitals", input?.Hospitals);
 
             //Additional logic from sub classes
             if (action != null) await action.Invoke();
@@ -341,7 +349,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers
         /// <param name="ward"></param>
         /// <param name="ownerEntity"></param>
         /// <returns></returns>
-		private async Task<EntityWithDisplayNameDto<Guid?>> CreateWardRoleAppointedPerson<T>(EntityWithDisplayNameDto<Guid> role, WardInput ward, T ownerEntity) where T : PersonFhirBase
+		private async Task<WardRoleAppointedPerson> CreateWardRoleAppointedPerson<T>(EntityWithDisplayNameDto<Guid> role, EntityWithDisplayNameDto<Guid> ward, T ownerEntity) where T : PersonFhirBase
         {
             var dbShaRole = await _shaRoleRepository.FirstOrDefaultAsync(r => r.Id == role.Id);
             var dbWard = await _wardRepository.GetAsync(ward.Id);
@@ -352,7 +360,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers
                 uow.Complete();
             }
 
-            return _mapper.Map<EntityWithDisplayNameDto<Guid?>>(wardRoleAppointed);
+            return wardRoleAppointed;
         }
 
         /// <summary>
@@ -363,7 +371,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers
         /// <param name="hospital"></param>
         /// <param name="ownerEntity"></param>
         /// <returns></returns>
-        private async Task<EntityWithDisplayNameDto<Guid?>> CreateHospitalRoleAppointedPerson<T>(EntityWithDisplayNameDto<Guid> role, HospitalInput hospital, T ownerEntity) where T : PersonFhirBase
+        private async Task<HospitalRoleAppointedPerson> CreateHospitalRoleAppointedPerson<T>(EntityWithDisplayNameDto<Guid> role, EntityWithDisplayNameDto<Guid> hospital, T ownerEntity) where T : PersonFhirBase
         {
             var dbShaRole = await _shaRoleRepository.FirstOrDefaultAsync(r => r.Id == role.Id);
             var dbHospital = await _hospitalRepository.GetAsync(hospital.Id);
@@ -374,7 +382,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers
                 uow.Complete();
             }
 
-            return _mapper.Map<EntityWithDisplayNameDto<Guid?>>(hospitalRoleAppointed);
+            return _mapper.Map<HospitalRoleAppointedPerson>(hospitalRoleAppointed);
         }
 
         /// <summary>

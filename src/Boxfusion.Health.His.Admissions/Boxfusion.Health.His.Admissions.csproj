@@ -23,17 +23,7 @@
     <Compile Remove="Services\Admissions\IEncountersAppService.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="..\..\..\..\..\.nuget\packages\hl7.fhir.specification.r4\3.3.0\contentFiles\any\any\specification.zip" Link="Services\Separations\specification.zip">
-      <Private>True</Private>
-      <NuGetPackageVersion>3.3.0</NuGetPackageVersion>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <NuGetItemType>Content</NuGetItemType>
-      <TargetPath>specification.zip</TargetPath>
-      <NuGetPackageId>Hl7.Fhir.Specification.R4</NuGetPackageId>
-      <Pack>false</Pack>
-    </Content>
-  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Abp" Version="5.0.0" />

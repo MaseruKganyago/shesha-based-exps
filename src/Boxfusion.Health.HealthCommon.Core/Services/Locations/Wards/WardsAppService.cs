@@ -1,10 +1,12 @@
 ﻿using Abp.Authorization;
+using Boxfusion.Health.HealthCommon.Core.Domain.Dashboard;
 using Boxfusion.Health.HealthCommon.Core.Dtos;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services.Locations.Wards.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using Shesha.Web.DataTable;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,6 +34,41 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Locations.Wards
             _WardCrudHelper = WardCrudHelper;
         }
 
+        /// <summary>
+        /// Ward index table
+        /// </summary>
+        /// <returns></returns>
+        public static DataTableConfig IndexTable()
+        {
+            var table = new DataTableConfig<WardItems, Guid>("Wards_Index");
+
+            table.AddProperty(e => e.Speciality, c => c.Caption("Ward Speciality"));
+            table.AddProperty(e => e.Name, d => d.Caption("Ward Name"));
+            table.AddProperty(e => e.Description, d => d.Caption("Ward Description"));
+            table.AddProperty(e => e.NumberOfBeds, d => d.Caption("No. of Beds"));
+            table.OnRequestToFilter = (criteria, form) =>
+            {
+            };
+
+            return table;
+        }
+
+        /// <summary>
+        /// Speciality
+        /// </summary>
+        /// <returns></returns>
+        public static DataTableConfig SpecialityIndexTable()
+        {
+            var table = new DataTableConfig<SpecialityItems, Guid>("Specialities_Index");
+
+            table.AddProperty(e => e.Speciality, c => c.Caption("Ward Speciality"));
+            table.AddProperty(e => e.NumberOfBedsInSpeciality, d => d.Caption("Ward Name"));
+            table.OnRequestToFilter = (criteria, form) =>
+            {
+            };
+
+            return table;
+        }
 
         /// <summary>
         /// 

@@ -1,5 +1,6 @@
 ﻿using Abp.Authorization;
 using Abp.UI;
+using Boxfusion.Health.HealthCommon.Core.Domain.Dashboard;
 using Boxfusion.Health.HealthCommon.Core.Dtos;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Fhir;
@@ -7,6 +8,7 @@ using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services.Organisations.Hospitals;
 using Boxfusion.Health.HealthCommon.Core.Services.Organisations.Hospitals.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using Shesha.Web.DataTable;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,6 +36,23 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Organisations.Hospitals
             _HospitalCrudHelper = HospitalCrudHelper;
         }
 
+        //
+        public static DataTableConfig IndexTable()
+        {
+            var table = new DataTableConfig<HospitalItems, Guid>("Hospitals_Index");
+
+            table.AddProperty(e => e.Name, d => d.Caption("Facility Name"));
+            table.AddProperty(e => e.Type, c => c.Caption("Facility Type"));
+            table.AddProperty(e => e.Address, d => d.Caption("Address"));
+            table.AddProperty(e => e.Latitude, d => d.Caption("Latitude"));
+            table.AddProperty(e => e.Longitude, d => d.Caption("Longitude"));
+            table.AddProperty(e => e.PrimaryContactTelephone, d => d.Caption("Contact Details"));
+            table.OnRequestToFilter = (criteria, form) =>
+            {
+            };
+
+            return table;
+        }
 
         /// <summary>
         /// 
