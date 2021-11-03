@@ -2,12 +2,12 @@
 using Abp.Configuration;
 using Abp.Localization;
 
-namespace Boxfusion.Health.His.Admissions.Configuration
+namespace Boxfusion.Health.His.Domain.Configuration
 {
     /// <summary>
     /// Defines Health.His settings
     /// </summary>
-    public class HisAdmisSettingProvider : SettingProvider
+    public class HisDomainSettingProvider : SettingProvider
     {
         /// <summary>
         /// 
@@ -17,9 +17,9 @@ namespace Boxfusion.Health.His.Admissions.Configuration
         /// <summary>
         /// 
         /// </summary>
-        public HisAdmisSettingProvider()
+        public HisDomainSettingProvider()
         {
-            LocalizationSourceName = "HisAdmis";
+            LocalizationSourceName = "HisDomain";
         }
 
         /// <summary>

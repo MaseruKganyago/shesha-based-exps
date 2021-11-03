@@ -3,32 +3,29 @@ using Abp.AspNetCore.Configuration;
 using Abp.AutoMapper;
 using Abp.Modules;
 using Castle.MicroKernel.Registration;
-using Boxfusion.Health.His.Admissions.Authorization;
-//using Boxfusion.Health.His.Admissions.Configuration;
-using Boxfusion.Health.His.Admissions.Localization;
+using Boxfusion.Health.His.Domain.Authorization;
+//using Boxfusion.Health.His.Domain.Configuration;
+using Boxfusion.Health.His.Domain.Localization;
 using Shesha;
 using Shesha.Authorization;
-using Boxfusion.Health.His.Domain;
+using Boxfusion.Health.HealthCommon.Core;
 
-namespace Boxfusion.Health.His.Admissions
+namespace Boxfusion.Health.His.Domain
 {
     /// <summary>
     /// Health.His Module
     /// </summary>
     [DependsOn(
-        typeof(HisDomainModule),
         typeof(SheshaCoreModule)
     )]
-    public class HisAdmisModule : AbpModule
+    public class HisDomainModule : AbpModule
     {
-        /// <summary>
         /// inheritedDoc
-        /// </summary>
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
             IocManager.IocContainer.Register(
-              Component.For<ICustomPermissionChecker>().Forward<IHisAdmisPermissionChecker>().Forward<HisAdmisPermissionChecker>().ImplementedBy<HisAdmisPermissionChecker>().LifestyleTransient()
+              Component.For<ICustomPermissionChecker>().Forward<IHisDomainPermissionChecker>().Forward<HisDomainPermissionChecker>().ImplementedBy<HisDomainPermissionChecker>().LifestyleTransient()
           );
 
             var thisAssembly = Assembly.GetExecutingAssembly();
@@ -40,27 +37,23 @@ namespace Boxfusion.Health.His.Admissions
             );
         }
 
-        /// <summary>
         /// inheritedDoc
-        /// </summary>
         public override void PreInitialize()
         {
             base.PreInitialize();
 
-            //Configuration.Settings.Providers.Add<HisAdmisSettingProvider>();
-            Configuration.Authorization.Providers.Add<HisAdmisAuthorizationProvider>();
+            //Configuration.Settings.Providers.Add<HisDomainSettingProvider>();
+            Configuration.Authorization.Providers.Add<HisDomainAuthorizationProvider>();
 
-            HisAdmisLocalizationConfigurer.Configure(Configuration.Localization);
+            HisDomainLocalizationConfigurer.Configure(Configuration.Localization);
         }
 
-        /// <summary>
         /// inheritedDoc
-        /// </summary>
         public override void PostInitialize()
         {
             Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
-                typeof(HisAdmisModule).Assembly,
-                moduleName: "HisAdmis",
+                typeof(HisDomainModule).Assembly,
+                moduleName: "HisDomain",
                 useConventionalHttpVerbs: true);
         }
     }

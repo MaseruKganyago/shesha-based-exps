@@ -75,51 +75,25 @@
             System Administrator
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmisSettingsAppService.Update(Boxfusion.Health.His.Admissions.Configuration.HisAdmisSettingsDto)">
-            <summary>
-            Updates Health.His settings
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmisSettingsAppService.Get">
-            <summary>
-            Returns Health.His settings
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmisSettingsAppService.ChangeSettingAsync(System.String,System.String)">
-            <summary>
-            Changes setting for tenant with fallback to application
-            </summary>
-            <param name="name">Setting name</param>
-            <param name="value">Setting value</param>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdmisSettingNames">
-            <summary>
-            Contains setting names for Health.Hiss
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdmisSettingProvider">
-            <summary>
-            Defines Health.His settings
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdmisSettingsDto">
-            <summary>
-            Health.His settings DTO
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.HisAdmisModule">
             <summary>
             Health.His Module
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.HisAdmisModule.Initialize">
+            <summary>
             inheritedDoc
+            </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.HisAdmisModule.PreInitialize">
+            <summary>
             inheritedDoc
+            </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.HisAdmisModule.PostInitialize">
+            <summary>
             inheritedDoc
+            </summary>
         </member>
     </members>
 </doc>

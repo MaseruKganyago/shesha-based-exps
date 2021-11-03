@@ -16,9 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Web.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admissions", "src\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.csproj", "{CEA41403-B987-4352-9DF5-015DA76F3F65}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Tests", "test\Boxfusion.Health.His.Tests\Boxfusion.Health.His.Tests.csproj", "{CCD6D1E2-5DE4-4FDD-BCBA-B47D022F7488}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Domain", "src\Boxfusion.Health.His.Domain\Boxfusion.Health.His.Domain.csproj", "{B48270DE-2D45-4198-B10E-E331C8529C73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boxfusion.Health.HealthCommon.Core", "src\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj", "{607866A0-C059-4BD9-9AA5-FD6FF0FF006E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Tests", "test\Boxfusion.Health.His.Tests\Boxfusion.Health.His.Tests.csproj", "{CCD6D1E2-5DE4-4FDD-BCBA-B47D022F7488}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +38,10 @@ Global
 		{CEA41403-B987-4352-9DF5-015DA76F3F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEA41403-B987-4352-9DF5-015DA76F3F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEA41403-B987-4352-9DF5-015DA76F3F65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B48270DE-2D45-4198-B10E-E331C8529C73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B48270DE-2D45-4198-B10E-E331C8529C73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B48270DE-2D45-4198-B10E-E331C8529C73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B48270DE-2D45-4198-B10E-E331C8529C73}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CCD6D1E2-5DE4-4FDD-BCBA-B47D022F7488}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CCD6D1E2-5DE4-4FDD-BCBA-B47D022F7488}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCD6D1E2-5DE4-4FDD-BCBA-B47D022F7488}.Release|Any CPU.ActiveCfg = Release|Any CPU

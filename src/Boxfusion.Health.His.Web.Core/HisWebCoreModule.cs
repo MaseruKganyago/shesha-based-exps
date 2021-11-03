@@ -29,6 +29,9 @@ using Shesha.Web.FormsDesigner;
 
 namespace Boxfusion.Health.His.Admissions
 {
+    /// <summary>
+    /// ReSharper disable once InconsistentNaming
+    /// </summary>
     [DependsOn(
          typeof(SheshaApplicationModule),
          typeof(SheshaNHibernateModule),
@@ -50,18 +53,24 @@ namespace Boxfusion.Health.His.Admissions
          typeof(SheshaSmsPortalModule),
          typeof(SheshaFormsDesignerModule)
      )]
-    // ReSharper disable once InconsistentNaming
     public class HisWebCoreModule : AbpModule
     {
         private readonly IWebHostEnvironment _env;
         private readonly IConfigurationRoot _appConfiguration;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="env"></param>
         public HisWebCoreModule(IWebHostEnvironment env)
         {
             _env = env;
             _appConfiguration = env.GetAppConfiguration();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override void PreInitialize()
         {
             Configuration.DefaultNameOrConnectionString = _appConfiguration.GetConnectionString(
@@ -91,6 +100,9 @@ namespace Boxfusion.Health.His.Admissions
             tokenAuthConfig.Expiration = TimeSpan.FromDays(5);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(typeof(HisWebCoreModule).GetAssembly());

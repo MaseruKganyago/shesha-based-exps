@@ -24,15 +24,11 @@
     <None Remove="Configuration\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Services\Admissions\EncountersAppService.cs" />
-    <Compile Remove="Services\Admissions\IEncountersAppService.cs" />
-  </ItemGroup>
-
 
 
   <ItemGroup>
     <PackageReference Include="Abp" Version="5.0.0" />
+    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.0.0" />
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
@@ -47,12 +43,5 @@
   <ItemGroup>
     <Folder Include="Domain\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Services\Admissions\Helpers\" />
-    <Folder Include="Services\Separations\" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Boxfusion.Health.His.Domain\Boxfusion.Health.His.Domain.csproj" />
-  </ItemGroup>
-
 </Project>

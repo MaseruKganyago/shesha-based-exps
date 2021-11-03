@@ -4,6 +4,27 @@
         <name>Boxfusion.Health.His.Web.Core</name>
     </assembly>
     <members>
+        <member name="T:Boxfusion.Health.His.Admissions.HisWebCoreModule">
+            <summary>
+            ReSharper disable once InconsistentNaming
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.HisWebCoreModule.#ctor(Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="env"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.HisWebCoreModule.PreInitialize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.HisWebCoreModule.Initialize">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:Boxfusion.Health.His.Swagger.SwaggerOperationFilter.GetSingleAttributeOfMemberOrDeclaringTypeOrDefault``1(System.Reflection.MemberInfo,``0,System.Boolean)">
             <summary>
             Copied from ABP
