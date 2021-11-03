@@ -16,6 +16,7 @@ namespace Boxfusion.Health.His.Domain
     /// Health.His Module
     /// </summary>
     [DependsOn(
+        typeof(HealthCommonModule),
         typeof(SheshaCoreModule)
     )]
     public class HisDomainModule : AbpModule
