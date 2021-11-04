@@ -12,8 +12,15 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Boxfusion.Health.His.Swagger
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class SwaggerHelper
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
         public static void AddDocumentsPerService(this SwaggerGenOptions options)
         {
             var typeFinder = IocManager.Instance.Resolve<ITypeFinder>();
@@ -40,6 +47,10 @@ namespace Boxfusion.Health.His.Swagger
             options.DocInclusionPredicate((docName, description) => ApiExplorerGroupPerControllerConvention.GroupInclusionPredicate(docName, description));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
         public static void AddXmlDocuments(this SwaggerGenOptions options)
         {
             var assemblyFinder = IocManager.Instance.Resolve<IAssemblyFinder>();
