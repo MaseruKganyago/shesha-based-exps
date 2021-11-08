@@ -75,6 +75,226 @@
             System Administrator
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.AdmissionsPatient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.AdmissionsPatient.HospitalisationPatientNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.AdmissionsPatient.Province">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.AdmissionsPatient.Classification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.AdmissionsPatient.OtherCategories">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Enums.RefListClassification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListClassification.h0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListClassification.h1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListClassification.h2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListClassification.h3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListClassification.hg">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListClassification.pg">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListClassification.pf">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListClassification.ph">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListClassification.ws">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Enums.RefListIdentificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListIdentificationType.saID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListIdentificationType.passport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListIdentificationType.immigrationDocuments">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListIdentificationType.asylumDocuments">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListIdentificationType.notProvided">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListIdentificationType.other">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Enums.RefListOtherCategories">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListOtherCategories.materalDeaths">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListOtherCategories.prisoner">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListOtherCategories.mva">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListOtherCategories.gunshot">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListOtherCategories.burnWounds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListOtherCategories.stabWounds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListOtherCategories.dayPatients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListOtherCategories.lodgers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListOtherCategories.cancellations">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Enums.RefListProvince">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListProvince.easternCape">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListProvince.freeState">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListProvince.gauteng">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListProvince.kwaZuluNatal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListProvince.limpopo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListProvince.mpumalang">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListProvince.northWest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListProvince.northernCape">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListProvince.westernCape">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListProvince.notProvided">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Enums.RefListProvince.other">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.HisAdmisModule">
             <summary>
             Health.His Module
@@ -93,6 +313,346 @@
         <member name="M:Boxfusion.Health.His.Admissions.HisAdmisModule.PostInitialize">
             <summary>
             inheritedDoc
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers.IEncounterCrudHelper{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.HospitalisationEncounter},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Admissions.Domain.AdmissionsPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Ward,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="encounterCrudHelper"></param>
+            <param name="repository"></param>
+            <param name="wardRepository"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.AdmitPatient(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmissionsMapProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmissionsMapProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.IdentityNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.DateOfBirth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.Gender">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.AdmissionDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.HospitalisationPatientNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.AdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.AdmissionType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.Specialty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.Ward">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.Code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.Province">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.Classification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.Nationality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.OtherCategories">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.IdentityNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.DateOfBirth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.Gender">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.AdmissionDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.HospitalisationPatientNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.AdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.AdmissionType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.Specialty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.Ward">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.Code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.Province">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.Classification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.Nationality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.OtherCategories">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Admissions.IAdmissionsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211108021400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211108021400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211108021400.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.PreAdmissionIdentifier">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.OriginOwnerId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.OriginOwnerType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.AdmitSource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.ReAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.DietPreference">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.SpecialCourtesy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.SpecialArrangement">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.DestinationOwnerId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.DestinationOwnerType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.DischargeDisposition">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.PreAdmissionIdentifier">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.OriginOwnerId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.OriginOwnerType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.AdmitSource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.ReAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.DietPreference">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.SpecialCourtesy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.SpecialArrangement">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.DestinationOwnerId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.DestinationOwnerType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.DischargeDisposition">
+            <summary>
+            
             </summary>
         </member>
     </members>

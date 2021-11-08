@@ -45,8 +45,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\" />
-    <Folder Include="Migrations\" />
     <Folder Include="Services\Admissions\Helpers\" />
     <Folder Include="Services\Separations\" />
   </ItemGroup>
