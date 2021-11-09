@@ -32,5 +32,20 @@ namespace Boxfusion.Health.His.Admissions.Domain
 		/// 
 		/// </summary>
 		public virtual RefListOtherCategories OtherCategories { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual RefListAdmissionType AdmissionType { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual RefListAdmissionStatus AdmissionStatus { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual RefListIdentificationType IdentificationType { get; set; }
 	}
 }

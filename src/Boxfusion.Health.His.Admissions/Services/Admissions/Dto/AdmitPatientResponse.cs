@@ -90,5 +90,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 		/// 
 		/// </summary>
 		public ReferenceListItemValueDto OtherCategories { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public ReferenceListItemValueDto AdmissionStatus { get; set; }
 	}
 }

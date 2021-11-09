@@ -9,6 +9,7 @@ using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers;
 using Boxfusion.Health.His.Admissions.Domain;
+using Boxfusion.Health.His.Admissions.Domain.Enums;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
@@ -52,7 +53,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 		/// </summary>
 		/// <param name="input"></param>
 		/// <returns></returns>
-		[HttpPost, Route("")]
+		[HttpPost, Route("AdmitPatient")]
 		public async Task<AdmitPatientResponse> AdmitPatient(AdmitPatientInput input)
 		{
 			if (string.IsNullOrEmpty(input.IdentityNumber)) throw new UserFriendlyException("Patient IdentittyNumber can not be null.");
@@ -67,6 +68,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 				patient = await SaveOrUpdateEntityAsync<AdmissionsPatient>(null, async item =>
 				{
 					ObjectMapper.Map(input, item);
+					item.AdmissionStatus = RefListAdmissionStatus.admitted;
 				});
 			}
 
