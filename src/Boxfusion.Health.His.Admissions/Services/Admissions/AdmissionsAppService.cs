@@ -3,6 +3,7 @@ using Abp.Domain.Repositories;
 using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Boxfusion.Health.HealthCommon.Core.Dtos;
 using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
@@ -38,6 +39,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 		private readonly IRepository<AdmissionsPatient, Guid> _repository;
 		private readonly IRepository<Ward, Guid> _wardRepository;
 		private readonly IConditionsCrudHelper _conditionsCrudHelper;
+		private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;
+		private readonly IRepository<ConditionIcdTenCode, Guid> _conditionIcdTenCodeRepository;
 
 		/// <summary>
 		/// 
@@ -46,15 +49,21 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 		/// <param name="repository"></param>
 		/// <param name="wardRepository"></param>
 		/// <param name="conditionsCrudHelper"></param>
+		/// <param name="diagnosisRepository"></param>
+		/// <param name="conditionIcdTenCodeRepository"></param>
 		public AdmissionsAppService(IEncounterCrudHelper<HospitalisationEncounter> encounterCrudHelper, 
 			IRepository<AdmissionsPatient, Guid> repository,
 			IRepository<Ward, Guid> wardRepository,
-			IConditionsCrudHelper conditionsCrudHelper)
+			IConditionsCrudHelper conditionsCrudHelper,
+			IRepository<Diagnosis, Guid> diagnosisRepository,
+			IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepository)
 		{
 			_encounterCrudHelper = encounterCrudHelper;
 			_repository = repository;
 			_wardRepository = wardRepository;
 			_conditionsCrudHelper = conditionsCrudHelper;
+			_diagnosisRepository = diagnosisRepository;
+			_conditionIcdTenCodeRepository = conditionIcdTenCodeRepository;
 		}
 
 		/// <summary>
@@ -97,7 +106,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 				item.Class = RefListRefListEncounterClasses.PRENC;
 			});
 			//Diagnosis BackboneElement
-			var diagnosisResult = await SaveOrUpdateDiagnosis(admission.Diagnosis.FirstOrDefault(), entity);
+			var diagnosisResult = await SaveOrUpdateDiagnosis(admission.Diagnosis.FirstOrDefault(), admissionEntity);
 
 			//Maps back patient-admission to AdmitPatientResponse
 			var result = new AdmitPatientResponse();
@@ -106,6 +115,36 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			result.Code = diagnosisResult.Condition.Code;
 
 			return result;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="encounterId"></param>
+		/// <returns></returns>
+		[HttpGet, Route("AdmittedPatientDetails/{encounterId}")]
+		public async Task<AdmitPatientResponse> GetAdmittedPatientDetails(Guid encounterId)
+		{
+			Validation.ValidateIdWithException(encounterId, "encounterId can not be null.");
+
+			var admissionEntity = await _encounterCrudHelper.GetByIdAsync(encounterId);
+			var patientEntity = await _repository.GetAsync(admissionEntity.Subject.Id);
+			var diagnosis = await _diagnosisRepository.GetAllListAsync(a => a.OwnerId == encounterId.ToString());
+
+			var result = new AdmitPatientResponse();
+			ObjectMapper.Map(patientEntity, result);
+			ObjectMapper.Map(admissionEntity, result);
+			result.Code = await GetIcdCodes(diagnosis.FirstOrDefault());
+
+			return result;
+		}
+
+		private async Task<List<EntityWithDisplayNameDto<Guid?>>> GetIcdCodes(Diagnosis diagnosis)
+		{
+			var list = await _conditionIcdTenCodeRepository.GetAllListAsync();
+			list.RemoveAll(a => a.Condition?.Id != diagnosis.Condition?.Id);
+
+			return ObjectMapper.Map<List<EntityWithDisplayNameDto<Guid?>>>(list);
 		}
 
 		private async Task MapAdmissionConstantValues(HospitalisationEncounterInput admission, AdmissionsPatient patient, AdmitPatientInput input)
@@ -126,6 +165,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			diagnosisList.Add(diagnosis);
 
 			admission.Diagnosis = diagnosisList;
+			admission.Subject = new EntityWithDisplayNameDto<Guid?>(patient.Id, patient.FirstName);
 		}
 
 		private async Task<DiagnosisResponse> SaveOrUpdateDiagnosis(DiagnosisInput diagnosis, HospitalisationEncounter ownerEntity)

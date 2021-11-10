@@ -1,6 +1,8 @@
-﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+﻿using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
+using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
+using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.His.Admissions.Domain;
 using Shesha.AutoMapper;
@@ -56,6 +58,19 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 				.ForMember(a => a.Id, opt => opt.Ignore())
 				.ForMember(a => a.DestinationOwnerId, opt => opt.MapFrom(b => b.Id))
 				.ForMember(a => a.DestinationOwnerType, opt => opt.MapFrom(b => b.GetTypeShortAlias()));
+
+			//Diagnosis
+			CreateMap<DiagnosisInput, Diagnosis>()
+				.ForMember(a => a.Condition, options => options.MapFrom(b => b.Condition.Id != null ? GetEntity<Condition>(b.Condition.Id) : null))
+				.MapReferenceListValuesFromDto();
+
+			CreateMap<Diagnosis, DiagnosisResponse>()
+				.ForMember(a => a.Condition, options => options.Ignore())
+				.MapReferenceListValuesToDto();
+
+			CreateMap<ConditionIcdTenCode, EntityWithDisplayNameDto<Guid?>>()
+				.ForMember(a => a.Id, options => options.MapFrom(b => b.Id))
+				.ForMember(a => a.DisplayText, options => options.MapFrom(b => $"{b.IcdTenCode.ICDTenThreeCode} {b.IcdTenCode.WHOFullDesc}"));
 		}
 	}
 }

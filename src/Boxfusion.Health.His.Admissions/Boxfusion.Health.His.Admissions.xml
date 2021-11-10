@@ -375,7 +375,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers.IEncounterCrudHelper{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.HospitalisationEncounter},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Admissions.Domain.AdmissionsPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Ward,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Conditions.Helpers.IConditionsCrudHelper)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers.IEncounterCrudHelper{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.HospitalisationEncounter},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Admissions.Domain.AdmissionsPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Ward,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Conditions.Helpers.IConditionsCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ConditionIcdTenCode,System.Guid})">
             <summary>
             
             </summary>
@@ -383,12 +383,21 @@
             <param name="repository"></param>
             <param name="wardRepository"></param>
             <param name="conditionsCrudHelper"></param>
+            <param name="diagnosisRepository"></param>
+            <param name="conditionIcdTenCodeRepository"></param>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.AdmitPatient(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.GetAdmittedPatientDetails(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="encounterId"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmissionsMapProfile">
