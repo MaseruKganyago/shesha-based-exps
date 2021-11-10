@@ -375,13 +375,14 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers.IEncounterCrudHelper{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.HospitalisationEncounter},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Admissions.Domain.AdmissionsPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Ward,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers.IEncounterCrudHelper{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.HospitalisationEncounter},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Admissions.Domain.AdmissionsPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Ward,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Conditions.Helpers.IConditionsCrudHelper)">
             <summary>
             
             </summary>
             <param name="encounterCrudHelper"></param>
             <param name="repository"></param>
             <param name="wardRepository"></param>
+            <param name="conditionsCrudHelper"></param>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.AdmitPatient(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput)">
             <summary>
@@ -661,6 +662,36 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211109230900.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211110085900">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211110085900.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211110085900.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211110090700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211110090700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211110090700.Down">
             <summary>
             
             </summary>

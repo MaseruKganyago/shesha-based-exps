@@ -9,7 +9,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 	/// <summary>
 	/// 
 	/// </summary>
-	public class AdmitPatientInput: EntityDto<Guid>
+	public class AdmitPatientInput: EntityDto<Guid?>
 	{
 		/// <summary>
 		/// 
