@@ -350,6 +350,96 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.IdentificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.IdentityNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.DateOfBirth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.Gender">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.StartDateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.HospitalisationPatientNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.PreAdmissionIdentifier">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.AdmissionType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.Speciality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.Province">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.Classification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.Nationality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.OtherCategories">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.AdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.Days">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.HisAdmisModule">
             <summary>
             Health.His Module
@@ -385,6 +475,12 @@
             <param name="conditionsCrudHelper"></param>
             <param name="diagnosisRepository"></param>
             <param name="conditionIcdTenCodeRepository"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.IndexTable">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.AdmitPatient(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput)">
             <summary>
@@ -701,6 +797,21 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211110090700.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211110194700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211110194700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211110194700.Down">
             <summary>
             
             </summary>

@@ -27,9 +27,15 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 		{
 			//AdmissionsPatient
 			CreateMap<AdmitPatientInput, AdmissionsPatient>()
+				.ForMember(a => a.HospitalisationPatientNumber, opt => opt.MapFrom(b => b.HospitalisationPatientNumber))
+				.ForMember(a => a.FirstName, opt => opt.MapFrom(b => b.FirstName))
+				.ForMember(a => a.LastName, opt => opt.MapFrom(b => b.LastName))
 				.MapReferenceListValuesFromDto();
 
 			CreateMap<AdmissionsPatient, AdmitPatientResponse>()
+				.ForMember(a => a.HospitalisationPatientNumber, opt => opt.MapFrom(b => b.HospitalisationPatientNumber))
+				.ForMember(a => a.FirstName, opt => opt.MapFrom(b => b.FirstName))
+				.ForMember(a => a.LastName, opt => opt.MapFrom(b => b.LastName))
 				.MapReferenceListValuesToDto();
 
 			//HospitalisationEncounter

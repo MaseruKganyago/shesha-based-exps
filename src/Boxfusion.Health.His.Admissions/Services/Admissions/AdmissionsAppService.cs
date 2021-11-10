@@ -14,11 +14,13 @@ using Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers;
 using Boxfusion.Health.His.Admissions.Domain;
 using Boxfusion.Health.His.Admissions.Domain.Enums;
+using Boxfusion.Health.His.Admissions.Domain.Views;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 using Shesha.AutoMapper.Dto;
 using Shesha.Extensions;
+using Shesha.Web.DataTable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +66,35 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			_conditionsCrudHelper = conditionsCrudHelper;
 			_diagnosisRepository = diagnosisRepository;
 			_conditionIcdTenCodeRepository = conditionIcdTenCodeRepository;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public static DataTableConfig IndexTable()
+		{
+			var table = new DataTableConfig<AdmittedPatientItems, Guid>("AdmittedPatients_Index");
+
+			table.AddProperty(a => a.IdentificationType, b => b.Caption("ID Type"));
+			table.AddProperty(a => a.IdentityNumber, b => b.Caption("I.D No."));
+			table.AddProperty(a => a.DateOfBirth, b => b.Caption("D.O.B").SortDescending().IsFilterable(true).Sortable(true));
+			table.AddProperty(a => a.Gender, b => b.Caption("Gender"));
+			table.AddProperty(a => a.StartDateTime, b => b.Caption("Admission Date").SortDescending().IsFilterable(true).Sortable(true));
+			table.AddProperty(a => a.HospitalisationPatientNumber, b => b.Caption("Hospital Patient Number"));
+			table.AddProperty(a => a.PreAdmissionIdentifier, b => b.Caption("Admission Number"));
+			table.AddProperty(a => a.FirstName, b => b.Caption("Patient Name"));
+			table.AddProperty(a => a.LastName, b => b.Caption("Patient Surname"));
+			table.AddProperty(a => a.AdmissionType, b => b.Caption("Admission Type"));
+			table.AddProperty(a => a.Speciality, b => b.Caption("Specialty"));
+			table.AddProperty(a => a.Province, b => b.Caption("Patient Province"));
+			table.AddProperty(a => a.Classification, b => b.Caption("Classification"));
+			table.AddProperty(a => a.Nationality, b => b.Caption("Nationality"));
+			table.AddProperty(a => a.OtherCategories, b => b.Caption("Other Categories"));
+			table.AddProperty(a => a.AdmissionStatus, b => b.Caption("Admission Status"));
+			table.AddProperty(a => a.Days, b => b.Caption("Inpatient Days"));
+
+			return table;
 		}
 
 		/// <summary>
