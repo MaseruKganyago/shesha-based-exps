@@ -43,6 +43,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 		private readonly IConditionsCrudHelper _conditionsCrudHelper;
 		private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;
 		private readonly IRepository<ConditionIcdTenCode, Guid> _conditionIcdTenCodeRepository;
+		private readonly IRepository<Hospital, Guid> _hosiptalRepository;
 
 		/// <summary>
 		/// 
@@ -53,12 +54,14 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 		/// <param name="conditionsCrudHelper"></param>
 		/// <param name="diagnosisRepository"></param>
 		/// <param name="conditionIcdTenCodeRepository"></param>
+		/// <param name="hosiptalRepository"></param>
 		public AdmissionsAppService(IEncounterCrudHelper<HospitalisationEncounter> encounterCrudHelper, 
 			IRepository<AdmissionsPatient, Guid> repository,
 			IRepository<Ward, Guid> wardRepository,
 			IConditionsCrudHelper conditionsCrudHelper,
 			IRepository<Diagnosis, Guid> diagnosisRepository,
-			IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepository)
+			IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepository,
+			IRepository<Hospital, Guid> hosiptalRepository)
 		{
 			_encounterCrudHelper = encounterCrudHelper;
 			_repository = repository;
@@ -66,6 +69,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			_conditionsCrudHelper = conditionsCrudHelper;
 			_diagnosisRepository = diagnosisRepository;
 			_conditionIcdTenCodeRepository = conditionIcdTenCodeRepository;
+			_hosiptalRepository = hosiptalRepository;
 		}
 
 		/// <summary>
@@ -158,16 +162,22 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 		public async Task<AdmitPatientResponse> GetAdmittedPatientDetails(Guid encounterId)
 		{
 			Validation.ValidateIdWithException(encounterId, "encounterId can not be null.");
-
 			var admissionEntity = await _encounterCrudHelper.GetByIdAsync(encounterId);
+
+			if (admissionEntity == null) throw new UserFriendlyException($"AdmittedPatientDetails with specified id: {encounterId} not found.");
+
+			var hospital = new List<Hospital>();
+
 			var patientEntity = await _repository.GetAsync(admissionEntity.Subject.Id);
 			var diagnosis = await _diagnosisRepository.GetAllListAsync(a => a.OwnerId == encounterId.ToString());
 			var wards = await _wardRepository.GetAllListAsync(a => a.Id.ToString() == admissionEntity.DestinationOwnerId);
+			if (!string.IsNullOrEmpty(admissionEntity.OriginOwnerId)) hospital = await _hosiptalRepository.GetAllListAsync(a => a.Id.ToString() == admissionEntity.OriginOwnerId);
 
 			var result = new AdmitPatientResponse();
 			ObjectMapper.Map(patientEntity, result);
 			ObjectMapper.Map(admissionEntity, result);
 			ObjectMapper.Map(wards.FirstOrDefault(), result);
+			ObjectMapper.Map(hospital.FirstOrDefault(), result);
 			result.Code = await GetIcdCodes(diagnosis.FirstOrDefault());
 
 			return result;

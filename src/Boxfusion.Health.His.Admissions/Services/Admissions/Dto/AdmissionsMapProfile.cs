@@ -33,6 +33,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 				.MapReferenceListValuesFromDto();
 
 			CreateMap<AdmissionsPatient, AdmitPatientResponse>()
+				.ForMember(a => a.Id, opt => opt.Ignore())
 				.ForMember(a => a.HospitalisationPatientNumber, opt => opt.MapFrom(b => b.HospitalisationPatientNumber))
 				.ForMember(a => a.FirstName, opt => opt.MapFrom(b => b.FirstName))
 				.ForMember(a => a.LastName, opt => opt.MapFrom(b => b.LastName))
@@ -67,6 +68,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 				.ForMember(a => a.DestinationOwnerType, opt => opt.MapFrom(b => b.GetTypeShortAlias()));
 
 			CreateMap<Ward, AdmitPatientResponse>()
+				.ForMember(a => a.Id, opt => opt.Ignore())
 				.ForMember(a => a.Ward, opt => opt.MapFrom(b => new EntityWithDisplayNameDto<Guid?>(b.Id, b.Name)))
 				.MapReferenceListValuesToDto();
 
@@ -78,6 +80,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 			CreateMap<Diagnosis, DiagnosisResponse>()
 				.ForMember(a => a.Condition, options => options.Ignore())
 				.MapReferenceListValuesToDto();
+
+			//Hospital
+			CreateMap<Hospital, AdmitPatientResponse>()
+				.ForMember(a => a.Id, opt => opt.Ignore())
+				.ForMember(a => a.HospitalOfTransfer, opt => opt.MapFrom(b => b.Name));
 
 			CreateMap<ConditionIcdTenCode, EntityWithDisplayNameDto<Guid?>>()
 				.ForMember(a => a.Id, options => options.MapFrom(b => b.Id))

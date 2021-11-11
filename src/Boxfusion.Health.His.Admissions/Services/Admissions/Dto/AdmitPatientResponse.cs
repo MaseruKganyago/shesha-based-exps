@@ -14,6 +14,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 		/// <summary>
 		/// 
 		/// </summary>
+		public ReferenceListItemValueDto IdentificationType { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public string IdentityNumber { get; set; }
 
 		/// <summary>
@@ -95,5 +100,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 		/// 
 		/// </summary>
 		public ReferenceListItemValueDto AdmissionStatus { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string HospitalOfTransfer { get; set; }
 	}
 }
