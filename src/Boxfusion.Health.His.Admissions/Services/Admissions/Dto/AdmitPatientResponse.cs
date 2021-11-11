@@ -59,7 +59,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 		/// <summary>
 		/// 
 		/// </summary>
-		public ReferenceListItemValueDto Specialty { get; set; }
+		public ReferenceListItemValueDto Speciality { get; set; }
 
 		/// <summary>
 		/// 

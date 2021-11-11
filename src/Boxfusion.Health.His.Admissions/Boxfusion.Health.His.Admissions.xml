@@ -561,7 +561,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.Specialty">
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientInput.Speciality">
             <summary>
             
             </summary>
@@ -651,7 +651,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.Specialty">
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AdmitPatientResponse.Speciality">
             <summary>
             
             </summary>

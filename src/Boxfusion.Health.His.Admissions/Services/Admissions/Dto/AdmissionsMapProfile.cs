@@ -45,6 +45,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 				.MapReferenceListValuesFromDto();
 
 			CreateMap<HospitalisationEncounter, AdmitPatientResponse>()
+				.ForMember(a => a.Id, opt => opt.MapFrom(b => b.Id))
 				.ForMember(a => a.AdmissionNumber, opt => opt.MapFrom(b => b.PreAdmissionIdentifier))
 				.ForMember(a => a.AdmissionDate, opt => opt.MapFrom(b => b.StartDateTime))
 				.MapReferenceListValuesToDto();
@@ -64,6 +65,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 				.ForMember(a => a.Id, opt => opt.Ignore())
 				.ForMember(a => a.DestinationOwnerId, opt => opt.MapFrom(b => b.Id))
 				.ForMember(a => a.DestinationOwnerType, opt => opt.MapFrom(b => b.GetTypeShortAlias()));
+
+			CreateMap<Ward, AdmitPatientResponse>()
+				.ForMember(a => a.Ward, opt => opt.MapFrom(b => new EntityWithDisplayNameDto<Guid?>(b.Id, b.Name)))
+				.MapReferenceListValuesToDto();
 
 			//Diagnosis
 			CreateMap<DiagnosisInput, Diagnosis>()
