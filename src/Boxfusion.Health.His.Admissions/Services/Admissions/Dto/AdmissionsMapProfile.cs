@@ -1,0 +1,94 @@
+﻿using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
+using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
+using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
+using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
+using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
+using Boxfusion.Health.His.Admissions.Domain;
+using Shesha.AutoMapper;
+using Shesha.AutoMapper.Dto;
+using Shesha.Domain;
+using Shesha.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
+{
+	/// <summary>
+	/// 
+	/// </summary>
+	public class AdmissionsMapProfile: ShaProfile
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		public AdmissionsMapProfile()
+		{
+			//AdmissionsPatient
+			CreateMap<AdmitPatientInput, AdmissionsPatient>()
+				.ForMember(a => a.HospitalisationPatientNumber, opt => opt.MapFrom(b => b.HospitalisationPatientNumber))
+				.ForMember(a => a.FirstName, opt => opt.MapFrom(b => b.FirstName))
+				.ForMember(a => a.LastName, opt => opt.MapFrom(b => b.LastName))
+				.MapReferenceListValuesFromDto();
+
+			CreateMap<AdmissionsPatient, AdmitPatientResponse>()
+				.ForMember(a => a.Id, opt => opt.Ignore())
+				.ForMember(a => a.HospitalisationPatientNumber, opt => opt.MapFrom(b => b.HospitalisationPatientNumber))
+				.ForMember(a => a.FirstName, opt => opt.MapFrom(b => b.FirstName))
+				.ForMember(a => a.LastName, opt => opt.MapFrom(b => b.LastName))
+				.MapReferenceListValuesToDto();
+
+			//HospitalisationEncounter
+			CreateMap<AdmitPatientInput, HospitalisationEncounterInput>()
+				.ForMember(a => a.PreAdmissionIdentifier, opt => opt.MapFrom(b => b.AdmissionNumber))
+				.ForMember(a => a.StartDateTime, opt => opt.MapFrom(b => b.AdmissionDate))
+				.MapReferenceListValuesFromDto();
+
+			CreateMap<HospitalisationEncounter, AdmitPatientResponse>()
+				.ForMember(a => a.Id, opt => opt.MapFrom(b => b.Id))
+				.ForMember(a => a.AdmissionNumber, opt => opt.MapFrom(b => b.PreAdmissionIdentifier))
+				.ForMember(a => a.AdmissionDate, opt => opt.MapFrom(b => b.StartDateTime))
+				.MapReferenceListValuesToDto();
+
+			CreateMap<HospitalisationEncounterInput, HospitalisationEncounter>()
+				.ForMember(a => a.Appointment, options => options.MapFrom(b => GetEntity<Appointment>(b.Appointment)))
+				.ForMember(a => a.BasedOn, options => options.MapFrom(b => GetEntity<ServiceRequest>(b.BasedOn)))
+				.ForMember(a => a.Subject, options => options.MapFrom(b => GetEntity<Patient>(b.Subject)))
+				.ForMember(a => a.EpisodeOfCare, options => options.MapFrom(b => GetEntity<EpisodeOfCare>(b.EpisodeOfCare)))
+				.ForMember(a => a.Performer, options => options.MapFrom(b => GetEntity<Person>(b.Performer)))
+				.ForMember(a => a.ServiceProvider, options => options.MapFrom(b => GetEntity<FhirOrganisation>(b.ServiceProvider)))
+				.ForMember(a => a.PartOf, options => options.MapFrom(b => GetEntity<Encounter>(b.PartOf)))
+				.MapReferenceListValuesFromDto();
+
+			//Ward
+			CreateMap<Ward, HospitalisationEncounterInput>()
+				.ForMember(a => a.Id, opt => opt.Ignore())
+				.ForMember(a => a.DestinationOwnerId, opt => opt.MapFrom(b => b.Id))
+				.ForMember(a => a.DestinationOwnerType, opt => opt.MapFrom(b => b.GetTypeShortAlias()));
+
+			CreateMap<Ward, AdmitPatientResponse>()
+				.ForMember(a => a.Id, opt => opt.Ignore())
+				.ForMember(a => a.Ward, opt => opt.MapFrom(b => new EntityWithDisplayNameDto<Guid?>(b.Id, b.Name)))
+				.MapReferenceListValuesToDto();
+
+			//Diagnosis
+			CreateMap<DiagnosisInput, Diagnosis>()
+				.ForMember(a => a.Condition, options => options.MapFrom(b => b.Condition.Id != null ? GetEntity<Condition>(b.Condition.Id) : null))
+				.MapReferenceListValuesFromDto();
+
+			CreateMap<Diagnosis, DiagnosisResponse>()
+				.ForMember(a => a.Condition, options => options.Ignore())
+				.MapReferenceListValuesToDto();
+
+			//Hospital
+			CreateMap<Hospital, AdmitPatientResponse>()
+				.ForMember(a => a.Id, opt => opt.Ignore())
+				.ForMember(a => a.HospitalOfTransfer, opt => opt.MapFrom(b => b.Name));
+
+			CreateMap<ConditionIcdTenCode, EntityWithDisplayNameDto<Guid?>>()
+				.ForMember(a => a.Id, options => options.MapFrom(b => b.Id))
+				.ForMember(a => a.DisplayText, options => options.MapFrom(b => $"{b.IcdTenCode.ICDTenThreeCode} {b.IcdTenCode.WHOFullDesc}"));
+		}
+	}
+}
