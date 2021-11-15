@@ -46,6 +46,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Services\Reports\Dto\" />
     <Folder Include="Services\Users\" />
     <Folder Include="Services\Wards\Helpers\" />
     <Folder Include="Services\Hospitals\" />
