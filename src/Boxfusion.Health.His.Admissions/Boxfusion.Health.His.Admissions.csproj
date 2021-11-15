@@ -19,12 +19,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Configuration\**" />
-    <EmbeddedResource Remove="Configuration\**" />
-    <None Remove="Configuration\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Services\Admissions\EncountersAppService.cs" />
     <Compile Remove="Services\Admissions\IEncountersAppService.cs" />
   </ItemGroup>
@@ -45,7 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\" />
     <Folder Include="Migrations\" />
     <Folder Include="Services\Admissions\Helpers\" />
     <Folder Include="Services\Separations\" />

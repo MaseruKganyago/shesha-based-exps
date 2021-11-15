@@ -19,7 +19,7 @@ namespace Boxfusion.Health.His.Admissions
         typeof(HisDomainModule),
         typeof(SheshaCoreModule)
     )]
-    public class HisAdmisModule : AbpModule
+    public class HisAdmissModule : AbpModule
     {
         /// <summary>
         /// inheritedDoc
@@ -28,7 +28,7 @@ namespace Boxfusion.Health.His.Admissions
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
             IocManager.IocContainer.Register(
-              Component.For<ICustomPermissionChecker>().Forward<IHisAdmisPermissionChecker>().Forward<HisAdmisPermissionChecker>().ImplementedBy<HisAdmisPermissionChecker>().LifestyleTransient()
+              Component.For<ICustomPermissionChecker>().Forward<IHisAdmissPermissionChecker>().Forward<HisAdmissPermissionChecker>().ImplementedBy<HisAdmissPermissionChecker>().LifestyleTransient()
           );
 
             var thisAssembly = Assembly.GetExecutingAssembly();
@@ -48,9 +48,9 @@ namespace Boxfusion.Health.His.Admissions
             base.PreInitialize();
 
             //Configuration.Settings.Providers.Add<HisAdmisSettingProvider>();
-            Configuration.Authorization.Providers.Add<HisAdmisAuthorizationProvider>();
+            Configuration.Authorization.Providers.Add<HisAdmissAuthorizationProvider>();
 
-            HisAdmisLocalizationConfigurer.Configure(Configuration.Localization);
+            HisAdmissLocalizationConfigurer.Configure(Configuration.Localization);
         }
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace Boxfusion.Health.His.Admissions
         public override void PostInitialize()
         {
             Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
-                typeof(HisAdmisModule).Assembly,
-                moduleName: "HisAdmis",
+                typeof(HisAdmissModule).Assembly,
+                moduleName: "HisAdmiss",
                 useConventionalHttpVerbs: true);
         }
     }

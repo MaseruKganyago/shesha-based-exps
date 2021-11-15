@@ -11,24 +11,28 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath></OutputPath>
-    <DocumentationFile>.\Boxfusion.Health.His.Domain.xml</DocumentationFile>
+    <DocumentationFile>.\Boxfusion.Health.His.Administration.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>.\Boxfusion.Health.His.Domain.xml</DocumentationFile>
+    <DocumentationFile>.\Boxfusion.Health.His.Administration.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Configuration\**" />
-    <EmbeddedResource Remove="Configuration\**" />
-    <None Remove="Configuration\**" />
+    <Compile Remove="Domain\**" />
+    <EmbeddedResource Remove="Domain\**" />
+    <None Remove="Domain\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\Wards\EncountersAppService.cs" />
+    <Compile Remove="Services\Wards\IEncountersAppService.cs" />
   </ItemGroup>
 
 
 
   <ItemGroup>
     <PackageReference Include="Abp" Version="5.0.0" />
-    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.0.3" />
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
@@ -39,4 +43,16 @@
     <PackageReference Include="Shesha.Scheduler" Version="0.0.21" />
     <PackageReference Include="Shesha.Web.Controls" Version="0.0.21" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+    <Folder Include="Services\Users\" />
+    <Folder Include="Services\Wards\Helpers\" />
+    <Folder Include="Services\Hospitals\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Boxfusion.Health.His.Domain\Boxfusion.Health.His.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
