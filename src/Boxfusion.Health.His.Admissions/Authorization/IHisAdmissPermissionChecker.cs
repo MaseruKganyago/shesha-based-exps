@@ -6,7 +6,7 @@ namespace Boxfusion.Health.His.Admissions.Authorization
     /// <summary>
     /// Health.His Permission checker
     /// </summary>
-    public interface IHisAdmisPermissionChecker
+    public interface IHisAdmissPermissionChecker
     {
         /// <summary>
         /// 

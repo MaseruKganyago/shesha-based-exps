@@ -19,12 +19,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Configuration\**" />
-    <EmbeddedResource Remove="Configuration\**" />
-    <None Remove="Configuration\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Services\Admissions\EncountersAppService.cs" />
     <Compile Remove="Services\Admissions\IEncountersAppService.cs" />
   </ItemGroup>

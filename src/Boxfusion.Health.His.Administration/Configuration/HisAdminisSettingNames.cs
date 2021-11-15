@@ -1,9 +1,9 @@
-﻿namespace Boxfusion.Health.His.Admissions.Configuration
+﻿namespace Boxfusion.Health.His.Administration.Configuration
 {
     /// <summary>
     /// Contains setting names for Health.Hiss
     /// </summary>
-    public static class HisAdmisSettingNames
+    public static class HisAdminisSettingNames
     {
         /*
         /// <summary>

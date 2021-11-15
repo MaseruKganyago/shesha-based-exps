@@ -38,7 +38,7 @@ namespace Boxfusion.Health.His.Admissions
          typeof(AbpAspNetCoreModule),
          typeof(AbpAspNetCoreSignalRModule),
          typeof(AbpAutoMapperModule),
-         typeof(HisAdmisModule),
+         typeof(HisAdmissModule),
          typeof(SheshaSchedulerModule),
          typeof(SheshaImportModule),
          typeof(SheshaWebControlsModule),

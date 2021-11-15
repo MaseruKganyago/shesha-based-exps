@@ -3,7 +3,7 @@ using Abp.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 
-namespace Boxfusion.Health.His.Admissions.Configuration
+namespace Boxfusion.Health.His.Administration.Configuration
 {
     /// <summary>
     /// 
@@ -27,16 +27,16 @@ namespace Boxfusion.Health.His.Admissions.Configuration
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task Update(HisAdmisSettingsDto input)
+        public async Task Update(HisAdminisSettingsDto input)
         {
         }        
 
         /// <summary>
         /// Returns Health.His settings
         /// </summary>
-        public async Task<HisAdmisSettingsDto> Get()
+        public async Task<HisAdminisSettingsDto> Get()
         {
-            var result = new HisAdmisSettingsDto()
+            var result = new HisAdminisSettingsDto()
             {
             };
 

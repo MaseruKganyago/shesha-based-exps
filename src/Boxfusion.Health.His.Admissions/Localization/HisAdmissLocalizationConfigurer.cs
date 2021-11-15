@@ -5,14 +5,21 @@ using Abp.Reflection.Extensions;
 
 namespace Boxfusion.Health.His.Admissions.Localization
 {
-    public static class HisAdmisLocalizationConfigurer
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class HisAdmissLocalizationConfigurer
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="localizationConfiguration"></param>
         public static void Configure(ILocalizationConfiguration localizationConfiguration)
         {
             localizationConfiguration.Sources.Add(
-                new DictionaryBasedLocalizationSource("HisAdmis",
+                new DictionaryBasedLocalizationSource("HisAdmiss",
                     new XmlEmbeddedFileLocalizationDictionaryProvider(
-                        typeof(HisAdmisLocalizationConfigurer).GetAssembly(),
+                        typeof(HisAdmissLocalizationConfigurer).GetAssembly(),
                         "Boxfusion.Health.His.Admissions.Localization.SourceFiles"
                     )
                 )
