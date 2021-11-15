@@ -121,11 +121,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 				patient = await SaveOrUpdateEntityAsync<AdmissionsPatient>(null, async item =>
 				{
 					ObjectMapper.Map(input, item);
-					item.AdmissionStatus = RefListAdmissionStatus.admitted;
 				});
 			}
 
-			//Admit patient using HospitalisationEncounter
+			#region Admit patient using HospitalisationEncounter
 			var ward = await _wardRepository.GetAsync((Guid)input.Ward.Id);
 
 			var admission = new HospitalisationEncounterInput();
@@ -134,12 +133,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 
 			await MapAdmissionConstantValues(admission, patient, input);
 
-			var entity = ObjectMapper.Map<HospitalisationEncounter>(admission);
 			var admissionEntity = await SaveOrUpdateEntityAsync<HospitalisationEncounter>(null, async item =>
-			{
-				ObjectMapper.Map(admission, item);
-				item.Class = RefListRefListEncounterClasses.PRENC;
+			{ObjectMapper.Map(input, item);
 			});
+			#endregion
+
 			//Diagnosis BackboneElement
 			var diagnosisResult = await SaveOrUpdateDiagnosis(admission.Diagnosis.FirstOrDefault(), admissionEntity);
 
