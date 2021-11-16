@@ -39,8 +39,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Dtos\" />
     <Folder Include="Services\Admissions\Helpers\" />
     <Folder Include="Services\Separations\" />
+    <Folder Include="Services\TempAdmissions\Helpers\" />
   </ItemGroup>
 
   <ItemGroup>

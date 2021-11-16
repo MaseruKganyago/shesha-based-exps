@@ -66,5 +66,10 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// 
         /// </summary>
         public virtual bool CapturedAfterApproval { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual HisAdmission HisAdmission { get; set; }
     }
 }

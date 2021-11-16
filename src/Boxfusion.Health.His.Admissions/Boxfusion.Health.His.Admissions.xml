@@ -922,6 +922,21 @@
             <param name="filterDate"></param>
             <returns></returns>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionMapProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionMapProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211108021400">
             <summary>
             
