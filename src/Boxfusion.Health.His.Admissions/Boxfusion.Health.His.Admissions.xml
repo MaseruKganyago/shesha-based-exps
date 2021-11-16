@@ -140,6 +140,10 @@
             <param name="value">Setting value</param>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdmissSettingsDto">
+            <summary>
+            Health.His settings DTO
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.AdmissionsPatient">
             <summary>
             
@@ -505,11 +509,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.HisAdmisModule">
-            <summary>
-            Health.His settings DTO
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.HisAdmissModule">
             <summary>
             Health.His Module
@@ -784,6 +783,21 @@
             </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Admissions.IAdmissionsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionMapProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionMapProfile.#ctor">
             <summary>
             
             </summary>
