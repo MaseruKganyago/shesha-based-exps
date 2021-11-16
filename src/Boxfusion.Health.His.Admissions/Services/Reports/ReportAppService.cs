@@ -29,15 +29,17 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
         /// 
         /// </summary>
         private readonly IRepository<WardAdmission, Guid> _wardAdminssionsRepository;
+        private readonly IRepository<HisPatient, Guid> _hisPatientRepository;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="wardAdminssionsRepository"></param>
-        /// <param name="wardRepository"></param>
-        public ReportAppService(IRepository<WardAdmission, Guid> wardAdminssionsRepository)
+        /// <param name="hisPatientRepository"></param>
+        public ReportAppService(IRepository<WardAdmission, Guid> wardAdminssionsRepository, IRepository<HisPatient, Guid> hisPatientRepository)
         {
             _wardAdminssionsRepository = wardAdminssionsRepository;
+            _hisPatientRepository = hisPatientRepository;
         }
 
         /// <summary>
@@ -47,46 +49,29 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
         /// <param name="wardId"></param>
         /// <param name="filterDate"></param>
         /// <returns></returns>
-        [HttpGet, Route("report")]
+        [HttpGet, Route("Report")]
         public async Task<List<ReportResponseDto>> GetReport(RefListReportTypes reportType, Guid wardId, DateTime filterDate)
         {
-            List<ReportResponseDto> results = new List<ReportResponseDto>();
             var allAdmissions = await _wardAdminssionsRepository.GetAllListAsync(r => r.SeparationDestinationWard.Id == wardId);
+            var patients = await _hisPatientRepository.GetAllListAsync();
             if (allAdmissions == null)
                 throw new UserFriendlyException("No results found for the ward");
 
+            var totalAddmissions = new List<WardAdmission>();
             if (reportType == RefListReportTypes.Daily)
-            {
-                var todayAdmissions = allAdmissions.Where(r => r.CreationTime.Day == filterDate.Day);
-                var response = allAdmissions.Select(r => new ReportResponseDto()
-                {
-                    IDNumber = r.Subject.IdentityNumber,
-                    AdminstrationDate = r.CreationTime,
-                    AdmissionStatus = r.AdmissionStatus,
-                    AdmissionType = r.AdmissionType,
-                    Speciality = r.SeparationDestinationWard.Speciality,
-                    DOB = r.Subject.DateOfBirth,
-                    Gender = r.Subject.Gender,
-                   // HospitalPatientNumber = r.WardAdmissionNumber,
-                    Nationality = r.Subject.Nationality,
-                    PatientName = r.Subject.FirstName,
-                    PatientSurname = r.Subject.LastName,
-                    WardAdmissionNumber = r.WardAdmissionNumber,
-                    // PatientDays = 
-                    //PatientProvice = r.pro
-                   // OtherCategories = r.SeparationDes
-                    //IDType = r.Subject.do
-                    //Diagnosis = r.Subject
-                });
-
-                results.AddRange(response);
-            }
+                totalAddmissions = allAdmissions.Where(r => r.CreationTime.Day == filterDate.Day).ToList();
             else
+                totalAddmissions = allAdmissions.Where(r => filterDate.Date.AddMonths(-1).Date <= r.CreationTime.Date && r.CreationTime.Date <= filterDate.Date).ToList();
+
+            var reportResposnseResults = allAdmissions.Select(r => ObjectMapper.Map<ReportResponseDto>(r));
+            foreach (var item in reportResposnseResults)
             {
-
+                var patient = patients.FirstOrDefault(e => e.Id == item.PatientId);
+                if (patient != null)
+                    ObjectMapper.Map(patient, item);
             }
-
-            return results;
+            return reportResposnseResults.ToList();
+           
         }
     }
 }

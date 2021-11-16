@@ -15,15 +15,19 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Dto
         /// <summary>
         /// 
         /// </summary>
-        public string IDType { get; set; }
+        public Guid PatientId { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string IDNumber { get; set; }
+        public RefListIdentificationTypes? IdentificationType { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string IdentityNumber { get; set; }
         /// <summary>
         /// Date of birth
         /// </summary>
-        public DateTime? DOB { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         /// <summary>
         /// 
         /// </summary>
