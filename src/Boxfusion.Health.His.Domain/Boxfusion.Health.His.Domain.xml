@@ -335,6 +335,21 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Domain.Domain.Enums.RefListReportTypes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Domain.Enums.RefListReportTypes.Daily">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Domain.Enums.RefListReportTypes.Monthly">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Domain.Domain.Enums.RefListSeparationChildHealths">
             <summary>
             
