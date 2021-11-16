@@ -31,7 +31,7 @@ namespace Boxfusion.Health.His.Admissions.Configuration
         {
             return new SettingDefinition[]
             {
-                //new SettingDefinition(Health.HisSettingNames.RevisitPeriod, (7*24*60).ToString() /* 7 days */, L("DSD_NPO_RevisitPeriod"), scopes: SettingScopes.Application | SettingScopes.Tenant, isInherited: false),
+                new SettingDefinition(HisAdmissSettingNames.HospitalIdentifier, false.ToString(), L("HospitalIdentifier"), scopes: SettingScopes.Application | SettingScopes.Tenant, isInherited: false),
             };
         }
 

@@ -5,5 +5,9 @@
     /// </summary>
     public class HisAdmissSettingsDto
     {
-    }
+        /// <summary>
+        /// 
+        /// </summary>
+		public string HospitalIdentifier { get; set; }
+	}
 }

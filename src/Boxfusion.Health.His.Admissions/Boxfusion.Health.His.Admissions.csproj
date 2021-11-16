@@ -19,6 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\Admissions\Dto\HospitalisationEncounterInput.cs" />
     <Compile Remove="Services\Admissions\EncountersAppService.cs" />
     <Compile Remove="Services\Admissions\IEncountersAppService.cs" />
   </ItemGroup>

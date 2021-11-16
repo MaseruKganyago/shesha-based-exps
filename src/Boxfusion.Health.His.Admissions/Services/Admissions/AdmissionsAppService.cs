@@ -13,9 +13,9 @@ using Boxfusion.Health.HealthCommon.Core.Services.Conditions.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers;
 using Boxfusion.Health.His.Admissions.Domain;
-using Boxfusion.Health.His.Admissions.Domain.Enums;
 using Boxfusion.Health.His.Admissions.Domain.Views;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
+using Boxfusion.Health.His.Domain.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 using Shesha.AutoMapper.Dto;
@@ -37,8 +37,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 	[Route("api/v{version:apiVersion}/HisAdmis/[controller]")]
 	public class AdmissionsAppService: SheshaAppServiceBase, IAdmissionsAppService
 	{
-		private readonly IEncounterCrudHelper<HospitalisationEncounter> _encounterCrudHelper;
-		private readonly IRepository<AdmissionsPatient, Guid> _repository;
+		private readonly IEncounterCrudHelper<WardAdmission> _encounterCrudHelper;
+		private readonly IRepository<HisPatient, Guid> _repository;
 		private readonly IRepository<Ward, Guid> _wardRepository;
 		private readonly IConditionsCrudHelper _conditionsCrudHelper;
 		private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;
@@ -55,8 +55,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 		/// <param name="diagnosisRepository"></param>
 		/// <param name="conditionIcdTenCodeRepository"></param>
 		/// <param name="hosiptalRepository"></param>
-		public AdmissionsAppService(IEncounterCrudHelper<HospitalisationEncounter> encounterCrudHelper, 
-			IRepository<AdmissionsPatient, Guid> repository,
+		public AdmissionsAppService(IEncounterCrudHelper<WardAdmission> encounterCrudHelper, 
+			IRepository<HisPatient, Guid> repository,
 			IRepository<Ward, Guid> wardRepository,
 			IConditionsCrudHelper conditionsCrudHelper,
 			IRepository<Diagnosis, Guid> diagnosisRepository,
@@ -109,31 +109,32 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 		[HttpPost, Route("AdmitPatient")]
 		public async Task<AdmitPatientResponse> AdmitPatient(AdmitPatientInput input)
 		{
-			if (string.IsNullOrEmpty(input.IdentityNumber)) throw new UserFriendlyException("Patient IdentittyNumber can not be null.");
-			Validation.ValidateIdWithException(input.Ward?.Id, "Ward id cannot be null.");
+			if (string.IsNullOrEmpty(input.Patient.IdentityNumber)) throw new UserFriendlyException("Patient IdentittyNumber can not be null.");
+
+			var ward = input.WardAdmission.Locations.FirstOrDefault();
+			Validation.ValidateIdWithException(ward.Location.Id, "Ward id cannot be null.");
 
 			//Creates new AdmissionsPatient entity if doesn't already exist
-			var patient = new AdmissionsPatient();
-			patient = await _repository.FirstOrDefaultAsync(x => x.IdentityNumber == input.IdentityNumber);
+			var patient = new HisPatient();
+			patient = await _repository.FirstOrDefaultAsync(x => x.IdentityNumber == input.Patient.IdentityNumber);
 
 			if (patient == null)
 			{
-				patient = await SaveOrUpdateEntityAsync<AdmissionsPatient>(null, async item =>
+				patient = await SaveOrUpdateEntityAsync<HisPatient>(null, async item =>
 				{
 					ObjectMapper.Map(input, item);
 				});
 			}
 
 			#region Admit patient using HospitalisationEncounter
-			var ward = await _wardRepository.GetAsync((Guid)input.Ward.Id);
+			var wardEntity = await _wardRepository.GetAsync((Guid)ward.Location.Id);
+			ObjectMapper.Map(ward, input.WardAdmission);
 
-			var admission = new HospitalisationEncounterInput();
-			ObjectMapper.Map(input, admission);
-			ObjectMapper.Map(ward, admission);
+
 
 			await MapAdmissionConstantValues(admission, patient, input);
 
-			var admissionEntity = await SaveOrUpdateEntityAsync<HospitalisationEncounter>(null, async item =>
+			var admissionEntity = await SaveOrUpdateEntityAsync<WardAdmission>(null, async item =>
 			{ObjectMapper.Map(input, item);
 			});
 			#endregion
@@ -189,7 +190,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			return ObjectMapper.Map<List<EntityWithDisplayNameDto<Guid?>>>(list);
 		}
 
-		private async Task MapAdmissionConstantValues(HospitalisationEncounterInput admission, AdmissionsPatient patient, AdmitPatientInput input)
+		private async Task MapAdmissionConstantValues(HospitalisationEncounterInput admission, HisPatient patient, AdmitPatientInput input)
 		{
 			//Gets logged-in system user admitting patient
 			var currentUser = await GetCurrentPersonAsync();
