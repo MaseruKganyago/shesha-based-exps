@@ -21,5 +21,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 		/// 
 		/// </summary>
 		public WardAdmissionInput WardAdmission { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public HospitalAdmissionInput HospitalAdmission { get; set; }
 	}
 }

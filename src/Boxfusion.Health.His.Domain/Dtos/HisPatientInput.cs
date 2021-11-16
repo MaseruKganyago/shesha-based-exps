@@ -35,5 +35,15 @@ namespace Boxfusion.Health.His.Domain.Dtos
         /// 
         /// </summary>
         public ReferenceListItemValueDto PatientProvince { get; set; }
-    }
+
+        /// <summary>
+        /// 
+        /// </summary>
+		public string FirstName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+		public string LastName { get; set; }
+	}
 }

@@ -46,6 +46,11 @@ namespace Boxfusion.Health.His.Domain.Dtos
         /// <summary>
         /// 
         /// </summary>
+        public EntityWithDisplayNameDto<Guid?> AdmissionDestinationWard { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public EntityWithDisplayNameDto<Guid?> SeparationDestinationWard { get; set; }
 
         /// <summary>

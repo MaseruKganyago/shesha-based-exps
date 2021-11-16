@@ -1,7 +1,7 @@
 ﻿using Abp.Domain.Entities;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
-using Boxfusion.Health.His.Admissions.Domain.Enums;
+using Boxfusion.Health.His.Domain.Domain.Enums;
 using Shesha.Domain.Attributes;
 using Shesha.Domain.Enums;
 using System;
@@ -22,7 +22,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Views
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual RefListIdentificationType IdentificationType { get; set; }
+		public virtual RefListIdentificationTypes IdentificationType { get; set; }
 
 		/// <summary>
 		/// 
@@ -60,7 +60,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Views
 
 		/// <summary>
 		/// 
-		/// </summary>
+		/// </summary>5
 		public virtual string FirstName { get; set; }
 
 		/// <summary>
@@ -71,7 +71,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Views
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual RefListAdmissionType AdmissionType { get; set; }
+		public virtual RefListAdmissionTypes AdmissionType { get; set; }
 
 		/// <summary>
 		/// 
@@ -81,12 +81,12 @@ namespace Boxfusion.Health.His.Admissions.Domain.Views
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual RefListProvince Province { get; set; }
+		public virtual RefListProvinces Province { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual RefListClassification Classification { get; set; }
+		public virtual RefListClassifications Classification { get; set; }
 
 		/// <summary>
 		/// 
@@ -101,7 +101,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Views
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual RefListAdmissionStatus AdmissionStatus { get; set; }
+		public virtual RefListAdmissionStatuses AdmissionStatus { get; set; }
 
 		/// <summary>
 		/// 
