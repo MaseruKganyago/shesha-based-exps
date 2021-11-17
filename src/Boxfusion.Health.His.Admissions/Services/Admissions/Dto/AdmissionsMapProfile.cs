@@ -2,6 +2,7 @@
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
+using Boxfusion.Health.HealthCommon.Core.Dtos;
 using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
@@ -91,7 +92,16 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 				.MapReferenceListValuesFromDto();
 
 			CreateMap<Diagnosis, DiagnosisResponse>()
-				.ForMember(a => a.Condition, options => options.Ignore())
+				.ForMember(a => a.Condition, options => options.MapFrom(b => b.Condition != null ? new ConditionResponse() { Id = b.Condition.Id } : null))
+				.MapReferenceListValuesToDto();
+
+			CreateMap<Condition, ConditionResponse>()
+				.ForMember(c => c.Category, options => options.MapFrom(c => UtilityHelper.GetMultiReferenceListItemValueList(c.Category != null ? (RefListConditionCategory)c.Category : 0)))
+				.ForMember(c => c.BodySite, options => options.MapFrom(c => UtilityHelper.GetMultiReferenceListItemValueList(c.BodySite != null ? (RefListBodySite)c.Category : 0)))
+				.ForMember(a => a.Subject, options => options.MapFrom(b => b.Subject != null ? new EntityWithDisplayNameDto<Guid?>(b.Subject.Id, $"{b.Subject.FirstName} {b.Subject.LastName}") : null))
+				.ForMember(a => a.Encounter, options => options.MapFrom(b => b.Encounter != null ? new EntityWithDisplayNameDto<Guid?>(b.Encounter.Id, b.Encounter.Identifier) : null))
+				.ForMember(a => a.Recorder, options => options.MapFrom(b => b.Recorder != null ? new EntityWithDisplayNameDto<Guid?>(b.Recorder.Id, $"{b.Recorder.FirstName} {b.Recorder.LastName}") : null))
+				.ForMember(a => a.Asserter, options => options.MapFrom(b => b.Asserter != null ? new EntityWithDisplayNameDto<Guid?>(b.Asserter.Id, $"{b.Asserter.FirstName} {b.Asserter.LastName}") : null))
 				.MapReferenceListValuesToDto();
 
 			CreateMap<ConditionIcdTenCode, EntityWithDisplayNameDto<Guid?>>()

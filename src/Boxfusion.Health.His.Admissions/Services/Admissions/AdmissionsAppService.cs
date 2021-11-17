@@ -41,42 +41,43 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 	public class AdmissionsAppService: SheshaAppServiceBase, IAdmissionsAppService
 	{
 		private readonly IEncounterCrudHelper<WardAdmission> _wardAdmissionCrudHelper;
-		private readonly IEncounterCrudHelper<HospitalAdmission> _hospitalisationEncounter;
-		private readonly IRepository<HisPatient, Guid> _repository;
+		private readonly IEncounterCrudHelper<HospitalAdmission> _hospitalisationEncounterCrudHelper;
+		private readonly IRepository<HisPatient, Guid> _patientRepository;
 		private readonly IRepository<Ward, Guid> _wardRepository;
 		private readonly IConditionsCrudHelper _conditionsCrudHelper;
 		private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;
 		private readonly IRepository<ConditionIcdTenCode, Guid> _conditionIcdTenCodeRepository;
-		private readonly IRepository<Hospital, Guid> _hosiptalRepository;
+		private readonly IRepository<Condition, Guid> _conditionRepository;
+
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="wardAdmissionCrudHelper"></param>
-		/// <param name="repository"></param>
+		/// <param name="patientRepository"></param>
 		/// <param name="wardRepository"></param>
 		/// <param name="conditionsCrudHelper"></param>
 		/// <param name="diagnosisRepository"></param>
 		/// <param name="conditionIcdTenCodeRepository"></param>
-		/// <param name="hosiptalRepository"></param>
-		/// <param name="hospitalisationEncounter"></param>
+		/// <param name="hospitalisationEncounterCrudHelper"></param>
+		/// <param name="conditionRepository"></param>
 		public AdmissionsAppService(IEncounterCrudHelper<WardAdmission> wardAdmissionCrudHelper, 
-			IRepository<HisPatient, Guid> repository,
+			IRepository<HisPatient, Guid> patientRepository,
 			IRepository<Ward, Guid> wardRepository,
 			IConditionsCrudHelper conditionsCrudHelper,
 			IRepository<Diagnosis, Guid> diagnosisRepository,
 			IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepository,
-			IRepository<Hospital, Guid> hosiptalRepository,
-			IEncounterCrudHelper<HospitalAdmission> hospitalisationEncounter)
+			IEncounterCrudHelper<HospitalAdmission> hospitalisationEncounterCrudHelper,
+			IRepository<Condition, Guid> conditionRepository)
 		{
 			_wardAdmissionCrudHelper = wardAdmissionCrudHelper;
-			_repository = repository;
+			_patientRepository = patientRepository;
 			_wardRepository = wardRepository;
 			_conditionsCrudHelper = conditionsCrudHelper;
 			_diagnosisRepository = diagnosisRepository;
 			_conditionIcdTenCodeRepository = conditionIcdTenCodeRepository;
-			_hosiptalRepository = hosiptalRepository;
-			_hospitalisationEncounter = hospitalisationEncounter;
+			_hospitalisationEncounterCrudHelper = hospitalisationEncounterCrudHelper;
+			_conditionRepository = conditionRepository;
 		}
 
 		/// <summary>
@@ -93,7 +94,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			table.AddProperty(a => a.Gender, b => b.Caption("Gender"));
 			table.AddProperty(a => a.StartDateTime, b => b.Caption("Admission Date").SortDescending().IsFilterable(true).Sortable(true));
 			table.AddProperty(a => a.HospitalisationPatientNumber, b => b.Caption("Hospital Patient Number"));
-			table.AddProperty(a => a.PreAdmissionIdentifier, b => b.Caption("Admission Number"));
+			table.AddProperty(a => a.WardAdmissionNumber, b => b.Caption("Admission Number"));
 			table.AddProperty(a => a.FirstName, b => b.Caption("Patient Name"));
 			table.AddProperty(a => a.LastName, b => b.Caption("Patient Surname"));
 			table.AddProperty(a => a.AdmissionType, b => b.Caption("Admission Type"));
@@ -101,7 +102,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			table.AddProperty(a => a.Province, b => b.Caption("Patient Province"));
 			table.AddProperty(a => a.Classification, b => b.Caption("Classification"));
 			table.AddProperty(a => a.Nationality, b => b.Caption("Nationality"));
-			table.AddProperty(a => a.OtherCategories, b => b.Caption("Other Categories"));
+			table.AddProperty(a => a.OtherCategory, b => b.Caption("Other Categories"));
 			table.AddProperty(a => a.AdmissionStatus, b => b.Caption("Admission Status"));
 			table.AddProperty(a => a.Days, b => b.Caption("Inpatient Days"));
 
@@ -123,7 +124,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 
 			//Creates new AdmissionsPatient entity if doesn't already exist
 			var patient = new HisPatient();
-			patient = await _repository.FirstOrDefaultAsync(x => x.IdentityNumber == input.Patient.IdentityNumber);
+			patient = await _patientRepository.FirstOrDefaultAsync(x => x.IdentityNumber == input.Patient.IdentityNumber);
 
 			if (patient == null)
 			{
@@ -135,6 +136,16 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 
 			var person = await GetCurrentPersonAsync();
 
+			#region Create hospital-patient encouter using HospitalAdmission
+			input.HospitalAdmission.Performer = person != null ? new EntityWithDisplayNameDto<Guid?>(person.Id, person.FullName) : null;
+			input.HospitalAdmission.Subject = patient != null ? new EntityWithDisplayNameDto<Guid?>(patient.Id, patient?.FullName) : null;
+			var hospitalAdmissionEntity = await SaveOrUpdateEntityAsync<HospitalAdmission>(null, async item =>
+			{
+				ObjectMapper.Map(input.HospitalAdmission, item);
+				item.HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.admitted;
+			});
+			#endregion
+
 			#region Admit patient into ward using WardAdmission
 			var diagnosis = input.WardAdmission.Diagnosis.FirstOrDefault();
 
@@ -145,20 +156,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 				item.AdmissionStatus = RefListAdmissionStatuses.admitted;
 				item.Subject = patient;
 				item.Performer = (Practitioner)person;
+				item.HisAdmission = hospitalAdmissionEntity;
 			});
 
-			//Diagnosis BackboneElement (Note: Saving diagnosis locally just until is updated on cdm level)
+			//Diagnosis BackboneElement (Note: Saving diagnosis with local implementation just until cdm is updated)
 			var diagnosisResult = await SaveOrUpdateDiagnosis(diagnosis, wardAdmissionEntity);
-			#endregion
-
-			#region Create hospital-patient encouter using HospitalAdmission
-			input.HospitalAdmission.Performer = person != null ? new EntityWithDisplayNameDto<Guid?>(person.Id, person.FullName) : null;
-			input.HospitalAdmission.Subject = person != null ? new EntityWithDisplayNameDto<Guid?>(patient.Id, patient?.FullName) : null;
-			var hospitalAdmissionEntity = await SaveOrUpdateEntityAsync<HospitalAdmission>(null, async item =>
-			{
-				ObjectMapper.Map(input.HospitalAdmission, item);
-				item.HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.admitted;
-			});
 			#endregion
 
 			//Maps back patient-admission to AdmitPatientResponse
@@ -174,12 +176,59 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			return result;
 		}
 
-		private async Task<List<EntityWithDisplayNameDto<Guid?>>> GetIcdCodes(Diagnosis diagnosis)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="encounterId"></param>
+		/// <returns></returns>
+		[HttpGet, Route("AdmittedPatientDetails/{encounterId}")]
+		public async Task<AdmitPatientResponse> GetAdmittedPatientDetails(Guid encounterId)
 		{
-			var list = await _conditionIcdTenCodeRepository.GetAllListAsync();
-			list.RemoveAll(a => a.Condition?.Id != diagnosis.Condition?.Id);
+			Validation.ValidateIdWithException(encounterId, "encounterId can not be null.");
+			var wardAdmissionEntity = await _wardAdmissionCrudHelper.GetByIdAsync(encounterId);
 
-			return ObjectMapper.Map<List<EntityWithDisplayNameDto<Guid?>>>(list);
+			if (wardAdmissionEntity == null) throw new UserFriendlyException($"AdmittedPatientDetails with specified id: {encounterId} not found.");
+
+			var patientEntity = await _patientRepository.GetAsync(wardAdmissionEntity.Subject.Id);
+			var diagnosis = ObjectMapper.Map<DiagnosisResponse>(await _diagnosisRepository.FirstOrDefaultAsync(a => a.OwnerId == encounterId.ToString()));
+			var hospitalAdmissionEntity = await _hospitalisationEncounterCrudHelper.GetByIdAsync(wardAdmissionEntity.HisAdmission.Id);
+
+			//Maps back patient-admission to AdmitPatientResponse
+			var result = new AdmitPatientResponse();
+			result.Patient = ObjectMapper.Map<HisPatientResponse>(patientEntity);
+			result.WardAdmission = ObjectMapper.Map<WardAdmissionResponse>(wardAdmissionEntity);
+			result.HospitalAdmission = ObjectMapper.Map<HospitalAdmissionResponse>(hospitalAdmissionEntity);
+
+			var condition = await GetCondition((Guid)(diagnosis.Condition?.Id));
+			diagnosis.Condition = condition;
+
+			var list = new List<DiagnosisResponse>();
+			list.Add(diagnosis);
+			result.WardAdmission.Diagnosis = list;
+
+			return result;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		private async Task<ConditionResponse> GetCondition(Guid id)
+		{
+			if (id == Guid.Empty) throw new UserFriendlyException("id cannot be null.");
+
+			var entity = await _conditionRepository.GetAsync(id);
+			if (entity == null) throw new UserFriendlyException("Condition with specified id does not exist.");
+			var conditionResult = ObjectMapper.Map<ConditionResponse>(entity);
+
+			//Gets all conditionIcdTenCodeAssignments for the condition and maps to result
+			var list = await _conditionIcdTenCodeRepository.GetAllListAsync();
+			list.RemoveAll(a => a.Condition?.Id != conditionResult?.Id);
+
+			conditionResult.Code = ObjectMapper.Map<List<EntityWithDisplayNameDto<Guid?>>>(list);
+
+			return conditionResult;
 		}
 
 		private async Task<DiagnosisResponse> SaveOrUpdateDiagnosis(DiagnosisInput diagnosis, WardAdmission ownerEntity)

@@ -56,7 +56,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Views
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual string PreAdmissionIdentifier { get; set; }
+		public virtual string WardAdmissionNumber { get; set; }
 
 		/// <summary>
 		/// 
@@ -96,7 +96,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Views
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual RefListOtherCategories OtherCategories { get; set; }
+		public virtual RefListOtherCategories OtherCategory { get; set; }
 
 		/// <summary>
 		/// 
