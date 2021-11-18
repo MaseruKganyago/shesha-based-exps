@@ -63,6 +63,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 				.ForMember(a => a.SeparationDestinationWard, options => options.MapFrom(b => b.SeparationDestinationWard != null ? new EntityWithDisplayNameDto<Guid?>(b.SeparationDestinationWard.Id, b.SeparationDestinationWard.Name) : null))
 				.MapReferenceListValuesToDto();
 
+			CreateMap<Ward, WardAdmissionResponse>()
+				.MapReferenceListValuesToDto();
+
 			//HospitalAdmission
 			CreateMap<HospitalAdmissionInput, HospitalAdmission>()
 				.ForMember(a => a.Appointment, options => options.MapFrom(b => GetEntity<Appointment>(b.Appointment)))

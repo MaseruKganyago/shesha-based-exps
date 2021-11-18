@@ -172,6 +172,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			var list = new List<DiagnosisResponse>();
 			list.Add(diagnosisResult);
 			result.WardAdmission.Diagnosis = list;
+			result.Id = wardAdmissionEntity.Id;
 
 			return result;
 		}
@@ -192,12 +193,14 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			var patientEntity = await _patientRepository.GetAsync(wardAdmissionEntity.Subject.Id);
 			var diagnosis = ObjectMapper.Map<DiagnosisResponse>(await _diagnosisRepository.FirstOrDefaultAsync(a => a.OwnerId == encounterId.ToString()));
 			var hospitalAdmissionEntity = await _hospitalisationEncounterCrudHelper.GetByIdAsync(wardAdmissionEntity.HisAdmission.Id);
+			var wardEntity = wardAdmissionEntity.AdmissionDestinationWard;
 
 			//Maps back patient-admission to AdmitPatientResponse
 			var result = new AdmitPatientResponse();
 			result.Patient = ObjectMapper.Map<HisPatientResponse>(patientEntity);
 			result.WardAdmission = ObjectMapper.Map<WardAdmissionResponse>(wardAdmissionEntity);
 			result.HospitalAdmission = ObjectMapper.Map<HospitalAdmissionResponse>(hospitalAdmissionEntity);
+			ObjectMapper.Map(wardEntity, result.WardAdmission);
 
 			var condition = await GetCondition((Guid)(diagnosis.Condition?.Id));
 			diagnosis.Condition = condition;
@@ -205,6 +208,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			var list = new List<DiagnosisResponse>();
 			list.Add(diagnosis);
 			result.WardAdmission.Diagnosis = list;
+			result.Id = encounterId;
 
 			return result;
 		}

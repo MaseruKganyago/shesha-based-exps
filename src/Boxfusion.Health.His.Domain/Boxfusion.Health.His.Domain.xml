@@ -915,6 +915,11 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Domain.Dtos.WardAdmissionResponse.Speciality">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Domain.HisDomainModule">
             <summary>
             Health.His Module
