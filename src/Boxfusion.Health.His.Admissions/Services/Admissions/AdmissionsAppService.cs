@@ -126,13 +126,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			var patient = new HisPatient();
 			patient = await _patientRepository.FirstOrDefaultAsync(x => x.IdentityNumber == input.Patient.IdentityNumber);
 
-			if (patient == null)
+			patient = await SaveOrUpdateEntityAsync<HisPatient>((Guid?)Validation.ValidateId(patient?.Id), async item =>
 			{
-				patient = await SaveOrUpdateEntityAsync<HisPatient>(null, async item =>
-				{
-					ObjectMapper.Map(input.Patient, item);
-				});
-			}
+				ObjectMapper.Map(input.Patient, item);
+			});
 
 			var person = await GetCurrentPersonAsync();
 
@@ -211,6 +208,22 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			result.Id = encounterId;
 
 			return result;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="identityNumber"></param>
+		/// <returns></returns>
+		[HttpGet, Route("[action]/{identityNumber}")]
+		public async Task<HisPatientResponse> GetPatientByIdentityNumber([FromRoute] string identityNumber)
+		{
+			if (string.IsNullOrEmpty(identityNumber)) throw new UserFriendlyException("identityNumber can not be null.");
+
+			var patient = await _patientRepository.FirstOrDefaultAsync(x => x.IdentityNumber == identityNumber);
+			if (patient == null) throw new UserFriendlyException("identityNumber can not be null.");
+
+			return ObjectMapper.Map<HisPatientResponse>(patient);
 		}
 
 		/// <summary>

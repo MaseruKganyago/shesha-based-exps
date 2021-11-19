@@ -340,6 +340,13 @@
             <param name="encounterId"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.GetPatientByIdentityNumber(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="identityNumber"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.GetCondition(System.Guid)">
             <summary>
             
