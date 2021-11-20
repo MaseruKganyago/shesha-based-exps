@@ -24,6 +24,11 @@
     <None Remove="Configuration\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\M20211116224700.cs" />
+    <Compile Remove="Migrations\M20211117084400.cs" />
+  </ItemGroup>
+
 
 
   <ItemGroup>

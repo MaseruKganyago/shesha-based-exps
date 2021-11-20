@@ -50,7 +50,7 @@ namespace Boxfusion.Health.His.Domain.Migrations
                 .AddForeignKeyColumn("His_SeparationDestinationWardId", "Core_Facilities")
                 .AddColumn("His_SeparationChildHealthLkp").AsInt64().Nullable()
                 .AddColumn("His_SeparationComment").AsString(250).Nullable()
-                .AddColumn("His_CapturedAfterApproval").AsBoolean();
+                .AddColumn("His_CapturedAfterApproval").AsBoolean().WithDefaultValue(false);
 
             Alter.Table("Core_Persons")
                 .AddColumn("His_PatientMasterIndexNumber").AsString(30).Nullable()

@@ -11,5 +11,7 @@
         /// </summary>
         public const string SettingName = "Boxfusion.Health.His.Admissions.SettingName";
         */
+
+        public const string HospitalIdentifier = "Boxfusion.Health.His.Admissions.HospitalIdentifier";
     }
 }
