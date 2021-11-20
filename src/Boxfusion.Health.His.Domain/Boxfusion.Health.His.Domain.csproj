@@ -24,11 +24,16 @@
     <None Remove="Configuration\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\M20211116224700.cs" />
+    <Compile Remove="Migrations\M20211117084400.cs" />
+  </ItemGroup>
+
 
 
   <ItemGroup>
     <PackageReference Include="Abp" Version="5.0.0" />
-    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.0.3" />
+    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.0.10" />
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />

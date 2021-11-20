@@ -10,14 +10,17 @@ namespace Boxfusion.Health.His.Admissions.Configuration
     /// </summary>
     public class HisAdmisSettingsAppService: SheshaAppServiceBase
     {
+        private readonly IHisAdmissSettings _hisAdmissSettingManager;
         private readonly ISettingManager _settingManager;
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="settingManager"></param>
-        public HisAdmisSettingsAppService(ISettingManager settingManager)
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="hisAdmissSettingManager"></param>
+		/// <param name="settingManager"></param>
+		public HisAdmisSettingsAppService(IHisAdmissSettings hisAdmissSettingManager, ISettingManager settingManager)
         {
+            _hisAdmissSettingManager = hisAdmissSettingManager;
             _settingManager = settingManager;
         }
 
@@ -29,6 +32,8 @@ namespace Boxfusion.Health.His.Admissions.Configuration
         [HttpPost]
         public async Task Update(HisAdmissSettingsDto input)
         {
+            if (input.HospitalIdentifier != null)
+                _hisAdmissSettingManager.HospitalIdentifier = input.HospitalIdentifier;
         }        
 
         /// <summary>
@@ -38,6 +43,7 @@ namespace Boxfusion.Health.His.Admissions.Configuration
         {
             var result = new HisAdmissSettingsDto()
             {
+                HospitalIdentifier = _hisAdmissSettingManager.HospitalIdentifier
             };
 
             return result;

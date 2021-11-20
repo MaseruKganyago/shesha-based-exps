@@ -44,5 +44,10 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// 
         /// </summary>
         public virtual FhirOrganisation TransferToHospital { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual bool CapturedAfterApproval { get; set; }
     }
 }
