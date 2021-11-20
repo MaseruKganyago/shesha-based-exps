@@ -163,6 +163,22 @@
             </summary>
             <param name="localizationConfiguration"></param>
         </member>
+        <member name="T:Boxfusion.Health.His.Administration.Services.Reports.IReportAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Administration.Services.Reports.ReportAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Services.Reports.ReportAppService.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Patients.IPatientsAppService)">
+            <summary>
+            
+            </summary>
+            <param name="patientAppService"></param>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.HisAdminisModule">
             <summary>
             Health.His Module

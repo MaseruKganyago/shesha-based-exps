@@ -792,6 +792,106 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.WardAdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.AdmissionType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.CapturedAfterApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.HospitalAdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.Classification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.OtherCategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.TransferFroHospital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.TransferToHospital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.PatientMasterIndexNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.HospitalPatientNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.IdentificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.IdentityNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.PatientProvince">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.DateOfBirth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.Gender">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.Nationality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.Ward">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.Code">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionMapProfile">
             <summary>
             
@@ -801,6 +901,352 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.WardAdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.AdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.HospitalAdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.AdmissionType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.CapturedAfterApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.HospitalAdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.Classification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.OtherCategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.TransferFroHospital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.TransferToHospital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.PatientMasterIndexNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.HospitalPatientNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.IdentificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.IdentityNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.PatientProvince">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.DateOfBirth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.Gender">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.Nationality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.Ward">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.Code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.HisAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.HisPatientInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.HisPatientInput.PatientMasterIndexNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.HisPatientInput.HospitalPatientNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.HisPatientInput.IdentificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.HisPatientInput.PatientProvince">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.HisPatientInput.Ward">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HospitalAdmission,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers.IPatientCrudHelper{Boxfusion.Health.His.Domain.Domain.HisPatient,Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.NonUserCdmPatientResponse},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.EncounterLocation,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ConditionIcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager,AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>
+            <param name="wardAdmissionRepositiory"></param>
+            <param name="hospitalAdmissionRepositiory"></param>
+            <param name="patientCrudHelper"></param>
+            <param name="encounterLocationRepositiory"></param>
+            <param name="conditionIcdTenCodeRepositiory"></param>
+            <param name="icdTenCodeRepositiory"></param>
+            <param name="conditionRepositiory"></param>
+            <param name="diagnosisRepositiory"></param>
+            <param name="unitOfWork"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.GetAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.ValidateIdentityNumber(System.String,System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="identityNumber"></param>
+            <param name="currentWardId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.CreateAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <param name="currentLoggedInPerson"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.UpdateAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.DeleteAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.CreateICdTenCode(Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Nullable{System.Guid}},Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.ValidateIdentityNumber(System.String,System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="identityNumber"></param>
+            <param name="currentWardId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.GetAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.CreateAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.UpdateAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.DeleteAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService.ValidateIdentityNumber(System.String,System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="identityNumber"></param>
+            <param name="currentWardId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService.GetAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService.CreateAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService.UpdateAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService.DeleteAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.#ctor(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper)">
+            <summary>
+            
+            </summary>
+            <param name="admissionCrudHelper"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.GetAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.ValidateIdentityNumber(System.String,System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="identityNumber"></param>
+            <param name="currentWardId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.CreateAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.UpdateAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.DeleteAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211108021400">
             <summary>
@@ -933,126 +1379,6 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211111140200.Down">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.PreAdmissionIdentifier">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.OriginOwnerId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.OriginOwnerType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.AdmitSource">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.ReAdmission">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.DietPreference">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.SpecialCourtesy">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.SpecialArrangement">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.DestinationOwnerId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.DestinationOwnerType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterInput.DischargeDisposition">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.PreAdmissionIdentifier">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.OriginOwnerId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.OriginOwnerType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.AdmitSource">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.ReAdmission">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.DietPreference">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.SpecialCourtesy">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.SpecialArrangement">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.DestinationOwnerId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.DestinationOwnerType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalisationEncounterResponse.DischargeDisposition">
             <summary>
             
             </summary>
