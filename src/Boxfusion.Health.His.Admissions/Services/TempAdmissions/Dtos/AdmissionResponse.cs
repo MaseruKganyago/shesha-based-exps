@@ -13,13 +13,23 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
     /// 
     /// </summary>
     [AutoMap(typeof(WardAdmission))]
-    public class AdmissionInput : HospitalisationEncounterInput
+    public class AdmissionResponse : HospitalisationEncounterResponse
     {
         //Ward: Ward(rather use Encounter.Location)
         /// <summary>
         /// 
         /// </summary>
         public string WardAdmissionNumber { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto AdmissionStatus { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto HospitalAdmissionStatus { get; set; }
 
         /// <summary>
         /// 
@@ -117,5 +127,10 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         /// 
         /// </summary>
         public List<EntityWithDisplayNameDto<Guid?>> Code { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EntityWithDisplayNameDto<Guid?> HisAdmission { get; set; }
     }
 }

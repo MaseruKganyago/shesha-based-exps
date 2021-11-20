@@ -40,6 +40,12 @@ namespace Boxfusion.Health.His.Domain.Domain.Enums
         /// 
         /// </summary>
         [Description("Not Provided")]
-        NotProvided = 5
+        NotProvided = 5,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("Other")]
+        Other = 6
     }
 }

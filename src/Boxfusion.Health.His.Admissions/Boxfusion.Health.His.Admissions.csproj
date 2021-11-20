@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Compile Remove="Services\Admissions\Dto\HospitalisationEncounterInput.cs" />
+    <Compile Remove="Services\Admissions\Dto\HospitalisationEncounterResponse.cs" />
     <Compile Remove="Services\Admissions\EncountersAppService.cs" />
     <Compile Remove="Services\Admissions\IEncountersAppService.cs" />
   </ItemGroup>
@@ -41,9 +42,9 @@
 
   <ItemGroup>
     <Folder Include="Dtos\" />
+    <Folder Include="Helpers\Validations\" />
     <Folder Include="Services\Admissions\Helpers\" />
     <Folder Include="Services\Separations\" />
-    <Folder Include="Services\TempAdmissions\Helpers\" />
   </ItemGroup>
 
   <ItemGroup>

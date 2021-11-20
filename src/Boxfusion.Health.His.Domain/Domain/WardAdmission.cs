@@ -16,7 +16,10 @@ namespace Boxfusion.Health.His.Domain.Domain
     [Table("Fhir_Encounters")]
     public class WardAdmission : HisAdmission
     {
-        //Ward: Ward(rather use Encounter.Location)
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual Ward Ward { get; set; }
         /// <summary>
         /// 
         /// </summary>

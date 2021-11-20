@@ -67,5 +67,10 @@ namespace Boxfusion.Health.His.Domain.Dtos
         /// 
         /// </summary>
         public bool CapturedAfterApproval { get; set; }
-    }
+
+        /// <summary>
+        /// 
+        /// </summary>
+		public ReferenceListItemValueDto Speciality { get; set; }
+	}
 }
