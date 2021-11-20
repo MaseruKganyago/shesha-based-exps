@@ -14,6 +14,7 @@ using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
+using NHibernate.Linq;
 using Shesha.AutoMapper.Dto;
 using Shesha.Extensions;
 using System;
@@ -52,6 +53,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
 		/// <param name="icdTenCodeRepositiory"></param>
 		/// <param name="conditionRepositiory"></param>
 		/// <param name="diagnosisRepositiory"></param>
+		/// <param name="hisPatientRepositiory"></param>
 		/// <param name="unitOfWork"></param>
 		/// <param name="mapper"></param>
 		public AdmissionCrudHelper(
@@ -63,6 +65,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
 			IRepository<IcdTenCode, Guid> icdTenCodeRepositiory,
 			IRepository<Condition, Guid> conditionRepositiory,
 			IRepository<Diagnosis, Guid> diagnosisRepositiory,
+			IRepository<HisPatient, Guid> hisPatientRepositiory,
 			IUnitOfWorkManager unitOfWork,
 			IMapper mapper)
         {
@@ -74,20 +77,10 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
 			_icdTenCodeRepositiory = icdTenCodeRepositiory;
 			_conditionRepositiory = conditionRepositiory;
 			_diagnosisRepositiory = diagnosisRepositiory;
+			_hisPatientRepositiory = hisPatientRepositiory;
 			_unitOfWork = unitOfWork;
 			_mapper = mapper;
         }
-
-  //      /// <summary>
-  //      /// 
-  //      /// </summary>
-  //      /// <returns></returns>
-  //      public async Task<List<AdmissionResponse>> GetAllAsync()
-		//{
-		//	var wardAdmissions = await _wardAdmissionRepositiory.GetAllListAsync();
-
-		//	return _mapper.Map<List<TResult>>(patients);
-		//}
 
 		/// <summary>
 		/// 
@@ -106,19 +99,26 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
 			if (wardAdmission?.Subject != null)
 				hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
 
-  
+			var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient);
 
-			//var conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition));
-			//.Where(t => idList.Contains(t.Id));
+			List<ConditionIcdTenCode> conditionIcdTenCodes = null;
+			List<IcdTenCode> icdTenCodes = null;
+			if (conditions.Count() > 0)
+            {
+				conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition));
 
-			//var icdTenCodes = await _icdTenCodeRepositiory.GetAllListAsync(x => conditionIcdTenCodes.Contains(x.Id));
+				var temp = conditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
+				if (conditionIcdTenCodes.Count() > 0)
+					icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => temp.Contains(x.Id)).ToListAsync();
+			}
+			List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
+			icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
 
 			_mapper.Map(hospitalAdmission, admissionResponse);
 			_mapper.Map(hisPatient, admissionResponse);
+			UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
 
-
-
-			throw new NotImplementedException();
+			return admissionResponse;
 		}
 
 		/// <summary>
@@ -233,12 +233,10 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
 		/// <param name="id"></param>
 		/// <returns></returns>
 		public async Task DeleteAsync(Guid id)
-		{
-
+		{ 
+			var entity = await _wardAdmissionRepositiory.GetAsync(id);
+			await _wardAdmissionRepositiory.DeleteAsync(entity);
 		}
-
-
-
 
 		/// <summary>
 		/// 
