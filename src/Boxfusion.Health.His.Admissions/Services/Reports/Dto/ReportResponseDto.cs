@@ -1,4 +1,7 @@
-﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
+﻿using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
+using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
+using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Shesha.Domain.Enums;
 using System;
@@ -10,7 +13,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Dto
     /// <summary>
     /// 
     /// </summary>
-    public class ReportResponseDto
+    [AutoMap(typeof(WardAdmission),typeof(HisPatient))]
+    public class ReportResponseDto : EntityDto<Guid>
     {
         /// <summary>
         /// 
