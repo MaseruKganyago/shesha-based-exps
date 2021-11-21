@@ -177,13 +177,14 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(c => c.EpisodeOfCare, options => options.MapFrom(c => c.EpisodeOfCare != null ? new EntityWithDisplayNameDto<Guid?>(c.EpisodeOfCare.Id, "") : null))
                 .MapReferenceListValuesToDto();
 
+            //CreateMap<HisPatient, AdmissionResponse>()
+            //    .ForMember(c => c.Id, options => options.Ignore())
+            //    .ForMember(c => c.Identifier, options => options.Ignore())
+            //    .ForMember(c => c.Subject, options => options.Ignore())
+            //    .MapReferenceListValuesToDto();
+            
+                
             CreateMap<HisPatient, AdmissionResponse>()
-                .ForMember(c => c.Id, options => options.Ignore())
-                .ForMember(c => c.Identifier, options => options.Ignore())
-                .ForMember(c => c.Subject, options => options.Ignore())
-                .MapReferenceListValuesToDto();
-
-            CreateMap<Patient, AdmissionResponse>()
                 .ForMember(c => c.Id, options => options.Ignore())
                 .ForMember(c => c.Identifier, options => options.Ignore())
                 .ForMember(c => c.Subject, options => options.Ignore())
@@ -191,7 +192,13 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(c => c.LastName, options => options.MapFrom(c => c.LastName))
                 .ForMember(c => c.DateOfBirth, options => options.MapFrom(c => c.DateOfBirth))
                 .ForMember(c => c.IdentityNumber, options => options.MapFrom(c => c.IdentityNumber))
+                .ForMember(c => c.PatientMasterIndexNumber, options => options.MapFrom(c => c.PatientMasterIndexNumber))
+                .ForMember(c => c.HospitalPatientNumber, options => options.MapFrom(c => c.HospitalPatientNumber))
                 .ForMember(c => c.Gender, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Shesha.Core", "Gender", (long?)c.Gender)))
+                .ForMember(c => c.Nationality, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Cdm", "Countries", (long?)c.Nationality)))
+                .ForMember(c => c.PatientProvince, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "Provinces", (long?)c.PatientProvince)))
+                .ForMember(c => c.IdentificationType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "IdentificationTypes", (long?)c.IdentificationType)))
+
 
                 .MapReferenceListValuesToDto();
 

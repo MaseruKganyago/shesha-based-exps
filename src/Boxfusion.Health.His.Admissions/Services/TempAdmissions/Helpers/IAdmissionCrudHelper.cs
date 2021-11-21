@@ -12,12 +12,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
     /// </summary>
     public interface IAdmissionCrudHelper
     {
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <returns></returns>
-        //Task<List<AdmissionResponse>> GetAllAsync();
-
         /// <summary>
         /// 
         /// </summary>
