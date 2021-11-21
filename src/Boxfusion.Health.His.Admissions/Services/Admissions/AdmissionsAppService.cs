@@ -20,6 +20,7 @@ using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Boxfusion.Health.His.Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using NHibernate.Linq;
 using Shesha;
 using Shesha.AutoMapper.Dto;
 using Shesha.Extensions;
@@ -107,6 +108,41 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			table.AddProperty(a => a.Days, b => b.Caption("Inpatient Days"));
 
 			return table;
+		}
+
+		[HttpPost, Route("AcceptOrRejectTransfers")]
+		public async Task<AdmitPatientResponse> AcceptOrRejectTransfers(AcceptOrRejectTransfersInput input)
+		{
+			var wardAdmissionService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<WardAdmission, Guid>>();
+			var wardAdmission = await  GetEntityAsync<WardAdmission>(input.WardAdmissionId);
+
+			if (wardAdmission == null)
+				throw new UserFriendlyException("The Petient was not found in the ward Admission register");
+
+			if (input.AcceptanceDecision == RefListAcceptanceDecision.Accept)
+			{
+				if (wardAdmission.AdmissionStatus != RefListAdmissionStatuses.inTransit)
+					throw new UserFriendlyException("The Petient was not transfered from any ward");
+
+				wardAdmission.AdmissionStatus = RefListAdmissionStatuses.admitted;
+				wardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
+				wardAdmission.StartDateTime = DateTime.Now;
+			}
+			else
+			{
+				if(wardAdmission.InternalTransferOriginalWard.Id == null)
+					throw new UserFriendlyException("The Previous ward record was not found");
+
+				var originalWard = await wardAdmissionService.GetAsync(wardAdmission.InternalTransferOriginalWard.Id);
+				wardAdmission.TransferRejectionReason = input?.TransferRejectionReason;
+				wardAdmission.TransferRejectionReasonComment = input?.TransferRejectionReasonComment;
+
+				await wardAdmissionService.UpdateAsync(originalWard);
+			}
+
+			await wardAdmissionService.UpdateAsync(wardAdmission);
+
+			return null;
 		}
 
 		/// <summary>
