@@ -84,5 +84,9 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// 
         /// </summary>
         public virtual HisAdmission HisAdmission { get; set; }
+        /// <summary>
+        /// Used to like the serparations
+        /// </summary>
+        public virtual WardAdmission InternalTransferOriginalWard { get; set; }
     }
 }
