@@ -49,12 +49,5 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <param name="id"></param>
         /// <returns></returns>
         Task DeleteAsync(Guid id);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<AdmissionResponse> SeparateAsync(SeparationInput input);
     }
 }

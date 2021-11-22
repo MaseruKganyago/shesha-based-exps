@@ -221,27 +221,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
 			return admissionResponse;
         }
 
-		public async Task<AdmissionResponse> SeparateAsync(SeparationInput input)
-        {
-			var wardAdmission = await _wardAdmissionRepositiory.GetAsync(input.Id);
-			if(input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.internalTransfer)
-            {
-				//update record in ward 1
-				var separationToWard = await _wardRepositiory.GetAsync(input.SeparationDestinationWard.Id.Value);
-				wardAdmission.AdmissionStatus = RefListAdmissionStatuses.inTransit;
-				wardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
-				wardAdmission.SeparationDate = DateTime.Now;
-				wardAdmission.SeparationDestinationWard = separationToWard;
-
-				//create new record in ward 2
-
-			}
-
-			_mapper.Map(input, wardAdmission);
-
-			throw new NotImplementedException();
-        }
-
 		/// <summary>
 		/// 
 		/// </summary>

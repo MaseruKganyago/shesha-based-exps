@@ -409,6 +409,13 @@
             
             </summary>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.IAdmissionsAppService.AcceptOrRejectTransfers(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.AcceptOrRejectTransfersInput)">
+            <summary>
+            This function is used for Accepting and Rejecting Transfers
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportMapProfile">
             <summary>
             
@@ -978,13 +985,6 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.SeparateAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.SeparationInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService">
             <summary>
             
@@ -1054,13 +1054,6 @@
             <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.CreateAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.SeparateAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.SeparationInput)">
             <summary>
             
             </summary>
@@ -1257,6 +1250,21 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211118204000.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211122095300">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211122095300.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211122095300.Down">
             <summary>
             
             </summary>
