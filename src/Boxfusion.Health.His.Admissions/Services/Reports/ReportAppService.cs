@@ -28,17 +28,13 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
         /// <summary>
         /// 
         /// </summary>
-        private readonly IRepository<WardAdmission, Guid> _wardAdminssionsRepository;
+        private readonly IRepository<WardAdmission, Guid> _wardAdmissionsRepository;
         private readonly IRepository<HisPatient, Guid> _hisPatientRepository;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="wardAdminssionsRepository"></param>
-        /// <param name="hisPatientRepository"></param>
-        public ReportAppService(IRepository<WardAdmission, Guid> wardAdminssionsRepository, IRepository<HisPatient, Guid> hisPatientRepository)
+        ///
+        public ReportAppService(IRepository<WardAdmission, Guid> wardAdmissionsRepository, IRepository<HisPatient, Guid> hisPatientRepository)
         {
-            _wardAdminssionsRepository = wardAdminssionsRepository;
+            _wardAdmissionsRepository = wardAdmissionsRepository;
             _hisPatientRepository = hisPatientRepository;
         }
 
@@ -49,29 +45,21 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
         /// <param name="wardId"></param>
         /// <param name="filterDate"></param>
         /// <returns></returns>
-        [HttpGet, Route("Report")]
+        [HttpGet, Route("Reports")]
         public async Task<List<ReportResponseDto>> GetReport(RefListReportTypes reportType, Guid wardId, DateTime filterDate)
         {
-            var allAdmissions = await _wardAdminssionsRepository.GetAllListAsync(r => r.SeparationDestinationWard.Id == wardId);
-            var patients = await _hisPatientRepository.GetAllListAsync();
-            if (allAdmissions == null)
-                throw new UserFriendlyException("No results found for the ward");
-
-            var totalAddmissions = new List<WardAdmission>();
+            List<WardAdmission> allAdmissions = new List<WardAdmission>();
             if (reportType == RefListReportTypes.Daily)
-                totalAddmissions = allAdmissions.Where(r => r.CreationTime.Day == filterDate.Day).ToList();
+                allAdmissions = await _wardAdmissionsRepository.GetAllListAsync(r => r.Ward.Id == wardId && r.CreationTime.Date == filterDate.Date);
             else
-                totalAddmissions = allAdmissions.Where(r => filterDate.Date.AddMonths(-1).Date <= r.CreationTime.Date && r.CreationTime.Date <= filterDate.Date).ToList();
+                allAdmissions = await _wardAdmissionsRepository.GetAllListAsync(r => r.Ward.Id == wardId && filterDate.Date.AddMonths(-1).Date <= r.CreationTime.Date && r.CreationTime.Date <= filterDate.Date);
 
-            var reportResposnseResults = allAdmissions.Select(r => ObjectMapper.Map<ReportResponseDto>(r));
-            foreach (var item in reportResposnseResults)
-            {
-                var patient = patients.FirstOrDefault(e => e.Id == item.PatientId);
-                if (patient != null)
-                    ObjectMapper.Map(patient, item);
-            }
-            return reportResposnseResults.ToList();
+            if (allAdmissions.Count() < 0)
+                throw new UserFriendlyException("No results found for the ward");
            
+            var allAdmissionReponse = ObjectMapper.Map<List<ReportResponseDto>>(allAdmissions);
+
+            return allAdmissionReponse;
         }
     }
 }

@@ -25,7 +25,9 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         public AdmissionMapProfile()
         {
             CreateMap<AdmissionInput, WardAdmission>()
+                .ForMember(c => c.Id, options => options.Ignore())
                 .ForMember(c => c.CapturedAfterApproval, options => options.MapFrom(c => false))
+                .ForMember(c => c.StartDateTime, options => options.MapFrom(c => DateTime.Now))
                 .ForMember(u => u.AdmissionStatus, options => options.MapFrom(u => RefListAdmissionStatuses.admitted))
                 .ForMember(a => a.PartOf, options => options.MapFrom(b => GetEntity<Encounter>(b.PartOf)))
                 .ForMember(a => a.ServiceProvider, options => options.MapFrom(b => GetEntity<FhirOrganisation>(b.ServiceProvider)))
@@ -38,6 +40,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .MapReferenceListValuesFromDto();
 
             CreateMap<AdmissionInput, HospitalAdmission>()
+                .ForMember(c => c.Id, options => options.Ignore())
                 .ForMember(c => c.CapturedAfterApproval, options => options.MapFrom(c => false))
                 .ForMember(c => c.HospitalAdmissionNumber, options => options.MapFrom(c => c.HospitalAdmissionNumber))
                 .ForMember(c => c.Status, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.Status)))
@@ -59,7 +62,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(c => c.ReasonReferenceOwnerId, options => options.MapFrom(c => c.ReasonReferenceOwnerId))
                 .ForMember(e => e.ReasonCode, e => e.MapFrom(e => UtilityHelper.SetMultiValueReferenceList(e.ReasonCode)))
                 .ForMember(c => c.EndDateTime, options => options.MapFrom(c => c.EndDateTime))
-                .ForMember(c => c.StartDateTime, options => options.MapFrom(c => c.StartDateTime))
+                .ForMember(c => c.StartDateTime, options => options.MapFrom(c => DateTime.Now))
                 .ForMember(c => c.Identifier, options => options.MapFrom(c => c.Identifier))
                 .ForMember(u => u.HospitalAdmissionStatus, options => options.MapFrom(u => RefListHospitalAdmissionStatuses.admitted))
                 .ForMember(c => c.Classification, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.Classification)))
@@ -76,6 +79,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .MapReferenceListValuesToDto();
 
             CreateMap<AdmissionInput, HisPatient>()
+                .ForMember(c => c.Id, options => options.Ignore())
                 .ForMember(c => c.PatientMasterIndexNumber, options => options.MapFrom(c => c.PatientMasterIndexNumber))
                 .ForMember(c => c.HospitalPatientNumber, options => options.MapFrom(c => c.HospitalPatientNumber))
                 .ForMember(c => c.FirstName, options => options.MapFrom(c => c.FirstName))
@@ -114,9 +118,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(c => c.DischargeDisposition, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Cdm", "EncounterHospitalisationDischargeDispositions", (long?)c.DischargeDisposition)))
                 .ForMember(c => c.AdmissionStatus, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "AdmissionStatuses", (long?) c.AdmissionStatus)))
                 .ForMember(c => c.AdmissionType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "AdmissionTypes", (long?)c.AdmissionType)))
-                //.ForMember(c => c.TransferRejectionReason, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "TransferRejectionReasons", (long?)c.TransferRejectionReason)))
-                //.ForMember(c => c.SeparationType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "SeparationTypes", (long?)c.SeparationType)))
-                //.ForMember(c => c.SeparationChildHealth, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "SeparationChildHealths", (long?)c.SeparationChildHealth)))
                 .ForMember(c => c.ReasonCode, options => options.MapFrom(c => UtilityHelper.GetMultiReferenceListItemValueList((RefListServiceRequestProcedureReasons)c.ReasonCode)))
                 .ForMember(c => c.PreAdmissionIdentifier, options => options.MapFrom(c => c.PreAdmissionIdentifier))
                 .ForMember(c => c.OriginOwnerId, options => options.MapFrom(c => c.OriginOwnerId))
@@ -176,13 +177,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(c => c.BasedOn, options => options.MapFrom(c => c.BasedOn != null ? new EntityWithDisplayNameDto<Guid?>(c.BasedOn.Id, c.BasedOn.Identifier) : null))
                 .ForMember(c => c.EpisodeOfCare, options => options.MapFrom(c => c.EpisodeOfCare != null ? new EntityWithDisplayNameDto<Guid?>(c.EpisodeOfCare.Id, "") : null))
                 .MapReferenceListValuesToDto();
-
-            //CreateMap<HisPatient, AdmissionResponse>()
-            //    .ForMember(c => c.Id, options => options.Ignore())
-            //    .ForMember(c => c.Identifier, options => options.Ignore())
-            //    .ForMember(c => c.Subject, options => options.Ignore())
-            //    .MapReferenceListValuesToDto();
-            
                 
             CreateMap<HisPatient, AdmissionResponse>()
                 .ForMember(c => c.Id, options => options.Ignore())
@@ -198,11 +192,23 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(c => c.Nationality, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Cdm", "Countries", (long?)c.Nationality)))
                 .ForMember(c => c.PatientProvince, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "Provinces", (long?)c.PatientProvince)))
                 .ForMember(c => c.IdentificationType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "IdentificationTypes", (long?)c.IdentificationType)))
+                .MapReferenceListValuesToDto();
 
-
+            CreateMap<HisPatientInput, HisPatient>()
+                .ForMember(c => c.PatientMasterIndexNumber, options => options.MapFrom(c => c.PatientMasterIndexNumber))
+                .ForMember(c => c.HospitalPatientNumber, options => options.MapFrom(c => c.HospitalPatientNumber))
+                .ForMember(c => c.FirstName, options => options.MapFrom(c => c.FirstName))
+                .ForMember(c => c.LastName, options => options.MapFrom(c => c.LastName))
+                .ForMember(c => c.IdentityNumber, options => options.MapFrom(c => c.IdentityNumber))
+                .ForMember(c => c.DateOfBirth, options => options.MapFrom(c => c.DateOfBirth))
+                .ForMember(c => c.Gender, options => options.MapFrom(c => c.Gender != null ? (RefListGender?)c.Gender.ItemValue : null))
+                .ForMember(c => c.IdentificationType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.IdentificationType)))
+                .ForMember(c => c.PatientProvince, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.PatientProvince)))
+                .ForMember(c => c.Nationality, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.Nationality)))
                 .MapReferenceListValuesToDto();
 
             CreateMap<AdmissionInput, HisPatientInput>()
+                .ForMember(c => c.Id, options => options.Ignore())
                 .MapReferenceListValuesFromDto();
         }
     }
