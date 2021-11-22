@@ -104,10 +104,70 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-		[HttpPut, Route("")]
-        public Task<AdmissionResponse> UpdateAsync(AdmissionInput input)
+        [HttpPost, Route("[action]")]
+        public async Task<AdmissionResponse> SeparateAsync(SeparationInput input)
         {
+            Validation.ValidateReflist(input?.SeparationType, "Separation Type");
+            Validation.ValidateReflist(input?.SeparationChildHealth, "Separation Child Health");
+            Validation.ValidateNullableType(input?.SeparationDate, "Separation Date");
+            Validation.ValidateNullableType(input?.Code, "Icd-10 Code");
+
+            if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.internalTransfer)
+            {
+                Validation.ValidateNullableType(input?.SeparationDestinationWard, "Separation Date");
+            }
+
+            if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.externalTransfer)
+            {
+                if (input.IsGautengGovFacility)
+                    Validation.ValidateNullableType(input?.TransferToHospital, "Gauteng Government Destination Hospital");
+                else
+                    Validation.ValidateText(input?.TransferToNonGautengHospital, "None Gauteng Government Destination Hospital");
+            }
+
+
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+		[HttpPut, Route("")]
+        public async Task<AdmissionResponse> UpdateAsync(AdmissionInput input)
+        {
+            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            Validation.ValidateReflist(input?.IdentificationType, "Identityfication Type");
+            Validation.ValidateEntityWithDisplayNameDto(input?.Ward, "Ward");
+            Validation.ValidateReflist(input?.Gender, "Gender");
+            Validation.ValidateNullableType(input?.StartDateTime, "Admission Date");
+            Validation.ValidateText(input?.HospitalAdmissionNumber, "Hospital Admission Number");
+            Validation.ValidateText(input?.WardAdmissionNumber, "Ward Admission Number");
+            Validation.ValidateReflist(input?.AdmissionType, "Admission Type");
+
+            if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided || input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
+            {
+                Validation.ValidateText(input?.IdentityNumber, "I.D. No.");
+                Validation.ValidateNullableType(input?.DateOfBirth, "Date of Birth");
+                Validation.ValidateText(input?.HospitalPatientNumber, "Hospital Patient Number");
+                Validation.ValidateText(input?.FirstName, "First Name");
+                Validation.ValidateText(input?.HospitalPatientNumber, "Last Name");
+                Validation.ValidateReflist(input?.PatientProvince, "Patient Province");
+                Validation.ValidateReflist(input?.Classification, "Classification");
+                Validation.ValidateReflist(input?.Nationality, "Nationality");
+                Validation.ValidateReflist(input?.OtherCategory, "Other Categories");
+
+                if (input?.IdentificationType.ItemValue == (int)RefListIdentificationTypes.SAID)
+                {
+                    if (!Validation.IsValidIdentityNumber(input?.IdentityNumber))
+                        throw new UserFriendlyException("The specified identify number is not a valid South African number.");
+                }
+            }
+
+            var admission = await _admissionCrudHelper.UpdateAsync(input, person);
+
+            return admission;
         }
 
         /// <summary>
@@ -116,9 +176,9 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         /// <param name="id"></param>
         /// <returns></returns>
  		[HttpDelete, Route("{id}")]
-        public Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            await _admissionCrudHelper.DeleteAsync(id);
         }
     }
 }

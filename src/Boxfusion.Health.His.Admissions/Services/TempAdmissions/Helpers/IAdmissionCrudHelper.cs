@@ -31,6 +31,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// 
         /// </summary>
         /// <param name="input"></param>
+        /// <param name="currentLoggedInPerson"></param>
         /// <returns></returns>
         Task<AdmissionResponse> CreateAsync(AdmissionInput input, PersonFhirBase currentLoggedInPerson);
 
@@ -38,9 +39,9 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// 
         /// </summary>
         /// <param name="input"></param>
-        /// <param name="action"></param>
+        /// <param name="currentLoggedInPerson"></param>
         /// <returns></returns>
-        Task<AdmissionResponse> UpdateAsync(AdmissionInput input);
+        Task<AdmissionResponse> UpdateAsync(AdmissionInput input, PersonFhirBase currentLoggedInPerson);
 
         /// <summary>
         /// 
@@ -48,5 +49,12 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <param name="id"></param>
         /// <returns></returns>
         Task DeleteAsync(Guid id);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<AdmissionResponse> SeparateAsync(SeparationInput input);
     }
 }
