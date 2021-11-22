@@ -129,6 +129,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 				wardAdmission.AdmissionStatus = RefListAdmissionStatuses.admitted;
 				wardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
 				wardAdmission.StartDateTime = DateTime.Now;
+				wardAdmission.WardAdmissionNumber = input.WardAdmissionNumber;
+
 				respose.Accepted = true;
 			}
 			else
@@ -139,6 +141,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 				var originalWard = await wardAdmissionService.GetAsync(wardAdmission.InternalTransferOriginalWard.Id);
 				wardAdmission.TransferRejectionReason = input?.TransferRejectionReason;
 				wardAdmission.TransferRejectionReasonComment = input?.TransferRejectionReasonComment;
+
+				originalWard.AdmissionStatus = RefListAdmissionStatuses.admitted;
 
 				await wardAdmissionService.UpdateAsync(originalWard);
 				respose.Rejected = true;
