@@ -104,36 +104,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [HttpPost, Route("[action]")]
-        public async Task<AdmissionResponse> SeparateAsync(SeparationInput input)
-        {
-            Validation.ValidateReflist(input?.SeparationType, "Separation Type");
-            Validation.ValidateReflist(input?.SeparationChildHealth, "Separation Child Health");
-            Validation.ValidateNullableType(input?.SeparationDate, "Separation Date");
-            Validation.ValidateNullableType(input?.Code, "Icd-10 Code");
-
-            if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.internalTransfer)
-            {
-                Validation.ValidateNullableType(input?.SeparationDestinationWard, "Separation Date");
-            }
-
-            if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.externalTransfer)
-            {
-                if (input.IsGautengGovFacility)
-                    Validation.ValidateNullableType(input?.TransferToHospital, "Gauteng Government Destination Hospital");
-                else
-                    Validation.ValidateText(input?.TransferToNonGautengHospital, "None Gauteng Government Destination Hospital");
-            }
-
-
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
 		[HttpPut, Route("")]
         public async Task<AdmissionResponse> UpdateAsync(AdmissionInput input)
         {

@@ -610,6 +610,11 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardAdmission.InternalTransferOriginalWard">
+            <summary>
+            Used to like the serparations
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport">
             <summary>
             
@@ -1000,21 +1005,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211116194100">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211116194100.Up">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211116194100.Down">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211116214600">
             <summary>
             
@@ -1030,6 +1020,21 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211120113700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211120113700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211120113700.Down">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211122005200">
             <summary>
             
@@ -1041,6 +1046,21 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211122005200.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211122111700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211122111700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211122111700.Down">
             <summary>
             
             </summary>
