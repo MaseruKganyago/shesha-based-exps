@@ -111,13 +111,15 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 		}
 
 		[HttpPost, Route("AcceptOrRejectTransfers")]
-		public async Task<AdmitPatientResponse> AcceptOrRejectTransfers(AcceptOrRejectTransfersInput input)
+		public async Task<AcceptOrRejectTransfersResponse> AcceptOrRejectTransfers(AcceptOrRejectTransfersInput input)
 		{
 			var wardAdmissionService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<WardAdmission, Guid>>();
 			var wardAdmission = await  GetEntityAsync<WardAdmission>(input.WardAdmissionId);
 
 			if (wardAdmission == null)
 				throw new UserFriendlyException("The Petient was not found in the ward Admission register");
+
+			var respose = new AcceptOrRejectTransfersResponse();
 
 			if (input.AcceptanceDecision == RefListAcceptanceDecision.Accept)
 			{
@@ -127,6 +129,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 				wardAdmission.AdmissionStatus = RefListAdmissionStatuses.admitted;
 				wardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
 				wardAdmission.StartDateTime = DateTime.Now;
+				respose.Accepted = true;
 			}
 			else
 			{
@@ -138,11 +141,12 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 				wardAdmission.TransferRejectionReasonComment = input?.TransferRejectionReasonComment;
 
 				await wardAdmissionService.UpdateAsync(originalWard);
+				respose.Rejected = true;
 			}
 
 			await wardAdmissionService.UpdateAsync(wardAdmission);
 
-			return null;
+			return respose;
 		}
 
 		/// <summary>

@@ -7,7 +7,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
 {
     public class AcceptOrRejectTransfersInput
     {
-        public Guid PetientId { get; set; }
         public Guid WardAdmissionId { get; set; }
         public RefListAcceptanceDecision? AcceptanceDecision { get; set; }
         public RefListTransferRejectionReasons? TransferRejectionReason { get; set; }

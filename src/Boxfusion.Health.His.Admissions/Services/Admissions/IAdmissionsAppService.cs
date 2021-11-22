@@ -17,6 +17,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<AdmitPatientResponse> AcceptOrRejectTransfers(AcceptOrRejectTransfersInput input);
+        Task<AcceptOrRejectTransfersResponse> AcceptOrRejectTransfers(AcceptOrRejectTransfersInput input);
     }
 }
