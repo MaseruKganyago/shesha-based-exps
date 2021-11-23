@@ -431,11 +431,6 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.IdentificationType">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.IdentityNumber">
             <summary>
             
@@ -486,17 +481,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.PatientProvince">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.Classification">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.Nationality">
             <summary>
             
             </summary>
@@ -512,6 +497,31 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.PatientDays">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.Subject">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Dto.SubjectResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.SubjectResponse.Nationality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.SubjectResponse.PatientProvince">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.SubjectResponse.IdentificationType">
             <summary>
             
             </summary>

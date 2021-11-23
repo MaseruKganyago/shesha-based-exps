@@ -14,13 +14,13 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Dto
     /// <summary>
     /// 
     /// </summary>
-    [AutoMap(typeof(WardAdmission),typeof(HisPatient),typeof(HospitalAdmission))]
+    [AutoMap(typeof(WardAdmission), typeof(HisPatient), typeof(HospitalAdmission))]
     public class ReportResponseDto : EntityDto<Guid>
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public ReferenceListItemValueDto IdentificationType { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public ReferenceListItemValueDto IdentificationType { get; set; }
 
         /// <summary>
         /// 
@@ -72,20 +72,20 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Dto
         /// </summary>
         public ReferenceListItemValueDto Speciality { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public ReferenceListItemValueDto PatientProvince { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public ReferenceListItemValueDto PatientProvince { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public ReferenceListItemValueDto Classification { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public ReferenceListItemValueDto Nationality { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public ReferenceListItemValueDto Nationality { get; set; }
 
         /// <summary>
         /// 
@@ -101,5 +101,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Dto
         /// 
         /// </summary>
         public int PatientDays { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public SubjectResponse Subject { get; set; }
     }
 }

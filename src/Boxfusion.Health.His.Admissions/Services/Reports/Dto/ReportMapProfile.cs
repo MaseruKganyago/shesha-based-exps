@@ -1,7 +1,9 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
 using Boxfusion.Health.His.Domain.Domain;
 using Shesha.AutoMapper;
+using Shesha.AutoMapper.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -44,20 +46,34 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Dto
                 .ForMember(c => c.DateOfBirth, options => options.MapFrom(c => c.Subject.DateOfBirth))
                 .ForMember(c => c.IdentityNumber, options => options.MapFrom(c => c.Subject.IdentityNumber))
                 .ForMember(c => c.HospitalPatientNumber, options => options.MapFrom(c => (c.Subject as HisPatient).HospitalPatientNumber))
-                .ForMember(c => c.Gender, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Shesha.Core", "Gender", (long?)c.Subject.Gender)))
-                .ForMember(c => c.Nationality, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Cdm", "Countries", (long?)c.Subject.Nationality)))
-                .ForMember(c => c.PatientProvince, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "Provinces", (long?)(c.Subject as HisPatient).PatientProvince)))
-                .ForMember(c => c.IdentificationType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "IdentificationTypes", (long?)(c.Subject as HisPatient).IdentificationType)))
+                //.ForMember(c => c.Gender, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Shesha.Core", "Gender", (long?)c.Subject.Gender)))
+                //.ForMember(c => c.Nationality, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Cdm", "Countries", (long?)c.Subject.Nationality)))
+                //.ForMember(c => c.PatientProvince, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "Provinces", (long?)((HisPatient)c.Subject).PatientProvince)))
+                //.ForMember(c => c.IdentificationType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "IdentificationTypes", (long?)(c.Subject as HisPatient).IdentificationType)))
 
-                .ForMember(c => c.Classification, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "Classifications", (long?)(c.HisAdmission as HospitalAdmission).Classification)))
-                .ForMember(c => c.OtherCategory, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "OtherCategories", (long?)(c.HisAdmission as HospitalAdmission).OtherCategory)))
+                //.ForMember(c => c.Classification, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "Classifications", (long?)(c.HisAdmission as HospitalAdmission).Classification)))
+                //.ForMember(c => c.OtherCategory, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "OtherCategories", (long?)(c.HisAdmission as HospitalAdmission).OtherCategory)))
                 .ForMember(c => c.StartDateTime, options => options.MapFrom(c => c.StartDateTime))
-                .ForMember(c => c.Speciality, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "WardSpecialities", (long?)c.Ward.Speciality)))
+                //.ForMember(c => c.Speciality, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "WardSpecialities", (long?)c.Ward.Speciality)))
                 .MapReferenceListValuesToDto();
 
             //CreateMap<Ward, ReportResponseDto>()
             //    .ForMember(c => c.Speciality, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "WardSpecialities", (long?)c.Speciality)))
             //    .MapReferenceListValuesToDto();
+
+            CreateMap<Patient, SubjectResponse>()
+                .ForMember(i => i.PatientProvince, options => options.MapFrom(i => getRefListItemValueDto(i)))
+                .MapReferenceListValuesToDto();
+        }
+
+        private static ReferenceListItemValueDto getRefListItemValueDto(Patient patient)
+        {
+            if(patient is HisPatient)
+            {
+                Console.WriteLine("Testing ");
+            }
+            var hisPatient = patient as HisPatient;
+            return GetRefListItemValueDto("His", "Provinces", (int?)hisPatient.PatientProvince);
         }
     }
 }
