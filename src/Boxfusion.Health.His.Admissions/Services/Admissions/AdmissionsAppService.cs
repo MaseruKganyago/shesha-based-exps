@@ -15,6 +15,7 @@ using Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers;
 using Boxfusion.Health.His.Admissions.Configuration;
 using Boxfusion.Health.His.Admissions.Domain;
 using Boxfusion.Health.His.Admissions.Domain.Views;
+using Boxfusion.Health.His.Admissions.Helpers;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
@@ -149,6 +150,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 			}
 
 			await wardAdmissionService.UpdateAsync(wardAdmission);
+			await ServiceBusHelper.TransferAddmission(wardAdmission);
 
 			return respose;
 		}
