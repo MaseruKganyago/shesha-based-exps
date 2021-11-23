@@ -31,6 +31,7 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Boxfusion.Health.His.Admissions.Hubs;
 
 namespace Boxfusion.Health.His.Web.Host.Startup
 {
@@ -159,6 +160,7 @@ namespace Boxfusion.Health.His.Web.Host.Startup
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHub<AbpCommonHub>("/signalr");
+                endpoints.MapHub<HisAdmisSignalRHub>("/signalr-utilityManDashboardHub");
                 endpoints.MapControllers();
                 endpoints.MapSignalRHubs();
             });

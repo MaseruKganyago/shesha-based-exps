@@ -15,6 +15,7 @@ using Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers;
 using Boxfusion.Health.His.Admissions.Configuration;
 using Boxfusion.Health.His.Admissions.Domain;
 using Boxfusion.Health.His.Admissions.Domain.Views;
+using Boxfusion.Health.His.Admissions.Helpers;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
@@ -129,6 +130,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 				wardAdmission.AdmissionStatus = RefListAdmissionStatuses.admitted;
 				wardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
 				wardAdmission.StartDateTime = DateTime.Now;
+				wardAdmission.WardAdmissionNumber = input.WardAdmissionNumber;
+
 				respose.Accepted = true;
 			}
 			else
@@ -140,11 +143,14 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 				wardAdmission.TransferRejectionReason = input?.TransferRejectionReason;
 				wardAdmission.TransferRejectionReasonComment = input?.TransferRejectionReasonComment;
 
+				originalWard.AdmissionStatus = RefListAdmissionStatuses.admitted;
+
 				await wardAdmissionService.UpdateAsync(originalWard);
 				respose.Rejected = true;
 			}
 
 			await wardAdmissionService.UpdateAsync(wardAdmission);
+			await ServiceBusHelper.TransferAddmission(wardAdmission);
 
 			return respose;
 		}

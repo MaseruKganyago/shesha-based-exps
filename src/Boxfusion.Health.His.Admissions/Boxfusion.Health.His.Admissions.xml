@@ -271,6 +271,26 @@
             
             </summary>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Helpers.ServiceBusHelper.TransferAddmission(Boxfusion.Health.His.Domain.Domain.WardAdmission)">
+            <summary>
+            I am using this as an example for sending a massage to a topic named ExampleTopic
+            </summary>
+            <param name="admission"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Helpers.ServiceBusHelper.SendAsync(System.String,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Helpers.ServiceBusHelper.HandleMessage(System.String,System.Object)">
+            <summary>
+            Handle different Messages
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.HisAdmissModule">
             <summary>
             Health.His Module
@@ -290,6 +310,26 @@
             <summary>
             inheritedDoc
             </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Hubs.HisAdmisSignalRHub.SendMessage(System.String)">
+            <summary>
+            Used for sending SignalR Messages
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Hubs.HisAdmisSignalRHub.OnConnectedAsync">
+            <summary>
+            Used for handling connecting
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Hubs.HisAdmisSignalRHub.OnDisconnectedAsync(System.Exception)">
+            <summary>
+            Used for handling Disconnecting
+            </summary>
+            <param name="exception"></param>
+            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Localization.HisAdmissLocalizationConfigurer">
             <summary>
