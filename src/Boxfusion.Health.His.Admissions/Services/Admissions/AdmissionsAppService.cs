@@ -130,7 +130,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 				wardAdmission.AdmissionStatus = RefListAdmissionStatuses.admitted;
 				wardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
 				wardAdmission.StartDateTime = DateTime.Now;
-				wardAdmission.WardAdmissionNumber = input.WardAdmissionNumber;
 
 				respose.Accepted = true;
 			}
