@@ -95,8 +95,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             var wardAdmission = await _wardAdmissionRepositiory.GetAsync(encounterId);
 
             HospitalAdmission hospitalAdmission = null;
-            if (wardAdmission?.HisAdmission != null)
-                hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.HisAdmission.Id);
+            if (wardAdmission?.PartOf != null)
+                hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
 
             HisPatient hisPatient = null;
             if (wardAdmission?.Subject != null)
@@ -126,8 +126,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
                 destinationWard.InternalTransferOriginalWard = wardAdmission;
                 destinationWard.Ward.Id = input.SeparationDestinationWard.Id.Value;
                 _mapper.Map(hisPatient, hospitalAdmission);
-                if (wardAdmission?.HisAdmission == null)
-                    _mapper.Map(wardAdmission.HisAdmission, destinationWard);
+                if (wardAdmission?.PartOf == null)
+                    _mapper.Map(wardAdmission.PartOf, destinationWard);
 
                 destinationWard = await _wardAdmissionRepositiory.InsertAsync(wardAdmission);
 
