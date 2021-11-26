@@ -387,6 +387,20 @@
             <param name="identityNumber"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.GetWardCensusDailyStats(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.WardCensusInput)">
+            <summary>
+            Used to get the ward daily census by passing wardId and the Report date
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.GetWardCensusMonthlyStats(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.WardCensusInput)">
+            <summary>
+            Used to het Monthly ward stats 
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.GetCondition(System.Guid)">
             <summary>
             
