@@ -1,18 +1,17 @@
-﻿using Abp.Application.Services.Dto;
-using Abp.AutoMapper;
+﻿using Abp.AutoMapper;
+using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.His.Domain.Domain;
 using Shesha.AutoMapper.Dto;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
+namespace Boxfusion.Health.His.Admissions.Services.Separations.Dto
 {
     /// <summary>
     /// 
     /// </summary>
     [AutoMap(typeof(WardAdmission), typeof(HospitalAdmission))]
-    public class SeparationInput : EntityDto<Guid>
+    public class SeparationInput : HospitalisationEncounterInput
     {
         /// <summary>
         /// 
@@ -22,12 +21,12 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         /// <summary>
         /// 
         /// </summary>
-        public  ReferenceListItemValueDto SeparationType { get; set; }
+        public ReferenceListItemValueDto SeparationType { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public  EntityWithDisplayNameDto<Guid?> SeparationDestinationWard { get; set; }
+        public EntityWithDisplayNameDto<Guid?> SeparationDestinationWard { get; set; }
 
         /// <summary>
         /// 
@@ -58,5 +57,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         /// 
         /// </summary>
         public bool IsGautengGovFacility { get; set; }
+        public EntityWithDisplayNameDto<Guid?> Ward { get; internal set; }
     }
 }

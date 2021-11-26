@@ -12,3 +12,4 @@ Logs
 ElmahLogs
 Upload
 /src/Boxfusion.Health.His.Web.Host/appsettings.Neo.json
+/src/Boxfusion.Health.His.Web.Host/appsettings.Development.json
