@@ -270,13 +270,51 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 
 			return ObjectMapper.Map<HisPatientResponse>(patient);
 		}
-
 		/// <summary>
-		/// 
+		/// Used to get the ward daily census by passing wardId and the Report date
 		/// </summary>
-		/// <param name="id"></param>
+		/// <param name="input"></param>
 		/// <returns></returns>
-		private async Task<ConditionResponse> GetCondition(Guid id)
+		[HttpGet, Route("GetWardCensusDailyStats")]
+		public async Task<WardCensusResponse> GetWardCensusDailyStats(WardCensusInput input)
+        {
+			return new WardCensusResponse()
+			{
+				MidnightCount = 25,
+				TotalAdmittedPatients = 30,
+				TotalSeparatedPatients = 5,
+				TotalBedAvailability = 25,
+				TotalBedInWard = 250,
+				BedUtilisation = 25,
+				Alos = 2
+			};
+        }
+		/// <summary>
+		/// Used to het Monthly ward stats 
+		/// </summary>
+		/// <param name="input"></param>
+		/// <returns></returns>
+		[HttpGet, Route("GetWardCensusMonthlyStats")]
+		public async Task<WardCensusResponse> GetWardCensusMonthlyStats(WardCensusInput input)
+        {
+			return new WardCensusResponse()
+			{
+				MidnightCount = 25,
+				TotalAdmittedPatients = 30,
+				TotalSeparatedPatients = 5,
+				TotalBedAvailability = 25,
+				TotalBedInWard = 250,
+				BedUtilisation = 25,
+				Alos = 2
+			};
+		}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private async Task<ConditionResponse> GetCondition(Guid id)
 		{
 			if (id == Guid.Empty) throw new UserFriendlyException("id cannot be null.");
 
