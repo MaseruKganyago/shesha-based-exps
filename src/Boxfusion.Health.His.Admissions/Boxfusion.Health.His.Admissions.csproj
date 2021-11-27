@@ -19,10 +19,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Services\Admissions\Dto\HospitalisationEncounterInput.cs" />
-    <Compile Remove="Services\Admissions\Dto\HospitalisationEncounterResponse.cs" />
-    <Compile Remove="Services\Admissions\EncountersAppService.cs" />
-    <Compile Remove="Services\Admissions\IEncountersAppService.cs" />
+    <Compile Remove="Services\Admissions\**" />
+    <EmbeddedResource Remove="Services\Admissions\**" />
+    <None Remove="Services\Admissions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\HisPatients\Dtos\HisPatientInput.cs" />
+    <Compile Remove="Services\HisPatients\Dtos\HisPatientResponse.cs" />
+    <Compile Remove="Services\TempAdmissions\Dtos\HisPatientInput.cs" />
   </ItemGroup>
 
 
@@ -44,6 +49,7 @@
     <Folder Include="Dtos\" />
     <Folder Include="Helpers\Validations\" />
     <Folder Include="Services\Admissions\Helpers\" />
+    <Folder Include="Services\Separations\" />
   </ItemGroup>
 
   <ItemGroup>
