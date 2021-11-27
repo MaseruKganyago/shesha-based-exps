@@ -291,6 +291,12 @@
             Handle different Messages
             </summary>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Helpers.SessionDataProvider.#ctor(Shesha.NHibernate.ISessionProvider)">
+            <summary>
+            
+            </summary>
+            <param name="sessionProvider"></param>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.HisAdmissModule">
             <summary>
             Health.His Module
@@ -331,6 +337,18 @@
             <param name="exception"></param>
             <returns></returns>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Jobs.DailyStatsCalculatorJob">
+            <summary>
+            Used to calculate stats daily
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Jobs.DailyStatsCalculatorJob.DoExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Localization.HisAdmissLocalizationConfigurer">
             <summary>
             
@@ -347,7 +365,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers.IEncounterCrudHelper{Boxfusion.Health.His.Domain.Domain.WardAdmission},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Ward,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Conditions.Helpers.IConditionsCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ConditionIcdTenCode,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers.IEncounterCrudHelper{Boxfusion.Health.His.Domain.Domain.HospitalAdmission},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers.IEncounterCrudHelper{Boxfusion.Health.His.Domain.Domain.WardAdmission},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Ward,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Conditions.Helpers.IConditionsCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ConditionIcdTenCode,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers.IEncounterCrudHelper{Boxfusion.Health.His.Domain.Domain.HospitalAdmission},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Boxfusion.Health.His.Admissions.Helpers.ISessionDataProvider)">
             <summary>
             
             </summary>
@@ -385,6 +403,20 @@
             
             </summary>
             <param name="identityNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.GetWardCensusDailyStats(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.WardCensusInput)">
+            <summary>
+            Used to get the ward daily census by passing wardId and the Report date
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.GetWardCensusMonthlyStats(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.WardCensusInput)">
+            <summary>
+            Used to het Monthly ward stats 
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.GetCondition(System.Guid)">
@@ -1315,6 +1347,21 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211122095300.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211127135300">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211127135300.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211127135300.Down">
             <summary>
             
             </summary>
