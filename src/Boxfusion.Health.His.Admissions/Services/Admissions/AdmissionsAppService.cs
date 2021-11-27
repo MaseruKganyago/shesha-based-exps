@@ -191,8 +191,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 				item.AdmissionStatus = RefListAdmissionStatuses.admitted;
 				item.Subject = patient;
 				item.Performer = (Practitioner)person;
-				item.HisAdmission = hospitalAdmissionEntity;
-			});
+                item.PartOf = hospitalAdmissionEntity;
+            });
 
             //Diagnosis BackboneElement (Note: Saving diagnosis with local implementation just until cdm is updated)
             var diagnosisResult = await SaveOrUpdateDiagnosis(diagnosis, wardAdmissionEntity);
@@ -227,8 +227,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 
 			var patientEntity = await _patientRepository.GetAsync(wardAdmissionEntity.Subject.Id);
 			var diagnosis = ObjectMapper.Map<DiagnosisResponse>(await _diagnosisRepository.FirstOrDefaultAsync(a => a.OwnerId == encounterId.ToString()));
-			var hospitalAdmissionEntity = await _hospitalisationEncounterCrudHelper.GetByIdAsync(wardAdmissionEntity.HisAdmission.Id);
-			var wardEntity = wardAdmissionEntity.AdmissionDestinationWard;
+			var hospitalAdmissionEntity = await _hospitalisationEncounterCrudHelper.GetByIdAsync(wardAdmissionEntity.Id);
+			var wardEntity = wardAdmissionEntity.Ward;
 
             //Maps back patient-admission to AdmitPatientResponse
             var result = new AdmitPatientResponse();
