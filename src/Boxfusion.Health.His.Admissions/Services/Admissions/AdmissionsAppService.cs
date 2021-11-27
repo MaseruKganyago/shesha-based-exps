@@ -43,7 +43,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;
         private readonly IRepository<ConditionIcdTenCode, Guid> _conditionIcdTenCodeRepository;
         private readonly IRepository<Condition, Guid> _conditionRepository;
-
+        private readonly ISessionDataProvider _sessionDataProvider;
 
         /// <summary>
         /// 
@@ -63,7 +63,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             IRepository<Diagnosis, Guid> diagnosisRepository,
             IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepository,
             IEncounterCrudHelper<HospitalAdmission> hospitalisationEncounterCrudHelper,
-            IRepository<Condition, Guid> conditionRepository)
+            IRepository<Condition, Guid> conditionRepository, ISessionDataProvider sessionDataProvider)
         {
             _wardAdmissionCrudHelper = wardAdmissionCrudHelper;
             _patientRepository = patientRepository;
@@ -73,6 +73,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             _conditionIcdTenCodeRepository = conditionIcdTenCodeRepository;
             _hospitalisationEncounterCrudHelper = hospitalisationEncounterCrudHelper;
             _conditionRepository = conditionRepository;
+            _sessionDataProvider = sessionDataProvider;
         }
 
         /// <summary>
@@ -271,15 +272,21 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         [HttpGet, Route("GetWardCensusDailyStats")]
         public async Task<WardCensusResponse> GetWardCensusDailyStats(WardCensusInput input)
         {
-			return new WardCensusResponse()
+            var dailyStats = await _sessionDataProvider.GetDailyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
+            if (!dailyStats.Any())
+            {
+                throw new UserFriendlyException("No records found for the ward and date specified");
+            }
+
+            var dailyStat = dailyStats[0];
+
+            return new WardCensusResponse()
 			{
-				MidnightCount = 25,
-				TotalAdmittedPatients = 30,
-				TotalSeparatedPatients = 5,
-				TotalBedAvailability = 25,
-				TotalBedInWard = 250,
-				BedUtilisation = 25,
-				Alos = 2
+				MidnightCount = (int?)dailyStat.MidnightCount,
+				TotalAdmittedPatients = (int?)dailyStat.TotalAdmittedPatients,
+				TotalSeparatedPatients = (int?)dailyStat.TotalSeparatedPatients,
+				TotalBedAvailability = (int?)dailyStat.TotalBedAvailability,
+				TotalBedInWard = (int?)dailyStat.TotalBedInWard
 			};
         }
         /// <summary>
