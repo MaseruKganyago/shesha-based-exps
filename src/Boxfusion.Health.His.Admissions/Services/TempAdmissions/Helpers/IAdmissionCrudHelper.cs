@@ -2,7 +2,6 @@
 using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
@@ -49,5 +48,19 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <param name="id"></param>
         /// <returns></returns>
         Task DeleteAsync(Guid id);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hospitalAdmissionId"></param>
+        /// <returns></returns>
+        Task<List<AdmissionResponse>> GetWardAdmissions(Guid hospitalAdmissionId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="patientId"></param>
+        /// <returns></returns>
+        Task<PatientResponse> GetPatient(Guid patientId);
     }
 }

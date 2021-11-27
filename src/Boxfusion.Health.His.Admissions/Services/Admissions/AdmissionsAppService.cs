@@ -4,16 +4,11 @@ using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
-using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Boxfusion.Health.HealthCommon.Core.Dtos;
 using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
-using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services.Conditions.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers;
-using Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers;
-using Boxfusion.Health.His.Admissions.Configuration;
-using Boxfusion.Health.His.Admissions.Domain;
 using Boxfusion.Health.His.Admissions.Domain.Views;
 using Boxfusion.Health.His.Admissions.Helpers;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
@@ -21,7 +16,6 @@ using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Boxfusion.Health.His.Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using NHibernate.Linq;
 using Shesha;
 using Shesha.AutoMapper.Dto;
 using Shesha.Extensions;
@@ -29,7 +23,6 @@ using Shesha.Web.DataTable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Admissions.Services.Admissions
@@ -50,7 +43,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;
         private readonly IRepository<ConditionIcdTenCode, Guid> _conditionIcdTenCodeRepository;
         private readonly IRepository<Condition, Guid> _conditionRepository;
-        private readonly ISessionDataProvider _dataProvider;
+
 
         /// <summary>
         /// 
@@ -70,7 +63,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             IRepository<Diagnosis, Guid> diagnosisRepository,
             IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepository,
             IEncounterCrudHelper<HospitalAdmission> hospitalisationEncounterCrudHelper,
-            IRepository<Condition, Guid> conditionRepository, ISessionDataProvider dataProvider)
+            IRepository<Condition, Guid> conditionRepository)
         {
             _wardAdmissionCrudHelper = wardAdmissionCrudHelper;
             _patientRepository = patientRepository;
@@ -80,7 +73,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             _conditionIcdTenCodeRepository = conditionIcdTenCodeRepository;
             _hospitalisationEncounterCrudHelper = hospitalisationEncounterCrudHelper;
             _conditionRepository = conditionRepository;
-            _dataProvider = dataProvider;
         }
 
         /// <summary>
@@ -192,15 +184,15 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             #region Admit patient into ward using WardAdmission
             var diagnosis = input.WardAdmission.Diagnosis.FirstOrDefault();
 
-            input.WardAdmission.Diagnosis = null;
-            var wardAdmissionEntity = await SaveOrUpdateEntityAsync<WardAdmission>(null, async item =>
-            {
-                ObjectMapper.Map(input.WardAdmission, item);
-                item.AdmissionStatus = RefListAdmissionStatuses.admitted;
-                item.Subject = patient;
-                item.Performer = (Practitioner)person;
-                item.HisAdmission = hospitalAdmissionEntity;
-            });
+			input.WardAdmission.Diagnosis = null;
+			var wardAdmissionEntity = await SaveOrUpdateEntityAsync<WardAdmission>(null, async item =>
+			{
+				ObjectMapper.Map(input.WardAdmission, item);
+				item.AdmissionStatus = RefListAdmissionStatuses.admitted;
+				item.Subject = patient;
+				item.Performer = (Practitioner)person;
+				item.HisAdmission = hospitalAdmissionEntity;
+			});
 
             //Diagnosis BackboneElement (Note: Saving diagnosis with local implementation just until cdm is updated)
             var diagnosisResult = await SaveOrUpdateDiagnosis(diagnosis, wardAdmissionEntity);
@@ -233,10 +225,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 
             if (wardAdmissionEntity == null) throw new UserFriendlyException($"AdmittedPatientDetails with specified id: {encounterId} not found.");
 
-            var patientEntity = await _patientRepository.GetAsync(wardAdmissionEntity.Subject.Id);
-            var diagnosis = ObjectMapper.Map<DiagnosisResponse>(await _diagnosisRepository.FirstOrDefaultAsync(a => a.OwnerId == encounterId.ToString()));
-            var hospitalAdmissionEntity = await _hospitalisationEncounterCrudHelper.GetByIdAsync(wardAdmissionEntity.HisAdmission.Id);
-            var wardEntity = wardAdmissionEntity.AdmissionDestinationWard;
+			var patientEntity = await _patientRepository.GetAsync(wardAdmissionEntity.Subject.Id);
+			var diagnosis = ObjectMapper.Map<DiagnosisResponse>(await _diagnosisRepository.FirstOrDefaultAsync(a => a.OwnerId == encounterId.ToString()));
+			var hospitalAdmissionEntity = await _hospitalisationEncounterCrudHelper.GetByIdAsync(wardAdmissionEntity.HisAdmission.Id);
+			var wardEntity = wardAdmissionEntity.AdmissionDestinationWard;
 
             //Maps back patient-admission to AdmitPatientResponse
             var result = new AdmitPatientResponse();
@@ -279,22 +271,16 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         [HttpGet, Route("GetWardCensusDailyStats")]
         public async Task<WardCensusResponse> GetWardCensusDailyStats(WardCensusInput input)
         {
-            var dailyStats = await _dataProvider.GetDailyStats(new WardCensusInput { ReportDate = input.ReportDate, WardId = input.WardId });
-            
-            if (!dailyStats.Any())
-            {
-                throw new UserFriendlyException("No Stats was found for the specified ward and date");
-            }
-
-            var dailyStat = dailyStats[0];
-            return new WardCensusResponse()
-            {
-                MidnightCount = (int?)dailyStat.MidnightCount,
-                TotalAdmittedPatients = (int?)dailyStat.TotalAdmittedPatients,
-                TotalSeparatedPatients = (int?)dailyStat.TotalSeparatedPatients,
-                TotalBedAvailability = (int?)dailyStat.TotalBedAvailability,
-                TotalBedInWard = (int?)dailyStat.TotalBedInWard
-            };
+			return new WardCensusResponse()
+			{
+				MidnightCount = 25,
+				TotalAdmittedPatients = 30,
+				TotalSeparatedPatients = 5,
+				TotalBedAvailability = 25,
+				TotalBedInWard = 250,
+				BedUtilisation = 25,
+				Alos = 2
+			};
         }
         /// <summary>
         /// Used to het Monthly ward stats 
@@ -304,17 +290,17 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         [HttpGet, Route("GetWardCensusMonthlyStats")]
         public async Task<WardCensusResponse> GetWardCensusMonthlyStats(WardCensusInput input)
         {
-            return new WardCensusResponse()
-            {
-                MidnightCount = null,
-                TotalAdmittedPatients = 30,
-                TotalSeparatedPatients = 5,
-                TotalBedAvailability = 25,
-                TotalBedInWard = 250,
-                BedUtilisation = 25,
-                Alos = 2
-            };
-        }
+			return new WardCensusResponse()
+			{
+				MidnightCount = 25,
+				TotalAdmittedPatients = 30,
+				TotalSeparatedPatients = 5,
+				TotalBedAvailability = 25,
+				TotalBedInWard = 250,
+				BedUtilisation = 25,
+				Alos = 2
+			};
+		}
 
         /// <summary>
         /// 

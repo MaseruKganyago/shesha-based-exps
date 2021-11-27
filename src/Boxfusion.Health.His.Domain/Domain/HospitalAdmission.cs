@@ -1,10 +1,7 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Shesha.Domain.Attributes;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Boxfusion.Health.His.Domain.Domain
 {

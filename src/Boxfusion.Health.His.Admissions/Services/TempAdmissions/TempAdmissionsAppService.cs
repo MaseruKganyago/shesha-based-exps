@@ -8,7 +8,6 @@ using Boxfusion.Health.His.Domain.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
@@ -150,5 +149,43 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         {
             await _admissionCrudHelper.DeleteAsync(id);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet, Route("wardAdmission/{id}")]
+        public async Task<AdmissionResponse> GetWardAdmission(Guid id)
+        {
+            var wardAdmission = await _admissionCrudHelper.GetAsync(id);
+            return wardAdmission;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet, Route("patient/{id}")]
+        public async Task<PatientResponse> GetPatient(Guid id)
+        {
+            var patient = await _admissionCrudHelper.GetPatient(id);
+            return patient;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet, Route("wardAdmissions/{id}")]
+        public async Task<List<AdmissionResponse>> GetWardAdmissions(Guid id)
+        {
+            var wardAdmissions = await _admissionCrudHelper.GetWardAdmissions(id);
+            return wardAdmissions;
+        }
+
+
     }
 }
