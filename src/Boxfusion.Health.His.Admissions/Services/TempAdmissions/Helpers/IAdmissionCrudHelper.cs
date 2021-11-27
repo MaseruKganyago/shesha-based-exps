@@ -18,7 +18,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <param name="identityNumber"></param>
         /// <param name="currentWardId"></param>
         /// <returns></returns>
-        Task ValidateIdentityNumber(string identityNumber, Guid? currentWardId);
+        Task ValidateIdentityNumber(string identityNumber, Guid currentWardId);
 
         /// <summary>
         /// 

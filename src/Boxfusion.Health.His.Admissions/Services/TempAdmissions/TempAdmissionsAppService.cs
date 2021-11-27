@@ -59,7 +59,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         [HttpGet, Route("[action]/{identityNumber}")]
         public async Task ValidateIdentityNumber(ValidateIdDto input)
         {
-            await _admissionCrudHelper.ValidateIdentityNumber(input?.IdentityNumber, input?.CurrentWardId);
+            await _admissionCrudHelper.ValidateIdentityNumber(input?.IdentityNumber, (Guid)input?.CurrentWardId);
         }
 
         /// <summary>
