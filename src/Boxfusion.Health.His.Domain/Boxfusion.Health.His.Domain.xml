@@ -575,11 +575,6 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardAdmission.AdmissionDestinationWard">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="P:Boxfusion.Health.His.Domain.Domain.WardAdmission.SeparationDestinationWard">
             <summary>
             
@@ -601,11 +596,6 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Domain.Domain.WardAdmission.CapturedAfterApproval">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardAdmission.HisAdmission">
             <summary>
             
             </summary>
@@ -716,16 +706,6 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Domain.Dtos.HisPatientInput.PatientProvince">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Domain.Dtos.HisPatientInput.FirstName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Domain.Dtos.HisPatientInput.LastName">
             <summary>
             
             </summary>

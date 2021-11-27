@@ -14,8 +14,8 @@ namespace Boxfusion.Health.His.Domain.Dtos
     /// 
     /// </summary>
     [AutoMapFrom(typeof(HisPatient))]
-    public class HisPatientInput: CdmPatientInput
-	{
+    public class HisPatientInput: NonUserCdmPatientInput
+    {
         /// <summary>
         /// 
         /// </summary>
@@ -35,15 +35,5 @@ namespace Boxfusion.Health.His.Domain.Dtos
         /// 
         /// </summary>
         public ReferenceListItemValueDto PatientProvince { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-		public string FirstName { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-		public string LastName { get; set; }
 	}
 }

@@ -18,7 +18,6 @@ namespace Boxfusion.Health.His.Domain.Migrations
         public override void Up()
         {
             Rename.Column("His_InternalTransferOriginalWard").OnTable("Fhir_Encounters").To("His_InternalTransferOriginalWardId");
-
         }
 
         /// <summary>
