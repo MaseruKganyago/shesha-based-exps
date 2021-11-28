@@ -6,14 +6,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
+namespace Boxfusion.Health.His.Admissions.Services.HisPatients.Dtos
 {
     /// <summary>
     /// 
     /// </summary>
     [AutoMap(typeof(HisPatient))]
-    public class HisPatientInput : NonUserCdmPatientInput
+    public class HisPatientResponse : NonUserCdmPatientResponse
     {
+        //Patient properties
         /// <summary>
         /// 
         /// </summary>
@@ -32,11 +33,36 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         /// <summary>
         /// 
         /// </summary>
+        public string IdentityNumber { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public ReferenceListItemValueDto PatientProvince { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public EntityWithDisplayNameDto<Guid?> Ward { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto Gender { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string LastName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto Nationality { get; set; }
     }
 }

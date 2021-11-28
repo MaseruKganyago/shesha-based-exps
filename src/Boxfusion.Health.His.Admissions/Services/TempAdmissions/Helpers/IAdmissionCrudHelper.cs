@@ -1,5 +1,6 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
+using Boxfusion.Health.His.Domain.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,7 +19,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <param name="identityNumber"></param>
         /// <param name="currentWardId"></param>
         /// <returns></returns>
-        Task ValidateIdentityNumber(string identityNumber, Guid currentWardId);
+        Task ValidateIdentityNumber(string identityNumber, Guid? currentWardId);
 
         /// <summary>
         /// 
@@ -32,8 +33,9 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// </summary>
         /// <param name="input"></param>
         /// <param name="currentLoggedInPerson"></param>
+        /// <param name="hisPatient"></param>
         /// <returns></returns>
-        Task<AdmissionResponse> CreateAsync(AdmissionInput input, PersonFhirBase currentLoggedInPerson);
+        Task<AdmissionResponse> CreateAsync(AdmissionInput input, PersonFhirBase currentLoggedInPerson, HisPatient hisPatient);
 
         /// <summary>
         /// 

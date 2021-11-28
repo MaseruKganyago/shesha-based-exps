@@ -33,7 +33,7 @@
 
   <ItemGroup>
     <PackageReference Include="Abp" Version="5.0.0" />
-    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.0.13" />
+    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.0.14" />
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />

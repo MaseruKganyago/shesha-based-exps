@@ -22,6 +22,7 @@
     <DocumentationFile>.\Boxfusion.Health.His.Web.Core.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+	  <!--<PackageReference Include="Shesha.Reporting" Version="0.0.13" />-->	  
     <PackageReference Include="Abp.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Abp.AspNetCore.SignalR" Version="5.0.0" />
     <PackageReference Include="Abp.ZeroCore" Version="5.0.0" />

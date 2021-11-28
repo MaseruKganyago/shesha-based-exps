@@ -50,10 +50,10 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// </summary>
         public virtual RefListSeparationTypes? SeparationType { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-		public virtual Ward AdmissionDestinationWard { get; set; }
+  //      /// <summary>
+  //      /// 
+  //      /// </summary>
+		//public virtual Ward AdmissionDestinationWard { get; set; }
 
 		/// <summary>
 		/// 
@@ -80,10 +80,10 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// </summary>
         public virtual bool CapturedAfterApproval { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual HisAdmission HisAdmission { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public virtual HisAdmission HisAdmission { get; set; }
         /// <summary>
         /// Used to like the serparations
         /// </summary>
