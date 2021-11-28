@@ -1015,6 +1015,36 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211116224700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211116224700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211116224700.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211117084400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211117084400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211117084400.Down">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211120113700">
             <summary>
             
