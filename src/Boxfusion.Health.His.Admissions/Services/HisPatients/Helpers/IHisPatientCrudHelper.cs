@@ -1,51 +1,49 @@
-﻿using Abp.Application.Services;
-using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
-using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
+﻿using Boxfusion.Health.His.Domain.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
+namespace Boxfusion.Health.His.Admissions.Services.HisPatients.Helpers
 {
     /// <summary>
     /// 
     /// </summary>
-    public interface ITempAdmissionsAppService : IApplicationService
+    public interface IHisPatientCrudHelper
     {
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <returns></returns>
-        //Task<List<AdmissionResponse>> GetAllAsync();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<List<HisPatientResponse>> GetAllAsync();
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="identityNumber"></param>
         /// <returns></returns>
-        Task ValidateIdentityNumber(ValidateIdDto input);
+        Task<HisPatientResponse> GetByIdNumberAsync(string identityNumber);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<AdmissionResponse> GetAsync(Guid id);
+        Task<HisPatientResponse> GetAsync(Guid id);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<AdmissionResponse> CreateAsync(AdmissionInput input);
+        Task<HisPatientResponse> CreateAsync(HisPatientInput input);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<AdmissionResponse> UpdateAsync(AdmissionInput input);
+        Task<HisPatientResponse> UpdateAsync(HisPatientInput input);
 
         /// <summary>
         /// 

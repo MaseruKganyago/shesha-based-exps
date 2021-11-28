@@ -15,7 +15,11 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
     [AutoMap(typeof(WardAdmission))]
     public class AdmissionInput : HospitalisationEncounterInput
     {
-        //Ward: Ward(rather use Encounter.Location)
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto IdentificationType { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -56,57 +60,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         /// 
         /// </summary>
         public EntityWithDisplayNameDto<Guid?> TransferToHospital { get; set; }
-
-        //Patient properties
-        /// <summary>
-        /// 
-        /// </summary>
-        public string PatientMasterIndexNumber { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string HospitalPatientNumber { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ReferenceListItemValueDto IdentificationType { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string IdentityNumber { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ReferenceListItemValueDto PatientProvince { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime? DateOfBirth { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ReferenceListItemValueDto Gender { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string FirstName { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string LastName { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ReferenceListItemValueDto Nationality { get; set; }
 
         /// <summary>
         /// 

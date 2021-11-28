@@ -112,7 +112,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             var wardAdmission = await GetEntityAsync<WardAdmission>(input.WardAdmissionId);
 
             if (wardAdmission == null)
-                throw new UserFriendlyException("The Petient was not found in the ward Admission register");
+                throw new UserFriendlyException("The Patient was not found in the ward Admission register");
 
             var respose = new AcceptOrRejectTransfersResponse();
 
@@ -146,107 +146,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             await ServiceBusHelper.TransferAddmission(wardAdmission);
 
             return respose;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        [HttpPost, Route("AdmitPatient")]
-        public async Task<AdmitPatientResponse> AdmitPatient(AdmitPatientInput input)
-        {
-            if (string.IsNullOrEmpty(input.Patient.IdentityNumber)) throw new UserFriendlyException("Patient IdentittyNumber can not be null.");
-
-            var ward = input.WardAdmission.AdmissionDestinationWard;
-            Validation.ValidateIdWithException(ward.Id, "Ward id cannot be null.");
-
-            //Creates new AdmissionsPatient entity if doesn't already exist
-            var patient = new HisPatient();
-            patient = await _patientRepository.FirstOrDefaultAsync(x => x.IdentityNumber == input.Patient.IdentityNumber);
-
-            patient = await SaveOrUpdateEntityAsync<HisPatient>((Guid?)Validation.ValidateId(patient?.Id), async item =>
-            {
-                ObjectMapper.Map(input.Patient, item);
-            });
-
-            var person = await GetCurrentPersonAsync();
-
-            #region Create hospital-patient encouter using HospitalAdmission
-            input.HospitalAdmission.Performer = person != null ? new EntityWithDisplayNameDto<Guid?>(person.Id, person.FullName) : null;
-            input.HospitalAdmission.Subject = patient != null ? new EntityWithDisplayNameDto<Guid?>(patient.Id, patient?.FullName) : null;
-            var hospitalAdmissionEntity = await SaveOrUpdateEntityAsync<HospitalAdmission>(null, async item =>
-            {
-                ObjectMapper.Map(input.HospitalAdmission, item);
-                item.HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.admitted;
-            });
-            #endregion
-
-            #region Admit patient into ward using WardAdmission
-            var diagnosis = input.WardAdmission.Diagnosis.FirstOrDefault();
-
-			input.WardAdmission.Diagnosis = null;
-			var wardAdmissionEntity = await SaveOrUpdateEntityAsync<WardAdmission>(null, async item =>
-			{
-				ObjectMapper.Map(input.WardAdmission, item);
-				item.AdmissionStatus = RefListAdmissionStatuses.admitted;
-				item.Subject = patient;
-				item.Performer = (Practitioner)person;
-                item.PartOf = hospitalAdmissionEntity;
-            });
-
-            //Diagnosis BackboneElement (Note: Saving diagnosis with local implementation just until cdm is updated)
-            var diagnosisResult = await SaveOrUpdateDiagnosis(diagnosis, wardAdmissionEntity);
-            #endregion
-
-            //Maps back patient-admission to AdmitPatientResponse
-            var result = new AdmitPatientResponse();
-            result.Patient = ObjectMapper.Map<HisPatientResponse>(patient);
-            result.WardAdmission = ObjectMapper.Map<WardAdmissionResponse>(wardAdmissionEntity);
-            result.HospitalAdmission = ObjectMapper.Map<HospitalAdmissionResponse>(hospitalAdmissionEntity);
-
-            var list = new List<DiagnosisResponse>();
-            list.Add(diagnosisResult);
-            result.WardAdmission.Diagnosis = list;
-            result.Id = wardAdmissionEntity.Id;
-
-            return result;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="encounterId"></param>
-        /// <returns></returns>
-        [HttpGet, Route("AdmittedPatientDetails/{encounterId}")]
-        public async Task<AdmitPatientResponse> GetAdmittedPatientDetails(Guid encounterId)
-        {
-            Validation.ValidateIdWithException(encounterId, "encounterId can not be null.");
-            var wardAdmissionEntity = await _wardAdmissionCrudHelper.GetByIdAsync(encounterId);
-
-            if (wardAdmissionEntity == null) throw new UserFriendlyException($"AdmittedPatientDetails with specified id: {encounterId} not found.");
-
-			var patientEntity = await _patientRepository.GetAsync(wardAdmissionEntity.Subject.Id);
-			var diagnosis = ObjectMapper.Map<DiagnosisResponse>(await _diagnosisRepository.FirstOrDefaultAsync(a => a.OwnerId == encounterId.ToString()));
-			var hospitalAdmissionEntity = await _hospitalisationEncounterCrudHelper.GetByIdAsync(wardAdmissionEntity.Id);
-			var wardEntity = wardAdmissionEntity.Ward;
-
-            //Maps back patient-admission to AdmitPatientResponse
-            var result = new AdmitPatientResponse();
-            result.Patient = ObjectMapper.Map<HisPatientResponse>(patientEntity);
-            result.WardAdmission = ObjectMapper.Map<WardAdmissionResponse>(wardAdmissionEntity);
-            result.HospitalAdmission = ObjectMapper.Map<HospitalAdmissionResponse>(hospitalAdmissionEntity);
-            ObjectMapper.Map(wardEntity, result.WardAdmission);
-
-            var condition = await GetCondition((Guid)(diagnosis.Condition?.Id));
-            diagnosis.Condition = condition;
-
-            var list = new List<DiagnosisResponse>();
-            list.Add(diagnosis);
-            result.WardAdmission.Diagnosis = list;
-            result.Id = encounterId;
-
-            return result;
         }
 
         /// <summary>

@@ -710,16 +710,6 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Dtos.HisPatientInput.FirstName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Domain.Dtos.HisPatientInput.LastName">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Domain.Dtos.HisPatientResponse">
             <summary>
             

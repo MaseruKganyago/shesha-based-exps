@@ -13,8 +13,8 @@ namespace Boxfusion.Health.His.Domain.Dtos
     /// 
     /// </summary>
     [AutoMapFrom(typeof(HisPatient))]
-    public class HisPatientResponse: CdmPatientResponse
-	{
+    public class HisPatientResponse: NonUserCdmPatientResponse
+    {
         /// <summary>
         /// 
         /// </summary>

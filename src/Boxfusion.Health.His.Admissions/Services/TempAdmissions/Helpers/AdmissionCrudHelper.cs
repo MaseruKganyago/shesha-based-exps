@@ -231,19 +231,21 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <param name="currentLoggedInPerson"></param>
-        /// <returns></returns>
-        public async Task<AdmissionResponse> CreateAsync(AdmissionInput input, PersonFhirBase currentLoggedInPerson)
-        {
-            //Create patient
-            var hisPatient = _mapper.Map<HisPatient>(input);
-            var hisPatientInput = _mapper.Map<HisPatientInput>(input);
-            var insertedHisPatient = await _patientCrudHelper.CreateAsync(hisPatientInput, hisPatient);
-            var admissionResponse = _mapper.Map<AdmissionResponse>(hisPatient);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="input"></param>
+		/// <param name="currentLoggedInPerson"></param>
+		/// <param name="hisPatient"></param>
+		/// <returns></returns>
+		public async Task<AdmissionResponse> CreateAsync(AdmissionInput input, PersonFhirBase currentLoggedInPerson, HisPatient hisPatient)
+		{
+			//Create patient
+			//var hisPatient = _mapper.Map<HisPatient>(input);
+			//var hisPatientInput = _mapper.Map<HisPatientInput>(input);
+
+			//var insertedHisPatient = await _patientCrudHelper.CreateAsync(hisPatientInput, hisPatient);
+			var admissionResponse = _mapper.Map<AdmissionResponse>(hisPatient);
 
             //Create hospital admission record if IsExternaPatient == true
             HospitalAdmission insertedHospitalAdmission = null;
@@ -254,21 +256,21 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 insertedHospitalAdmission = await _hospitalAdmissionRepositiory.InsertAsync(hospitalAdmission);
             }
 
-            //Create ward admission record
-            var wardAdmission = _mapper.Map<WardAdmission>(input);
-            wardAdmission.PartOf = insertedHospitalAdmission;
-            _mapper.Map(hisPatient, wardAdmission);
-            var insertedWardAdmission = await _wardAdmissionRepositiory.InsertAsync(wardAdmission);
+			//Create ward admission record
+			var wardAdmission = _mapper.Map<WardAdmission>(input);
+			wardAdmission.PartOf = insertedHospitalAdmission;
+			_mapper.Map(hisPatient, wardAdmission);
+			var insertedWardAdmission = await _wardAdmissionRepositiory.InsertAsync(wardAdmission);
 
-            //Create a condition
-            var condition = new Condition
-            {
-                RecordedDate = DateTime.Now,
-                Subject = hisPatient,
-                Recorder = currentLoggedInPerson,
-                Asserter = currentLoggedInPerson,
-                HospitalisationEncounter = insertedWardAdmission
-            };
+			//Create a condition
+			var condition = new Condition
+			{
+				RecordedDate = DateTime.Now,
+				Subject = hisPatient,
+				Recorder = currentLoggedInPerson,
+				//Asserter = currentLoggedInPerson,
+				HospitalisationEncounter = insertedWardAdmission
+			};
 
             var insertedCondition = await _conditionRepositiory.InsertAsync(condition);
             //add a list of conditionIcdTenCode to a task
@@ -311,18 +313,18 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             var updatedWardAdmission = await _wardAdmissionRepositiory.UpdateAsync(dbWardAdmission);
             var admissionResponse = _mapper.Map<AdmissionResponse>(updatedWardAdmission);
 
-            if (dbWardAdmission?.PartOf != null)
+			if(dbWardAdmission?.PartOf != null)
             {
-                var dbHospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(dbWardAdmission.PartOf.Id);
-                _mapper.Map(input, dbHospitalAdmission);
-                var updatedHospitalAdmission = await _hospitalAdmissionRepositiory.UpdateAsync(dbHospitalAdmission);
-                _mapper.Map(updatedHospitalAdmission, admissionResponse);
-            }
+				var dbHospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(dbWardAdmission.PartOf.Id);
+				_mapper.Map(input, dbHospitalAdmission);
+				var updatedHospitalAdmission = await _hospitalAdmissionRepositiory.UpdateAsync(dbHospitalAdmission);
+				_mapper.Map(updatedHospitalAdmission, admissionResponse);
+			}
 
-            var dbHisPatient = await _hisPatientRepositiory.GetAsync(dbWardAdmission.Subject.Id);
-            _mapper.Map(input, dbHisPatient);
-            var updatedHisPatient = await _hisPatientRepositiory.UpdateAsync(dbHisPatient);
-            _mapper.Map(dbHisPatient, admissionResponse);
+			var dbHisPatient = await _hisPatientRepositiory.GetAsync(dbWardAdmission.Subject.Id);
+			//_mapper.Map(input, dbHisPatient);
+			//var updatedHisPatient = await _hisPatientRepositiory.UpdateAsync(dbHisPatient);
+			//_mapper.Map(dbHisPatient, admissionResponse);
 
             //Update a condition
             var dbCondition = await _conditionRepositiory.FirstOrDefaultAsync(x => x.HospitalisationEncounter == dbWardAdmission);
