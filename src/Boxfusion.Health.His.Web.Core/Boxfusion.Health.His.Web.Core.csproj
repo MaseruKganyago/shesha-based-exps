@@ -27,6 +27,7 @@
     <PackageReference Include="Abp.AspNetCore.SignalR" Version="5.0.0" />
     <PackageReference Include="Abp.ZeroCore" Version="5.0.0" />
     <PackageReference Include="Shesha.Application" Version="0.0.21" />
+    <PackageReference Include="Shesha.Reporting" Version="0.0.13" />
     <PackageReference Include="Shesha.AzureAD" Version="0.0.21" />
     <PackageReference Include="Shesha.Core" Version="0.0.21" />
     <PackageReference Include="Shesha.Elmah" Version="0.0.21" />

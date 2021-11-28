@@ -1,4 +1,4 @@
-﻿using FluentMigrator;
+using FluentMigrator;
 using Shesha.FluentMigrator;
 using System;
 using System.Collections.Generic;

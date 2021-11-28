@@ -18,5 +18,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         /// <param name="input"></param>
         /// <returns></returns>
         Task<AcceptOrRejectTransfersResponse> AcceptOrRejectTransfers(AcceptOrRejectTransfersInput input);
+        Task<WardCensusResponse> GetWardCensusDailyStats(WardCensusInput input);
+        Task<WardCensusResponse> GetWardCensusMonthlyStats(WardCensusInput input);
     }
 }

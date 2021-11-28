@@ -1,11 +1,8 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
-using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Shesha.Domain.Attributes;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Boxfusion.Health.His.Domain.Domain
 {
@@ -55,10 +52,10 @@ namespace Boxfusion.Health.His.Domain.Domain
   //      /// </summary>
 		//public virtual Ward AdmissionDestinationWard { get; set; }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public virtual Ward SeparationDestinationWard { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual Ward SeparationDestinationWard { get; set; }
 
         /// <summary>
         /// 
