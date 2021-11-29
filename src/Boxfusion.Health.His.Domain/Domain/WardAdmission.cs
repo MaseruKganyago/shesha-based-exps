@@ -47,10 +47,10 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// </summary>
         public virtual RefListSeparationTypes? SeparationType { get; set; }
 
-  //      /// <summary>
-  //      /// 
-  //      /// </summary>
-		//public virtual Ward AdmissionDestinationWard { get; set; }
+        //      /// <summary>
+        //      /// 
+        //      /// </summary>
+        //public virtual Ward AdmissionDestinationWard { get; set; }
 
         /// <summary>
         /// 
@@ -85,5 +85,10 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// Used to like the serparations
         /// </summary>
         public virtual WardAdmission InternalTransferOriginalWard { get; set; }
+
+        /// <summary>
+        /// Used to like the serparations
+        /// </summary>
+        public virtual WardAdmission InternalTransferDestinationWard { get; set; }
     }
 }
