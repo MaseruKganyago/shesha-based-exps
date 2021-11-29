@@ -129,7 +129,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             }
             else
             {
-                if (wardAdmission.InternalTransferOriginalWard.Id == null)
+                if (wardAdmission?.InternalTransferOriginalWard?.Id == null)
                     throw new UserFriendlyException("The Previous ward record was not found");
 
                 var originalWard = await wardAdmissionService.GetAsync(wardAdmission.InternalTransferOriginalWard.Id);
