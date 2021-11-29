@@ -43,9 +43,9 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         /// </summary>
         /// <returns></returns>
         [HttpGet, Route("")]
-        public async Task<List<AdmissionResponse>> GetAllAsync()
+        public async Task<List<AdmissionResponse>> GetAllAsync(Guid wardId, DateTime admissionDate)
         {
-            var admissions = await _admissionCrudHelper.GetAllAsync();
+            var admissions = await _admissionCrudHelper.GetAllAsync(wardId, admissionDate);
 
             return admissions;
         }
