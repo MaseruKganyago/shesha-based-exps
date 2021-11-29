@@ -26,6 +26,7 @@ using Shesha.Sms.SmsPortal;
 using Shesha.Sms.Xml2Sms;
 using Shesha.Web;
 using Shesha.Web.FormsDesigner;
+using Shesha.Reporting;
 
 namespace Boxfusion.Health.His.Admissions
 {
@@ -51,7 +52,8 @@ namespace Boxfusion.Health.His.Admissions
          typeof(SheshaBulkSmsModule),
          typeof(SheshaXml2SmsModule),
          typeof(SheshaSmsPortalModule),
-         typeof(SheshaFormsDesignerModule)
+         typeof(SheshaFormsDesignerModule),
+         typeof(SheshaReportingModule)
      )]
     public class HisWebCoreModule : AbpModule
     {

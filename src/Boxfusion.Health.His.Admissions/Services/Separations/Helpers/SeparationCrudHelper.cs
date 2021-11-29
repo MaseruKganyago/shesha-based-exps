@@ -115,7 +115,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             {
                 //var sourceWardAdmission = _mapper.Map<WardAdmission>(wardAdmission);
                 wardAdmission.AdmissionStatus = RefListAdmissionStatuses.inTransit;
-                // wardAdmission.SeparationDestinationWard.Id = input.SeparationDestinationWard.Id.Value;
+                wardAdmission.SeparationDestinationWard.Id = input.SeparationDestinationWard.Id.Value;
+
+
 
                 //_mapper.Map(hisPatient, sourceWardAdmission);
                 var updatedWardAdmission = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
@@ -128,8 +130,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
                 _mapper.Map(hisPatient, hospitalAdmission);
                 if (wardAdmission?.PartOf == null)
                     _mapper.Map(wardAdmission.PartOf, destinationWard);
+                destinationWard.InternalTransferOriginalWard = wardAdmission;
 
-                destinationWard = await _wardAdmissionRepositiory.InsertAsync(wardAdmission);
+                var destinationWardAdmission = await _wardAdmissionRepositiory.InsertAsync(destinationWard);
+
+                wardAdmission.InternalTransferDestinationWard = destinationWardAdmission;
 
                 //Validation.ValidateNullableType(input?.SeparationDestinationWard, "Separation Destination Ward");
             }

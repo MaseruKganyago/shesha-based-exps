@@ -12,8 +12,8 @@ namespace Boxfusion.Health.His.Domain.Domain
     /// <summary>
     /// 
     /// </summary>
-    [Entity(TypeShortAlias = "His.WardMidnightCensusDailyReport")]
-    public class WardMidnightCensusDailyReport : FullAuditedEntity<Guid>
+    [Entity(TypeShortAlias = "His.WardMidnightCensusReport")]
+    public class WardMidnightCensusReport : FullAuditedEntity<Guid>
     {
         /// <summary>
         /// 
@@ -29,6 +29,11 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// 
         /// </summary>
         public virtual RefListApprovalStatuses? ApprovalStatus { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual RefListReportType? ReportType { get; set; }
 
         /// <summary>
         /// 
