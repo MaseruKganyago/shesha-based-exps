@@ -16,7 +16,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// 
         /// </summary>
         /// <returns></returns>
-        Task<List<AdmissionResponse>> GetAllAsync();
+        Task<List<AdmissionResponse>> GetAllAsync(Guid wardId, DateTime admissionDate);
 
         /// <summary>
         /// 

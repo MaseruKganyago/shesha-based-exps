@@ -1134,7 +1134,7 @@
             <param name="unitOfWork"></param>
             <param name="mapper"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.GetAllAsync">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.GetAllAsync(System.Guid,System.DateTime)">
             <summary>
             
             </summary>
@@ -1213,7 +1213,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.GetAllAsync">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.GetAllAsync(System.Guid,System.DateTime)">
             <summary>
             
             </summary>
@@ -1324,7 +1324,7 @@
             <param name="admissionCrudHelper"></param>
             <param name="hisPatientRepositiory"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.GetAllAsync">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.GetAllAsync(System.Guid,System.DateTime)">
             <summary>
             
             </summary>
