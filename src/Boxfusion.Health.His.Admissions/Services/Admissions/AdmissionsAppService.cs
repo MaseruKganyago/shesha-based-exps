@@ -143,7 +143,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             }
 
             await wardAdmissionService.UpdateAsync(wardAdmission);
-            await ServiceBusHelper.TransferAddmission(wardAdmission);
 
             return respose;
         }
