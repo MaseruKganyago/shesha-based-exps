@@ -87,15 +87,28 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        public async Task<List<AdmissionResponse>> GetAllAsync()
+        {
+            var admissions = await _wardAdmissionRepositiory.GetAllListAsync();
+
+            var admissionResponses = _mapper.Map<List<AdmissionResponse>>(admissions);
+
+            return admissionResponses;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public async Task<AdmissionResponse> GetAsync(Guid id)
-        {
-            var wardAdmission = await _wardAdmissionRepositiory.GetAsync(id);
-            var admissionResponse = _mapper.Map<AdmissionResponse>(wardAdmission);
-            HospitalAdmission hospitalAdmission = null;
-            if (wardAdmission?.PartOf != null)
-                hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
+		{
+			var wardAdmission = await _wardAdmissionRepositiory.GetAsync(id);
+			var admissionResponse = _mapper.Map<AdmissionResponse>(wardAdmission);
+			HospitalAdmission hospitalAdmission = null;
+			if(wardAdmission?.PartOf != null)
+				hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
 
             HisPatient hisPatient = null;
             if (wardAdmission?.Subject != null)

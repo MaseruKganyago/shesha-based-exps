@@ -605,72 +605,77 @@
             Used to like the serparations
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport">
+        <member name="T:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport.Ward">
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.Ward">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport.ReportDate">
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.ReportDate">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport.ApprovalStatus">
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.ApprovalStatus">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport.Description">
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.ReportType">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport.ApprovedBy">
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.Description">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport.ApprovalTime">
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.ApprovedBy">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport.MidnightCount">
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.ApprovalTime">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport.TotalAdmittedPatients">
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.MidnightCount">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport.TotalSeparatedPatients">
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.TotalAdmittedPatients">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport.TotalBedAvailability">
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.TotalSeparatedPatients">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport.NumBedsInWard">
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.TotalBedAvailability">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport.BedUtilisation">
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.NumBedsInWard">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusDailyReport.AverageLengthofStay">
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.BedUtilisation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.AverageLengthofStay">
             <summary>
             
             </summary>
@@ -1086,6 +1091,21 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211122111700.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211129095000">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211129095000.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211129095000.Down">
             <summary>
             
             </summary>
