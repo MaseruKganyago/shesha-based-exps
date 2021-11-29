@@ -136,37 +136,37 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             return admissionResponse;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="patientId"></param>
-        /// <returns></returns>
-        public async Task<PatientResponse> GetPatient(Guid patientId)
-        {
-            HisPatient hisPatient = null;
-            hisPatient = await _hisPatientRepositiory.GetAsync(patientId);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="patientId"></param>
+        ///// <returns></returns>
+        //public async Task<PatientResponse> GetPatient(Guid patientId)
+        //{
+        //    HisPatient hisPatient = null;
+        //    hisPatient = await _hisPatientRepositiory.GetAsync(patientId);
 
-            var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient);
+        //    var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient);
 
-            List<ConditionIcdTenCode> conditionIcdTenCodes = null;
-            List<IcdTenCode> icdTenCodes = null;
-            if (conditions.Count() > 0)
-            {
-                conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition));
+        //    List<ConditionIcdTenCode> conditionIcdTenCodes = null;
+        //    List<IcdTenCode> icdTenCodes = null;
+        //    if (conditions.Count() > 0)
+        //    {
+        //        conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition));
 
-                var temp = conditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
-                if (conditionIcdTenCodes.Count() > 0)
-                    icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => temp.Contains(x.Id)).ToListAsync();
-            }
-            List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
-            icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
+        //        var temp = conditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
+        //        if (conditionIcdTenCodes.Count() > 0)
+        //            icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => temp.Contains(x.Id)).ToListAsync();
+        //    }
+        //    List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
+        //    icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
 
-            return new PatientResponse
-            {
-                Patient = hisPatient,
-                IcdTenCodes = icdTenCodes
-            };
-        }
+        //    return new PatientResponse
+        //    {
+        //        Patient = hisPatient,
+        //        IcdTenCodes = icdTenCodes
+        //    };
+        //}
 
         /// <summary>
         /// 
@@ -189,7 +189,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 if (wardAdmission?.Subject != null)
                     hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
 
-                var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient);
+                var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient && x.HospitalisationEncounter.Id == hospitalAdmissionId);
 
                 List<ConditionIcdTenCode> conditionIcdTenCodes = null;
                 List<IcdTenCode> icdTenCodes = null;
@@ -282,8 +282,8 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
 				Subject = hisPatient,
 				Recorder = currentLoggedInPerson,
 				//Asserter = currentLoggedInPerson,
-				HospitalisationEncounter = insertedWardAdmission
-			};
+				HospitalisationEncounter = insertedHospitalAdmission
+            };
 
             var insertedCondition = await _conditionRepositiory.InsertAsync(condition);
             //add a list of conditionIcdTenCode to a task
@@ -373,6 +373,18 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         {
             var entity = await _wardAdmissionRepositiory.GetAsync(id);
             await _wardAdmissionRepositiory.DeleteAsync(entity);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<PatientAuditTrailDto>> GetPatientAuditTrailAsync(Guid patientId)
+        {
+            var admissions = await _wardAdmissionRepositiory.GetAll().Where(x => x.Subject.Id == patientId).OrderByDescending(x => x.CreationTime).ToListAsync();
+            var admissionResponses = _mapper.Map<List<PatientAuditTrailDto>>(admissions);
+
+            return admissionResponses;
         }
 
         /// <summary>

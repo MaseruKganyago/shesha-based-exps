@@ -53,6 +53,18 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("{patientId}/patient")]
+        public async Task<List<PatientAuditTrailDto>> GetPatientAuditTrailAsync(Guid patientId)
+        {
+            var admissions = await _admissionCrudHelper.GetPatientAuditTrailAsync(patientId);
+
+            return admissions;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet, Route("{id}")]
@@ -159,17 +171,17 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             return wardAdmission;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet, Route("patient/{id}")]
-        public async Task<PatientResponse> GetPatient(Guid id)
-        {
-            var patient = await _admissionCrudHelper.GetPatient(id);
-            return patient;
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <returns></returns>
+        //[HttpGet, Route("patient/{id}")]
+        //public async Task<PatientResponse> GetPatient(Guid id)
+        //{
+        //    var patient = await _hisPatientRepositiory.GetAsync(id);
+        //    return patient;
+        //}
 
         /// <summary>
         /// 

@@ -13,11 +13,18 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
     /// </summary>
     public interface ITempAdmissionsAppService : IApplicationService
     {
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <returns></returns>
-        //Task<List<AdmissionResponse>> GetAllAsync();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<List<AdmissionResponse>> GetAllAsync(Guid wardId, DateTime admissionDate);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="patientId"></param>
+        /// <returns></returns>
+        Task<List<PatientAuditTrailDto>> GetPatientAuditTrailAsync(Guid patientId);
 
         /// <summary>
         /// 

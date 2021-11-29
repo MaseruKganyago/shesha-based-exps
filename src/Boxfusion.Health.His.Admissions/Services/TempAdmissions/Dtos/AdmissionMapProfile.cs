@@ -177,8 +177,14 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(c => c.IdentificationType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "IdentificationTypes", (long?)c.IdentificationType)))
                 .MapReferenceListValuesToDto();
 
-            //CreateMap<AdmissionInput, HisPatientInput>()
-            //    .ForMember(c => c.Id, options => options.Ignore())
+            CreateMap<WardAdmission, PatientAuditTrailDto>()
+                .ForMember(c => c.StartDateTime, options => options.MapFrom(c => c.StartDateTime))
+                .ForMember(c => c.AdmissionStatus, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "AdmissionStatuses", (long?)c.AdmissionStatus)))
+                .ForMember(c => c.Speciality, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "WardSpecialities", (long?)c.Ward.Speciality)))
+                .MapReferenceListValuesFromDto();
+
+            //CreateMap<Ward, PatientAuditTrailDto>()
+            //    .ForMember(c => c.Speciality, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "WardSpecialities", (long?)c.Speciality)))
             //    .MapReferenceListValuesFromDto();
         }
     }
