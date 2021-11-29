@@ -18,8 +18,8 @@ namespace Boxfusion.Health.His.Admissions.Jobs
     [ScheduledJob("C9CF60F3-22AC-4756-B7AD-FC3B984D6811", StartUpMode.Automatic, "* * * * *")]
     public class DailyStatsCalculatorJob : ScheduledJobBase, ITransientDependency
     {
-        private readonly IRepository<WardMidnightCensusDailyReport, Guid> _wardMidnightCensusReport;
-        public DailyStatsCalculatorJob(IRepository<WardMidnightCensusDailyReport, Guid> wardMidnightCensusReport)
+        private readonly IRepository<WardMidnightCensusReport, Guid> _wardMidnightCensusReport;
+        public DailyStatsCalculatorJob(IRepository<WardMidnightCensusReport, Guid> wardMidnightCensusReport)
         {
             _wardMidnightCensusReport = wardMidnightCensusReport;
         }
