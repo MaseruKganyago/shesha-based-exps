@@ -44,5 +44,27 @@ namespace Boxfusion.Health.His.Admissions.Helpers
                 throw new UserFriendlyException(Ex.Message);
             }
         }
+
+        public async Task<List<DailyStats>> GetMonthlyStats(WardCensusInput input)
+        {
+            try
+            {
+                return (await _sessionProvider.Session
+                    .CreateSQLQuery(@"Exec GetWardCensusMonthlyStatsProc 
+                            @WardId = :WardId,
+                            @ReportDate = :ReportDate                           
+                    ")
+                    .SetParameter("WardId", input.WardId)
+                    .SetParameter("ReportDate", input.ReportDate)
+                    .SetResultTransformer(Transformers.AliasToBean<DailyStats>())
+                    .ListAsync<DailyStats>())
+                    .ToList();
+            }
+            catch (Exception Ex)
+            {
+
+                throw new UserFriendlyException(Ex.Message);
+            }
+        }
     }
 }

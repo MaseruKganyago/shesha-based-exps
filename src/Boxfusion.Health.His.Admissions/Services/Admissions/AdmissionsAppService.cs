@@ -180,16 +180,16 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             var dailyStat = dailyStats[0];
 
             return new WardCensusResponse()
-			{
-				MidnightCount = (int?)dailyStat.MidnightCount,
-				TotalAdmittedPatients = (int?)dailyStat.TotalAdmittedPatients,
-				TotalSeparatedPatients = (int?)dailyStat.TotalSeparatedPatients,
-				TotalBedAvailability = (int?)dailyStat.TotalBedAvailability,
-				TotalBedInWard = (int?)dailyStat.TotalBedInWard,
-                AverageBedAvailability = dailyStat.AverageLengthOfStay,
+            {
+                MidnightCount = (int?)dailyStat.MidnightCount,
+                TotalAdmittedPatients = (int?)dailyStat.TotalAdmittedPatients,
+                TotalSeparatedPatients = (int?)dailyStat.TotalSeparatedPatients,
+                TotalBedAvailability = (int?)dailyStat.TotalBedAvailability,
+                TotalBedInWard = (int?)dailyStat.TotalBedInWard,
+                AverageBedAvailability = dailyStat.AverageBedAvailability,
                 AverageLengthOfStay = dailyStat.AverageLengthOfStay,
                 BedUtilisation = dailyStat.BedUtilisation
-			};
+            };
         }
         /// <summary>
         /// Used to het Monthly ward stats 
@@ -199,17 +199,26 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         [HttpGet, Route("GetWardCensusMonthlyStats")]
         public async Task<WardCensusResponse> GetWardCensusMonthlyStats(WardCensusInput input)
         {
-			return new WardCensusResponse()
-			{
-				MidnightCount = 25,
-				TotalAdmittedPatients = 30,
-				TotalSeparatedPatients = 5,
-				TotalBedAvailability = 25,
-				TotalBedInWard = 250,
-				BedUtilisation = 25,
-                AverageLengthOfStay = 2
-			};
-		}
+            var dailyStats = await _sessionDataProvider.GetMonthlyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
+            if (!dailyStats.Any())
+            {
+                throw new UserFriendlyException("No records found for the ward and date specified");
+            }
+
+            var dailyStat = dailyStats[0];
+
+            return new WardCensusResponse()
+            {
+                MidnightCount = (int?)dailyStat.MidnightCount,
+                TotalAdmittedPatients = (int?)dailyStat.TotalAdmittedPatients,
+                TotalSeparatedPatients = (int?)dailyStat.TotalSeparatedPatients,
+                TotalBedAvailability = (int?)dailyStat.TotalBedAvailability,
+                TotalBedInWard = (int?)dailyStat.TotalBedInWard,
+                AverageBedAvailability = dailyStat.AverageBedAvailability,
+                AverageLengthOfStay = dailyStat.AverageLengthOfStay,
+                BedUtilisation = dailyStat.BedUtilisation
+            };
+        }
 
         /// <summary>
         /// 
