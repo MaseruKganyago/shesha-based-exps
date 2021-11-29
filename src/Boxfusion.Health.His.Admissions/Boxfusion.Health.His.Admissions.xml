@@ -1134,6 +1134,12 @@
             <param name="unitOfWork"></param>
             <param name="mapper"></param>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.GetAllAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.GetAsync(System.Guid)">
             <summary>
             
@@ -1206,6 +1212,12 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.GetAllAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.ValidateIdentityNumber(System.String,System.Guid)">
             <summary>
@@ -1311,6 +1323,12 @@
             </summary>
             <param name="admissionCrudHelper"></param>
             <param name="hisPatientRepositiory"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.GetAllAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.GetAsync(System.Guid)">
             <summary>

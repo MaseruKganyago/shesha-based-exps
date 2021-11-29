@@ -15,6 +15,12 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        Task<List<AdmissionResponse>> GetAllAsync();
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="identityNumber"></param>
         /// <param name="currentWardId"></param>
         /// <returns></returns>

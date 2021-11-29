@@ -41,6 +41,18 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("")]
+        public async Task<List<AdmissionResponse>> GetAllAsync()
+        {
+            var admissions = await _admissionCrudHelper.GetAllAsync();
+
+            return admissions;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet, Route("{id}")]
@@ -56,7 +68,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [HttpGet, Route("[action]/{identityNumber}")]
+        [HttpPut, Route("[action]")]
         public async Task ValidateIdentityNumber(ValidateIdDto input)
         {
             await _admissionCrudHelper.ValidateIdentityNumber(input?.IdentityNumber, (Guid)input?.CurrentWardId);
