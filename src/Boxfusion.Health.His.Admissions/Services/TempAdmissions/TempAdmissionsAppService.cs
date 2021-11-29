@@ -24,18 +24,35 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
     {
         private readonly IAdmissionCrudHelper _admissionCrudHelper;
         private readonly IRepository<HisPatient, Guid> _hisPatientRepositiory;
-
+        private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="wardAdmissionRepository"></param>
         /// <param name="admissionCrudHelper"></param>
         /// <param name="hisPatientRepositiory"></param>
         public TempAdmissionsAppService(
+            IRepository<WardAdmission, Guid> wardAdmissionRepository,
             IAdmissionCrudHelper admissionCrudHelper,
             IRepository<HisPatient, Guid> hisPatientRepositiory)
         {
             _admissionCrudHelper = admissionCrudHelper;
             _hisPatientRepositiory = hisPatientRepositiory;
+            _wardAdmissionRepositiory = wardAdmissionRepository;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wardId"></param>
+        /// <param name="admissionStatus"></param>
+        /// <returns></returns>
+        [HttpGet, Route("GetAllByAdmissionStatus")]
+        public async Task<List<AdmissionResponse>> GetAllByStatusAsync(Guid wardId, RefListAdmissionStatuses admissionStatus)
+        {
+            var admissions = await _wardAdmissionRepositiory.GetAllListAsync(r => r.Ward != null && r.Ward.Id == wardId && r.AdmissionStatus == admissionStatus);
+
+             return ObjectMapper.Map<List<AdmissionResponse>>(admissions);
         }
 
         /// <summary>

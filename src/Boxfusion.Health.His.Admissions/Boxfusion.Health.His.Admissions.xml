@@ -1387,6 +1387,14 @@
             
             </summary>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService.GetAllByStatusAsync(System.Guid,Boxfusion.Health.His.Domain.Domain.Enums.RefListAdmissionStatuses)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="admissionStatus"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService.GetAllAsync(System.Guid,System.DateTime)">
             <summary>
             
@@ -1441,12 +1449,21 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.#ctor(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid})">
             <summary>
             
             </summary>
+            <param name="wardAdmissionRepository"></param>
             <param name="admissionCrudHelper"></param>
             <param name="hisPatientRepositiory"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.GetAllByStatusAsync(System.Guid,Boxfusion.Health.His.Domain.Domain.Enums.RefListAdmissionStatuses)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="admissionStatus"></param>
+            <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.GetAllAsync(System.Guid,System.DateTime)">
             <summary>
