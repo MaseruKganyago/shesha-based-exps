@@ -100,6 +100,18 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        public async Task<List<AdmissionResponse>> GetPatientAuditTrailAsync(Guid partOfId)
+        {
+            var admissions = await _wardAdmissionRepositiory.GetAll().Where(x => x.PartOf.Id == partOfId).OrderByDescending(x => x.CreationTime).ToListAsync();
+            var admissionResponses = _mapper.Map<List<AdmissionResponse>>(admissions);
+
+            return admissionResponses;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public async Task<AdmissionResponse> GetAsync(Guid id)
@@ -375,17 +387,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             await _wardAdmissionRepositiory.DeleteAsync(entity);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public async Task<List<AdmissionResponse>> GetPatientAuditTrailAsync(Guid patientId, Guid partOfId)
-        {
-            var admissions = await _wardAdmissionRepositiory.GetAll().Where(x => x.Subject.Id == patientId && x.PartOf.Id == partOfId).OrderByDescending(x => x.CreationTime).ToListAsync();
-            var admissionResponses = _mapper.Map<List<AdmissionResponse>>(admissions);
-
-            return admissionResponses;
-        }
 
         /// <summary>
         /// 
