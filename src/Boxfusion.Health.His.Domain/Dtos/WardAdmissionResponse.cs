@@ -2,8 +2,6 @@
 using Boxfusion.Health.His.Domain.Domain;
 using Shesha.AutoMapper.Dto;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Boxfusion.Health.His.Domain.Dtos
 {
@@ -11,8 +9,8 @@ namespace Boxfusion.Health.His.Domain.Dtos
     /// 
     /// </summary>
     [AutoMapFrom(typeof(WardAdmission))]
-    public class WardAdmissionResponse: HisAdmissionResponse
-	{
+    public class WardAdmissionResponse : HisAdmissionResponse
+    {
         /// <summary>
         /// 
         /// </summary>
@@ -72,5 +70,16 @@ namespace Boxfusion.Health.His.Domain.Dtos
         /// 
         /// </summary>
 		public ReferenceListItemValueDto Speciality { get; set; }
-	}
+
+        //public virtual HisAdmission HisAdmission { get; set; }
+        /// <summary>
+        /// Used to like the serparations
+        /// </summary>
+        public virtual WardAdmission InternalTransferOriginalWard { get; set; }
+
+        /// <summary>
+        /// Used to like the serparations
+        /// </summary>
+        public virtual WardAdmission InternalTransferDestinationWard { get; set; }
+    }
 }

@@ -88,10 +88,22 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task<List<AdmissionResponse>> GetAllAsync()
+        public async Task<List<AdmissionResponse>> GetAllAsync(Guid wardId, DateTime admissionDate)
         {
-            var admissions = await _wardAdmissionRepositiory.GetAllListAsync();
+            var admissions = await _wardAdmissionRepositiory.GetAllListAsync(x => x.Ward.Id == wardId && x.StartDateTime.Value.Date == admissionDate.Date);
 
+            var admissionResponses = _mapper.Map<List<AdmissionResponse>>(admissions);
+
+            return admissionResponses;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<AdmissionResponse>> GetPatientAuditTrailAsync(Guid partOfId)
+        {
+            var admissions = await _wardAdmissionRepositiory.GetAll().Where(x => x.PartOf.Id == partOfId).OrderByDescending(x => x.CreationTime).ToListAsync();
             var admissionResponses = _mapper.Map<List<AdmissionResponse>>(admissions);
 
             return admissionResponses;
@@ -136,37 +148,37 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             return admissionResponse;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="patientId"></param>
-        /// <returns></returns>
-        public async Task<PatientResponse> GetPatient(Guid patientId)
-        {
-            HisPatient hisPatient = null;
-            hisPatient = await _hisPatientRepositiory.GetAsync(patientId);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="patientId"></param>
+        ///// <returns></returns>
+        //public async Task<PatientResponse> GetPatient(Guid patientId)
+        //{
+        //    HisPatient hisPatient = null;
+        //    hisPatient = await _hisPatientRepositiory.GetAsync(patientId);
 
-            var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient);
+        //    var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient);
 
-            List<ConditionIcdTenCode> conditionIcdTenCodes = null;
-            List<IcdTenCode> icdTenCodes = null;
-            if (conditions.Count() > 0)
-            {
-                conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition));
+        //    List<ConditionIcdTenCode> conditionIcdTenCodes = null;
+        //    List<IcdTenCode> icdTenCodes = null;
+        //    if (conditions.Count() > 0)
+        //    {
+        //        conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition));
 
-                var temp = conditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
-                if (conditionIcdTenCodes.Count() > 0)
-                    icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => temp.Contains(x.Id)).ToListAsync();
-            }
-            List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
-            icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
+        //        var temp = conditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
+        //        if (conditionIcdTenCodes.Count() > 0)
+        //            icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => temp.Contains(x.Id)).ToListAsync();
+        //    }
+        //    List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
+        //    icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
 
-            return new PatientResponse
-            {
-                Patient = hisPatient,
-                IcdTenCodes = icdTenCodes
-            };
-        }
+        //    return new PatientResponse
+        //    {
+        //        Patient = hisPatient,
+        //        IcdTenCodes = icdTenCodes
+        //    };
+        //}
 
         /// <summary>
         /// 
@@ -189,7 +201,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 if (wardAdmission?.Subject != null)
                     hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
 
-                var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient);
+                var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient && x.HospitalisationEncounter.Id == hospitalAdmissionId);
 
                 List<ConditionIcdTenCode> conditionIcdTenCodes = null;
                 List<IcdTenCode> icdTenCodes = null;
@@ -282,8 +294,8 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
 				Subject = hisPatient,
 				Recorder = currentLoggedInPerson,
 				//Asserter = currentLoggedInPerson,
-				HospitalisationEncounter = insertedWardAdmission
-			};
+				HospitalisationEncounter = insertedHospitalAdmission
+            };
 
             var insertedCondition = await _conditionRepositiory.InsertAsync(condition);
             //add a list of conditionIcdTenCode to a task
@@ -374,6 +386,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             var entity = await _wardAdmissionRepositiory.GetAsync(id);
             await _wardAdmissionRepositiory.DeleteAsync(entity);
         }
+
 
         /// <summary>
         /// 
