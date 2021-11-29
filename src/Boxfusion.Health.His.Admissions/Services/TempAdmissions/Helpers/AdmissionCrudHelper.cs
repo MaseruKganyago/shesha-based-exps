@@ -90,7 +90,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <returns></returns>
         public async Task<List<AdmissionResponse>> GetAllAsync(Guid wardId, DateTime admissionDate)
         {
-            var admissions = await _wardAdmissionRepositiory.GetAllListAsync(x => x.Ward.Id == wardId && x.StartDateTime.Value.Date == admissionDate.Date );
+            var admissions = await _wardAdmissionRepositiory.GetAllListAsync(x => x.Ward.Id == wardId && x.StartDateTime.Value.Date == admissionDate.Date);
 
             var admissionResponses = _mapper.Map<List<AdmissionResponse>>(admissions);
 
@@ -379,10 +379,10 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task<List<PatientAuditTrailDto>> GetPatientAuditTrailAsync(Guid patientId)
+        public async Task<List<AdmissionResponse>> GetPatientAuditTrailAsync(Guid patientId, Guid partOfId)
         {
-            var admissions = await _wardAdmissionRepositiory.GetAll().Where(x => x.Subject.Id == patientId).OrderByDescending(x => x.CreationTime).ToListAsync();
-            var admissionResponses = _mapper.Map<List<PatientAuditTrailDto>>(admissions);
+            var admissions = await _wardAdmissionRepositiory.GetAll().Where(x => x.Subject.Id == patientId && x.PartOf.Id == partOfId).OrderByDescending(x => x.CreationTime).ToListAsync();
+            var admissionResponses = _mapper.Map<List<AdmissionResponse>>(admissions);
 
             return admissionResponses;
         }

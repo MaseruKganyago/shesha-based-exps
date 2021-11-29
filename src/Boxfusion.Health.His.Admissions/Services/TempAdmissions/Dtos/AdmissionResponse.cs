@@ -172,23 +172,21 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         /// <summary>
         /// 
         /// </summary>
-        ReferenceListItemValueDto Speciality { get; set; }
+        public ReferenceListItemValueDto Speciality { get; set; }
 
         /// <summary>
         /// Used to like the serparations
         /// </summary>
-        public virtual WardAdmission InternalTransferOriginalWard { get; set; }
+        public EntityWithDisplayNameDto<Guid?> InternalTransferOriginalWard { get; set; }
 
         /// <summary>
         /// Used to like the serparations
         /// </summary>
-        public virtual WardAdmission InternalTransferDestinationWard { get; set; }
+        public EntityWithDisplayNameDto<Guid?> InternalTransferDestinationWard { get; set; }
 
         // <summary>
         /// 
         /// </summary>
         public string AgeBreakdown { get; set; }
-
-
     }
 }

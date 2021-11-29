@@ -54,10 +54,10 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         /// 
         /// </summary>
         /// <returns></returns>
-        [HttpGet, Route("{patientId}/patient")]
-        public async Task<List<PatientAuditTrailDto>> GetPatientAuditTrailAsync(Guid patientId)
+        [HttpGet, Route("{patientId}/patient/{partOfId}/encounter")]
+        public async Task<List<AdmissionResponse>> GetPatientAuditTrailAsync(Guid patientId, Guid partOfId)
         {
-            var admissions = await _admissionCrudHelper.GetPatientAuditTrailAsync(patientId);
+            var admissions = await _admissionCrudHelper.GetPatientAuditTrailAsync(patientId, partOfId);
 
             return admissions;
         }

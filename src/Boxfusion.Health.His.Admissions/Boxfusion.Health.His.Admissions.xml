@@ -960,6 +960,57 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.SeparationDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.TransferRejectionReason">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.TransferRejectionReasonComment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.SeparationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.SeparationDestinationWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.SeparationChildHealth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.SeparationComment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.Speciality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.InternalTransferOriginalWard">
+            <summary>
+            Used to like the serparations
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.InternalTransferDestinationWard">
+            <summary>
+            Used to like the serparations
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.AgeBreakdown" -->
         <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionMapProfile">
             <summary>
             
@@ -1265,7 +1316,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.GetPatientAuditTrailAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.GetPatientAuditTrailAsync(System.Guid,System.Guid)">
             <summary>
             
             </summary>
@@ -1305,11 +1356,12 @@
             <param name="currentWardId"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.GetPatientAuditTrailAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.GetPatientAuditTrailAsync(System.Guid,System.Guid)">
             <summary>
             
             </summary>
             <param name="patientId"></param>
+            <param name="partOfId"></param>
             <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.GetAsync(System.Guid)">
@@ -1361,11 +1413,12 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService.GetPatientAuditTrailAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService.GetPatientAuditTrailAsync(System.Guid,System.Guid)">
             <summary>
             
             </summary>
-            <param name="patientId"></param>
+            <param name="patientIdGuid"></param>
+            <param name="partOfId"></param>
             <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService.ValidateIdentityNumber(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.ValidateIdDto)">
@@ -1421,7 +1474,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.GetPatientAuditTrailAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.GetPatientAuditTrailAsync(System.Guid,System.Guid)">
             <summary>
             
             </summary>

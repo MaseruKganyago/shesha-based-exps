@@ -27,7 +27,6 @@
   <ItemGroup>
     <Compile Remove="Services\HisPatients\Dtos\HisPatientInput.cs" />
     <Compile Remove="Services\HisPatients\Dtos\HisPatientResponse.cs" />
-    <Compile Remove="Services\TempAdmissions\Dtos\HisPatientInput.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -59,7 +58,6 @@
   <ItemGroup>
     <Folder Include="Dtos\" />
     <Folder Include="Helpers\Validations\" />
-    <Folder Include="Services\Separations\" />
   </ItemGroup>
 
   <ItemGroup>

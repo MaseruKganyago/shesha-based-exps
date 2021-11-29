@@ -22,9 +22,10 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="patientId"></param>
+        /// <param name="patientIdGuid"></param>
+        /// <param name="partOfId"></param>
         /// <returns></returns>
-        Task<List<PatientAuditTrailDto>> GetPatientAuditTrailAsync(Guid patientId);
+        Task<List<AdmissionResponse>> GetPatientAuditTrailAsync(Guid patientIdGuid, Guid partOfId);
 
         /// <summary>
         /// 
