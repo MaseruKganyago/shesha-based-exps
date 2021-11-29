@@ -1,11 +1,9 @@
-﻿using Abp.Application.Services.Dto;
-using Abp.AutoMapper;
+﻿using Abp.AutoMapper;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.His.Domain.Domain;
 using Shesha.AutoMapper.Dto;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
 {
@@ -132,5 +130,65 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         /// 
         /// </summary>
         public EntityWithDisplayNameDto<Guid?> HisAdmission { get; set; }
+
+
+        /* Separation Related properties */
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual DateTime? SeparationDate { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto TransferRejectionReason { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TransferRejectionReasonComment { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto SeparationType { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EntityWithDisplayNameDto<Guid?> SeparationDestinationWard { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto SeparationChildHealth { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SeparationComment { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        ReferenceListItemValueDto Speciality { get; set; }
+
+        /// <summary>
+        /// Used to like the serparations
+        /// </summary>
+        public virtual WardAdmission InternalTransferOriginalWard { get; set; }
+
+        /// <summary>
+        /// Used to like the serparations
+        /// </summary>
+        public virtual WardAdmission InternalTransferDestinationWard { get; set; }
+
+        // <summary>
+        /// 
+        /// </summary>
+        public string AgeBreakdown { get; set; }
+
+
     }
 }

@@ -940,6 +940,16 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Domain.Dtos.WardAdmissionResponse.InternalTransferOriginalWard">
+            <summary>
+            Used to like the serparations
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Domain.Dtos.WardAdmissionResponse.InternalTransferDestinationWard">
+            <summary>
+            Used to like the serparations
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Domain.HisDomainModule">
             <summary>
             Health.His Module
