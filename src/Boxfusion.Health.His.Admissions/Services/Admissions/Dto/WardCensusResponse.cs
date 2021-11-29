@@ -11,7 +11,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
         public int? TotalSeparatedPatients { get; set; }
         public int? TotalBedAvailability { get; set; }
         public int? TotalBedInWard { get; set; }
-        public int? BedUtilisation { get; set; }
-        public int? Alos { get; set; }
+        public decimal? BedUtilisation { get; set; }
+        public decimal? AverageBedAvailability { get; set; }
+        public decimal? AverageLengthOfStay { get; set; }
     }
 }

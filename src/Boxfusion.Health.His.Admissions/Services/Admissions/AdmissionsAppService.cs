@@ -185,7 +185,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 				TotalAdmittedPatients = (int?)dailyStat.TotalAdmittedPatients,
 				TotalSeparatedPatients = (int?)dailyStat.TotalSeparatedPatients,
 				TotalBedAvailability = (int?)dailyStat.TotalBedAvailability,
-				TotalBedInWard = (int?)dailyStat.TotalBedInWard
+				TotalBedInWard = (int?)dailyStat.TotalBedInWard,
+                AverageBedAvailability = dailyStat.AverageLengthOfStay,
+                AverageLengthOfStay = dailyStat.AverageLengthOfStay,
+                BedUtilisation = dailyStat.BedUtilisation
 			};
         }
         /// <summary>
@@ -204,7 +207,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 				TotalBedAvailability = 25,
 				TotalBedInWard = 250,
 				BedUtilisation = 25,
-				Alos = 2
+                AverageLengthOfStay = 2
 			};
 		}
 
