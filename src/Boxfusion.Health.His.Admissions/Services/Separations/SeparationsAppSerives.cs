@@ -3,6 +3,7 @@ using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Admissions.Services.Separations.Dto;
 using Boxfusion.Health.His.Admissions.Services.Separations.Helpers;
+using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,14 +20,16 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
     public class SeparationsAppSerives : CdmAppServiceBase, ISeparationsAppService
     {
         private readonly ISeparationCrudHelper _separationCrudHelper;
+        private readonly ISeparationService _separationService;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="separationCrudHelper"></param>
-        public SeparationsAppSerives(ISeparationCrudHelper separationCrudHelper)
+        public SeparationsAppSerives(ISeparationCrudHelper separationCrudHelper, ISeparationService separationService)
         {
             _separationCrudHelper = separationCrudHelper;
+            _separationService = separationService;
         }
 
         /// <summary>
@@ -35,7 +38,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("")]
-        public async Task<SeparationResponse> CreateAsync(SeparationInput input)
+        public async Task<AdmissionResponse> CreateAsync(SeparationInput input)
         {
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
 
@@ -57,7 +60,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
                     Validation.ValidateText(input?.TransferToNonGautengHospital, "None Gauteng Government Destination Hospital");
             }
 
-            var separation = await _separationCrudHelper.CreateAsync(input, person);
+            // var separation = await _separationCrudHelper.CreateAsync(input, person);
+            var separation = await _separationService.CreateAsync(input, person);
+
             return separation;
         }
 
