@@ -172,7 +172,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         /// <summary>
         /// 
         /// </summary>
-        ReferenceListItemValueDto Speciality { get; set; }
+        public ReferenceListItemValueDto Speciality { get; set; }
 
         /// <summary>
         /// Used to like the serparations
@@ -188,7 +188,5 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         /// 
         /// </summary>
         public string AgeBreakdown { get; set; }
-
-
     }
 }

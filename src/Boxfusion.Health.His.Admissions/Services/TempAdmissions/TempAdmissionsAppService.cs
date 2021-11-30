@@ -24,18 +24,35 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
     {
         private readonly IAdmissionCrudHelper _admissionCrudHelper;
         private readonly IRepository<HisPatient, Guid> _hisPatientRepositiory;
-
+        private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="wardAdmissionRepository"></param>
         /// <param name="admissionCrudHelper"></param>
         /// <param name="hisPatientRepositiory"></param>
         public TempAdmissionsAppService(
+            IRepository<WardAdmission, Guid> wardAdmissionRepository,
             IAdmissionCrudHelper admissionCrudHelper,
             IRepository<HisPatient, Guid> hisPatientRepositiory)
         {
             _admissionCrudHelper = admissionCrudHelper;
             _hisPatientRepositiory = hisPatientRepositiory;
+            _wardAdmissionRepositiory = wardAdmissionRepository;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wardId"></param>
+        /// <param name="admissionStatus"></param>
+        /// <returns></returns>
+        [HttpGet, Route("GetAllByAdmissionStatus")]
+        public async Task<List<AdmissionResponse>> GetAllByStatusAsync(Guid wardId, RefListAdmissionStatuses admissionStatus)
+        {
+            var admissions = await _wardAdmissionRepositiory.GetAllListAsync(r => r.Ward != null && r.Ward.Id == wardId && r.AdmissionStatus == admissionStatus);
+
+             return ObjectMapper.Map<List<AdmissionResponse>>(admissions);
         }
 
         /// <summary>
@@ -46,6 +63,18 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         public async Task<List<AdmissionResponse>> GetAllAsync(Guid wardId, DateTime admissionDate)
         {
             var admissions = await _admissionCrudHelper.GetAllAsync(wardId, admissionDate);
+
+            return admissions;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("wardadmissions/partof/{partOfId}")]
+        public async Task<List<AdmissionResponse>> GetPatientAuditTrailAsync(Guid partOfId)
+        {
+            var admissions = await _admissionCrudHelper.GetPatientAuditTrailAsync(partOfId);
 
             return admissions;
         }
@@ -159,17 +188,17 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             return wardAdmission;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet, Route("patient/{id}")]
-        public async Task<PatientResponse> GetPatient(Guid id)
-        {
-            var patient = await _admissionCrudHelper.GetPatient(id);
-            return patient;
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <returns></returns>
+        //[HttpGet, Route("patient/{id}")]
+        //public async Task<PatientResponse> GetPatient(Guid id)
+        //{
+        //    var patient = await _hisPatientRepositiory.GetAsync(id);
+        //    return patient;
+        //}
 
         /// <summary>
         /// 

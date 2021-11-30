@@ -29,6 +29,14 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="patientId"></param>
+        /// <param name="partOfId"></param>
+        /// <returns></returns>
+        Task<List<AdmissionResponse>> GetPatientAuditTrailAsync(Guid partOfId);
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         Task<AdmissionResponse> GetAsync(Guid id);
@@ -64,11 +72,11 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <returns></returns>
         Task<List<AdmissionResponse>> GetWardAdmissions(Guid hospitalAdmissionId);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="patientId"></param>
-        /// <returns></returns>
-        Task<PatientResponse> GetPatient(Guid patientId);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="patientId"></param>
+        ///// <returns></returns>
+        //Task<PatientResponse> GetPatient(Guid patientId);
     }
 }

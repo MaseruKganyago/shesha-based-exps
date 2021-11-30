@@ -1,6 +1,7 @@
 ﻿using Abp.Application.Services;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
+using Boxfusion.Health.His.Domain.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,11 +14,26 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
     /// </summary>
     public interface ITempAdmissionsAppService : IApplicationService
     {
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <returns></returns>
-        //Task<List<AdmissionResponse>> GetAllAsync();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wardId"></param>
+        /// <param name="admissionStatus"></param>
+        /// <returns></returns>
+        Task<List<AdmissionResponse>> GetAllByStatusAsync(Guid wardId, RefListAdmissionStatuses admissionStatus);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<List<AdmissionResponse>> GetAllAsync(Guid wardId, DateTime admissionDate);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="patientIdGuid"></param>
+        /// <param name="partOfId"></param>
+        /// <returns></returns>
+        Task<List<AdmissionResponse>> GetPatientAuditTrailAsync(Guid partOfId);
 
         /// <summary>
         /// 

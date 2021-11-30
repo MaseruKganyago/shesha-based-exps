@@ -70,5 +70,62 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         /// 
         /// </summary>
         public List<EntityWithDisplayNameDto<Guid?>> Code { get; set; }
+
+        /* Separation Related properties */
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual DateTime? SeparationDate { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto TransferRejectionReason { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TransferRejectionReasonComment { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto SeparationType { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EntityWithDisplayNameDto<Guid?> SeparationDestinationWard { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto SeparationChildHealth { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SeparationComment { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        ReferenceListItemValueDto Speciality { get; set; }
+
+        /// <summary>
+        /// Used to like the serparations
+        /// </summary>
+        public virtual EntityWithDisplayNameDto<Guid?> InternalTransferOriginalWard { get; set; }
+
+        /// <summary>
+        /// Used to like the serparations
+        /// </summary>
+        public virtual EntityWithDisplayNameDto<Guid?> InternalTransferDestinationWard { get; set; }
+
+        // <summary>
+        /// 
+        /// </summary>
+        public string AgeBreakdown { get; set; }
     }
 }
