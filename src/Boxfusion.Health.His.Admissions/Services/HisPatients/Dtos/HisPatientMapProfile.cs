@@ -20,6 +20,7 @@ namespace Boxfusion.Health.His.Admissions.Services.HisPatients.Dtos
         public HisPatientMapProfile()
         {
             CreateMap<HisPatientInput, HisPatient>()
+                .ForMember(c => c.CommunicationLanguage, options => options.Ignore())
                 //.ForMember(c => c.PatientMasterIndexNumber, options => options.MapFrom(c => c.PatientMasterIndexNumber))
                 //.ForMember(c => c.HospitalPatientNumber, options => options.MapFrom(c => c.HospitalPatientNumber))
                 //.ForMember(c => c.FirstName, options => options.MapFrom(c => c.FirstName))
