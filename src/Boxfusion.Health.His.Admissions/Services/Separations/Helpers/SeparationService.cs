@@ -1,4 +1,5 @@
-﻿using Abp.Domain.Repositories;
+﻿using Abp.Dependency;
+using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using AutoMapper;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
@@ -9,7 +10,6 @@ using Boxfusion.Health.His.Admissions.Services.Separations.Dto;
 using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
-using Shesha;
 using Shesha.AutoMapper.Dto;
 using Shesha.Extensions;
 using System;
@@ -22,7 +22,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
     /// <summary>
     /// 
     /// </summary>
-    public class SeparationService : SheshaAppServiceBase, ISeparationService
+    public class SeparationService : ISeparationService, ITransientDependency
     {
         private readonly IRepository<Ward, Guid> _wardRepositiory;
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
