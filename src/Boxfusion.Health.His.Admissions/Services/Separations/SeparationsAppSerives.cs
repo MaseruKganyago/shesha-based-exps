@@ -16,7 +16,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
     /// </summary>
     [AbpAuthorize]
     [ApiVersion("1")]
-    [Route("api/v{version:apiVersion}/His/[controller]")]
+    [Route("api/v{version:apiVersion}/His/PatientSeparation")]
     public class SeparationsAppSerives : CdmAppServiceBase, ISeparationsAppService
     {
         private readonly ISeparationCrudHelper _separationCrudHelper;
@@ -43,9 +43,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
 
             Validation.ValidateReflist(input?.SeparationType, "Separation Type");
-            Validation.ValidateReflist(input?.SeparationChildHealth, "Separation Child Health");
+
             Validation.ValidateNullableType(input?.SeparationDate, "Separation Date");
             Validation.ValidateNullableType(input?.Code, "Icd-10 Code");
+
 
             if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.internalTransfer)
             {

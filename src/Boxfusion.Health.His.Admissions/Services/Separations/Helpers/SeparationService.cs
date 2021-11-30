@@ -4,6 +4,7 @@ using AutoMapper;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
+using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.His.Admissions.Services.Separations.Dto;
 using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
 using Boxfusion.Health.His.Domain.Domain;
@@ -66,6 +67,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
         /// <returns></returns>
         public async Task<AdmissionResponse> CreateAsync(SeparationInput input, PersonFhirBase currentLoggedInPerson)
         {
+
+
             var encounterId = input.Id;
             var wardAdmission = await _wardAdmissionRepositiory.GetAsync(encounterId);
             // wardAdmission = await GetEntityAsync<Encounter>(input.Id);
@@ -77,6 +80,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             HisPatient hisPatient = null;
             if (wardAdmission?.Subject != null)
                 hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
+
+            var agebreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, input.SeparationDate.Value);
+            if (agebreakdown != "> 12 years" || agebreakdown != "5-12 years")
+                Validation.ValidateReflist(input?.SeparationChildHealth, "Separation Child Health");
 
             if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.internalTransfer)
             {
