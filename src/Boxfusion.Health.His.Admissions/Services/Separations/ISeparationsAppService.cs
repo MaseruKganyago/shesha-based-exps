@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services;
 using Boxfusion.Health.His.Admissions.Services.Separations.Dto;
+using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
 using System;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<SeparationResponse> CreateAsync(SeparationInput input);
+        Task<AdmissionResponse> CreateAsync(SeparationInput input);
 
         /// <summary>
         /// 

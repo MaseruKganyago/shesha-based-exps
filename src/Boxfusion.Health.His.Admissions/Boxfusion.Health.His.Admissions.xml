@@ -778,17 +778,6 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationResponse.Patient">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationResponse.WardAdmission">
-            <summary>
-            
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationResponse.DestinationWardAdmission" -->
         <member name="P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationResponse.HospitalAdmission">
             <summary>
             
@@ -832,6 +821,44 @@
             <param name="condition"></param>
             <returns></returns>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.SeparationService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.SeparationService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Ward,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid},AutoMapper.IMapper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ConditionIcdTenCode,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.FhirOrganisation,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="wardRepositiory"></param>
+            <param name="wardAdmissionRepositiory"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.SeparationService.CreateAsync(Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <param name="currentLoggedInPerson"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.SeparationService.UpdateConditions(Boxfusion.Health.His.Domain.Domain.HisPatient,Boxfusion.Health.His.Domain.Domain.HospitalAdmission,Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
+            <summary>
+            
+            </summary>
+            <param name="hisPatient"></param>
+            <param name="hospitalAdmission"></param>
+            <param name="input"></param>
+            <param name="currentLoggedInPerson"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.SeparationService.CreateICdTenCode(Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Nullable{System.Guid}},Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.ISeparationsAppService.GetAsync(System.Guid)">
             <summary>
             
@@ -866,7 +893,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives.#ctor(Boxfusion.Health.His.Admissions.Services.Separations.Helpers.ISeparationCrudHelper)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives.#ctor(Boxfusion.Health.His.Admissions.Services.Separations.Helpers.ISeparationCrudHelper,Boxfusion.Health.His.Admissions.Services.Separations.Helpers.ISeparationService)">
             <summary>
             
             </summary>
@@ -1181,16 +1208,6 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.InternalTransferOriginalWard">
-            <summary>
-            Used to like the serparations
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.InternalTransferDestinationWard">
-            <summary>
-            Used to like the serparations
-            </summary>
-        </member>
         <!-- Badly formed XML comment ignored for member "P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.AgeBreakdown" -->
         <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.PatientResponse">
             <summary>
@@ -1387,6 +1404,14 @@
             
             </summary>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService.GetAllByStatusAsync(System.Guid,Boxfusion.Health.His.Domain.Domain.Enums.RefListAdmissionStatuses)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="admissionStatus"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService.GetAllAsync(System.Guid,System.DateTime)">
             <summary>
             
@@ -1441,12 +1466,21 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.#ctor(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid})">
             <summary>
             
             </summary>
+            <param name="wardAdmissionRepository"></param>
             <param name="admissionCrudHelper"></param>
             <param name="hisPatientRepositiory"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.GetAllByStatusAsync(System.Guid,Boxfusion.Health.His.Domain.Domain.Enums.RefListAdmissionStatuses)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="admissionStatus"></param>
+            <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.GetAllAsync(System.Guid,System.DateTime)">
             <summary>
@@ -1789,6 +1823,36 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211127135300.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211129181800">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211129181800.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211129181800.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211129200200">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211129200200.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211129200200.Down">
             <summary>
             
             </summary>

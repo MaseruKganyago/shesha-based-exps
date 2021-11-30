@@ -5,9 +5,9 @@ using AutoMapper;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
-using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
-using Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers;
+using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.His.Admissions.Services.Separations.Dto;
+using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Shesha.AutoMapper.Dto;
@@ -22,19 +22,16 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
     /// <summary>
     /// 
     /// </summary>
-    public class SeparationCrudHelper : ISeparationCrudHelper, ITransientDependency
+    public class SeparationService : ISeparationService, ITransientDependency
     {
-
+        private readonly IRepository<Ward, Guid> _wardRepositiory;
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepositiory;
-        private readonly IPatientCrudHelper<HisPatient, NonUserCdmPatientResponse> _patientCrudHelper;
-        private readonly IRepository<EncounterLocation, Guid> _encounterLocationRepositiory;
-        private readonly IRepository<ConditionIcdTenCode, Guid> _conditionIcdTenCodeRepositiory;
-        private readonly IRepository<IcdTenCode, Guid> _icdTenCodeRepositiory;
+        private readonly IRepository<HisPatient, Guid> _hisPatientRepositiory;
         private readonly IRepository<Condition, Guid> _conditionRepositiory;
         private readonly IRepository<Diagnosis, Guid> _diagnosisRepositiory;
-        private readonly IRepository<HisPatient, Guid> _hisPatientRepositiory;
-        private readonly IRepository<Ward, Guid> _wardRepositiory;
+        private readonly IRepository<IcdTenCode, Guid> _icdTenCodeRepositiory;
+        private readonly IRepository<ConditionIcdTenCode, Guid> _conditionIcdTenCodeRepositiory;
         private readonly IRepository<FhirOrganisation, Guid> _organisationRepositiory;
 
         private readonly IUnitOfWorkManager _unitOfWork;
@@ -43,46 +40,23 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="wardAdmissionRepositiory"></param>
-        /// <param name="hospitalAdmissionRepositiory"></param>
-        /// <param name="patientCrudHelper"></param>
-        /// <param name="encounterLocationRepositiory"></param>
-        /// <param name="conditionIcdTenCodeRepositiory"></param>
-        /// <param name="icdTenCodeRepositiory"></param>
-        /// <param name="conditionRepositiory"></param>
-        /// <param name="diagnosisRepositiory"></param>
-        /// <param name="hisPatientRepositiory"></param>
         /// <param name="wardRepositiory"></param>
-        /// <param name="unitOfWork"></param>
-        /// <param name="mapper"></param>
-        public SeparationCrudHelper(
-            IRepository<WardAdmission, Guid> wardAdmissionRepositiory,
-            IRepository<HospitalAdmission, Guid> hospitalAdmissionRepositiory,
-            IPatientCrudHelper<HisPatient, NonUserCdmPatientResponse> patientCrudHelper,
-            IRepository<EncounterLocation, Guid> encounterLocationRepositiory,
-            IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepositiory,
-            IRepository<IcdTenCode, Guid> icdTenCodeRepositiory,
-            IRepository<Condition, Guid> conditionRepositiory,
-            IRepository<Diagnosis, Guid> diagnosisRepositiory,
-            IRepository<HisPatient, Guid> hisPatientRepositiory,
-            IRepository<Ward, Guid> wardRepositiory,
-            IRepository<FhirOrganisation, Guid> organisationRepositiory,
-            IUnitOfWorkManager unitOfWork,
-            IMapper mapper)
+        /// <param name="wardAdmissionRepositiory"></param>
+        public SeparationService(IRepository<Ward, Guid> wardRepositiory, IRepository<WardAdmission,
+            Guid> wardAdmissionRepositiory, IRepository<HospitalAdmission, Guid> hospitalAdmissionRepositiory,
+            IRepository<HisPatient, Guid> hisPatientRepositiory, IMapper mapper, IRepository<Condition, Guid> conditionRepositiory, IRepository<Diagnosis, Guid> diagnosisRepositiory, IRepository<IcdTenCode, Guid> icdTenCodeRepositiory, IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepositiory, IUnitOfWorkManager unitOfWork, IRepository<FhirOrganisation, Guid> organisationRepositiory)
         {
+            _wardRepositiory = wardRepositiory;
             _wardAdmissionRepositiory = wardAdmissionRepositiory;
             _hospitalAdmissionRepositiory = hospitalAdmissionRepositiory;
-            _patientCrudHelper = patientCrudHelper;
-            _encounterLocationRepositiory = encounterLocationRepositiory;
-            _conditionIcdTenCodeRepositiory = conditionIcdTenCodeRepositiory;
-            _icdTenCodeRepositiory = icdTenCodeRepositiory;
+            _hisPatientRepositiory = hisPatientRepositiory;
+            _mapper = mapper;
             _conditionRepositiory = conditionRepositiory;
             _diagnosisRepositiory = diagnosisRepositiory;
-            _hisPatientRepositiory = hisPatientRepositiory;
-            _wardRepositiory = wardRepositiory;
-            _organisationRepositiory = organisationRepositiory;
+            _icdTenCodeRepositiory = icdTenCodeRepositiory;
+            _conditionIcdTenCodeRepositiory = conditionIcdTenCodeRepositiory;
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            _organisationRepositiory = organisationRepositiory;
         }
 
         /// <summary>
@@ -91,10 +65,13 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
         /// <param name="input"></param>
         /// <param name="currentLoggedInPerson"></param>
         /// <returns></returns>
-        public async Task<SeparationResponse> CreateAsync(SeparationInput input, PersonFhirBase currentLoggedInPerson)
+        public async Task<AdmissionResponse> CreateAsync(SeparationInput input, PersonFhirBase currentLoggedInPerson)
         {
+
+
             var encounterId = input.Id;
             var wardAdmission = await _wardAdmissionRepositiory.GetAsync(encounterId);
+            // wardAdmission = await GetEntityAsync<Encounter>(input.Id);
 
             HospitalAdmission hospitalAdmission = null;
             if (wardAdmission?.PartOf != null)
@@ -104,59 +81,33 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             if (wardAdmission?.Subject != null)
                 hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
 
-            WardAdmission destinationWardAdmission = null;
-            if (input.SeparationDestinationWard != null)
-                destinationWardAdmission = _mapper.Map<WardAdmission>(input);
-            else
-                destinationWardAdmission = new WardAdmission();
-
-
-            // var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient);
-
-            // await UpdateConditions(hisPatient, hospitalAdmission, input, currentLoggedInPerson);
+            var agebreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, input.SeparationDate.Value);
+            if (agebreakdown != "> 12 years" || agebreakdown != "5-12 years")
+                Validation.ValidateReflist(input?.SeparationChildHealth, "Separation Child Health");
 
             if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.internalTransfer)
             {
-                //var sourceWardAdmission = _mapper.Map<WardAdmission>(wardAdmission);
+                wardAdmission = await _wardAdmissionRepositiory.GetAsync(encounterId);
                 wardAdmission.AdmissionStatus = RefListAdmissionStatuses.inTransit;
-                wardAdmission.SeparationDestinationWard = new Ward();
-                wardAdmission.SeparationDestinationWard.Id = input.SeparationDestinationWard.Id.Value;
-                // var updatedWardAdmission = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
+                var separationDestinationWard = await _wardRepositiory.GetAsync(input.SeparationDestinationWard.Id.Value);
+                wardAdmission.SeparationDestinationWard = separationDestinationWard;
 
+                wardAdmission = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
 
+                //Create destination ward admission record
+                WardAdmission destinationWardAdmission = null;
+                if (input.SeparationDestinationWard != null)
+                    destinationWardAdmission = _mapper.Map<WardAdmission>(input);
 
-                //_mapper.Map(hisPatient, sourceWardAdmission);
-                //Create ward admission record
-
-                // destinationWardAdmission.Ward = new Ward();
-                // destinationWardAdmission.PartOf = new Encounter();
-                // destinationWardAdmission.InternalTransferOriginalWard = new WardAdmission();
-
-                // destinationWardAdmission.PartOf = hospitalAdmission;
-                // destinationWardAdmission.AdmissionStatus = RefListAdmissionStatuses.inTransit;
-                // destinationWardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
-                // destinationWardAdmission.Ward.Id = input.SeparationDestinationWard.Id.Value;
-                // destinationWardAdmission.InternalTransferOriginalWard = wardAdmission;
-                // _mapper.Map(hisPatient, destinationWardAdmission);
-                //var insertedDestinationWardAdmission = await _wardAdmissionRepositiory.InsertAsync(destinationWardAdmission);
-
-
-
-                // destinationWardAdmission.AdmissionStatus = RefListAdmissionStatuses.inTransit;
-                // destinationWardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
-                // destinationWardAdmission.InternalTransferOriginalWard = wardAdmission;
-                // destinationWardAdmission.Ward.Id = input.SeparationDestinationWard.Id.Value;
-                // _mapper.Map(hisPatient, hospitalAdmission);
-                // if (destinationWardAdmission.PartOf == null)
-                // _mapper.Map(wardAdmission.PartOf, destinationWardAdmission);
-                // destinationWardAdmission.InternalTransferOriginalWard = wardAdmission;
-
-                // var insertedDestinationWardAdmission = await _wardAdmissionRepositiory.InsertAsync(destinationWardAdmission);
-
-                // wardAdmission.InternalTransferDestinationWard = insertedDestinationWardAdmission;
-                // var updatedWardAdmission = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
-
-                //Validation.ValidateNullableType(input?.SeparationDestinationWard, "Separation Destination Ward");
+                destinationWardAdmission.PartOf = hospitalAdmission;
+                destinationWardAdmission.AdmissionStatus = RefListAdmissionStatuses.inTransit;
+                destinationWardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
+                destinationWardAdmission.Ward = separationDestinationWard; // input.SeparationDestinationWard.Id.Value;
+                destinationWardAdmission.InternalTransferOriginalWard = wardAdmission;
+                _mapper.Map(hisPatient, destinationWardAdmission);
+                var insertedDestinationWardAdmission = await _wardAdmissionRepositiory.InsertAsync(destinationWardAdmission);
+                (await _wardAdmissionRepositiory.UpdateAsync(wardAdmission)).InternalTransferDestinationWard = insertedDestinationWardAdmission;
+                wardAdmission = await _wardAdmissionRepositiory.UpdateAsync(await _wardAdmissionRepositiory.UpdateAsync(wardAdmission));
             }
             else if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.externalTransfer)
             {
@@ -189,18 +140,36 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
                 await _hospitalAdmissionRepositiory.UpdateAsync(hospitalAdmission);
             }
 
-            //var separationResponse = new SeparationResponse
-            //{
-            //    Patient = _mapper.Map<HisPatientResponse>(hisPatient),
-            //    // WardAdmission = _mapper.Map<WardAdmissionResponse>(wardAdmission),
-            //    // DestinationWardAdmission = _mapper.Map<WardAdmissionResponse>(destinationWardAdmission),
-            //    // HospitalAdmission = _mapper.Map<AdmissionResponse>(hospitalAdmission)
-            //};
+            var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient);
+            await UpdateConditions(hisPatient, hospitalAdmission, input, currentLoggedInPerson);
 
-            return new SeparationResponse();
+            var admissionResponse = _mapper.Map<AdmissionResponse>(hisPatient);
+            _mapper.Map(wardAdmission, admissionResponse);
+            _mapper.Map(hospitalAdmission, admissionResponse);
+
+            admissionResponse.SeparationDate = input.SeparationDate;
+            admissionResponse.SeparationType = input.SeparationType;
+            admissionResponse.SeparationDestinationWard = input.SeparationDestinationWard;
+            admissionResponse.SeparationComment = input.SeparationComment;
+            if (hisPatient.DateOfBirth.HasValue && input.SeparationDate.HasValue)
+                admissionResponse.AgeBreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, input.SeparationDate.Value);
+
+            // admissionResponse.InternalTransferDestinationWard = wardAdmission.InternalTransferDestinationWard;
+
+            // admissionResponse.InternalTransferOriginalWard = wardAdmission.InternalTransferOriginalWard;
+
+            return admissionResponse;
+
         }
 
-        // hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hisPatient"></param>
+        /// <param name="hospitalAdmission"></param>
+        /// <param name="input"></param>
+        /// <param name="currentLoggedInPerson"></param>
+        /// <returns></returns>
         private async Task UpdateConditions(HisPatient hisPatient, HospitalAdmission hospitalAdmission,
             SeparationInput input, PersonFhirBase currentLoggedInPerson)
         {
@@ -260,5 +229,64 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
 
             return new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc);
         }
+
+        private string AgeBreakdown(DateTime dateOfBirth, DateTime separationDate)
+        {
+
+            int Years = new DateTime(DateTime.Now.Subtract(dateOfBirth).Ticks).Year - 1;
+            DateTime PastYearDate = dateOfBirth.AddYears(Years);
+            int Months = 0;
+            for (int i = 1; i <= 12; i++)
+            {
+                if (PastYearDate.AddMonths(i) == separationDate)
+                {
+                    Months = i;
+                    break;
+                }
+                else if (PastYearDate.AddMonths(i) >= separationDate)
+                {
+                    Months = i - 1;
+                    break;
+                }
+            }
+            int Days = separationDate.Subtract(PastYearDate.AddMonths(Months)).Days;
+
+            if (Years == 0 && Months == 0 && Days >= 0)
+            {
+                if (Days <= 6)
+                    return "0-6 days";
+
+                if (Days <= 7 && Days >= 28)
+                    return "7-28 days";
+
+                if (Days <= 29)
+                    return "29 days - 11 months";
+            }
+
+            if (Years == 0 && Months <= 11 && Days >= 0)
+            {
+                if (Days <= 6)
+                    return "0-6 days";
+
+                if (Days >= 7 && Days <= 28)
+                    return "7-28 days";
+
+                if (Days <= 29)
+                    return "29 days - 11 months";
+            }
+
+            if (Years < 5)
+                return "12-59 months";
+
+            if (Years > 5 && Years < 12)
+                return "5-12 years";
+
+            if (Years > 12)
+                return "> 12 years";
+
+            return " No age range found";
+
+        }
+
     }
 }

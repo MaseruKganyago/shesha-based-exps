@@ -43,7 +43,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(a => a.InternalTransferOriginalWard, options => options.MapFrom(b => GetEntity<Ward>(b.InternalTransferOriginalWard)))
                 .ForMember(a => a.InternalTransferDestinationWard, options => options.MapFrom(b => GetEntity<Ward>(b.InternalTransferDestinationWard)))
                 .MapReferenceListValuesFromDto();
-            
+
             CreateMap<AdmissionInput, HospitalAdmission>()
                 .ForMember(c => c.Id, options => options.Ignore())
                 .ForMember(c => c.CapturedAfterApproval, options => options.MapFrom(c => false))
@@ -129,16 +129,15 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(c => c.PartOf, options => options.MapFrom(c => c.PartOf != null ? new EntityWithDisplayNameDto<Guid?>(c.PartOf.Id, c.PartOf.Identifier) : null))
                 .ForMember(c => c.Ward, options => options.MapFrom(c => c.Ward != null ? new EntityWithDisplayNameDto<Guid?>(c.Ward.Id, c.Ward.Name) : null))
                 .ForMember(c => c.SeparationDate, options => options.MapFrom(c => c.SeparationDate))
-                .ForMember(c => c.TransferRejectionReason, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "TransferRejectionReasons", (long?)c.TransferRejectionReason)))
+                .ForMember(c => c.TransferRejectionReason, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Cdm", "EncounterHospitalisationTransferRejectionReason", (long?)c.TransferRejectionReason)))
                 .ForMember(c => c.TransferRejectionReasonComment, options => options.MapFrom(c => c.TransferRejectionReasonComment))
-                .ForMember(c => c.SeparationType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "SeparationTypes", (long?)c.SeparationType)))
+                .ForMember(c => c.SeparationType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Cdm", "EncounterHospitalisationSeparationType", (long?)c.SeparationType)))
                 .ForMember(c => c.SeparationDestinationWard, options => options.MapFrom(c => c.SeparationDestinationWard != null ? new EntityWithDisplayNameDto<Guid?>(c.SeparationDestinationWard.Id, c.SeparationDestinationWard.Name) : null))
-                .ForMember(c => c.SeparationChildHealth, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "SeparationChildHealths", (long?)c.SeparationChildHealth)))
+                .ForMember(c => c.SeparationChildHealth, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Cdm", "EncounterHospitalisationSeparationChildHealth", (long?)c.SeparationChildHealth)))
                 .ForMember(c => c.SeparationComment, options => options.MapFrom(c => c.SeparationComment))
-                .ForMember(c => c.Speciality, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "WardSpecialities", (long?)c.Ward.Speciality)))
-                .ForMember(c => c.InternalTransferOriginalWard, options => options.MapFrom(c => c.InternalTransferOriginalWard != null ? new EntityWithDisplayNameDto<Guid?>(c.InternalTransferOriginalWard.Id, c.InternalTransferOriginalWard.Identifier) : null))
-                .ForMember(c => c.InternalTransferDestinationWard, options => options.MapFrom(c => c.InternalTransferDestinationWard != null ? new EntityWithDisplayNameDto<Guid?>(c.InternalTransferDestinationWard.Id, c.InternalTransferDestinationWard.Identifier) : null))
-                .ForMember(C => C.AgeBreakdown, options => options.Ignore())
+                //.ForMember(c => c.InternalTransferOriginalWard, options => options.MapFrom(c => c.InternalTransferOriginalWard != null ? new EntityWithDisplayNameDto<Guid?>(c.InternalTransferOriginalWard.Id, c.InternalTransferOriginalWard.Identifier) : null))
+                //.ForMember(c => c.InternalTransferDestinationWard, options => options.MapFrom(c => c.InternalTransferDestinationWard != null ? new EntityWithDisplayNameDto<Guid?>(c.InternalTransferDestinationWard.Id, c.InternalTransferDestinationWard.Identifier) : null))
+                //.ForMember(C => C.AgeBreakdown, options => options.MapFrom(""))
                 .MapReferenceListValuesFromDto();
 
             CreateMap<HospitalAdmission, AdmissionResponse>()

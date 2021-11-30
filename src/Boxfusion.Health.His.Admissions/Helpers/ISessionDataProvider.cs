@@ -10,5 +10,6 @@ namespace Boxfusion.Health.His.Admissions.Helpers
     public interface ISessionDataProvider : ITransientDependency
     {
         Task<List<DailyStats>> GetDailyStats(WardCensusInput input);
+        Task<List<DailyStats>> GetMonthlyStats(WardCensusInput input);
     }
 }
