@@ -48,7 +48,27 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// <summary>
         /// 
         /// </summary>
+        public virtual PersonFhirBase ApprovedBy2 { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual DateTime? ApprovalTime { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual DateTime? ApprovalTime2 { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual string? RejectionComments { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual PersonFhirBase RejectedBy { get; set; }
 
         /// <summary>
         /// 
