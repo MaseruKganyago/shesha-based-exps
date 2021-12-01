@@ -52,7 +52,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
             if (reportType == RefListReportTypes.Daily)
                 allAdmissions = await _wardAdmissionsRepository.GetAllListAsync(r => r.Ward.Id == wardId && r.CreationTime.Date == filterDate.Date);
             else
-                allAdmissions = await _wardAdmissionsRepository.GetAllListAsync(r => r.Ward.Id == wardId && filterDate.Date.AddMonths(-1).Date <= r.CreationTime.Date && r.CreationTime.Date <= filterDate.Date);
+                allAdmissions = await _wardAdmissionsRepository.GetAllListAsync(r => r.Ward.Id == wardId && filterDate.Date.AddMonths(-1).Date <= r.CreationTime.Date && r.CreationTime.Date <= filterDate.Date && r.AdmissionStatus != RefListAdmissionStatuses.rejected);
 
             if (allAdmissions.Count() < 0)
                 throw new UserFriendlyException("No results found for the ward");
