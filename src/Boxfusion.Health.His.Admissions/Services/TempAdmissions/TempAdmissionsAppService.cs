@@ -113,7 +113,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         {
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
             Validation.ValidateEntityWithDisplayNameDto(input?.Ward, "Ward");
-            Validation.ValidateEntityWithDisplayNameDto(input.Subject, "Patient");
+            Validation.ValidateEntityWithDisplayNameDto(input?.Subject, "Patient");
             Validation.ValidateNullableType(input?.StartDateTime, "Admission Date");
             Validation.ValidateText(input?.HospitalAdmissionNumber, "Hospital Admission Number");
             Validation.ValidateText(input?.WardAdmissionNumber, "Ward Admission Number");
