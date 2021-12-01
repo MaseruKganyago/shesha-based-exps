@@ -337,18 +337,6 @@
             <param name="exception"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Jobs.DailyStatsCalculatorJob">
-            <summary>
-            Used to calculate stats daily
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Jobs.DailyStatsCalculatorJob.DoExecuteAsync(System.Threading.CancellationToken)">
-            <summary>
-            
-            </summary>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Localization.HisAdmissLocalizationConfigurer">
             <summary>
             
@@ -1669,6 +1657,40 @@
             
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.HisWardsAppService.ApproveLevel2(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.WardCensusInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.HisWardsAppService.GetAssignedWards">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.HisWardsAppService.GetWardDailyReport(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.WardCensusInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.HisWardsAppService.Reject(Boxfusion.Health.His.Admissions.Services.Wards.Dto.RejectReportInput)">
+            <summary>
+            Used to reject the report
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.HisWardsAppService.SubmitForApproval(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.WardCensusInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService">
