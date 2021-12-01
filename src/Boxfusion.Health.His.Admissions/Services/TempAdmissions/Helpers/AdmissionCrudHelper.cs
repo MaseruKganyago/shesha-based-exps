@@ -115,12 +115,12 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <param name="id"></param>
         /// <returns></returns>
         public async Task<AdmissionResponse> GetAsync(Guid id)
-		{
-			var wardAdmission = await _wardAdmissionRepositiory.GetAsync(id);
-			var admissionResponse = _mapper.Map<AdmissionResponse>(wardAdmission);
-			HospitalAdmission hospitalAdmission = null;
-			if(wardAdmission?.PartOf != null)
-				hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
+        {
+            var wardAdmission = await _wardAdmissionRepositiory.GetAsync(id);
+            var admissionResponse = _mapper.Map<AdmissionResponse>(wardAdmission);
+            HospitalAdmission hospitalAdmission = null;
+            if (wardAdmission?.PartOf != null)
+                hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
 
             HisPatient hisPatient = null;
             if (wardAdmission?.Subject != null)
@@ -144,6 +144,17 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             _mapper.Map(hospitalAdmission, admissionResponse);
             _mapper.Map(hisPatient, admissionResponse);
             UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
+
+            admissionResponse.SeparationDate = wardAdmission.SeparationDate;
+            //admissionResponse.SeparationType = new ReferenceListItemValueDto
+            //{
+            //    Item = nameof(wardAdmission.SeparationType),
+            //    ItemValue = (long?)wardAdmission.SeparationType.Value
+            //};
+            //admissionResponse.SeparationDestinationWard = new EntityWithDisplayNameDto<WardAdmission>(wardAdmission);
+            admissionResponse.SeparationComment = wardAdmission.SeparationComment;
+            if (hisPatient.DateOfBirth.HasValue && wardAdmission.SeparationDate.HasValue)
+                admissionResponse.AgeBreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, wardAdmission.SeparationDate.Value);
 
             return admissionResponse;
         }
@@ -256,21 +267,21 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         }
 
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="input"></param>
-		/// <param name="currentLoggedInPerson"></param>
-		/// <param name="hisPatient"></param>
-		/// <returns></returns>
-		public async Task<AdmissionResponse> CreateAsync(AdmissionInput input, PersonFhirBase currentLoggedInPerson, HisPatient hisPatient)
-		{
-			//Create patient
-			//var hisPatient = _mapper.Map<HisPatient>(input);
-			//var hisPatientInput = _mapper.Map<HisPatientInput>(input);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="currentLoggedInPerson"></param>
+        /// <param name="hisPatient"></param>
+        /// <returns></returns>
+        public async Task<AdmissionResponse> CreateAsync(AdmissionInput input, PersonFhirBase currentLoggedInPerson, HisPatient hisPatient)
+        {
+            //Create patient
+            //var hisPatient = _mapper.Map<HisPatient>(input);
+            //var hisPatientInput = _mapper.Map<HisPatientInput>(input);
 
-			//var insertedHisPatient = await _patientCrudHelper.CreateAsync(hisPatientInput, hisPatient);
-			var admissionResponse = _mapper.Map<AdmissionResponse>(hisPatient);
+            //var insertedHisPatient = await _patientCrudHelper.CreateAsync(hisPatientInput, hisPatient);
+            var admissionResponse = _mapper.Map<AdmissionResponse>(hisPatient);
 
             //Create hospital admission record if IsExternaPatient == true
             HospitalAdmission insertedHospitalAdmission = null;
@@ -281,20 +292,20 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 insertedHospitalAdmission = await _hospitalAdmissionRepositiory.InsertAsync(hospitalAdmission);
             }
 
-			//Create ward admission record
-			var wardAdmission = _mapper.Map<WardAdmission>(input);
-			wardAdmission.PartOf = insertedHospitalAdmission;
-			_mapper.Map(hisPatient, wardAdmission);
-			var insertedWardAdmission = await _wardAdmissionRepositiory.InsertAsync(wardAdmission);
+            //Create ward admission record
+            var wardAdmission = _mapper.Map<WardAdmission>(input);
+            wardAdmission.PartOf = insertedHospitalAdmission;
+            _mapper.Map(hisPatient, wardAdmission);
+            var insertedWardAdmission = await _wardAdmissionRepositiory.InsertAsync(wardAdmission);
 
-			//Create a condition
-			var condition = new Condition
-			{
-				RecordedDate = DateTime.Now,
-				Subject = hisPatient,
-				Recorder = currentLoggedInPerson,
-				//Asserter = currentLoggedInPerson,
-				HospitalisationEncounter = insertedHospitalAdmission
+            //Create a condition
+            var condition = new Condition
+            {
+                RecordedDate = DateTime.Now,
+                Subject = hisPatient,
+                Recorder = currentLoggedInPerson,
+                //Asserter = currentLoggedInPerson,
+                HospitalisationEncounter = insertedHospitalAdmission
             };
 
             var insertedCondition = await _conditionRepositiory.InsertAsync(condition);
@@ -338,18 +349,18 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             var updatedWardAdmission = await _wardAdmissionRepositiory.UpdateAsync(dbWardAdmission);
             var admissionResponse = _mapper.Map<AdmissionResponse>(updatedWardAdmission);
 
-			if(dbWardAdmission?.PartOf != null)
+            if (dbWardAdmission?.PartOf != null)
             {
-				var dbHospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(dbWardAdmission.PartOf.Id);
-				_mapper.Map(input, dbHospitalAdmission);
-				var updatedHospitalAdmission = await _hospitalAdmissionRepositiory.UpdateAsync(dbHospitalAdmission);
-				_mapper.Map(updatedHospitalAdmission, admissionResponse);
-			}
+                var dbHospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(dbWardAdmission.PartOf.Id);
+                _mapper.Map(input, dbHospitalAdmission);
+                var updatedHospitalAdmission = await _hospitalAdmissionRepositiory.UpdateAsync(dbHospitalAdmission);
+                _mapper.Map(updatedHospitalAdmission, admissionResponse);
+            }
 
-			var dbHisPatient = await _hisPatientRepositiory.GetAsync(dbWardAdmission.Subject.Id);
-			//_mapper.Map(input, dbHisPatient);
-			//var updatedHisPatient = await _hisPatientRepositiory.UpdateAsync(dbHisPatient);
-			//_mapper.Map(dbHisPatient, admissionResponse);
+            var dbHisPatient = await _hisPatientRepositiory.GetAsync(dbWardAdmission.Subject.Id);
+            //_mapper.Map(input, dbHisPatient);
+            //var updatedHisPatient = await _hisPatientRepositiory.UpdateAsync(dbHisPatient);
+            //_mapper.Map(dbHisPatient, admissionResponse);
 
             //Update a condition
             var dbCondition = await _conditionRepositiory.FirstOrDefaultAsync(x => x.HospitalisationEncounter == dbWardAdmission);
@@ -425,6 +436,64 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 await _conditionIcdTenCodeRepositiory.DeleteAsync(conditionIcdTenCode);
                 uow.Complete();
             }
+        }
+
+        private string AgeBreakdown(DateTime dateOfBirth, DateTime separationDate)
+        {
+
+            int Years = new DateTime(DateTime.Now.Subtract(dateOfBirth).Ticks).Year - 1;
+            DateTime PastYearDate = dateOfBirth.AddYears(Years);
+            int Months = 0;
+            for (int i = 1; i <= 12; i++)
+            {
+                if (PastYearDate.AddMonths(i) == separationDate)
+                {
+                    Months = i;
+                    break;
+                }
+                else if (PastYearDate.AddMonths(i) >= separationDate)
+                {
+                    Months = i - 1;
+                    break;
+                }
+            }
+            int Days = separationDate.Subtract(PastYearDate.AddMonths(Months)).Days;
+
+            if (Years == 0 && Months == 0 && Days >= 0)
+            {
+                if (Days <= 6)
+                    return "0-6 days";
+
+                if (Days <= 7 && Days >= 28)
+                    return "7-28 days";
+
+                if (Days <= 29)
+                    return "29 days - 11 months";
+            }
+
+            if (Years == 0 && Months <= 11 && Days >= 0)
+            {
+                if (Days <= 6)
+                    return "0-6 days";
+
+                if (Days >= 7 && Days <= 28)
+                    return "7-28 days";
+
+                if (Days <= 29)
+                    return "29 days - 11 months";
+            }
+
+            if (Years < 5)
+                return "12-59 months";
+
+            if (Years > 5 && Years < 12)
+                return "5-12 years";
+
+            if (Years > 12)
+                return "> 12 years";
+
+            return " No age range found";
+
         }
     }
 }

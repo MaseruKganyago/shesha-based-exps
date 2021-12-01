@@ -8,10 +8,8 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers;
 using Boxfusion.Health.His.Admissions.Services.Separations.Dto;
-using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
-using Boxfusion.Health.His.Domain.Dtos;
 using Shesha.AutoMapper.Dto;
 using Shesha.Extensions;
 using System;
@@ -106,42 +104,57 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             if (wardAdmission?.Subject != null)
                 hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
 
-            WardAdmission destinationWard = null;
+            WardAdmission destinationWardAdmission = null;
             if (input.SeparationDestinationWard != null)
-                destinationWard = _mapper.Map<WardAdmission>(input);
+                destinationWardAdmission = _mapper.Map<WardAdmission>(input);
             else
-                destinationWard = new WardAdmission();
+                destinationWardAdmission = new WardAdmission();
 
 
             // var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient);
 
-            await UpdateConditions(hisPatient, hospitalAdmission, input, currentLoggedInPerson);
+            // await UpdateConditions(hisPatient, hospitalAdmission, input, currentLoggedInPerson);
 
             if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.internalTransfer)
             {
                 //var sourceWardAdmission = _mapper.Map<WardAdmission>(wardAdmission);
                 wardAdmission.AdmissionStatus = RefListAdmissionStatuses.inTransit;
+                wardAdmission.SeparationDestinationWard = new Ward();
                 wardAdmission.SeparationDestinationWard.Id = input.SeparationDestinationWard.Id.Value;
+                // var updatedWardAdmission = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
 
 
 
                 //_mapper.Map(hisPatient, sourceWardAdmission);
+                //Create ward admission record
 
-                destinationWard.Ward = new Ward();
+                // destinationWardAdmission.Ward = new Ward();
+                // destinationWardAdmission.PartOf = new Encounter();
+                // destinationWardAdmission.InternalTransferOriginalWard = new WardAdmission();
 
-                destinationWard.AdmissionStatus = RefListAdmissionStatuses.inTransit;
-                destinationWard.AdmissionType = RefListAdmissionTypes.internalTransferIn;
-                destinationWard.InternalTransferOriginalWard = wardAdmission;
-                destinationWard.Ward.Id = input.SeparationDestinationWard.Id.Value;
-                _mapper.Map(hisPatient, hospitalAdmission);
-                if (wardAdmission?.PartOf == null)
-                    _mapper.Map(wardAdmission.PartOf, destinationWard);
-                destinationWard.InternalTransferOriginalWard = wardAdmission;
+                // destinationWardAdmission.PartOf = hospitalAdmission;
+                // destinationWardAdmission.AdmissionStatus = RefListAdmissionStatuses.inTransit;
+                // destinationWardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
+                // destinationWardAdmission.Ward.Id = input.SeparationDestinationWard.Id.Value;
+                // destinationWardAdmission.InternalTransferOriginalWard = wardAdmission;
+                // _mapper.Map(hisPatient, destinationWardAdmission);
+                //var insertedDestinationWardAdmission = await _wardAdmissionRepositiory.InsertAsync(destinationWardAdmission);
 
-                var destinationWardAdmission = await _wardAdmissionRepositiory.InsertAsync(destinationWard);
 
-                wardAdmission.InternalTransferDestinationWard = destinationWardAdmission;
-                var updatedWardAdmission = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
+
+                // destinationWardAdmission.AdmissionStatus = RefListAdmissionStatuses.inTransit;
+                // destinationWardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
+                // destinationWardAdmission.InternalTransferOriginalWard = wardAdmission;
+                // destinationWardAdmission.Ward.Id = input.SeparationDestinationWard.Id.Value;
+                // _mapper.Map(hisPatient, hospitalAdmission);
+                // if (destinationWardAdmission.PartOf == null)
+                // _mapper.Map(wardAdmission.PartOf, destinationWardAdmission);
+                // destinationWardAdmission.InternalTransferOriginalWard = wardAdmission;
+
+                // var insertedDestinationWardAdmission = await _wardAdmissionRepositiory.InsertAsync(destinationWardAdmission);
+
+                // wardAdmission.InternalTransferDestinationWard = insertedDestinationWardAdmission;
+                // var updatedWardAdmission = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
 
                 //Validation.ValidateNullableType(input?.SeparationDestinationWard, "Separation Destination Ward");
             }
@@ -176,15 +189,15 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
                 await _hospitalAdmissionRepositiory.UpdateAsync(hospitalAdmission);
             }
 
-            var separationResponse = new SeparationResponse
-            {
-                Patient = _mapper.Map<HisPatientResponse>(hisPatient),
-                WardAdmission = _mapper.Map<WardAdmissionResponse>(wardAdmission),
-                DestinationWardAdmission = _mapper.Map<WardAdmissionResponse>(destinationWard),
-                HospitalAdmission = _mapper.Map<AdmissionResponse>(hospitalAdmission)
-            };
+            //var separationResponse = new SeparationResponse
+            //{
+            //    Patient = _mapper.Map<HisPatientResponse>(hisPatient),
+            //    // WardAdmission = _mapper.Map<WardAdmissionResponse>(wardAdmission),
+            //    // DestinationWardAdmission = _mapper.Map<WardAdmissionResponse>(destinationWardAdmission),
+            //    // HospitalAdmission = _mapper.Map<AdmissionResponse>(hospitalAdmission)
+            //};
 
-            return separationResponse;
+            return new SeparationResponse();
         }
 
         // hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
