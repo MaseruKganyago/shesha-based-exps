@@ -113,13 +113,13 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         {
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
             Validation.ValidateEntityWithDisplayNameDto(input?.Ward, "Ward");
-            Validation.ValidateEntityWithDisplayNameDto(input.Subject, "Patient");
+            Validation.ValidateEntityWithDisplayNameDto(input?.Subject, "Patient");
             Validation.ValidateNullableType(input?.StartDateTime, "Admission Date");
             Validation.ValidateText(input?.HospitalAdmissionNumber, "Hospital Admission Number");
             Validation.ValidateText(input?.WardAdmissionNumber, "Ward Admission Number");
             Validation.ValidateReflist(input?.AdmissionType, "Admission Type");
 
-            if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided || input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
+            if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided && input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
             {
                 Validation.ValidateReflist(input?.Classification, "Classification");
                 Validation.ValidateReflist(input?.OtherCategory, "Other Categories");
@@ -150,7 +150,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             Validation.ValidateText(input?.WardAdmissionNumber, "Ward Admission Number");
             Validation.ValidateReflist(input?.AdmissionType, "Admission Type");
 
-            if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided || input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
+            if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided && input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
             {
                 Validation.ValidateReflist(input?.Classification, "Classification");
                 Validation.ValidateReflist(input?.OtherCategory, "Other Categories");

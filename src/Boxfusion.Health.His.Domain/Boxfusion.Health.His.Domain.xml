@@ -95,6 +95,11 @@
             
             </summary>
         </member>
+        <member name="F:Boxfusion.Health.His.Domain.Domain.Enums.RefListAdmissionStatuses.rejected">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Domain.Domain.Enums.RefListAdmissionTypes">
             <summary>
             
@@ -120,17 +125,27 @@
             
             </summary>
         </member>
+        <member name="F:Boxfusion.Health.His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Boxfusion.Health.His.Domain.Domain.Enums.RefListApprovalStatuses.approved">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Boxfusion.Health.His.Domain.Domain.Enums.RefListApprovalStatuses.notApproved">
+        <member name="F:Boxfusion.Health.His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingApproval">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Boxfusion.Health.His.Domain.Domain.Enums.RefListApprovalStatuses.waitingForApproval">
+        <member name="F:Boxfusion.Health.His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingFinalApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Domain.Enums.RefListApprovalStatuses.Rejected">
             <summary>
             
             </summary>
@@ -236,6 +251,16 @@
             </summary>
         </member>
         <member name="F:Boxfusion.Health.His.Domain.Domain.Enums.RefListIdentificationTypes.Other">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.SingleApprover">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.TwoApprover">
             <summary>
             
             </summary>
@@ -645,7 +670,27 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.ApprovedBy2">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.ApprovalTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.ApprovalTime2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.RejectionComments">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.RejectedBy">
             <summary>
             
             </summary>
@@ -681,6 +726,11 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.AverageLengthofStay">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.AverageBedAvailability">
             <summary>
             
             </summary>
@@ -1136,6 +1186,81 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211129102900.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211201153400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201153400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201153400.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211201154400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201154400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201154400.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211201193100">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201193100.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201193100.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211201201200">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201201200.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201201200.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211201212700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201212700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201212700.Down">
             <summary>
             
             </summary>

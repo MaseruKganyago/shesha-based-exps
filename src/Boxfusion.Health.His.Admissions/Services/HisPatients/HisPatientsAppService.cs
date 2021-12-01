@@ -78,9 +78,9 @@ namespace Boxfusion.Health.His.Admissions.Services.HisPatients
             Validation.ValidateReflist(input?.IdentificationType, "Identityfication Type");
             Validation.ValidateReflist(input?.Gender, "Gender");
 
-            if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided || input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
+            if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided && input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
             {
-                Validation.ValidateText(input?.IdentityNumber, "I.D. No.");
+                //Validation.ValidateText(input?.IdentityNumber, "I.D. No.");
                 Validation.ValidateNullableType(input?.DateOfBirth, "Date of Birth");
                 Validation.ValidateText(input?.HospitalPatientNumber, "Hospital Patient Number");
                 Validation.ValidateText(input?.FirstName, "First Name");
@@ -109,9 +109,9 @@ namespace Boxfusion.Health.His.Admissions.Services.HisPatients
             Validation.ValidateReflist(input?.IdentificationType, "Identityfication Type");
             Validation.ValidateReflist(input?.Gender, "Gender");
 
-            if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided || input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
+            if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided && input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
             {
-                Validation.ValidateText(input?.IdentityNumber, "I.D. No.");
+                //Validation.ValidateText(input?.IdentityNumber, "I.D. No.");
                 Validation.ValidateNullableType(input?.DateOfBirth, "Date of Birth");
                 Validation.ValidateText(input?.HospitalPatientNumber, "Hospital Patient Number");
                 Validation.ValidateText(input?.FirstName, "First Name");

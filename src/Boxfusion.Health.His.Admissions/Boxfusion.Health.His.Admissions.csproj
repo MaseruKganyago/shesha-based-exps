@@ -37,6 +37,7 @@
     <Compile Include="Services\Admissions\Dto\DailyStats.cs" />
     <Compile Include="Services\Admissions\Dto\WardCensusInput.cs" />
     <Compile Include="Services\Admissions\Dto\WardCensusResponse.cs" />
+    <Compile Include="Services\Admissions\Dto\WardMidnightCensusReportResponse.cs" />
     <Compile Include="Services\Admissions\IAdmissionsAppService.cs" />
   </ItemGroup>
 

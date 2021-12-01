@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Abp.UI;
+using Boxfusion.Health.His.Admissions.Services.Reports.Helpers;
 
 namespace Boxfusion.Health.His.Admissions.Services.Reports
 {
@@ -25,21 +26,17 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
     [Route("api/v{version:apiVersion}/HisAdmis/[controller]")]
     public class ReportAppService : SheshaAppServiceBase,  IReportAppService
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly IRepository<WardAdmission, Guid> _wardAdmissionsRepository;
-        private readonly IRepository<HisPatient, Guid> _hisPatientRepository;
+        private readonly IReportHelper _reportHelper;
 
         ///
-        public ReportAppService(IRepository<WardAdmission, Guid> wardAdmissionsRepository, IRepository<HisPatient, Guid> hisPatientRepository)
+        public ReportAppService(
+            IReportHelper reportHelper)
         {
-            _wardAdmissionsRepository = wardAdmissionsRepository;
-            _hisPatientRepository = hisPatientRepository;
+            _reportHelper = reportHelper;
         }
 
         /// <summary>
-        /// Returns the report based on the report type, date and ward
+        /// 
         /// </summary>
         /// <param name="reportType"></param>
         /// <param name="wardId"></param>
@@ -48,18 +45,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
         [HttpGet, Route("Reports")]
         public async Task<List<ReportResponseDto>> GetReport(RefListReportTypes reportType, Guid wardId, DateTime filterDate)
         {
-            List<WardAdmission> allAdmissions = new List<WardAdmission>();
-            if (reportType == RefListReportTypes.Daily)
-                allAdmissions = await _wardAdmissionsRepository.GetAllListAsync(r => r.Ward.Id == wardId && r.CreationTime.Date == filterDate.Date);
-            else
-                allAdmissions = await _wardAdmissionsRepository.GetAllListAsync(r => r.Ward.Id == wardId && filterDate.Date.AddMonths(-1).Date <= r.CreationTime.Date && r.CreationTime.Date <= filterDate.Date);
+            var reports = await _reportHelper.GetReportAsync(reportType, wardId, filterDate);
 
-            if (allAdmissions.Count() < 0)
-                throw new UserFriendlyException("No results found for the ward");
-           
-            var allAdmissionReponse = ObjectMapper.Map<List<ReportResponseDto>>(allAdmissions);
-
-            return allAdmissionReponse;
+            return reports;
         }
     }
 }
