@@ -90,7 +90,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <returns></returns>
         public async Task<List<AdmissionResponse>> GetAllAsync(Guid wardId, DateTime admissionDate)
         {
-            var admissions = await _wardAdmissionRepositiory.GetAllListAsync(x => x.Ward.Id == wardId && x.StartDateTime.Value.Date == admissionDate.Date);
+            var admissions = await _wardAdmissionRepositiory.GetAllListAsync(x => x.Ward.Id == wardId && x.StartDateTime.Value.Date == admissionDate.Date && x.AdmissionStatus != RefListAdmissionStatuses.rejected);
 
             var admissionResponses = _mapper.Map<List<AdmissionResponse>>(admissions);
 
