@@ -1235,5 +1235,20 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211201201200">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201201200.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201201200.Down">
+            <summary>
+            
+            </summary>
+        </member>
     </members>
 </doc>
