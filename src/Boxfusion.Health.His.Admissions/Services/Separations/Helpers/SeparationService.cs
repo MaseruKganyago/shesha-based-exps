@@ -87,7 +87,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             Guard.Against.Null(hisPatient, nameof(hisPatient));
 
             var agebreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, input.SeparationDate.Value);
-            if (agebreakdown != "> 12 years" || agebreakdown != "5-12 years")
+            if (agebreakdown != "12 - 59 months")
+            { }
+            else if (agebreakdown != "5-12 years")
+            { }
+            else
                 Validation.ValidateReflist(input?.SeparationChildHealth, "Separation Child Health");
 
             if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.internalTransfer)
