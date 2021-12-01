@@ -15,19 +15,31 @@ namespace Boxfusion.Health.His.Domain.Domain.Enums
         /// <summary>
         /// 
         /// </summary>
+        [Description("Inprogress")]
+        Inprogress = 1,
+
+        /// <summary>
+        /// 
+        /// </summary>
         [Description("Approved")]
-        approved = 1,
+        approved = 2,
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("Awaiting Approval")]
+        awaitingApproval = 3,
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("Awaiting Final Approval")]
+        awaitingFinalApproval = 4,
 
         /// <summary>
         /// 
         /// </summary>
-        [Description("Not Approved")]
-        notApproved = 2,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [Description("Waiting for Approval")]
-        waitingForApproval = 3
+        [Description("Rejected")]
+        Rejected = 5
     }
 }

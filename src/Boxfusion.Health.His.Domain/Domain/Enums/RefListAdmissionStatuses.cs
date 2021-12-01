@@ -28,6 +28,12 @@ namespace Boxfusion.Health.His.Domain.Domain.Enums
         /// 
         /// </summary>
         [Description("In-Transit")]
-        inTransit = 3
+        inTransit = 3,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("Rejected")]
+        rejected = 4
     }
 }

@@ -1,11 +1,12 @@
-﻿using Boxfusion.Health.His.Domain.Domain;
+﻿using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
+using Boxfusion.Health.His.Domain.Domain;
 using Shesha.AutoMapper;
 using Shesha.AutoMapper.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
+namespace Boxfusion.Health.His.Admissions.Services.Wards.Dto
 {
     public class WardMidnightCensusReportMapProfile : ShaProfile
     {
@@ -18,6 +19,15 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
                 .ForMember(c => c.RejectedBy, options => options.MapFrom(c => c.RejectedBy != null ? new EntityWithDisplayNameDto<Guid?>(c.RejectedBy.Id, c.RejectedBy.FullName) : null))
                 .ForMember(c => c.Ward, options => options.MapFrom(c => c.Ward != null ? new EntityWithDisplayNameDto<Guid?>(c.Ward.Id, c.Ward.Name) : null))
                 .MapReferenceListValuesToDto();
+
+            CreateMap<DailyStats, WardMidnightCensusReport>()
+                .ForMember(c => c.MidnightCount, options => options.MapFrom(r => r.MidnightCount))
+                .ForMember(c => c.TotalAdmittedPatients, opt => opt.MapFrom(r => r.TotalAdmittedPatients))
+                .ForMember(c => c.TotalSeparatedPatients, opt => opt.MapFrom(r => r.TotalSeparatedPatients))
+                .ForMember(c => c.TotalBedAvailability, opt => opt.MapFrom(r => r.TotalBedAvailability))
+                .ForMember(c => c.NumBedsInWard, opt => opt.MapFrom(r => r.TotalBedInWard))
+                .ForMember(c => c.AverageBedAvailability, opt => opt.MapFrom(r => r.AverageBedAvailability))
+                ;
         }
     }
 }

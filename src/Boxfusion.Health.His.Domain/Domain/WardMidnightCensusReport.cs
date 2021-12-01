@@ -73,27 +73,27 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// <summary>
         /// 
         /// </summary>
-        public virtual int? MidnightCount { get; set; }
+        public virtual float? MidnightCount { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public virtual int? TotalAdmittedPatients { get; set; }
+        public virtual float? TotalAdmittedPatients { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public virtual int? TotalSeparatedPatients { get; set; }
+        public virtual float? TotalSeparatedPatients { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public virtual int? TotalBedAvailability { get; set; }
+        public virtual float? TotalBedAvailability { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public virtual int? NumBedsInWard { get; set; }
+        public virtual float? NumBedsInWard { get; set; }
 
         /// <summary>
         /// 
@@ -103,6 +103,11 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// <summary>
         /// 
         /// </summary>
-        public virtual double? AverageLengthofStay { get; set; }
+        public virtual float? AverageLengthofStay { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual float? AverageBedAvailability { get; set; }
     }
 }

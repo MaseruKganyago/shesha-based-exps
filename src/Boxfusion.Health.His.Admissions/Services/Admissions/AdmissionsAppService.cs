@@ -135,6 +135,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
                 var originalWard = await wardAdmissionService.GetAsync(wardAdmission.InternalTransferOriginalWard.Id);
                 wardAdmission.TransferRejectionReason = input?.TransferRejectionReason;
                 wardAdmission.TransferRejectionReasonComment = input?.TransferRejectionReasonComment;
+                wardAdmission.AdmissionStatus = RefListAdmissionStatuses.rejected;
 
                 originalWard.AdmissionStatus = RefListAdmissionStatuses.admitted;
 
