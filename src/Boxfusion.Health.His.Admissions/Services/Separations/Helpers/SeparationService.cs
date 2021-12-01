@@ -1,6 +1,7 @@
 ﻿using Abp.Dependency;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
+using Ardalis.GuardClauses;
 using AutoMapper;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
@@ -71,15 +72,19 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
 
             var encounterId = input.Id;
             var wardAdmission = await _wardAdmissionRepositiory.GetAsync(encounterId);
+            Guard.Against.Null(wardAdmission, nameof(wardAdmission));
             // wardAdmission = await GetEntityAsync<Encounter>(input.Id);
 
             HospitalAdmission hospitalAdmission = null;
-            if (wardAdmission?.PartOf != null)
-                hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
+            Guard.Against.Null(wardAdmission.PartOf, nameof(wardAdmission.PartOf));
+            hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
+            Guard.Against.Null(hospitalAdmission, nameof(hospitalAdmission));
+
 
             HisPatient hisPatient = null;
-            if (wardAdmission?.Subject != null)
-                hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
+            Guard.Against.Null(wardAdmission.Subject, nameof(wardAdmission.Subject));
+            hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
+            Guard.Against.Null(hisPatient, nameof(hisPatient));
 
             var agebreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, input.SeparationDate.Value);
             if (agebreakdown != "> 12 years" || agebreakdown != "5-12 years")
