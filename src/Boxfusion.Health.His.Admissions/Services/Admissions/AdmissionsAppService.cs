@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shesha;
 using Shesha.AutoMapper.Dto;
 using Shesha.Extensions;
+using Shesha.NHibernate;
 using Shesha.Web.DataTable;
 using System;
 using System.Collections.Generic;
@@ -140,6 +141,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
                 originalWard.AdmissionStatus = RefListAdmissionStatuses.admitted;
 
                 await wardAdmissionService.UpdateAsync(originalWard);
+                await CurrentUnitOfWork.SaveChangesAsync();
+                var _sessionProvider = Abp.Dependency.IocManager.Instance.Resolve<ISessionProvider>();
+                await _sessionProvider.Session.Transaction.CommitAsync();
                 respose.Rejected = true;
             }
 
