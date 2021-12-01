@@ -57,6 +57,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
             {
                 if (input.IsGautengGovFacility)
                     Validation.ValidateNullableType(input?.TransferToHospital, "Gauteng Government Destination Hospital");
+
                 if (!input.IsGautengGovFacility)
                     Validation.ValidateText(input?.TransferToNonGautengHospital, "None Gauteng Government Destination Hospital");
             }
