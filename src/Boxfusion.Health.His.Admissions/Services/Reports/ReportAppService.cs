@@ -14,6 +14,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Abp.UI;
+using Boxfusion.Health.His.Admissions.Services.Reports.Helpers;
+using Boxfusion.Health.HealthCommon.Core.Services;
 
 namespace Boxfusion.Health.His.Admissions.Services.Reports
 {
@@ -23,23 +25,22 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/HisAdmis/[controller]")]
-    public class ReportAppService : SheshaAppServiceBase,  IReportAppService
+    public class ReportAppService : CdmAppServiceBase,  IReportAppService
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly IRepository<WardAdmission, Guid> _wardAdmissionsRepository;
-        private readonly IRepository<HisPatient, Guid> _hisPatientRepository;
+        private readonly IReportHelper _reportHelper;
+        private readonly IRepository<WardRoleAppointedPerson, Guid> _wardRoleRepositiory;
 
         ///
-        public ReportAppService(IRepository<WardAdmission, Guid> wardAdmissionsRepository, IRepository<HisPatient, Guid> hisPatientRepository)
+        public ReportAppService(
+            IReportHelper reportHelper,
+            IRepository<WardRoleAppointedPerson, Guid> wardRoleRepositiory)
         {
-            _wardAdmissionsRepository = wardAdmissionsRepository;
-            _hisPatientRepository = hisPatientRepository;
+            _reportHelper = reportHelper;
+            _wardRoleRepositiory = wardRoleRepositiory;
         }
 
         /// <summary>
-        /// Returns the report based on the report type, date and ward
+        /// 
         /// </summary>
         /// <param name="reportType"></param>
         /// <param name="wardId"></param>
@@ -48,18 +49,16 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
         [HttpGet, Route("Reports")]
         public async Task<List<ReportResponseDto>> GetReport(RefListReportTypes reportType, Guid wardId, DateTime filterDate)
         {
-            List<WardAdmission> allAdmissions = new List<WardAdmission>();
-            if (reportType == RefListReportTypes.Daily)
-                allAdmissions = await _wardAdmissionsRepository.GetAllListAsync(r => r.Ward.Id == wardId && r.CreationTime.Date == filterDate.Date);
-            else
-                allAdmissions = await _wardAdmissionsRepository.GetAllListAsync(r => r.Ward.Id == wardId && filterDate.Date.AddMonths(-1).Date <= r.CreationTime.Date && r.CreationTime.Date <= filterDate.Date && r.AdmissionStatus != RefListAdmissionStatuses.rejected);
+            //var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            //var person = await GetCurrentLoggedPersonAsync();
+            //var wardRoleAppointedPersons = await _wardRoleRepositiory.GetAllListAsync(x => x.Person.Id == person.Id);
 
-            if (allAdmissions.Count() < 0)
-                throw new UserFriendlyException("No results found for the ward");
-           
-            var allAdmissionReponse = ObjectMapper.Map<List<ReportResponseDto>>(allAdmissions);
+            //if (!wardRoleAppointedPersons.Any(x => x.Ward.Id == wardId))
+            //    throw new UserFriendlyException("User is not assigned to the selected ward.");
 
-            return allAdmissionReponse;
+            var reports = await _reportHelper.GetReportAsync(reportType, wardId, filterDate);
+
+            return reports;
         }
     }
 }

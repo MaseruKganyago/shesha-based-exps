@@ -6,11 +6,13 @@ using AutoMapper;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
+using Boxfusion.Health.HealthCommon.Core.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.His.Admissions.Services.Separations.Dto;
 using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
+using NHibernate.Linq;
 using Shesha.AutoMapper.Dto;
 using Shesha.Extensions;
 using System;
@@ -81,9 +83,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             Guard.Against.Null(hospitalAdmission, nameof(hospitalAdmission));
 
 
-            HisPatient hisPatient = null;
+            // HisPatient hisPatient = null;
             Guard.Against.Null(wardAdmission.Subject, nameof(wardAdmission.Subject));
-            hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
+            var hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
             Guard.Against.Null(hisPatient, nameof(hisPatient));
 
             var agebreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, input.SeparationDate.Value);
@@ -92,14 +94,20 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             else if (agebreakdown != "5-12 years")
             { }
             else
+            {
                 Validation.ValidateReflist(input?.SeparationChildHealth, "Separation Child Health");
+                wardAdmission.SeparationChildHealth = (RefListSeparationChildHealths)input.SeparationChildHealth.ItemValue;
+            }
+            wardAdmission.AdmissionStatus = RefListAdmissionStatuses.separated;
+            wardAdmission.SeparationDate = input?.SeparationDate.Value;
+            wardAdmission.SeparationComment = input.SeparationComment;
+            wardAdmission.SeparationType = (RefListSeparationTypes?)input.SeparationType.ItemValue;
 
             if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.internalTransfer)
             {
-                wardAdmission = await _wardAdmissionRepositiory.GetAsync(encounterId);
-                wardAdmission.AdmissionStatus = RefListAdmissionStatuses.inTransit;
                 var separationDestinationWard = await _wardRepositiory.GetAsync(input.SeparationDestinationWard.Id.Value);
                 wardAdmission.SeparationDestinationWard = separationDestinationWard;
+
 
                 wardAdmission = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
 
@@ -113,15 +121,16 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
                 destinationWardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
                 destinationWardAdmission.Ward = separationDestinationWard; // input.SeparationDestinationWard.Id.Value;
                 destinationWardAdmission.InternalTransferOriginalWard = wardAdmission;
+                // destinationWardAdmission.wa
                 _mapper.Map(hisPatient, destinationWardAdmission);
                 var insertedDestinationWardAdmission = await _wardAdmissionRepositiory.InsertAsync(destinationWardAdmission);
-                (await _wardAdmissionRepositiory.UpdateAsync(wardAdmission)).InternalTransferDestinationWard = insertedDestinationWardAdmission;
-                wardAdmission = await _wardAdmissionRepositiory.UpdateAsync(await _wardAdmissionRepositiory.UpdateAsync(wardAdmission));
+
+                wardAdmission.InternalTransferDestinationWard = insertedDestinationWardAdmission;
+                wardAdmission = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
             }
             else if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.externalTransfer)
             {
                 //var sourceWardAdmission = _mapper.Map<WardAdmission>(wardAdmission);
-                wardAdmission.AdmissionStatus = RefListAdmissionStatuses.separated;
                 wardAdmission.SeparationType = RefListSeparationTypes.externalTransfer;
                 await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
 
@@ -141,7 +150,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             }
             else
             {
-                wardAdmission.AdmissionStatus = RefListAdmissionStatuses.separated;
                 wardAdmission.SeparationType = (RefListSeparationTypes)input.SeparationType.ItemValue;
                 await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
 
@@ -149,26 +157,34 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
                 await _hospitalAdmissionRepositiory.UpdateAsync(hospitalAdmission);
             }
 
-            var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient);
-            await UpdateConditions(hisPatient, hospitalAdmission, input, currentLoggedInPerson);
 
             var admissionResponse = _mapper.Map<AdmissionResponse>(hisPatient);
             _mapper.Map(wardAdmission, admissionResponse);
             _mapper.Map(hospitalAdmission, admissionResponse);
 
-            admissionResponse.SeparationDate = input.SeparationDate;
-            admissionResponse.SeparationType = input.SeparationType;
-            admissionResponse.SeparationDestinationWard = input.SeparationDestinationWard;
-            admissionResponse.SeparationComment = input.SeparationComment;
+
             if (hisPatient.DateOfBirth.HasValue && input.SeparationDate.HasValue)
                 admissionResponse.AgeBreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, input.SeparationDate.Value);
 
-            // admissionResponse.InternalTransferDestinationWard = wardAdmission.InternalTransferDestinationWard;
+            var conditions = await _conditionRepositiory.GetAllListAsync(x => x.HospitalisationEncounter == hospitalAdmission);
 
-            // admissionResponse.InternalTransferOriginalWard = wardAdmission.InternalTransferOriginalWard;
+            List<ConditionIcdTenCode> conditionIcdTenCodes = null;
+            List<IcdTenCode> icdTenCodes = null;
+            if (conditions.Count() > 0)
+            {
+                conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition));
+
+                var temp = conditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
+                if (conditionIcdTenCodes.Count() > 0)
+                    icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => temp.Contains(x.Id)).ToListAsync();
+            }
+            List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
+            icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
+
+            UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
+
 
             return admissionResponse;
-
         }
 
         /// <summary>

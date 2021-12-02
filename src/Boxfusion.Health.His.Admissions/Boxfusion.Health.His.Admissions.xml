@@ -565,7 +565,102 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.IdentificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.IdentityNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.DateOfBirth">
+            <summary>
+            Date of birth
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.Gender">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.AdmissionDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.WardAdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.HospitalPatientNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.AdmissionType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.Speciality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.PatientProvince">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.Classification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.Nationality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.OtherCategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.AdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.PatientDays">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.IdentificationType">
             <summary>
             
             </summary>
@@ -585,7 +680,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.StartDateTime">
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.AdmissionDate">
             <summary>
             
             </summary>
@@ -620,7 +715,17 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.PatientProvince">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.Classification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.Nationality">
             <summary>
             
             </summary>
@@ -640,27 +745,55 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.Subject">
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.IReportHelper">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Dto.SubjectResponse">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.IReportHelper.GetReportAsync(Boxfusion.Health.His.Domain.Domain.Enums.RefListReportTypes,System.Guid,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="reportType"></param>
+            <param name="wardId"></param>
+            <param name="filterDate"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.ReportHelper">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.SubjectResponse.Nationality">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.ReportHelper.#ctor(AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>IMapper _mapper
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.ReportHelper.#cctor">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.SubjectResponse.PatientProvince">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.ReportHelper.GetReportAsync(Boxfusion.Health.His.Domain.Domain.Enums.RefListReportTypes,System.Guid,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="reportType"></param>
+            <param name="wardId"></param>
+            <param name="filterDate"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.Util">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.SubjectResponse.IdentificationType">
+        <member name="F:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.Util.DailyReportSqlQuery">
+            <summary>
+            SQL 
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.Util.MonthReportSqlQuery">
             <summary>
             
             </summary>
@@ -670,17 +803,12 @@
             
             </summary>
         </member>
-        <member name="F:Boxfusion.Health.His.Admissions.Services.Reports.ReportAppService._wardAdmissionsRepository">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.ReportAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.ReportAppService.#ctor(Boxfusion.Health.His.Admissions.Services.Reports.Helpers.IReportHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.WardRoleAppointedPerson,System.Guid})">
             
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.ReportAppService.GetReport(Boxfusion.Health.His.Domain.Domain.Enums.RefListReportTypes,System.Guid,System.DateTime)">
             <summary>
-            Returns the report based on the report type, date and ward
+            
             </summary>
             <param name="reportType"></param>
             <param name="wardId"></param>
@@ -1194,6 +1322,16 @@
         <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.Speciality">
             <summary>
             
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.InternalTransferOriginalWard">
+            <summary>
+            Used to like the serparations
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.InternalTransferDestinationWard">
+            <summary>
+            Used to like the serparations
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.AgeBreakdown" -->

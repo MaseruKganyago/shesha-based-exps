@@ -145,14 +145,15 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             _mapper.Map(hisPatient, admissionResponse);
             UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
 
-            admissionResponse.SeparationDate = wardAdmission.SeparationDate;
+            //admissionResponse.SeparationDate = wardAdmission.SeparationDate;
             //admissionResponse.SeparationType = new ReferenceListItemValueDto
             //{
             //    Item = nameof(wardAdmission.SeparationType),
             //    ItemValue = (long?)wardAdmission.SeparationType.Value
             //};
             //admissionResponse.SeparationDestinationWard = new EntityWithDisplayNameDto<WardAdmission>(wardAdmission);
-            admissionResponse.SeparationComment = wardAdmission.SeparationComment;
+            // admissionResponse.SeparationComment = wardAdmission.SeparationComment;
+
             if (hisPatient.DateOfBirth.HasValue && wardAdmission.SeparationDate.HasValue)
                 admissionResponse.AgeBreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, wardAdmission.SeparationDate.Value);
 
