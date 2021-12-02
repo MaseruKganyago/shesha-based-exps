@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\M20211116200800.cs" />
     <Compile Remove="Services\HisPatients\Dtos\HisPatientInput.cs" />
     <Compile Remove="Services\HisPatients\Dtos\HisPatientResponse.cs" />
   </ItemGroup>
