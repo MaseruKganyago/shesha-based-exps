@@ -177,12 +177,12 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         /// <summary>
         /// Used to like the serparations
         /// </summary>
-        // public virtual WardAdmission InternalTransferOriginalWard { get; set; }
+        public EntityWithDisplayNameDto<Guid?> InternalTransferOriginalWard { get; set; }
 
         /// <summary>
         /// Used to like the serparations
         /// </summary>
-        // public  WardAdmission InternalTransferDestinationWard { get; set; }
+        public EntityWithDisplayNameDto<Guid?> InternalTransferDestinationWard { get; set; }
 
         // <summary>
         /// 
