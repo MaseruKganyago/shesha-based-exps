@@ -42,6 +42,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(c => c.SeparationComment, options => options.MapFrom(c => c.SeparationComment))
                 .ForMember(a => a.InternalTransferOriginalWard, options => options.MapFrom(b => GetEntity<Ward>(b.InternalTransferOriginalWard)))
                 .ForMember(a => a.InternalTransferDestinationWard, options => options.MapFrom(b => GetEntity<Ward>(b.InternalTransferDestinationWard)))
+                .ForMember(e => e.ReasonCode, e => e.MapFrom(e => UtilityHelper.SetMultiValueReferenceList(e.ReasonCode)))
                 .MapReferenceListValuesFromDto();
 
             CreateMap<AdmissionInput, HospitalAdmission>()
