@@ -37,14 +37,17 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [HttpGet, Route("ApproveLevel1")]
         public async Task<WardMidnightCensusReportResponse> ApproveLevel1(WardCensusInput input)
         {
-            var ward = await GetEntityAsync<HisWard>(input.WardId);
+            var approvalModel = await _sessionDataProvider.GetApprovalModels(input.WardId);
+            if (!approvalModel.Any()) throw new UserFriendlyException("The spacified ward doesn't have MidnightCensusApprovalModel");
+            var approval = approvalModel[0];
 
-            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
+            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward.Id == input.WardId && r.ReportDate == input.ReportDate);
 
-            if (entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingApproval && ward.MidnightCensusApprovalModel == His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.TwoApprover)
+            if (entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingApproval && approval.His_MidnightCensusApprovalModelLkp == (float)His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.TwoApprover)
             {
                 entity.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingFinalApproval;
                 entity.ApprovedBy = await GetCurrentPersonAsync() as PersonFhirBase;
+                entity.ApprovalTime = DateTime.Now;
 
                 await _wardMidnightCensusReport.UpdateAsync(entity);
             }
@@ -63,7 +66,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [HttpGet, Route("ApproveLevel2")]
         public async Task<WardMidnightCensusReportResponse> ApproveLevel2(WardCensusInput input)
         {
-            var ward = await GetEntityAsync<HisWard>(input.WardId);
+            var ward = await GetEntityAsync<Ward>(input.WardId);
 
             var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
 
@@ -71,10 +74,26 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             {
                 entity.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.approved;
                 entity.ApprovedBy2 = await GetCurrentPersonAsync() as PersonFhirBase;
+                entity.ApprovalTime2 = DateTime.Now;
 
                 //Todo: Calculate stats for the day and save to the WardReport table
+                var calculatedReport = await _sessionDataProvider.GetDailyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
+                if (!calculatedReport.Any())
+                {
+                    throw new UserFriendlyException("No records found for the ward and date specified");
+                }
+                var dailyStat = calculatedReport[0];
 
-                await _wardMidnightCensusReport.UpdateAsync(entity);
+                entity = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(entity.Id, async (item) =>
+                {
+                    ObjectMapper.Map(dailyStat, item);
+                    item.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress;
+                    item.BedUtilisation = (double?)dailyStat.BedUtilisation;
+                    item.AverageLengthofStay = (float?)dailyStat.AverageLengthOfStay;
+                    item.ReportType = His.Domain.Domain.Enums.RefListReportType.Daily;
+                    item.ReportDate = input.ReportDate;
+                    item.Ward = ward;
+                });
             }
             else
             {
@@ -124,7 +143,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                     item.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress;
                     item.BedUtilisation = (double?)dailyStat.BedUtilisation;
                     item.AverageLengthofStay = (float?)dailyStat.AverageLengthOfStay;
+                    item.ReportType = His.Domain.Domain.Enums.RefListReportType.Daily;
+                    item.ReportDate = input.ReportDate;
+                    item.Ward = ward;
                 });
+                return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
             }
 
             if (entity.ApprovalStatus != His.Domain.Domain.Enums.RefListApprovalStatuses.approved)
@@ -187,18 +210,20 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [HttpPost, Route("SubmitForApproval")]
         public async Task<WardMidnightCensusReportResponse> SubmitForApproval(WardCensusInput input)
         {
-            var ward = await GetEntityAsync<HisWard>(input.WardId);
+            var approvalModel = await _sessionDataProvider.GetApprovalModels(input.WardId);
+            if(!approvalModel.Any()) throw new UserFriendlyException("The spacified ward doesn't have MidnightCensusApprovalModel");
 
-            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
+            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward.Id == input.WardId && r.ReportDate == input.ReportDate);
             //Check Midnight for the day.
 
             if (entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress || entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.Rejected)
             {
-                if (ward.MidnightCensusApprovalModel == His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.SingleApprover)
+                var approval = approvalModel[0];
+                if (approval.His_MidnightCensusApprovalModelLkp == (float)His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.SingleApprover)
                 {
                     entity.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingFinalApproval;
                 }
-                if (ward.MidnightCensusApprovalModel == His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.TwoApprover)
+                if (approval.His_MidnightCensusApprovalModelLkp == (float)His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.TwoApprover)
                 {
                     entity.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingApproval;
                 }

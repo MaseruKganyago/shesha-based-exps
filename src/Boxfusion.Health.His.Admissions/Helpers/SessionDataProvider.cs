@@ -1,5 +1,6 @@
 ﻿using Abp.UI;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
+using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
 using NHibernate.Transform;
 using Shesha.NHibernate;
 using System;
@@ -21,6 +22,28 @@ namespace Boxfusion.Health.His.Admissions.Helpers
         public SessionDataProvider(ISessionProvider sessionProvider)
         {
             _sessionProvider = sessionProvider;
+        }
+
+        public async Task<List<MidnightCensusApprovalModels>> GetApprovalModels(Guid wardId)
+        {
+            try
+            {
+                return (await _sessionProvider.Session
+                    .CreateSQLQuery(@"
+                            SELECT [His_MidnightCensusApprovalModelLkp]
+                            FROM [dbo].[Core_Facilities]
+                            WHERE Id = :WardId                         
+                    ")
+                    .SetParameter("WardId", wardId)
+                    .SetResultTransformer(Transformers.AliasToBean<MidnightCensusApprovalModels>())
+                    .ListAsync<MidnightCensusApprovalModels>())
+                    .ToList();
+            }
+            catch (Exception Ex)
+            {
+
+                throw new UserFriendlyException(Ex.Message);
+            }
         }
 
         public async Task<List<DailyStats>> GetDailyStats(WardCensusInput input)
