@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Abp.UI;
 using Boxfusion.Health.His.Admissions.Services.Reports.Helpers;
+using Boxfusion.Health.HealthCommon.Core.Services;
 
 namespace Boxfusion.Health.His.Admissions.Services.Reports
 {
@@ -24,15 +25,18 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/HisAdmis/[controller]")]
-    public class ReportAppService : SheshaAppServiceBase,  IReportAppService
+    public class ReportAppService : CdmAppServiceBase,  IReportAppService
     {
         private readonly IReportHelper _reportHelper;
+        private readonly IRepository<WardRoleAppointedPerson, Guid> _wardRoleRepositiory;
 
         ///
         public ReportAppService(
-            IReportHelper reportHelper)
+            IReportHelper reportHelper,
+            IRepository<WardRoleAppointedPerson, Guid> wardRoleRepositiory)
         {
             _reportHelper = reportHelper;
+            _wardRoleRepositiory = wardRoleRepositiory;
         }
 
         /// <summary>
@@ -45,6 +49,13 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
         [HttpGet, Route("Reports")]
         public async Task<List<ReportResponseDto>> GetReport(RefListReportTypes reportType, Guid wardId, DateTime filterDate)
         {
+            //var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            var person = await GetCurrentLoggedPersonAsync();
+            var wardRoleAppointedPersons = await _wardRoleRepositiory.GetAllListAsync(x => x.Person.Id == person.Id);
+
+            if (!wardRoleAppointedPersons.Any(x => x.Ward.Id == wardId))
+                throw new UserFriendlyException("User is not assigned to the selected ward.");
+
             var reports = await _reportHelper.GetReportAsync(reportType, wardId, filterDate);
 
             return reports;
