@@ -117,7 +117,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         public async Task<AdmissionResponse> GetAsync(Guid id)
         {
             var wardAdmission = await _wardAdmissionRepositiory.GetAsync(id);
-            var admissionResponse = _mapper.Map<AdmissionResponse>(wardAdmission);
             HospitalAdmission hospitalAdmission = null;
             if (wardAdmission?.PartOf != null)
                 hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
@@ -141,7 +140,9 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
             icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
 
-            _mapper.Map(hospitalAdmission, admissionResponse);
+
+            var admissionResponse = _mapper.Map<AdmissionResponse>(hospitalAdmission);
+            _mapper.Map(wardAdmission, admissionResponse);
             _mapper.Map(hisPatient, admissionResponse);
             UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
 
@@ -330,8 +331,8 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             };
             var insertedDiagnosis = await _diagnosisRepositiory.InsertAsync(diagnosis);
 
-            _mapper.Map(insertedWardAdmission, admissionResponse);
             _mapper.Map(insertedHospitalAdmission, admissionResponse);
+            _mapper.Map(insertedWardAdmission, admissionResponse);
             UtilityHelper.TrySetProperty(admissionResponse, "Code", icdTenCodeResponses);
 
             return admissionResponse;
