@@ -35,7 +35,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             _sessionDataProvider = sessionDataProvider;
         }
 
-        [HttpGet, Route("ApproveLevel1")]
+        [HttpPost, Route("ApproveLevel1")]
         [AbpAuthorize(PermissionNames.ApproveReport)]
         public async Task<WardMidnightCensusReportResponse> ApproveLevel1(WardCensusInput input)
         {
@@ -65,7 +65,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [HttpGet, Route("ApproveLevel2")]
+        [HttpPost, Route("ApproveLevel2")]
         [AbpAuthorize(PermissionNames.ApproveReport)]
         public async Task<WardMidnightCensusReportResponse> ApproveLevel2(WardCensusInput input)
         {
