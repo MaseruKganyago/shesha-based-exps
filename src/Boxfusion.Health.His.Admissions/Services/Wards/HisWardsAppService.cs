@@ -4,6 +4,7 @@ using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
+using Boxfusion.Health.His.Admissions.Authorization;
 using Boxfusion.Health.His.Admissions.Helpers;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
 using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
@@ -35,6 +36,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         }
 
         [HttpGet, Route("ApproveLevel1")]
+        [AbpAuthorize(PermissionNames.ApproveReport)]
         public async Task<WardMidnightCensusReportResponse> ApproveLevel1(WardCensusInput input)
         {
             var approvalModel = await _sessionDataProvider.GetApprovalModels(input.WardId);
@@ -64,6 +66,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet, Route("ApproveLevel2")]
+        [AbpAuthorize(PermissionNames.ApproveReport)]
         public async Task<WardMidnightCensusReportResponse> ApproveLevel2(WardCensusInput input)
         {
             var ward = await GetEntityAsync<Ward>(input.WardId);
@@ -121,6 +124,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet, Route("DailyReport")]
+        [AbpAuthorize(PermissionNames.DailyReports)]
         public async Task<WardMidnightCensusReportResponse> GetWardDailyReport(WardCensusInput input)
         {
             var ward = await GetEntityAsync<Ward>(input.WardId);
@@ -181,6 +185,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("Reject")]
+        [AbpAuthorize(PermissionNames.DisapproveReport)]
         public async Task<WardMidnightCensusReportResponse> Reject(RejectReportInput input)
         {
             var ward = await GetEntityAsync<Ward>(input.WardId);
@@ -208,6 +213,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("SubmitForApproval")]
+        [AbpAuthorize(PermissionNames.DailyReports)]
         public async Task<WardMidnightCensusReportResponse> SubmitForApproval(WardCensusInput input)
         {
             var approvalModel = await _sessionDataProvider.GetApprovalModels(input.WardId);

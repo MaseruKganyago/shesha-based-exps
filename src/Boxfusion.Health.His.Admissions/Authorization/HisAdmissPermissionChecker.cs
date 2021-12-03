@@ -43,6 +43,9 @@ namespace Boxfusion.Health.His.Admissions.Authorization
                 return true;
 
             // add custom permission checks here...
+            if (permissionName == PermissionNames.ApproveReport || permissionName == PermissionNames.DisapproveReport 
+                || permissionName == PermissionNames.DailyReports || permissionName == PermissionNames.MonthlyReports)
+                return await this.IsApproverLevel1(person) || await this.IsApproverLevel2(person);
             
             return false;
         }
@@ -67,6 +70,16 @@ namespace Boxfusion.Health.His.Admissions.Authorization
         public bool IsGranted(long userId, string permissionName)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool> IsApproverLevel1(Person person)
+        {
+            return await IsInAnyOfRoles(person, RoleNames.ApproverLevel1);
+        }
+
+        public async Task<bool> IsApproverLevel2(Person person)
+        {
+            return await IsInAnyOfRoles(person, RoleNames.ApproverLevel2);
         }
     }
 }
