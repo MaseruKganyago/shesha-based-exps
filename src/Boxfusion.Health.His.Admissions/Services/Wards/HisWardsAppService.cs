@@ -213,7 +213,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("SubmitForApproval")]
-        [AbpAuthorize(PermissionNames.DailyReports)]
+        [AbpAuthorize(PermissionNames.SubmitsReportsForApproval)]
         public async Task<WardMidnightCensusReportResponse> SubmitForApproval(WardCensusInput input)
         {
             var approvalModel = await _sessionDataProvider.GetApprovalModels(input.WardId);
