@@ -15,7 +15,6 @@
         public const string MonthlyReports = "pages:monthlyReports"; 
         public const string CreateFacility = "pages:createfacility"; 
         public const string Facilities = "pages:facilities";
-        public const string Pages_Users = "Pages.Users";
         public const string CaptureAdmissions = "pages:captureAdmissions";
         public const string SeparateAndTransfer = "pages:separateandtransfer";
         public const string SubmitsReportsForApproval = "pages:submitsReportsForApproval";

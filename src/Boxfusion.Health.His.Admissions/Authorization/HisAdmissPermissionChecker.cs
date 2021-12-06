@@ -50,7 +50,7 @@ namespace Boxfusion.Health.His.Admissions.Authorization
             if (permissionName == PermissionNames.CreateFacility || permissionName == PermissionNames.Facilities)
                 return await this.IsGlobalAdmin(person);
 
-            if (permissionName == PermissionNames.Pages_Users)
+            if (permissionName == Shesha.Authorization.PermissionNames.Pages_Users)
                 return await this.IsFacilityAdmin(person);
             
             if (permissionName == PermissionNames.SeparateAndTransfer || permissionName == PermissionNames.SubmitsReportsForApproval)
