@@ -46,7 +46,22 @@ namespace Boxfusion.Health.His.Admissions.Authorization
             if (permissionName == PermissionNames.ApproveReport || permissionName == PermissionNames.DisapproveReport 
                 || permissionName == PermissionNames.DailyReports || permissionName == PermissionNames.MonthlyReports)
                 return await this.IsApproverLevel1(person) || await this.IsApproverLevel2(person);
+
+            if (permissionName == PermissionNames.CreateFacility || permissionName == PermissionNames.Facilities)
+                return await this.IsGlobalAdmin(person);
+
+            if (permissionName == PermissionNames.Pages_Users)
+                return await this.IsFacilityAdmin(person);
             
+            if (permissionName == PermissionNames.SeparateAndTransfer || permissionName == PermissionNames.SubmitsReportsForApproval)
+                return await this.IsCapturer(person);
+
+            if (permissionName == PermissionNames.DailyReports)
+                return await this.IsViewer(person);
+
+            if (permissionName == PermissionNames.ReportsAndStats)
+                return await this.IsViewer(person) || await this.IsCapturer(person) || await this.IsManager(person) || await this.IsApproverLevel1(person) || await this.IsApproverLevel2(person);
+
             return false;
         }
 
@@ -80,6 +95,30 @@ namespace Boxfusion.Health.His.Admissions.Authorization
         public async Task<bool> IsApproverLevel2(Person person)
         {
             return await IsInAnyOfRoles(person, RoleNames.ApproverLevel2);
+        }
+        public async Task<bool> IsManager(Person person)
+        {
+            return await IsInAnyOfRoles(person, RoleNames.Manager);
+        }
+
+        public async Task<bool> IsGlobalAdmin(Person person)
+        {
+            return await IsInAnyOfRoles(person, RoleNames.GlobalAdmin);
+        }
+
+        public async Task<bool> IsFacilityAdmin(Person person)
+        {
+            return await IsInAnyOfRoles(person, RoleNames.FacilityAdmin);
+        }
+
+        public async Task<bool> IsCapturer(Person person)
+        {
+            return await IsInAnyOfRoles(person, RoleNames.Capturer);
+        }
+
+        public async Task<bool> IsViewer(Person person)
+        {
+            return await IsInAnyOfRoles(person, RoleNames.Viewer);
         }
     }
 }
