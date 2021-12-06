@@ -1,18 +1,25 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Abp.Runtime.Session;
 using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
+using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
+using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Admissions.Authorization;
+using Boxfusion.Health.His.Admissions.Domain.Views;
 using Boxfusion.Health.His.Admissions.Helpers;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
 using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
+using Boxfusion.Health.His.Admissions.Services.Wards.Dto.Helpers;
 using Boxfusion.Health.His.Domain.Domain;
 using Microsoft.AspNetCore.Mvc;
 using NHibernate.Linq;
 using Shesha;
+using Shesha.AutoMapper.Dto;
 using Shesha.Domain;
+using Shesha.Web.DataTable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,18 +28,79 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Admissions.Services.Wards
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/admissions/[controller]")]
-    public class HisWardsAppService : SheshaAppServiceBase, IHisWardsAppService
+    public class HisWardsAppService : CdmAppServiceBase, IHisWardsAppService
     {
         private readonly IRepository<WardMidnightCensusReport, Guid> _wardMidnightCensusReport;
         private readonly ISessionDataProvider _sessionDataProvider;
+        private readonly IWardCrudHelper _wardCrudHelper;
 
-        public HisWardsAppService(IRepository<WardMidnightCensusReport, Guid> wardMidnightCensusReport, ISessionDataProvider sessionDataProvider)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wardMidnightCensusReport"></param>
+        /// <param name="sessionDataProvider"></param>
+        /// <param name="wardCrudHelper"></param>
+        public HisWardsAppService(
+            IRepository<WardMidnightCensusReport, Guid> wardMidnightCensusReport, 
+            ISessionDataProvider sessionDataProvider,
+            IWardCrudHelper wardCrudHelper)
         {
             _wardMidnightCensusReport = wardMidnightCensusReport;
             _sessionDataProvider = sessionDataProvider;
+            _wardCrudHelper = wardCrudHelper;
+        }
+
+        /// <summary>
+        /// Ward index table
+        /// </summary>
+        /// <returns></returns>
+        public static DataTableConfig IndexTable()
+        {
+            var table = new DataTableConfig<WardItems, Guid>("Wards_Index");
+
+            table.AddProperty(e => e.Speciality, c => c.Caption("Ward Speciality"));
+            table.AddProperty(e => e.Name, d => d.Caption("Ward Name"));
+            table.AddProperty(e => e.Description, d => d.Caption("Ward Description"));
+            table.AddProperty(e => e.NumberOfBeds, d => d.Caption("No. of Beds"));
+            table.OnRequestToFilter = (criteria, form) =>
+            {
+                var _session = Abp.Dependency.IocManager.Instance.Resolve<IAbpSession>();
+                var _accidentReportRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<ShaRoleAppointedPerson, Guid>>();
+                var personService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Person, Guid>>();
+                //var _permissions = Abp.Dependency.IocManager.Instance.Resolve<ARFormsPermissionChecker>();
+
+                var person = personService.FirstOrDefault(c => c.User.Id == _session.GetUserId());
+                var wardsId = new List<string>() { $"ent.Id='{Guid.Empty}'" };
+
+
+
+
+            };
+
+            return table;
+        }
+
+        /// <summary>
+        /// Speciality
+        /// </summary>
+        /// <returns></returns>
+        public static DataTableConfig SpecialityIndexTable()
+        {
+            var table = new DataTableConfig<SpecialityItems, Guid>("Specialities_Index");
+
+            table.AddProperty(e => e.Speciality, c => c.Caption("Ward Speciality"));
+            table.AddProperty(e => e.NumberOfBedsInSpeciality, d => d.Caption("Ward Name"));
+            table.OnRequestToFilter = (criteria, form) =>
+            {
+            };
+
+            return table;
         }
 
         [HttpPost, Route("ApproveLevel1")]
@@ -242,6 +310,112 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             }
 
             return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("")]
+        public async Task<List<WardResponse>> GetWardsAsync()
+        {
+            return await _wardCrudHelper.GetAllAsync();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hospitalId"></param>
+        /// <returns></returns>
+        [HttpGet, Route("[action]/{hospitalId}")]
+        public async Task<List<WardResponse>> GetWardByHospitalAsync(Guid hospitalId)
+        {
+            return await _wardCrudHelper.GetWardByHospitalAsync(hospitalId);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ownerOrganisationId"></param>
+        /// <param name="term"></param>
+        /// <returns></returns>
+        [HttpGet, Route("ownerOrganisation/{ownerOrganisationId}")]
+        public async Task<List<AutocompleteItemDto>> GetWardByHospitalAutoCompleteAsync(Guid ownerOrganisationId, string term = null)
+        {
+            term = (term ?? "").ToLower();
+            return ObjectMapper.Map<List<AutocompleteItemDto>>(await _wardCrudHelper.GetWardByHospitalAutoCompleteAsync(term, ownerOrganisationId));
+        }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="term"></param>
+        ///// <param name="personId"></param>
+        ///// <returns></returns>
+        //[HttpGet, Route("subject/{personId}")]
+        //public async Task<List<AutocompleteItemDto>> GetWardByPersonAutoCompleteAsync(Guid personId)
+        //{
+        //    return ObjectMapper.Map<List<AutocompleteItemDto>>(await _wardCrudHelper.GetWardByPersonAutoCompleteAsync(personId));
+        //}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet, Route("{id}")]
+        public async Task<WardResponse> GetWardAsync(Guid id)
+        {
+            return await _wardCrudHelper.GetAsync(id);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost, Route("")]
+        public async Task<WardResponse> CreateWardAsync(WardInput input)
+        {
+            await ValidatePermissionsForAdmin();
+            Validation.ValidateText(input?.Name, "Name");
+            Validation.ValidateText(input?.Description, "Description");
+            Validation.ValidateNullableType(input?.NumberOfBeds, "NumberOfBeds");
+            Validation.ValidateReflist(input?.Speciality, "Speciliaty");
+            Validation.ValidateEntityWithDisplayNameDto(input?.OwnerOrganisation, "OwnerOrganisation");
+
+            return await _wardCrudHelper.CreateAsync(input);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPut, Route("")]
+        public async Task<WardResponse> UpdateWardAsync(WardInput input)
+        {
+            await ValidatePermissionsForAdmin();
+            Validation.ValidateIdWithException(input?.Id, "Ward Id cannot be empty");
+            Validation.ValidateText(input.Name, "Name");
+            Validation.ValidateText(input.Description, "Description");
+            Validation.ValidateNullableType(input.NumberOfBeds, "NumberOfBeds");
+            Validation.ValidateReflist(input?.Speciality, "Speciliaty");
+            Validation.ValidateEntityWithDisplayNameDto(input?.OwnerOrganisation, "OwnerOrganisation");
+
+            return await _wardCrudHelper.UpdateAsync(input);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete, Route("{id}")]
+        public async Task DeleteWardAsync(Guid id)
+        {
+            Validation.ValidateIdWithException(id, "Ward Id cannot be empty");
+            await _wardCrudHelper.DeleteAsync(id);
         }
     }
 }
