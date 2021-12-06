@@ -1975,6 +1975,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.IWardCrudHelper.IsPersonAssignedToHospital(System.Guid)">
+            <summary>
+            This function will be used to determine if the current is assigned to the hospital they are querying ward data for
+            </summary>
+            <param name="wardId"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.WardCrudHelper">
             <summary>
             
