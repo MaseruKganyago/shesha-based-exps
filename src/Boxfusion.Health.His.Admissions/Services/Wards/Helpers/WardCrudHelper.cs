@@ -18,7 +18,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Admissions.Services.Wards.Dto.Helpers
+namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
 {
     /// <summary>
     /// 
