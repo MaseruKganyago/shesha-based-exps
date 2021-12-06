@@ -12,7 +12,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals
     /// <summary>
     /// 
     /// </summary>
-    public interface IHospitalsAppService : IApplicationService
+    public interface IHisHospitalsAppService : IApplicationService
     {
         /// <summary>
         /// 

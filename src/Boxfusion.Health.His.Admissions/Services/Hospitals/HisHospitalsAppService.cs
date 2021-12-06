@@ -6,7 +6,6 @@ using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers;
-using Boxfusion.Health.HealthCommon.Core.Services.Organisations.Hospitals.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Shesha.Web.DataTable;
 using System;
@@ -23,7 +22,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/admissions/[controller]")]
-    public class HospitalsAppService : CdmAppServiceBase, IHospitalsAppService
+    public class HisHospitalsAppService : CdmAppServiceBase, IHisHospitalsAppService
     {
         private readonly IHospitalCrudHelper _HospitalCrudHelper;
 
@@ -31,7 +30,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers
         /// 
         /// </summary>
         /// <param name="HospitalCrudHelper"></param>
-        public HospitalsAppService(
+        public HisHospitalsAppService(
             IHospitalCrudHelper HospitalCrudHelper)
         {
             _HospitalCrudHelper = HospitalCrudHelper;

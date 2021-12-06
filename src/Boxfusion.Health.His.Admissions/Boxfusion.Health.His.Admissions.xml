@@ -719,77 +719,77 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HospitalsAppService">
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HisHospitalsAppService">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HospitalsAppService.#ctor(Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.IHospitalCrudHelper)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HisHospitalsAppService.#ctor(Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.IHospitalCrudHelper)">
             <summary>
             
             </summary>
             <param name="HospitalCrudHelper"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HospitalsAppService.GetHospitalsAsync">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HisHospitalsAppService.GetHospitalsAsync">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HospitalsAppService.GetHospitalAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HisHospitalsAppService.GetHospitalAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HospitalsAppService.CreateHospitalAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HisHospitalsAppService.CreateHospitalAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HospitalsAppService.UpdateHospitalAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HisHospitalsAppService.UpdateHospitalAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HospitalsAppService.DeleteHospitalAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HisHospitalsAppService.DeleteHospitalAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Services.Hospitals.IHospitalsAppService">
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Hospitals.IHisHospitalsAppService">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.IHospitalsAppService.GetHospitalsAsync">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.IHisHospitalsAppService.GetHospitalsAsync">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.IHospitalsAppService.GetHospitalAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.IHisHospitalsAppService.GetHospitalAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.IHospitalsAppService.CreateHospitalAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.IHisHospitalsAppService.CreateHospitalAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.IHospitalsAppService.UpdateHospitalAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.IHisHospitalsAppService.UpdateHospitalAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
             <summary>
             
             </summary>
@@ -797,7 +797,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.IHospitalsAppService.DeleteHospitalAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.IHisHospitalsAppService.DeleteHospitalAsync(System.Guid)">
             <summary>
             
             </summary>
