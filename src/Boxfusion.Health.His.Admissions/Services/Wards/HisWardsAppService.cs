@@ -177,6 +177,20 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// 
         /// </summary>
         /// <returns></returns>
+        [HttpGet, Route("AssignedHospitals")]
+        public async Task<List<HospitalResponse>> GetAssignedHospitals()
+        {
+            var currentPerson = await GetCurrentPersonAsync();
+            var appointmentService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
+            var wards = await appointmentService.GetAll().Where(r => r.Person == currentPerson).Select(r => r.Hospital).ToListAsync();
+
+            return ObjectMapper.Map<List<HospitalResponse>>(wards);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet, Route("AssignedWards")]
         public async Task<List<WardResponse>> GetAssignedWards()
         {
@@ -281,7 +295,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("SubmitForApproval")]
-        [AbpAuthorize(PermissionNames.DailyReports)]
+        [AbpAuthorize(PermissionNames.SubmitsReportsForApproval)]
         public async Task<WardMidnightCensusReportResponse> SubmitForApproval(WardCensusInput input)
         {
             var approvalModel = await _sessionDataProvider.GetApprovalModels(input.WardId);

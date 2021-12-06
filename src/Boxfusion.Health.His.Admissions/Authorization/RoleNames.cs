@@ -22,5 +22,25 @@
         /// 
         /// </summary>
         public const string ApproverLevel2 = "Approver Level 2";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string Manager = "Manager";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string Viewer = "Viewer";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string Capturer = "Capturer";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string FacilityAdmin = "Facility Admin";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string GlobalAdmin = "Global Admin";
     }
 }
