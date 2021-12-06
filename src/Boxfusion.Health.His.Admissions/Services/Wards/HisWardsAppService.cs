@@ -12,7 +12,7 @@ using Boxfusion.Health.His.Admissions.Domain.Views;
 using Boxfusion.Health.His.Admissions.Helpers;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
 using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
-using Boxfusion.Health.His.Admissions.Services.Wards.Dto.Helpers;
+using Boxfusion.Health.His.Admissions.Services.Wards.Helpers;
 using Boxfusion.Health.His.Domain.Domain;
 using Microsoft.AspNetCore.Mvc;
 using NHibernate.Linq;
