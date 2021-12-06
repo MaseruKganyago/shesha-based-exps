@@ -12,6 +12,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
     public interface  IHisWardsAppService : IApplicationService
     {
         Task<List<WardResponse>> GetAssignedWards();
+        Task<List<HospitalResponse>> GetAssignedHospitals();
         Task<WardMidnightCensusReportResponse> GetWardDailyReport(WardCensusInput input);
         Task<WardMidnightCensusReportResponse> SubmitForApproval(WardCensusInput input);
         Task<WardMidnightCensusReportResponse> ApproveLevel1(WardCensusInput input);
