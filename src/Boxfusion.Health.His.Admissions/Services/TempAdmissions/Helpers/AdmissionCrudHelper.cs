@@ -150,6 +150,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 admissionResponse = _mapper.Map<AdmissionResponse>(wardAdmission);
 
             _mapper.Map(hisPatient, admissionResponse);
+            _mapper.Map(wardAdmission.Ward, admissionResponse);
             UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
 
             if (hisPatient.DateOfBirth.HasValue && wardAdmission.SeparationDate.HasValue)
@@ -211,7 +212,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 if (wardAdmission?.Subject != null)
                     hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
 
-                var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient && x.HospitalisationEncounter.Id == hospitalAdmissionId);
+                var conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient); //&& x.HospitalisationEncounter.Id == hospitalAdmissionId);
 
                 List<ConditionIcdTenCode> conditionIcdTenCodes = null;
                 List<IcdTenCode> icdTenCodes = null;
@@ -228,6 +229,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
 
                 _mapper.Map(hospitalAdmission, admissionResponse);
                 _mapper.Map(hisPatient, admissionResponse);
+                _mapper.Map(wardAdmission.Ward, admissionResponse);
                 UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
 
                 admissionsResponse.Add(admissionResponse);
@@ -326,6 +328,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
 
             _mapper.Map(insertedHospitalAdmission, admissionResponse);
             _mapper.Map(insertedWardAdmission, admissionResponse);
+            _mapper.Map(wardAdmission.Ward, admissionResponse);
             UtilityHelper.TrySetProperty(admissionResponse, "Code", icdTenCodeResponses);
 
             return admissionResponse;
@@ -375,6 +378,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 icdTenCodeResponses = conditonIcdTenCodes.ToList();
             }
 
+            _mapper.Map(dbWardAdmission.Ward, admissionResponse);
             UtilityHelper.TrySetProperty(admissionResponse, "Code", icdTenCodeResponses);
 
             return admissionResponse;
