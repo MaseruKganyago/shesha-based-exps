@@ -71,5 +71,12 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Dto.Helpers
 		/// <param name="id"></param>
 		/// <returns></returns>
 		Task DeleteAsync(Guid id);
+		/// <summary>
+		/// This function will be used to determine if the current is assigned to the hospital they are querying ward data for
+		/// </summary>
+		/// <param name="wardId"></param>
+		/// <returns></returns>
+		Task<bool> IsPersonAssignedToHospital(Guid wardId);
+		Task<bool> IsPersonAssignedToWard(Guid wardId);
 	}
 }

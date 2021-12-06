@@ -107,6 +107,18 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [AbpAuthorize(PermissionNames.ApproveReport)]
         public async Task<WardMidnightCensusReportResponse> ApproveLevel1(WardCensusInput input)
         {
+            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId);
+            if (!isPersonAssignedToHospital)
+            {
+                throw new UserFriendlyException("The Current User is not assigned to this hospital");
+            }
+
+            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId);
+            if (!isPersonAssignedToWard)
+            {
+                throw new UserFriendlyException("The Current User is not assigned to this ward");
+            }
+
             var approvalModel = await _sessionDataProvider.GetApprovalModels(input.WardId);
             if (!approvalModel.Any()) throw new UserFriendlyException("The spacified ward doesn't have MidnightCensusApprovalModel");
             var approval = approvalModel[0];
@@ -137,6 +149,18 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [AbpAuthorize(PermissionNames.ApproveReport)]
         public async Task<WardMidnightCensusReportResponse> ApproveLevel2(WardCensusInput input)
         {
+            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId);
+            if (!isPersonAssignedToHospital)
+            {
+                throw new UserFriendlyException("The Current User is not assigned to this hospital");
+            }
+
+            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId);
+            if (!isPersonAssignedToWard)
+            {
+                throw new UserFriendlyException("The Current User is not assigned to this ward");
+            }
+
             var ward = await GetEntityAsync<Ward>(input.WardId);
 
             var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
@@ -209,6 +233,18 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [AbpAuthorize(PermissionNames.DailyReports)]
         public async Task<WardMidnightCensusReportResponse> GetWardDailyReport(WardCensusInput input)
         {
+            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId);
+            if (!isPersonAssignedToHospital)
+            {
+                throw new UserFriendlyException("The Current User is not assigned to this hospital");
+            }
+
+            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId);
+            if (!isPersonAssignedToWard)
+            {
+                throw new UserFriendlyException("The Current User is not assigned to this ward");
+            }
+
             var ward = await GetEntityAsync<Ward>(input.WardId);
 
             var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
@@ -270,6 +306,18 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [AbpAuthorize(PermissionNames.DisapproveReport)]
         public async Task<WardMidnightCensusReportResponse> Reject(RejectReportInput input)
         {
+            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId);
+            if (!isPersonAssignedToHospital)
+            {
+                throw new UserFriendlyException("The Current User is not assigned to this hospital");
+            }
+
+            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId);
+            if (!isPersonAssignedToWard)
+            {
+                throw new UserFriendlyException("The Current User is not assigned to this ward");
+            }
+
             var ward = await GetEntityAsync<Ward>(input.WardId);
 
             var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
@@ -298,6 +346,18 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [AbpAuthorize(PermissionNames.SubmitsReportsForApproval)]
         public async Task<WardMidnightCensusReportResponse> SubmitForApproval(WardCensusInput input)
         {
+            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId);
+            if (!isPersonAssignedToHospital)
+            {
+                throw new UserFriendlyException("The Current User is not assigned to this hospital");
+            }
+
+            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId);
+            if (!isPersonAssignedToWard)
+            {
+                throw new UserFriendlyException("The Current User is not assigned to this ward");
+            }
+
             var approvalModel = await _sessionDataProvider.GetApprovalModels(input.WardId);
             if(!approvalModel.Any()) throw new UserFriendlyException("The spacified ward doesn't have MidnightCensusApprovalModel");
 
