@@ -140,20 +140,17 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
             icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
 
+            AdmissionResponse admissionResponse = null;
+            if(hospitalAdmission != null)
+                admissionResponse = _mapper.Map<AdmissionResponse>(hospitalAdmission);
 
-            var admissionResponse = _mapper.Map<AdmissionResponse>(hospitalAdmission);
-            _mapper.Map(wardAdmission, admissionResponse);
+            if(admissionResponse != null)
+                _mapper.Map(wardAdmission, admissionResponse);
+            else
+                admissionResponse = _mapper.Map<AdmissionResponse>(wardAdmission);
+
             _mapper.Map(hisPatient, admissionResponse);
             UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
-
-            //admissionResponse.SeparationDate = wardAdmission.SeparationDate;
-            //admissionResponse.SeparationType = new ReferenceListItemValueDto
-            //{
-            //    Item = nameof(wardAdmission.SeparationType),
-            //    ItemValue = (long?)wardAdmission.SeparationType.Value
-            //};
-            //admissionResponse.SeparationDestinationWard = new EntityWithDisplayNameDto<WardAdmission>(wardAdmission);
-            // admissionResponse.SeparationComment = wardAdmission.SeparationComment;
 
             if (hisPatient.DateOfBirth.HasValue && wardAdmission.SeparationDate.HasValue)
                 admissionResponse.AgeBreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, wardAdmission.SeparationDate.Value);
@@ -279,10 +276,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         public async Task<AdmissionResponse> CreateAsync(AdmissionInput input, PersonFhirBase currentLoggedInPerson, HisPatient hisPatient)
         {
             //Create patient
-            //var hisPatient = _mapper.Map<HisPatient>(input);
-            //var hisPatientInput = _mapper.Map<HisPatientInput>(input);
-
-            //var insertedHisPatient = await _patientCrudHelper.CreateAsync(hisPatientInput, hisPatient);
             var admissionResponse = _mapper.Map<AdmissionResponse>(hisPatient);
 
             //Create hospital admission record if IsExternaPatient == true
@@ -351,21 +344,19 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             var updatedWardAdmission = await _wardAdmissionRepositiory.UpdateAsync(dbWardAdmission);
             var admissionResponse = _mapper.Map<AdmissionResponse>(updatedWardAdmission);
 
+            HospitalAdmission dbHospitalAdmission = null;
             if (dbWardAdmission?.PartOf != null)
             {
-                var dbHospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(dbWardAdmission.PartOf.Id);
+                dbHospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(dbWardAdmission.PartOf.Id);
                 _mapper.Map(input, dbHospitalAdmission);
                 var updatedHospitalAdmission = await _hospitalAdmissionRepositiory.UpdateAsync(dbHospitalAdmission);
                 _mapper.Map(updatedHospitalAdmission, admissionResponse);
             }
 
             var dbHisPatient = await _hisPatientRepositiory.GetAsync(dbWardAdmission.Subject.Id);
-            //_mapper.Map(input, dbHisPatient);
-            //var updatedHisPatient = await _hisPatientRepositiory.UpdateAsync(dbHisPatient);
-            //_mapper.Map(dbHisPatient, admissionResponse);
 
             //Update a condition
-            var dbCondition = await _conditionRepositiory.FirstOrDefaultAsync(x => x.HospitalisationEncounter == dbWardAdmission);
+            var dbCondition = await _conditionRepositiory.FirstOrDefaultAsync(x => x.HospitalisationEncounter == dbHospitalAdmission);
 
             //add a list of conditionIcdTenCode to a task
             List<EntityWithDisplayNameDto<Guid?>> icdTenCodeResponses = null;
