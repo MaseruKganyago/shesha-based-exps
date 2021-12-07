@@ -19,6 +19,7 @@ using NHibernate.Linq;
 using Shesha;
 using Shesha.AutoMapper.Dto;
 using Shesha.Domain;
+using Shesha.Utilities;
 using Shesha.Web.DataTable;
 using System;
 using System.Collections.Generic;
@@ -71,16 +72,16 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             table.OnRequestToFilter = (criteria, form) =>
             {
                 var _session = Abp.Dependency.IocManager.Instance.Resolve<IAbpSession>();
-                var _accidentReportRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<ShaRoleAppointedPerson, Guid>>();
+                var _wardRoleAppointedPersonRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<WardRoleAppointedPerson, Guid>>();
                 var personService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Person, Guid>>();
-                //var _permissions = Abp.Dependency.IocManager.Instance.Resolve<ARFormsPermissionChecker>();
 
                 var person = personService.FirstOrDefault(c => c.User.Id == _session.GetUserId());
                 var wardsId = new List<string>() { $"ent.Id='{Guid.Empty}'" };
+                wardsId.AddRange(_wardRoleAppointedPersonRepository.GetAll().Where(x => x.Person != person).Select(x => $"ent.Id='{x.Ward.Id}'").Distinct());
 
 
-
-
+                var applicationsFilter = $"{wardsId.Delimited(" or ")}";
+                criteria.FilterClauses.Add(applicationsFilter);
             };
 
             return table;
