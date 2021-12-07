@@ -187,6 +187,207 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             return admissionResponse;
         }
 
+        /*public async Task<AdmissionResponse> UndoAdmission(Guid admissionId, PersonFhirBase currentLoggedInPerson)
+        {
+            var encounterId = admissionId;
+            var wardAdmission = await _wardAdmissionRepositiory.GetAsync(encounterId);
+            Guard.Against.Null(wardAdmission, nameof(wardAdmission));
+            // wardAdmission = await GetEntityAsync<Encounter>(input.Id);
+
+            HospitalAdmission hospitalAdmission = null;
+            Guard.Against.Null(wardAdmission.PartOf, nameof(wardAdmission.PartOf));
+            hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
+            Guard.Against.Null(hospitalAdmission, nameof(hospitalAdmission));
+
+
+            // HisPatient hisPatient = null;
+            Guard.Against.Null(wardAdmission.Subject, nameof(wardAdmission.Subject));
+            var hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
+            Guard.Against.Null(hisPatient, nameof(hisPatient));
+
+            wardAdmission.AdmissionStatus = null;
+            wardAdmission.SeparationDate = null;
+            wardAdmission.SeparationComment = null;
+
+            if (wardAdmission.SeparationType == RefListSeparationTypes.internalTransfer)
+            {
+                // var separationDestinationWard = await _wardRepositiory.GetAsync(input.SeparationDestinationWard.Id.Value);
+                wardAdmission.SeparationDestinationWard = null;
+                wardAdmission = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
+                WardAdmission destinationWardAdmission = null;
+                destinationWardAdmission = await _wardAdmissionRepositiory.GetAsync(wardAdmission.InternalTransferDestinationWard.Id);
+                await _wardAdmissionRepositiory.DeleteAsync(destinationWardAdmission);
+
+                wardAdmission.InternalTransferDestinationWard = null;
+                wardAdmission = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
+            }
+            else if (wardAdmission.SeparationType == RefListSeparationTypes.externalTransfer)
+            {
+                //var sourceWardAdmission = _mapper.Map<WardAdmission>(wardAdmission);
+                wardAdmission.SeparationType = null;
+                await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
+
+                if (hospitalAdmission.TransferToHospital.Id != null)
+                {
+                    hospitalAdmission.HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.admitted;
+                    hospitalAdmission.TransferToHospital = null;
+                    await _hospitalAdmissionRepositiory.UpdateAsync(hospitalAdmission);
+                }
+                else
+                {
+                    hospitalAdmission.TransferToNonGautengHospital = null;
+                    hospitalAdmission.HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.admitted;
+                    await _hospitalAdmissionRepositiory.UpdateAsync(hospitalAdmission);
+                }
+            }
+            else
+            {
+                wardAdmission.SeparationType = null;
+                await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
+
+                hospitalAdmission.HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.admitted;
+                await _hospitalAdmissionRepositiory.UpdateAsync(hospitalAdmission);
+            }
+
+            var admissionResponse = _mapper.Map<AdmissionResponse>(hisPatient);
+            _mapper.Map(wardAdmission, admissionResponse);
+            _mapper.Map(hospitalAdmission, admissionResponse);
+
+
+            if (hisPatient.DateOfBirth.HasValue && input.SeparationDate.HasValue)
+                admissionResponse.AgeBreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, input.SeparationDate.Value);
+
+            var conditions = await _conditionRepositiory.GetAllListAsync(x => x.HospitalisationEncounter == hospitalAdmission);
+
+            List<ConditionIcdTenCode> conditionIcdTenCodes = null;
+            List<IcdTenCode> icdTenCodes = null;
+            if (conditions.Count() > 0)
+            {
+                conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition));
+
+                var temp = conditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
+                if (conditionIcdTenCodes.Count() > 0)
+                    icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => temp.Contains(x.Id)).ToListAsync();
+            }
+            List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
+            icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
+
+            UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
+
+
+            return admissionResponse;
+        }*/
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="admissionId"></param>
+        /// <param name="currentLoggedInPerson"></param>
+        /// <returns></returns>
+        public async Task<AdmissionResponse> UndoSeparation(Guid admissionId, PersonFhirBase currentLoggedInPerson)
+        {
+            var encounterId = admissionId;
+            var wardAdmission = await _wardAdmissionRepositiory.GetAsync(encounterId);
+            Guard.Against.Null(wardAdmission, nameof(wardAdmission));
+            // wardAdmission = await GetEntityAsync<Encounter>(input.Id);
+
+            HospitalAdmission hospitalAdmission = null;
+            Guard.Against.Null(wardAdmission.PartOf, nameof(wardAdmission.PartOf));
+            hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
+            Guard.Against.Null(hospitalAdmission, nameof(hospitalAdmission));
+
+
+            // HisPatient hisPatient = null;
+            Guard.Against.Null(wardAdmission.Subject, nameof(wardAdmission.Subject));
+            var hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
+            Guard.Against.Null(hisPatient, nameof(hisPatient));
+
+            if (wardAdmission.SeparationType == RefListSeparationTypes.internalTransfer)
+            {
+                Guard.Against.Null(wardAdmission.InternalTransferOriginalWard, nameof(wardAdmission.InternalTransferOriginalWard));
+                var originalWard = await _wardAdmissionRepositiory.GetAsync(wardAdmission.InternalTransferOriginalWard.Id);
+
+
+                originalWard.AdmissionStatus = null;
+                originalWard.SeparationDate = null;
+                originalWard.SeparationComment = null;
+
+                originalWard.SeparationDestinationWard = null;
+                originalWard.InternalTransferDestinationWard = null;
+                originalWard = await _wardAdmissionRepositiory.UpdateAsync(originalWard);
+                encounterId = originalWard.Id;
+
+                await _wardAdmissionRepositiory.DeleteAsync(wardAdmission);
+            }
+            else if (wardAdmission.SeparationType == RefListSeparationTypes.externalTransfer)
+            {
+                //var sourceWardAdmission = _mapper.Map<WardAdmission>(wardAdmission);
+                wardAdmission.SeparationType = null;
+                await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
+
+                if (hospitalAdmission.TransferToHospital.Id != null)
+                {
+                    hospitalAdmission.HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.admitted;
+                    hospitalAdmission.TransferToHospital = null;
+                    await _hospitalAdmissionRepositiory.UpdateAsync(hospitalAdmission);
+                }
+                else
+                {
+                    hospitalAdmission.TransferToNonGautengHospital = null;
+                    hospitalAdmission.HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.admitted;
+                    await _hospitalAdmissionRepositiory.UpdateAsync(hospitalAdmission);
+                }
+            }
+            else
+            {
+                wardAdmission.SeparationType = null;
+                await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
+
+                hospitalAdmission.HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.admitted;
+                await _hospitalAdmissionRepositiory.UpdateAsync(hospitalAdmission);
+            }
+
+            wardAdmission = await _wardAdmissionRepositiory.GetAsync(encounterId);
+            Guard.Against.Null(wardAdmission, nameof(wardAdmission));
+            // wardAdmission = await GetEntityAsync<Encounter>(input.Id);
+
+            hospitalAdmission = null;
+            Guard.Against.Null(wardAdmission.PartOf, nameof(wardAdmission.PartOf));
+            hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
+            Guard.Against.Null(hospitalAdmission, nameof(hospitalAdmission));
+
+
+            // HisPatient hisPatient = null;
+            Guard.Against.Null(wardAdmission.Subject, nameof(wardAdmission.Subject));
+            hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
+            Guard.Against.Null(hisPatient, nameof(hisPatient));
+
+            var admissionResponse = _mapper.Map<AdmissionResponse>(hisPatient);
+            _mapper.Map(wardAdmission, admissionResponse);
+            _mapper.Map(hospitalAdmission, admissionResponse);
+
+            var conditions = await _conditionRepositiory.GetAllListAsync(x => x.HospitalisationEncounter == hospitalAdmission);
+
+            List<ConditionIcdTenCode> conditionIcdTenCodes = null;
+            List<IcdTenCode> icdTenCodes = null;
+            if (conditions.Count() > 0)
+            {
+                conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition));
+
+                var temp = conditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
+                if (conditionIcdTenCodes.Count() > 0)
+                    icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => temp.Contains(x.Id)).ToListAsync();
+            }
+            List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
+            icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
+
+            UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
+
+
+            return admissionResponse;
+
+        }
+
         /// <summary>
         /// 
         /// </summary>
