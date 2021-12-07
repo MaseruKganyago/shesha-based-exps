@@ -95,8 +95,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         {
             var table = new DataTableConfig<SpecialityItems, Guid>("Specialities_Index");
 
-            table.AddProperty(e => e.Speciality, c => c.Caption("Ward Speciality"));
-            table.AddProperty(e => e.NumberOfBedsInSpeciality, d => d.Caption("Ward Name"));
+            table.AddProperty(e => e.Speciality, c => c.Caption("Specialities"));
+            table.AddProperty(e => e.NumberOfBedsInSpeciality, d => d.Caption("No. of Beds"));
             table.OnRequestToFilter = (criteria, form) =>
             {
             };
