@@ -77,7 +77,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
 
                 var person = personService.FirstOrDefault(c => c.User.Id == _session.GetUserId());
                 var wardsId = new List<string>() { $"ent.Id='{Guid.Empty}'" };
-                wardsId.AddRange(_wardRoleAppointedPersonRepository.GetAll().Where(x => x.Person != person).Select(x => $"ent.Id='{x.Ward.Id}'").Distinct());
+                wardsId.AddRange(_wardRoleAppointedPersonRepository.GetAll().Where(x => x.Person != person).Select(x => $"ent.Id='{x.Ward.Id}'"));
 
 
                 var applicationsFilter = $"{wardsId.Delimited(" or ")}";
