@@ -233,7 +233,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet, Route("DailyReport")]
-        [AbpAuthorize(PermissionNames.DailyReports)]
+        [AbpAuthorize(PermissionNames.ReportsAndStats)]
         public async Task<WardMidnightCensusReportResponse> GetWardDailyReport(WardCensusInput input)
         {
             var currentPerson = await GetCurrentPersonAsync();
@@ -259,20 +259,28 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 var calculatedReport = await _sessionDataProvider.GetDailyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
                 if (!calculatedReport.Any())
                 {
-                    throw new UserFriendlyException("No records found for the ward and date specified");
+                    entity = new WardMidnightCensusReport()
+                    {
+                        ReportDate = input.ReportDate,
+                        TotalBedAvailability = ward.NumberOfBeds,
+                        NumBedsInWard = ward.NumberOfBeds
+                    };
                 }
-                var dailyStat = calculatedReport[0];
-
-                entity = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(null, async (item) =>
+                else
                 {
-                    ObjectMapper.Map(dailyStat, item);
-                    item.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress;
-                    item.BedUtilisation = (double?)dailyStat.BedUtilisation;
-                    item.AverageLengthofStay = (float?)dailyStat.AverageLengthOfStay;
-                    item.ReportType = His.Domain.Domain.Enums.RefListReportType.Daily;
-                    item.ReportDate = input.ReportDate;
-                    item.Ward = ward;
-                });
+                    var dailyStat = calculatedReport[0];
+
+                    entity = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(null, async (item) =>
+                    {
+                        ObjectMapper.Map(dailyStat, item);
+                        item.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress;
+                        item.BedUtilisation = (double?)dailyStat.BedUtilisation;
+                        item.AverageLengthofStay = (float?)dailyStat.AverageLengthOfStay;
+                        item.ReportType = His.Domain.Domain.Enums.RefListReportType.Daily;
+                        item.ReportDate = input.ReportDate;
+                        item.Ward = ward;
+                    });
+                }
                 return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
             }
 
@@ -282,21 +290,29 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 var calculatedReport = await _sessionDataProvider.GetDailyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
                 if (!calculatedReport.Any())
                 {
-                    throw new UserFriendlyException("No records found for the ward and date specified");
+                    entity = new WardMidnightCensusReport()
+                    {
+                        ReportDate = input.ReportDate,
+                        TotalBedAvailability = ward.NumberOfBeds,
+                        NumBedsInWard = ward.NumberOfBeds
+                    };
                 }
-                var dailyStat = calculatedReport[0];
-                entity = new WardMidnightCensusReport()
+                else
                 {
-                    ReportDate = input.ReportDate,
-                    MidnightCount = dailyStat.MidnightCount,//Owe Migration
-                    TotalAdmittedPatients = dailyStat.TotalAdmittedPatients,// owe
-                    TotalSeparatedPatients = dailyStat.TotalSeparatedPatients,//owe
-                    TotalBedAvailability = dailyStat.TotalBedAvailability,//owe
-                    NumBedsInWard = dailyStat.TotalBedInWard, //owe and mappings
-                    BedUtilisation = (double?)dailyStat.BedUtilisation,
-                    AverageLengthofStay = (float?)dailyStat.AverageLengthOfStay,
-                    AverageBedAvailability = (float?)dailyStat.AverageLengthOfStay
-                };
+                    var dailyStat = calculatedReport[0];
+                    entity = new WardMidnightCensusReport()
+                    {
+                        ReportDate = input.ReportDate,
+                        MidnightCount = dailyStat.MidnightCount,
+                        TotalAdmittedPatients = dailyStat.TotalAdmittedPatients,
+                        TotalSeparatedPatients = dailyStat.TotalSeparatedPatients,
+                        TotalBedAvailability = dailyStat.TotalBedAvailability,
+                        NumBedsInWard = dailyStat.TotalBedInWard,
+                        BedUtilisation = (double?)dailyStat.BedUtilisation,
+                        AverageLengthofStay = (float?)dailyStat.AverageLengthOfStay,
+                        AverageBedAvailability = (float?)dailyStat.AverageLengthOfStay
+                    };
+                }
             }
             
             return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
