@@ -665,6 +665,16 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Hospitals.Dtos.HospitalMapProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Hospitals.Dtos.HospitalMapProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers.HospitalCrudHelper">
             <summary>
             

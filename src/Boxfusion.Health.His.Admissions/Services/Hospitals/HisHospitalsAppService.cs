@@ -90,7 +90,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers
         {
             await ValidatePermissionsForAdmin();
             Validation.ValidateText(input.Name, "Name");
-            Validation.ValidateReflist(input.OrganisationType, "OrganisationType");
+            Validation.ValidateReflist(input.FacilityType, "FacilityType");
+            Validation.ValidateReflist(input.District, "District");
             //Validation.ValidateIdWithException(input?.PrimaryAddress?.Id, "Address cannot be empty");
             Validation.ValidateNullableType(input.Latitude, "Latitude");
             Validation.ValidateNullableType(input.Longitude, "Longitude");
@@ -108,7 +109,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers
         {
             await ValidatePermissionsForAdmin();
             Validation.ValidateText(input.Name, "Name");
-            Validation.ValidateReflist(input.OrganisationType, "OrganisationType");
+            Validation.ValidateReflist(input.FacilityType, "FacilityType");
+            Validation.ValidateReflist(input.District, "District");
             Validation.ValidateIdWithException(input?.PrimaryAddress?.Id, "Address cannot be empty");
             Validation.ValidateNullableType(input.Latitude, "Latitude");
             Validation.ValidateNullableType(input.Longitude, "Longitude");
