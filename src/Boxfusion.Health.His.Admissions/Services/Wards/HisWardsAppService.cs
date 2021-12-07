@@ -107,13 +107,14 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [AbpAuthorize(PermissionNames.ApproveReport)]
         public async Task<WardMidnightCensusReportResponse> ApproveLevel1(WardCensusInput input)
         {
-            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId);
+            var currentPerson = await GetCurrentPersonAsync();
+            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId, currentPerson);
             if (!isPersonAssignedToHospital)
             {
                 throw new UserFriendlyException("The Current User is not assigned to this hospital");
             }
 
-            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId);
+            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId, currentPerson);
             if (!isPersonAssignedToWard)
             {
                 throw new UserFriendlyException("The Current User is not assigned to this ward");
@@ -149,13 +150,14 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [AbpAuthorize(PermissionNames.ApproveReport)]
         public async Task<WardMidnightCensusReportResponse> ApproveLevel2(WardCensusInput input)
         {
-            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId);
+            var currentPerson = await GetCurrentPersonAsync();
+            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId, currentPerson);
             if (!isPersonAssignedToHospital)
             {
                 throw new UserFriendlyException("The Current User is not assigned to this hospital");
             }
 
-            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId);
+            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId, currentPerson);
             if (!isPersonAssignedToWard)
             {
                 throw new UserFriendlyException("The Current User is not assigned to this ward");
@@ -233,13 +235,14 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [AbpAuthorize(PermissionNames.DailyReports)]
         public async Task<WardMidnightCensusReportResponse> GetWardDailyReport(WardCensusInput input)
         {
-            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId);
+            var currentPerson = await GetCurrentPersonAsync();
+            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId, currentPerson);
             if (!isPersonAssignedToHospital)
             {
                 throw new UserFriendlyException("The Current User is not assigned to this hospital");
             }
 
-            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId);
+            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId, currentPerson);
             if (!isPersonAssignedToWard)
             {
                 throw new UserFriendlyException("The Current User is not assigned to this ward");
@@ -306,13 +309,14 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [AbpAuthorize(PermissionNames.DisapproveReport)]
         public async Task<WardMidnightCensusReportResponse> Reject(RejectReportInput input)
         {
-            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId);
+            var currentPerson = await GetCurrentPersonAsync();
+            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId, currentPerson);
             if (!isPersonAssignedToHospital)
             {
                 throw new UserFriendlyException("The Current User is not assigned to this hospital");
             }
 
-            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId);
+            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId, currentPerson);
             if (!isPersonAssignedToWard)
             {
                 throw new UserFriendlyException("The Current User is not assigned to this ward");
@@ -346,13 +350,14 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [AbpAuthorize(PermissionNames.SubmitsReportsForApproval)]
         public async Task<WardMidnightCensusReportResponse> SubmitForApproval(WardCensusInput input)
         {
-            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId);
+            var currentPerson = await GetCurrentPersonAsync();
+            var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId, currentPerson);
             if (!isPersonAssignedToHospital)
             {
                 throw new UserFriendlyException("The Current User is not assigned to this hospital");
             }
 
-            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId);
+            var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId, currentPerson);
             if (!isPersonAssignedToWard)
             {
                 throw new UserFriendlyException("The Current User is not assigned to this ward");

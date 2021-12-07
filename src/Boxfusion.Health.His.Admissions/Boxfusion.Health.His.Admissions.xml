@@ -306,6 +306,41 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Views.HospitalItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.HospitalItems.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.HospitalItems.Type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.HospitalItems.Address">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.HospitalItems.Latitude">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.HospitalItems.Longitude">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.HospitalItems.PrimaryContactTelephone">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.Views.SpecialityItems">
             <summary>
             
@@ -1975,11 +2010,20 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.IWardCrudHelper.IsPersonAssignedToHospital(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.IWardCrudHelper.IsPersonAssignedToHospital(System.Guid,Shesha.Domain.Person)">
             <summary>
-            This function will be used to determine if the current is assigned to the hospital they are querying ward data for
+            
             </summary>
             <param name="wardId"></param>
+            <param name="currentPerson"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.IWardCrudHelper.IsPersonAssignedToWard(System.Guid,Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="currentPerson"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.WardCrudHelper">
@@ -2044,6 +2088,22 @@
             
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.WardCrudHelper.IsPersonAssignedToHospital(System.Guid,Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="currentPerson"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.WardCrudHelper.IsPersonAssignedToWard(System.Guid,Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="currentPerson"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Wards.HisWardsAppService">

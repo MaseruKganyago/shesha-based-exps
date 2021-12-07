@@ -13,6 +13,7 @@ using Boxfusion.Health.HealthCommon.Core.Services.Locations.Helpers;
 using NHibernate.Linq;
 using Shesha;
 using Shesha.AutoMapper.Dto;
+using Shesha.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
     /// <summary>
     /// 
     /// </summary>
-    public class WardCrudHelper : SheshaAppServiceBase, IWardCrudHelper, ITransientDependency
+    public class WardCrudHelper : IWardCrudHelper, ITransientDependency
     {
         private readonly ILocationCrudHelper<Ward, WardResponse> _wardCrudHelper;
         private readonly IRepository<CdmAddress, Guid> _addressRepository;
@@ -145,10 +146,15 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
             await _wardCrudHelper.DeleteAsync(id);
         }
 
-        public async Task<bool> IsPersonAssignedToHospital(Guid wardId)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wardId"></param>
+        /// <param name="currentPerson"></param>
+        /// <returns></returns>
+        public async Task<bool> IsPersonAssignedToHospital(Guid wardId, Person currentPerson)
         {
-            var currentPerson = await GetCurrentPersonAsync();
-            var OwnerOrganisation = await GetEntityAsync<Ward>(wardId);
+            var OwnerOrganisation = await _repository.GetAsync(wardId);
 
             var hospitalAppoitmentService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
             var hospital = await hospitalAppoitmentService.GetAll().Where(r => r.Person == currentPerson).Select(r => r.Hospital).FirstOrDefaultAsync();
@@ -161,10 +167,15 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
             return false;
         }
 
-        public async Task<bool> IsPersonAssignedToWard(Guid wardId)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wardId"></param>
+        /// <param name="currentPerson"></param>
+        /// <returns></returns>
+        public async Task<bool> IsPersonAssignedToWard(Guid wardId, Person currentPerson)
         {
-            var currentPerson = await GetCurrentPersonAsync();
-            var OwnerOrganisation = await GetEntityAsync<Ward>(wardId);
+            var OwnerOrganisation = await _repository.GetAsync(wardId);
 
             var hospital = await _wardRoleAppointedPersonRepository.GetAll().Where(r => r.Person == currentPerson).Select(r => r.Ward).FirstOrDefaultAsync();
 

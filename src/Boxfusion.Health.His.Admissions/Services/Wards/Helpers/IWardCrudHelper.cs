@@ -1,6 +1,7 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Dtos;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Shesha.AutoMapper.Dto;
+using Shesha.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -71,12 +72,21 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
 		/// <param name="id"></param>
 		/// <returns></returns>
 		Task DeleteAsync(Guid id);
+
 		/// <summary>
-		/// This function will be used to determine if the current is assigned to the hospital they are querying ward data for
+		/// 
 		/// </summary>
 		/// <param name="wardId"></param>
+		/// <param name="currentPerson"></param>
 		/// <returns></returns>
-		Task<bool> IsPersonAssignedToHospital(Guid wardId);
-		Task<bool> IsPersonAssignedToWard(Guid wardId);
+		Task<bool> IsPersonAssignedToHospital(Guid wardId, Person currentPerson);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="wardId"></param>
+		/// <param name="currentPerson"></param>
+		/// <returns></returns>
+		Task<bool> IsPersonAssignedToWard(Guid wardId, Person currentPerson);
 	}
 }
