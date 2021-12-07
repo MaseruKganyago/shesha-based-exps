@@ -85,6 +85,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         {
             var table = new DataTableConfig<AdmittedPatientItems, Guid>("AdmittedPatients_Index");
 
+            table.UseDtos = true;
+            table.UpdateUrl = url => "/api/v1/His/TempAdmissions";
+
             table.AddProperty(a => a.IdentificationType, b => b.Caption("ID Type"));
             table.AddProperty(a => a.IdentityNumber, b => b.Caption("I.D No."));
             table.AddProperty(a => a.DateOfBirth, b => b.Caption("D.O.B").SortDescending().IsFilterable(true).Sortable(true));
