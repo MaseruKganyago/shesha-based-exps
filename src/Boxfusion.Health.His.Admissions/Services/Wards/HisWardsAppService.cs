@@ -471,9 +471,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("")]
+        [AbpAuthorize(PermissionNames.CreateFacility)]
         public async Task<WardResponse> CreateWardAsync(WardInput input)
         {
-            await ValidatePermissionsForAdmin();
             Validation.ValidateText(input?.Name, "Name");
             Validation.ValidateText(input?.Description, "Description");
             Validation.ValidateNullableType(input?.NumberOfBeds, "NumberOfBeds");
