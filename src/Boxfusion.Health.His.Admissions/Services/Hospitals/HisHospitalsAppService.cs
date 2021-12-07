@@ -1,6 +1,6 @@
 ﻿using Abp.Authorization;
 using Abp.UI;
-using Boxfusion.Health.HealthCommon.Core.Domain.Dashboard;
+using Boxfusion.Health.His.Admissions.Domain.Views;
 using Boxfusion.Health.HealthCommon.Core.Dtos;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Fhir;
