@@ -40,6 +40,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers
         public static DataTableConfig IndexTable()
         {
             var table = new DataTableConfig<HospitalItems, Guid>("Hospitals_Index");
+            table.UseDtos = true;
+            table.DetailsUrl = url => "/api/v1/admissions/HisHospitals";
+            table.CreateUrl = url => "/api/v1/admissions/HisHospitals";
+            table.UpdateUrl = url => "/api/v1/admissions/HisHospitals";
+            table.DeleteUrl = url => "/api/v1/admissions/HisHospitals";
 
             table.AddProperty(e => e.Name, d => d.Caption("Facility Name"));
             table.AddProperty(e => e.Type, c => c.Caption("Facility Type"));
