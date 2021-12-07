@@ -1183,6 +1183,22 @@
             
             </summary>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.ISeparationService.CreateAsync(Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <param name="currentLoggedInPerson"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.ISeparationService.UndoSeparation(System.Guid,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
+            <summary>
+            
+            </summary>
+            <param name="admissionId"></param>
+            <param name="currentLoggedInPerson"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.SeparationCrudHelper">
             <summary>
             
@@ -1241,6 +1257,14 @@
             <param name="currentLoggedInPerson"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.SeparationService.UndoSeparation(System.Guid,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
+            <summary>
+            
+            </summary>
+            <param name="admissionId"></param>
+            <param name="currentLoggedInPerson"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.SeparationService.UpdateConditions(Boxfusion.Health.His.Domain.Domain.HisPatient,Boxfusion.Health.His.Domain.Domain.HospitalAdmission,Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
             <summary>
             
@@ -1259,13 +1283,6 @@
             <param name="condition"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.ISeparationsAppService.GetAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.ISeparationsAppService.CreateAsync(Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput)">
             <summary>
             
@@ -1273,15 +1290,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.ISeparationsAppService.UpdateAsync(Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <param name="action"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.ISeparationsAppService.DeleteAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.ISeparationsAppService.UndoSeparationAsync(System.Guid)">
             <summary>
             
             </summary>
@@ -1306,25 +1315,11 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives.DeleteAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives.UndoSeparationAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives.GetAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives.UpdateAsync(Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput">
@@ -2610,6 +2605,21 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211203105100.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211207130300">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211207130300.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211207130300.Down">
             <summary>
             
             </summary>

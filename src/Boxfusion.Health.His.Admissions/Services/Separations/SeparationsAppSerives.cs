@@ -73,33 +73,38 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete, Route("{id}")]
-        public Task DeleteAsync(Guid id)
+        [HttpDelete, Route("undoSeparation/{id}")]
+        [AbpAuthorize("Approver Level 1")]
+        public async Task<AdmissionResponse> UndoSeparationAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+
+            var separation = await _separationService.UndoSeparation(id, person);
+
+            return separation;
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet, Route("{id}")]
-        public Task<SeparationResponse> GetAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <returns></returns>
+        //[HttpGet, Route("{id}")]
+        //public Task<SeparationResponse> GetAsync(Guid id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        [HttpPut, Route("")]
-        public Task<SeparationResponse> UpdateAsync(SeparationInput input)
-        {
-            throw new NotImplementedException();
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="input"></param>
+        ///// <returns></returns>
+        //[HttpPut, Route("")]
+        //public Task<SeparationResponse> UpdateAsync(SeparationInput input)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
