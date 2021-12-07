@@ -201,7 +201,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(c => c.Subject, options => options.Ignore())
                 .ForMember(c => c.Status, options => options.Ignore())
                 .ForMember(c => c.Type, options => options.Ignore())
-                .ForMember(c => c.IdentificationType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "WardSpecialities", (long?)c.Speciality)))
+                .ForMember(c => c.Speciality, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "WardSpecialities", (long?)c.Speciality)))
                 .MapReferenceListValuesToDto();
         }
     }
