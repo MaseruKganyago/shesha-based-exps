@@ -8,14 +8,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
 {
     public interface ISeparationsAppService : IApplicationService
     {
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        Task<SeparationResponse> GetAsync(Guid id);
-
         /// <summary>
         /// 
         /// </summary>
@@ -23,20 +15,13 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
         /// <returns></returns>
         Task<AdmissionResponse> CreateAsync(SeparationInput input);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <param name="action"></param>
-        /// <returns></returns>
-        Task<SeparationResponse> UpdateAsync(SeparationInput input);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task DeleteAsync(Guid id);
+        Task<AdmissionResponse> UndoSeparationAsync(Guid id);
 
     }
 }
