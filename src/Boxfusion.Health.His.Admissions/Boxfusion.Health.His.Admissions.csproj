@@ -19,8 +19,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Dtos\**" />
     <Compile Remove="Services\Admissions\**" />
+    <EmbeddedResource Remove="Dtos\**" />
     <EmbeddedResource Remove="Services\Admissions\**" />
+    <None Remove="Dtos\**" />
     <None Remove="Services\Admissions\**" />
   </ItemGroup>
 
@@ -58,7 +61,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\" />
     <Folder Include="Helpers\Validations\" />
   </ItemGroup>
 

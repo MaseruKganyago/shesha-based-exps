@@ -3,6 +3,4 @@
 	url = https://MaziMuhlari:h7z4mwhc3bpwc3qjn232qeimnmsm2fctpaywbmij6qnwltkksgtq@dev.azure.com/boxfusion/SheshaBackendv3/_git/SheshaBackendv3
 	branch = d/Release3
 	
-    [submodule "Healtcore"]
-    path=Healtcore
-	url =https://pkgs.dev.azure.com/boxfusion/_packaging/nuget.boxfusion.co.za/nuget/v3/index.json
+  

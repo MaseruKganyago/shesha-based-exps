@@ -122,7 +122,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided && input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
             {
                 Validation.ValidateReflist(input?.Classification, "Classification");
-                Validation.ValidateReflist(input?.OtherCategory, "Other Categories");
+                //Validation.ValidateReflist(input?.OtherCategory, "Other Categories");
             }
 
             var patient = await _hisPatientRepositiory.GetAsync(input.Subject.Id.Value);
@@ -153,7 +153,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided && input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
             {
                 Validation.ValidateReflist(input?.Classification, "Classification");
-                Validation.ValidateReflist(input?.OtherCategory, "Other Categories");
+                //Validation.ValidateReflist(input?.OtherCategory, "Other Categories");
             }
 
             var patient = await _hisPatientRepositiory.GetAsync(input.Subject.Id.Value);
