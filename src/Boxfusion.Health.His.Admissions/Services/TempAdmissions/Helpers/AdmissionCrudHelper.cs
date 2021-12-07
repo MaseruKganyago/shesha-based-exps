@@ -225,12 +225,12 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             HospitalAdmission insertedHospitalAdmission = null;
             using (var uow = _unitOfWork.Begin())
             {
-                if (input.AdmissionType.ItemValue != (int)RefListAdmissionTypes.internalTransferIn)
-                {
-                    var hospitalAdmission = _mapper.Map<HospitalAdmission>(input);
-                    _mapper.Map(hisPatient, hospitalAdmission);
-                    insertedHospitalAdmission = await _hospitalAdmissionRepositiory.InsertAsync(hospitalAdmission);
-                }
+                //if (input.AdmissionType.ItemValue != (int)RefListAdmissionTypes.internalTransferIn)
+                //{
+                var hospitalAdmission = _mapper.Map<HospitalAdmission>(input);
+                _mapper.Map(hisPatient, hospitalAdmission);
+                insertedHospitalAdmission = await _hospitalAdmissionRepositiory.InsertAsync(hospitalAdmission);
+                //}
 
                 //Create ward admission record
                 var wardAdmission = _mapper.Map<WardAdmission>(input);
