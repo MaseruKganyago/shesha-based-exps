@@ -39,16 +39,13 @@ namespace Boxfusion.Health.His.Admissions.Authorization
                 return true;
             
             // data administrator has all rights
-            if (await IsInAnyOfRoles(person, RoleNames.DataAdministrator))
+            if (await IsInAnyOfRoles(person, RoleNames.GlobalAdmin))
                 return true;
 
             // add custom permission checks here...
             if (permissionName == PermissionNames.ApproveReport || permissionName == PermissionNames.DisapproveReport 
                 || permissionName == PermissionNames.DailyReports || permissionName == PermissionNames.MonthlyReports)
                 return await this.IsApproverLevel1(person) || await this.IsApproverLevel2(person);
-
-            if (permissionName == PermissionNames.CreateFacility || permissionName == PermissionNames.Facilities)
-                return await this.IsGlobalAdmin(person);
 
             if (permissionName == Shesha.Authorization.PermissionNames.Pages_Users)
                 return await this.IsFacilityAdmin(person);
