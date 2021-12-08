@@ -76,6 +76,10 @@ namespace Boxfusion.Health.His.Admissions.Authorization
         {
             return await IsInAnyOfRoles(person, RoleNames.DataAdministrator);
         }
+        public async Task<bool> IsAdmin(Person person)
+        {
+            return await IsInAnyOfRoles(person, RoleNames.SystemAdministrator);
+        }
 
         public bool IsGranted(long userId, string permissionName)
         {

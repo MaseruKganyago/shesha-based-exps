@@ -21,5 +21,6 @@ namespace Boxfusion.Health.His.Admissions.Authorization
         Task<bool> IsApproverLevel1(Person person);
         Task<bool> IsApproverLevel2(Person person);
         Task<bool> IsManager(Person person);
+        Task<bool> IsAdmin(Person person);
     }
 }
