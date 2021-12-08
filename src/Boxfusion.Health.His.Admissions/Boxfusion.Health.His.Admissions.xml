@@ -381,6 +381,32 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Helpers.ISessionDataProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Helpers.ISessionDataProvider.GetDailyStats(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.WardCensusInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Helpers.ISessionDataProvider.GetMonthlyStats(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.WardCensusInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Helpers.ISessionDataProvider.GetApprovalModels(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Helpers.ServiceBusHelper.TransferAddmission(Boxfusion.Health.His.Domain.Domain.WardAdmission)">
             <summary>
             I am using this as an example for sending a massage to a topic named ExampleTopic
