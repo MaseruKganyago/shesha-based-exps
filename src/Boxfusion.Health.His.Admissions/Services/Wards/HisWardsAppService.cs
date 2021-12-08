@@ -255,10 +255,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             }
 
             var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId, currentPerson);
-            if (!isPersonAssignedToWard)
-            {
-                throw new UserFriendlyException("The Current User is not assigned to this ward");
-            }
+            //if (!isPersonAssignedToWard)
+            //{
+            //    throw new UserFriendlyException("The Current User is not assigned to this ward");
+            //}
 
             var ward = await GetEntityAsync<Ward>(input.WardId);
 
@@ -290,6 +290,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                         item.ReportType = His.Domain.Domain.Enums.RefListReportType.Daily;
                         item.ReportDate = input.ReportDate;
                         item.Ward = ward;
+                        item.TodaysAdmission = dailyStat.TodaysAdmission;
                     });
                 }
                 return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
@@ -321,7 +322,17 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                         NumBedsInWard = dailyStat.TotalBedInWard,
                         BedUtilisation = (double?)dailyStat.BedUtilisation,
                         AverageLengthofStay = (float?)dailyStat.AverageLengthOfStay,
-                        AverageBedAvailability = (float?)dailyStat.AverageLengthOfStay
+                        AverageBedAvailability = (float?)dailyStat.AverageLengthOfStay,
+                        TodaysAdmission = dailyStat.TodaysAdmission,
+                        ApprovalStatus = entity.ApprovalStatus,
+                        ApprovalTime = entity.ApprovalTime,
+                        ApprovalTime2 = entity.ApprovalTime2,
+                        ApprovedBy = entity.ApprovedBy,
+                        ApprovedBy2 = entity.ApprovedBy2,
+                        RejectedBy = entity.RejectedBy,
+                        RejectionComments = entity.RejectionComments,
+                        ReportType = entity.ReportType,
+                        Ward = entity.Ward
                     };
                 }
             }
