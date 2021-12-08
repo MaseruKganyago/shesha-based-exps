@@ -2690,5 +2690,20 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211208234500">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211208234500.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211208234500.Down">
+            <summary>
+            
+            </summary>
+        </member>
     </members>
 </doc>
