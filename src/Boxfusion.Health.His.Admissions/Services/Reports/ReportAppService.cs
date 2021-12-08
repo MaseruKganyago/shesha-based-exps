@@ -49,11 +49,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
         [HttpGet, Route("Reports")]
         public async Task<List<ReportResponseDto>> GetReport(RefListReportTypes reportType, Guid wardId, DateTime filterDate)
         {
-            var person = await GetCurrentLoggedPersonFhirBaseAsync();
-            var wardRoleAppointedPersons = await _wardRoleRepositiory.GetAllListAsync(x => x.Person.Id == person.Id);
+            //var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            //var wardRoleAppointedPersons = await _wardRoleRepositiory.GetAllListAsync(x => x.Person.Id == person.Id);
 
-            if (!wardRoleAppointedPersons.Any(x => x.Ward.Id == wardId))
-                throw new UserFriendlyException("User is not assigned to the selected ward.");
+            //if (!wardRoleAppointedPersons.Any(x => x.Ward.Id == wardId))
+            //    throw new UserFriendlyException("User is not assigned to the selected ward.");
 
             var reports = await _reportHelper.GetReportAsync(reportType, wardId, filterDate);
 

@@ -38,7 +38,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 												left join Core_Persons per on per.Id = enc.SubjectId 
 												left join Core_Facilities fac on fac.Id = enc.His_WardId
 												left join Fhir_Encounters hosEnc on hosEnc.Id = enc.PartOfId
-												where enc.His_WardId = :wardId and convert(date, enc.StartDateTime) = convert(date, :filterDate)
+												where enc.His_WardId = :wardId and convert(date, enc.StartDateTime) <= convert(date, :filterDate)
 												and (enc.His_AdmissionStatusLkp != 2 and enc.His_AdmissionStatusLkp != 4)";
 
 		/// <summary>
@@ -69,7 +69,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 													left join Core_Facilities fac on fac.Id = enc.His_WardId
 													left join Fhir_Encounters hosEnc on hosEnc.Id = enc.PartOfId
 													where enc.His_WardId = :wardId and month(enc.StartDateTime) = month(:filterDate)
-													and (enc.His_AdmissionStatusLkp != 2 and enc.His_AdmissionStatusLkp != 4)";
+													and (enc.His_AdmissionStatusLkp != 2 and enc.His_AdmissionStatusLkp != 4) and enc.IsDeleted = 0";
 		#endregion
 	}
 }
