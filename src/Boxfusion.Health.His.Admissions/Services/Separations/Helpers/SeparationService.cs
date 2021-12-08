@@ -15,6 +15,7 @@ using Boxfusion.Health.His.Domain.Domain.Enums;
 using NHibernate.Linq;
 using Shesha.AutoMapper.Dto;
 using Shesha.Extensions;
+using Shesha.NHibernate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,16 +89,20 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             var hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
             Guard.Against.Null(hisPatient, nameof(hisPatient));
 
-            var agebreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, input.SeparationDate.Value);
-            if (agebreakdown != "12 - 59 months")
-            { }
-            else if (agebreakdown != "5-12 years")
-            { }
-            else
+            if (hisPatient.DateOfBirth.HasValue)
             {
-                Validation.ValidateReflist(input?.SeparationChildHealth, "Separation Child Health");
-                wardAdmission.SeparationChildHealth = (RefListSeparationChildHealths)input.SeparationChildHealth.ItemValue;
+                var agebreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, input.SeparationDate.Value);
+                if (agebreakdown != "12 - 59 months")
+                { }
+                else if (agebreakdown != "5-12 years")
+                { }
+                else
+                {
+                    Validation.ValidateReflist(input?.SeparationChildHealth, "Separation Child Health");
+                    wardAdmission.SeparationChildHealth = (RefListSeparationChildHealths)input.SeparationChildHealth.ItemValue;
+                }
             }
+
             wardAdmission.AdmissionStatus = RefListAdmissionStatuses.separated;
             wardAdmission.SeparationDate = input?.SeparationDate.Value;
             wardAdmission.SeparationComment = input.SeparationComment;
@@ -157,6 +162,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
                 await _hospitalAdmissionRepositiory.UpdateAsync(hospitalAdmission);
             }
 
+            await UpdateConditions(hisPatient, hospitalAdmission, input, currentLoggedInPerson);
 
             var admissionResponse = _mapper.Map<AdmissionResponse>(hisPatient);
             _mapper.Map(wardAdmission, admissionResponse);
@@ -429,6 +435,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
                 Condition = insertedCondition
             };
             var insertedDiagnosis = await _diagnosisRepositiory.InsertAsync(diagnosis);
+            var _sessionProvider = Abp.Dependency.IocManager.Instance.Resolve<ISessionProvider>();
+            await _unitOfWork.Current.SaveChangesAsync();
+            await _sessionProvider.Session.Transaction.CommitAsync();
         }
 
         /// <summary>
