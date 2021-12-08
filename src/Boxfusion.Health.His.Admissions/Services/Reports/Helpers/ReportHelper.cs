@@ -48,7 +48,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
             if (reportType == RefListReportTypes.Daily)
             {
                 reportQuery = await _sessionProvider.Session
-                          .CreateSQLQuery(Helpers.Util.DailyReportSqlQuery)
+                          .CreateSQLQuery(Util.DailyReportSqlQuery)
                           .SetResultTransformer(Transformers.AliasToBean<ReportModelQuery>())
                           .SetParameter("wardId", wardId)
                           .SetParameter("filterDate", filterDate)
@@ -57,7 +57,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
             else
             {
                 reportQuery = await _sessionProvider.Session
-                          .CreateSQLQuery(Helpers.Util.MonthReportSqlQuery)
+                          .CreateSQLQuery(Util.MonthReportSqlQuery)
                           .SetResultTransformer(Transformers.AliasToBean<ReportModelQuery>())
                           .SetParameter("wardId", wardId)
                           .SetParameter("filterDate", filterDate)
