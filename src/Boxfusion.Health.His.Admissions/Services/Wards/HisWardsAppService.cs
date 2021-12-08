@@ -255,10 +255,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             }
 
             var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId, currentPerson);
-            //if (!isPersonAssignedToWard)
-            //{
-            //    throw new UserFriendlyException("The Current User is not assigned to this ward");
-            //}
+            if (!isPersonAssignedToWard)
+            {
+                throw new UserFriendlyException("The Current User is not assigned to this ward");
+            }
 
             var ward = await GetEntityAsync<Ward>(input.WardId);
 
