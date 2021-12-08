@@ -249,8 +249,8 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 };
 
                 var insertedCondition = await _conditionRepositiory.InsertAsync(condition);
+
                 //add a list of conditionIcdTenCode to a task
-                //List<EntityWithDisplayNameDto<Guid?>> icdTenCodeResponses = null;
                 if (input?.Code != null && input?.Code.Count() > 0)
                 {
                     //Add newly updated contact points
