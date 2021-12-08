@@ -735,6 +735,11 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.TodaysAdmission">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Domain.Dtos.HisAdmissionInput">
             <summary>
             
