@@ -209,9 +209,20 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         {
             var currentPerson = await GetCurrentPersonAsync();
             var appointmentService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
-            var wards = await appointmentService.GetAll().Where(r => r.Person == currentPerson).Select(r => r.Hospital).ToListAsync();
+            var hisAdmissPermissionChecker = Abp.Dependency.IocManager.Instance.Resolve<IHisAdmissPermissionChecker>();
+            var hospitals = new List<Hospital>();
 
-            return ObjectMapper.Map<List<HospitalResponse>>(wards);
+            if ( !await hisAdmissPermissionChecker.IsAdmin(currentPerson))
+            {
+                hospitals = await appointmentService.GetAll().Where(r => r.Person == currentPerson).Select(r => r.Hospital).ToListAsync();
+            }
+            else
+            {
+                var hospitalService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Hospital, Guid>>();
+                hospitals = await hospitalService.GetAll().ToListAsync();
+            }
+
+            return ObjectMapper.Map<List<HospitalResponse>>(hospitals);
         }
 
         /// <summary>
