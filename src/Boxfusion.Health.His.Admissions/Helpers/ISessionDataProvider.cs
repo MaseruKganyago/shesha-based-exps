@@ -8,10 +8,30 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Admissions.Helpers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ISessionDataProvider : ITransientDependency
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         Task<List<DailyStats>> GetDailyStats(WardCensusInput input);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         Task<List<DailyStats>> GetMonthlyStats(WardCensusInput input);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wardId"></param>
+        /// <returns></returns>
         Task<List<MidnightCensusApprovalModels>> GetApprovalModels(Guid wardId);
     }
 }
