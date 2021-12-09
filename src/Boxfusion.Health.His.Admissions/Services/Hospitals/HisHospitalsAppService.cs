@@ -88,7 +88,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers
         [HttpPost, Route("")]
         public async Task<HospitalResponse> CreateHospitalAsync(HospitalInput input)
         {
-            await ValidatePermissionsForAdmin();
+            //await ValidatePermissionsForAdmin();
             Validation.ValidateText(input.Name, "Name");
             Validation.ValidateReflist(input.FacilityType, "FacilityType");
             Validation.ValidateReflist(input.District, "District");
@@ -107,7 +107,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers
         [HttpPut, Route("")]
         public async Task<HospitalResponse> UpdateHospitalAsync(HospitalInput input)
         {
-            await ValidatePermissionsForAdmin();
+            //await ValidatePermissionsForAdmin();
             Validation.ValidateText(input.Name, "Name");
             Validation.ValidateReflist(input.FacilityType, "FacilityType");
             Validation.ValidateReflist(input.District, "District");
