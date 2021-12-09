@@ -515,7 +515,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [HttpPut, Route("")]
         public async Task<WardResponse> UpdateWardAsync(WardInput input)
         {
-            await ValidatePermissionsForAdmin();
             Validation.ValidateIdWithException(input?.Id, "Ward Id cannot be empty");
             Validation.ValidateText(input.Name, "Name");
             Validation.ValidateText(input.Description, "Description");
