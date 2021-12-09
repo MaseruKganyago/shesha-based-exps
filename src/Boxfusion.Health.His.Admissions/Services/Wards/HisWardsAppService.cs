@@ -72,13 +72,15 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             table.OnRequestToFilter = (criteria, form) =>
             {
                 var _session = Abp.Dependency.IocManager.Instance.Resolve<IAbpSession>();
-                var _wardRoleAppointedPersonRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<WardRoleAppointedPerson, Guid>>();
                 var personService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Person, Guid>>();
+                var _hospitalRoleAppointedPersonRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
+                var _wardRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Ward, Guid>>();
+
 
                 var person = personService.FirstOrDefault(c => c.User.Id == _session.GetUserId());
                 var wardsId = new List<string>() { $"ent.Id='{Guid.Empty}'" };
-                wardsId.AddRange(_wardRoleAppointedPersonRepository.GetAll().Where(x => x.Person.Id != person.Id).Select(x => $"ent.Id='{x.Ward.Id}'"));
-
+                var hospitalIds = _hospitalRoleAppointedPersonRepository.GetAll().Where(x => x.Person.Id != person.Id).Select(x => x.Hospital.Id);
+                wardsId.AddRange(_wardRepository.GetAll().Where(x => hospitalIds.Contains(x.OwnerOrganisation.Id)).Select(x => $"ent.Id='{x.Id}'"));
 
                 var applicationsFilter = $"{wardsId.Delimited(" or ")}";
                 criteria.FilterClauses.Add(applicationsFilter);
@@ -513,7 +515,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [HttpPut, Route("")]
         public async Task<WardResponse> UpdateWardAsync(WardInput input)
         {
-            await ValidatePermissionsForAdmin();
             Validation.ValidateIdWithException(input?.Id, "Ward Id cannot be empty");
             Validation.ValidateText(input.Name, "Name");
             Validation.ValidateText(input.Description, "Description");

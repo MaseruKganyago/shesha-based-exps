@@ -2705,5 +2705,35 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211209014900">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211209014900.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211209014900.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211209023700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211209023700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211209023700.Down">
+            <summary>
+            
+            </summary>
+        </member>
     </members>
 </doc>

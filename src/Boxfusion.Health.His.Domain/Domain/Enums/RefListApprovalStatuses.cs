@@ -15,7 +15,7 @@ namespace Boxfusion.Health.His.Domain.Domain.Enums
         /// <summary>
         /// 
         /// </summary>
-        [Description("Inprogress")]
+        [Description("In Progress")]
         Inprogress = 1,
 
         /// <summary>
