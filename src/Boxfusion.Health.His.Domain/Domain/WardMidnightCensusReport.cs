@@ -109,5 +109,9 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// 
         /// </summary>
         public virtual float? AverageBedAvailability { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual float? TodaysAdmission { get; set; }
     }
 }
