@@ -48,7 +48,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <param name="sessionDataProvider"></param>
         /// <param name="wardCrudHelper"></param>
         public HisWardsAppService(
-            IRepository<WardMidnightCensusReport, Guid> wardMidnightCensusReport, 
+            IRepository<WardMidnightCensusReport, Guid> wardMidnightCensusReport,
             ISessionDataProvider sessionDataProvider,
             IWardCrudHelper wardCrudHelper)
         {
@@ -214,7 +214,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             var hisAdmissPermissionChecker = Abp.Dependency.IocManager.Instance.Resolve<IHisAdmissPermissionChecker>();
             var hospitals = new List<Hospital>();
 
-            if ( !await hisAdmissPermissionChecker.IsAdmin(currentPerson))
+            if (!await hisAdmissPermissionChecker.IsAdmin(currentPerson))
             {
                 hospitals = await appointmentService.GetAll().Where(r => r.Person == currentPerson).Select(r => r.Hospital).ToListAsync();
             }
@@ -339,7 +339,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
 
                 }
             }
-            
+
             return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
         }
         /// <summary>
@@ -406,7 +406,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             }
 
             var approvalModel = await _sessionDataProvider.GetApprovalModels(input.WardId);
-            if(!approvalModel.Any()) throw new UserFriendlyException("The spacified ward doesn't have MidnightCensusApprovalModel");
+            if (!approvalModel.Any()) throw new UserFriendlyException("The spacified ward doesn't have MidnightCensusApprovalModel");
 
             var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward.Id == input.WardId && r.ReportDate == input.ReportDate);
             //Check Midnight for the day.
@@ -503,7 +503,17 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             Validation.ValidateText(input?.Description, "Description");
             Validation.ValidateNullableType(input?.NumberOfBeds, "NumberOfBeds");
             Validation.ValidateReflist(input?.Speciality, "Speciliaty");
-            Validation.ValidateEntityWithDisplayNameDto(input?.OwnerOrganisation, "OwnerOrganisation");
+
+            var hospitals = await GetAssignedHospitals();
+            if (hospitals.Any())
+            {
+                input.OwnerOrganisation.Id = hospitals[0].Id;
+                input.OwnerOrganisation.DisplayText = hospitals[0].Name;
+            }
+            else
+            {
+                Validation.ValidateEntityWithDisplayNameDto(input?.OwnerOrganisation, "OwnerOrganisation");
+            }
 
             return await _wardCrudHelper.CreateAsync(input);
         }
@@ -521,7 +531,17 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             Validation.ValidateText(input.Description, "Description");
             Validation.ValidateNullableType(input.NumberOfBeds, "NumberOfBeds");
             Validation.ValidateReflist(input?.Speciality, "Speciliaty");
-            Validation.ValidateEntityWithDisplayNameDto(input?.OwnerOrganisation, "OwnerOrganisation");
+
+            var hospitals = await GetAssignedHospitals();
+            if (hospitals.Any())
+            {
+                input.OwnerOrganisation.Id = hospitals[0].Id;
+                input.OwnerOrganisation.DisplayText = hospitals[0].Name;
+            }
+            else
+            {
+                Validation.ValidateEntityWithDisplayNameDto(input?.OwnerOrganisation, "OwnerOrganisation");
+            }
 
             return await _wardCrudHelper.UpdateAsync(input);
         }
