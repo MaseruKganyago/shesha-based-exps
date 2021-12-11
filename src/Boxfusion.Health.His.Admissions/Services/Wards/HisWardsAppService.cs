@@ -337,10 +337,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                         Ward = entity.Ward
                     };
 
-                    if(entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress || entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.Rejected)
-                    {
-                        await _wardMidnightCensusReport.UpdateAsync(entity);
-                    }                    
                 }
             }
             
