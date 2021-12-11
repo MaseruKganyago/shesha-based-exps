@@ -184,11 +184,18 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
                 if (conditionIcdTenCodes.Count() > 0)
                     icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => temp.Contains(x.Id)).ToListAsync();
             }
-            List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
-            icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
 
+            List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
+            List<EntityWithDisplayNameDto<Guid?>> separationCodes = new List<EntityWithDisplayNameDto<Guid?>>();
+
+            codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCodes.FirstOrDefault().Id, icdTenCodes.FirstOrDefault().ICDTenThreeCodeDesc));
             UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
 
+            if (icdTenCodes.Count > 1)
+            {
+                separationCodes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCodes.LastOrDefault().Id, icdTenCodes.LastOrDefault().ICDTenThreeCodeDesc));
+                UtilityHelper.TrySetProperty(admissionResponse, "SeparationCode", separationCodes);
+            }
 
             return admissionResponse;
         }

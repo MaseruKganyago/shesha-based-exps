@@ -129,6 +129,11 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         /// <summary>
         /// 
         /// </summary>
+        public List<EntityWithDisplayNameDto<Guid?>> SeparationCode { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public EntityWithDisplayNameDto<Guid?> HisAdmission { get; set; }
 
 

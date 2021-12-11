@@ -125,20 +125,33 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             if (wardAdmission?.Subject != null)
                 hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
 
-            List<EntityWithDisplayNameDto<Guid?>> codes = await GetIcdTenCodes(hisPatient, hospitalAdmission);
+
 
             AdmissionResponse admissionResponse = null;
-            if(hospitalAdmission != null)
+            if (hospitalAdmission != null)
                 admissionResponse = _mapper.Map<AdmissionResponse>(hospitalAdmission);
 
-            if(admissionResponse != null)
+            if (admissionResponse != null)
                 _mapper.Map(wardAdmission, admissionResponse);
             else
                 admissionResponse = _mapper.Map<AdmissionResponse>(wardAdmission);
 
             _mapper.Map(hisPatient, admissionResponse);
             _mapper.Map(wardAdmission.Ward, admissionResponse);
-            UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
+
+            List<EntityWithDisplayNameDto<Guid?>> codes = await GetIcdTenCodes(hisPatient, hospitalAdmission);
+            List<EntityWithDisplayNameDto<Guid?>> admissionCodes = new List<EntityWithDisplayNameDto<Guid?>>
+            { new EntityWithDisplayNameDto<Guid?> { Id = codes.FirstOrDefault().Id, DisplayText = codes.FirstOrDefault().DisplayText } };
+            UtilityHelper.TrySetProperty(admissionResponse, "Code", admissionCodes);
+
+            List<EntityWithDisplayNameDto<Guid?>> separationCodes = new List<EntityWithDisplayNameDto<Guid?>>();
+            if (codes.Count > 1)
+            {
+                separationCodes.Add(new EntityWithDisplayNameDto<Guid?>
+                { Id = codes.FirstOrDefault().Id, DisplayText = codes.FirstOrDefault().DisplayText });
+                UtilityHelper.TrySetProperty(admissionResponse, "separationCode", separationCodes);
+
+            }
 
             if (hisPatient.DateOfBirth.HasValue && wardAdmission.SeparationDate.HasValue)
                 admissionResponse.AgeBreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, wardAdmission.SeparationDate.Value);
