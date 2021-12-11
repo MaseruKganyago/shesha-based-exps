@@ -125,8 +125,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             if (wardAdmission?.Subject != null)
                 hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
 
-
-
             AdmissionResponse admissionResponse = null;
             if (hospitalAdmission != null)
                 admissionResponse = _mapper.Map<AdmissionResponse>(hospitalAdmission);
@@ -139,18 +137,28 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             _mapper.Map(hisPatient, admissionResponse);
             _mapper.Map(wardAdmission.Ward, admissionResponse);
 
-            List<EntityWithDisplayNameDto<Guid?>> codes = await GetIcdTenCodes(hisPatient, hospitalAdmission);
-            List<EntityWithDisplayNameDto<Guid?>> admissionCodes = new List<EntityWithDisplayNameDto<Guid?>>
-            { new EntityWithDisplayNameDto<Guid?> { Id = codes.FirstOrDefault().Id, DisplayText = codes.FirstOrDefault().DisplayText } };
-            UtilityHelper.TrySetProperty(admissionResponse, "Code", admissionCodes);
+            var codes = await GetIcdTenCodes(hisPatient, hospitalAdmission);
+            var separationCodes = new List<EntityWithDisplayNameDto<Guid?>>();
 
-            List<EntityWithDisplayNameDto<Guid?>> separationCodes = new List<EntityWithDisplayNameDto<Guid?>>();
-            if (codes.Count > 1)
+            if (codes.Any())
             {
-                separationCodes.Add(new EntityWithDisplayNameDto<Guid?>
-                { Id = codes.FirstOrDefault().Id, DisplayText = codes.FirstOrDefault().DisplayText });
-                UtilityHelper.TrySetProperty(admissionResponse, "separationCode", separationCodes);
+                var admissionCodes = new List<EntityWithDisplayNameDto<Guid?>>()
+                {
+                    new EntityWithDisplayNameDto<Guid?> ()
+                    {
+                        Id = codes.FirstOrDefault().Id,
+                        DisplayText = codes.FirstOrDefault().DisplayText
+                    }
+                };
 
+                separationCodes.Add(new EntityWithDisplayNameDto<Guid?>()
+                {
+                    Id = codes.FirstOrDefault().Id,
+                    DisplayText = codes.FirstOrDefault().DisplayText
+                });
+
+                UtilityHelper.TrySetProperty(admissionResponse, "Code", admissionCodes);
+                UtilityHelper.TrySetProperty(admissionResponse, "separationCode", separationCodes);                
             }
 
             if (hisPatient.DateOfBirth.HasValue && wardAdmission.SeparationDate.HasValue)
