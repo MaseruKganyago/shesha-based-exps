@@ -36,11 +36,25 @@ namespace Boxfusion.Health.His.Admissions.Authorization
 
             // system administrator has all rights
             if (await IsInAnyOfRoles(person, RoleNames.SystemAdministrator))
+            {
+                if (permissionName == PermissionNames.AdmissionDashboard)
+                {
+                    return false;
+                }
                 return true;
+            }
+               
             
             // data administrator has all rights
             if (await IsInAnyOfRoles(person, RoleNames.GlobalAdmin))
+            {
+                if (permissionName == PermissionNames.AdmissionDashboard)
+                {
+                    return false;
+                }
                 return true;
+            }
+            
 
             // add custom permission checks here...
             if (permissionName == PermissionNames.ApproveReport || permissionName == PermissionNames.DisapproveReport 

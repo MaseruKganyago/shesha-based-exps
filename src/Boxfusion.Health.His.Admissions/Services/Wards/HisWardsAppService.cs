@@ -507,8 +507,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             var hospitals = await GetAssignedHospitals();
             if (hospitals.Any())
             {
-                input.OwnerOrganisation.Id = hospitals[0].Id;
-                input.OwnerOrganisation.DisplayText = hospitals[0].Name;
+                input.OwnerOrganisation = new EntityWithDisplayNameDto<Guid?>()
+                {
+                    DisplayText = hospitals[0].Name,
+                    Id = hospitals[0].Id
+                };
             }
             else
             {
@@ -535,8 +538,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             var hospitals = await GetAssignedHospitals();
             if (hospitals.Any())
             {
-                input.OwnerOrganisation.Id = hospitals[0].Id;
-                input.OwnerOrganisation.DisplayText = hospitals[0].Name;
+                input.OwnerOrganisation = new EntityWithDisplayNameDto<Guid?>()
+                {
+                    DisplayText = hospitals[0].Name,
+                    Id = hospitals[0].Id
+                };
             }
             else
             {

@@ -159,7 +159,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
             var hospitalAppoitmentService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
             var hospital = await hospitalAppoitmentService.GetAll().Where(r => r.Person == currentPerson).Select(r => r.Hospital).FirstOrDefaultAsync();
 
-            if(OwnerOrganisation.OwnerOrganisation.Id == hospital.Id)
+            if(OwnerOrganisation?.OwnerOrganisation?.Id == hospital.Id)
             {
                 return true;
             }
