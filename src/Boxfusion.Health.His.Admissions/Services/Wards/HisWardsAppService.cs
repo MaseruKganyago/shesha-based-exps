@@ -187,7 +187,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 entity = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(entity.Id, async (item) =>
                 {
                     ObjectMapper.Map(dailyStat, item);
-                    item.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress;
+                    item.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.approved;
                     item.BedUtilisation = (double?)dailyStat.BedUtilisation;
                     item.AverageLengthofStay = (float?)dailyStat.AverageLengthOfStay;
                     item.ReportType = His.Domain.Domain.Enums.RefListReportType.Daily;
@@ -336,6 +336,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                         ReportType = entity.ReportType,
                         Ward = entity.Ward
                     };
+
+                    if(entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress || entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.Rejected)
+                    {
+                        await _wardMidnightCensusReport.UpdateAsync(entity);
+                    }                    
                 }
             }
             
