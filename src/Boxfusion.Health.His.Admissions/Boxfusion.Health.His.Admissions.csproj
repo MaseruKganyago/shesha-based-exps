@@ -37,6 +37,7 @@
     <Compile Include="Services\Admissions\Dto\AcceptOrRejectTransfersInput.cs" />
     <Compile Include="Services\Admissions\Dto\AcceptOrRejectTransfersResponse.cs" />
     <Compile Include="Services\Admissions\Dto\AdmissionsMapProfile.cs" />
+    <Compile Include="Services\Admissions\Dto\MonthlyStats.cs" />
     <Compile Include="Services\Admissions\Dto\DailyStats.cs" />
     <Compile Include="Services\Admissions\Dto\WardCensusInput.cs" />
     <Compile Include="Services\Admissions\Dto\WardCensusResponse.cs" />

@@ -68,19 +68,21 @@ namespace Boxfusion.Health.His.Admissions.Helpers
             }
         }
 
-        public async Task<List<DailyStats>> GetMonthlyStats(WardCensusInput input)
+        public async Task<List<MonthlyStats>> GetMonthlyStats(WardCensusInput input)
         {
             try
             {
                 return (await _sessionProvider.Session
                     .CreateSQLQuery(@"Exec GetWardCensusMonthlyStatsProc 
                             @WardId = :WardId,
-                            @ReportDate = :ReportDate                           
+                            @ReportDate = :ReportDate,
+                            @DaysLapsed = :DaysLapsed
                     ")
                     .SetParameter("WardId", input.WardId)
                     .SetParameter("ReportDate", input.ReportDate)
-                    .SetResultTransformer(Transformers.AliasToBean<DailyStats>())
-                    .ListAsync<DailyStats>())
+                    .SetParameter("DaysLapsed", input.ReportDate.Value.Day)
+                    .SetResultTransformer(Transformers.AliasToBean<MonthlyStats>())
+                    .ListAsync<MonthlyStats>())
                     .ToList();
             }
             catch (Exception Ex)
