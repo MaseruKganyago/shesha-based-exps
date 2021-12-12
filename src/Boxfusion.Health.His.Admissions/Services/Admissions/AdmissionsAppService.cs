@@ -170,63 +170,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 
             return ObjectMapper.Map<HisPatientResponse>(patient);
         }
-        /// <summary>
-        /// Used to get the ward daily census by passing wardId and the Report date
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        [HttpGet, Route("GetWardCensusDailyStats")]
-        public async Task<WardCensusResponse> GetWardCensusDailyStats(WardCensusInput input)
-        {
-            var dailyStats = await _sessionDataProvider.GetDailyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
-            if (!dailyStats.Any())
-            {
-                throw new UserFriendlyException("No records found for the ward and date specified");
-            }
-
-            var dailyStat = dailyStats[0];
-
-            return new WardCensusResponse()
-            {
-                MidnightCount = (int?)dailyStat.MidnightCount,
-                TotalAdmittedPatients = (int?)dailyStat.TotalAdmittedPatients,
-                TotalSeparatedPatients = (int?)dailyStat.TotalSeparatedPatients,
-                TotalBedAvailability = (int?)dailyStat.TotalBedAvailability,
-                TotalBedInWard = (int?)dailyStat.TotalBedInWard,
-                AverageBedAvailability = dailyStat.AverageBedAvailability,
-                AverageLengthOfStay = dailyStat.AverageLengthOfStay,
-                BedUtilisation = dailyStat.BedUtilisation
-            };
-        }
-        /// <summary>
-        /// Used to het Monthly ward stats 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        [HttpGet, Route("GetWardCensusMonthlyStats")]
-        public async Task<WardCensusResponse> GetWardCensusMonthlyStats(WardCensusInput input)
-        {
-            var dailyStats = await _sessionDataProvider.GetMonthlyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
-            if (!dailyStats.Any())
-            {
-                throw new UserFriendlyException("No records found for the ward and date specified");
-            }
-
-            var dailyStat = dailyStats[0];
-
-            return new WardCensusResponse()
-            {
-                MidnightCount = (int?)dailyStat.MidnightCount,
-                TotalAdmittedPatients = (int?)dailyStat.TotalAdmittedPatients,
-                TotalSeparatedPatients = (int?)dailyStat.TotalSeparatedPatients,
-                TotalBedAvailability = (int?)dailyStat.TotalBedAvailability,
-                TotalBedInWard = (int?)dailyStat.TotalBedInWard,
-                AverageBedAvailability = dailyStat.AverageBedAvailability,
-                AverageLengthOfStay = dailyStat.AverageLengthOfStay,
-                BedUtilisation = dailyStat.BedUtilisation
-            };
-        }
-
+       
         /// <summary>
         /// 
         /// </summary>

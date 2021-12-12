@@ -159,7 +159,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
             var hospitalAppoitmentService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
             var hospital = await hospitalAppoitmentService.GetAll().Where(r => r.Person == currentPerson).Select(r => r.Hospital).FirstOrDefaultAsync();
 
-            if(OwnerOrganisation.OwnerOrganisation.Id == hospital.Id)
+            if(OwnerOrganisation?.OwnerOrganisation?.Id == hospital.Id)
             {
                 return true;
             }
@@ -177,9 +177,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
         {
             var OwnerOrganisation = await _repository.GetAsync(wardId);
 
-            var hospital = await _wardRoleAppointedPersonRepository.GetAll().Where(r => r.Person == currentPerson).Select(r => r.Ward).FirstOrDefaultAsync();
+            var hospital = await _wardRoleAppointedPersonRepository.GetAll()
+                .Where(r => r.Person == currentPerson).Select(r => r.Ward).ToListAsync();
 
-            if (OwnerOrganisation.Id == hospital.Id)
+            if(hospital.Any(r => r.Id == OwnerOrganisation.Id))
             {
                 return true;
             }

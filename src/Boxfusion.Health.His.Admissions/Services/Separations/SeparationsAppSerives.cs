@@ -1,6 +1,8 @@
 ﻿using Abp.Authorization;
+using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
+using Boxfusion.Health.His.Admissions.Authorization;
 using Boxfusion.Health.His.Admissions.Services.Separations.Dto;
 using Boxfusion.Health.His.Admissions.Services.Separations.Helpers;
 using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
@@ -21,15 +23,16 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
     {
         private readonly ISeparationCrudHelper _separationCrudHelper;
         private readonly ISeparationService _separationService;
-
+        private readonly IHisAdmissPermissionChecker _hisAdmissPermissionChecker;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="separationCrudHelper"></param>
-        public SeparationsAppSerives(ISeparationCrudHelper separationCrudHelper, ISeparationService separationService)
+        public SeparationsAppSerives(ISeparationCrudHelper separationCrudHelper, ISeparationService separationService, IHisAdmissPermissionChecker hisAdmissPermissionChecker)
         {
             _separationCrudHelper = separationCrudHelper;
             _separationService = separationService;
+            _hisAdmissPermissionChecker = hisAdmissPermissionChecker;
         }
 
         /// <summary>
@@ -74,9 +77,13 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete, Route("undoSeparation/{id}")]
-        [AbpAuthorize("Approver Level 1")]
         public async Task<AdmissionResponse> UndoSeparationAsync(Guid id)
         {
+            if(!await _hisAdmissPermissionChecker.IsApproverLevel1(await GetCurrentPersonAsync()))
+            {
+                throw new UserFriendlyException("The logged user is not a level 1 approver");
+            }
+
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
 
             var separation = await _separationService.UndoSeparation(id, person);

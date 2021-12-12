@@ -9,6 +9,8 @@
         /// Pages: Admission Dashboard
         /// </summary>
         public const string AdmissionDashboard = "pages:admissionDashboard";
+        public const string DailyAdmissionDashboard = "pages:dailyAdmissionDashboard";
+        public const string AllAdmissionDashboard = "pages:allAdmissionDashboard";
         public const string ApproveReport = "pages:approveReport";
         public const string DisapproveReport = "pages:disapproveReport";
         public const string DailyReports = "pages:dailyReports";
