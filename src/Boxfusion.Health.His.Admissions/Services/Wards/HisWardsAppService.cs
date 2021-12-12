@@ -343,6 +343,44 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
         }
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpGet, Route("MonthlyReport")]
+        public async Task<WardMidnightCensusReportResponse> GetWardMonthlyReport(WardCensusInput input)
+        {
+            var ward = await GetEntityAsync<Ward>(input.WardId);
+
+            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate && r.ReportType == His.Domain.Domain.Enums.RefListReportType.Monthly);
+
+            if(entity == null)
+            {
+                var calculatedReport = await _sessionDataProvider.GetMonthlyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
+                if (calculatedReport.Any())
+                {
+                    var monthlyStat = calculatedReport[0];
+
+                    entity = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(null, async (item) =>
+                    {
+                        item.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress;
+                        item.BedUtilisation = (double?)monthlyStat.BedUtilisation;
+                        item.AverageLengthofStay = (float?)monthlyStat.AverageLengthOfStay;
+                        item.ReportType = His.Domain.Domain.Enums.RefListReportType.Monthly;
+                        item.ReportDate = input.ReportDate;
+                        item.Ward = ward;
+                        item.AverageBedAvailability = (float?)monthlyStat.AverageBedAvailability;
+                        item.NumBedsInWard = monthlyStat.NumBedsInWard;
+                        item.TotalBedAvailability = monthlyStat.TotalBedAvailability;
+                        item.TotalAdmissions = (int?)monthlyStat.TotalAdmissions;
+                        item.TotalSeparations = (int?)monthlyStat.TotalSeparations;
+                    });
+                }
+                return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
+            }
+            return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
+        }
+        /// <summary>
         /// Used to reject the report
         /// </summary>
         /// <param name="input"></param>
@@ -394,16 +432,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         {
             var currentPerson = await GetCurrentPersonAsync();
             var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId, currentPerson);
-            if (!isPersonAssignedToHospital)
-            {
-                throw new UserFriendlyException("The Current User is not assigned to this hospital");
-            }
+            if (!isPersonAssignedToHospital) throw new UserFriendlyException("The Current User is not assigned to this hospital");
 
             var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId, currentPerson);
-            if (!isPersonAssignedToWard)
-            {
-                throw new UserFriendlyException("The Current User is not assigned to this ward");
-            }
+            if (!isPersonAssignedToWard) throw new UserFriendlyException("The Current User is not assigned to this ward");
 
             var approvalModel = await _sessionDataProvider.GetApprovalModels(input.WardId);
             if (!approvalModel.Any()) throw new UserFriendlyException("The spacified ward doesn't have MidnightCensusApprovalModel");
@@ -562,6 +594,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         {
             Validation.ValidateIdWithException(id, "Ward Id cannot be empty");
             await _wardCrudHelper.DeleteAsync(id);
-        }
+        }                
     }
 }
