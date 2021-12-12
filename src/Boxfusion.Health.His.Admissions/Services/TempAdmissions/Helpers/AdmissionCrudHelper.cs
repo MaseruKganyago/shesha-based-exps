@@ -15,6 +15,7 @@ using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using NHibernate.Linq;
 using Shesha.AutoMapper.Dto;
+using Shesha.Domain;
 using Shesha.Extensions;
 using System;
 using System.Collections.Generic;
@@ -228,6 +229,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
 
                 //Create ward admission record
                 var wardAdmission = _mapper.Map<WardAdmission>(input);
+                _mapper.Map(currentLoggedInPerson, wardAdmission);
                 wardAdmission.PartOf = insertedHospitalAdmission;
                 _mapper.Map(hisPatient, wardAdmission);
                 var insertedWardAdmission = await _wardAdmissionRepositiory.InsertAsync(wardAdmission);
@@ -281,6 +283,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         {
             //AdmissionResponse admissionResponse = null;
             var dbWardAdmission = await _wardAdmissionRepositiory.GetAsync(input.Id);
+            _mapper.Map(currentLoggedInPerson, dbWardAdmission);
             var dbHisPatient = await _hisPatientRepositiory.GetAsync(dbWardAdmission.Subject.Id);
             _mapper.Map(input, dbWardAdmission);
             var updatedWardAdmission = await _wardAdmissionRepositiory.UpdateAsync(dbWardAdmission);
