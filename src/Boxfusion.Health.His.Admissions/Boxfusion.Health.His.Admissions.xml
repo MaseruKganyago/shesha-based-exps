@@ -1338,7 +1338,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives.#ctor(Boxfusion.Health.His.Admissions.Services.Separations.Helpers.ISeparationCrudHelper,Boxfusion.Health.His.Admissions.Services.Separations.Helpers.ISeparationService)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives.#ctor(Boxfusion.Health.His.Admissions.Services.Separations.Helpers.ISeparationCrudHelper,Boxfusion.Health.His.Admissions.Services.Separations.Helpers.ISeparationService,Boxfusion.Health.His.Admissions.Authorization.IHisAdmissPermissionChecker)">
             <summary>
             
             </summary>
