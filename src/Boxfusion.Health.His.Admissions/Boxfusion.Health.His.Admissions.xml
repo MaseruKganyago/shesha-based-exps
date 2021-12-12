@@ -1875,7 +1875,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Ward,System.Guid})">
             <summary>
             
             </summary>
