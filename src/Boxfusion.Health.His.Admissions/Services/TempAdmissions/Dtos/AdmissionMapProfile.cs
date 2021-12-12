@@ -6,6 +6,7 @@ using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Shesha.AutoMapper;
 using Shesha.AutoMapper.Dto;
+using Shesha.Domain;
 using System;
 
 namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
@@ -202,6 +203,10 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(c => c.Type, options => options.Ignore())
                 .ForMember(c => c.PartOf, options => options.Ignore())
                 .ForMember(c => c.Speciality, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "WardSpecialities", (long?)c.Speciality)))
+                .MapReferenceListValuesToDto();
+
+            CreateMap<PersonFhirBase, WardAdmission>()
+                .ForMember(c => c.Performer, options => options.MapFrom(c => GetEntity<Person>(c.Id)))
                 .MapReferenceListValuesToDto();
         }
     }
