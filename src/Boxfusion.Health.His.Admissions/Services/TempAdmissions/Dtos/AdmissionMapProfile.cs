@@ -206,6 +206,11 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .MapReferenceListValuesToDto();
 
             CreateMap<PersonFhirBase, WardAdmission>()
+                .ForMember(c => c.Id, options => options.Ignore())
+                .ForMember(c => c.Identifier, options => options.Ignore())
+                .ForMember(c => c.Subject, options => options.Ignore())
+                .ForMember(c => c.Status, options => options.Ignore())
+                .ForMember(c => c.Type, options => options.Ignore())
                 .ForMember(c => c.Performer, options => options.MapFrom(c => GetEntity<Person>(c.Id)))
                 .MapReferenceListValuesToDto();
         }
