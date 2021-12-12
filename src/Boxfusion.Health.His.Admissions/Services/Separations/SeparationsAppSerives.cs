@@ -1,5 +1,4 @@
 ﻿using Abp.Authorization;
-using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Admissions.Authorization;
@@ -21,16 +20,14 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
     [Route("api/v{version:apiVersion}/His/PatientSeparation")]
     public class SeparationsAppSerives : CdmAppServiceBase, ISeparationsAppService
     {
-        private readonly ISeparationCrudHelper _separationCrudHelper;
         private readonly ISeparationService _separationService;
         private readonly IHisAdmissPermissionChecker _hisAdmissPermissionChecker;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="separationCrudHelper"></param>
-        public SeparationsAppSerives(ISeparationCrudHelper separationCrudHelper, ISeparationService separationService, IHisAdmissPermissionChecker hisAdmissPermissionChecker)
+        public SeparationsAppSerives(ISeparationService separationService, IHisAdmissPermissionChecker hisAdmissPermissionChecker)
         {
-            _separationCrudHelper = separationCrudHelper;
             _separationService = separationService;
             _hisAdmissPermissionChecker = hisAdmissPermissionChecker;
         }
@@ -79,10 +76,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
         [HttpDelete, Route("undoSeparation/{id}")]
         public async Task<AdmissionResponse> UndoSeparationAsync(Guid id)
         {
-            if(!await _hisAdmissPermissionChecker.IsApproverLevel1(await GetCurrentPersonAsync()))
-            {
-                throw new UserFriendlyException("The logged user is not a level 1 approver");
-            }
+            //if (!await _hisAdmissPermissionChecker.IsApproverLevel1(await GetCurrentPersonAsync()))
+            //{
+            //    throw new UserFriendlyException("The logged user is not a level 1 approver");
+            //}
 
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
 
