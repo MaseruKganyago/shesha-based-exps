@@ -2156,6 +2156,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.HisWardsAppService.GetWardMonthlyReport(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.WardCensusInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.HisWardsAppService.Reject(Boxfusion.Health.His.Admissions.Services.Wards.Dto.RejectReportInput)">
             <summary>
             Used to reject the report

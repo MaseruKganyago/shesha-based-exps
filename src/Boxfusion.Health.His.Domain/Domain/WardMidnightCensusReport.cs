@@ -113,5 +113,13 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// 
         /// </summary>
         public virtual float? TodaysAdmission { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual int? TotalAdmissions { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual int? TotalSeparations { get; set; }
     }
 }

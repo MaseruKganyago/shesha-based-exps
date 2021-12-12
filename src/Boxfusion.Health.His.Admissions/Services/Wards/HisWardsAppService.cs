@@ -342,12 +342,17 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
 
             return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpGet, Route("MonthlyReport")]
         public async Task<WardMidnightCensusReportResponse> GetWardMonthlyReport(WardCensusInput input)
         {
             var ward = await GetEntityAsync<Ward>(input.WardId);
 
-            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
+            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate && r.ReportType == His.Domain.Domain.Enums.RefListReportType.Monthly);
 
             if(entity == null)
             {
@@ -358,13 +363,17 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
 
                     entity = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(null, async (item) =>
                     {
-                        ObjectMapper.Map(monthlyStat, item);
                         item.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress;
                         item.BedUtilisation = (double?)monthlyStat.BedUtilisation;
                         item.AverageLengthofStay = (float?)monthlyStat.AverageLengthOfStay;
                         item.ReportType = His.Domain.Domain.Enums.RefListReportType.Monthly;
                         item.ReportDate = input.ReportDate;
                         item.Ward = ward;
+                        item.AverageBedAvailability = (float?)monthlyStat.AverageBedAvailability;
+                        item.NumBedsInWard = monthlyStat.NumBedsInWard;
+                        item.TotalBedAvailability = monthlyStat.TotalBedAvailability;
+                        item.TotalAdmissions = (int?)monthlyStat.TotalAdmissions;
+                        item.TotalSeparations = (int?)monthlyStat.TotalSeparations;
                     });
                 }
                 return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
