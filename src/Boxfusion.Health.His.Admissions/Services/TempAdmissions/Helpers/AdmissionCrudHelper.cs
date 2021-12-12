@@ -128,40 +128,17 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             List<EntityWithDisplayNameDto<Guid?>> codes = await GetIcdTenCodes(wardAdmission);
 
             AdmissionResponse admissionResponse = null;
-            if (hospitalAdmission != null)
+            if(hospitalAdmission != null)
                 admissionResponse = _mapper.Map<AdmissionResponse>(hospitalAdmission);
 
-            if (admissionResponse != null)
+            if(admissionResponse != null)
                 _mapper.Map(wardAdmission, admissionResponse);
             else
                 admissionResponse = _mapper.Map<AdmissionResponse>(wardAdmission);
 
             _mapper.Map(hisPatient, admissionResponse);
             _mapper.Map(wardAdmission.Ward, admissionResponse);
-
-            var codes = await GetIcdTenCodes(hisPatient, hospitalAdmission);
-            var separationCodes = new List<EntityWithDisplayNameDto<Guid?>>();
-
-            if (codes.Any())
-            {
-                var admissionCodes = new List<EntityWithDisplayNameDto<Guid?>>()
-                {
-                    new EntityWithDisplayNameDto<Guid?> ()
-                    {
-                        Id = codes.FirstOrDefault().Id,
-                        DisplayText = codes.FirstOrDefault().DisplayText
-                    }
-                };
-
-                separationCodes.Add(new EntityWithDisplayNameDto<Guid?>()
-                {
-                    Id = codes.FirstOrDefault().Id,
-                    DisplayText = codes.FirstOrDefault().DisplayText
-                });
-
-                UtilityHelper.TrySetProperty(admissionResponse, "Code", admissionCodes);
-                UtilityHelper.TrySetProperty(admissionResponse, "separationCode", separationCodes);                
-            }
+            UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
 
             if (hisPatient.DateOfBirth.HasValue && wardAdmission.SeparationDate.HasValue)
                 admissionResponse.AgeBreakdown = AgeBreakdown(hisPatient.DateOfBirth.Value, wardAdmission.SeparationDate.Value);
@@ -244,13 +221,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         {
             //Create patient
             var admissionResponse = _mapper.Map<AdmissionResponse>(hisPatient);
-            //Create hospital admission record if IsExternaPatient == true
-            //HospitalAdmission insertedHospitalAdmission = null;
-            //WardAdmission insertedWardAdmission = null;
-            //using (var uow = _unitOfWork.Begin())
-            //{
-                //if (input.AdmissionType.ItemValue != (int)RefListAdmissionTypes.internalTransferIn)
-                //{
                 var hospitalAdmission = _mapper.Map<HospitalAdmission>(input);
                 _mapper.Map(hisPatient, hospitalAdmission);
                 var insertedHospitalAdmission = await _hospitalAdmissionRepositiory.InsertAsync(hospitalAdmission);
@@ -296,10 +266,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 _mapper.Map(insertedHospitalAdmission, admissionResponse);
                 _mapper.Map(insertedWardAdmission, admissionResponse);
                 _mapper.Map(wardAdmission?.Ward, admissionResponse);
-            //    await uow.CompleteAsync();
-            //}
-            //List<EntityWithDisplayNameDto<Guid?>> codes = await GetIcdTenCodes(insertedWardAdmission);
-
             UtilityHelper.TrySetProperty(admissionResponse, "Code", icdTenCodeResponses);
 
             return admissionResponse;
@@ -316,9 +282,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             //AdmissionResponse admissionResponse = null;
             var dbWardAdmission = await _wardAdmissionRepositiory.GetAsync(input.Id);
             var dbHisPatient = await _hisPatientRepositiory.GetAsync(dbWardAdmission.Subject.Id);
-            //HospitalAdmission dbHospitalAdmission = null;
-            //using (var uow = _unitOfWork.Begin())
-            //{
             _mapper.Map(input, dbWardAdmission);
             var updatedWardAdmission = await _wardAdmissionRepositiory.UpdateAsync(dbWardAdmission);
             var admissionResponse = _mapper.Map<AdmissionResponse>(updatedWardAdmission);
@@ -338,7 +301,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 //add a list of conditionIcdTenCode to a task
             if (input?.Code != null && input?.Code.Count() > 0)
             {
-                //Delete old ShaRoleAppointmentPerson when deleting
+                //Delete old conditionIcdTenCode when deleting
                 var dbConditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => x.Condition == dbCondition);
                 dbConditionIcdTenCodes.ForEach(x => x.IsDeleted = false);
                 var taskDeleteConditionIcdTenCodes = new List<Task>();
@@ -350,9 +313,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 var conditonIcdTenCodes = ((IList<EntityWithDisplayNameDto<Guid?>>)await Task.WhenAll(taskConditionIcdTenCodes)); //save contact points to db
                 icdTenCodeResponses = conditonIcdTenCodes.ToList();
             }
-            //await uow.CompleteAsync();
-            //}
-            icdTenCodeResponses.AddRange(await GetIcdTenCodes(dbWardAdmission));
+
             _mapper.Map(dbWardAdmission?.Ward, admissionResponse);
             UtilityHelper.TrySetProperty(admissionResponse, "Code", icdTenCodeResponses);
 
