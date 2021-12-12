@@ -125,7 +125,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             if (wardAdmission?.Subject != null)
                 hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
 
-            List<EntityWithDisplayNameDto<Guid?>> codes = await GetIcdTenCodes(hisPatient, hospitalAdmission);
+            List<EntityWithDisplayNameDto<Guid?>> codes = await GetIcdTenCodes(wardAdmission);
 
             AdmissionResponse admissionResponse = null;
             if(hospitalAdmission != null)
@@ -167,7 +167,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 if (wardAdmission?.Subject != null)
                     hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
 
-                List<EntityWithDisplayNameDto<Guid?>> codes = await GetIcdTenCodes(hisPatient, hospitalAdmission);
+                List<EntityWithDisplayNameDto<Guid?>> codes = await GetIcdTenCodes(wardAdmission);
 
                 _mapper.Map(hospitalAdmission, admissionResponse);
                 _mapper.Map(hisPatient, admissionResponse);
@@ -222,14 +222,15 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             //Create patient
             var admissionResponse = _mapper.Map<AdmissionResponse>(hisPatient);
             //Create hospital admission record if IsExternaPatient == true
-            HospitalAdmission insertedHospitalAdmission = null;
-            using (var uow = _unitOfWork.Begin())
-            {
+            //HospitalAdmission insertedHospitalAdmission = null;
+            //WardAdmission insertedWardAdmission = null;
+            //using (var uow = _unitOfWork.Begin())
+            //{
                 //if (input.AdmissionType.ItemValue != (int)RefListAdmissionTypes.internalTransferIn)
                 //{
                 var hospitalAdmission = _mapper.Map<HospitalAdmission>(input);
                 _mapper.Map(hisPatient, hospitalAdmission);
-                insertedHospitalAdmission = await _hospitalAdmissionRepositiory.InsertAsync(hospitalAdmission);
+                var insertedHospitalAdmission = await _hospitalAdmissionRepositiory.InsertAsync(hospitalAdmission);
                 //}
 
                 //Create ward admission record
@@ -244,12 +245,13 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                     RecordedDate = DateTime.Now,
                     Subject = hisPatient,
                     Recorder = currentLoggedInPerson,
-                    //Asserter = currentLoggedInPerson,
+                    FhirEncounter = insertedWardAdmission,
                     HospitalisationEncounter = insertedHospitalAdmission
                 };
 
                 var insertedCondition = await _conditionRepositiory.InsertAsync(condition);
 
+                List<EntityWithDisplayNameDto<Guid?>> icdTenCodeResponses = new List<EntityWithDisplayNameDto<Guid?>>();
                 //add a list of conditionIcdTenCode to a task
                 if (input?.Code != null && input?.Code.Count() > 0)
                 {
@@ -257,25 +259,25 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                     var taskConditionIcdTenCodes = new List<Task<EntityWithDisplayNameDto<Guid?>>>(); //Tasks lists to handle batch insert into database
                     input.Code.ForEach((v) => taskConditionIcdTenCodes.Add(CreateICdTenCode(v, insertedCondition)));
                     var conditonIcdTenCodes = ((IList<EntityWithDisplayNameDto<Guid?>>)await Task.WhenAll(taskConditionIcdTenCodes)); //save contact points to db
-                    var icdTenCodeResponses = conditonIcdTenCodes.ToList();
+                    icdTenCodeResponses = conditonIcdTenCodes.ToList();
                 }
 
                 //Create a diagnosis
                 var diagnosis = new Diagnosis
                 {
-                    OwnerId = hisPatient.Id.ToString(),
-                    OwnerType = hisPatient.GetTypeShortAlias(),
-                    Condition = insertedCondition
+                    OwnerId = insertedHospitalAdmission.Id.ToString(),
+                    OwnerType = insertedHospitalAdmission.GetTypeShortAlias(),
+                    Condition = insertedCondition,          
                 };
                 var insertedDiagnosis = await _diagnosisRepositiory.InsertAsync(diagnosis);
                 _mapper.Map(insertedHospitalAdmission, admissionResponse);
                 _mapper.Map(insertedWardAdmission, admissionResponse);
                 _mapper.Map(wardAdmission?.Ward, admissionResponse);
-                uow.Complete();
-            }
-            List<EntityWithDisplayNameDto<Guid?>> codes = await GetIcdTenCodes(hisPatient, insertedHospitalAdmission);
+            //    await uow.CompleteAsync();
+            //}
+            //List<EntityWithDisplayNameDto<Guid?>> codes = await GetIcdTenCodes(insertedWardAdmission);
 
-            UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
+            UtilityHelper.TrySetProperty(admissionResponse, "Code", icdTenCodeResponses);
 
             return admissionResponse;
         }
@@ -288,47 +290,48 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <returns></returns>
         public async Task<AdmissionResponse> UpdateAsync(AdmissionInput input, PersonFhirBase currentLoggedInPerson)
         {
-            AdmissionResponse admissionResponse = null;
+            //AdmissionResponse admissionResponse = null;
             var dbWardAdmission = await _wardAdmissionRepositiory.GetAsync(input.Id);
             var dbHisPatient = await _hisPatientRepositiory.GetAsync(dbWardAdmission.Subject.Id);
-            HospitalAdmission dbHospitalAdmission = null;
-            using (var uow = _unitOfWork.Begin())
+            //HospitalAdmission dbHospitalAdmission = null;
+            //using (var uow = _unitOfWork.Begin())
+            //{
+            _mapper.Map(input, dbWardAdmission);
+            var updatedWardAdmission = await _wardAdmissionRepositiory.UpdateAsync(dbWardAdmission);
+            var admissionResponse = _mapper.Map<AdmissionResponse>(updatedWardAdmission);
+
+            if (dbWardAdmission?.PartOf != null)
             {
-                _mapper.Map(input, dbWardAdmission);
-                var updatedWardAdmission = await _wardAdmissionRepositiory.UpdateAsync(dbWardAdmission);
-                admissionResponse = _mapper.Map<AdmissionResponse>(updatedWardAdmission);
-
-                if (dbWardAdmission?.PartOf != null)
-                {
-                    dbHospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(dbWardAdmission.PartOf.Id);
-                    _mapper.Map(input, dbHospitalAdmission);
-                    var updatedHospitalAdmission = await _hospitalAdmissionRepositiory.UpdateAsync(dbHospitalAdmission);
-                    _mapper.Map(updatedHospitalAdmission, admissionResponse);
-                }
-
-                //Update a condition
-                var dbCondition = await _conditionRepositiory.FirstOrDefaultAsync(x => x.HospitalisationEncounter == dbHospitalAdmission);
-
-                //add a list of conditionIcdTenCode to a task
-                if (input?.Code != null && input?.Code.Count() > 0)
-                {
-                    //Delete old ShaRoleAppointmentPerson when deleting
-                    var dbConditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => x.Condition == dbCondition);
-                    dbConditionIcdTenCodes.ForEach(x => x.IsDeleted = false);
-                    var taskDeleteConditionIcdTenCodes = new List<Task>();
-                    dbConditionIcdTenCodes.ForEach((conditionIcdTenCode) => taskDeleteConditionIcdTenCodes.Add(DeleteConditionIcdTenCode(conditionIcdTenCode)));
-
-                    //Add newly updated contact points
-                    var taskConditionIcdTenCodes = new List<Task<EntityWithDisplayNameDto<Guid?>>>(); //Tasks lists to handle batch insert into database
-                    input.Code.ForEach((v) => taskConditionIcdTenCodes.Add(CreateICdTenCode(v, dbCondition)));
-                    var conditonIcdTenCodes = ((IList<EntityWithDisplayNameDto<Guid?>>)await Task.WhenAll(taskConditionIcdTenCodes)); //save contact points to db
-                    var icdTenCodeResponses = conditonIcdTenCodes.ToList();
-                }
-                uow.Complete();
+                var dbHospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(dbWardAdmission.PartOf.Id);
+                _mapper.Map(input, dbHospitalAdmission);
+                var updatedHospitalAdmission = await _hospitalAdmissionRepositiory.UpdateAsync(dbHospitalAdmission);
+                _mapper.Map(updatedHospitalAdmission, admissionResponse);
             }
-            List<EntityWithDisplayNameDto<Guid?>> codes = await GetIcdTenCodes(dbHisPatient, dbHospitalAdmission);
+
+            //Update a condition
+            var dbCondition = await _conditionRepositiory.FirstOrDefaultAsync(x => x.FhirEncounter == dbWardAdmission);
+
+            List<EntityWithDisplayNameDto<Guid?>> icdTenCodeResponses = new List<EntityWithDisplayNameDto<Guid?>>();
+                //add a list of conditionIcdTenCode to a task
+            if (input?.Code != null && input?.Code.Count() > 0)
+            {
+                //Delete old ShaRoleAppointmentPerson when deleting
+                var dbConditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => x.Condition == dbCondition);
+                dbConditionIcdTenCodes.ForEach(x => x.IsDeleted = false);
+                var taskDeleteConditionIcdTenCodes = new List<Task>();
+                dbConditionIcdTenCodes.ForEach((conditionIcdTenCode) => taskDeleteConditionIcdTenCodes.Add(DeleteConditionIcdTenCode(conditionIcdTenCode)));
+
+                //Add newly updated contact points
+                var taskConditionIcdTenCodes = new List<Task<EntityWithDisplayNameDto<Guid?>>>(); //Tasks lists to handle batch insert into database
+                input.Code.ForEach((v) => taskConditionIcdTenCodes.Add(CreateICdTenCode(v, dbCondition)));
+                var conditonIcdTenCodes = ((IList<EntityWithDisplayNameDto<Guid?>>)await Task.WhenAll(taskConditionIcdTenCodes)); //save contact points to db
+                icdTenCodeResponses = conditonIcdTenCodes.ToList();
+            }
+            //await uow.CompleteAsync();
+            //}
+            icdTenCodeResponses.AddRange(await GetIcdTenCodes(dbWardAdmission));
             _mapper.Map(dbWardAdmission?.Ward, admissionResponse);
-            UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
+            UtilityHelper.TrySetProperty(admissionResponse, "Code", icdTenCodeResponses);
 
             return admissionResponse;
         }
@@ -342,32 +345,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         {
             var entity = await _wardAdmissionRepositiory.GetAsync(id);
             await _wardAdmissionRepositiory.DeleteAsync(entity);
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <param name="condition"></param>
-        /// <returns></returns>
-        private async Task<EntityWithDisplayNameDto<Guid?>> CreateICdTenCode(EntityWithDisplayNameDto<Guid?> input, Condition condition)
-        {
-            ConditionIcdTenCode insertedConditionIcdTenCode = null;
-            var icdTenCode = await _icdTenCodeRepositiory.GetAsync(input.Id.Value);
-            using (var uow = _unitOfWork.Begin())
-            {
-                var conditionIcdTenCode = new ConditionIcdTenCode
-                {
-                    Condition = condition,
-                    IcdTenCode = icdTenCode
-                };
-
-                insertedConditionIcdTenCode = await _conditionIcdTenCodeRepositiory.InsertAsync(conditionIcdTenCode);
-                uow.Complete();
-            }
-
-            return new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc);
         }
 
         /// <summary>
@@ -441,29 +418,58 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             return " No age range found";
         }
 
-        private async Task<List<EntityWithDisplayNameDto<Guid?>>> GetIcdTenCodes(HisPatient hisPatient, HospitalAdmission insertedHospitalAdmission)
+        private async Task<List<EntityWithDisplayNameDto<Guid?>>> GetIcdTenCodes(WardAdmission wardAdmission)
         {
             //Get IcdTenCodes
             List<Condition> conditions = null;
+            List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
             //if (insertedHospitalAdmission != null)
             //    conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient && x.HospitalisationEncounter.Id == insertedHospitalAdmission.Id);
             //else
-            conditions = await _conditionRepositiory.GetAllListAsync(x => x.Subject == hisPatient);
-
-            List<ConditionIcdTenCode> conditionIcdTenCodes = null;
-            List<IcdTenCode> icdTenCodes = null;
-            if (conditions.Count() > 0)
+            conditions = await _conditionRepositiory.GetAllListAsync(x => x.FhirEncounter == wardAdmission);
+            if(conditions?.Count() > 0)
             {
-                conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition));
+                List<ConditionIcdTenCode> conditionIcdTenCodes = null;
+                List<IcdTenCode> icdTenCodes = null;
+                if (conditions.Count() > 0)
+                {
+                    conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition));
 
-                var icdTenCodeIds = conditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
-                if (conditionIcdTenCodes.Count() > 0)
-                    icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => icdTenCodeIds.Contains(x.Id)).ToListAsync();
+                    var icdTenCodeIds = conditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
+                    if (conditionIcdTenCodes.Count() > 0)
+                        icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => icdTenCodeIds.Contains(x.Id)).ToListAsync();
+                }
+
+                if (icdTenCodes?.Count() > 0)
+                    icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
             }
-            List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
-            if (icdTenCodes?.Count() > 0)
-                icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
+
             return codes;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        private async Task<EntityWithDisplayNameDto<Guid?>> CreateICdTenCode(EntityWithDisplayNameDto<Guid?> input, Condition condition)
+        {
+            ConditionIcdTenCode insertedConditionIcdTenCode = null;
+            var icdTenCode = await _icdTenCodeRepositiory.GetAsync(input.Id.Value);
+            using (var uow = _unitOfWork.Begin())
+            {
+                var conditionIcdTenCode = new ConditionIcdTenCode
+                {
+                    Condition = condition,
+                    IcdTenCode = icdTenCode
+                };
+
+                insertedConditionIcdTenCode = await _conditionIcdTenCodeRepositiory.InsertAsync(conditionIcdTenCode);
+                uow.Complete();
+            }
+
+            return new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc);
         }
     }
 }
