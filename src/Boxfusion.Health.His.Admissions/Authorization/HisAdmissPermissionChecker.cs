@@ -71,6 +71,8 @@ namespace Boxfusion.Health.His.Admissions.Authorization
                 return await this.IsViewer(person) || await this.IsCapturer(person) || await this.IsManager(person) || await this.IsApproverLevel1(person) || await this.IsApproverLevel2(person);
             if (permissionName == PermissionNames.Administration || permissionName == PermissionNames.CreateFacility)
                 return await this.IsFacilityAdmin(person);
+            if (permissionName == PermissionNames.Reports)
+                return await this.IsManager(person);
 
             return false;
         }
