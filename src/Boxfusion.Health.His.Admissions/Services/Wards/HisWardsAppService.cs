@@ -79,7 +79,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
 
 
                 var person = personService.FirstOrDefault(c => c.User.Id == _session.GetUserId());
-                //var wardsId = new List<string>() { $"ent.Id='{Guid.Empty}'" };
                 var hospitalId = _hospitalRoleAppointedPersonRepository.GetAll().Where(s => s.Person == person).Select(s => s.Hospital.Id).FirstOrDefault();
                 var isAdmin = await _hisAdmissPermissionChecker.IsAdmin(person);
 

@@ -59,7 +59,7 @@ namespace Boxfusion.Health.His.Admissions.Authorization
                 || permissionName == PermissionNames.DailyReports || permissionName == PermissionNames.MonthlyReports)
                 return await this.IsApproverLevel1(person) || await this.IsApproverLevel2(person);
 
-            if (permissionName == Shesha.Authorization.PermissionNames.Pages_Users || permissionName == PermissionNames.Wards)
+            if (permissionName == Shesha.Authorization.PermissionNames.Pages_Users || permissionName == PermissionNames.Wards || permissionName == PermissionNames.Speciality)
                 return await this.IsFacilityAdmin(person);
             
             if (permissionName == PermissionNames.SeparateAndTransfer || permissionName == PermissionNames.SubmitsReportsForApproval)
