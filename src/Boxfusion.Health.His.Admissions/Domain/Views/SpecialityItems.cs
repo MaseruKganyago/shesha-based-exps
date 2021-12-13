@@ -25,5 +25,9 @@ namespace Boxfusion.Health.His.Admissions.Domain.Views
         /// 
         /// </summary>
 		public virtual int? NumberOfBedsInSpeciality { get; set; }
-	}
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual Guid HospitalId { get; set; }
+    }
 }

@@ -99,8 +99,23 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
 
             table.AddProperty(e => e.Speciality, c => c.Caption("Specialities"));
             table.AddProperty(e => e.NumberOfBedsInSpeciality, d => d.Caption("No. of Beds"));
-            table.OnRequestToFilter = (criteria, form) =>
+
+            table.OnRequestToFilterStaticAsync = async (criteria, form) =>
             {
+                var session = Abp.Dependency.IocManager.Instance.Resolve<IAbpSession>();
+                var _hisAdmissPermissionChecker = Abp.Dependency.IocManager.Instance.Resolve<IHisAdmissPermissionChecker>();
+                var personService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Person, Guid>>();
+                var hisHospitalRoleAppointedPersonService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
+
+                var person = personService.FirstOrDefault(c => c.User.Id == session.UserId);
+                var hospital = hisHospitalRoleAppointedPersonService.GetAll().Where(s => s.Person == person).Select(s => s.Hospital).FirstOrDefault();
+                var isAdmin = await _hisAdmissPermissionChecker.IsAdmin(person);
+
+                if (!isAdmin)
+                {
+                    criteria.FilterClauses.Add($"ent.HospitalId = '{hospital.Id}'");
+                }
+
             };
 
             return table;
