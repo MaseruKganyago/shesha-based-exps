@@ -22,5 +22,6 @@
         public const string SubmitsReportsForApproval = "pages:submitsReportsForApproval";
         public const string ReportsAndStats = "pages:reportsAndStats";
         public const string Administration = "pages:administration";
+        public const string Wards = "pages:wards";
     }
 }

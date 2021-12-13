@@ -69,21 +69,25 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             table.AddProperty(e => e.Name, d => d.Caption("Ward Name"));
             table.AddProperty(e => e.Description, d => d.Caption("Ward Description"));
             table.AddProperty(e => e.NumberOfBeds, d => d.Caption("No. of Beds"));
-            table.OnRequestToFilter = (criteria, form) =>
+            table.OnRequestToFilterStaticAsync = async (criteria, form) =>
             {
                 var _session = Abp.Dependency.IocManager.Instance.Resolve<IAbpSession>();
+                var _hisAdmissPermissionChecker = Abp.Dependency.IocManager.Instance.Resolve<IHisAdmissPermissionChecker>();
                 var personService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Person, Guid>>();
                 var _hospitalRoleAppointedPersonRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
                 var _wardRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Ward, Guid>>();
 
 
                 var person = personService.FirstOrDefault(c => c.User.Id == _session.GetUserId());
-                var wardsId = new List<string>() { $"ent.Id='{Guid.Empty}'" };
-                var hospitalIds = _hospitalRoleAppointedPersonRepository.GetAll().Where(x => x.Person.Id != person.Id).Select(x => x.Hospital.Id);
-                wardsId.AddRange(_wardRepository.GetAll().Where(x => hospitalIds.Contains(x.OwnerOrganisation.Id)).Select(x => $"ent.Id='{x.Id}'"));
+                //var wardsId = new List<string>() { $"ent.Id='{Guid.Empty}'" };
+                var hospitalId = _hospitalRoleAppointedPersonRepository.GetAll().Where(s => s.Person == person).Select(s => s.Hospital.Id).FirstOrDefault();
+                var isAdmin = await _hisAdmissPermissionChecker.IsAdmin(person);
 
-                var applicationsFilter = $"{wardsId.Delimited(" or ")}";
-                criteria.FilterClauses.Add(applicationsFilter);
+                if (!isAdmin)
+                {
+                    criteria.FilterClauses.Add($"ent.HospitalId = '{hospitalId}'");
+                }
+
             };
 
             return table;

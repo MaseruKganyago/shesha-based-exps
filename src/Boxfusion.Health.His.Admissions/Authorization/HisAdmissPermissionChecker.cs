@@ -43,8 +43,7 @@ namespace Boxfusion.Health.His.Admissions.Authorization
                 }
                 return true;
             }
-               
-            
+                           
             // data administrator has all rights
             if (await IsInAnyOfRoles(person, RoleNames.GlobalAdmin))
             {
@@ -55,32 +54,32 @@ namespace Boxfusion.Health.His.Admissions.Authorization
                 return true;
             }
             
-
             // add custom permission checks here...
             if (permissionName == PermissionNames.ApproveReport || permissionName == PermissionNames.DisapproveReport 
                 || permissionName == PermissionNames.DailyReports || permissionName == PermissionNames.MonthlyReports)
                 return await this.IsApproverLevel1(person) || await this.IsApproverLevel2(person);
 
-            if (permissionName == Shesha.Authorization.PermissionNames.Pages_Users)
+            if (permissionName == Shesha.Authorization.PermissionNames.Pages_Users || permissionName == PermissionNames.Wards)
                 return await this.IsFacilityAdmin(person);
             
             if (permissionName == PermissionNames.SeparateAndTransfer || permissionName == PermissionNames.SubmitsReportsForApproval)
                 return await this.IsCapturer(person);
 
-            if (permissionName == PermissionNames.ReportsAndStats || permissionName == PermissionNames.DailyReports || permissionName == PermissionNames.AdmissionDashboard || permissionName == PermissionNames.AllAdmissionDashboard || permissionName == PermissionNames.DailyAdmissionDashboard)
+            if (permissionName == PermissionNames.ReportsAndStats || permissionName == PermissionNames.DailyReports 
+                || permissionName == PermissionNames.AdmissionDashboard || permissionName == PermissionNames.AllAdmissionDashboard 
+                || permissionName == PermissionNames.DailyAdmissionDashboard)
                 return await this.IsViewer(person) || await this.IsCapturer(person) || await this.IsManager(person) || await this.IsApproverLevel1(person) || await this.IsApproverLevel2(person);
             if (permissionName == PermissionNames.Administration || permissionName == PermissionNames.CreateFacility)
                 return await this.IsFacilityAdmin(person);
+
             return false;
         }
-
         /// inheritedDoc
         public async Task<bool> IsInAnyOfRoles(Person person, params string[] roles)
         {
             return await _rolePersonRepository.GetAll()
                 .Where(e => roles.Contains(e.Role.Name) && e.Person == person).AnyAsync();
         }
-
         /// <summary>
         /// 
         /// </summary>
@@ -94,17 +93,14 @@ namespace Boxfusion.Health.His.Admissions.Authorization
         {
             return await IsInAnyOfRoles(person, RoleNames.SystemAdministrator);
         }
-
         public bool IsGranted(long userId, string permissionName)
         {
             throw new NotImplementedException();
         }
-
         public async Task<bool> IsApproverLevel1(Person person)
         {
             return await IsInAnyOfRoles(person, RoleNames.ApproverLevel1);
         }
-
         public async Task<bool> IsApproverLevel2(Person person)
         {
             return await IsInAnyOfRoles(person, RoleNames.ApproverLevel2);
@@ -113,22 +109,18 @@ namespace Boxfusion.Health.His.Admissions.Authorization
         {
             return await IsInAnyOfRoles(person, RoleNames.Manager);
         }
-
         public async Task<bool> IsGlobalAdmin(Person person)
         {
             return await IsInAnyOfRoles(person, RoleNames.GlobalAdmin);
         }
-
         public async Task<bool> IsFacilityAdmin(Person person)
         {
             return await IsInAnyOfRoles(person, RoleNames.FacilityAdmin);
         }
-
         public async Task<bool> IsCapturer(Person person)
         {
             return await IsInAnyOfRoles(person, RoleNames.Capturer);
         }
-
         public async Task<bool> IsViewer(Person person)
         {
             return await IsInAnyOfRoles(person, RoleNames.Viewer);
