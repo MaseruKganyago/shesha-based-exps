@@ -184,7 +184,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             if (destinationWardAdmission != null)
             {
                 var separationCodes = GetCodes(destinationWardAdmission);
-                UtilityHelper.TrySetProperty(admissionResponse, "separartionCode", separationCodes);
+                UtilityHelper.TrySetProperty(admissionResponse, "SeparationCode", separationCodes);
+            }
+            else
+            {
+                UtilityHelper.TrySetProperty(admissionResponse, "SeparationCode", codes);
             }
 
 

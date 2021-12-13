@@ -1,4 +1,5 @@
 ﻿using Abp.Authorization;
+using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Admissions.Authorization;
@@ -76,10 +77,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
         [HttpDelete, Route("undoSeparation/{id}")]
         public async Task<AdmissionResponse> UndoSeparationAsync(Guid id)
         {
-            //if (!await _hisAdmissPermissionChecker.IsApproverLevel1(await GetCurrentPersonAsync()))
-            //{
-            //    throw new UserFriendlyException("The logged user is not a level 1 approver");
-            //}
+            if (!await _hisAdmissPermissionChecker.IsApproverLevel1(await GetCurrentPersonAsync()))
+            {
+                throw new UserFriendlyException("The logged user is not a level 1 approver");
+            }
 
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
 
