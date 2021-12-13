@@ -1,5 +1,6 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Abp.Runtime.Session;
 using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
@@ -9,6 +10,7 @@ using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services.Conditions.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers;
+using Boxfusion.Health.His.Admissions.Authorization;
 using Boxfusion.Health.His.Admissions.Domain.Views;
 using Boxfusion.Health.His.Admissions.Helpers;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
@@ -18,6 +20,7 @@ using Boxfusion.Health.His.Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 using Shesha.AutoMapper.Dto;
+using Shesha.Domain;
 using Shesha.Extensions;
 using Shesha.NHibernate;
 using Shesha.Web.DataTable;
@@ -106,6 +109,23 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             table.AddProperty(a => a.AdmissionStatus, b => b.Caption("Admission Status"));
             table.AddProperty(a => a.Days, b => b.Caption("Inpatient Days"));
 
+            table.OnRequestToFilterStaticAsync = async (criteria, form) =>
+            {
+                var session = Abp.Dependency.IocManager.Instance.Resolve<IAbpSession>();
+                var _hisAdmissPermissionChecker = Abp.Dependency.IocManager.Instance.Resolve<IHisAdmissPermissionChecker>();
+                var personService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Person, Guid>>();
+                var hisHospitalRoleAppointedPersonService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
+
+                var person = personService.FirstOrDefault(c => c.User.Id == session.UserId);
+                var hospital = hisHospitalRoleAppointedPersonService.GetAll().Where(s => s.Person == person).Select(s => s.Hospital).FirstOrDefault();
+                var isAdmin = await _hisAdmissPermissionChecker.IsAdmin(person);
+
+                if (!isAdmin)
+                {
+                    criteria.FilterClauses.Add($"ent.HospitalId = '{hospital.Id}'");
+                }
+
+            };
             return table;
         }
 
