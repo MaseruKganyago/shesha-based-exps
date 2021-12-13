@@ -58,7 +58,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers
         public async Task<HospitalResponse> GetAsync(Guid id)
         {
             var HospitalResponse = await _HospitalCrudHelper.GetAsync(id);
-            HospitalResponse.PrimaryAddress = _mapper.Map<CdmAddressResponse>(await _addressRepository.GetAll().Where(x => x.OwnerId.Trim() == HospitalResponse.Id.ToString()).OrderByDescending(x => x.CreationTime).FirstOrDefaultAsync());
+            var hospital = await _addressRepository.GetAll().Where(x => x.OwnerId.Trim() == HospitalResponse.Id.ToString()).OrderByDescending(x => x.CreationTime).FirstOrDefaultAsync();
+            HospitalResponse.PrimaryAddress = _mapper.Map<CdmAddressResponse>(hospital);
 
             return HospitalResponse;
         }

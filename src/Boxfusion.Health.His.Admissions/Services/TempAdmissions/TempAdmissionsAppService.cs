@@ -136,7 +136,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             if (patient == null)
                 throw new UserFriendlyException("Patient Id cannot be empty");
 
-            var wardAdmissionCount = await _wardAdmissionRepositiory.GetAll().Where(x => x.AdmissionStatus == RefListAdmissionStatuses.admitted && x.IsDeleted == false).ToListAsync();
+            var wardAdmissionCount = await _wardAdmissionRepositiory.GetAll().Where(x => x.AdmissionStatus == RefListAdmissionStatuses.admitted && x.IsDeleted == false && x.Ward.Id == input.Ward.Id.Value).ToListAsync();
             var wardCount = await _wardRepositiory.GetAsync(input.Ward.Id.Value);
 
             if (wardAdmissionCount.Count() >= wardCount.NumberOfBeds)
