@@ -1,6 +1,7 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.UI;
+using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
@@ -8,8 +9,10 @@ using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
+using NHibernate.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
@@ -25,6 +28,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         private readonly IAdmissionCrudHelper _admissionCrudHelper;
         private readonly IRepository<HisPatient, Guid> _hisPatientRepositiory;
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
+        private readonly IRepository<Ward, Guid> _wardRepositiory;
         /// <summary>
         /// 
         /// </summary>
@@ -34,11 +38,13 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         public TempAdmissionsAppService(
             IRepository<WardAdmission, Guid> wardAdmissionRepository,
             IAdmissionCrudHelper admissionCrudHelper,
-            IRepository<HisPatient, Guid> hisPatientRepositiory)
+            IRepository<HisPatient, Guid> hisPatientRepositiory,
+            IRepository<Ward, Guid> wardRepositiory)
         {
             _admissionCrudHelper = admissionCrudHelper;
             _hisPatientRepositiory = hisPatientRepositiory;
             _wardAdmissionRepositiory = wardAdmissionRepository;
+            _wardRepositiory = wardRepositiory;
         }
 
         /// <summary>
@@ -129,6 +135,12 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             var patient = await _hisPatientRepositiory.GetAsync(input.Subject.Id.Value);
             if (patient == null)
                 throw new UserFriendlyException("Patient Id cannot be empty");
+
+            var wardAdmissionCount = await _wardAdmissionRepositiory.GetAll().Where(x => x.AdmissionStatus == RefListAdmissionStatuses.admitted && x.IsDeleted == false && x.Ward.Id == input.Ward.Id.Value).ToListAsync();
+            var wardCount = await _wardRepositiory.GetAsync(input.Ward.Id.Value);
+
+            if (wardAdmissionCount.Count() >= wardCount.NumberOfBeds)
+                throw new UserFriendlyException("The total number of admitted patients has exceeded the total number of beds");
 
             var admission = await _admissionCrudHelper.CreateAsync(input, person, patient);
 
