@@ -2164,6 +2164,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.HisWardsAppService.Dummy">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.HisWardsAppService.GetWardDailyReport(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.WardCensusInput)">
             <summary>
             

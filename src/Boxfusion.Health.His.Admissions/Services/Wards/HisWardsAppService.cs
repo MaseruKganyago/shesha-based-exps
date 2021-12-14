@@ -267,6 +267,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [AbpAuthorize(PermissionNames.ReportsAndStats)]
         public async Task<WardMidnightCensusReportResponse> GetWardDailyReport(WardCensusInput input)
         {
+            await _sessionDataProvider.MidnightCensusApprovalModelHack();
             var currentPerson = await GetCurrentPersonAsync();
             var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId, currentPerson);
             if (!isPersonAssignedToHospital)
