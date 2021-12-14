@@ -91,23 +91,5 @@ namespace Boxfusion.Health.His.Admissions.Helpers
                 throw new UserFriendlyException(Ex.Message);
             }
         }
-
-        public async Task MidnightCensusApprovalModelHack()
-        {
-            try
-            {
-                 await _sessionProvider.Session
-                    .CreateSQLQuery(@"
-                              update Core_Facilities
-                              set His_MidnightCensusApprovalModelLkp = 2
-                              where IsDeleted = 0
-                        ").ExecuteUpdateAsync();
-            }
-            catch (Exception Ex)
-            {
-
-                throw new UserFriendlyException(Ex.Message);
-            }
-        }
     }
 }
