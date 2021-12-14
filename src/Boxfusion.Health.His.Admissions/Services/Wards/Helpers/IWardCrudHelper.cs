@@ -1,5 +1,6 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Dtos;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
+using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
 using Shesha.AutoMapper.Dto;
 using Shesha.Domain;
 using System;
@@ -19,7 +20,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		Task<List<WardResponse>> GetAllAsync();
+		Task<List<HisWardResponse>> GetAllAsync();
 
 		/// <summary>
 		/// 
@@ -42,7 +43,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
 		/// <param name="term"></param>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		Task<List<WardResponse>> GetWardByHospitalAsync(Guid id);
+		Task<List<HisWardResponse>> GetWardByHospitalAsync(Guid id);
 
 		/// <summary>
 		/// 
@@ -57,7 +58,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
 		/// </summary>
 		/// <param name="input"></param>
 		/// <returns></returns>
-		Task<WardResponse> CreateAsync(WardInput input);
+		Task<HisWardResponse> CreateAsync(HisWardInput input);
 
 		/// <summary>
 		/// 

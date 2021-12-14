@@ -488,7 +488,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// </summary>
         /// <returns></returns>
         [HttpGet, Route("")]
-        public async Task<List<WardResponse>> GetWardsAsync()
+        public async Task<List<HisWardResponse>> GetWardsAsync()
         {
             return await _wardCrudHelper.GetAllAsync();
         }
@@ -499,7 +499,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <param name="hospitalId"></param>
         /// <returns></returns>
         [HttpGet, Route("[action]/{hospitalId}")]
-        public async Task<List<WardResponse>> GetWardByHospitalAsync(Guid hospitalId)
+        public async Task<List<HisWardResponse>> GetWardByHospitalAsync(Guid hospitalId)
         {
             return await _wardCrudHelper.GetWardByHospitalAsync(hospitalId);
         }
@@ -547,7 +547,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <returns></returns>
         [HttpPost, Route("")]
         [AbpAuthorize(PermissionNames.CreateFacility)]
-        public async Task<WardResponse> CreateWardAsync(WardInput input)
+        public async Task<HisWardResponse> CreateWardAsync(HisWardInput input)
         {
             Validation.ValidateText(input?.Name, "Name");
             Validation.ValidateText(input?.Description, "Description");

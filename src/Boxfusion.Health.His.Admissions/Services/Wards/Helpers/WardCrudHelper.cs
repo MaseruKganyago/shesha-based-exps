@@ -10,6 +10,8 @@ using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Services.Locations.Helpers;
+using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
+using Boxfusion.Health.His.Domain.Domain;
 using NHibernate.Linq;
 using Shesha;
 using Shesha.AutoMapper.Dto;
@@ -27,9 +29,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
     /// </summary>
     public class WardCrudHelper : IWardCrudHelper, ITransientDependency
     {
-        private readonly ILocationCrudHelper<Ward, WardResponse> _wardCrudHelper;
+        private readonly ILocationCrudHelper<HisWard, HisWardResponse> _wardCrudHelper;
         private readonly IRepository<CdmAddress, Guid> _addressRepository;
-        private readonly IRepository<Ward, Guid> _repository;
+        private readonly IRepository<HisWard, Guid> _repository;
         private readonly IRepository<WardRoleAppointedPerson, Guid> _wardRoleAppointedPersonRepository;
         private readonly IMapper _mapper;
 
@@ -40,8 +42,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
         /// <param name="addressRepository"></param>
         /// <param name="mapper"></param>
         public WardCrudHelper(
-            ILocationCrudHelper<Ward, WardResponse> wardCrudHelper,
-            IRepository<Ward, Guid> repository,
+            ILocationCrudHelper<HisWard, HisWardResponse> wardCrudHelper,
+            IRepository<HisWard, Guid> repository,
             IRepository<WardRoleAppointedPerson, Guid> wardRoleAppointedPersonRepository,
             IRepository<CdmAddress, Guid> addressRepository,
             IMapper mapper)
@@ -57,7 +59,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task<List<WardResponse>> GetAllAsync()
+        public async Task<List<HisWardResponse>> GetAllAsync()
         {
             var WardResponses = await _wardCrudHelper.GetAllAsync();
             return WardResponses;
@@ -92,7 +94,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
         /// <param name="term"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<List<WardResponse>> GetWardByHospitalAsync(Guid id)
+        public async Task<List<HisWardResponse>> GetWardByHospitalAsync(Guid id)
         {
             var wardResponses = await _wardCrudHelper.GetLocationByOrganisationAsync(id);
             return wardResponses;
@@ -116,9 +118,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<WardResponse> CreateAsync(WardInput input)
+        public async Task<HisWardResponse> CreateAsync(HisWardInput input)
         {
-            var location = _mapper.Map<Ward>(input);
+            var location = _mapper.Map<HisWard>(input);
             var WardResponse = await _wardCrudHelper.CreateAsync(input?.Address, location);
 
             return WardResponse;

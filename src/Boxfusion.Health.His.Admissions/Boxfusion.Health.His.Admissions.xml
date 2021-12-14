@@ -306,6 +306,11 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.AdmittedPatientItems.HospitalId">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.Views.HospitalItems">
             <summary>
             
@@ -382,6 +387,11 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.WardItems.NumberOfBeds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Views.WardItems.HospitalId">
             <summary>
             
             </summary>
@@ -1993,7 +2003,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.IWardCrudHelper.CreateAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.WardInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.IWardCrudHelper.CreateAsync(Boxfusion.Health.His.Admissions.Services.Wards.Dto.HisWardInput)">
             <summary>
             
             </summary>
@@ -2035,7 +2045,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.WardCrudHelper.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Locations.Helpers.ILocationCrudHelper{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Ward,Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.WardResponse},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Ward,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.WardRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Cdm.CdmAddress,System.Guid},AutoMapper.IMapper)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.WardCrudHelper.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Locations.Helpers.ILocationCrudHelper{Boxfusion.Health.His.Domain.Domain.HisWard,Boxfusion.Health.His.Admissions.Services.Wards.Dto.HisWardResponse},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.WardRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Cdm.CdmAddress,System.Guid},AutoMapper.IMapper)">
             <summary>
             
             </summary>
@@ -2072,7 +2082,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.WardCrudHelper.CreateAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.WardInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.WardCrudHelper.CreateAsync(Boxfusion.Health.His.Admissions.Services.Wards.Dto.HisWardInput)">
             <summary>
             
             </summary>
@@ -2210,7 +2220,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.HisWardsAppService.CreateWardAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.WardInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.HisWardsAppService.CreateWardAsync(Boxfusion.Health.His.Admissions.Services.Wards.Dto.HisWardInput)">
             <summary>
             
             </summary>
@@ -2313,7 +2323,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.IHisWardsAppService.CreateWardAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.WardInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.IHisWardsAppService.CreateWardAsync(Boxfusion.Health.His.Admissions.Services.Wards.Dto.HisWardInput)">
             <summary>
             
             </summary>
@@ -2796,6 +2806,36 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211213123400.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211213231800">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211213231800.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211213231800.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211214125100">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211214125100.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211214125100.Down">
             <summary>
             
             </summary>
