@@ -33,5 +33,7 @@ namespace Boxfusion.Health.His.Admissions.Helpers
         /// <param name="wardId"></param>
         /// <returns></returns>
         Task<List<MidnightCensusApprovalModels>> GetApprovalModels(Guid wardId);
+
+        Task MidnightCensusApprovalModelHack();
     }
 }
