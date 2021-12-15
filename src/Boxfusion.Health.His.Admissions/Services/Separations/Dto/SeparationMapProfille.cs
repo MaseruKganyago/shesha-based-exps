@@ -32,8 +32,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Dto
             .ForMember(a => a.Performer, options => options.MapFrom(b => GetEntity<Practitioner>(b.Performer)))
             .ForMember(a => a.BasedOn, options => options.MapFrom(b => GetEntity<ServiceRequest>(b.BasedOn)))
             .ForMember(a => a.EpisodeOfCare, options => options.MapFrom(b => GetEntity<EpisodeOfCare>(b.EpisodeOfCare)))
-            .ForMember(a => a.Ward, options => options.MapFrom(b => GetEntity<Ward>(b.Ward)))
-            .ForMember(a => a.SeparationDestinationWard, options => options.MapFrom(b => GetEntity<Ward>(b.SeparationDestinationWard)))
+            .ForMember(a => a.Ward, options => options.MapFrom(b => GetEntity<HisWard>(b.Ward)))
+            .ForMember(a => a.SeparationDestinationWard, options => options.MapFrom(b => GetEntity<HisWard>(b.SeparationDestinationWard)))
             .ForMember(a => a.Subject, options => options.MapFrom(b => GetEntity<Patient>(b.Subject)))
             .MapReferenceListValuesFromDto();
 

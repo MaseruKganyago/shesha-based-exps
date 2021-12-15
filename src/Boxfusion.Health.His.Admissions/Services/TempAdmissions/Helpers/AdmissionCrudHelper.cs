@@ -38,7 +38,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         private readonly IRepository<Condition, Guid> _conditionRepositiory;
         private readonly IRepository<Diagnosis, Guid> _diagnosisRepositiory;
         private readonly IRepository<HisPatient, Guid> _hisPatientRepositiory;
-        private readonly IRepository<Ward, Guid> _wardRepositiory;
+        private readonly IRepository<HisWard, Guid> _wardRepositiory;
         private readonly IUnitOfWorkManager _unitOfWork;
         private readonly IMapper _mapper;
 
@@ -67,7 +67,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             IRepository<Condition, Guid> conditionRepositiory,
             IRepository<Diagnosis, Guid> diagnosisRepositiory,
             IRepository<HisPatient, Guid> hisPatientRepositiory,
-            IRepository<Ward, Guid> wardRepositiory,
+            IRepository<HisWard, Guid> wardRepositiory,
             IUnitOfWorkManager unitOfWork,
             IMapper mapper)
         {

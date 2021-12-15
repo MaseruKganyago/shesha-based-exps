@@ -42,7 +42,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         private readonly IEncounterCrudHelper<WardAdmission> _wardAdmissionCrudHelper;
         private readonly IEncounterCrudHelper<HospitalAdmission> _hospitalisationEncounterCrudHelper;
         private readonly IRepository<HisPatient, Guid> _patientRepository;
-        private readonly IRepository<Ward, Guid> _wardRepository;
+        private readonly IRepository<HisWard, Guid> _wardRepository;
         private readonly IConditionsCrudHelper _conditionsCrudHelper;
         private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;
         private readonly IRepository<ConditionIcdTenCode, Guid> _conditionIcdTenCodeRepository;
@@ -60,9 +60,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         /// <param name="conditionIcdTenCodeRepository"></param>
         /// <param name="hospitalisationEncounterCrudHelper"></param>
         /// <param name="conditionRepository"></param>
+        /// <param name="sessionDataProvider"></param>
         public AdmissionsAppService(IEncounterCrudHelper<WardAdmission> wardAdmissionCrudHelper,
             IRepository<HisPatient, Guid> patientRepository,
-            IRepository<Ward, Guid> wardRepository,
+            IRepository<HisWard, Guid> wardRepository,
             IConditionsCrudHelper conditionsCrudHelper,
             IRepository<Diagnosis, Guid> diagnosisRepository,
             IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepository,
@@ -128,7 +129,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             };
             return table;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [HttpPost, Route("AcceptOrRejectTransfers")]
         public async Task<AcceptOrRejectTransfersResponse> AcceptOrRejectTransfers(AcceptOrRejectTransfersInput input)
         {

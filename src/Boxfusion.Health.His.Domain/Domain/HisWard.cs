@@ -13,6 +13,9 @@ namespace Boxfusion.Health.His.Domain.Domain
     [Entity(TypeShortAlias = "His.HisWard")]
     public class HisWard : Ward
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual RefListMidnightCensusApprovalModel MidnightCensusApprovalModel { get; set; }
     }
 }

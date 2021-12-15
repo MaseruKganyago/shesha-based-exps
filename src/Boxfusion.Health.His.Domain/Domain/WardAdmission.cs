@@ -16,7 +16,7 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// <summary>
         /// 
         /// </summary>
-        public virtual Ward Ward { get; set; }
+        public virtual HisWard Ward { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -50,7 +50,7 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// <summary>
         /// 
         /// </summary>
-        public virtual Ward SeparationDestinationWard { get; set; }
+        public virtual HisWard SeparationDestinationWard { get; set; }
 
         /// <summary>
         /// 

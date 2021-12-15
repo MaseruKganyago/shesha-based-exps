@@ -16,7 +16,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// 
         /// </summary>
         /// <returns></returns>
-        Task<List<WardResponse>> GetAssignedWards();
+        Task<List<HisWardResponse>> GetAssignedWards();
         /// <summary>
         /// 
         /// </summary>
@@ -85,7 +85,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<WardResponse> GetWardAsync(Guid id);
+        Task<HisWardResponse> GetWardAsync(Guid id);
 
         /// <summary>
         /// 
@@ -100,7 +100,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <param name="id"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<WardResponse> UpdateWardAsync(WardInput input);
+        Task<HisWardResponse> UpdateWardAsync(WardInput input);
 
         /// <summary>
         /// 

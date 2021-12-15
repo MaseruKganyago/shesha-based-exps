@@ -6,6 +6,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Services.Organisations.Helper;
+using Boxfusion.Health.His.Domain.Domain;
 using NHibernate.Linq;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers
     /// </summary>
     public class HospitalCrudHelper : IHospitalCrudHelper, ITransientDependency
     {
-        private readonly IOrganisationCrudHelper<Hospital, HospitalResponse> _HospitalCrudHelper;
+        private readonly IOrganisationCrudHelper<HisHospital, HospitalResponse> _HospitalCrudHelper;
         private readonly IRepository<CdmAddress, Guid> _addressRepository;
         private readonly IMapper _mapper;
 
@@ -31,7 +32,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers
         /// <param name="addressRepository"></param>
         /// <param name="mapper"></param>
         public HospitalCrudHelper(
-            IOrganisationCrudHelper<Hospital, HospitalResponse> HospitalCrudHelper,
+            IOrganisationCrudHelper<HisHospital, HospitalResponse> HospitalCrudHelper,
             IRepository<CdmAddress, Guid> addressRepository,
             IMapper mapper)
         {
@@ -71,7 +72,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers
         /// <returns></returns>
         public async Task<HospitalResponse> CreateAsync(HospitalInput input)
         {
-            var organisation = _mapper.Map<Hospital>(input);
+            var organisation = _mapper.Map<HisHospital>(input);
             var HospitalResponse = await _HospitalCrudHelper.CreateAsync(input?.PrimaryAddress, organisation);
 
             return HospitalResponse;
@@ -80,7 +81,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="id"></param>
         /// <param name="input"></param>
         /// <returns></returns>
         public async Task<HospitalResponse> UpdateAsync(HospitalInput input)

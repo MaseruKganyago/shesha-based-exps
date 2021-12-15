@@ -24,28 +24,6 @@ namespace Boxfusion.Health.His.Admissions.Helpers
             _sessionProvider = sessionProvider;
         }
 
-        public async Task<List<MidnightCensusApprovalModels>> GetApprovalModels(Guid wardId)
-        {
-            try
-            {
-                return (await _sessionProvider.Session
-                    .CreateSQLQuery(@"
-                            SELECT [His_MidnightCensusApprovalModelLkp]
-                            FROM [dbo].[Core_Facilities]
-                            WHERE Id = :WardId                         
-                    ")
-                    .SetParameter("WardId", wardId)
-                    .SetResultTransformer(Transformers.AliasToBean<MidnightCensusApprovalModels>())
-                    .ListAsync<MidnightCensusApprovalModels>())
-                    .ToList();
-            }
-            catch (Exception Ex)
-            {
-
-                throw new UserFriendlyException(Ex.Message);
-            }
-        }
-
         public async Task<List<DailyStats>> GetDailyStats(WardCensusInput input)
         {
             try

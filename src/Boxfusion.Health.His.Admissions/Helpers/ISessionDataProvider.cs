@@ -27,12 +27,5 @@ namespace Boxfusion.Health.His.Admissions.Helpers
         /// <returns></returns>
         Task<List<MonthlyStats>> GetMonthlyStats(WardCensusInput input);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="wardId"></param>
-        /// <returns></returns>
-        Task<List<MidnightCensusApprovalModels>> GetApprovalModels(Guid wardId);
-
     }
 }

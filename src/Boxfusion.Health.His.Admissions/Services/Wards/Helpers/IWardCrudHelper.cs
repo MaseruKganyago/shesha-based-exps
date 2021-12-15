@@ -51,7 +51,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
 		/// <typeparam name="T"></typeparam>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		Task<WardResponse> GetAsync(Guid id);
+		Task<HisWardResponse> GetAsync(Guid id);
 
 		/// <summary>
 		/// 
@@ -65,7 +65,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
 		/// </summary>
 		/// <param name="input"></param>
 		/// <returns></returns>
-		Task<WardResponse> UpdateAsync(WardInput input);
+		Task<HisWardResponse> UpdateAsync(WardInput input);
 
 		/// <summary>
 		/// 
