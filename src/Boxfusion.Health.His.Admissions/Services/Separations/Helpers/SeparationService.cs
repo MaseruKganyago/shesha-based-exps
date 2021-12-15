@@ -107,7 +107,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             wardAdmission.SeparationDate = input?.SeparationDate.Value;
             wardAdmission.SeparationComment = input.SeparationComment;
             wardAdmission.SeparationType = (RefListSeparationTypes?)input.SeparationType.ItemValue;
-
+            var _sessionProvider = Abp.Dependency.IocManager.Instance.Resolve<ISessionProvider>();
             WardAdmission destinationWardAdmission = null;
             if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.internalTransfer)
             {
@@ -128,13 +128,21 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
                 // destinationWardAdmission.wa
                 _mapper.Map(hisPatient, destinationWardAdmission);
                 var insertedDestinationWardAdmission = await _wardAdmissionRepositiory.InsertAsync(destinationWardAdmission);
-                var _sessionProvider = Abp.Dependency.IocManager.Instance.Resolve<ISessionProvider>();
+
                 await _unitOfWork.Current.SaveChangesAsync();
                 await _sessionProvider.Session.Transaction.CommitAsync();
 
+                await Task.Run(() =>
+                {
+                    wardAdmission = _wardAdmissionRepositiory.Get(encounterId);
+                    insertedDestinationWardAdmission = _wardAdmissionRepositiory.Get(insertedDestinationWardAdmission.Id);
 
-                wardAdmission.InternalTransferDestinationWard = insertedDestinationWardAdmission;
-                wardAdmission = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
+                    wardAdmission.InternalTransferDestinationWard = insertedDestinationWardAdmission;
+                    wardAdmission = _wardAdmissionRepositiory.Update(wardAdmission);
+
+                    _unitOfWork.Current.SaveChangesAsync();
+                    _sessionProvider.Session.Transaction.CommitAsync();
+                });
             }
             else if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.externalTransfer)
             {
@@ -183,7 +191,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
 
             if (destinationWardAdmission != null)
             {
-                var separationCodes = GetCodes(destinationWardAdmission);
+                var separationCodes = await GetCodes(destinationWardAdmission);
                 UtilityHelper.TrySetProperty(admissionResponse, "SeparationCode", separationCodes);
             }
             else
@@ -478,10 +486,18 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
                 OwnerType = hisPatient.GetTypeShortAlias(),
                 Condition = insertedCondition
             };
-            var insertedDiagnosis = await _diagnosisRepositiory.InsertAsync(diagnosis);
-            var _sessionProvider = Abp.Dependency.IocManager.Instance.Resolve<ISessionProvider>();
-            await _unitOfWork.Current.SaveChangesAsync();
-            await _sessionProvider.Session.Transaction.CommitAsync();
+
+            await Task.Run(() =>
+            {
+                var insertedDiagnosis = _diagnosisRepositiory.InsertAsync(diagnosis);
+
+                var _sessionProvider = Abp.Dependency.IocManager.Instance.Resolve<ISessionProvider>();
+                _unitOfWork.Current.SaveChangesAsync();
+                _sessionProvider.Session.Transaction.CommitAsync();
+
+            });
+
+
         }
 
         /// <summary>
