@@ -28,18 +28,19 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         private readonly IAdmissionCrudHelper _admissionCrudHelper;
         private readonly IRepository<HisPatient, Guid> _hisPatientRepositiory;
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
-        private readonly IRepository<Ward, Guid> _wardRepositiory;
+        private readonly IRepository<HisWard, Guid> _wardRepositiory;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="wardAdmissionRepository"></param>
         /// <param name="admissionCrudHelper"></param>
         /// <param name="hisPatientRepositiory"></param>
+        /// <param name="wardRepositiory"></param>
         public TempAdmissionsAppService(
             IRepository<WardAdmission, Guid> wardAdmissionRepository,
             IAdmissionCrudHelper admissionCrudHelper,
             IRepository<HisPatient, Guid> hisPatientRepositiory,
-            IRepository<Ward, Guid> wardRepositiory)
+            IRepository<HisWard, Guid> wardRepositiory)
         {
             _admissionCrudHelper = admissionCrudHelper;
             _hisPatientRepositiory = hisPatientRepositiory;
@@ -201,18 +202,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             var wardAdmission = await _admissionCrudHelper.GetAsync(id);
             return wardAdmission;
         }
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns></returns>
-        //[HttpGet, Route("patient/{id}")]
-        //public async Task<PatientResponse> GetPatient(Guid id)
-        //{
-        //    var patient = await _hisPatientRepositiory.GetAsync(id);
-        //    return patient;
-        //}
 
         /// <summary>
         /// 

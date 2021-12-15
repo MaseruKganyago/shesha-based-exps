@@ -1,4 +1,5 @@
-﻿using Shesha.Domain;
+﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+using Shesha.Domain;
 using Shesha.Domain.Attributes;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Boxfusion.Health.His.Domain.Domain
     /// 
     /// </summary>
     [Entity(TypeShortAlias = "His.HisHospitalRoleAppointedPerson")]
-    public class HisHospitalRoleAppointedPerson: ShaRoleAppointedPerson
+    public class HisHospitalRoleAppointedPerson: HospitalRoleAppointedPerson
     {
     }
 }

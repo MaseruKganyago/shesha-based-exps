@@ -2,6 +2,7 @@
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
+using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Shesha.AutoMapper;
@@ -32,17 +33,17 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(a => a.Performer, options => options.MapFrom(b => GetEntity<Practitioner>(b.Performer)))
                 .ForMember(a => a.BasedOn, options => options.MapFrom(b => GetEntity<ServiceRequest>(b.BasedOn)))
                 .ForMember(a => a.EpisodeOfCare, options => options.MapFrom(b => GetEntity<EpisodeOfCare>(b.EpisodeOfCare)))
-                .ForMember(a => a.Ward, options => options.MapFrom(b => GetEntity<Ward>(b.Ward)))
+                .ForMember(a => a.Ward, options => options.MapFrom(b => GetEntity<HisWard>(b.Ward)))
                 .ForMember(a => a.Subject, options => options.MapFrom(b => GetEntity<Patient>(b.Subject)))
                 .ForMember(c => c.SeparationDate, options => options.MapFrom(c => c.SeparationDate))
                 .ForMember(c => c.TransferRejectionReason, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.TransferRejectionReason)))
                 .ForMember(c => c.TransferRejectionReasonComment, options => options.MapFrom(c => c.TransferRejectionReasonComment))
                 .ForMember(c => c.SeparationType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.SeparationType)))
-                .ForMember(a => a.SeparationDestinationWard, options => options.MapFrom(b => GetEntity<Ward>(b.SeparationDestinationWard)))
+                .ForMember(a => a.SeparationDestinationWard, options => options.MapFrom(b => GetEntity<HisWard>(b.SeparationDestinationWard)))
                 .ForMember(c => c.SeparationChildHealth, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.SeparationChildHealth)))
                 .ForMember(c => c.SeparationComment, options => options.MapFrom(c => c.SeparationComment))
-                .ForMember(a => a.InternalTransferOriginalWard, options => options.MapFrom(b => GetEntity<Ward>(b.InternalTransferOriginalWard)))
-                .ForMember(a => a.InternalTransferDestinationWard, options => options.MapFrom(b => GetEntity<Ward>(b.InternalTransferDestinationWard)))
+                .ForMember(a => a.InternalTransferOriginalWard, options => options.MapFrom(b => GetEntity<HisWard>(b.InternalTransferOriginalWard)))
+                .ForMember(a => a.InternalTransferDestinationWard, options => options.MapFrom(b => GetEntity<HisWard>(b.InternalTransferDestinationWard)))
                 .ForMember(e => e.ReasonCode, e => e.MapFrom(e => UtilityHelper.SetMultiValueReferenceList(e.ReasonCode)))
                 .MapReferenceListValuesFromDto();
 

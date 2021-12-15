@@ -3,6 +3,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
+using Boxfusion.Health.His.Domain.Domain;
 using Shesha.AutoMapper;
 using Shesha.AutoMapper.Dto;
 using Shesha.Domain;
@@ -23,7 +24,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Dtos
         /// </summary>
         public HospitalMapProfile()
         {
-            CreateMap<HospitalInput, Hospital>()
+            CreateMap<HospitalInput, HisHospital>()
                     .ForMember(c => c.PrimaryAddress, options => options.Ignore())
                     .ForMember(e => e.Parent, e => e.MapFrom(e => GetEntity<Organisation>(e.Parent)))
                     .ForMember(e => e.PrimaryContact, e => e.MapFrom(e => GetEntity<Person>(e.PrimaryContact)))
@@ -31,21 +32,21 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Dtos
                     .ForMember(c => c.FacilityType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.FacilityType)))
                     .MapReferenceListValuesFromDto();
 
-            CreateMap<HospitalResponse, Hospital>()
+            CreateMap<HospitalResponse, HisHospital>()
                     .ForMember(c => c.PrimaryAddress, options => options.Ignore())
                     .ForMember(e => e.Parent, e => e.MapFrom(e => GetEntity<Organisation>(e.Parent)))
                     .ForMember(e => e.PrimaryContact, e => e.MapFrom(e => GetEntity<Person>(e.PrimaryContact)))
                     .MapReferenceListValuesFromDto();
 
 
-            CreateMap<Hospital, HospitalResponse>()
+            CreateMap<HisHospital, HospitalResponse>()
                     .ForMember(c => c.Parent, options => options.MapFrom(c => c.Parent != null ? new EntityWithDisplayNameDto<Guid?>(c.Parent.Id, c.Parent.Name) : null))
                     .ForMember(c => c.PrimaryContact, options => options.MapFrom(c => c.PrimaryContact != null ? new EntityWithDisplayNameDto<Guid?>(c.PrimaryContact.Id, c.PrimaryContact.FullName) : null))
                     .ForMember(c => c.District, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Cdm", "FacilityDistricts", (long?)c.District)))
                     .ForMember(c => c.FacilityType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Cdm", "HospitalTypes", (long?)c.FacilityType)))
                     .MapReferenceListValuesToDto();
 
-            CreateMap<Hospital, CdmAddressInput>()
+            CreateMap<HisHospital, CdmAddressInput>()
                     .ForMember(c => c.OwnerId, options => options.MapFrom(c => c.Id.ToString()))
                     .ForMember(c => c.OwnerType, options => options.MapFrom(c => c.GetTypeShortAlias()))
                     .ForMember(u => u.Id, options => options.Ignore())
@@ -59,7 +60,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Dtos
                     .ForMember(u => u.EndDateTime, options => options.Ignore())
                     .MapReferenceListValuesFromDto();
 
-            CreateMap<Hospital, CdmAddress>()
+            CreateMap<HisHospital, CdmAddress>()
                     .ForMember(c => c.Id, options => options.Ignore())
                     .ForMember(c => c.Type, options => options.Ignore())
                     .ForMember(c => c.Latitude, options => options.Ignore())

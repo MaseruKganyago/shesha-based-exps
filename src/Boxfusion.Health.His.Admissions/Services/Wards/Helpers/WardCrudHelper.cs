@@ -10,6 +10,8 @@ using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Services.Locations.Helpers;
+using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
+using Boxfusion.Health.His.Domain.Domain;
 using NHibernate.Linq;
 using Shesha;
 using Shesha.AutoMapper.Dto;
@@ -27,9 +29,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
     /// </summary>
     public class WardCrudHelper : IWardCrudHelper, ITransientDependency
     {
-        private readonly ILocationCrudHelper<Ward, WardResponse> _wardCrudHelper;
+        private readonly ILocationCrudHelper<HisWard, HisWardResponse> _wardCrudHelper;
         private readonly IRepository<CdmAddress, Guid> _addressRepository;
-        private readonly IRepository<Ward, Guid> _repository;
+        private readonly IRepository<HisWard, Guid> _repository;
         private readonly IRepository<WardRoleAppointedPerson, Guid> _wardRoleAppointedPersonRepository;
         private readonly IMapper _mapper;
 
@@ -37,11 +39,13 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
         /// 
         /// </summary>
         /// <param name="wardCrudHelper"></param>
+        /// <param name="repository"></param>
+        /// <param name="wardRoleAppointedPersonRepository"></param>
         /// <param name="addressRepository"></param>
         /// <param name="mapper"></param>
         public WardCrudHelper(
-            ILocationCrudHelper<Ward, WardResponse> wardCrudHelper,
-            IRepository<Ward, Guid> repository,
+            ILocationCrudHelper<HisWard, HisWardResponse> wardCrudHelper,
+            IRepository<HisWard, Guid> repository,
             IRepository<WardRoleAppointedPerson, Guid> wardRoleAppointedPersonRepository,
             IRepository<CdmAddress, Guid> addressRepository,
             IMapper mapper)
@@ -57,7 +61,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task<List<WardResponse>> GetAllAsync()
+        public async Task<List<HisWardResponse>> GetAllAsync()
         {
             var WardResponses = await _wardCrudHelper.GetAllAsync();
             return WardResponses;
@@ -76,23 +80,12 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
             return _mapper.Map<List<AutocompleteItemDto>>(await _repository.GetAll().Where(x => (x.Name ?? "").ToLower().Contains(term) && x.OwnerOrganisation.Id == organisationId).OrderBy(x => x.Name).Take(10).ToListAsync());
         }
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="personId"></param>
-        ///// <returns></returns>
-        //public async Task<List<AutocompleteItemDto>> GetWardByPersonAutoCompleteAsync(Guid personId)
-        //{
-        //    return _mapper.Map<List<AutocompleteItemDto>>(await _wardRoleAppointedPersonRepository.GetAll().Where(x => x.Person.Id == personId).Select(x => x.Ward).Distinct().ToListAsync());
-        //}
-
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="term"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<List<WardResponse>> GetWardByHospitalAsync(Guid id)
+        public async Task<List<HisWardResponse>> GetWardByHospitalAsync(Guid id)
         {
             var wardResponses = await _wardCrudHelper.GetLocationByOrganisationAsync(id);
             return wardResponses;
@@ -103,7 +96,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<WardResponse> GetAsync(Guid id)
+        public async Task<HisWardResponse> GetAsync(Guid id)
         {
             var WardResponse = await _wardCrudHelper.GetAsync(id);
             WardResponse.Address = _mapper.Map<CdmAddressResponse>(await _addressRepository.GetAll().Where(x => x.OwnerId.Trim() == WardResponse.Id.ToString()).OrderByDescending(x => x.CreationTime).FirstOrDefaultAsync());
@@ -116,9 +109,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<WardResponse> CreateAsync(WardInput input)
+        public async Task<HisWardResponse> CreateAsync(HisWardInput input)
         {
-            var location = _mapper.Map<Ward>(input);
+            var location = _mapper.Map<HisWard>(input);
             var WardResponse = await _wardCrudHelper.CreateAsync(input?.Address, location);
 
             return WardResponse;
@@ -127,10 +120,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="id"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<WardResponse> UpdateAsync(WardInput input)
+        public async Task<HisWardResponse> UpdateAsync(WardInput input)
         {
             var WardResponse = await _wardCrudHelper.UpdateAsync(input);
             return WardResponse;

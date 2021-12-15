@@ -57,6 +57,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Dto
         /// 
         /// </summary>
         public bool IsGautengGovFacility { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public EntityWithDisplayNameDto<Guid?> Ward { get; internal set; }
     }
 }

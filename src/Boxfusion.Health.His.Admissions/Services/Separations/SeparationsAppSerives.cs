@@ -26,6 +26,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="separationService"></param>
+        /// <param name="hisAdmissPermissionChecker"></param>
         /// <param name="separationCrudHelper"></param>
         public SeparationsAppSerives(ISeparationService separationService, IHisAdmissPermissionChecker hisAdmissPermissionChecker)
         {
@@ -88,28 +90,5 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
 
             return separation;
         }
-
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns></returns>
-        //[HttpGet, Route("{id}")]
-        //public Task<SeparationResponse> GetAsync(Guid id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="input"></param>
-        ///// <returns></returns>
-        //[HttpPut, Route("")]
-        //public Task<SeparationResponse> UpdateAsync(SeparationInput input)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

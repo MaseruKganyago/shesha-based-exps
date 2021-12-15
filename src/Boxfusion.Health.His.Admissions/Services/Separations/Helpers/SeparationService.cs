@@ -28,7 +28,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
     /// </summary>
     public class SeparationService : ISeparationService, ITransientDependency
     {
-        private readonly IRepository<Ward, Guid> _wardRepositiory;
+        private readonly IRepository<HisWard, Guid> _wardRepositiory;
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepositiory;
         private readonly IRepository<HisPatient, Guid> _hisPatientRepositiory;
@@ -46,9 +46,21 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
         /// </summary>
         /// <param name="wardRepositiory"></param>
         /// <param name="wardAdmissionRepositiory"></param>
-        public SeparationService(IRepository<Ward, Guid> wardRepositiory, IRepository<WardAdmission,
+        /// <param name="hospitalAdmissionRepositiory"></param>
+        /// <param name="hisPatientRepositiory"></param>
+        /// <param name="mapper"></param>
+        /// <param name="conditionRepositiory"></param>
+        /// <param name="diagnosisRepositiory"></param>
+        /// <param name="icdTenCodeRepositiory"></param>
+        /// <param name="conditionIcdTenCodeRepositiory"></param>
+        /// <param name="unitOfWork"></param>
+        /// <param name="organisationRepositiory"></param>
+        public SeparationService(IRepository<HisWard, Guid> wardRepositiory, IRepository<WardAdmission,
             Guid> wardAdmissionRepositiory, IRepository<HospitalAdmission, Guid> hospitalAdmissionRepositiory,
-            IRepository<HisPatient, Guid> hisPatientRepositiory, IMapper mapper, IRepository<Condition, Guid> conditionRepositiory, IRepository<Diagnosis, Guid> diagnosisRepositiory, IRepository<IcdTenCode, Guid> icdTenCodeRepositiory, IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepositiory, IUnitOfWorkManager unitOfWork, IRepository<FhirOrganisation, Guid> organisationRepositiory)
+            IRepository<HisPatient, Guid> hisPatientRepositiory, IMapper mapper, 
+            IRepository<Condition, Guid> conditionRepositiory, IRepository<Diagnosis, Guid> diagnosisRepositiory, 
+            IRepository<IcdTenCode, Guid> icdTenCodeRepositiory, IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepositiory,
+            IUnitOfWorkManager unitOfWork, IRepository<FhirOrganisation, Guid> organisationRepositiory)
         {
             _wardRepositiory = wardRepositiory;
             _wardAdmissionRepositiory = wardAdmissionRepositiory;

@@ -75,7 +75,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 var _hisAdmissPermissionChecker = Abp.Dependency.IocManager.Instance.Resolve<IHisAdmissPermissionChecker>();
                 var personService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Person, Guid>>();
                 var _hospitalRoleAppointedPersonRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
-                var _wardRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Ward, Guid>>();
+                var _wardRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HisWard, Guid>>();
 
 
                 var person = personService.FirstOrDefault(c => c.User.Id == _session.GetUserId());
@@ -123,7 +123,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
 
             return table;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         [HttpPost, Route("ApproveLevel1")]
         [AbpAuthorize(PermissionNames.ApproveReport)]
         public async Task<WardMidnightCensusReportResponse> ApproveLevel1(WardCensusInput input)
@@ -141,13 +145,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 throw new UserFriendlyException("The Current User is not assigned to this ward");
             }
 
-            var approvalModel = await _sessionDataProvider.GetApprovalModels(input.WardId);
-            if (!approvalModel.Any()) throw new UserFriendlyException("The spacified ward doesn't have MidnightCensusApprovalModel");
-            var approval = approvalModel[0];
-
             var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward.Id == input.WardId && r.ReportDate == input.ReportDate);
 
-            if (entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingApproval && approval.His_MidnightCensusApprovalModelLkp == (float)His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.TwoApprover)
+            if (entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingApproval && entity.Ward.MidnightCensusApprovalModel == His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.TwoApprover)
             {
                 entity.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingFinalApproval;
                 entity.ApprovedBy = await GetCurrentPersonAsync() as PersonFhirBase;
@@ -184,7 +184,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 throw new UserFriendlyException("The Current User is not assigned to this ward");
             }
 
-            var ward = await GetEntityAsync<Ward>(input.WardId);
+            var ward = await GetEntityAsync<HisWard>(input.WardId);
 
             var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
 
@@ -250,13 +250,13 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// </summary>
         /// <returns></returns>
         [HttpGet, Route("AssignedWards")]
-        public async Task<List<WardResponse>> GetAssignedWards()
+        public async Task<List<HisWardResponse>> GetAssignedWards()
         {
             var currentPerson = await GetCurrentPersonAsync();
             var appointmentService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<WardRoleAppointedPerson, Guid>>();
             var wards = await appointmentService.GetAll().Where(r => r.Person == currentPerson).Select(r => r.Ward).ToListAsync();
 
-            return ObjectMapper.Map<List<WardResponse>>(wards);
+            return ObjectMapper.Map<List<HisWardResponse>>(wards);
         }
         /// <summary>
         /// 
@@ -267,7 +267,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [AbpAuthorize(PermissionNames.ReportsAndStats)]
         public async Task<WardMidnightCensusReportResponse> GetWardDailyReport(WardCensusInput input)
         {
-            await _sessionDataProvider.MidnightCensusApprovalModelHack();
             var currentPerson = await GetCurrentPersonAsync();
             var isPersonAssignedToHospital = await _wardCrudHelper.IsPersonAssignedToHospital(input.WardId, currentPerson);
             if (!isPersonAssignedToHospital)
@@ -281,7 +280,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 throw new UserFriendlyException("The Current User is not assigned to this ward");
             }
 
-            var ward = await GetEntityAsync<Ward>(input.WardId);
+            var ward = await GetEntityAsync<HisWard>(input.WardId);
 
             var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
 
@@ -369,7 +368,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         [HttpGet, Route("MonthlyReport")]
         public async Task<WardMidnightCensusReportResponse> GetWardMonthlyReport(WardCensusInput input)
         {
-            var ward = await GetEntityAsync<Ward>(input.WardId);
+            var ward = await GetEntityAsync<HisWard>(input.WardId);
 
             var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate && r.ReportType == His.Domain.Domain.Enums.RefListReportType.Monthly);
 
@@ -421,7 +420,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 throw new UserFriendlyException("The Current User is not assigned to this ward");
             }
 
-            var ward = await GetEntityAsync<Ward>(input.WardId);
+            var ward = await GetEntityAsync<HisWard>(input.WardId);
 
             var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
 
@@ -456,20 +455,17 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             var isPersonAssignedToWard = await _wardCrudHelper.IsPersonAssignedToWard(input.WardId, currentPerson);
             if (!isPersonAssignedToWard) throw new UserFriendlyException("The Current User is not assigned to this ward");
 
-            var approvalModel = await _sessionDataProvider.GetApprovalModels(input.WardId);
-            if (!approvalModel.Any()) throw new UserFriendlyException("The spacified ward doesn't have MidnightCensusApprovalModel");
-
             var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward.Id == input.WardId && r.ReportDate == input.ReportDate);
             //Check Midnight for the day.
 
             if (entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress || entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.Rejected)
             {
-                var approval = approvalModel[0];
-                if (approval.His_MidnightCensusApprovalModelLkp == (float)His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.SingleApprover)
+                if (entity.Ward.MidnightCensusApprovalModel == His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.SingleApprover)
                 {
                     entity.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingFinalApproval;
                 }
-                if (approval.His_MidnightCensusApprovalModelLkp == (float)His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.TwoApprover)
+
+                if (entity.Ward.MidnightCensusApprovalModel == His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.TwoApprover)
                 {
                     entity.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingApproval;
                 }
@@ -489,7 +485,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// </summary>
         /// <returns></returns>
         [HttpGet, Route("")]
-        public async Task<List<WardResponse>> GetWardsAsync()
+        public async Task<List<HisWardResponse>> GetWardsAsync()
         {
             return await _wardCrudHelper.GetAllAsync();
         }
@@ -500,7 +496,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <param name="hospitalId"></param>
         /// <returns></returns>
         [HttpGet, Route("[action]/{hospitalId}")]
-        public async Task<List<WardResponse>> GetWardByHospitalAsync(Guid hospitalId)
+        public async Task<List<HisWardResponse>> GetWardByHospitalAsync(Guid hospitalId)
         {
             return await _wardCrudHelper.GetWardByHospitalAsync(hospitalId);
         }
@@ -518,25 +514,13 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             return ObjectMapper.Map<List<AutocompleteItemDto>>(await _wardCrudHelper.GetWardByHospitalAutoCompleteAsync(term, ownerOrganisationId));
         }
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="term"></param>
-        ///// <param name="personId"></param>
-        ///// <returns></returns>
-        //[HttpGet, Route("subject/{personId}")]
-        //public async Task<List<AutocompleteItemDto>> GetWardByPersonAutoCompleteAsync(Guid personId)
-        //{
-        //    return ObjectMapper.Map<List<AutocompleteItemDto>>(await _wardCrudHelper.GetWardByPersonAutoCompleteAsync(personId));
-        //}
-
         /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet, Route("{id}")]
-        public async Task<WardResponse> GetWardAsync(Guid id)
+        public async Task<HisWardResponse> GetWardAsync(Guid id)
         {
             return await _wardCrudHelper.GetAsync(id);
         }
@@ -548,7 +532,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <returns></returns>
         [HttpPost, Route("")]
         [AbpAuthorize(PermissionNames.CreateFacility)]
-        public async Task<WardResponse> CreateWardAsync(WardInput input)
+        public async Task<HisWardResponse> CreateWardAsync(HisWardInput input)
         {
             Validation.ValidateText(input?.Name, "Name");
             Validation.ValidateText(input?.Description, "Description");
@@ -578,7 +562,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPut, Route("")]
-        public async Task<WardResponse> UpdateWardAsync(WardInput input)
+        public async Task<HisWardResponse> UpdateWardAsync(WardInput input)
         {
             Validation.ValidateIdWithException(input?.Id, "Ward Id cannot be empty");
             Validation.ValidateText(input.Name, "Name");

@@ -40,8 +40,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions.Dto
                 .ForMember(a => a.ServiceProvider, options => options.MapFrom(b => GetEntity<Hospital>(b.ServiceProvider)))
                 .ForMember(a => a.PartOf, options => options.MapFrom(b => GetEntity<Encounter>(b.PartOf)))
                 .ForMember(a => a.ReasonCode, options => options.MapFrom(b => UtilityHelper.SetMultiValueReferenceList(b.ReasonCode)))
-                .ForMember(a => a.Ward, options => options.MapFrom(b => GetEntity<Ward>(b.AdmissionDestinationWard)))
-                .ForMember(a => a.SeparationDestinationWard, options => options.MapFrom(b => GetEntity<Ward>(b.AdmissionDestinationWard)))
+                .ForMember(a => a.Ward, options => options.MapFrom(b => GetEntity<HisWard>(b.AdmissionDestinationWard)))
+                .ForMember(a => a.SeparationDestinationWard, options => options.MapFrom(b => GetEntity<HisWard>(b.AdmissionDestinationWard)))
                 .MapReferenceListValuesFromDto();
 
             CreateMap<WardAdmission, WardAdmissionResponse>()
