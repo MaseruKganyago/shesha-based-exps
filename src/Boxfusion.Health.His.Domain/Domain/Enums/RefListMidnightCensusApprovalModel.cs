@@ -18,7 +18,7 @@ namespace Boxfusion.Health.His.Domain.Domain.Enums
         /// <summary>
         /// 
         /// </summary>
-        [Description("Two Approver")]
+        [Description("Two Approvers")]
         TwoApprover = 2
     }
 }

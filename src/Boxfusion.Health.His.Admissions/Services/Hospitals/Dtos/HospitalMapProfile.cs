@@ -3,6 +3,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
+using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
 using Boxfusion.Health.His.Domain.Domain;
 using Shesha.AutoMapper;
 using Shesha.AutoMapper.Dto;
@@ -32,7 +33,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Dtos
                     .ForMember(c => c.FacilityType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.FacilityType)))
                     .MapReferenceListValuesFromDto();
 
-            CreateMap<HospitalResponse, HisHospital>()
+            CreateMap<HisHospitalResponse, HisHospital>()
                     .ForMember(c => c.PrimaryAddress, options => options.Ignore())
                     .ForMember(e => e.Parent, e => e.MapFrom(e => GetEntity<Organisation>(e.Parent)))
                     .ForMember(e => e.PrimaryContact, e => e.MapFrom(e => GetEntity<Person>(e.PrimaryContact)))
