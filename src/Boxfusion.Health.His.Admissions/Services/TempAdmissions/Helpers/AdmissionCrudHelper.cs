@@ -142,14 +142,19 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             _mapper.Map(wardAdmission.Ward, admissionResponse);
             UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
 
-            if (wardAdmission.InternalTransferDestinationWard != null)
+
+            if (wardAdmission.AdmissionStatus == RefListAdmissionStatuses.separated)
             {
-                var separationCodes = await GetIcdTenCodes(wardAdmission.InternalTransferDestinationWard);
-                UtilityHelper.TrySetProperty(admissionResponse, "SeparationCode", separationCodes);
-            }
-            else
-            {
-                UtilityHelper.TrySetProperty(admissionResponse, "SeparationCode", codes);
+
+                if (wardAdmission.InternalTransferDestinationWard != null)
+                {
+                    var separationCodes = await GetIcdTenCodes(wardAdmission.InternalTransferDestinationWard);
+                    UtilityHelper.TrySetProperty(admissionResponse, "SeparationCode", separationCodes);
+                }
+                else
+                {
+                    UtilityHelper.TrySetProperty(admissionResponse, "SeparationCode", codes);
+                }
             }
 
             if (hisPatient.DateOfBirth.HasValue && wardAdmission.SeparationDate.HasValue)
