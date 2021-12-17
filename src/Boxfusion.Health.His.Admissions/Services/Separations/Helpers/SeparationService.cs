@@ -57,8 +57,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
         /// <param name="organisationRepositiory"></param>
         public SeparationService(IRepository<HisWard, Guid> wardRepositiory, IRepository<WardAdmission,
             Guid> wardAdmissionRepositiory, IRepository<HospitalAdmission, Guid> hospitalAdmissionRepositiory,
-            IRepository<HisPatient, Guid> hisPatientRepositiory, IMapper mapper, 
-            IRepository<Condition, Guid> conditionRepositiory, IRepository<Diagnosis, Guid> diagnosisRepositiory, 
+            IRepository<HisPatient, Guid> hisPatientRepositiory, IMapper mapper,
+            IRepository<Condition, Guid> conditionRepositiory, IRepository<Diagnosis, Guid> diagnosisRepositiory,
             IRepository<IcdTenCode, Guid> icdTenCodeRepositiory, IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepositiory,
             IUnitOfWorkManager unitOfWork, IRepository<FhirOrganisation, Guid> organisationRepositiory)
         {
@@ -144,17 +144,14 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
                 await _unitOfWork.Current.SaveChangesAsync();
                 await _sessionProvider.Session.Transaction.CommitAsync();
 
-                await Task.Run(() =>
-                {
-                    wardAdmission = _wardAdmissionRepositiory.Get(encounterId);
-                    insertedDestinationWardAdmission = _wardAdmissionRepositiory.Get(insertedDestinationWardAdmission.Id);
+                wardAdmission = await _wardAdmissionRepositiory.GetAsync(encounterId);
+                insertedDestinationWardAdmission = await _wardAdmissionRepositiory.GetAsync(insertedDestinationWardAdmission.Id);
 
-                    wardAdmission.InternalTransferDestinationWard = insertedDestinationWardAdmission;
-                    wardAdmission = _wardAdmissionRepositiory.Update(wardAdmission);
+                wardAdmission.InternalTransferDestinationWard = insertedDestinationWardAdmission;
+                wardAdmission = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
 
-                    _unitOfWork.Current.SaveChangesAsync();
-                    _sessionProvider.Session.Transaction.CommitAsync();
-                });
+                await _unitOfWork.Current.SaveChangesAsync();
+                await _sessionProvider.Session.Transaction.CommitAsync();
             }
             else if (input?.SeparationType?.ItemValue == (int?)RefListSeparationTypes.externalTransfer)
             {
@@ -499,17 +496,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
                 Condition = insertedCondition
             };
 
-            await Task.Run(() =>
-            {
-                var insertedDiagnosis = _diagnosisRepositiory.InsertAsync(diagnosis);
+            var insertedDiagnosis = await _diagnosisRepositiory.InsertAsync(diagnosis);
 
-                var _sessionProvider = Abp.Dependency.IocManager.Instance.Resolve<ISessionProvider>();
-                _unitOfWork.Current.SaveChangesAsync();
-                _sessionProvider.Session.Transaction.CommitAsync();
-
-            });
-
-
+            var _sessionProvider = Abp.Dependency.IocManager.Instance.Resolve<ISessionProvider>();
+            await _unitOfWork.Current.SaveChangesAsync();
+            await _sessionProvider.Session.Transaction.CommitAsync();
         }
 
         /// <summary>
