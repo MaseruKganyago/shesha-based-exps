@@ -20,7 +20,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
         {
 
             Execute.Sql(@"
-                ALTER view [dbo].[vw_Report_PatientsWardsView]  AS  
+                CREATE OR ALTER view [dbo].[vw_Report_PatientsWardsView]  AS  
                     select distinct * from
                     (select Ward,Count(*) [NumberOfPatientsAdmitted]
                     ,[Admission_TypeLkp]

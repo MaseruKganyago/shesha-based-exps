@@ -20,7 +20,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
         {
 
             Execute.Sql(@"
-                ALTER view [dbo].[vw_Report_AllAdmittedPatientsView]  AS  
+                CREATE OR ALTER view [dbo].[vw_Report_AllAdmittedPatientsView]  AS  
 
                     with cte as (
                     select SubjectId, His_ClassificationLkp,His_OtherCategoryLkp,His_WardId
