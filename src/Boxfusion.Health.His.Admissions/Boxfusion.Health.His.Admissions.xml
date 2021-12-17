@@ -1130,7 +1130,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.ReportAppService.#ctor(Boxfusion.Health.His.Admissions.Services.Reports.Helpers.IReportHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.WardRoleAppointedPerson,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.ReportAppService.#ctor(Boxfusion.Health.His.Admissions.Services.Reports.Helpers.IReportHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardRoleAppointedPerson,System.Guid})">
             
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.ReportAppService.GetReport(Boxfusion.Health.His.Domain.Domain.Enums.RefListReportTypes,System.Guid,System.DateTime)">
@@ -1976,6 +1976,134 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Users.Dto.HisUserInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Users.Dto.HisUserResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Users.HisUsersAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.HisUsersAppService.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.IHisUserCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Authorization.Users.User,System.Int64})">
+            <summary>
+            
+            </summary>
+            <param name="hisUserCrudHelper"></param>
+            <param name="personRepository"></param>
+            <param name="userRepository"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.HisUsersAppService.IndexTable">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.HisUsersAppService.GetAllAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.HisUsersAppService.GetAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.HisUsersAppService.GetByIdNumberAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="identityNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.HisUsersAppService.CreateAsync(Boxfusion.Health.His.Admissions.Services.Users.Dto.HisUserInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.HisUsersAppService.UpdateAsync(Boxfusion.Health.His.Admissions.Services.Users.Dto.HisUserInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.HisUsersAppService.DeleteAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.HisUsersAppService.GetSupervisor(System.Guid)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Users.IHisUsersAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.IHisUsersAppService.GetAllAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.IHisUsersAppService.GetByIdNumberAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="identityNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.IHisUsersAppService.GetAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.IHisUsersAppService.CreateAsync(Boxfusion.Health.His.Admissions.Services.Users.Dto.HisUserInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.IHisUsersAppService.UpdateAsync(Boxfusion.Health.His.Admissions.Services.Users.Dto.HisUserInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.IHisUsersAppService.DeleteAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Users.IHisUsersAppService.GetSupervisor(System.Guid)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Wards.Dto.RejectReportInput">
             <summary>
             
@@ -2074,7 +2202,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.WardCrudHelper.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Locations.Helpers.ILocationCrudHelper{Boxfusion.Health.His.Domain.Domain.HisWard,Boxfusion.Health.His.Admissions.Services.Wards.Dto.HisWardResponse},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.WardRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Cdm.CdmAddress,System.Guid},AutoMapper.IMapper)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.Helpers.WardCrudHelper.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Locations.Helpers.ILocationCrudHelper{Boxfusion.Health.His.Domain.Domain.HisWard,Boxfusion.Health.His.Admissions.Services.Wards.Dto.HisWardResponse},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Cdm.CdmAddress,System.Guid},AutoMapper.IMapper)">
             <summary>
             
             </summary>
@@ -2883,6 +3011,184 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211217013600">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211217013600.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211217013600.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211217054800">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211217054800.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211217054800.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Services.Users.Dtos.HisUserMapProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Dtos.HisUserMapProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.HisUserCrudHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.HisUserCrudHelper.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.IPersonFhirBaseCrudHelper{Boxfusion.Health.His.Domain.Domain.HisUser,Boxfusion.Health.His.Admissions.Services.Users.Dto.HisUserResponse},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Cdm.CdmAddress,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HospitalRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRole,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisUser,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisHospital,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointedPerson,System.Guid},AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>
+            <param name="personFhirCrudHelper"></param>
+            <param name="addressRepository"></param>
+            <param name="wardRoleAppointedPersonRepository"></param>
+            <param name="hospitalRoleAppointedPersonRepository"></param>
+            <param name="shaRoleRepository"></param>
+            <param name="repository"></param>
+            <param name="unitOfWork"></param>
+            <param name="hospitalRepository"></param>
+            <param name="wardRepository"></param>
+            <param name="shaRoleAppointedPersonRepository"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.HisUserCrudHelper.GetAllAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.HisUserCrudHelper.GetAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.HisUserCrudHelper.GetByIdNumberAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="identityNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.HisUserCrudHelper.CreateAsync(Boxfusion.Health.His.Admissions.Services.Users.Dto.HisUserInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.HisUserCrudHelper.UpdateAsync(Boxfusion.Health.His.Admissions.Services.Users.Dto.HisUserInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.HisUserCrudHelper.DeleteAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.HisUserCrudHelper.CreateWardRoleAppointedPerson``1(Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Nullable{System.Guid}},Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Nullable{System.Guid}},``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="role"></param>
+            <param name="ward"></param>
+            <param name="ownerEntity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.HisUserCrudHelper.CreateHospitalRoleAppointedPerson``1(Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Nullable{System.Guid}},Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Nullable{System.Guid}},``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="role"></param>
+            <param name="hospital"></param>
+            <param name="ownerEntity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.HisUserCrudHelper.DeleteShaRoleAppointedPerson(Shesha.Domain.ShaRoleAppointedPerson)">
+            <summary>
+            
+            </summary>
+            <param name="shaRoleAppointedPerson"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.IHisUserCrudHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.IHisUserCrudHelper.GetAllAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.IHisUserCrudHelper.GetByIdNumberAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="identityNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.IHisUserCrudHelper.GetAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.IHisUserCrudHelper.CreateAsync(Boxfusion.Health.His.Admissions.Services.Users.Dto.HisUserInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <param name="entity"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.IHisUserCrudHelper.UpdateAsync(Boxfusion.Health.His.Admissions.Services.Users.Dto.HisUserInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Services.Users.Helpers.IHisUserCrudHelper.DeleteAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

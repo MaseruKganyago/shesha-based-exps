@@ -230,7 +230,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             var currentPerson = await GetCurrentPersonAsync();
             var appointmentService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
             var hisAdmissPermissionChecker = Abp.Dependency.IocManager.Instance.Resolve<IHisAdmissPermissionChecker>();
-            var hospitals = new List<Hospital>();
+            var hospitals = new List<HisHospital>();
 
             if (!await hisAdmissPermissionChecker.IsAdmin(currentPerson))
             {
@@ -238,7 +238,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             }
             else
             {
-                var hospitalService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Hospital, Guid>>();
+                var hospitalService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HisHospital, Guid>>();
                 hospitals = await hospitalService.GetAll().ToListAsync();
             }
 

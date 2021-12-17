@@ -27,6 +27,7 @@
   <ItemGroup>
     <Compile Remove="Domain\Enums\RefListDistrictTypes.cs" />
     <Compile Remove="Domain\Enums\RefListHospitalTypes.cs" />
+    <Compile Remove="Domain\HisHospitalRoleAppointedPerson.cs" />
     <Compile Remove="Migrations\M20211215134300.cs" />
   </ItemGroup>
 
@@ -34,7 +35,7 @@
 
   <ItemGroup>
     <PackageReference Include="Abp" Version="5.0.0" />
-    <PackageReference Include="Boxfusion.Health.HealthCommon.Core" Version="1.0.35" />
+    <PackageReference Include="Boxfusion.Health.HealthCommon.Core" Version="1.0.36" />
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />

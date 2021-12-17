@@ -480,11 +480,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Domain.Domain.HisHospitalRoleAppointedPerson">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Domain.Domain.HisPatient">
             <summary>
             
@@ -506,6 +501,11 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Domain.Domain.HisPatient.PatientProvince">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Domain.HisUser">
             <summary>
             
             </summary>
@@ -561,6 +561,16 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Domain.Domain.HospitalAdmission.CapturedAfterApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Domain.HospitalRoleAppointedPerson">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Domain.Domain.HospitalRoleAppointedPerson.Hospital">
             <summary>
             
             </summary>
@@ -751,6 +761,16 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport.TotalSeparations">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Domain.WardRoleAppointedPerson">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Domain.Domain.WardRoleAppointedPerson.Ward">
             <summary>
             
             </summary>
