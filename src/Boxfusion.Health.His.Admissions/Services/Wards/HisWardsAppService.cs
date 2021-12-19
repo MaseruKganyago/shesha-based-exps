@@ -332,29 +332,29 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 else
                 {
                     var dailyStat = calculatedReport[0];
-                    entity = new WardMidnightCensusReport()
-                    {
-                        ReportDate = input.ReportDate,
-                        MidnightCount = dailyStat.MidnightCount,
-                        TotalAdmittedPatients = dailyStat.TotalAdmittedPatients,
-                        TotalSeparatedPatients = dailyStat.TotalSeparatedPatients,
-                        TotalBedAvailability = dailyStat.TotalBedAvailability,
-                        NumBedsInWard = dailyStat.TotalBedInWard,
-                        BedUtilisation = (double?)dailyStat.BedUtilisation,
-                        AverageLengthofStay = (float?)dailyStat.AverageLengthOfStay,
-                        AverageBedAvailability = (float?)dailyStat.AverageLengthOfStay,
-                        TodaysAdmission = dailyStat.TodaysAdmission,
-                        ApprovalStatus = entity.ApprovalStatus,
-                        ApprovalTime = entity.ApprovalTime,
-                        ApprovalTime2 = entity.ApprovalTime2,
-                        ApprovedBy = entity.ApprovedBy,
-                        ApprovedBy2 = entity.ApprovedBy2,
-                        RejectedBy = entity.RejectedBy,
-                        RejectionComments = entity.RejectionComments,
-                        ReportType = entity.ReportType,
-                        Ward = entity.Ward
-                    };
 
+                    entity =  await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(entity.Id, async item =>
+                    {
+                        item.ReportDate = input.ReportDate;
+                        item.MidnightCount = dailyStat.MidnightCount;
+                        item.TotalAdmittedPatients = dailyStat.TotalAdmittedPatients;
+                        item.TotalSeparatedPatients = dailyStat.TotalSeparatedPatients;
+                        item.TotalBedAvailability = dailyStat.TotalBedAvailability;
+                        item.NumBedsInWard = dailyStat.TotalBedInWard;
+                        item.BedUtilisation = (double?)dailyStat.BedUtilisation;
+                        item.AverageLengthofStay = (float?)dailyStat.AverageLengthOfStay;
+                        item.AverageBedAvailability = (float?)dailyStat.AverageLengthOfStay;
+                        item.TodaysAdmission = dailyStat.TodaysAdmission;
+                        item.ApprovalStatus = entity.ApprovalStatus;
+                        item.ApprovalTime = entity.ApprovalTime;
+                        item.ApprovalTime2 = entity.ApprovalTime2;
+                        item.ApprovedBy = entity.ApprovedBy;
+                        item.ApprovedBy2 = entity.ApprovedBy2;
+                        item.RejectedBy = entity.RejectedBy;
+                        item.RejectionComments = entity.RejectionComments;
+                        item.ReportType = entity.ReportType;
+                        item.Ward = entity.Ward;
+                    });
                 }
             }
 
