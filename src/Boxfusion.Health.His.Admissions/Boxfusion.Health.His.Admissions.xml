@@ -1776,7 +1776,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HospitalAdmission,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers.IPatientCrudHelper{Boxfusion.Health.His.Domain.Domain.HisPatient,Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.NonUserCdmPatientResponse},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.EncounterLocation,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ConditionIcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisWard,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager,AutoMapper.IMapper)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HospitalAdmission,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers.IPatientCrudHelper{Boxfusion.Health.His.Domain.Domain.HisPatient,Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.NonUserCdmPatientResponse},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.EncounterLocation,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisConditionIcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisWard,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager,AutoMapper.IMapper)">
             <summary>
             
             </summary>
@@ -1859,14 +1859,14 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.DeleteConditionIcdTenCode(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ConditionIcdTenCode)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.DeleteConditionIcdTenCode(Boxfusion.Health.His.Domain.Domain.HisConditionIcdTenCode)">
             <summary>
             
             </summary>
             <param name="conditionIcdTenCode"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.CreateICdTenCode(Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Nullable{System.Guid}},Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.CreateICdTenCode(Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Nullable{System.Guid}},Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Boolean)">
             <summary>
             
             </summary>
