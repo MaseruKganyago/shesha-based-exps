@@ -38,7 +38,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 												left join Core_Persons per on per.Id = enc.SubjectId 
 												left join Core_Facilities fac on fac.Id = enc.His_WardId
 												left join Fhir_Encounters hosEnc on hosEnc.Id = enc.PartOfId
-												where enc.His_WardId = :wardId and convert(date, enc.StartDateTime) <= convert(date, :filterDate)
+												where enc.His_WardId = :wardId and convert(date, enc.StartDateTime) <= convert(date, :filterDate) and convert(date, @filterDate) <= getdate()
 												and (enc.His_AdmissionStatusLkp != 2 and enc.His_AdmissionStatusLkp != 4)
 												UNION ALL
 												select
@@ -65,7 +65,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 												left join Core_Persons per on per.Id = enc.SubjectId 
 												left join Core_Facilities fac on fac.Id = enc.His_WardId
 												left join Fhir_Encounters hosEnc on hosEnc.Id = enc.PartOfId
-												where enc.His_WardId = :wardId and convert(date, enc.StartDateTime) = convert(date, :filterDate)
+												where enc.His_WardId = :wardId and convert(date, enc.StartDateTime) <= convert(date, :filterDate) and convert(date, @filterDate) <= getdate()
 												and (enc.His_AdmissionStatusLkp = 2 or enc.His_AdmissionStatusLkp = 4) and enc.IsDeleted = 0";
 
 		/// <summary>
