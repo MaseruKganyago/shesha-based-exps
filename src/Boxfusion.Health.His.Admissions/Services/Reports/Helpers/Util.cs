@@ -32,7 +32,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 												,per.Fhir_NationalityLkp Nationality
 												,hosEnc.His_OtherCategoryLkp OtherCategory
 												,enc.His_AdmissionStatusLkp AdmissionStatus
-												,DATEDIFF(day, enc.StartDateTime, getdate()) AS PatientDays
+												,DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())) AS PatientDays
 												from
 												Fhir_Encounters enc
 												left join Core_Persons per on per.Id = enc.SubjectId 
@@ -59,7 +59,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 												,per.Fhir_NationalityLkp Nationality
 												,hosEnc.His_OtherCategoryLkp OtherCategory
 												,enc.His_AdmissionStatusLkp AdmissionStatus
-												,DATEDIFF(day, enc.StartDateTime, getdate()) AS PatientDays
+												,DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())) AS PatientDays
 												from
 												Fhir_Encounters enc
 												left join Core_Persons per on per.Id = enc.SubjectId 
