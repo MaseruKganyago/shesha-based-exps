@@ -50,6 +50,11 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// <summary>
         /// 
         /// </summary>
+        public virtual bool IsGautengGovFacility { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual bool CapturedAfterApproval { get; set; }
     }
 }

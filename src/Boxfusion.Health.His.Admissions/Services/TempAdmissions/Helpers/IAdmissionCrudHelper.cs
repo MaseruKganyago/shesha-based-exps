@@ -72,6 +72,14 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <returns></returns>
         Task<List<AdmissionResponse>> GetWardAdmissions(Guid hospitalAdmissionId);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="currentLoggedInPerson"></param>
+        /// <returns></returns>
+        Task<AdmissionResponse> SeparatePatientAsync(AdmissionInput input, PersonFhirBase currentLoggedInPerson);
+
         ///// <summary>
         ///// 
         ///// </summary>

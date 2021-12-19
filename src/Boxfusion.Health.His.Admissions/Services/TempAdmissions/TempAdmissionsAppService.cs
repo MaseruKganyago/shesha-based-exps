@@ -6,6 +6,7 @@ using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
 using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers;
+using local = Boxfusion.Health.His.Admissions.Helpers;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
@@ -122,7 +123,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             Validation.ValidateEntityWithDisplayNameDto(input?.Ward, "Ward");
             Validation.ValidateEntityWithDisplayNameDto(input?.Subject, "Patient");
             Validation.ValidateNullableType(input?.StartDateTime, "Admission Date");
-            //Validation.ValidateText(input?.HospitalAdmissionNumber, "Hospital Admission Number");
             Validation.ValidateText(input?.WardAdmissionNumber, "Ward Admission Number");
             Validation.ValidateReflist(input?.AdmissionType, "Admission Type");
 
@@ -130,7 +130,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             {
                 Validation.ValidateReflist(input?.Classification, "Classification");
                 Validation.ValidateText(input?.HospitalAdmissionNumber, "Hospital Admission Number");
-                //Validation.ValidateReflist(input?.OtherCategory, "Other Categories");
             }
 
             var patient = await _hisPatientRepositiory.GetAsync(input.Subject.Id.Value);
@@ -160,7 +159,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             Validation.ValidateEntityWithDisplayNameDto(input?.Ward, "Ward");
             Validation.ValidateEntityWithDisplayNameDto(input?.Subject, "Patient");
             Validation.ValidateNullableType(input?.StartDateTime, "Admission Date");
-            //Validation.ValidateText(input?.HospitalAdmissionNumber, "Hospital Admission Number");
             Validation.ValidateText(input?.WardAdmissionNumber, "Ward Admission Number");
             Validation.ValidateReflist(input?.AdmissionType, "Admission Type");
 
@@ -168,7 +166,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             {
                 Validation.ValidateText(input?.HospitalAdmissionNumber, "Hospital Admission Number");
                 Validation.ValidateReflist(input?.Classification, "Classification");
-                //Validation.ValidateReflist(input?.OtherCategory, "Other Categories");
             }
 
             var patient = await _hisPatientRepositiory.GetAsync(input.Subject.Id.Value);
@@ -178,6 +175,40 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             var admission = await _admissionCrudHelper.UpdateAsync(input, person);
 
             return admission;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPut, Route("separate")]
+        public async Task<AdmissionResponse> SeparatePatientAsync(AdmissionInput input)
+        {
+            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            Validation.ValidateIdWithException(input?.Id, "Admission Id cannot be empty.");
+            Validation.ValidateReflist(input?.SeparationType, "Separation Type");
+            Validation.ValidateNullableType(input?.SeparationDate, "Separation Date");
+            Validation.ValidateEntityWithDisplayNameDto(input?.SeparationCode, "Separation Code");
+
+            var admission = await _wardAdmissionRepositiory.GetAsync(input.Id);
+
+            if(admission?.Subject?.DateOfBirth != null)
+            {
+                if(local.UtilityHelper.GetAge(admission.Subject.DateOfBirth.Value) < 5)
+                {
+                    Validation.ValidateReflist(input?.SeparationChildHealth, "Separation Child Health");
+                }
+            }
+
+            if(input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.internalTransfer)
+                Validation.ValidateEntityWithDisplayNameDto(input?.SeparationDestinationWard, "Ward");
+            if (input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.externalTransfer)
+                Validation.ValidateEntityWithDisplayNameDto(input?.TransferToHospital, "Transfer to hospital");
+
+            var admissionResponse = await _admissionCrudHelper.SeparatePatientAsync(input, person);
+
+            return admissionResponse;
         }
 
         /// <summary>

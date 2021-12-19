@@ -441,6 +441,26 @@
             </summary>
             <param name="sessionProvider"></param>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Helpers.UtilityHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Helpers.UtilityHelper.AgeBreakdown(System.DateTime,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="dateOfBirth"></param>
+            <param name="separationDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Helpers.UtilityHelper.GetAge(System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="dob"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.HisAdmissModule">
             <summary>
             Health.His Module
@@ -1156,194 +1176,6 @@
             <param name="filterDate"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput.SeparationDate">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput.SeparationType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput.SeparationDestinationWard">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput.TransferToHospital">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput.TransferToNonGautengHospital">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput.SeparationChildHealth">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput.SeparationComment">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput.Code">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput.IsGautengGovFacility">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput.Ward">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationMapProfille">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationMapProfille.#ctor">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationResponse">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationResponse.HospitalAdmission">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.ISeparationService.CreateAsync(Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <param name="currentLoggedInPerson"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.ISeparationService.UndoSeparation(System.Guid,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
-            <summary>
-            
-            </summary>
-            <param name="admissionId"></param>
-            <param name="currentLoggedInPerson"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.SeparationService">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.SeparationService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid},AutoMapper.IMapper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ConditionIcdTenCode,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.FhirOrganisation,System.Guid})">
-            <summary>
-            
-            </summary>
-            <param name="wardRepositiory"></param>
-            <param name="wardAdmissionRepositiory"></param>
-            <param name="hospitalAdmissionRepositiory"></param>
-            <param name="hisPatientRepositiory"></param>
-            <param name="mapper"></param>
-            <param name="conditionRepositiory"></param>
-            <param name="diagnosisRepositiory"></param>
-            <param name="icdTenCodeRepositiory"></param>
-            <param name="conditionIcdTenCodeRepositiory"></param>
-            <param name="unitOfWork"></param>
-            <param name="organisationRepositiory"></param>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.SeparationService.CreateAsync(Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <param name="currentLoggedInPerson"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.SeparationService.UndoSeparation(System.Guid,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
-            <summary>
-            
-            </summary>
-            <param name="admissionId"></param>
-            <param name="currentLoggedInPerson"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.SeparationService.UpdateConditions(Boxfusion.Health.His.Domain.Domain.HisPatient,Boxfusion.Health.His.Domain.Domain.HospitalAdmission,Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase,Boxfusion.Health.His.Domain.Domain.WardAdmission)">
-            <summary>
-            
-            </summary>
-            <param name="hisPatient"></param>
-            <param name="hospitalAdmission"></param>
-            <param name="input"></param>
-            <param name="currentLoggedInPerson"></param>
-            <param name="wardAdmission"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.Helpers.SeparationService.CreateICdTenCode(Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Nullable{System.Guid}},Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <param name="condition"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.ISeparationsAppService.CreateAsync(Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.ISeparationsAppService.UndoSeparationAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives.#ctor(Boxfusion.Health.His.Admissions.Services.Separations.Helpers.ISeparationService,Boxfusion.Health.His.Admissions.Authorization.IHisAdmissPermissionChecker)">
-            <summary>
-            
-            </summary>
-            <param name="separationService"></param>
-            <param name="hisAdmissPermissionChecker"></param>
-            <param name="separationCrudHelper"></param>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives.CreateAsync(Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives.UndoSeparationAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput">
             <summary>
             
@@ -1455,6 +1287,21 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.AgeBreakdown" -->
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.IsGautengGovFacility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.TransferToNonGautengHospital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput.SeparationCode">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionMapProfile">
             <summary>
             
@@ -1641,6 +1488,16 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.AgeBreakdown" -->
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.IsGautengGovFacility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionResponse.TransferToNonGautengHospital">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.PatientResponse">
             <summary>
             
@@ -1652,6 +1509,61 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.PatientResponse.IcdTenCodes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.SeparationInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.SeparationInput.SeparationDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.SeparationInput.SeparationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.SeparationInput.SeparationDestinationWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.SeparationInput.TransferToHospital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.SeparationInput.TransferToNonGautengHospital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.SeparationInput.SeparationChildHealth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.SeparationInput.SeparationComment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.SeparationInput.Code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.SeparationInput.IsGautengGovFacility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.SeparationInput.SeparationCode">
             <summary>
             
             </summary>
@@ -1744,6 +1656,14 @@
             <param name="currentLoggedInPerson"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.SeparatePatientAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <param name="currentLoggedInPerson"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.AdmissionCrudHelper.DeleteAsync(System.Guid)">
             <summary>
             
@@ -1829,6 +1749,14 @@
             
             </summary>
             <param name="hospitalAdmissionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.SeparatePatientAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <param name="currentLoggedInPerson"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.ITempAdmissionsAppService">
@@ -1949,6 +1877,13 @@
             <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.UpdateAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.SeparatePatientAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.AdmissionInput)">
             <summary>
             
             </summary>

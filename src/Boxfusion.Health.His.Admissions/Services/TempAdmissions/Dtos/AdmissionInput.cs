@@ -127,5 +127,20 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         /// 
         /// </summary>
         public string AgeBreakdown { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsGautengGovFacility { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TransferToNonGautengHospital { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<EntityWithDisplayNameDto<Guid?>> SeparationCode { get; set; }
     }
 }
