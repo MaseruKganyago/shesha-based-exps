@@ -21,7 +21,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Dto
         /// </summary>
         public SeparationMapProfille()
         {
-            CreateMap<SeparationInput, WardAdmission>()
+            CreateMap<SeparationsInput, WardAdmission>()
             .ForMember(c => c.Id, options => options.Ignore())
             .ForMember(c => c.CapturedAfterApproval, options => options.MapFrom(c => false))
             .ForMember(c => c.StartDateTime, options => options.MapFrom(c => DateTime.Now))

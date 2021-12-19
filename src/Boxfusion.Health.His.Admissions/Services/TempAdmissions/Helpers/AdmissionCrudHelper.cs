@@ -16,7 +16,6 @@ using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using NHibernate.Linq;
 using Shesha.AutoMapper.Dto;
-using Shesha.Domain;
 using Shesha.Extensions;
 using System;
 using System.Collections.Generic;

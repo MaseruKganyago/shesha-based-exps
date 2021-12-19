@@ -6,6 +6,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
 {
     public interface ISeparationCrudHelper
     {
-        Task<SeparationResponse> CreateAsync(SeparationInput input, PersonFhirBase currentLoggedInPerson);
+        Task<SeparationResponse> CreateAsync(SeparationsInput input, PersonFhirBase currentLoggedInPerson);
     }
 }

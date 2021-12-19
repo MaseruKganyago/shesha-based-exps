@@ -21,13 +21,10 @@
   <ItemGroup>
     <Compile Remove="Dtos\**" />
     <Compile Remove="Services\Admissions\**" />
-    <Compile Remove="Services\Separations\**" />
     <EmbeddedResource Remove="Dtos\**" />
     <EmbeddedResource Remove="Services\Admissions\**" />
-    <EmbeddedResource Remove="Services\Separations\**" />
     <None Remove="Dtos\**" />
     <None Remove="Services\Admissions\**" />
-    <None Remove="Services\Separations\**" />
   </ItemGroup>
 
   <ItemGroup>

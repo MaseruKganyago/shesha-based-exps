@@ -11,7 +11,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Dto
     /// 
     /// </summary>
     [AutoMap(typeof(WardAdmission), typeof(HospitalAdmission))]
-    public class SeparationInput : HospitalisationEncounterInput
+    public class SeparationsInput : HospitalisationEncounterInput
     {
         /// <summary>
         /// 
