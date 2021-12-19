@@ -84,6 +84,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
 
             CreateMap<SeparationInput, HospitalAdmission>()
                 .ForMember(c => c.Id, options => options.Ignore())
+                .ForMember(a => a.TransferToHospital, options => options.MapFrom(b => GetEntity<FhirOrganisation>(b.TransferToHospital)))
                 .ForMember(c => c.TransferToNonGautengHospital, options => options.MapFrom(c => c.TransferToNonGautengHospital))
                 .ForMember(c => c.IsGautengGovFacility, options => options.MapFrom(c => c.IsGautengGovFacility))
                 .MapReferenceListValuesFromDto();
