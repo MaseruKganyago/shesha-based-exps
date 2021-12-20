@@ -192,7 +192,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             Validation.ValidateNullableType(input?.SeparationDate, "Separation Date");
             Validation.ValidateEntityWithDisplayNameDto(input?.SeparationCode, "Separation Code");
 
-            var admission = await _wardAdmissionRepositiory.GetAsync(input.Id);
+            var admission = await _wardAdmissionRepositiory.FirstOrDefaultAsync(x => x.Id == input.Id);
 
             if(admission?.Subject?.DateOfBirth != null)
             {
