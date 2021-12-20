@@ -32,13 +32,13 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 												,per.Fhir_NationalityLkp Nationality
 												,hosEnc.His_OtherCategoryLkp OtherCategory
 												,enc.His_AdmissionStatusLkp AdmissionStatus
-												,DATEDIFF(day, enc.StartDateTime, getdate()) AS PatientDays
+												,DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())) AS PatientDays
 												from
 												Fhir_Encounters enc
 												left join Core_Persons per on per.Id = enc.SubjectId 
 												left join Core_Facilities fac on fac.Id = enc.His_WardId
 												left join Fhir_Encounters hosEnc on hosEnc.Id = enc.PartOfId
-												where enc.His_WardId = :wardId and convert(date, enc.StartDateTime) <= convert(date, :filterDate) and convert(date, @filterDate) <= getdate()
+												where enc.His_WardId = :wardId and convert(date, enc.StartDateTime) <= convert(date, :filterDate) and convert(date, :filterDate) <= dateadd(HOUR, 2, getdate())
 												and (enc.His_AdmissionStatusLkp != 2 and enc.His_AdmissionStatusLkp != 4)
 												UNION ALL
 												select
@@ -59,14 +59,14 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 												,per.Fhir_NationalityLkp Nationality
 												,hosEnc.His_OtherCategoryLkp OtherCategory
 												,enc.His_AdmissionStatusLkp AdmissionStatus
-												,DATEDIFF(day, enc.StartDateTime, getdate()) AS PatientDays
+												,DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())) AS PatientDays
 												from
 												Fhir_Encounters enc
 												left join Core_Persons per on per.Id = enc.SubjectId 
 												left join Core_Facilities fac on fac.Id = enc.His_WardId
 												left join Fhir_Encounters hosEnc on hosEnc.Id = enc.PartOfId
-												where enc.His_WardId = :wardId and convert(date, enc.StartDateTime) <= convert(date, :filterDate) and convert(date, @filterDate) <= getdate()
-												and (enc.His_AdmissionStatusLkp = 2 or enc.His_AdmissionStatusLkp = 4) and enc.IsDeleted = 0";
+												where enc.His_WardId = :wardId and convert(date, enc.StartDateTime) <= convert(date, :filterDate) and convert(date, :filterDate) <= dateadd(HOUR, 2, getdate())
+												and (enc.His_AdmissionStatusLkp = 2) and enc.IsDeleted = 0";
 
 		/// <summary>
 		/// 

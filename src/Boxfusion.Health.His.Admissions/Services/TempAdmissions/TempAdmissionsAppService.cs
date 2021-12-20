@@ -192,7 +192,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             Validation.ValidateNullableType(input?.SeparationDate, "Separation Date");
             Validation.ValidateEntityWithDisplayNameDto(input?.SeparationCode, "Separation Code");
 
-            var admission = await _wardAdmissionRepositiory.GetAsync(input.Id);
+            var admission = await _wardAdmissionRepositiory.FirstOrDefaultAsync(x => x.Id == input.Id);
 
             if(admission?.Subject?.DateOfBirth != null)
             {
@@ -205,7 +205,16 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             if(input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.internalTransfer)
                 Validation.ValidateEntityWithDisplayNameDto(input?.SeparationDestinationWard, "Ward");
             if (input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.externalTransfer)
-                Validation.ValidateEntityWithDisplayNameDto(input?.TransferToHospital, "Transfer to hospital");
+            {
+                if (input.IsGautengGovFacility)
+                {
+                    Validation.ValidateEntityWithDisplayNameDto(input?.TransferToHospital, "Transfer to hospital");
+                }
+                else
+                {
+                    Validation.ValidateText(input?.TransferToNonGautengHospital, "Transfer To Non Gauteng Hospital");
+                }
+            }
 
             var admissionResponse = await _admissionCrudHelper.SeparatePatientAsync(input, person);
 

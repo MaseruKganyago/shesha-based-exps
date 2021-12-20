@@ -68,7 +68,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Users
             table.AddProperty(e => e.FirstName, d => d.Caption("Name"));
             table.AddProperty(e => e.LastName, d => d.Caption("Surname"));
             table.AddProperty(e => e.UserName, d => d.Caption("UserName"));
-            table.AddProperty(e => e.Supervisor, d => d.Caption("Supervisor"));
+            //table.AddProperty(e => e.Supervisor, d => d.Caption("Supervisor"));
             table.OnRequestToFilterStaticAsync = async (criteria, form) => 
             {
                 var _session = Abp.Dependency.IocManager.Instance.Resolve<IAbpSession>();

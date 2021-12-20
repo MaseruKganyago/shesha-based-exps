@@ -79,8 +79,17 @@ namespace Boxfusion.Health.His.Admissions.Helpers
         /// <returns></returns>
         public static int GetAge(DateTime dob)
         {
-            int age = 0;
-            age = DateTime.Now.AddYears(-dob.Year).Year;
+            //int age = 0;
+            //age = DateTime.Now.AddYears(-dob.Year).Year;
+            //return age;
+            // Save today's date.
+            var today = DateTime.Today;
+
+            // Calculate the age.
+            var age = today.Year - dob.Year;
+
+            // Go back to the year in which the person was born in case of a leap year
+            if (dob.Date > today.AddYears(-age)) age--;
             return age;
         }
     }
