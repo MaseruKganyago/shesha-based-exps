@@ -100,7 +100,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <param name="id"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<HisWardResponse> UpdateWardAsync(WardInput input);
+        Task<HisWardResponse> UpdateWardAsync(HisWardInput input);
 
         /// <summary>
         /// 
