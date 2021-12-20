@@ -68,7 +68,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Users
             table.AddProperty(e => e.FirstName, d => d.Caption("Name"));
             table.AddProperty(e => e.LastName, d => d.Caption("Surname"));
             table.AddProperty(e => e.UserName, d => d.Caption("UserName"));
-            //table.AddProperty(e => e.Supervisor, d => d.Caption("Supervisor"));
             table.OnRequestToFilterStaticAsync = async (criteria, form) => 
             {
                 var _session = Abp.Dependency.IocManager.Instance.Resolve<IAbpSession>();
@@ -82,7 +81,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Users
                     var _wardRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Ward, Guid>>();
 
                     var hospitalId = _hospitalRoleAppointedPersonRepository.GetAll().Where(s => s.Person == person).Select(s => s.Hospital.Id).FirstOrDefault();
-                    criteria.FilterClauses.Add($"ent.HospitalId = '{hospitalId}'");
+                    criteria.FilterClauses.Add($"ent.HospitalId = '{hospitalId}' and ent.id !='{person.Id}'");
                 }
                 
             };
