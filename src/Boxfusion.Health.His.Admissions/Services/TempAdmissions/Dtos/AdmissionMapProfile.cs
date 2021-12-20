@@ -68,8 +68,8 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(a => a.SeparationDestinationWard, options => options.Ignore())
                 .ForMember(c => c.SeparationChildHealth, options => options.Ignore())
                 .ForMember(c => c.SeparationComment, options => options.Ignore())
-                .ForMember(a => a.InternalTransferOriginalWard, options => options.MapFrom(b => GetEntity<HisWard>(b.InternalTransferOriginalWard)))
-                .ForMember(a => a.InternalTransferDestinationWard, options => options.MapFrom(b => GetEntity<HisWard>(b.InternalTransferDestinationWard)))
+                .ForMember(a => a.InternalTransferOriginalWard, options => options.MapFrom(b => GetEntity<WardAdmission>(b.InternalTransferOriginalWard)))
+                .ForMember(a => a.InternalTransferDestinationWard, options => options.MapFrom(b => GetEntity<WardAdmission>(b.InternalTransferDestinationWard)))
                 .ForMember(e => e.ReasonCode, e => e.MapFrom(e => UtilityHelper.SetMultiValueReferenceList(e.ReasonCode)))
                 .MapReferenceListValuesFromDto();
 

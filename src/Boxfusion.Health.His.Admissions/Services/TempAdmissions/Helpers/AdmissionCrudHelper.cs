@@ -308,9 +308,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         public async Task<AdmissionResponse> SeparatePatientAsync(AdmissionInput input, PersonFhirBase currentLoggedInPerson)
         {
             var dbWardAdmission = await _wardAdmissionRepositiory.GetAsync(input.Id);
-            //HospitalAdmission updatedHospitalAdmission = null;
-            //WardAdmission updatedWardAdmission = null;
-            //AdmissionResponse admissionResponse = null;
             List<EntityWithDisplayNameDto<Guid?>> icdTenCodeResponses = new List<EntityWithDisplayNameDto<Guid?>>();
 
             var patient = await _hisPatientRepositiory.GetAsync(dbWardAdmission.Subject.Id);

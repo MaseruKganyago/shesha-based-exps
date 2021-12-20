@@ -216,10 +216,6 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
                 }
             }
 
-
-
-
-
             var admissionResponse = await _admissionCrudHelper.SeparatePatientAsync(input, person);
 
             return admissionResponse;
