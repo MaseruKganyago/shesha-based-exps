@@ -107,7 +107,6 @@ namespace Boxfusion.Health.HealthCommon.Core.Services.Users.Dtos
                 .ForMember(u => u.Id, options => options.MapFrom(c => c.Id))
                 .ForMember(u => u.DisplayText, options => options.MapFrom(c => c.Role.Name))
                 .MapReferenceListValuesFromDto();
-
         }
     }
 }
