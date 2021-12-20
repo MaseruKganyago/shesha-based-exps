@@ -205,7 +205,20 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             if(input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.internalTransfer)
                 Validation.ValidateEntityWithDisplayNameDto(input?.SeparationDestinationWard, "Ward");
             if (input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.externalTransfer)
-                Validation.ValidateEntityWithDisplayNameDto(input?.TransferToHospital, "Transfer to hospital");
+            {
+                if (input.IsGautengGovFacility)
+                {
+                    Validation.ValidateEntityWithDisplayNameDto(input?.TransferToHospital, "Transfer to hospital");
+                }
+                else
+                {
+                    Validation.ValidateText(input?.TransferToNonGautengHospital, "Transfer To Non Gauteng Hospital");
+                }
+            }
+
+
+
+
 
             var admissionResponse = await _admissionCrudHelper.SeparatePatientAsync(input, person);
 
