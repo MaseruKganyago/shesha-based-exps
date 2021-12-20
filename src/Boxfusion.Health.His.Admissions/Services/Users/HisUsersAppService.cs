@@ -78,7 +78,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Users
                 if (!await _permissionChecker.IsAdmin(person))
                 {
                     var _hospitalRoleAppointedPersonRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
-                    var _wardRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Ward, Guid>>();
+                    var _wardRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HisWard, Guid>>();
 
                     var hospitalId = _hospitalRoleAppointedPersonRepository.GetAll().Where(s => s.Person == person).Select(s => s.Hospital.Id).FirstOrDefault();
                     criteria.FilterClauses.Add($"ent.HospitalId = '{hospitalId}' and ent.id !='{person.Id}'");

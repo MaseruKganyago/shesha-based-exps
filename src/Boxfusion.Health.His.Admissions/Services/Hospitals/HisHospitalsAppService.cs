@@ -13,6 +13,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Boxfusion.Health.HealthCommon.Core.Services;
+using Abp.Runtime.Session;
+using Boxfusion.Health.HealthCommon.Core;
+using Shesha.Domain;
+using Abp.Domain.Repositories;
+using Boxfusion.Health.His.Domain.Domain;
+using System.Linq;
 
 namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers
 {
@@ -52,8 +58,21 @@ namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Helpers
             table.AddProperty(e => e.Latitude, d => d.Caption("Latitude"));
             table.AddProperty(e => e.Longitude, d => d.Caption("Longitude"));
             table.AddProperty(e => e.PrimaryContactTelephone, d => d.Caption("Contact Details"));
-            table.OnRequestToFilter = (criteria, form) =>
+            table.OnRequestToFilterStaticAsync = async (criteria, form) =>
             {
+                var _session = Abp.Dependency.IocManager.Instance.Resolve<IAbpSession>();
+                var _permissionChecker = Abp.Dependency.IocManager.Instance.Resolve<ICdmPermissionChecker>();
+                var personService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Person, Guid>>();
+                var person = personService.FirstOrDefault(c => c.User.Id == _session.GetUserId());
+
+                if (!await _permissionChecker.IsAdmin(person))
+                {
+                    var _hospitalRoleAppointedPersonRepository = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
+
+                    var hospitalId = _hospitalRoleAppointedPersonRepository.GetAll().Where(s => s.Person == person).Select(s => s.Hospital.Id).FirstOrDefault();
+                    criteria.FilterClauses.Add($"ent.Id = '{hospitalId}'");
+                }
+
             };
 
             return table;

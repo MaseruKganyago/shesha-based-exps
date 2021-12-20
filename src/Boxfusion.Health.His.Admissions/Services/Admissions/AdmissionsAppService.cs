@@ -48,6 +48,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         private readonly IRepository<ConditionIcdTenCode, Guid> _conditionIcdTenCodeRepository;
         private readonly IRepository<Condition, Guid> _conditionRepository;
         private readonly ISessionDataProvider _sessionDataProvider;
+        private readonly IHisWardMidnightCensusReportsHelper _hisWardMidnightCensusReportsHelper;
 
         /// <summary>
         /// 
@@ -68,7 +69,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             IRepository<Diagnosis, Guid> diagnosisRepository,
             IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepository,
             IEncounterCrudHelper<HospitalAdmission> hospitalisationEncounterCrudHelper,
-            IRepository<Condition, Guid> conditionRepository, ISessionDataProvider sessionDataProvider)
+            IRepository<Condition, Guid> conditionRepository, ISessionDataProvider sessionDataProvider,
+            IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper)
         {
             _wardAdmissionCrudHelper = wardAdmissionCrudHelper;
             _patientRepository = patientRepository;
@@ -79,6 +81,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             _hospitalisationEncounterCrudHelper = hospitalisationEncounterCrudHelper;
             _conditionRepository = conditionRepository;
             _sessionDataProvider = sessionDataProvider;
+            _hisWardMidnightCensusReportsHelper = hisWardMidnightCensusReportsHelper;
         }
 
         /// <summary>
@@ -176,6 +179,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             }
 
             await wardAdmissionService.UpdateAsync(wardAdmission);
+
+            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)wardAdmission.StartDateTime.Value.Date, wardId = (Guid)wardAdmission.Ward.Id });
 
             return respose;
         }

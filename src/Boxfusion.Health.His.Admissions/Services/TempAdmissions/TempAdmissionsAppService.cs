@@ -15,6 +15,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Boxfusion.Health.His.Admissions.Hubs;
+using Boxfusion.Health.His.Admissions.Helpers;
 
 namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
 {
@@ -27,6 +29,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
     public class TempAdmissionsAppService : CdmAppServiceBase, ITempAdmissionsAppService
     {
         private readonly IAdmissionCrudHelper _admissionCrudHelper;
+        private readonly IHisWardMidnightCensusReportsHelper _hisWardMidnightCensusReportsHelper;
         private readonly IRepository<HisPatient, Guid> _hisPatientRepositiory;
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         private readonly IRepository<HisWard, Guid> _wardRepositiory;
@@ -37,16 +40,19 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         /// <param name="admissionCrudHelper"></param>
         /// <param name="hisPatientRepositiory"></param>
         /// <param name="wardRepositiory"></param>
+        /// <param name="hisWardMidnightCensusReportsHelper"></param>
         public TempAdmissionsAppService(
             IRepository<WardAdmission, Guid> wardAdmissionRepository,
             IAdmissionCrudHelper admissionCrudHelper,
             IRepository<HisPatient, Guid> hisPatientRepositiory,
-            IRepository<HisWard, Guid> wardRepositiory)
+            IRepository<HisWard, Guid> wardRepositiory,
+            IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper)
         {
             _admissionCrudHelper = admissionCrudHelper;
             _hisPatientRepositiory = hisPatientRepositiory;
             _wardAdmissionRepositiory = wardAdmissionRepository;
             _wardRepositiory = wardRepositiory;
+            _hisWardMidnightCensusReportsHelper = hisWardMidnightCensusReportsHelper;
         }
 
         /// <summary>
@@ -144,6 +150,8 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
 
             var admission = await _admissionCrudHelper.CreateAsync(input, person, patient);
 
+            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)admission.StartDateTime.Value.Date, wardId = (Guid)admission.Ward.Id });
+
             return admission;
         }
 
@@ -174,6 +182,8 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
                 throw new UserFriendlyException("Patient Id cannot be empty");
 
             var admission = await _admissionCrudHelper.UpdateAsync(input, person);
+
+            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)admission.StartDateTime.Value.Date, wardId = (Guid)admission.Ward.Id });
 
             return admission;
         }
@@ -217,6 +227,8 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             }
 
             var admissionResponse = await _admissionCrudHelper.SeparatePatientAsync(input, person);
+
+            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)admissionResponse.StartDateTime.Value.Date, wardId = (Guid)admissionResponse.Ward.Id });
 
             return admissionResponse;
         }

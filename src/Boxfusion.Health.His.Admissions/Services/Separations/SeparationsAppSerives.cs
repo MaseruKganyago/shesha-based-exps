@@ -3,6 +3,7 @@ using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Admissions.Authorization;
+using Boxfusion.Health.His.Admissions.Helpers;
 using Boxfusion.Health.His.Admissions.Services.Separations.Dto;
 using Boxfusion.Health.His.Admissions.Services.Separations.Helpers;
 using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
@@ -23,16 +24,21 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
     {
         private readonly ISeparationService _separationService;
         private readonly IHisAdmissPermissionChecker _hisAdmissPermissionChecker;
+        private readonly IHisWardMidnightCensusReportsHelper _hisWardMidnightCensusReportsHelper;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="separationService"></param>
         /// <param name="hisAdmissPermissionChecker"></param>
+        /// <param name="hisWardMidnightCensusReportsHelper"></param>
         /// <param name="separationCrudHelper"></param>
-        public SeparationsAppSerives(ISeparationService separationService, IHisAdmissPermissionChecker hisAdmissPermissionChecker)
+        public SeparationsAppSerives(ISeparationService separationService, 
+            IHisAdmissPermissionChecker hisAdmissPermissionChecker,
+            IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper)
         {
             _separationService = separationService;
             _hisAdmissPermissionChecker = hisAdmissPermissionChecker;
+            _hisWardMidnightCensusReportsHelper = hisWardMidnightCensusReportsHelper;
         }
 
         /// <summary>
@@ -87,6 +93,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
 
             var separation = await _separationService.UndoSeparation(id, person);
+
+            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)separation.StartDateTime.Value.Date, wardId = (Guid)separation.Ward.Id });
 
             return separation;
         }
