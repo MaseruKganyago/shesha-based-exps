@@ -1,4 +1,5 @@
 ﻿using Abp.Domain.Entities;
+using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Shesha.Domain.Attributes;
 using System;
@@ -22,7 +23,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Views
         /// <summary>
         /// 
         /// </summary>
-		public virtual RefListOrganisationTypes? Type { get; set; }
+		public virtual RefListHospitalTypes? Type { get; set; }
         /// <summary>
         /// 
         /// </summary>

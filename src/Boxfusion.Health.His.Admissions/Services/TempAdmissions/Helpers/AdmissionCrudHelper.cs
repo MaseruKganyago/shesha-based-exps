@@ -201,7 +201,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 throw new UserFriendlyException("The specified identify number is not a valid South African number.");
 
             var wardAdmissions = await _wardAdmissionRepositiory.GetAllListAsync(x => x.Subject.IdentityNumber == identityNumber);
-            if (wardAdmissions.Count() > 0)
+            if (wardAdmissions.Any())
             {
                 if (!wardAdmissions.Where(x => x.AdmissionStatus == RefListAdmissionStatuses.admitted).Any())
                     throw new UserFriendlyException($"This I.D. number belongs to a returning patient {wardAdmissions[0].Subject.FullName}, {identityNumber}");
@@ -278,7 +278,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             List<EntityWithDisplayNameDto<Guid?>> icdTenCodeResponses = new List<EntityWithDisplayNameDto<Guid?>>();
 
                 //add a list of conditionIcdTenCode to a task
-            if (input?.Code != null && input?.Code.Count() > 0)
+            if (input?.Code != null && input.Code.Any())
             {
                 //Delete old conditionIcdTenCode when deleting
                 var dbConditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => x.Condition == dbCondition);
