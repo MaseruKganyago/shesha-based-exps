@@ -21,6 +21,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 												,per.DateOfBirth
 												,per.GenderLkp Gender
 												,enc.StartDateTime AdmissionDate
+												,enc.His_SeparationDate SeparationDate
 												,per.His_HospitalPatientNumber HospitalPatientNumber
 												,enc.His_WardAdmissionNumber WardAdmissionNumber
 												,per.FirstName
@@ -48,6 +49,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 												,per.DateOfBirth
 												,per.GenderLkp Gender
 												,enc.StartDateTime AdmissionDate
+												,enc.His_SeparationDate SeparationDate
 												,per.His_HospitalPatientNumber HospitalPatientNumber
 												,enc.His_WardAdmissionNumber WardAdmissionNumber
 												,per.FirstName

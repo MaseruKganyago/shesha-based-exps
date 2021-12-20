@@ -942,6 +942,11 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.SeparationDate">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.WardAdmissionNumber">
             <summary>
             
@@ -1028,6 +1033,11 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.AdmissionDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.SeparationDate">
             <summary>
             
             </summary>

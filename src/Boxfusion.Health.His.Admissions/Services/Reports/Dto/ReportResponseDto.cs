@@ -45,6 +45,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Dto
         /// <summary>
         /// 
         /// </summary>
+        public DateTime? SeparationDate { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string WardAdmissionNumber { get; set; }
 
         /// <summary>
