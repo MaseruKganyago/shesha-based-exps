@@ -22,6 +22,10 @@ namespace Boxfusion.Health.His.Admissions.Domain.Views
 		/// <summary>
 		/// 
 		/// </summary>
+		public virtual string FacilityName { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual RefListIdentificationTypes IdentificationType { get; set; }
 
 		/// <summary>
@@ -102,6 +106,13 @@ namespace Boxfusion.Health.His.Admissions.Domain.Views
 		/// 
 		/// </summary>
 		public virtual RefListAdmissionStatuses AdmissionStatus { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		[DataType(DataType.Date)]
+		[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
+		public virtual DateTime? SeparationDate { get; set; }
 
 		/// <summary>
 		/// 
