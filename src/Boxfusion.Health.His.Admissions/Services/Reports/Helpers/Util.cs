@@ -21,7 +21,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 												,per.DateOfBirth
 												,per.GenderLkp Gender
 												,enc.StartDateTime AdmissionDate
-												,enc.His_SeparationDate SeparationDate
 												,per.His_HospitalPatientNumber HospitalPatientNumber
 												,enc.His_WardAdmissionNumber WardAdmissionNumber
 												,per.FirstName
@@ -33,6 +32,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 												,per.Fhir_NationalityLkp Nationality
 												,hosEnc.His_OtherCategoryLkp OtherCategory
 												,enc.His_AdmissionStatusLkp AdmissionStatus
+												,enc.His_SeparationDate SeparationDate
 												,DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())) AS PatientDays
 												from
 												Fhir_Encounters enc
@@ -49,7 +49,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 												,per.DateOfBirth
 												,per.GenderLkp Gender
 												,enc.StartDateTime AdmissionDate
-												,enc.His_SeparationDate SeparationDate
 												,per.His_HospitalPatientNumber HospitalPatientNumber
 												,enc.His_WardAdmissionNumber WardAdmissionNumber
 												,per.FirstName
@@ -61,6 +60,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 												,per.Fhir_NationalityLkp Nationality
 												,hosEnc.His_OtherCategoryLkp OtherCategory
 												,enc.His_AdmissionStatusLkp AdmissionStatus
+												,enc.His_SeparationDate SeparationDate
 												,DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())) AS PatientDays
 												from
 												Fhir_Encounters enc
@@ -91,6 +91,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
 													,per.Fhir_NationalityLkp Nationality
 													,hosEnc.His_OtherCategoryLkp OtherCategory
 													,enc.His_AdmissionStatusLkp AdmissionStatus
+													,enc.His_SeparationDate SeparationDate
 													,DATEDIFF(day, enc.StartDateTime, getdate()) AS PatientDays
 													from
 													Fhir_Encounters enc

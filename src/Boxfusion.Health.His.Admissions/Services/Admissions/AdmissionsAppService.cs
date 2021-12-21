@@ -99,7 +99,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 
             table.UseDtos = true;
             table.UpdateUrl = url => "/api/v1/His/TempAdmissions";
-
+            table.AddProperty(a => a.FacilityName, b => b.Caption("Facility Name"));
             table.AddProperty(a => a.IdentificationType, b => b.Caption("ID Type"));
             table.AddProperty(a => a.IdentityNumber, b => b.Caption("I.D No."));
             table.AddProperty(a => a.DateOfBirth, b => b.Caption("D.O.B").SortDescending().IsFilterable(true).Sortable(true));
@@ -116,6 +116,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             table.AddProperty(a => a.Nationality, b => b.Caption("Nationality"));
             table.AddProperty(a => a.OtherCategory, b => b.Caption("Other Categories"));
             table.AddProperty(a => a.AdmissionStatus, b => b.Caption("Admission Status"));
+            table.AddProperty(a => a.SeparationDate, b => b.Caption("Separation Date"));
             table.AddProperty(a => a.Days, b => b.Caption("Inpatient Days"));
 
             table.OnRequestToFilterStaticAsync = async (criteria, form) =>

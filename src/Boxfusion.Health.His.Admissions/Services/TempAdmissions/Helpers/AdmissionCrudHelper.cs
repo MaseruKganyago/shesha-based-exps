@@ -265,36 +265,46 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             var updatedWardAdmission = await _wardAdmissionRepositiory.UpdateAsync(dbWardAdmission);
             var admissionResponse = _mapper.Map<AdmissionResponse>(updatedWardAdmission);
 
+            HospitalAdmission dbHospitalAdmission = null;
             if (dbWardAdmission?.PartOf != null)
             {
-                var dbHospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(dbWardAdmission.PartOf.Id);
+                dbHospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(dbWardAdmission.PartOf.Id);
                 _mapper.Map(input, dbHospitalAdmission);
                 var updatedHospitalAdmission = await _hospitalAdmissionRepositiory.UpdateAsync(dbHospitalAdmission);
                 _mapper.Map(updatedHospitalAdmission, admissionResponse);
             }
 
-            //Update a condition
-            var dbCondition = await _conditionRepositiory.FirstOrDefaultAsync(x => x.FhirEncounter == dbWardAdmission);
+            //Delete conditionIcd10Code
+            var dbConditions = await _conditionRepositiory.GetAllListAsync(x => x.FhirEncounter == dbWardAdmission);
             List<EntityWithDisplayNameDto<Guid?>> icdTenCodeResponses = new List<EntityWithDisplayNameDto<Guid?>>();
 
-                //add a list of conditionIcdTenCode to a task
+            var dbConditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => dbConditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.admitted && x.IsDeleted == false);
+            dbConditionIcdTenCodes.ForEach(x => x.IsDeleted = false);
+            var taskDeleteConditionIcdTenCodes = new List<Task>();
+            dbConditionIcdTenCodes.ForEach((conditionIcdTenCode) => taskDeleteConditionIcdTenCodes.Add(DeleteConditionIcdTenCode(conditionIcdTenCode)));
+
+            //add a list of conditionIcdTenCode to a task
             if (input?.Code != null && input.Code.Any())
             {
-                //Delete old conditionIcdTenCode when deleting
-                var dbConditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => x.Condition == dbCondition);
-                dbConditionIcdTenCodes.ForEach(x => x.IsDeleted = false);
-                var taskDeleteConditionIcdTenCodes = new List<Task>();
-                dbConditionIcdTenCodes.ForEach((conditionIcdTenCode) => taskDeleteConditionIcdTenCodes.Add(DeleteConditionIcdTenCode(conditionIcdTenCode)));
-
                 //Add newly updated contact points
+                var condition = dbConditionIcdTenCodes.Select(x => x.Condition).FirstOrDefault() ?? await _conditionRepositiory.InsertAsync(new Condition { RecordedDate = DateTime.Now, Subject = dbHisPatient, Recorder = currentLoggedInPerson, FhirEncounter = updatedWardAdmission, HospitalisationEncounter = dbHospitalAdmission });
                 var taskConditionIcdTenCodes = new List<Task<EntityWithDisplayNameDto<Guid?>>>(); //Tasks lists to handle batch insert into database
-                input.Code.ForEach((v) => taskConditionIcdTenCodes.Add(CreateICdTenCode(v, dbCondition, false)));
+                input.Code.ForEach((v) => taskConditionIcdTenCodes.Add(CreateICdTenCode(v, condition, false)));
                 var conditonIcdTenCodes = ((IList<EntityWithDisplayNameDto<Guid?>>)await Task.WhenAll(taskConditionIcdTenCodes)); //save contact points to db
                 icdTenCodeResponses = conditonIcdTenCodes.ToList();
             }
 
+            var _sessionProvider = Abp.Dependency.IocManager.Instance.Resolve<ISessionProvider>();
+            await _unitOfWork.Current.SaveChangesAsync();
+            await _sessionProvider.Session.Transaction.CommitAsync();
+
             _mapper.Map(dbWardAdmission?.Ward, admissionResponse);
-            UtilityHelper.TrySetProperty(admissionResponse, "Code", icdTenCodeResponses);
+            var results = await GetIcdTenCodes(dbWardAdmission);
+            List<EntityWithDisplayNameDto<Guid?>> codes = results.Item1;
+            List<EntityWithDisplayNameDto<Guid?>> separationCodes = results.Item2;
+
+            UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
+            UtilityHelper.TrySetProperty(admissionResponse, "SeparationCode", separationCodes);
 
             return admissionResponse;
         }
@@ -396,27 +406,32 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
             //Get IcdTenCodes
             List<EntityWithDisplayNameDto<Guid?>> codes = new List<EntityWithDisplayNameDto<Guid?>>();
             List<EntityWithDisplayNameDto<Guid?>> separationCodes = new List<EntityWithDisplayNameDto<Guid?>>();
-            List<HisConditionIcdTenCode> conditionIcdTenCodes = new List<HisConditionIcdTenCode>();
+
             List<IcdTenCode> icdTenCodes = new List<IcdTenCode>();
+            List<IcdTenCode> separationIcdTenCodes = new List<IcdTenCode>();
 
             var conditions = await _conditionRepositiory.GetAll().Where(x => x.FhirEncounter == wardAdmission).ToListAsync();
             if (conditions.Any())
             {     
                 //Admission Icd10Codes
-                conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.admitted);
-                var icdTenCodeIds = conditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
+                var conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.admitted && x.IsDeleted == false);
                 if (conditionIcdTenCodes.Any())
-                    icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => icdTenCodeIds.Contains(x.Id)).ToListAsync();
-                if (icdTenCodes.Any())
-                    icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
+                {
+                    var icdTenCodeIds = conditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
+                    icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => icdTenCodeIds.Contains(x.Id) && x.IsDeleted == false).ToListAsync();
+                    if (icdTenCodes.Any())
+                        icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, $"{icdTenCode.ICDTenCode} {icdTenCode.WHOFullDesc}")));
+                }
 
                 //Separation Icd10Codes
-                conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.separated);
-                var separationIcdTenCodeIds = conditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
-                    if (conditionIcdTenCodes.Any())
-                    icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => separationIcdTenCodeIds.Contains(x.Id)).ToListAsync();
-                if (icdTenCodes.Any())
-                    icdTenCodes.ForEach(icdTenCode => separationCodes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
+                var separationConditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.separated && x.IsDeleted == false);
+                if (separationConditionIcdTenCodes.Any())
+                {
+                    var separationIcdTenCodeIds = separationConditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
+                    separationIcdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => separationIcdTenCodeIds.Contains(x.Id) && x.IsDeleted == false).ToListAsync();
+                    if (separationIcdTenCodes.Any())
+                        separationIcdTenCodes.ForEach(icdTenCode => separationCodes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, $"{icdTenCode.ICDTenCode} {icdTenCode.WHOFullDesc}")));
+                }
             }
 
             return new Tuple<List<EntityWithDisplayNameDto<Guid?>>, List<EntityWithDisplayNameDto<Guid?>>>(codes, separationCodes);
@@ -519,7 +534,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 uow.Complete();
             }
 
-            return new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc);
+            return new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, $"{icdTenCode.ICDTenCode} {icdTenCode.WHOFullDesc}");
         }
     }
 }
