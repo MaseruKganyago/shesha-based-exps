@@ -408,7 +408,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 if (conditionIcdTenCodes.Any())
                     icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => icdTenCodeIds.Contains(x.Id)).ToListAsync();
                 if (icdTenCodes.Any())
-                    icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
+                    icdTenCodes.ForEach(icdTenCode => codes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, $"{icdTenCode.ICDTenCode} {icdTenCode.WHOFullDesc}")));
 
                 //Separation Icd10Codes
                 conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.separated);
@@ -416,7 +416,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                     if (conditionIcdTenCodes.Any())
                     icdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => separationIcdTenCodeIds.Contains(x.Id)).ToListAsync();
                 if (icdTenCodes.Any())
-                    icdTenCodes.ForEach(icdTenCode => separationCodes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc)));
+                    icdTenCodes.ForEach(icdTenCode => separationCodes.Add(new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, $"{icdTenCode.ICDTenCode} {icdTenCode.WHOFullDesc}")));
             }
 
             return new Tuple<List<EntityWithDisplayNameDto<Guid?>>, List<EntityWithDisplayNameDto<Guid?>>>(codes, separationCodes);
@@ -519,7 +519,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 uow.Complete();
             }
 
-            return new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, icdTenCode.ICDTenThreeCodeDesc);
+            return new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, $"{icdTenCode.ICDTenCode} {icdTenCode.WHOFullDesc}");
         }
     }
 }
