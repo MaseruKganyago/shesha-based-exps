@@ -255,7 +255,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             await _hisAdmissionAuditTrailRepository.InsertOrUpdateAsync(new HisAdmissionAuditTrail()
             {
                 Admission = wardAdmission,
-                AdmissionStatus = (RefListAdmissionStatuses?)admissionResponse.AdmissionStatus.ItemValue,
+                AdmissionStatus = RefListAdmissionStatuses.separated,
                 AuditTime = admissionResponse.StartDateTime,
                 Initiator = person
             });
