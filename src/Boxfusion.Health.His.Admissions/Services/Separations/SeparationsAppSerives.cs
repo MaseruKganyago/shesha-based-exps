@@ -80,6 +80,15 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
             // var separation = await _separationCrudHelper.CreateAsync(input, person);
             var separation = await _separationService.CreateAsync(input, person);
 
+            var wardAdmission = ObjectMapper.Map<WardAdmission>(separation.Id);
+            await _hisAdmissionAuditTrailRepository.InsertOrUpdateAsync(new HisAdmissionAuditTrail()
+            {
+                Admission = wardAdmission,
+                AdmissionStatus = RefListAdmissionStatuses.separated,
+                AuditTime = wardAdmission.StartDateTime,
+                Initiator = person
+            });
+
             return separation;
         }
 
