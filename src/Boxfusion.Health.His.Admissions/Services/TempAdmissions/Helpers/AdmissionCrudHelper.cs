@@ -478,8 +478,14 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 //add a list of conditionIcdTenCode to a task
                 if (input?.SeparationCode != null && input.SeparationCode.Any())
                 {
+                    //Delete conditionIcd10Code
                     var dbConditions = await _conditionRepositiory.GetAllListAsync(x => x.FhirEncounter == insertedWardAdmission);
-                    //List<EntityWithDisplayNameDto<Guid?>> icdTenCodeResponses = new List<EntityWithDisplayNameDto<Guid?>>();
+                    icdTenCodeResponses = new List<EntityWithDisplayNameDto<Guid?>>();
+
+                    var dbConditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => dbConditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.admitted && x.IsDeleted == false);
+                    dbConditionIcdTenCodes.ForEach(x => x.IsDeleted = false);
+                    var taskDeleteConditionIcdTenCodes = new List<Task>();
+                    dbConditionIcdTenCodes.ForEach((conditionIcdTenCode) => taskDeleteConditionIcdTenCodes.Add(DeleteConditionIcdTenCode(conditionIcdTenCode)));
 
                     var condition = await _conditionIcdTenCodeRepositiory.GetAll().Where(x => dbConditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.separated && x.IsDeleted == false).Select(x => x.Condition).FirstOrDefaultAsync() 
                         ?? new Condition { RecordedDate = DateTime.Now, Subject = hisPatient, Recorder = currentLoggedInPerson, FhirEncounter = insertedWardAdmission, HospitalisationEncounter = insertedHospitalAdmission };

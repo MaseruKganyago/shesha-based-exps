@@ -1372,14 +1372,14 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives.#ctor(Boxfusion.Health.His.Admissions.Services.Separations.Helpers.ISeparationService,Boxfusion.Health.His.Admissions.Authorization.IHisAdmissPermissionChecker,Boxfusion.Health.His.Admissions.Helpers.IHisWardMidnightCensusReportsHelper)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives.#ctor(Boxfusion.Health.His.Admissions.Services.Separations.Helpers.ISeparationService,Boxfusion.Health.His.Admissions.Authorization.IHisAdmissPermissionChecker,Boxfusion.Health.His.Admissions.Helpers.IHisWardMidnightCensusReportsHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisAdmissionAuditTrail,System.Guid})">
             <summary>
             
             </summary>
             <param name="separationService"></param>
             <param name="hisAdmissPermissionChecker"></param>
             <param name="hisWardMidnightCensusReportsHelper"></param>
-            <param name="separationCrudHelper"></param>
+            <param name="hisAdmissionAuditTrailRepository"></param>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Separations.SeparationsAppSerives.CreateAsync(Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.SeparationInput)">
             <summary>
@@ -2045,7 +2045,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisWard,System.Guid},Boxfusion.Health.His.Admissions.Helpers.IHisWardMidnightCensusReportsHelper)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.TempAdmissions.TempAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers.IAdmissionCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisWard,System.Guid},Boxfusion.Health.His.Admissions.Helpers.IHisWardMidnightCensusReportsHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisAdmissionAuditTrail,System.Guid})">
             <summary>
             
             </summary>
@@ -2669,7 +2669,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers.IEncounterCrudHelper{Boxfusion.Health.His.Domain.Domain.WardAdmission},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisWard,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Conditions.Helpers.IConditionsCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ConditionIcdTenCode,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers.IEncounterCrudHelper{Boxfusion.Health.His.Domain.Domain.HospitalAdmission},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Boxfusion.Health.His.Admissions.Helpers.ISessionDataProvider,Boxfusion.Health.His.Admissions.Helpers.IHisWardMidnightCensusReportsHelper)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers.IEncounterCrudHelper{Boxfusion.Health.His.Domain.Domain.WardAdmission},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisWard,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Conditions.Helpers.IConditionsCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ConditionIcdTenCode,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers.IEncounterCrudHelper{Boxfusion.Health.His.Domain.Domain.HospitalAdmission},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Boxfusion.Health.His.Admissions.Helpers.ISessionDataProvider,Boxfusion.Health.His.Admissions.Helpers.IHisWardMidnightCensusReportsHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisAdmissionAuditTrail,System.Guid})">
             <summary>
             
             </summary>
@@ -2682,6 +2682,8 @@
             <param name="hospitalisationEncounterCrudHelper"></param>
             <param name="conditionRepository"></param>
             <param name="sessionDataProvider"></param>
+            <param name="hisWardMidnightCensusReportsHelper"></param>
+            <param name="hisAdmissionAuditTrailRepository"></param>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.AdmissionsAppService.IndexTable">
             <summary>
@@ -3268,6 +3270,51 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211221085600.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211221112800">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211221112800.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211221112800.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211221114000">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211221114000.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211221114000.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211222000800">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211222000800.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211222000800.Down">
             <summary>
             
             </summary>
