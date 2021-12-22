@@ -1727,6 +1727,26 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.HisAdmissionAuditTrailInput.Admission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.HisAdmissionAuditTrailInput.AuditTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.HisAdmissionAuditTrailInput.Initiator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.HisAdmissionAuditTrailInput.AdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos.PatientResponse">
             <summary>
             
