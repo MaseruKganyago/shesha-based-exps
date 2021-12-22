@@ -1,6 +1,7 @@
 ﻿using Abp.Domain.Repositories;
 using Abp.UI;
 using Boxfusion.Health.His.Admissions.Helpers;
+using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
 using Boxfusion.Health.His.Domain.Domain;
 using Shesha.NHibernate;
 using System;
@@ -19,6 +20,36 @@ namespace Boxfusion.Health.His.Admissions.Helpers
         {
             _wardMidnightCensusReport = wardMidnightCensusReport;
             _sessionProvider = sessionProvider;
+        }
+
+        public async Task CreateAdmissionAuditTrailAsync(HisAdmissionAuditTrailInput input)
+        {
+            try
+            {
+                await _sessionProvider
+                    .Session
+                    .CreateSQLQuery(@"
+                            
+                        INSERT INTO [dbo].[His_HisAdmissionAuditTrails]
+                               ([Id],[CreationTime],[CreatorUserId],[InitiatorId],[AdmissionId],[AuditTime],[AdmissionStatusLkp])
+                         VALUES
+                               (NEWID(),GETDATE(),:UserId,:InitiatorId,:AdmissionId,:AuditTime,:AdmissionStatus)
+
+
+                    ")
+                    .SetParameter("UserId", input.UserId)
+                    .SetParameter("InitiatorId", input.Initiator)
+                    .SetParameter("AdmissionId", input.Admission)
+                    .SetParameter("AuditTime", input.AuditTime)
+                    .SetParameter("AdmissionStatus", input.AdmissionStatus)
+                    .ExecuteUpdateAsync()
+                    ;
+            }
+            catch (Exception Ex)
+            {
+
+                throw new UserFriendlyException(Ex.Message);
+            }
         }
 
         public async Task ResertReportAsync(ResertReportInput input)

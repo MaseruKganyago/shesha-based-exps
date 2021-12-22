@@ -17,6 +17,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Boxfusion.Health.His.Admissions.Hubs;
 using Boxfusion.Health.His.Admissions.Helpers;
+using Shesha.NHibernate;
+using Abp.Domain.Uow;
 
 namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
 {
@@ -246,18 +248,18 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
                     Validation.ValidateText(input?.TransferToNonGautengHospital, "Transfer To Non Gauteng Hospital");
                 }
             }
-
+            
             var admissionResponse = await _admissionCrudHelper.SeparatePatientAsync(input, person);
 
             await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)admissionResponse.StartDateTime.Value.Date, wardId = (Guid)admissionResponse.Ward.Id });
 
-            var wardAdmission = ObjectMapper.Map<WardAdmission>(input);
-            await _hisAdmissionAuditTrailRepository.InsertOrUpdateAsync(new HisAdmissionAuditTrail()
+            await _hisWardMidnightCensusReportsHelper.CreateAdmissionAuditTrailAsync(new HisAdmissionAuditTrailInput()
             {
-                Admission = wardAdmission,
+                Admission = input.Id,
                 AdmissionStatus = RefListAdmissionStatuses.separated,
-                AuditTime = admissionResponse.StartDateTime,
-                Initiator = person
+                AuditTime = admissionResponse.SeparationDate,
+                Initiator = person.Id,
+                UserId = person.User.Id
             });
 
             return admissionResponse;
