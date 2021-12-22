@@ -1,4 +1,5 @@
 ﻿using Abp.Authorization;
+using Abp.Domain.Repositories;
 using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
@@ -7,6 +8,7 @@ using Boxfusion.Health.His.Admissions.Helpers;
 using Boxfusion.Health.His.Admissions.Services.Separations.Dto;
 using Boxfusion.Health.His.Admissions.Services.Separations.Helpers;
 using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
+using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -25,20 +27,24 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
         private readonly ISeparationService _separationService;
         private readonly IHisAdmissPermissionChecker _hisAdmissPermissionChecker;
         private readonly IHisWardMidnightCensusReportsHelper _hisWardMidnightCensusReportsHelper;
+        private readonly IRepository<HisAdmissionAuditTrail, Guid> _hisAdmissionAuditTrailRepository;
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="separationService"></param>
         /// <param name="hisAdmissPermissionChecker"></param>
         /// <param name="hisWardMidnightCensusReportsHelper"></param>
-        /// <param name="separationCrudHelper"></param>
+        /// <param name="hisAdmissionAuditTrailRepository"></param>
         public SeparationsAppSerives(ISeparationService separationService, 
             IHisAdmissPermissionChecker hisAdmissPermissionChecker,
-            IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper)
+            IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper,
+            IRepository<HisAdmissionAuditTrail, Guid> hisAdmissionAuditTrailRepository)
         {
             _separationService = separationService;
             _hisAdmissPermissionChecker = hisAdmissPermissionChecker;
             _hisWardMidnightCensusReportsHelper = hisWardMidnightCensusReportsHelper;
+            _hisAdmissionAuditTrailRepository = hisAdmissionAuditTrailRepository;
         }
 
         /// <summary>
@@ -74,6 +80,15 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
             // var separation = await _separationCrudHelper.CreateAsync(input, person);
             var separation = await _separationService.CreateAsync(input, person);
 
+            var wardAdmission = ObjectMapper.Map<WardAdmission>(separation.Id);
+            await _hisAdmissionAuditTrailRepository.InsertOrUpdateAsync(new HisAdmissionAuditTrail()
+            {
+                Admission = wardAdmission,
+                AdmissionStatus = RefListAdmissionStatuses.separated,
+                AuditTime = wardAdmission.StartDateTime,
+                Initiator = person
+            });
+
             return separation;
         }
 
@@ -95,6 +110,15 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
             var separation = await _separationService.UndoSeparation(id, person);
 
             await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)separation.StartDateTime.Value.Date, wardId = (Guid)separation.Ward.Id });
+
+            var wardAdmission = ObjectMapper.Map<WardAdmission>(separation.Id);
+            await _hisAdmissionAuditTrailRepository.InsertOrUpdateAsync(new HisAdmissionAuditTrail()
+            {
+                Admission = wardAdmission,
+                AdmissionStatus = wardAdmission.AdmissionStatus,
+                AuditTime = wardAdmission.StartDateTime,
+                Initiator = person
+            });
 
             return separation;
         }

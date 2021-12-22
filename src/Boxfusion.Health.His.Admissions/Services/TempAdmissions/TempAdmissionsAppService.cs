@@ -31,6 +31,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         private readonly IAdmissionCrudHelper _admissionCrudHelper;
         private readonly IHisWardMidnightCensusReportsHelper _hisWardMidnightCensusReportsHelper;
         private readonly IRepository<HisPatient, Guid> _hisPatientRepositiory;
+        private readonly IRepository<HisAdmissionAuditTrail, Guid> _hisAdmissionAuditTrailRepository;
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         private readonly IRepository<HisWard, Guid> _wardRepositiory;
         /// <summary>
@@ -46,13 +47,15 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             IAdmissionCrudHelper admissionCrudHelper,
             IRepository<HisPatient, Guid> hisPatientRepositiory,
             IRepository<HisWard, Guid> wardRepositiory,
-            IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper)
+            IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper,
+            IRepository<HisAdmissionAuditTrail, Guid> hisAdmissionAuditTrailRepository)
         {
             _admissionCrudHelper = admissionCrudHelper;
             _hisPatientRepositiory = hisPatientRepositiory;
             _wardAdmissionRepositiory = wardAdmissionRepository;
             _wardRepositiory = wardRepositiory;
             _hisWardMidnightCensusReportsHelper = hisWardMidnightCensusReportsHelper;
+            _hisAdmissionAuditTrailRepository = hisAdmissionAuditTrailRepository;
         }
 
         /// <summary>
@@ -152,6 +155,15 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
 
             await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)admission.StartDateTime.Value.Date, wardId = (Guid)admission.Ward.Id });
 
+            var wardAdmission = ObjectMapper.Map<WardAdmission>(input);
+            await _hisAdmissionAuditTrailRepository.InsertOrUpdateAsync(new HisAdmissionAuditTrail()
+            {
+                Admission = wardAdmission,
+                AdmissionStatus = RefListAdmissionStatuses.admitted,
+                AuditTime = admission.StartDateTime,
+                Initiator = person
+            });
+
             return admission;
         }
 
@@ -184,6 +196,15 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             var admission = await _admissionCrudHelper.UpdateAsync(input, person);
 
             await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)admission.StartDateTime.Value.Date, wardId = (Guid)admission.Ward.Id });
+
+            var wardAdmission = ObjectMapper.Map<WardAdmission>(input);
+            await _hisAdmissionAuditTrailRepository.InsertOrUpdateAsync(new HisAdmissionAuditTrail()
+            {
+                Admission = wardAdmission,
+                AdmissionStatus = (RefListAdmissionStatuses?)admission.AdmissionStatus.ItemValue,
+                AuditTime = admission.StartDateTime,
+                Initiator = person
+            });
 
             return admission;
         }
@@ -229,6 +250,15 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             var admissionResponse = await _admissionCrudHelper.SeparatePatientAsync(input, person);
 
             await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)admissionResponse.StartDateTime.Value.Date, wardId = (Guid)admissionResponse.Ward.Id });
+
+            var wardAdmission = ObjectMapper.Map<WardAdmission>(input);
+            await _hisAdmissionAuditTrailRepository.InsertOrUpdateAsync(new HisAdmissionAuditTrail()
+            {
+                Admission = wardAdmission,
+                AdmissionStatus = RefListAdmissionStatuses.separated,
+                AuditTime = admissionResponse.StartDateTime,
+                Initiator = person
+            });
 
             return admissionResponse;
         }

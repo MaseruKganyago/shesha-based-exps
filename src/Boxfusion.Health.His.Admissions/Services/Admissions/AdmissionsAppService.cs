@@ -49,6 +49,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         private readonly IRepository<Condition, Guid> _conditionRepository;
         private readonly ISessionDataProvider _sessionDataProvider;
         private readonly IHisWardMidnightCensusReportsHelper _hisWardMidnightCensusReportsHelper;
+        private readonly IRepository<HisAdmissionAuditTrail, Guid> _hisAdmissionAuditTrailRepository;
 
         /// <summary>
         /// 
@@ -62,6 +63,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         /// <param name="hospitalisationEncounterCrudHelper"></param>
         /// <param name="conditionRepository"></param>
         /// <param name="sessionDataProvider"></param>
+        /// <param name="hisWardMidnightCensusReportsHelper"></param>
+        /// <param name="hisAdmissionAuditTrailRepository"></param>
         public AdmissionsAppService(IEncounterCrudHelper<WardAdmission> wardAdmissionCrudHelper,
             IRepository<HisPatient, Guid> patientRepository,
             IRepository<HisWard, Guid> wardRepository,
@@ -70,7 +73,8 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepository,
             IEncounterCrudHelper<HospitalAdmission> hospitalisationEncounterCrudHelper,
             IRepository<Condition, Guid> conditionRepository, ISessionDataProvider sessionDataProvider,
-            IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper)
+            IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper,
+            IRepository<HisAdmissionAuditTrail, Guid> hisAdmissionAuditTrailRepository)
         {
             _wardAdmissionCrudHelper = wardAdmissionCrudHelper;
             _patientRepository = patientRepository;
@@ -82,6 +86,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             _conditionRepository = conditionRepository;
             _sessionDataProvider = sessionDataProvider;
             _hisWardMidnightCensusReportsHelper = hisWardMidnightCensusReportsHelper;
+            _hisAdmissionAuditTrailRepository = hisAdmissionAuditTrailRepository;
         }
 
         /// <summary>
@@ -182,6 +187,15 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             await wardAdmissionService.UpdateAsync(wardAdmission);
 
             await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)wardAdmission.StartDateTime.Value.Date, wardId = (Guid)wardAdmission.Ward.Id });
+
+            var person = await GetCurrentPersonAsync();
+            await _hisAdmissionAuditTrailRepository.InsertOrUpdateAsync(new HisAdmissionAuditTrail()
+            {
+                Admission = wardAdmission,
+                AdmissionStatus = wardAdmission.AdmissionStatus,
+                AuditTime = wardAdmission.StartDateTime,
+                Initiator = person
+            });
 
             return respose;
         }
