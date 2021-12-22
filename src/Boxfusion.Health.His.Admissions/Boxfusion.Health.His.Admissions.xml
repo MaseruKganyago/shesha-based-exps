@@ -1027,6 +1027,11 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportModelQuery.RN">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto">
             <summary>
             
@@ -1118,6 +1123,11 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.PatientDays">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportResponseDto.RN">
             <summary>
             
             </summary>
