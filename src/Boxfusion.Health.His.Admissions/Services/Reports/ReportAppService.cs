@@ -53,5 +53,19 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
 
             return reports;
         }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="wardId"></param>
+        ///// <param name="reportDate"></param>
+        ///// <returns></returns>
+        //[HttpGet, Route("Dashboards")]
+        //public async Task<List<DashboardResponseDto>> GetReport(Guid wardId, DateTime reportDate)
+        //{
+        //    var dashboards = await _reportHelper.GetDashboardAsync(wardId, reportDate);
+
+        //    return dashboards;
+        //}
     }
 }

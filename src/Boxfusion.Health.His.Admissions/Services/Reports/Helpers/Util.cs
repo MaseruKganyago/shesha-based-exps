@@ -109,6 +109,26 @@ select
 													and enc.IsDeleted = 0
 )
 select * from CTE where RN = 1";
+
+		public static string Dashboards = @"DECLARE :BedInWard INT = (
+						SELECT Fhir_NumberOfBeds FROM Core_Facilities
+						WHERE Id = :wardId AND IsDeleted = 0
+					)
+DECLARE :TotalAdmittedPatients INT = (
+					SELECT COUNT(*)  FROM Fhir_Encounters
+						WHERE His_WardId = :wardId AND IsDeleted = 0
+						AND (CAST(StartDateTime AS DATE) = DATEADD(day, 0, CAST(:reportDate AS date))
+						OR CAST(StartDateTime AS DATE) < CAST(:reportDate AS date) )
+						AND His_AdmissionStatusLkp = 1 /*Admitted*/
+					)
+SELECT 
+Id
+,[Name]
+,[Description]
+,:BedInWard AS BedInWard
+,:TotalAdmittedPatients AS TotalAdmittedPatients
+,(:BedInWard -  :TotalAdmittedPatients) AS TotalBedAvailability
+FROM Core_Facilities";
 		#endregion
 	}
 }
