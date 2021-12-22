@@ -370,7 +370,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         {
             var ward = await GetEntityAsync<HisWard>(input.WardId);
 
-            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate && r.ReportType == His.Domain.Domain.Enums.RefListReportType.Monthly);
+            var entity = await _wardMidnightCensusReport.
+                FirstOrDefaultAsync(
+                    r => r.Ward == ward && r.ReportDate.Value.Year == input.ReportDate.Value.Year && r.ReportDate.Value.Month == input.ReportDate.Value.Month && r.ReportType == His.Domain.Domain.Enums.RefListReportType.Monthly);
 
             if(entity == null)
             {
@@ -396,7 +398,31 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 }
                 return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
             }
-            return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
+            else
+            {
+                var calculatedReport = await _sessionDataProvider.GetMonthlyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
+                if (calculatedReport.Any())
+                {
+                    var monthlyStat = calculatedReport[0];
+
+                    var resultsEntity = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(entity.Id, async (item) =>
+                    {
+                        item.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress;
+                        item.BedUtilisation = (double?)monthlyStat.BedUtilisation;
+                        item.AverageLengthofStay = (float?)monthlyStat.AverageLengthOfStay;
+                        item.ReportType = His.Domain.Domain.Enums.RefListReportType.Monthly;
+                        item.ReportDate = input.ReportDate;
+                        item.Ward = ward;
+                        item.AverageBedAvailability = (float?)monthlyStat.AverageBedAvailability;
+                        item.NumBedsInWard = monthlyStat.NumBedsInWard;
+                        item.TotalBedAvailability = monthlyStat.TotalBedAvailability;
+                        item.TotalAdmissions = (int?)monthlyStat.TotalAdmissions;
+                        item.TotalSeparations = (int?)monthlyStat.TotalSeparations;
+                    });
+                    return ObjectMapper.Map<WardMidnightCensusReportResponse>(resultsEntity);
+                }
+                return ObjectMapper.Map<WardMidnightCensusReportResponse>(null);
+            }
         }
         /// <summary>
         /// Used to reject the report
