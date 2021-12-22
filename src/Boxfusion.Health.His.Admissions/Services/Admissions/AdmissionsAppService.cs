@@ -189,13 +189,29 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)wardAdmission.StartDateTime.Value.Date, wardId = (Guid)wardAdmission.Ward.Id });
 
             var person = await GetCurrentPersonAsync();
-            await _hisAdmissionAuditTrailRepository.InsertOrUpdateAsync(new HisAdmissionAuditTrail()
+            var admissionAudit = await _hisAdmissionAuditTrailRepository
+                .FirstOrDefaultAsync(r => r.Admission.Id == wardAdmission.Id && r.AuditTime == wardAdmission.StartDateTime);
+
+            if (admissionAudit != null)
             {
-                Admission = wardAdmission,
-                AdmissionStatus = wardAdmission.AdmissionStatus,
-                AuditTime = wardAdmission.StartDateTime,
-                Initiator = person
-            });
+                await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(admissionAudit.Id, async item =>
+                {
+                    item.Admission = wardAdmission;
+                    item.AdmissionStatus = (RefListAdmissionStatuses?)wardAdmission.AdmissionStatus;
+                    item.AuditTime = wardAdmission.StartDateTime.Value.Date;
+                    item.Initiator = person;
+                });
+            }
+            else
+            {
+                await _hisAdmissionAuditTrailRepository.InsertAsync(new HisAdmissionAuditTrail()
+                {
+                    Admission = wardAdmission,
+                    AdmissionStatus = (RefListAdmissionStatuses?)wardAdmission.AdmissionStatus,
+                    AuditTime = wardAdmission.StartDateTime.Value.Date,
+                    Initiator = person
+                });
+            }
 
             return respose;
         }

@@ -158,13 +158,30 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)admission.StartDateTime.Value.Date, wardId = (Guid)admission.Ward.Id });
 
             var wardAdmission = ObjectMapper.Map<WardAdmission>(input);
-            await _hisAdmissionAuditTrailRepository.InsertOrUpdateAsync(new HisAdmissionAuditTrail()
+
+            var admissionAudit = await _hisAdmissionAuditTrailRepository
+                .FirstOrDefaultAsync(r => r.Admission.Id == wardAdmission.Id && r.AuditTime == admission.StartDateTime);
+
+            if(admissionAudit != null)
             {
-                Admission = wardAdmission,
-                AdmissionStatus = RefListAdmissionStatuses.admitted,
-                AuditTime = admission.StartDateTime,
-                Initiator = person
-            });
+                await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(admissionAudit.Id, async item =>
+                {
+                    item.Admission = wardAdmission;
+                    item.AdmissionStatus = RefListAdmissionStatuses.admitted;
+                    item.AuditTime = admission.StartDateTime.Value.Date;
+                    item.Initiator = person;
+                });
+            }
+            else
+            {
+                await _hisAdmissionAuditTrailRepository.InsertAsync(new HisAdmissionAuditTrail()
+                {
+                    Admission = wardAdmission,
+                    AdmissionStatus = (RefListAdmissionStatuses?)admission.AdmissionStatus.ItemValue,
+                    AuditTime = admission.StartDateTime.Value.Date,
+                    Initiator = person
+                });
+            }           
 
             return admission;
         }
@@ -200,13 +217,29 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)admission.StartDateTime.Value.Date, wardId = (Guid)admission.Ward.Id });
 
             var wardAdmission = ObjectMapper.Map<WardAdmission>(input);
-            await _hisAdmissionAuditTrailRepository.InsertOrUpdateAsync(new HisAdmissionAuditTrail()
+            var admissionAudit = await _hisAdmissionAuditTrailRepository
+                .FirstOrDefaultAsync(r => r.Admission.Id == wardAdmission.Id && r.AuditTime == admission.StartDateTime);
+
+            if (admissionAudit != null)
             {
-                Admission = wardAdmission,
-                AdmissionStatus = (RefListAdmissionStatuses?)admission.AdmissionStatus.ItemValue,
-                AuditTime = admission.StartDateTime,
-                Initiator = person
-            });
+                await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(admissionAudit.Id, async item =>
+                {
+                    item.Admission = wardAdmission;
+                    item.AdmissionStatus = (RefListAdmissionStatuses?)admission.AdmissionStatus.ItemValue;
+                    item.AuditTime = admission.StartDateTime.Value.Date;
+                    item.Initiator = person;
+                });
+            }
+            else
+            {
+                await _hisAdmissionAuditTrailRepository.InsertAsync(new HisAdmissionAuditTrail()
+                {
+                    Admission = wardAdmission,
+                    AdmissionStatus = (RefListAdmissionStatuses?)admission.AdmissionStatus.ItemValue,
+                    AuditTime = admission.StartDateTime.Value.Date,
+                    Initiator = person
+                });
+            }
 
             return admission;
         }
@@ -257,7 +290,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             {
                 Admission = input.Id,
                 AdmissionStatus = RefListAdmissionStatuses.separated,
-                AuditTime = admissionResponse.SeparationDate,
+                AuditTime = admissionResponse.SeparationDate.Value.Date,
                 Initiator = person.Id,
                 UserId = person.User.Id
             });
