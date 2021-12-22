@@ -316,7 +316,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 }
             }
 
-            if (entity.ApprovalStatus != His.Domain.Domain.Enums.RefListApprovalStatuses.approved)
+            if (results.ApprovalStatus != His.Domain.Domain.Enums.RefListApprovalStatuses.approved)
             {
                 //Calculate on the fly
                 var calculatedReport = await _sessionDataProvider.GetDailyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });

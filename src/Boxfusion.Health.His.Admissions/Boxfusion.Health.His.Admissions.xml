@@ -3364,6 +3364,21 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211222233200">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211222233200.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20211222233200.Down">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.HealthCommon.Core.Services.Users.Dtos.HisUserMapProfile">
             <summary>
             
