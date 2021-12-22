@@ -216,7 +216,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
 
             await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)admission.StartDateTime.Value.Date, wardId = (Guid)admission.Ward.Id });
 
-            var wardAdmission = ObjectMapper.Map<WardAdmission>(input);
+            var wardAdmission = await GetEntityAsync<WardAdmission>(admission.Id);
             var admissionAudit = await _hisAdmissionAuditTrailRepository
                 .FirstOrDefaultAsync(r => r.Admission.Id == wardAdmission.Id && r.AuditTime == admission.StartDateTime);
 
@@ -332,7 +332,5 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             var wardAdmissions = await _admissionCrudHelper.GetWardAdmissions(id);
             return wardAdmissions;
         }
-
-
     }
 }
