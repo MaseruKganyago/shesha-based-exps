@@ -370,7 +370,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         {
             var ward = await GetEntityAsync<HisWard>(input.WardId);
 
-            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate && r.ReportType == His.Domain.Domain.Enums.RefListReportType.Monthly);
+            var entity = await _wardMidnightCensusReport.
+                FirstOrDefaultAsync(
+                    r => r.Ward == ward && r.ReportDate.Value.Year == input.ReportDate.Value.Year && r.ReportDate.Value.Month == input.ReportDate.Value.Month && r.ReportType == His.Domain.Domain.Enums.RefListReportType.Monthly);
 
             if(entity == null)
             {
