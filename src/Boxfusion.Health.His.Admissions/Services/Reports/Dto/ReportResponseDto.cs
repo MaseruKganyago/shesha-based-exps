@@ -107,9 +107,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Dto
         /// </summary>
         public int PatientDays { get; set; }
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public SubjectResponse Subject { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public long RN { get; set; }
     }
 }
