@@ -478,21 +478,20 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
                 //add a list of conditionIcdTenCode to a task
                 if (input?.SeparationCode != null && input.SeparationCode.Any())
                 {
+                    var dbConditions = await _conditionRepositiory.GetAllListAsync(x => x.FhirEncounter == insertedWardAdmission);
+                    //List<EntityWithDisplayNameDto<Guid?>> icdTenCodeResponses = new List<EntityWithDisplayNameDto<Guid?>>();
+
+                    var condition = await _conditionIcdTenCodeRepositiory.GetAll().Where(x => dbConditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.separated && x.IsDeleted == false).Select(x => x.Condition).FirstOrDefaultAsync() 
+                        ?? new Condition { RecordedDate = DateTime.Now, Subject = hisPatient, Recorder = currentLoggedInPerson, FhirEncounter = insertedWardAdmission, HospitalisationEncounter = insertedHospitalAdmission };
+                    
+                    Condition insertedCondition = null;
                     //Create a condition
-                    var condition = new Condition
-                    {
-                        RecordedDate = DateTime.Now,
-                        Subject = hisPatient,
-                        Recorder = currentLoggedInPerson,
-                        FhirEncounter = insertedWardAdmission,
-                        HospitalisationEncounter = insertedHospitalAdmission
-                    };
+                    if (!Validation.IsValidateId(condition.Id))
+                        insertedCondition = await _conditionRepositiory.InsertAsync(condition);
 
-                    var insertedCondition = await _conditionRepositiory.InsertAsync(condition);
-
-                    //Add newly updated contact points
+                    //Add newly updated icd10code
                     var taskConditionIcdTenCodes = new List<Task<EntityWithDisplayNameDto<Guid?>>>(); //Tasks lists to handle batch insert into database
-                    input.SeparationCode.ForEach((v) => taskConditionIcdTenCodes.Add(CreateICdTenCode(v, insertedCondition, true)));
+                    input.SeparationCode.ForEach((v) => taskConditionIcdTenCodes.Add(CreateICdTenCode(v, condition ?? insertedCondition, true)));
                     var conditonIcdTenCodes = ((IList<EntityWithDisplayNameDto<Guid?>>)await Task.WhenAll(taskConditionIcdTenCodes)); //save contact points to db
                     icdTenCodeResponses = conditonIcdTenCodes.ToList();
 
