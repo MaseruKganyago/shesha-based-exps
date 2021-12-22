@@ -62,7 +62,6 @@ namespace Boxfusion.Health.His.Admissions.Helpers
                             SET ApprovalStatusLkp = 1
                             WHERE WardId = :WardId
                             AND ReportDate = :ReportDate   
-                            AND ApprovalStatusLkp = 2
                     ")
                     .SetParameter("WardId", input.wardId)
                     .SetParameter("ReportDate", input.reportDate)
