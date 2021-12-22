@@ -313,6 +313,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                         item.Ward = ward;
                         item.TodaysAdmission = dailyStat.TodaysAdmission;
                     });
+                    return ObjectMapper.Map<WardMidnightCensusReportResponse>(results);
                 }
             }
 
