@@ -41,7 +41,7 @@ select
 												left join Core_Persons per on per.Id = enc.SubjectId 
 												left join Core_Facilities fac on fac.Id = enc.His_WardId
 												left join Fhir_Encounters hosEnc on hosEnc.Id = enc.PartOfId
-												where enc.His_WardId = :wardId and convert(date, enc.StartDateTime) <= convert(date, :filterDate) and convert(date, :filterDate) <= dateadd(HOUR, 2, getdate())
+												where enc.His_WardId = :wardId and (convert(date, enc.StartDateTime) <= convert(date, :filterDate) and convert(date, :filterDate) <= dateadd(HOUR, 2, iif(enc.His_SeparationDate is null, getdate(),enc.His_SeparationDate)))
 												and (enc.His_AdmissionStatusLkp != 2 and enc.His_AdmissionStatusLkp != 4)
 												UNION ALL
 												select
@@ -70,7 +70,7 @@ select
 												left join Core_Persons per on per.Id = enc.SubjectId 
 												left join Core_Facilities fac on fac.Id = enc.His_WardId
 												left join Fhir_Encounters hosEnc on hosEnc.Id = enc.PartOfId
-												where enc.His_WardId = :wardId and convert(date, enc.StartDateTime) <= convert(date, :filterDate) and convert(date, :filterDate) <= dateadd(HOUR, 2, getdate())
+												where enc.His_WardId = :wardId and (convert(date, enc.StartDateTime) <= convert(date, :filterDate) and convert(date, :filterDate) <= dateadd(HOUR, 2, iif(enc.His_SeparationDate is null, getdate(),enc.His_SeparationDate)))
 												and (enc.His_AdmissionStatusLkp = 2) and enc.IsDeleted = 0
 )
 select * from CTE where RN = 1";
