@@ -1,4 +1,5 @@
 ﻿using Abp.Dependency;
+using Abp.UI;
 using AutoMapper;
 using Boxfusion.Health.His.Admissions.Domain.Views;
 using Boxfusion.Health.His.Admissions.Services.Reports.Dto;
@@ -75,13 +76,21 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
         /// <returns></returns>
         public async Task<List<DashboardResponseDto>> GetDashboardAsync(Guid? hospitalId)
         {
-            var dashboardQuery = await _sessionProvider.Session
-                          .CreateSQLQuery(Util.Dashboards)
-                          .SetResultTransformer(Transformers.AliasToBean<DashboardModelQuery>())
-                          .SetParameter("hospitalId", hospitalId)
-                          .ListAsync<DashboardModelQuery>();
+            try
+            {
+                var dashboardQuery = await _sessionProvider.Session
+                              .CreateSQLQuery(Util.Dashboards)
+                              .SetResultTransformer(Transformers.AliasToBean<DashboardModelQuery>())
+                              .SetParameter("hospitalId", hospitalId)
+                              .ListAsync<DashboardModelQuery>();
 
-            return _mapper.Map<List<DashboardResponseDto>>(dashboardQuery);
+                return _mapper.Map<List<DashboardResponseDto>>(dashboardQuery);
+            }
+            catch (Exception ex)
+            {
+                throw new UserFriendlyException(ex.Message);
+            }
+
         }
     }
 }

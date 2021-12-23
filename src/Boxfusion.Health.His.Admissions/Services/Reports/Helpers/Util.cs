@@ -119,7 +119,27 @@ select * from CTE where RN = 1";
 											,ward.[Name]
 											,ward.[Description]
 											,Fhir_NumberOfBeds BedInWard
-											,(SELECT COUNT(*)  FROM Fhir_Encounters enc WHERE Frwk_Discriminator = 'His.WardAdmission' and enc.His_WardId = ward.Id AND enc.IsDeleted = 0 AND enc.StartDateTime <= GETDATE() AND enc.His_AdmissionStatusLkp = 1) AS TotalAdmittedPatients
+											,(SELECT  SUM(totalAdmittedPatients) totalAdmittedPatients
+						FROM
+							( 
+							   SELECT  COUNT(*) totalAdmittedPatients
+											FROM Fhir_Encounters
+											WHERE isDeleted = 0
+												AND  (His_AdmissionStatusLkp != 2 and His_AdmissionStatusLkp != 4)
+												AND His_WardId = ward.Id
+												AND (convert(date, StartDateTime) <= convert(date, getdate()) 
+												and convert(date, getdate()) <= dateadd(HOUR, 2, iif(His_SeparationDate is null, getdate(),His_SeparationDate)))
+							
+								UNION ALL
+							   SELECT  COUNT(*) totalAdmittedPatients
+											FROM Fhir_Encounters
+											WHERE isDeleted = 0
+												AND  (His_AdmissionStatusLkp = 2)
+												AND His_WardId = ward.Id
+												AND (convert(date, StartDateTime) <= convert(date, getdate()) 
+												and convert(date, getdate()) <= dateadd(HOUR, 2, iif(His_SeparationDate is null, getdate(),His_SeparationDate)))
+						   ) s
+											) AS TotalAdmittedPatients
 											,RN = ROW_NUMBER()OVER(PARTITION BY ward.Id ORDER BY ward.Id)
 											FROM Core_Facilities ward 
 											LEFT JOIN Core_Organisations org on org.Id = ward.OwnerOrganisationId
