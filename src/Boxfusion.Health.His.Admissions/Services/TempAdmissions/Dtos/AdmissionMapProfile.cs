@@ -89,6 +89,40 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
                 .ForMember(c => c.IsGautengGovFacility, options => options.MapFrom(c => c.IsGautengGovFacility))
                 .MapReferenceListValuesFromDto();
 
+            CreateMap<WardAdmission, SeparationResponse>()
+            .ForMember(c => c.Id, options => options.Ignore())
+            .ForMember(c => c.SeparationType, options => options.Ignore())
+            .ForMember(a => a.SeparationDestinationWard, options => options.Ignore())
+            .ForMember(c => c.SeparationChildHealth, options => options.Ignore())
+            .ForMember(c => c.SeparationComment, options => options.Ignore())
+            .ForMember(c => c.SeparationDate, options => options.Ignore())
+            .ForMember(c => c.InternalTransferOriginalWard, options => options.Ignore())
+            .ForMember(c => c.InternalTransferDestinationWard, options => options.Ignore())
+            .MapReferenceListValuesFromDto();
+
+            CreateMap<HospitalAdmission, SeparationResponse>()
+                .ForMember(c => c.Id, options => options.Ignore())
+                .ForMember(a => a.TransferToHospital, options => options.Ignore())
+                .ForMember(c => c.TransferToNonGautengHospital, options => options.Ignore())
+                .ForMember(c => c.IsGautengGovFacility, options => options.Ignore())
+                .MapReferenceListValuesFromDto();
+
+            CreateMap<SeparationResponse, WardAdmission>()
+                .ForMember(c => c.Id, options => options.Ignore())
+                .ForMember(c => c.SeparationType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.SeparationType)))
+                .ForMember(a => a.SeparationDestinationWard, options => options.MapFrom(b => GetEntity<HisWard>(b.SeparationDestinationWard)))
+                .ForMember(c => c.SeparationChildHealth, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.SeparationChildHealth)))
+                .ForMember(c => c.SeparationComment, options => options.MapFrom(c => c.SeparationComment))
+                .ForMember(c => c.SeparationDate, options => options.MapFrom(c => c.SeparationDate))
+                .MapReferenceListValuesFromDto();
+
+            CreateMap<SeparationResponse, HospitalAdmission>()
+                .ForMember(c => c.Id, options => options.Ignore())
+                .ForMember(a => a.TransferToHospital, options => options.MapFrom(b => GetEntity<FhirOrganisation>(b.TransferToHospital)))
+                .ForMember(c => c.TransferToNonGautengHospital, options => options.MapFrom(c => c.TransferToNonGautengHospital))
+                .ForMember(c => c.IsGautengGovFacility, options => options.MapFrom(c => c.IsGautengGovFacility))
+                .MapReferenceListValuesFromDto();
+
             CreateMap<AdmissionInput, HospitalAdmission>()
                 .ForMember(c => c.Id, options => options.Ignore())
                 .ForMember(c => c.CapturedAfterApproval, options => options.MapFrom(c => false))
