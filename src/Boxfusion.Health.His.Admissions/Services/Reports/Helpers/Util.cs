@@ -114,15 +114,18 @@ select * from CTE where RN = 1";
 		/// 
 		/// </summary>
 		public static string Dashboards = @"WITH CTE AS (SELECT 
-												ward.Id
-												,[Name]
-												,[Description]
-												,Fhir_NumberOfBeds BedInWard
-												,(SELECT COUNT(*)  FROM Fhir_Encounters enc WHERE enc.His_WardId = ward.Id AND enc.IsDeleted = 0 AND enc.StartDateTime <= GETDATE() AND enc.His_AdmissionStatusLkp = 1) AS TotalAdmittedPatients
-												FROM Core_Facilities ward 
-												WHERE OwnerOrganisationId = CASE WHEN :hospitalId IS NULL THEN OwnerOrganisationId ELSE :hospitalId END
-												)
-												SELECT Id, [Name], [Description], BedInWard, TotalAdmittedPatients, (BedInWard - TotalAdmittedPatients) TotalBedAvailability from CTE";
+											ward.Id
+											,org.[Name] as HospitalName
+											,ward.[Name]
+											,ward.[Description]
+											,Fhir_NumberOfBeds BedInWard
+											,(SELECT COUNT(*)  FROM Fhir_Encounters enc WHERE Frwk_Discriminator = 'His.WardAdmission' and enc.His_WardId = ward.Id AND enc.IsDeleted = 0 AND enc.StartDateTime <= GETDATE() AND enc.His_AdmissionStatusLkp = 1) AS TotalAdmittedPatients
+											,RN = ROW_NUMBER()OVER(PARTITION BY ward.Id ORDER BY ward.Id)
+											FROM Core_Facilities ward 
+											LEFT JOIN Core_Organisations org on org.Id = ward.OwnerOrganisationId
+											WHERE OwnerOrganisationId = CASE WHEN :hospitalId IS NULL THEN OwnerOrganisationId ELSE :hospitalId END
+											)
+											SELECT Id, HospitalName, [Name], [Description], BedInWard, TotalAdmittedPatients, (BedInWard - TotalAdmittedPatients) TotalBedAvailability from CTE where RN = 1";
 		#endregion
 	}
 }

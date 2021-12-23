@@ -17,6 +17,10 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Dto
         /// <summary>
         /// 
         /// </summary>
+        public virtual string HospitalName { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
 		public virtual string Name { get; set; }
 
         /// <summary>

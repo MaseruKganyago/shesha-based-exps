@@ -927,6 +927,11 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardModelQuery.HospitalName">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardModelQuery.Name">
             <summary>
             
@@ -953,6 +958,11 @@
             </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardResponseDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardResponseDto.HospitalName">
             <summary>
             
             </summary>
