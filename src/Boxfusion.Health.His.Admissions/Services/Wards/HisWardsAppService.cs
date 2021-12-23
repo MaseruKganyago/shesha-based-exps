@@ -281,8 +281,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             }
 
             var ward = await GetEntityAsync<HisWard>(input.WardId);
-
-            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
+            var results = new WardMidnightCensusReport();
+            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate && r.ReportType == His.Domain.Domain.Enums.RefListReportType.Daily);
+            
 
             if (entity == null) //Create the report since it doesn't exist
             {
@@ -290,7 +291,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 var calculatedReport = await _sessionDataProvider.GetDailyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
                 if (!calculatedReport.Any())
                 {
-                    entity = new WardMidnightCensusReport()
+                    results = new WardMidnightCensusReport()
                     {
                         ReportDate = input.ReportDate,
                         TotalBedAvailability = ward.NumberOfBeds,
@@ -301,7 +302,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 {
                     var dailyStat = calculatedReport[0];
 
-                    entity = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(null, async (item) =>
+                    results = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(null, async (item) =>
                     {
                         ObjectMapper.Map(dailyStat, item);
                         item.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress;
@@ -312,17 +313,17 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                         item.Ward = ward;
                         item.TodaysAdmission = dailyStat.TodaysAdmission;
                     });
+                    return ObjectMapper.Map<WardMidnightCensusReportResponse>(results);
                 }
-                return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
             }
 
-            if (entity.ApprovalStatus != His.Domain.Domain.Enums.RefListApprovalStatuses.approved)
+            if (results.ApprovalStatus != His.Domain.Domain.Enums.RefListApprovalStatuses.approved)
             {
                 //Calculate on the fly
                 var calculatedReport = await _sessionDataProvider.GetDailyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
                 if (!calculatedReport.Any())
                 {
-                    entity = new WardMidnightCensusReport()
+                    results = new WardMidnightCensusReport()
                     {
                         ReportDate = input.ReportDate,
                         TotalBedAvailability = ward.NumberOfBeds,
@@ -333,7 +334,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 {
                     var dailyStat = calculatedReport[0];
 
-                    entity =  await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(entity.Id, async item =>
+                    results =  await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(entity.Id, async item =>
                     {
                         item.ReportDate = input.ReportDate;
                         item.MidnightCount = dailyStat.MidnightCount;
@@ -358,7 +359,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 }
             }
 
-            return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
+            return ObjectMapper.Map<WardMidnightCensusReportResponse>(results);
         }
         /// <summary>
         /// 
