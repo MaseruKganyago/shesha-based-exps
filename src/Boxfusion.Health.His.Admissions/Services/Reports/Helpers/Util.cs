@@ -34,7 +34,7 @@ select
 												,hosEnc.His_OtherCategoryLkp OtherCategory
 												,enc.His_AdmissionStatusLkp AdmissionStatus
 												,enc.His_SeparationDate SeparationDate
-												,DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())) AS PatientDays
+												,IIF(DATEDIFF(day, enc.StartDateTime, getdate()) < 0, 0, DATEDIFF(day, enc.StartDateTime, getdate())) AS PatientDays
 												,RN = ROW_NUMBER()OVER(PARTITION BY enc.Id ORDER BY enc.Id)
 												from
 												Fhir_Encounters enc
@@ -63,7 +63,7 @@ select
 												,hosEnc.His_OtherCategoryLkp OtherCategory
 												,enc.His_AdmissionStatusLkp AdmissionStatus
 												,enc.His_SeparationDate SeparationDate
-												,DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())) AS PatientDays
+												,IIF(DATEDIFF(day, enc.StartDateTime, getdate()) < 0, 0, DATEDIFF(day, enc.StartDateTime, getdate())) AS PatientDays
 												,RN = ROW_NUMBER()OVER(PARTITION BY enc.Id ORDER BY enc.Id)
 												from
 												Fhir_Encounters enc
@@ -98,7 +98,7 @@ select
 													,hosEnc.His_OtherCategoryLkp OtherCategory
 													,enc.His_AdmissionStatusLkp AdmissionStatus
 													,enc.His_SeparationDate SeparationDate
-													,DATEDIFF(day, enc.StartDateTime, getdate()) AS PatientDays
+													,IIF(DATEDIFF(day, enc.StartDateTime, getdate()) < 0, 0, DATEDIFF(day, enc.StartDateTime, getdate())) AS PatientDays
 												    ,RN = ROW_NUMBER()OVER(PARTITION BY enc.Id ORDER BY enc.Id)
 													from
 													Fhir_Encounters enc
