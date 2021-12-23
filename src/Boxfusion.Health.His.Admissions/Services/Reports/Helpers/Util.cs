@@ -34,14 +34,14 @@ select
 												,hosEnc.His_OtherCategoryLkp OtherCategory
 												,enc.His_AdmissionStatusLkp AdmissionStatus
 												,enc.His_SeparationDate SeparationDate
-												,DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())) AS PatientDays
+												,IIF(DATEDIFF(day, enc.StartDateTime, getdate()) < 0, 0, DATEDIFF(day, enc.StartDateTime, getdate())) AS PatientDays
 												,RN = ROW_NUMBER()OVER(PARTITION BY enc.Id ORDER BY enc.Id)
 												from
 												Fhir_Encounters enc
 												left join Core_Persons per on per.Id = enc.SubjectId 
 												left join Core_Facilities fac on fac.Id = enc.His_WardId
 												left join Fhir_Encounters hosEnc on hosEnc.Id = enc.PartOfId
-												where enc.His_WardId = :wardId and convert(date, enc.StartDateTime) <= convert(date, :filterDate) and convert(date, :filterDate) <= dateadd(HOUR, 2, getdate())
+												where enc.His_WardId = :wardId and (convert(date, enc.StartDateTime) <= convert(date, :filterDate) and convert(date, :filterDate) <= dateadd(HOUR, 2, iif(enc.His_SeparationDate is null, getdate(),enc.His_SeparationDate)))
 												and (enc.His_AdmissionStatusLkp != 2 and enc.His_AdmissionStatusLkp != 4)
 												UNION ALL
 												select
@@ -63,14 +63,14 @@ select
 												,hosEnc.His_OtherCategoryLkp OtherCategory
 												,enc.His_AdmissionStatusLkp AdmissionStatus
 												,enc.His_SeparationDate SeparationDate
-												,DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())) AS PatientDays
+												,IIF(DATEDIFF(day, enc.StartDateTime, getdate()) < 0, 0, DATEDIFF(day, enc.StartDateTime, getdate())) AS PatientDays
 												,RN = ROW_NUMBER()OVER(PARTITION BY enc.Id ORDER BY enc.Id)
 												from
 												Fhir_Encounters enc
 												left join Core_Persons per on per.Id = enc.SubjectId 
 												left join Core_Facilities fac on fac.Id = enc.His_WardId
 												left join Fhir_Encounters hosEnc on hosEnc.Id = enc.PartOfId
-												where enc.His_WardId = :wardId and convert(date, enc.StartDateTime) <= convert(date, :filterDate) and convert(date, :filterDate) <= dateadd(HOUR, 2, getdate())
+												where enc.His_WardId = :wardId and (convert(date, enc.StartDateTime) <= convert(date, :filterDate) and convert(date, :filterDate) <= dateadd(HOUR, 2, iif(enc.His_SeparationDate is null, getdate(),enc.His_SeparationDate)))
 												and (enc.His_AdmissionStatusLkp = 2) and enc.IsDeleted = 0
 )
 select * from CTE where RN = 1";
@@ -98,7 +98,7 @@ select
 													,hosEnc.His_OtherCategoryLkp OtherCategory
 													,enc.His_AdmissionStatusLkp AdmissionStatus
 													,enc.His_SeparationDate SeparationDate
-													,DATEDIFF(day, enc.StartDateTime, getdate()) AS PatientDays
+													,IIF(DATEDIFF(day, enc.StartDateTime, getdate()) < 0, 0, DATEDIFF(day, enc.StartDateTime, getdate())) AS PatientDays
 												    ,RN = ROW_NUMBER()OVER(PARTITION BY enc.Id ORDER BY enc.Id)
 													from
 													Fhir_Encounters enc
@@ -110,25 +110,42 @@ select
 )
 select * from CTE where RN = 1";
 
-		public static string Dashboards = @"DECLARE :BedInWard INT = (
-						SELECT Fhir_NumberOfBeds FROM Core_Facilities
-						WHERE Id = :wardId AND IsDeleted = 0
-					)
-DECLARE :TotalAdmittedPatients INT = (
-					SELECT COUNT(*)  FROM Fhir_Encounters
-						WHERE His_WardId = :wardId AND IsDeleted = 0
-						AND (CAST(StartDateTime AS DATE) = DATEADD(day, 0, CAST(:reportDate AS date))
-						OR CAST(StartDateTime AS DATE) < CAST(:reportDate AS date) )
-						AND His_AdmissionStatusLkp = 1 /*Admitted*/
-					)
-SELECT 
-Id
-,[Name]
-,[Description]
-,:BedInWard AS BedInWard
-,:TotalAdmittedPatients AS TotalAdmittedPatients
-,(:BedInWard -  :TotalAdmittedPatients) AS TotalBedAvailability
-FROM Core_Facilities";
+		/// <summary>
+		/// 
+		/// </summary>
+		public static string Dashboards = @"WITH CTE AS (SELECT 
+											ward.Id
+											,org.[Name] as HospitalName
+											,ward.[Name]
+											,ward.[Description]
+											,Fhir_NumberOfBeds BedInWard
+											,(SELECT  SUM(totalAdmittedPatients) totalAdmittedPatients
+						FROM
+							( 
+							   SELECT  COUNT(*) totalAdmittedPatients
+											FROM Fhir_Encounters
+											WHERE isDeleted = 0
+												AND  (His_AdmissionStatusLkp != 2 and His_AdmissionStatusLkp != 4)
+												AND His_WardId = ward.Id
+												AND (convert(date, StartDateTime) <= convert(date, getdate()) 
+												and convert(date, getdate()) <= dateadd(HOUR, 2, iif(His_SeparationDate is null, getdate(),His_SeparationDate)))
+							
+								UNION ALL
+							   SELECT  COUNT(*) totalAdmittedPatients
+											FROM Fhir_Encounters
+											WHERE isDeleted = 0
+												AND  (His_AdmissionStatusLkp = 2)
+												AND His_WardId = ward.Id
+												AND (convert(date, StartDateTime) <= convert(date, getdate()) 
+												and convert(date, getdate()) <= dateadd(HOUR, 2, iif(His_SeparationDate is null, getdate(),His_SeparationDate)))
+						   ) s
+											) AS TotalAdmittedPatients
+											,RN = ROW_NUMBER()OVER(PARTITION BY ward.Id ORDER BY ward.Id)
+											FROM Core_Facilities ward 
+											LEFT JOIN Core_Organisations org on org.Id = ward.OwnerOrganisationId
+											WHERE OwnerOrganisationId = CASE WHEN :hospitalId IS NULL THEN OwnerOrganisationId ELSE :hospitalId END
+											)
+											SELECT Id, HospitalName, [Name], [Description], BedInWard, TotalAdmittedPatients, (BedInWard - TotalAdmittedPatients) TotalBedAvailability from CTE where RN = 1";
 		#endregion
 	}
 }

@@ -379,6 +379,63 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="admission"></param>
+        /// <param name="currentLoggedInPerson"></param>
+        /// <returns></returns>
+        public async Task<AdmissionResponse> UndoSeparation(UndoSeparationDto admission, PersonFhirBase currentLoggedInPerson)
+        {
+            var wardAdmission = await _wardAdmissionRepositiory.GetAsync(admission.Id);
+            wardAdmission.AdmissionStatus = RefListAdmissionStatuses.admitted;
+            var hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
+            var hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
+
+            if (wardAdmission?.SeparationType == RefListSeparationTypes.internalTransfer)
+            {
+                if (Validation.IsValidateId(wardAdmission?.InternalTransferDestinationWard?.Id))
+                {
+                    var ward2Admission = await _wardAdmissionRepositiory.GetAsync(wardAdmission.InternalTransferDestinationWard.Id);
+                    await _wardAdmissionRepositiory.DeleteAsync(ward2Admission);
+                }
+            }
+
+            var separationResponse = _mapper.Map<SeparationResponse>(wardAdmission);
+            _mapper.Map(hospitalAdmission, separationResponse);
+
+            _mapper.Map(separationResponse, wardAdmission);
+            _mapper.Map(separationResponse, hospitalAdmission);
+
+            await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
+            await _hospitalAdmissionRepositiory.UpdateAsync(hospitalAdmission);
+
+            //Delete conditionIcd10Code
+            var dbConditions = await _conditionRepositiory.GetAllListAsync(x => x.FhirEncounter == wardAdmission);
+            List<EntityWithDisplayNameDto<Guid?>> icdTenCodeResponses = new List<EntityWithDisplayNameDto<Guid?>>();
+
+            var dbConditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => dbConditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.separated && x.IsDeleted == false);
+            dbConditionIcdTenCodes.ForEach(x => x.IsDeleted = false);
+            var taskDeleteConditionIcdTenCodes = new List<Task>();
+            dbConditionIcdTenCodes.ForEach((conditionIcdTenCode) => taskDeleteConditionIcdTenCodes.Add(DeleteConditionIcdTenCode(conditionIcdTenCode)));
+
+            var _sessionProvider = Abp.Dependency.IocManager.Instance.Resolve<ISessionProvider>();
+            await _unitOfWork.Current.SaveChangesAsync();
+            await _sessionProvider.Session.Transaction.CommitAsync();
+
+            var admissionResponse = _mapper.Map<AdmissionResponse>(hisPatient);
+            _mapper.Map(hospitalAdmission, admissionResponse);
+            _mapper.Map(wardAdmission, admissionResponse);
+            _mapper.Map(wardAdmission?.Ward, admissionResponse);
+            var results = await GetIcdTenCodes(wardAdmission);
+            List<EntityWithDisplayNameDto<Guid?>> codes = results.Item1;
+            List<EntityWithDisplayNameDto<Guid?>> separationCodes = results.Item2;
+
+            UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
+            UtilityHelper.TrySetProperty(admissionResponse, "SeparationCode", separationCodes);
+            return admissionResponse;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public async Task DeleteAsync(Guid id)

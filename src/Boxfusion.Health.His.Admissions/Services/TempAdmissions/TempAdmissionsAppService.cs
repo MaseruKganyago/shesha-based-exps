@@ -19,6 +19,7 @@ using Boxfusion.Health.His.Admissions.Hubs;
 using Boxfusion.Health.His.Admissions.Helpers;
 using Shesha.NHibernate;
 using Abp.Domain.Uow;
+using Boxfusion.Health.His.Admissions.Authorization;
 
 namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
 {
@@ -36,6 +37,8 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         private readonly IRepository<HisAdmissionAuditTrail, Guid> _hisAdmissionAuditTrailRepository;
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         private readonly IRepository<HisWard, Guid> _wardRepositiory;
+        private readonly IHisAdmissPermissionChecker _hisAdmissPermissionChecker;
+        
         /// <summary>
         /// 
         /// </summary>
@@ -44,13 +47,16 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         /// <param name="hisPatientRepositiory"></param>
         /// <param name="wardRepositiory"></param>
         /// <param name="hisWardMidnightCensusReportsHelper"></param>
+        /// <param name="hisAdmissionAuditTrailRepository"></param>
+        /// <param name="hisAdmissPermissionChecker"></param>
         public TempAdmissionsAppService(
             IRepository<WardAdmission, Guid> wardAdmissionRepository,
             IAdmissionCrudHelper admissionCrudHelper,
             IRepository<HisPatient, Guid> hisPatientRepositiory,
             IRepository<HisWard, Guid> wardRepositiory,
             IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper,
-            IRepository<HisAdmissionAuditTrail, Guid> hisAdmissionAuditTrailRepository)
+            IRepository<HisAdmissionAuditTrail, Guid> hisAdmissionAuditTrailRepository,
+            IHisAdmissPermissionChecker hisAdmissPermissionChecker)
         {
             _admissionCrudHelper = admissionCrudHelper;
             _hisPatientRepositiory = hisPatientRepositiory;
@@ -58,6 +64,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             _wardRepositiory = wardRepositiory;
             _hisWardMidnightCensusReportsHelper = hisWardMidnightCensusReportsHelper;
             _hisAdmissionAuditTrailRepository = hisAdmissionAuditTrailRepository;
+            _hisAdmissPermissionChecker = hisAdmissPermissionChecker;
         }
 
         /// <summary>
@@ -296,6 +303,53 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             });
 
             return admissionResponse;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="admission"></param>
+        /// <returns></returns>
+        [HttpPut, Route("undoSeparation")]
+        public async Task<AdmissionResponse> UndoSeparationAsync(UndoSeparationDto admission)
+        {
+            if (!await _hisAdmissPermissionChecker.IsApproverLevel1(await GetCurrentPersonAsync()))
+            {
+                throw new UserFriendlyException("The logged user is not a level 1 approver");
+            }
+
+            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+
+            var separation = await _admissionCrudHelper.UndoSeparation(admission, person);
+
+            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)separation.StartDateTime.Value.Date, wardId = (Guid)separation.Ward.Id });
+
+            var wardAdmission = await GetEntityAsync<WardAdmission>((separation.Id));
+            var admissionAudit = await _hisAdmissionAuditTrailRepository
+                .FirstOrDefaultAsync(r => r.Admission.Id == wardAdmission.Id && r.AuditTime == wardAdmission.StartDateTime);
+
+            if (admissionAudit != null)
+            {
+                await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(admissionAudit.Id, async item =>
+                {
+                    item.Admission = wardAdmission;
+                    item.AdmissionStatus = (RefListAdmissionStatuses?)wardAdmission.AdmissionStatus;
+                    item.AuditTime = wardAdmission.StartDateTime.Value.Date;
+                    item.Initiator = person;
+                });
+            }
+            else
+            {
+                await _hisAdmissionAuditTrailRepository.InsertAsync(new HisAdmissionAuditTrail()
+                {
+                    Admission = wardAdmission,
+                    AdmissionStatus = (RefListAdmissionStatuses?)wardAdmission.AdmissionStatus,
+                    AuditTime = wardAdmission.StartDateTime.Value.Date,
+                    Initiator = person
+                });
+            }
+
+            return separation;
         }
 
         /// <summary>

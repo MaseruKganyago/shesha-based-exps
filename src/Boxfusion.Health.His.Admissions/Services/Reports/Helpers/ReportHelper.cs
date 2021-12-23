@@ -1,4 +1,5 @@
 ﻿using Abp.Dependency;
+using Abp.UI;
 using AutoMapper;
 using Boxfusion.Health.His.Admissions.Domain.Views;
 using Boxfusion.Health.His.Admissions.Services.Reports.Dto;
@@ -68,22 +69,28 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
             return _mapper.Map<List<ReportResponseDto>>(reportQuery);
         }
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="wardId"></param>
-        ///// <param name="reportDate"></param>
-        ///// <returns></returns>
-        //public async Task<List<DashboardResponseDto>> GetDashboardAsync(Guid wardId, DateTime reportDate)
-        //{
-        //    var dashboardQuery = await _sessionProvider.Session
-        //                  .CreateSQLQuery(Util.Dashboards)
-        //                  .SetResultTransformer(Transformers.AliasToBean<DashboardModelQuery>())
-        //                  .SetParameter("wardId", wardId)
-        //                  .SetParameter("filterDate", reportDate)
-        //                  .ListAsync<DashboardModelQuery>();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hospitalId"></param>
+        /// <returns></returns>
+        public async Task<List<DashboardResponseDto>> GetDashboardAsync(Guid? hospitalId)
+        {
+            try
+            {
+                var dashboardQuery = await _sessionProvider.Session
+                              .CreateSQLQuery(Util.Dashboards)
+                              .SetResultTransformer(Transformers.AliasToBean<DashboardModelQuery>())
+                              .SetParameter("hospitalId", hospitalId)
+                              .ListAsync<DashboardModelQuery>();
 
-        //    return _mapper.Map<List<DashboardResponseDto>>(dashboardQuery);
-        //}
+                return _mapper.Map<List<DashboardResponseDto>>(dashboardQuery);
+            }
+            catch (Exception ex)
+            {
+                throw new UserFriendlyException(ex.Message);
+            }
+
+        }
     }
 }

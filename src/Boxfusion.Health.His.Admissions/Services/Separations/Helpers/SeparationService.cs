@@ -36,6 +36,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
         private readonly IRepository<Diagnosis, Guid> _diagnosisRepositiory;
         private readonly IRepository<IcdTenCode, Guid> _icdTenCodeRepositiory;
         private readonly IRepository<ConditionIcdTenCode, Guid> _conditionIcdTenCodeRepositiory;
+        private readonly IRepository<HisConditionIcdTenCode, Guid> _hisConditionIcdTenCodeRepositiory;
         private readonly IRepository<FhirOrganisation, Guid> _organisationRepositiory;
 
         private readonly IUnitOfWorkManager _unitOfWork;
@@ -60,6 +61,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             IRepository<HisPatient, Guid> hisPatientRepositiory, IMapper mapper,
             IRepository<Condition, Guid> conditionRepositiory, IRepository<Diagnosis, Guid> diagnosisRepositiory,
             IRepository<IcdTenCode, Guid> icdTenCodeRepositiory, IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepositiory,
+            IRepository<HisConditionIcdTenCode, Guid> hisConditionIcdTenCodeRepositiory,
             IUnitOfWorkManager unitOfWork, IRepository<FhirOrganisation, Guid> organisationRepositiory)
         {
             _wardRepositiory = wardRepositiory;
@@ -71,6 +73,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             _diagnosisRepositiory = diagnosisRepositiory;
             _icdTenCodeRepositiory = icdTenCodeRepositiory;
             _conditionIcdTenCodeRepositiory = conditionIcdTenCodeRepositiory;
+            _hisConditionIcdTenCodeRepositiory = hisConditionIcdTenCodeRepositiory;
             _unitOfWork = unitOfWork;
             _organisationRepositiory = organisationRepositiory;
         }
@@ -229,9 +232,9 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             Guard.Against.Null(hospitalAdmission, nameof(hospitalAdmission));
 
 
-            // HisPatient hisPatient = null;
+            HisPatient hisPatient = null;
             Guard.Against.Null(wardAdmission.Subject, nameof(wardAdmission.Subject));
-            var hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
+            hisPatient = await _hisPatientRepositiory.GetAsync(wardAdmission.Subject.Id);
             Guard.Against.Null(hisPatient, nameof(hisPatient));
 
             if (wardAdmission.SeparationType == RefListSeparationTypes.internalTransfer)
@@ -310,7 +313,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             List<EntityWithDisplayNameDto<Guid?>> codes = await GetCodes(wardAdmission);
             UtilityHelper.TrySetProperty(admissionResponse, "Code", codes);
             return admissionResponse;
-
         }
 
         private async Task<List<EntityWithDisplayNameDto<Guid?>>> GetCodes(WardAdmission wardAdmission)
@@ -467,6 +469,5 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations.Helpers
             return " No age range found";
 
         }
-
     }
 }

@@ -80,6 +80,14 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
         /// <returns></returns>
         Task<AdmissionResponse> SeparatePatientAsync(AdmissionInput input, PersonFhirBase currentLoggedInPerson);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="admission"></param>
+        /// <param name="currentLoggedInPerson"></param>
+        /// <returns></returns>
+        Task<AdmissionResponse> UndoSeparation(UndoSeparationDto admission, PersonFhirBase currentLoggedInPerson);
+
         ///// <summary>
         ///// 
         ///// </summary>
