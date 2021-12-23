@@ -30,8 +30,6 @@
   <ItemGroup>
     <Compile Remove="Services\HisPatients\Dtos\HisPatientInput.cs" />
     <Compile Remove="Services\HisPatients\Dtos\HisPatientResponse.cs" />
-    <Compile Remove="Services\Reports\Dto\DashboardModelQuery.cs" />
-    <Compile Remove="Services\Reports\Dto\DashboardResponseDto.cs" />
   </ItemGroup>
 
   <ItemGroup>

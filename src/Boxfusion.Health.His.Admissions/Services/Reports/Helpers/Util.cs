@@ -110,25 +110,19 @@ select
 )
 select * from CTE where RN = 1";
 
-		public static string Dashboards = @"DECLARE :BedInWard INT = (
-						SELECT Fhir_NumberOfBeds FROM Core_Facilities
-						WHERE Id = :wardId AND IsDeleted = 0
-					)
-DECLARE :TotalAdmittedPatients INT = (
-					SELECT COUNT(*)  FROM Fhir_Encounters
-						WHERE His_WardId = :wardId AND IsDeleted = 0
-						AND (CAST(StartDateTime AS DATE) = DATEADD(day, 0, CAST(:reportDate AS date))
-						OR CAST(StartDateTime AS DATE) < CAST(:reportDate AS date) )
-						AND His_AdmissionStatusLkp = 1 /*Admitted*/
-					)
-SELECT 
-Id
-,[Name]
-,[Description]
-,:BedInWard AS BedInWard
-,:TotalAdmittedPatients AS TotalAdmittedPatients
-,(:BedInWard -  :TotalAdmittedPatients) AS TotalBedAvailability
-FROM Core_Facilities";
+		/// <summary>
+		/// 
+		/// </summary>
+		public static string Dashboards = @"WITH CTE AS (SELECT 
+												ward.Id
+												,[Name]
+												,[Description]
+												,Fhir_NumberOfBeds BedInWard
+												,(SELECT COUNT(*)  FROM Fhir_Encounters enc WHERE enc.His_WardId = ward.Id AND enc.IsDeleted = 0 AND enc.StartDateTime <= GETDATE() AND enc.His_AdmissionStatusLkp = 1) AS TotalAdmittedPatients
+												FROM Core_Facilities ward 
+												WHERE OwnerOrganisationId = CASE WHEN :hospitalId IS NULL THEN OwnerOrganisationId ELSE :hospitalId END
+												)
+												SELECT Id, [Name], [Description], BedInWard, TotalAdmittedPatients, (BedInWard - TotalAdmittedPatients) TotalBedAvailability from CTE";
 		#endregion
 	}
 }

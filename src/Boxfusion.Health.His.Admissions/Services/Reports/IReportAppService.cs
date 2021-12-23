@@ -21,5 +21,12 @@ namespace Boxfusion.Health.His.Admissions.Services
         /// <param name="filterDate"></param>
         /// <returns></returns>
         Task<List<ReportResponseDto>> GetReport(RefListReportTypes reportType, Guid wardId, DateTime filterDate);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hospitalId"></param>
+        /// <returns></returns>
+        Task<List<DashboardResponseDto>> GetDashboard(Guid? hospitalId);
     }
 }

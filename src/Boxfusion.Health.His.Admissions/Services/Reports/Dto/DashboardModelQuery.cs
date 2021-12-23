@@ -17,24 +17,24 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Dto
         /// <summary>
         /// 
         /// </summary>
-		public string Name { get; set; }
+		public virtual string Name { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-		public string Description { get; set; }
+		public virtual string Description { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-		public int? BedInWard { get; set; }
+		public virtual int? BedInWard { get; set; }
         /// <summary>
         /// 
         /// </summary>
-		public int? TotalAdmittedPatients { get; set; }
+		public virtual int? TotalAdmittedPatients { get; set; }
         /// <summary>
         /// 
         /// </summary>
-		public int? TotalBedAvailability { get; set; }
+		public virtual int? TotalBedAvailability { get; set; }
 	}
 }

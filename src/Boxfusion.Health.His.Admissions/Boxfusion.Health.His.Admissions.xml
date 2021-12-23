@@ -922,6 +922,66 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardModelQuery">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardModelQuery.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardModelQuery.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardModelQuery.BedInWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardModelQuery.TotalAdmittedPatients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardModelQuery.TotalBedAvailability">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardResponseDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardResponseDto.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardResponseDto.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardResponseDto.BedInWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardResponseDto.TotalAdmittedPatients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Reports.Dto.DashboardResponseDto.TotalBedAvailability">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Dto.ReportMapProfile">
             <summary>
             
@@ -1146,6 +1206,13 @@
             <param name="filterDate"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.IReportHelper.GetDashboardAsync(System.Nullable{System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="hospitalId"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.ReportHelper">
             <summary>
             
@@ -1170,6 +1237,13 @@
             <param name="filterDate"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.ReportHelper.GetDashboardAsync(System.Nullable{System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="hospitalId"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.Util">
             <summary>
             
@@ -1181,6 +1255,11 @@
             </summary>
         </member>
         <member name="F:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.Util.MonthReportSqlQuery">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Services.Reports.Helpers.Util.Dashboards">
             <summary>
             
             </summary>
@@ -1202,6 +1281,13 @@
             <param name="filterDate"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.ReportAppService.GetDashboard(System.Nullable{System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="hospitalId"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.IReportAppService">
             <summary>
             
@@ -1214,6 +1300,13 @@
             <param name="reportType"></param>
             <param name="wardId"></param>
             <param name="filterDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.IReportAppService.GetDashboard(System.Nullable{System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="hospitalId"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Separations.Dto.SeparationMapProfille">

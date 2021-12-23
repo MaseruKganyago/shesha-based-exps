@@ -21,12 +21,11 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
         /// <returns></returns>
         Task<List<ReportResponseDto>> GetReportAsync(RefListReportTypes reportType, Guid wardId, DateTime filterDate);
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="wardId"></param>
-        ///// <param name="reportDate"></param>
-        ///// <returns></returns>
-        //Task<List<DashboardResponseDto>> GetDashboardAsync(Guid wardId, DateTime reportDate);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hospitalId"></param>
+        /// <returns></returns>
+        Task<List<DashboardResponseDto>> GetDashboardAsync(Guid? hospitalId);
     }
 }

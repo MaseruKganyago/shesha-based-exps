@@ -313,10 +313,10 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         [HttpPut, Route("undoSeparation")]
         public async Task<AdmissionResponse> UndoSeparationAsync(UndoSeparationDto admission)
         {
-            //if (!await _hisAdmissPermissionChecker.IsApproverLevel1(await GetCurrentPersonAsync()))
-            //{
-            //    throw new UserFriendlyException("The logged user is not a level 1 approver");
-            //}
+            if (!await _hisAdmissPermissionChecker.IsApproverLevel1(await GetCurrentPersonAsync()))
+            {
+                throw new UserFriendlyException("The logged user is not a level 1 approver");
+            }
 
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
 
