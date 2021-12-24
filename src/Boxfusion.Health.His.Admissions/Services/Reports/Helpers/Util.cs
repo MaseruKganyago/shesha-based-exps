@@ -127,8 +127,8 @@ select * from CTE where RN = 1";
 											WHERE isDeleted = 0
 												AND  (His_AdmissionStatusLkp != 2 and His_AdmissionStatusLkp != 4)
 												AND His_WardId = ward.Id
-												AND (convert(date, StartDateTime) <= convert(date, getdate()) 
-												and convert(date, getdate()) <= dateadd(HOUR, 2, iif(His_SeparationDate is null, getdate(),His_SeparationDate)))
+												AND (convert(date, StartDateTime) <= convert(date, dateadd(HOUR, 2, getdate())) 
+												and convert(date, dateadd(HOUR, 2, getdate())) <= dateadd(HOUR, 2, iif(His_SeparationDate is null, dateadd(HOUR, 2, getdate()),His_SeparationDate)))
 						   ) s
 											) AS TotalAdmittedPatients
 											,RN = ROW_NUMBER()OVER(PARTITION BY ward.Id ORDER BY ward.Id)
