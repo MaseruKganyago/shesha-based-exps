@@ -34,7 +34,7 @@ select
 												,hosEnc.His_OtherCategoryLkp OtherCategory
 												,enc.His_AdmissionStatusLkp AdmissionStatus
 												,enc.His_SeparationDate SeparationDate
-												,IIF(DATEDIFF(day, enc.StartDateTime, getdate()) < 0, 0, DATEDIFF(day, enc.StartDateTime, getdate())) AS PatientDays
+												,IIF(enc.His_SeparationDate is null, DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())), DATEDIFF(day, enc.StartDateTime, enc.His_SeparationDate)) AS PatientDays
 												,RN = ROW_NUMBER()OVER(PARTITION BY enc.Id ORDER BY enc.Id)
 												from
 												Fhir_Encounters enc
@@ -63,7 +63,7 @@ select
 												,hosEnc.His_OtherCategoryLkp OtherCategory
 												,enc.His_AdmissionStatusLkp AdmissionStatus
 												,enc.His_SeparationDate SeparationDate
-												,IIF(DATEDIFF(day, enc.StartDateTime, getdate()) < 0, 0, DATEDIFF(day, enc.StartDateTime, getdate())) AS PatientDays
+												,IIF(enc.His_SeparationDate is null, DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())), DATEDIFF(day, enc.StartDateTime, enc.His_SeparationDate)) AS PatientDays
 												,RN = ROW_NUMBER()OVER(PARTITION BY enc.Id ORDER BY enc.Id)
 												from
 												Fhir_Encounters enc
@@ -98,7 +98,7 @@ select
 													,hosEnc.His_OtherCategoryLkp OtherCategory
 													,enc.His_AdmissionStatusLkp AdmissionStatus
 													,enc.His_SeparationDate SeparationDate
-													,IIF(DATEDIFF(day, enc.StartDateTime, getdate()) < 0, 0, DATEDIFF(day, enc.StartDateTime, getdate())) AS PatientDays
+													,IIF(enc.His_SeparationDate is null, DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())), DATEDIFF(day, enc.StartDateTime, enc.His_SeparationDate)) AS PatientDays
 												    ,RN = ROW_NUMBER()OVER(PARTITION BY enc.Id ORDER BY enc.Id)
 													from
 													Fhir_Encounters enc
@@ -127,17 +127,8 @@ select * from CTE where RN = 1";
 											WHERE isDeleted = 0
 												AND  (His_AdmissionStatusLkp != 2 and His_AdmissionStatusLkp != 4)
 												AND His_WardId = ward.Id
-												AND (convert(date, StartDateTime) <= convert(date, getdate()) 
-												and convert(date, getdate()) <= dateadd(HOUR, 2, iif(His_SeparationDate is null, getdate(),His_SeparationDate)))
-							
-								UNION ALL
-							   SELECT  COUNT(*) totalAdmittedPatients
-											FROM Fhir_Encounters
-											WHERE isDeleted = 0
-												AND  (His_AdmissionStatusLkp = 2)
-												AND His_WardId = ward.Id
-												AND (convert(date, StartDateTime) <= convert(date, getdate()) 
-												and convert(date, getdate()) <= dateadd(HOUR, 2, iif(His_SeparationDate is null, getdate(),His_SeparationDate)))
+												AND (convert(date, StartDateTime) <= convert(date, dateadd(HOUR, 2, getdate())) 
+												and convert(date, dateadd(HOUR, 2, getdate())) <= dateadd(HOUR, 2, iif(His_SeparationDate is null, dateadd(HOUR, 2, getdate()),His_SeparationDate)))
 						   ) s
 											) AS TotalAdmittedPatients
 											,RN = ROW_NUMBER()OVER(PARTITION BY ward.Id ORDER BY ward.Id)
