@@ -415,7 +415,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                         item.ReportDate = input.ReportDate;
                         item.Ward = ward;
                         item.AverageBedAvailability = (float?)monthlyStat.AverageBedAvailability;
-                        item.NumBedsInWard = monthlyStat.NumBedsInWard;
+                        item.NumBedsInWard = ward.NumberOfBeds;
                         item.TotalBedAvailability = monthlyStat.TotalBedAvailability;
                         item.TotalAdmissions = (int?)monthlyStat.TotalAdmissions;
                         item.TotalSeparations = (int?)monthlyStat.TotalSeparations;
