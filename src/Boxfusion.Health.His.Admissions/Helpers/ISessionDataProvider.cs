@@ -1,4 +1,5 @@
 ﻿using Abp.Dependency;
+using Boxfusion.Health.His.Admissions.Helpers.Dtos;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
 using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
 using System;
@@ -18,7 +19,7 @@ namespace Boxfusion.Health.His.Admissions.Helpers
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<List<DailyStats>> GetDailyStats(WardCensusInput input);
+        Task<List<DailyStats>> GetDailyStats(WardCensusInput2 input);
 
         /// <summary>
         /// 
@@ -26,6 +27,9 @@ namespace Boxfusion.Health.His.Admissions.Helpers
         /// <param name="input"></param>
         /// <returns></returns>
         Task<List<MonthlyStats>> GetMonthlyStats(WardCensusInput input);
+        Task<List<TodaysAdmissionResponse>> GetTodaysAdmission(TodaysAdmissionInput input);
+        Task<List<MidnightCountResponse>> GetMidnightCount(TodaysAdmissionInput input);
+        Task<List<DayPatientsResponse>> GetDayPatients(TodaysAdmissionInput input);
 
     }
 }

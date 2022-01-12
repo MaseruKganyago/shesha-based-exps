@@ -406,12 +406,22 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Helpers.Dtos.TodaysAdmissionResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Helpers.Dtos.TodaysAdmissionInput">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Helpers.ISessionDataProvider">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Helpers.ISessionDataProvider.GetDailyStats(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.WardCensusInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Helpers.ISessionDataProvider.GetDailyStats(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.WardCensusInput2)">
             <summary>
             
             </summary>

@@ -10,6 +10,7 @@ using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Admissions.Authorization;
 using Boxfusion.Health.His.Admissions.Domain.Views;
 using Boxfusion.Health.His.Admissions.Helpers;
+using Boxfusion.Health.His.Admissions.Helpers.Dtos;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
 using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
 using Boxfusion.Health.His.Admissions.Services.Wards.Helpers;
@@ -210,7 +211,38 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
                 entity.ApprovalTime2 = DateTime.Now;
 
                 //Todo: Calculate stats for the day and save to the WardReport table
-                var calculatedReport = await _sessionDataProvider.GetDailyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
+
+                var inputObj = new TodaysAdmissionInput()
+                {
+                    ReportDate = input.ReportDate,
+                    WardId = input.WardId,
+                };
+
+                var todaysAdmissions = await _sessionDataProvider.GetTodaysAdmission(inputObj);
+                var midnightCounts = await _sessionDataProvider.GetMidnightCount(inputObj);
+                var dayPatients = await _sessionDataProvider.GetDayPatients(inputObj);
+                int todaysAdmission = 0;
+                int midnightCount = 0;
+                int dayPatient = 0;
+
+
+                if (dayPatients.Any() && midnightCounts.Any() && todaysAdmissions.Any())
+                {
+                    todaysAdmission = (int)todaysAdmissions[0].TodaysAdmission;
+                    midnightCount = (int)midnightCounts[0].MidnightCount;
+                    dayPatient = (int)dayPatients[0].DayPatients;
+                }
+
+                var calculatedReport = await _sessionDataProvider.GetDailyStats(
+                    new WardCensusInput2()
+                    {
+                        ReportDate = input.ReportDate,
+                        WardId = input.WardId,
+                        dayPatient = dayPatient,
+                        midnightCount = midnightCount,
+                        todaysAdmission = todaysAdmission,
+                    });
+
                 if (!calculatedReport.Any())
                 {
                     throw new UserFriendlyException("No records found for the ward and date specified");
@@ -303,7 +335,37 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             if (entity == null) //Create the report since it doesn't exist
             {
                 //Calculate on the fly
-                var calculatedReport = await _sessionDataProvider.GetDailyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
+                var inputObj = new TodaysAdmissionInput()
+                {
+                    ReportDate = input.ReportDate,
+                    WardId = input.WardId,
+                };
+
+                var todaysAdmissions = await _sessionDataProvider.GetTodaysAdmission(inputObj);
+                var midnightCounts = await _sessionDataProvider.GetMidnightCount(inputObj);
+                var dayPatients = await _sessionDataProvider.GetDayPatients(inputObj);
+                int todaysAdmission = 0;
+                int midnightCount = 0;
+                int dayPatient = 0;
+
+
+                if (dayPatients.Any() && midnightCounts.Any() && todaysAdmissions.Any())
+                {
+                    todaysAdmission = (int)todaysAdmissions[0].TodaysAdmission;
+                    midnightCount = (int)midnightCounts[0].MidnightCount;
+                    dayPatient = (int)dayPatients[0].DayPatients;
+                }
+
+                var calculatedReport = await _sessionDataProvider.GetDailyStats(
+                    new WardCensusInput2()
+                    {
+                        ReportDate = input.ReportDate,
+                        WardId = input.WardId,
+                        dayPatient = dayPatient,
+                        midnightCount = midnightCount,
+                        todaysAdmission = todaysAdmission,
+                    });
+
                 if (!calculatedReport.Any())
                 {
                     results = new WardMidnightCensusReport()
@@ -335,7 +397,37 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
             if (results.ApprovalStatus != His.Domain.Domain.Enums.RefListApprovalStatuses.approved)
             {
                 //Calculate on the fly
-                var calculatedReport = await _sessionDataProvider.GetDailyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
+                var inputObj = new TodaysAdmissionInput()
+                {
+                    ReportDate = input.ReportDate,
+                    WardId = input.WardId,
+                };
+
+                var todaysAdmissions = await _sessionDataProvider.GetTodaysAdmission(inputObj);
+                var midnightCounts = await _sessionDataProvider.GetMidnightCount(inputObj);
+                var dayPatients = await _sessionDataProvider.GetDayPatients(inputObj);
+                int todaysAdmission = 0;
+                int midnightCount = 0;
+                int dayPatient = 0;
+
+
+                if (dayPatients.Any() && midnightCounts.Any() && todaysAdmissions.Any())
+                {
+                    todaysAdmission = (int)todaysAdmissions[0].TodaysAdmission;
+                    midnightCount = (int)midnightCounts[0].MidnightCount;
+                    dayPatient = (int)dayPatients[0].DayPatients;
+                }
+
+                var calculatedReport = await _sessionDataProvider.GetDailyStats(
+                    new WardCensusInput2() 
+                    { 
+                        ReportDate = input.ReportDate, 
+                        WardId = input.WardId,
+                        dayPatient = dayPatient,
+                        midnightCount = midnightCount,
+                        todaysAdmission = todaysAdmission,
+                    });
+
                 if (!calculatedReport.Any())
                 {
                     results = new WardMidnightCensusReport()
