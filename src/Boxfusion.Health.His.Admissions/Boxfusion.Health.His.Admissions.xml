@@ -2675,6 +2675,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.HisWardsAppService.InternalMembersIndexTable">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Wards.HisWardsAppService.ApproveLevel1(Boxfusion.Health.His.Admissions.Services.Admissions.Dto.WardCensusInput)">
             <summary>
             
