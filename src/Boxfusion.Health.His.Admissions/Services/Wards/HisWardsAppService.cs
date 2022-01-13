@@ -124,20 +124,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
 
             return table;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public static ChildDataTableConfig<ShaRole, ShaRoleAppointedPersonInfo, Guid> InternalMembersIndexTable()
-        {
-            var table = ChildDataTableConfig<ShaRole, ShaRoleAppointedPersonInfo, Guid>.OneToMany("InternalMembers_Index", ap => ap.Role);
-
-            table.AddProperty(e => e.Person.FullName, c => c.Caption("Full Name").SortAscending());
-            table.AddProperty(e => e.Person.User.UserName, c => c.Caption("UserName"));
-            table.AddProperty(e => e.LastModificationTime, c => c.Caption("Updated On").Visible(false));
-
-            return table;
-        }
+        
 
         /// <summary>
         /// 
