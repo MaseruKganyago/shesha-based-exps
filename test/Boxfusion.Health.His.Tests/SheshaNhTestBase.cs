@@ -211,5 +211,8 @@ namespace Boxfusion.Health.His.Tests
             return await UsingDbSession(session => session.Query<Tenant>().SingleAsync(t => t.Id == tenantId));
         }
     }
+    public abstract class SheshaNhTestBase : SheshaNhTestBase<HisTestModule>
+    {
 
+    }
 }
