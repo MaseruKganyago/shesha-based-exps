@@ -212,8 +212,4 @@ namespace Boxfusion.Health.His.Tests
         }
     }
 
-    //public abstract class SheshaNhTestBase : SheshaNhTestBase<WorkOrderTestModule>
-    //{
-
-    //}
 }
