@@ -58,10 +58,16 @@ namespace Boxfusion.Health.His.Admissions
         /// </summary>
         public override void PostInitialize()
         {
-            Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
-                typeof(HisAdmissModule).Assembly,
-                moduleName: "HisAdmis",
-                useConventionalHttpVerbs: true);
+            try
+            {
+                Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
+                    typeof(HisAdmissModule).Assembly,
+                    moduleName: "HisAdmis",
+                    useConventionalHttpVerbs: true);
+            }
+            catch
+            {
+            }
         }
     }
 }

@@ -17,10 +17,15 @@ using Moq;
 using NSubstitute;
 using Boxfusion.Health.His.Tests.DependencyInjection;
 using Shesha;
-using Shesha.Configuration.Runtime;
 using Shesha.NHibernate;
 using Shesha.Services;
 using Boxfusion.Health.His.Admissions;
+using Abp.Domain.Uow;
+using System.Reflection;
+using Castle.Facilities.Logging;
+using Abp.Castle.Logging.Log4Net;
+using Abp.AspNetCore.Configuration;
+using Microsoft.Extensions.Hosting;
 
 namespace Boxfusion.Health.His.Tests
 {
@@ -39,11 +44,7 @@ namespace Boxfusion.Health.His.Tests
         public HisTestModule(SheshaNHibernateModule nhModule)
         {
             nhModule.ConnectionString = ConnectionString;
-
-            /*
-            nhModule.UseInMemoryDatabase = true;
             nhModule.SkipDbSeed = true;
-            */
         }
         
         public override void PreInitialize()
@@ -58,7 +59,20 @@ namespace Boxfusion.Health.His.Tests
 
             // mock IWebHostEnvironment
             IocManager.IocContainer.Register(Component.For<IWebHostEnvironment>().ImplementedBy<TestWebHostEnvironment>().LifestyleSingleton());
+
+            IocManager.IocContainer.Register(
+                Component.For<IAbpAspNetCoreConfiguration>()
+                    .ImplementedBy<AbpAspNetCoreConfiguration>()
+                    .LifestyleSingleton()
+            );
             
+            var appLifetimeMoq = new Mock<IHostApplicationLifetime>();
+            IocManager.IocContainer.Register(
+                Component.For<IHostApplicationLifetime>()
+                    .Instance(appLifetimeMoq.Object)
+                    .LifestyleSingleton()
+            );
+
             var configuration = new Mock<IConfiguration>();
             configuration.Setup(c => c.GetSection(It.IsAny<String>())).Returns(new Mock<IConfigurationSection>().Object);
             IocManager.IocContainer.Register(
@@ -66,10 +80,6 @@ namespace Boxfusion.Health.His.Tests
                     .Instance(configuration.Object)
                     .LifestyleSingleton()
             );
-
-            IocManager.Register(typeof(IEntityConfigurationStore),
-                typeof(EntityConfigurationStore),
-                DependencyLifeStyle.Singleton);
 
             IocManager.IocContainer.Register(
                 Component.For<IBackgroundJobClient>()
@@ -94,10 +104,19 @@ namespace Boxfusion.Health.His.Tests
 
             // replace connection string resolver
             Configuration.ReplaceService<IDbPerTenantConnectionStringResolver, TestConnectionStringResolver>(DependencyLifeStyle.Transient);
+
+            Configuration.ReplaceService<ICurrentUnitOfWorkProvider, AsyncLocalCurrentUnitOfWorkProvider>(DependencyLifeStyle.Singleton);
         }
 
         public override void Initialize()
         {
+            var thisAssembly = Assembly.GetExecutingAssembly();
+            IocManager.RegisterAssemblyByConvention(thisAssembly);
+
+            IocManager.IocContainer.AddFacility<LoggingFacility>(f => f.UseAbpLog4Net().WithConfig("log4net.config"));
+
+            StaticContext.SetIocManager(IocManager);
+            
             ServiceCollectionRegistrar.Register(IocManager);
         }
 

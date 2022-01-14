@@ -1,7 +1,5 @@
 ﻿using Boxfusion.Health.His.Admissions.Services.Wards;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
