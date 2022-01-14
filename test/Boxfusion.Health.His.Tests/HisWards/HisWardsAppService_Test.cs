@@ -11,20 +11,17 @@ namespace Boxfusion.Health.His.Tests.HisWards
     public class HisWardsAppService_Test : SheshaNhTestBase<HisTestModule>
     {
         private readonly IHisWardsAppService _hisWardsAppService;
-        private readonly ITestOutputHelper TestOutputHelper;
-        public HisWardsAppService_Test(
-            IHisWardsAppService hisWardsAppService,
-            ITestOutputHelper testOutputHelper
-            )
+        private readonly ITestOutputHelper _testOutputHelper;
+        public HisWardsAppService_Test()
         {
-            _hisWardsAppService = hisWardsAppService;
-            TestOutputHelper = testOutputHelper;
+            _hisWardsAppService = Resolve<IHisWardsAppService>();
+            _testOutputHelper = Resolve<ITestOutputHelper>();
         }
 
         [Fact]
         public async Task Should_Get_Daily_Report()
         {
-            TestOutputHelper.WriteLine("Testing Daily Report");
+            _testOutputHelper.WriteLine("Testing Daily Report");
             var report = await _hisWardsAppService.GetWardDailyReport(new Admissions.Services.Admissions.Dto.WardCensusInput()
             {
                 ReportDate = DateTime.Parse("2022-01-13"),
