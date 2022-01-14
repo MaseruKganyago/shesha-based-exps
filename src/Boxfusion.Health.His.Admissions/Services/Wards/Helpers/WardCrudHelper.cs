@@ -16,6 +16,7 @@ using NHibernate.Linq;
 using Shesha;
 using Shesha.AutoMapper.Dto;
 using Shesha.Domain;
+using Shesha.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -148,7 +149,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
         {
             var OwnerOrganisation = await _repository.GetAsync(wardId);
 
-            var hospitalAppoitmentService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
+            var hospitalAppoitmentService = StaticContext.IocManager.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
             var hospital = await hospitalAppoitmentService.GetAll().Where(r => r.Person == currentPerson).Select(r => r.Hospital).FirstOrDefaultAsync();
 
             if(OwnerOrganisation?.OwnerOrganisation?.Id == hospital.Id)
