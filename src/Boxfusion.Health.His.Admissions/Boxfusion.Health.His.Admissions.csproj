@@ -21,15 +21,22 @@
   <ItemGroup>
     <Compile Remove="Dtos\**" />
     <Compile Remove="Services\Admissions\**" />
+    <Compile Remove="Services\HisPatients\**" />
+    <Compile Remove="Services\Hospitals\**" />
+    <Compile Remove="Services\Users\**" />
+    <Compile Remove="Services\Wards\**" />
     <EmbeddedResource Remove="Dtos\**" />
     <EmbeddedResource Remove="Services\Admissions\**" />
+    <EmbeddedResource Remove="Services\HisPatients\**" />
+    <EmbeddedResource Remove="Services\Hospitals\**" />
+    <EmbeddedResource Remove="Services\Users\**" />
+    <EmbeddedResource Remove="Services\Wards\**" />
     <None Remove="Dtos\**" />
     <None Remove="Services\Admissions\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Services\HisPatients\Dtos\HisPatientInput.cs" />
-    <Compile Remove="Services\HisPatients\Dtos\HisPatientResponse.cs" />
+    <None Remove="Services\HisPatients\**" />
+    <None Remove="Services\Hospitals\**" />
+    <None Remove="Services\Users\**" />
+    <None Remove="Services\Wards\**" />
   </ItemGroup>
 
   <ItemGroup>

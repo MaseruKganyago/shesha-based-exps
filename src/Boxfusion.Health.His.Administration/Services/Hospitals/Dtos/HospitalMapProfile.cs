@@ -3,6 +3,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
+using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
 using Boxfusion.Health.His.Domain.Domain;
 using Shesha.AutoMapper;
 using Shesha.AutoMapper.Dto;
@@ -12,7 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Services.Hospitals.Dtos
+namespace Boxfusion.Health.His.Administration.Services.Hospitals.Dtos
 {
     /// <summary>
     /// 

@@ -1,7 +1,6 @@
 ﻿using Abp.Dependency;
 using Boxfusion.Health.His.Admissions.Helpers.Dtos;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
-using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;

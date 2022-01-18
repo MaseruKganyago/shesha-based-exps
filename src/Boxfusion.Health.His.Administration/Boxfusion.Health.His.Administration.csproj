@@ -20,13 +20,11 @@
 
   <ItemGroup>
     <Compile Remove="Domain\**" />
+    <Compile Remove="Migrations\**" />
     <EmbeddedResource Remove="Domain\**" />
+    <EmbeddedResource Remove="Migrations\**" />
     <None Remove="Domain\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Services\Wards\EncountersAppService.cs" />
-    <Compile Remove="Services\Wards\IEncountersAppService.cs" />
+    <None Remove="Migrations\**" />
   </ItemGroup>
 
 
@@ -45,13 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
-    <Folder Include="Services\Users\" />
-    <Folder Include="Services\Wards\Helpers\" />
-    <Folder Include="Services\Hospitals\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.csproj" />
     <ProjectReference Include="..\Boxfusion.Health.His.Domain\Boxfusion.Health.His.Domain.csproj" />
   </ItemGroup>
 

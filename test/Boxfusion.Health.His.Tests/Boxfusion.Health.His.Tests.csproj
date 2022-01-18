@@ -33,6 +33,7 @@
     <PackageReference Include="Castle.Core" Version="4.4.0" />
   </ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\..\src\Boxfusion.Health.His.Administration\Boxfusion.Health.His.Administration.csproj" />
 	  <ProjectReference Include="..\..\src\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.csproj" />
 	  <ProjectReference Include="..\..\src\Boxfusion.Health.His.Web.Core\Boxfusion.Health.His.Web.Core.csproj" />
 	</ItemGroup>
