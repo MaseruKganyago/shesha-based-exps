@@ -28,7 +28,7 @@ namespace Boxfusion.Health.His.Administration.Services.Hospitals
     /// </summary>
     [AbpAuthorize]
     [ApiVersion("1")]
-    [Route("api/v{version:apiVersion}/admissions/[controller]")]
+    [Route("api/v{version:apiVersion}/administrations/[controller]")]
     public class HisHospitalsAppService : CdmAppServiceBase, IHisHospitalsAppService
     {
         private readonly IHospitalCrudHelper _HospitalCrudHelper;

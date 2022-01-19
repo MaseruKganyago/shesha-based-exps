@@ -8,7 +8,7 @@ namespace Boxfusion.Health.His.Administration.Configuration
     /// <summary>
     /// 
     /// </summary>
-    public class HisAdmisSettingsAppService: SheshaAppServiceBase
+    public class HisAdminisSettingsAppService: SheshaAppServiceBase
     {
         private readonly ISettingManager _settingManager;
         
@@ -16,7 +16,7 @@ namespace Boxfusion.Health.His.Administration.Configuration
         /// 
         /// </summary>
         /// <param name="settingManager"></param>
-        public HisAdmisSettingsAppService(ISettingManager settingManager)
+        public HisAdminisSettingsAppService(ISettingManager settingManager)
         {
             _settingManager = settingManager;
         }

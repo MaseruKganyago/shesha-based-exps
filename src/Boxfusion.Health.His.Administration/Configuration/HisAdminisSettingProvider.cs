@@ -19,7 +19,7 @@ namespace Boxfusion.Health.His.Administration.Configuration
         /// </summary>
         public HisAdminisSettingProvider()
         {
-            LocalizationSourceName = "HisAdmis";
+            LocalizationSourceName = "HisAdminis";
         }
 
         /// <summary>

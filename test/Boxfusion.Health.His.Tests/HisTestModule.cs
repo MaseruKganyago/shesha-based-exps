@@ -40,8 +40,8 @@ namespace Boxfusion.Health.His.Tests
         )]
     public class HisTestModule : AbpModule
     {
-        private const string ConnectionString = @"Data Source=sql-shared-nonprod.database.windows.net;Initial Catalog=boxhealthhis-test;User=boxdbadmin;Password=n0-hack.2020;MultipleActiveResultSets=True;TrustServerCertificate=True";
-        //private const string ConnectionString = "Data Source=.;Initial Catalog=BoxHealthis-test;MultipleActiveResultSets=True;Trusted_Connection=True;";
+        //private const string ConnectionString = @"Data Source=sql-shared-nonprod.database.windows.net;Initial Catalog=boxhealthhis-test;User=boxdbadmin;Password=n0-hack.2020;MultipleActiveResultSets=True;TrustServerCertificate=True";
+        private const string ConnectionString = "Data Source=.;Initial Catalog=BoxHealthis-test;MultipleActiveResultSets=True;Trusted_Connection=True;";
 
         public HisTestModule(SheshaNHibernateModule nhModule)
         {

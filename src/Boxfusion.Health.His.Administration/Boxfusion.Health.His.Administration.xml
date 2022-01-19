@@ -117,30 +117,30 @@
             <param name="name"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Configuration.HisAdmisSettingsAppService">
+        <member name="T:Boxfusion.Health.His.Administration.Configuration.HisAdminisSettingsAppService">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisAdmisSettingsAppService.#ctor(Abp.Configuration.ISettingManager)">
+        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisAdminisSettingsAppService.#ctor(Abp.Configuration.ISettingManager)">
             <summary>
             
             </summary>
             <param name="settingManager"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisAdmisSettingsAppService.Update(Boxfusion.Health.His.Administration.Configuration.HisAdminisSettingsDto)">
+        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisAdminisSettingsAppService.Update(Boxfusion.Health.His.Administration.Configuration.HisAdminisSettingsDto)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisAdmisSettingsAppService.Get">
+        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisAdminisSettingsAppService.Get">
             <summary>
             Returns Health.His settings
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisAdmisSettingsAppService.ChangeSettingAsync(System.String,System.String)">
+        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisAdminisSettingsAppService.ChangeSettingAsync(System.String,System.String)">
             <summary>
             Changes setting for tenant with fallback to application
             </summary>

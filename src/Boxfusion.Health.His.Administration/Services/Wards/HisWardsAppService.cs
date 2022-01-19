@@ -35,7 +35,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
     /// </summary>
     [AbpAuthorize]
     [ApiVersion("1")]
-    [Route("api/v{version:apiVersion}/admissions/[controller]")]
+    [Route("api/v{version:apiVersion}/administrations/[controller]")]
     public class HisWardsAppService : CdmAppServiceBase, IHisWardsAppService
     {
         private readonly IRepository<WardMidnightCensusReport, Guid> _wardMidnightCensusReport;

@@ -31,6 +31,7 @@ namespace Boxfusion.Health.His.Tests.Hospitals
                 Longitude = 1544,
                 OrganisationType = new Shesha.AutoMapper.Dto.ReferenceListItemValueDto() { ItemValue = 1 },
                 Speciality = new Shesha.AutoMapper.Dto.ReferenceListItemValueDto() { ItemValue = 1 },
+                PrimaryContactTelephone = "015255454"
             });
 
             Assert.NotNull(hospital);

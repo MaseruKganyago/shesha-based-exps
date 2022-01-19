@@ -32,7 +32,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Users
     /// </summary>
     [AbpAuthorize]
     [ApiVersion("1")]
-    [Route("api/v{version:apiVersion}/admissions/[controller]")]
+    [Route("api/v{version:apiVersion}/administrations/[controller]")]
     public class HisUsersAppService : CdmAppServiceBase, IHisUsersAppService
     {
         private readonly IHisUserCrudHelper _hisUserCrudHelper;

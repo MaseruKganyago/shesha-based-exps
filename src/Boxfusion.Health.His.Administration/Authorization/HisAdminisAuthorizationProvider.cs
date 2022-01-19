@@ -35,7 +35,7 @@ namespace Boxfusion.Health.His.Administration.Authorization
 
         private static ILocalizableString L(string name)
         {
-            return new LocalizableString(name, "HisAdmis");
+            return new LocalizableString(name, "HisAdminis");
         }
     }
 }
