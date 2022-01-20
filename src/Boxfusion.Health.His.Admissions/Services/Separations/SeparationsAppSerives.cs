@@ -27,7 +27,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
         private readonly ISeparationService _separationService;
         private readonly IHisAdmissPermissionChecker _hisAdmissPermissionChecker;
         private readonly IHisWardMidnightCensusReportsHelper _hisWardMidnightCensusReportsHelper;
-        private readonly IRepository<HisAdmissionAuditTrail, Guid> _hisAdmissionAuditTrailRepository;
+        private readonly IHisAdmissionAuditTrailService _hisAdmissionAuditTrailRepository;
 
         /// <summary>
         /// 
@@ -39,7 +39,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
         public SeparationsAppSerives(ISeparationService separationService, 
             IHisAdmissPermissionChecker hisAdmissPermissionChecker,
             IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper,
-            IRepository<HisAdmissionAuditTrail, Guid> hisAdmissionAuditTrailRepository)
+            IHisAdmissionAuditTrailService hisAdmissionAuditTrailRepository)
         {
             _separationService = separationService;
             _hisAdmissPermissionChecker = hisAdmissPermissionChecker;
@@ -81,7 +81,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
             var separation = await _separationService.CreateAsync(input, person);
 
             var wardAdmission = ObjectMapper.Map<WardAdmission>(separation.Id);
-            await _hisAdmissionAuditTrailRepository.InsertOrUpdateAsync(new HisAdmissionAuditTrail()
+            await _hisAdmissionAuditTrailRepository.CreateAudit(new HisAdmissionAuditTrail()
             {
                 Admission = wardAdmission,
                 AdmissionStatus = RefListAdmissionStatuses.separated,
@@ -113,7 +113,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
 
             var wardAdmission = ObjectMapper.Map<WardAdmission>(separation.Id);
             var admissionAudit = await _hisAdmissionAuditTrailRepository
-                .FirstOrDefaultAsync(r => r.Admission.Id == wardAdmission.Id && r.AuditTime == wardAdmission.StartDateTime);
+                .GetAudit(wardAdmission.Id , wardAdmission.StartDateTime);
 
             if (admissionAudit != null)
             {
@@ -127,7 +127,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Separations
             }
             else
             {
-                await _hisAdmissionAuditTrailRepository.InsertAsync(new HisAdmissionAuditTrail()
+                await _hisAdmissionAuditTrailRepository.CreateAudit(new HisAdmissionAuditTrail()
                 {
                     Admission = wardAdmission,
                     AdmissionStatus = (RefListAdmissionStatuses?)wardAdmission.AdmissionStatus,

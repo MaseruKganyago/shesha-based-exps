@@ -49,7 +49,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         private readonly IRepository<Condition, Guid> _conditionRepository;
         private readonly ISessionDataProvider _sessionDataProvider;
         private readonly IHisWardMidnightCensusReportsHelper _hisWardMidnightCensusReportsHelper;
-        private readonly IRepository<HisAdmissionAuditTrail, Guid> _hisAdmissionAuditTrailRepository;
+        private readonly IHisAdmissionAuditTrailService _hisAdmissionAuditTrailRepository;
 
         /// <summary>
         /// 
@@ -74,7 +74,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             IEncounterCrudHelper<HospitalAdmission> hospitalisationEncounterCrudHelper,
             IRepository<Condition, Guid> conditionRepository, ISessionDataProvider sessionDataProvider,
             IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper,
-            IRepository<HisAdmissionAuditTrail, Guid> hisAdmissionAuditTrailRepository)
+            IHisAdmissionAuditTrailService hisAdmissionAuditTrailRepository)
         {
             _wardAdmissionCrudHelper = wardAdmissionCrudHelper;
             _patientRepository = patientRepository;
@@ -189,8 +189,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)wardAdmission.StartDateTime.Value.Date, wardId = (Guid)wardAdmission.Ward.Id });
 
             var person = await GetCurrentPersonAsync();
-            var admissionAudit = await _hisAdmissionAuditTrailRepository
-                .FirstOrDefaultAsync(r => r.Admission.Id == wardAdmission.Id && r.AuditTime == wardAdmission.StartDateTime);
+            var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(wardAdmission.Id, wardAdmission.StartDateTime);
 
             if (admissionAudit != null)
             {
@@ -204,7 +203,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             }
             else
             {
-                await _hisAdmissionAuditTrailRepository.InsertAsync(new HisAdmissionAuditTrail()
+                await _hisAdmissionAuditTrailRepository.CreateAudit(new HisAdmissionAuditTrail()
                 {
                     Admission = wardAdmission,
                     AdmissionStatus = (RefListAdmissionStatuses?)wardAdmission.AdmissionStatus,
