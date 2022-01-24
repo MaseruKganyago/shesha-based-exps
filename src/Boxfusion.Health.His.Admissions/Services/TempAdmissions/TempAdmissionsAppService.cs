@@ -262,7 +262,20 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
 
             if (entity == null)
             {
-                var calculatedReport = await _sessionDataProvider.GetMonthlyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
+                var inputObj = new TodaysAdmissionInput()
+                {
+                    ReportDate = input.ReportDate,
+                    WardId = input.WardId,
+                };
+                var totalAdmissions = await _sessionDataProvider.GetMonthlyTotalAdmissions(inputObj);
+                int TotalAdmissions = 0;
+
+                if (totalAdmissions.Any())
+                {
+                    TotalAdmissions = (int)totalAdmissions[0].TotalAdmissions;
+                }
+
+                var calculatedReport = await _sessionDataProvider.GetMonthlyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId, TotalMonthlyAdmissions = TotalAdmissions });
                 if (calculatedReport.Any())
                 {
                     var monthlyStat = calculatedReport[0];
@@ -286,7 +299,20 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
             }
             else
             {
-                var calculatedReport = await _sessionDataProvider.GetMonthlyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId });
+                var inputObj = new TodaysAdmissionInput()
+                {
+                    ReportDate = input.ReportDate,
+                    WardId = input.WardId,
+                };
+                var totalAdmissions = await _sessionDataProvider.GetMonthlyTotalAdmissions(inputObj);
+                int TotalAdmissions = 0;
+
+                if (totalAdmissions.Any())
+                {
+                    TotalAdmissions = (int)totalAdmissions[0].TotalAdmissions;
+                }
+
+                var calculatedReport = await _sessionDataProvider.GetMonthlyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId, TotalMonthlyAdmissions = TotalAdmissions });
                 if (calculatedReport.Any())
                 {
                     var monthlyStat = calculatedReport[0];
@@ -404,7 +430,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
         {
             var admissions = await _wardAdmissionRepositiory.GetAllListAsync(r => r.Ward != null && r.Ward.Id == wardId && r.AdmissionStatus == admissionStatus);
 
-             return ObjectMapper.Map<List<AdmissionResponse>>(admissions);
+            return ObjectMapper.Map<List<AdmissionResponse>>(admissions);
         }
 
         /// <summary>
@@ -492,9 +518,9 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
 
             var wardAdmission = await GetEntityAsync<WardAdmission>(admission.Id);
 
-            var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(input.Id ,admission.StartDateTime);
+            var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(input.Id, admission.StartDateTime);
 
-            if(admissionAudit != null)
+            if (admissionAudit != null)
             {
                 await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(admissionAudit.Id, async item =>
                 {
@@ -513,7 +539,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
                     AuditTime = admission.StartDateTime.Value.Date,
                     Initiator = person
                 });
-            }           
+            }
 
             return admission;
         }
@@ -591,15 +617,15 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
 
             var admission = await _wardAdmissionRepositiory.FirstOrDefaultAsync(x => x.Id == input.Id);
 
-            if(admission?.Subject?.DateOfBirth != null)
+            if (admission?.Subject?.DateOfBirth != null)
             {
-                if(local.UtilityHelper.GetAge(admission.Subject.DateOfBirth.Value) < 5)
+                if (local.UtilityHelper.GetAge(admission.Subject.DateOfBirth.Value) < 5)
                 {
                     Validation.ValidateReflist(input?.SeparationChildHealth, "Separation Child Health");
                 }
             }
 
-            if(input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.internalTransfer)
+            if (input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.internalTransfer)
                 Validation.ValidateEntityWithDisplayNameDto(input?.SeparationDestinationWard, "Ward");
             if (input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.externalTransfer)
             {
@@ -612,7 +638,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
                     Validation.ValidateText(input?.TransferToNonGautengHospital, "Transfer To Non Gauteng Hospital");
                 }
             }
-            
+
             var admissionResponse = await _admissionCrudHelper.SeparatePatientAsync(input, person);
 
             await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)admissionResponse.StartDateTime.Value.Date, wardId = (Guid)admissionResponse.Ward.Id });

@@ -20,6 +20,10 @@ namespace Boxfusion.Health.His.Admissions.Helpers.Dtos
     {
         public int DayPatients { get; set; }
     }
+    public class TotalAdmissionsResponse
+    {
+        public int TotalAdmissions { get; set; }
+    }
     /// <summary>
     /// 
     /// </summary>

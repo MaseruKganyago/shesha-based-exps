@@ -128,13 +128,51 @@ namespace Boxfusion.Health.His.Admissions.Helpers
                     .CreateSQLQuery(@"Exec GetWardCensusMonthlyStatsProc 
                             @WardId = :WardId,
                             @ReportDate = :ReportDate,
-                            @DaysLapsed = :DaysLapsed
+                            @DaysLapsed = :DaysLapsed,
+                            @TotalAdmissions = :totalAdmissions
                     ")
                     .SetParameter("WardId", input.WardId)
                     .SetParameter("ReportDate", input.ReportDate)
                     .SetParameter("DaysLapsed", input.ReportDate.Value.Day)
+                    .SetParameter("totalAdmissions", input.TotalMonthlyAdmissions)
                     .SetResultTransformer(Transformers.AliasToBean<MonthlyStats>())
                     .ListAsync<MonthlyStats>())
+                    .ToList();
+            }
+            catch (Exception Ex)
+            {
+
+                throw new UserFriendlyException(Ex.Message);
+            }
+        }
+
+        public async Task<List<TotalAdmissionsResponse>> GetMonthlyTotalAdmissions(TodaysAdmissionInput input)
+        {
+            try
+            {
+                return (await _sessionProvider.Session
+                    .CreateSQLQuery(@"
+                           WITH TotalAdmissions AS (
+                            SELECT  ROW_NUMBER() OVER(PARTITION BY AuditTrail.AdmissionId
+                                                        ORDER BY AuditTrail.CreationTime DESC) AS FilterProp
+                            FROM His_HisAdmissionAuditTrails AuditTrail
+	                            INNER JOIN Fhir_Encounters Enc 
+		                            ON Enc.Id = AuditTrail.AdmissionId
+                            WHERE AuditTrail.isDeleted = 0
+	                            AND Enc.His_WardId is not null
+	                            AND Enc.IsDeleted = 0
+	                            AND  AuditTrail.AdmissionStatusLkp = 1
+	                            AND Enc.His_WardId = :WardId
+	                            AND month(Enc.StartDateTime) = month(:ReportDate) and year(Enc.StartDateTime) = year(:ReportDate)
+                            )
+                            SELECT count(1) AS TotalAdmissions FROM TotalAdmissions WHERE FilterProp = 1
+
+
+                    ")
+                    .SetParameter("WardId", input.WardId)
+                    .SetParameter("ReportDate", input.ReportDate)
+                    .SetResultTransformer(Transformers.AliasToBean<TotalAdmissionsResponse>())
+                    .ListAsync<TotalAdmissionsResponse>())
                     .ToList();
             }
             catch (Exception Ex)

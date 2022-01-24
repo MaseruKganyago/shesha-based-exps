@@ -29,6 +29,7 @@ namespace Boxfusion.Health.His.Admissions.Helpers
         Task<List<TodaysAdmissionResponse>> GetTodaysAdmission(TodaysAdmissionInput input);
         Task<List<MidnightCountResponse>> GetMidnightCount(TodaysAdmissionInput input);
         Task<List<DayPatientsResponse>> GetDayPatients(TodaysAdmissionInput input);
+        Task<List<TotalAdmissionsResponse>> GetMonthlyTotalAdmissions(TodaysAdmissionInput input);
 
     }
 }
