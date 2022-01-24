@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Services.Wards.Dto
+namespace Boxfusion.Health.His.Admissions.Helpers.Dtos
 {
     [AutoMap(new[] { typeof(HisWard) })]
     public class HisWardResponse : WardResponse

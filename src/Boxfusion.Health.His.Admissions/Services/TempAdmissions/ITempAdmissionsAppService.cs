@@ -1,5 +1,7 @@
 ﻿using Abp.Application.Services;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
+using Boxfusion.Health.His.Admissions.Helpers.Dtos;
+using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
 using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using System;
@@ -14,6 +16,31 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
     /// </summary>
     public interface ITempAdmissionsAppService : IApplicationService
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<WardMidnightCensusReportResponse> GetWardDailyReport(WardCensusInput input);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<WardMidnightCensusReportResponse> GetWardMonthlyReport(WardCensusInput input);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<WardMidnightCensusReportResponse> SubmitForApproval(WardCensusInput input);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<WardMidnightCensusReportResponse> Reject(RejectReportInput input);
+
         /// <summary>
         /// 
         /// </summary>

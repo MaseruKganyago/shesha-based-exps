@@ -10,7 +10,7 @@ using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Services.Locations.Helpers;
-using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
+using Boxfusion.Health.His.Admissions.Helpers.Dtos;
 using Boxfusion.Health.His.Domain.Domain;
 using NHibernate.Linq;
 using Shesha;
@@ -23,7 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Admissions.Services.Wards.Helpers
+namespace Boxfusion.Health.His.Admissions.Helpers
 {
     /// <summary>
     /// 

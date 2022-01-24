@@ -1,4 +1,5 @@
-﻿using Boxfusion.Health.His.Domain.Domain;
+﻿using Boxfusion.Health.His.Admissions.Helpers.Dtos;
+using Boxfusion.Health.His.Domain.Domain;
 using Shesha.AutoMapper;
 using Shesha.AutoMapper.Dto;
 using Shesha.Domain;

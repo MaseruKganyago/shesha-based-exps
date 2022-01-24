@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
+using Boxfusion.Health.His.Admissions.Helpers.Dtos;
 using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
 using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
 using Shesha.AutoMapper.Dto;
@@ -22,24 +23,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// </summary>
         /// <returns></returns>
         Task<List<HospitalResponse>> GetAssignedHospitals();
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<WardMidnightCensusReportResponse> GetWardDailyReport(WardCensusInput input);
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<WardMidnightCensusReportResponse> GetWardMonthlyReport(WardCensusInput input);
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<WardMidnightCensusReportResponse> SubmitForApproval(WardCensusInput input);
+       
         /// <summary>
         /// 
         /// </summary>
@@ -51,13 +35,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<WardMidnightCensusReportResponse> ApproveLevel2(WardCensusInput input);
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<WardMidnightCensusReportResponse> Reject(RejectReportInput input);
+        Task<WardMidnightCensusReportResponse> ApproveLevel2(WardCensusInput input);       
 
         /// <summary>
         /// 
