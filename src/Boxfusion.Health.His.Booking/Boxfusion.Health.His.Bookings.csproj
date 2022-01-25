@@ -20,13 +20,10 @@
 
   <ItemGroup>
     <Compile Remove="Domain\**" />
-    <Compile Remove="Migrations\**" />
     <Compile Remove="Services\Wards\**" />
     <EmbeddedResource Remove="Domain\**" />
-    <EmbeddedResource Remove="Migrations\**" />
     <EmbeddedResource Remove="Services\Wards\**" />
     <None Remove="Domain\**" />
-    <None Remove="Migrations\**" />
     <None Remove="Services\Wards\**" />
   </ItemGroup>
 
