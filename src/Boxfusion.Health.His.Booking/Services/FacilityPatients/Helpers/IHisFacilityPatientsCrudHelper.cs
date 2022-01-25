@@ -20,5 +20,10 @@ namespace Boxfusion.Health.His.Bookings.Services.FacilityPatients.Helpers
         /// <param name="id"></param>
         /// <returns></returns>
         Task<FacilityPatientsResponse> GetAsync(Guid id);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        Task<List<FacilityPatientsResponse>> GetAllAsync();
     }
 }

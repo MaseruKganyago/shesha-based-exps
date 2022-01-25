@@ -34,6 +34,11 @@ namespace Boxfusion.Health.His.Bookings.Services.FacilityPatients.Helpers
             return await _patientCrudHelper.CreateAsync(input, facilityPatient);
         }
 
+        public async Task<List<FacilityPatientsResponse>> GetAllAsync()
+        {
+            return await _patientCrudHelper.GetAllAsync();
+        }
+
         /// <summary>
         /// 
         /// </summary>

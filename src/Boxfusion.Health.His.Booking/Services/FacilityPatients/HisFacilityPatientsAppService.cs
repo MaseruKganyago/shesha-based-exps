@@ -39,6 +39,16 @@ namespace Boxfusion.Health.His.Booking.Services.FacilityPatients
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("")]
+        public async Task<List<FacilityPatientsResponse>> GetAllAsync()
+        {
+            return await _hisPatientCrudHelper.GetAllAsync();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="patientId"></param>
         /// <returns></returns>
         [HttpGet, Route("{id}")]

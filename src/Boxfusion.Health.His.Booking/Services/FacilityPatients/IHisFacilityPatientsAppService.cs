@@ -18,6 +18,11 @@ namespace Boxfusion.Health.His.Booking.Services.FacilityPatients
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        Task<List<FacilityPatientsResponse>> GetAllAsync();
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         Task<FacilityPatientsResponse> CreateAsync(FacilityPatientsInput input);
