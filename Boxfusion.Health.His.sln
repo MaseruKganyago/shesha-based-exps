@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Domain
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Tests", "test\Boxfusion.Health.His.Tests\Boxfusion.Health.His.Tests.csproj", "{CCD6D1E2-5DE4-4FDD-BCBA-B47D022F7488}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Bookings", "src\Boxfusion.Health.His.Booking\Boxfusion.Health.His.Bookings.csproj", "{37C96E9F-1129-4309-A233-3427B57BAF2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{CCD6D1E2-5DE4-4FDD-BCBA-B47D022F7488}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCD6D1E2-5DE4-4FDD-BCBA-B47D022F7488}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCD6D1E2-5DE4-4FDD-BCBA-B47D022F7488}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37C96E9F-1129-4309-A233-3427B57BAF2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37C96E9F-1129-4309-A233-3427B57BAF2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37C96E9F-1129-4309-A233-3427B57BAF2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37C96E9F-1129-4309-A233-3427B57BAF2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

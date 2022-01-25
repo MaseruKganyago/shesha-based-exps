@@ -11,6 +11,9 @@ namespace Boxfusion.Health.His.Domain.Domain
     [Entity(TypeShortAlias = "His.FacilityPatient")]
     public class FacilityPatient : HisPatient
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual string FacilityPatientIdentifier { get; set; }
     }
 }

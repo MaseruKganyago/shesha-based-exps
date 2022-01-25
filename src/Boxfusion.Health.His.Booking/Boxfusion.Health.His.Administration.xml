@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Boxfusion.Health.His.Bookings</name>
+    </assembly>
+    <members>
+        <member name="T:Boxfusion.Health.His.Administration.Authorization.HisBookingsAuthorizationProvider">
+            <summary>
+            Health.His Authorization Provider
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Authorization.HisBookingsAuthorizationProvider.SetPermissions(Abp.Authorization.IPermissionDefinitionContext)">
+            <summary>
+            Register permissions declared in the <see cref="T:Boxfusion.Health.His.Administration.Authorization.PermissionNames"/> class
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:Boxfusion.Health.His.Administration.Authorization.HisBookingsPermissionChecker">
+            <summary>
+            Health.His Permission checker
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Authorization.HisBookingsPermissionChecker.#ctor(Abp.Domain.Repositories.IRepository{Shesha.Domain.Person,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointmentEntity,System.Guid})">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Authorization.HisBookingsPermissionChecker.IsGrantedAsync(System.Int64,System.String)">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Authorization.HisBookingsPermissionChecker.IsInAnyOfRoles(Shesha.Domain.Person,System.String[])">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Authorization.HisBookingsPermissionChecker.IsGranted(System.Int64,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="permissionName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Administration.Authorization.IHisBookingsPermissionChecker">
+            <summary>
+            Health.His Permission checker
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Administration.Authorization.PermissionNames">
+            <summary>
+            Health.His Permission names
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Administration.Authorization.RoleNames">
+            <summary>
+            Health.His Role Names
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingNames">
+            <summary>
+            Contains setting names for Health.Hiss
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingProvider">
+            <summary>
+            Defines Health.His settings
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingProvider.LocalizationSourceName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingProvider.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingProvider.GetSettingDefinitions(Abp.Configuration.SettingDefinitionProviderContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingProvider.L(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingsAppService.#ctor(Abp.Configuration.ISettingManager)">
+            <summary>
+            
+            </summary>
+            <param name="settingManager"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingsAppService.Update(Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingsDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingsAppService.Get">
+            <summary>
+            Returns Health.His settings
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingsAppService.ChangeSettingAsync(System.String,System.String)">
+            <summary>
+            Changes setting for tenant with fallback to application
+            </summary>
+            <param name="name">Setting name</param>
+            <param name="value">Setting value</param>
+        </member>
+        <member name="T:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingsDto">
+            <summary>
+            Health.His settings DTO
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Administration.Localization.HisBookingsLocalizationConfigurer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Administration.Localization.HisBookingsLocalizationConfigurer.Configure(Abp.Configuration.Startup.ILocalizationConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="localizationConfiguration"></param>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.HisBookingsModule">
+            <summary>
+            Health.His Module
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.HisBookingsModule.Initialize">
+            <summary>
+            inheritedDoc
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.HisBookingsModule.PreInitialize">
+            <summary>
+            inheritedDoc
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.HisBookingsModule.PostInitialize">
+            <summary>
+            inheritedDoc
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsInput.FacilityPatientIdentifier">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsMapProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsMapProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsResponse.FacilityPatientIdentifier">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.FacilityPatients.Helpers.HisFacilityPatientsCrudHelper.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers.IPatientCrudHelper{Boxfusion.Health.His.Domain.Domain.FacilityPatient,Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsResponse},AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>
+            <param name="patientCrudHelper"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.FacilityPatients.Helpers.HisFacilityPatientsCrudHelper.GetAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Booking.Services.FacilityPatients.HisFacilityPatientsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Booking.Services.FacilityPatients.HisFacilityPatientsAppService.#ctor(Boxfusion.Health.His.Bookings.Services.FacilityPatients.Helpers.IHisFacilityPatientsCrudHelper)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Booking.Services.FacilityPatients.HisFacilityPatientsAppService.GetFacilityPatient(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="patientId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Booking.Services.FacilityPatients.IHisFacilityPatientsAppService.GetFacilityPatient(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="patientId"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

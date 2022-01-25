@@ -7,7 +7,6 @@ using Abp.AutoMapper;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using Abp.Zero.Configuration;
-using Boxfusion.Health.His.Admissions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -41,6 +40,7 @@ namespace Boxfusion.Health.His.Admissions
          typeof(AbpAutoMapperModule),
          typeof(HisAdmissModule),
          typeof(HisAdminisModule),
+         typeof(HisBookingsModule),
          typeof(SheshaSchedulerModule),
          typeof(SheshaImportModule),
          typeof(SheshaWebControlsModule),

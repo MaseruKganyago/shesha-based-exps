@@ -50,5 +50,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Boxfusion.Health.His.Administration\Boxfusion.Health.His.Administration.csproj" />
     <ProjectReference Include="..\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.csproj" />
+    <ProjectReference Include="..\Boxfusion.Health.His.Booking\Boxfusion.Health.His.Bookings.csproj" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,18 @@
+﻿using Abp.AutoMapper;
+using Boxfusion.Health.His.Administration.Services.HisPatients.Dtos;
+using Boxfusion.Health.His.Domain.Domain;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos
+{
+    [AutoMap(typeof(FacilityPatient))]
+    public class FacilityPatientsInput : HisPatientInput
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string FacilityPatientIdentifier { get; set; }
+    }
+}
