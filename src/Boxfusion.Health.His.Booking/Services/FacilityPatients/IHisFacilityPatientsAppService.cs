@@ -12,8 +12,14 @@ namespace Boxfusion.Health.His.Booking.Services.FacilityPatients
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="patientId"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         Task<FacilityPatientsResponse> GetFacilityPatient(Guid id);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<FacilityPatientsResponse> CreateAsync(FacilityPatientsInput input);
     }
 }

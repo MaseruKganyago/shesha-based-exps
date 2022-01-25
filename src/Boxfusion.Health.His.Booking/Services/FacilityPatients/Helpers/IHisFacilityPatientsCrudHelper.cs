@@ -8,6 +8,17 @@ namespace Boxfusion.Health.His.Bookings.Services.FacilityPatients.Helpers
 {
     public interface IHisFacilityPatientsCrudHelper
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<FacilityPatientsResponse> CreateAsync(FacilityPatientsInput input);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         Task<FacilityPatientsResponse> GetAsync(Guid id);
     }
 }

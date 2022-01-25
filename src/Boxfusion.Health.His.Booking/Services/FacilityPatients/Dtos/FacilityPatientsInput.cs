@@ -7,6 +7,9 @@ using System.Text;
 
 namespace Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [AutoMap(typeof(FacilityPatient))]
     public class FacilityPatientsInput : HisPatientInput
     {

@@ -28,6 +28,12 @@ namespace Boxfusion.Health.His.Bookings.Services.FacilityPatients.Helpers
             _mapper = mapper;
         }
 
+        public async Task<FacilityPatientsResponse> CreateAsync(FacilityPatientsInput input)
+        {
+            var facilityPatient = _mapper.Map<FacilityPatient>(input);
+            return await _patientCrudHelper.CreateAsync(input, facilityPatient);
+        }
+
         /// <summary>
         /// 
         /// </summary>

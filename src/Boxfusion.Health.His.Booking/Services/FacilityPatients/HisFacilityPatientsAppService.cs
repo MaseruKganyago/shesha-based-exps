@@ -28,6 +28,17 @@ namespace Boxfusion.Health.His.Booking.Services.FacilityPatients
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost, Route("")]
+        public async Task<FacilityPatientsResponse> CreateAsync(FacilityPatientsInput input)
+        {
+            return await _hisPatientCrudHelper.CreateAsync(input);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="patientId"></param>
         /// <returns></returns>
         [HttpGet, Route("{id}")]
