@@ -19,14 +19,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Domain\**" />
-    <Compile Remove="Migrations\**" />
     <Compile Remove="Services\Wards\**" />
-    <EmbeddedResource Remove="Domain\**" />
-    <EmbeddedResource Remove="Migrations\**" />
     <EmbeddedResource Remove="Services\Wards\**" />
-    <None Remove="Domain\**" />
-    <None Remove="Migrations\**" />
     <None Remove="Services\Wards\**" />
   </ItemGroup>
 
@@ -49,6 +43,10 @@
     <ProjectReference Include="..\Boxfusion.Health.His.Administration\Boxfusion.Health.His.Administration.csproj" />
     <ProjectReference Include="..\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.csproj" />
     <ProjectReference Include="..\Boxfusion.Health.His.Domain\Boxfusion.Health.His.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\BookingAppointments\Helpers\" />
   </ItemGroup>
 
 </Project>

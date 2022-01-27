@@ -154,6 +154,11 @@
             inheritedDoc
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsInput">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsInput.FacilityPatientIdentifier">
             <summary>
             
@@ -193,6 +198,26 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.FacilityPatients.Helpers.IHisFacilityPatientsCrudHelper.CreateAsync(Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.FacilityPatients.Helpers.IHisFacilityPatientsCrudHelper.GetAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.FacilityPatients.Helpers.IHisFacilityPatientsCrudHelper.GetAllAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Booking.Services.FacilityPatients.HisFacilityPatientsAppService">
             <summary>
             
@@ -202,6 +227,19 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Booking.Services.FacilityPatients.HisFacilityPatientsAppService.CreateAsync(Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Booking.Services.FacilityPatients.HisFacilityPatientsAppService.GetAllAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Booking.Services.FacilityPatients.HisFacilityPatientsAppService.GetFacilityPatient(System.Guid)">
             <summary>
@@ -214,8 +252,36 @@
             <summary>
             
             </summary>
-            <param name="patientId"></param>
+            <param name="id"></param>
             <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Booking.Services.FacilityPatients.IHisFacilityPatientsAppService.GetAllAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Booking.Services.FacilityPatients.IHisFacilityPatientsAppService.CreateAsync(Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20220125225300">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20220125225300.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.HealthCommon.Core.Migrations.M20220125225300.Down">
+            <summary>
+            
+            </summary>
         </member>
     </members>
 </doc>
