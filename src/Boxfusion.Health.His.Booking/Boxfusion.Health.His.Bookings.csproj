@@ -46,6 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Jobs\" />
     <Folder Include="Services\BookingAppointments\Helpers\" />
   </ItemGroup>
 
