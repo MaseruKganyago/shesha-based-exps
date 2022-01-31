@@ -4,7 +4,7 @@ using System.Reflection;
 using Abp.Authorization;
 using Abp.Localization;
 
-namespace Boxfusion.Health.His.Administration.Authorization
+namespace Boxfusion.Health.His.Bookings.Authorization
 {
     /// <summary>
     /// Health.His Authorization Provider

@@ -26,6 +26,7 @@ using Shesha.Sms.Xml2Sms;
 using Shesha.Web;
 using Shesha.Web.FormsDesigner;
 using Shesha.Reporting;
+using Boxfusion.Health.His.Bookings;
 
 namespace Boxfusion.Health.His.Admissions
 {

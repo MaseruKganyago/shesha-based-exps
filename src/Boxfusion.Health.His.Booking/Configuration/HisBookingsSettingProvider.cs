@@ -2,7 +2,7 @@
 using Abp.Configuration;
 using Abp.Localization;
 
-namespace Boxfusion.Health.His.Administration.Configuration
+namespace Boxfusion.Health.His.Bookings.Configuration
 {
     /// <summary>
     /// Defines Health.His settings
