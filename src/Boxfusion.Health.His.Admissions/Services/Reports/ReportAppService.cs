@@ -28,15 +28,12 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
     public class ReportAppService : CdmAppServiceBase,  IReportAppService
     {
         private readonly IReportHelper _reportHelper;
-        private readonly IRepository<WardRoleAppointedPerson, Guid> _wardRoleRepositiory;
 
         ///
         public ReportAppService(
-            IReportHelper reportHelper,
-            IRepository<WardRoleAppointedPerson, Guid> wardRoleRepositiory)
+            IReportHelper reportHelper)
         {
             _reportHelper = reportHelper;
-            _wardRoleRepositiory = wardRoleRepositiory;
         }
 
         /// <summary>

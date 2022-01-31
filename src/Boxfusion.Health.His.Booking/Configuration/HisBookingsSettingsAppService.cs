@@ -3,7 +3,7 @@ using Abp.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 
-namespace Boxfusion.Health.His.Administration.Configuration
+namespace Boxfusion.Health.His.Bookings.Configuration
 {
     /// <summary>
     /// 

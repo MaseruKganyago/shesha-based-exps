@@ -4,7 +4,7 @@ using System.Text;
 using FluentMigrator;
 using Shesha.FluentMigrator;
 
-namespace Boxfusion.Health.HealthCommon.Core.Migrations
+namespace Boxfusion.Health.His.Bookings.Migrations
 {
     /// <summary>
     /// 

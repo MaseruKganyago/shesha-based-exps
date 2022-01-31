@@ -1,4 +1,4 @@
-﻿namespace Boxfusion.Health.His.Administration.Configuration
+﻿namespace Boxfusion.Health.His.Bookings.Configuration
 {
     /// <summary>
     /// Contains setting names for Health.Hiss

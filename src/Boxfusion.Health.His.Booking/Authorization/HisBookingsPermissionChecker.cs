@@ -6,7 +6,7 @@ using NHibernate.Linq;
 using Shesha.Authorization;
 using Shesha.Domain;
 
-namespace Boxfusion.Health.His.Administration.Authorization
+namespace Boxfusion.Health.His.Bookings.Authorization
 {
     /// <summary>
     /// Health.His Permission checker
@@ -35,7 +35,9 @@ namespace Boxfusion.Health.His.Administration.Authorization
                 return false;
 
             // add custom permission checks here...
-            
+            if (permissionName == PermissionNames.DailyAppointmentBooking)
+                return await this.IsScheduleManager(person) || await this.IsScheduleFulfiller(person) || await this.IsSystemAdministrator(person);
+
             return false;
         }
 
@@ -55,6 +57,36 @@ namespace Boxfusion.Health.His.Administration.Authorization
         public bool IsGranted(long userId, string permissionName)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="person"></param>
+        /// <returns></returns>
+        public async Task<bool> IsSystemAdministrator(Person person)
+        {
+            return await IsInAnyOfRoles(person, RoleNames.SystemAdministrator);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="person"></param>
+        /// <returns></returns>
+        public async Task<bool> IsScheduleManager(Person person)
+        {
+            return await IsInAnyOfRoles(person, RoleNames.ScheduleManager);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="person"></param>
+        /// <returns></returns>
+        public async Task<bool> IsScheduleFulfiller(Person person)
+        {
+            return await IsInAnyOfRoles(person, RoleNames.ScheduleFulfiller);
         }
     }
 }

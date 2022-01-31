@@ -1062,7 +1062,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.ReportAppService.#ctor(Boxfusion.Health.His.Admissions.Services.Reports.Helpers.IReportHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardRoleAppointedPerson,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.ReportAppService.#ctor(Boxfusion.Health.His.Admissions.Services.Reports.Helpers.IReportHelper)">
             
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Services.Reports.ReportAppService.GetReport(Boxfusion.Health.His.Domain.Domain.Enums.RefListReportTypes,System.Guid,System.DateTime)">

@@ -3,14 +3,13 @@ using Abp.AspNetCore.Configuration;
 using Abp.AutoMapper;
 using Abp.Modules;
 using Castle.MicroKernel.Registration;
-using Boxfusion.Health.His.Administration.Authorization;
-//using Boxfusion.Health.His.Administration.Configuration;
-using Boxfusion.Health.His.Administration.Localization;
 using Shesha;
 using Shesha.Authorization;
 using Boxfusion.Health.His.Domain;
+using Boxfusion.Health.His.Bookings.Authorization;
+using Boxfusion.Health.His.Bookings.Localization;
 
-namespace Boxfusion.Health.His.Admissions
+namespace Boxfusion.Health.His.Bookings
 {
     /// <summary>
     /// Health.His Module

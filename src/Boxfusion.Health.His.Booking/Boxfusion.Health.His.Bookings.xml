@@ -1,44 +1,44 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Boxfusion.Health.His.Administration</name>
+        <name>Boxfusion.Health.His.Bookings</name>
     </assembly>
     <members>
-        <member name="T:Boxfusion.Health.His.Administration.Authorization.HisBookingsAuthorizationProvider">
+        <member name="T:Boxfusion.Health.His.Bookings.Authorization.HisBookingsAuthorizationProvider">
             <summary>
             Health.His Authorization Provider
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Authorization.HisBookingsAuthorizationProvider.SetPermissions(Abp.Authorization.IPermissionDefinitionContext)">
+        <member name="M:Boxfusion.Health.His.Bookings.Authorization.HisBookingsAuthorizationProvider.SetPermissions(Abp.Authorization.IPermissionDefinitionContext)">
             <summary>
-            Register permissions declared in the <see cref="T:Boxfusion.Health.His.Administration.Authorization.PermissionNames"/> class
+            Register permissions declared in the <see cref="T:Boxfusion.Health.His.Bookings.Authorization.PermissionNames"/> class
             </summary>
             <param name="context"></param>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Authorization.HisBookingsPermissionChecker">
+        <member name="T:Boxfusion.Health.His.Bookings.Authorization.HisBookingsPermissionChecker">
             <summary>
             Health.His Permission checker
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Authorization.HisBookingsPermissionChecker.#ctor(Abp.Domain.Repositories.IRepository{Shesha.Domain.Person,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointmentEntity,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Bookings.Authorization.HisBookingsPermissionChecker.#ctor(Abp.Domain.Repositories.IRepository{Shesha.Domain.Person,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointmentEntity,System.Guid})">
             <summary>
             Default constructor
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Authorization.HisBookingsPermissionChecker.IsGrantedAsync(System.Int64,System.String)">
+        <member name="M:Boxfusion.Health.His.Bookings.Authorization.HisBookingsPermissionChecker.IsGrantedAsync(System.Int64,System.String)">
             inheritedDoc
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Authorization.HisBookingsPermissionChecker.IsInAnyOfRoles(Shesha.Domain.Person,System.String[])">
+        <member name="M:Boxfusion.Health.His.Bookings.Authorization.HisBookingsPermissionChecker.IsInAnyOfRoles(Shesha.Domain.Person,System.String[])">
             inheritedDoc
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Authorization.HisBookingsPermissionChecker.IsDataAdministrator(Shesha.Domain.Person)">
+        <member name="M:Boxfusion.Health.His.Bookings.Authorization.HisBookingsPermissionChecker.IsDataAdministrator(Shesha.Domain.Person)">
             <summary>
             
             </summary>
             <param name="person"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Authorization.HisBookingsPermissionChecker.IsGranted(System.Int64,System.String)">
+        <member name="M:Boxfusion.Health.His.Bookings.Authorization.HisBookingsPermissionChecker.IsGranted(System.Int64,System.String)">
             <summary>
             
             </summary>
@@ -46,426 +46,426 @@
             <param name="permissionName"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Authorization.IHisBookingsPermissionChecker">
+        <member name="T:Boxfusion.Health.His.Bookings.Authorization.IHisBookingsPermissionChecker">
             <summary>
             Health.His Permission checker
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Authorization.IHisBookingsPermissionChecker.IsDataAdministrator(Shesha.Domain.Person)">
+        <member name="M:Boxfusion.Health.His.Bookings.Authorization.IHisBookingsPermissionChecker.IsDataAdministrator(Shesha.Domain.Person)">
             <summary>
             
             </summary>
             <param name="person"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Authorization.PermissionNames">
+        <member name="T:Boxfusion.Health.His.Bookings.Authorization.PermissionNames">
             <summary>
             Health.His Permission names
             </summary>
         </member>
-        <member name="F:Boxfusion.Health.His.Administration.Authorization.PermissionNames.AdmissionDashboard">
+        <member name="F:Boxfusion.Health.His.Bookings.Authorization.PermissionNames.AdmissionDashboard">
             <summary>
             Pages: Admission Dashboard
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Authorization.RoleNames">
+        <member name="T:Boxfusion.Health.His.Bookings.Authorization.RoleNames">
             <summary>
             Health.His Role Names
             </summary>
         </member>
-        <member name="F:Boxfusion.Health.His.Administration.Authorization.RoleNames.DataAdministrator">
+        <member name="F:Boxfusion.Health.His.Bookings.Authorization.RoleNames.DataAdministrator">
             <summary>
             Data Administrator
             </summary>
         </member>
-        <member name="F:Boxfusion.Health.His.Administration.Authorization.RoleNames.SystemAdministrator">
+        <member name="F:Boxfusion.Health.His.Bookings.Authorization.RoleNames.SystemAdministrator">
             <summary>
             System Administrator
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingNames">
+        <member name="T:Boxfusion.Health.His.Bookings.Configuration.HisBookingsSettingNames">
             <summary>
             Contains setting names for Health.Hiss
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingProvider">
+        <member name="T:Boxfusion.Health.His.Bookings.Configuration.HisBookingsSettingProvider">
             <summary>
             Defines Health.His settings
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingProvider.LocalizationSourceName">
+        <member name="P:Boxfusion.Health.His.Bookings.Configuration.HisBookingsSettingProvider.LocalizationSourceName">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingProvider.#ctor">
+        <member name="M:Boxfusion.Health.His.Bookings.Configuration.HisBookingsSettingProvider.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingProvider.GetSettingDefinitions(Abp.Configuration.SettingDefinitionProviderContext)">
+        <member name="M:Boxfusion.Health.His.Bookings.Configuration.HisBookingsSettingProvider.GetSettingDefinitions(Abp.Configuration.SettingDefinitionProviderContext)">
             <summary>
             
             </summary>
             <param name="context"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingProvider.L(System.String)">
+        <member name="M:Boxfusion.Health.His.Bookings.Configuration.HisBookingsSettingProvider.L(System.String)">
             <summary>
             
             </summary>
             <param name="name"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingsAppService">
+        <member name="T:Boxfusion.Health.His.Bookings.Configuration.HisBookingsSettingsAppService">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingsAppService.#ctor(Abp.Configuration.ISettingManager)">
+        <member name="M:Boxfusion.Health.His.Bookings.Configuration.HisBookingsSettingsAppService.#ctor(Abp.Configuration.ISettingManager)">
             <summary>
             
             </summary>
             <param name="settingManager"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingsAppService.Update(Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingsDto)">
+        <member name="M:Boxfusion.Health.His.Bookings.Configuration.HisBookingsSettingsAppService.Update(Boxfusion.Health.His.Bookings.Configuration.HisBookingsSettingsDto)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingsAppService.Get">
+        <member name="M:Boxfusion.Health.His.Bookings.Configuration.HisBookingsSettingsAppService.Get">
             <summary>
             Returns Health.His settings
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingsAppService.ChangeSettingAsync(System.String,System.String)">
+        <member name="M:Boxfusion.Health.His.Bookings.Configuration.HisBookingsSettingsAppService.ChangeSettingAsync(System.String,System.String)">
             <summary>
             Changes setting for tenant with fallback to application
             </summary>
             <param name="name">Setting name</param>
             <param name="value">Setting value</param>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Configuration.HisBookingsSettingsDto">
+        <member name="T:Boxfusion.Health.His.Bookings.Configuration.HisBookingsSettingsDto">
             <summary>
             Health.His settings DTO
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Localization.HisBookingsLocalizationConfigurer">
+        <member name="T:Boxfusion.Health.His.Bookings.Localization.HisBookingsLocalizationConfigurer">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Localization.HisBookingsLocalizationConfigurer.Configure(Abp.Configuration.Startup.ILocalizationConfiguration)">
+        <member name="M:Boxfusion.Health.His.Bookings.Localization.HisBookingsLocalizationConfigurer.Configure(Abp.Configuration.Startup.ILocalizationConfiguration)">
             <summary>
             
             </summary>
             <param name="localizationConfiguration"></param>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientInput">
+        <member name="T:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientInput">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientInput.PatientMasterIndexNumber">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientInput.PatientMasterIndexNumber">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientInput.HospitalPatientNumber">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientInput.HospitalPatientNumber">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientInput.IdentificationType">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientInput.IdentificationType">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientInput.PatientProvince">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientInput.PatientProvince">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientMapProfile">
+        <member name="T:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientMapProfile">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientMapProfile.#ctor">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientMapProfile.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientResponse">
+        <member name="T:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientResponse">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientResponse.PatientMasterIndexNumber">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientResponse.PatientMasterIndexNumber">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientResponse.HospitalPatientNumber">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientResponse.HospitalPatientNumber">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientResponse.IdentificationType">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientResponse.IdentificationType">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientResponse.IdentityNumber">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientResponse.IdentityNumber">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientResponse.PatientProvince">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientResponse.PatientProvince">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientResponse.DateOfBirth">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientResponse.DateOfBirth">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientResponse.Gender">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientResponse.Gender">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientResponse.FirstName">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientResponse.FirstName">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientResponse.LastName">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientResponse.LastName">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientResponse.Nationality">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.HisPatients.Dtos.HisPatientResponse.Nationality">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.HisPatientCrudHelper">
+        <member name="T:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.HisPatientCrudHelper">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.HisPatientCrudHelper.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers.IPatientCrudHelper{Boxfusion.Health.His.Domain.Domain.HisPatient,Boxfusion.Health.His.Domain.Dtos.HisPatientResponse},AutoMapper.IMapper)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.HisPatientCrudHelper.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers.IPatientCrudHelper{Boxfusion.Health.His.Domain.Domain.HisPatient,Boxfusion.Health.His.Domain.Dtos.HisPatientResponse},AutoMapper.IMapper)">
             <summary>
             
             </summary>
             <param name="patientCrudHelper"></param>
             <param name="mapper"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.HisPatientCrudHelper.GetAllAsync">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.HisPatientCrudHelper.GetAllAsync">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.HisPatientCrudHelper.GetAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.HisPatientCrudHelper.GetAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.HisPatientCrudHelper.GetByIdNumberAsync(System.String)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.HisPatientCrudHelper.GetByIdNumberAsync(System.String)">
             <summary>
             
             </summary>
             <param name="identityNumber"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.HisPatientCrudHelper.CreateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.HisPatientCrudHelper.CreateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.HisPatientCrudHelper.UpdateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.HisPatientCrudHelper.UpdateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.HisPatientCrudHelper.DeleteAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.HisPatientCrudHelper.DeleteAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.IHisPatientCrudHelper">
+        <member name="T:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.IHisPatientCrudHelper">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.IHisPatientCrudHelper.GetAllAsync">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.IHisPatientCrudHelper.GetAllAsync">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.IHisPatientCrudHelper.GetByIdNumberAsync(System.String)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.IHisPatientCrudHelper.GetByIdNumberAsync(System.String)">
             <summary>
             
             </summary>
             <param name="identityNumber"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.IHisPatientCrudHelper.GetAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.IHisPatientCrudHelper.GetAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.IHisPatientCrudHelper.CreateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.IHisPatientCrudHelper.CreateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.IHisPatientCrudHelper.UpdateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.IHisPatientCrudHelper.UpdateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.IHisPatientCrudHelper.DeleteAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.IHisPatientCrudHelper.DeleteAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Services.HisPatients.HisPatientsAppService">
+        <member name="T:Boxfusion.Health.His.Bookings.Services.HisPatients.HisPatientsAppService">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.HisPatientsAppService.#ctor(Boxfusion.Health.His.Administration.Services.HisPatients.Helpers.IHisPatientCrudHelper)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.HisPatientsAppService.#ctor(Boxfusion.Health.His.Bookings.Services.HisPatients.Helpers.IHisPatientCrudHelper)">
             <summary>
             
             </summary>
             <param name="hisPatientCrudHelper"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.HisPatientsAppService.GetAllAsync">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.HisPatientsAppService.GetAllAsync">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.HisPatientsAppService.GetAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.HisPatientsAppService.GetAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.HisPatientsAppService.GetPatientByIdentityNumber(System.String)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.HisPatientsAppService.GetPatientByIdentityNumber(System.String)">
             <summary>
             
             </summary>
             <param name="identityNumber"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.HisPatientsAppService.CreateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.HisPatientsAppService.CreateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.HisPatientsAppService.UpdateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.HisPatientsAppService.UpdateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.HisPatientsAppService.DeleteAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.HisPatientsAppService.DeleteAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Services.HisPatients.IHisPatientsAppService">
+        <member name="T:Boxfusion.Health.His.Bookings.Services.HisPatients.IHisPatientsAppService">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.IHisPatientsAppService.GetAllAsync">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.IHisPatientsAppService.GetAllAsync">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.IHisPatientsAppService.GetPatientByIdentityNumber(System.String)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.IHisPatientsAppService.GetPatientByIdentityNumber(System.String)">
             <summary>
             
             </summary>
             <param name="identityNumber"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.IHisPatientsAppService.GetAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.IHisPatientsAppService.GetAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.IHisPatientsAppService.CreateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.IHisPatientsAppService.CreateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.IHisPatientsAppService.UpdateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.IHisPatientsAppService.UpdateAsync(Boxfusion.Health.His.Domain.Dtos.HisPatientInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.IHisPatientsAppService.DeleteAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.HisPatients.IHisPatientsAppService.DeleteAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Services.Hospitals.Dtos.HospitalMapProfile">
+        <member name="T:Boxfusion.Health.His.Bookings.Services.Hospitals.Dtos.HospitalMapProfile">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.Dtos.HospitalMapProfile.#ctor">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.Dtos.HospitalMapProfile.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Services.Hospitals.Helpers.HospitalCrudHelper">
+        <member name="T:Boxfusion.Health.His.Bookings.Services.Hospitals.Helpers.HospitalCrudHelper">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.Helpers.HospitalCrudHelper.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Organisations.Helper.IOrganisationCrudHelper{Boxfusion.Health.His.Domain.Domain.HisHospital,Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalResponse},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Cdm.CdmAddress,System.Guid},AutoMapper.IMapper)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.Helpers.HospitalCrudHelper.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Organisations.Helper.IOrganisationCrudHelper{Boxfusion.Health.His.Domain.Domain.HisHospital,Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalResponse},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Cdm.CdmAddress,System.Guid},AutoMapper.IMapper)">
             <summary>
             
             </summary>
@@ -473,53 +473,53 @@
             <param name="addressRepository"></param>
             <param name="mapper"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.Helpers.HospitalCrudHelper.GetAllAsync">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.Helpers.HospitalCrudHelper.GetAllAsync">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.Helpers.HospitalCrudHelper.GetAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.Helpers.HospitalCrudHelper.GetAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.Helpers.HospitalCrudHelper.CreateAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.Helpers.HospitalCrudHelper.CreateAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.Helpers.HospitalCrudHelper.UpdateAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.Helpers.HospitalCrudHelper.UpdateAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.Helpers.HospitalCrudHelper.DeleteAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.Helpers.HospitalCrudHelper.DeleteAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Services.Hospitals.Helpers.IHospitalCrudHelper">
+        <member name="T:Boxfusion.Health.His.Bookings.Services.Hospitals.Helpers.IHospitalCrudHelper">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.Helpers.IHospitalCrudHelper.GetAllAsync">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.Helpers.IHospitalCrudHelper.GetAllAsync">
             <summary>
             
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.Helpers.IHospitalCrudHelper.GetAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.Helpers.IHospitalCrudHelper.GetAsync(System.Guid)">
             <summary>
             
             </summary>
@@ -527,66 +527,66 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.Helpers.IHospitalCrudHelper.CreateAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.Helpers.IHospitalCrudHelper.CreateAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.Helpers.IHospitalCrudHelper.UpdateAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.Helpers.IHospitalCrudHelper.UpdateAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.Helpers.IHospitalCrudHelper.DeleteAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.Helpers.IHospitalCrudHelper.DeleteAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Services.Hospitals.HisHospitalsAppService">
+        <member name="T:Boxfusion.Health.His.Bookings.Services.Hospitals.HisHospitalsAppService">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.HisHospitalsAppService.#ctor(Boxfusion.Health.His.Administration.Services.Hospitals.Helpers.IHospitalCrudHelper)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.HisHospitalsAppService.#ctor(Boxfusion.Health.His.Bookings.Services.Hospitals.Helpers.IHospitalCrudHelper)">
             <summary>
             
             </summary>
             <param name="HospitalCrudHelper"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.HisHospitalsAppService.GetHospitalsAsync">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.HisHospitalsAppService.GetHospitalsAsync">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.HisHospitalsAppService.GetHospitalAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.HisHospitalsAppService.GetHospitalAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.HisHospitalsAppService.CreateHospitalAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.HisHospitalsAppService.CreateHospitalAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.HisHospitalsAppService.UpdateHospitalAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.HisHospitalsAppService.UpdateHospitalAsync(Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.HospitalInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Administration.Services.Hospitals.HisHospitalsAppService.DeleteHospitalAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.Hospitals.HisHospitalsAppService.DeleteHospitalAsync(System.Guid)">
             <summary>
             
             </summary>

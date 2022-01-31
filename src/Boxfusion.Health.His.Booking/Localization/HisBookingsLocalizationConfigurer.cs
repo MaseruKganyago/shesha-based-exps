@@ -3,7 +3,7 @@ using Abp.Localization.Dictionaries;
 using Abp.Localization.Dictionaries.Xml;
 using Abp.Reflection.Extensions;
 
-namespace Boxfusion.Health.His.Administration.Localization
+namespace Boxfusion.Health.His.Bookings.Localization
 {
     /// <summary>
     /// 

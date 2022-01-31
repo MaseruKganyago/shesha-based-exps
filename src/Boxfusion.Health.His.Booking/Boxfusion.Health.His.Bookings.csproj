@@ -45,8 +45,4 @@
     <ProjectReference Include="..\Boxfusion.Health.His.Domain\Boxfusion.Health.His.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\BookingAppointments\Helpers\" />
-  </ItemGroup>
-
 </Project>

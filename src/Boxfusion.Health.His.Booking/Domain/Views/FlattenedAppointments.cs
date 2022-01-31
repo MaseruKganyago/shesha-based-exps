@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Boxfusion.Health.His.Bookings.Domain.Views
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class FlattenedAppointments : EntityDto<Guid>
     {
         /// <summary>
@@ -21,12 +24,12 @@ namespace Boxfusion.Health.His.Bookings.Domain.Views
         /// <summary>
         /// The style of appointment or patient that has been booked in the slot (not service type)
         /// </summary>
-        public virtual ReferenceListItemValueDto AppointmentType { get; set; }
+        public virtual long? AppointmentType { get; set; }
 
         /// <summary>
         /// proposed | pending | booked | arrived | fulfilled | cancelled | noshow | entered-in-error | checked-in | waitlist
         /// </summary>
-        public virtual ReferenceListItemValueDto Status { get; set; }
+        public virtual long? Status { get; set; }
 
         /// <summary>
         /// A reference number issued to the patient.
