@@ -234,6 +234,30 @@
             inheritedDoc
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsJob">
+            <summary>
+            Creates booking slots so that they can be made available for the booking of appointments.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsJob.Logger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsJob.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="schedules"></param>
+            <param name="scheduleAvailability"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsJob.DoExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Localization.HisBookingsLocalizationConfigurer">
             <summary>
             
@@ -479,6 +503,12 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Booking.Services.FacilityPatients.HisFacilityPatientsAppService.FacilityPatientFlattened_Picker">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Booking.Services.FacilityPatients.HisFacilityPatientsAppService.CreateAsync(Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsInput)">
             <summary>

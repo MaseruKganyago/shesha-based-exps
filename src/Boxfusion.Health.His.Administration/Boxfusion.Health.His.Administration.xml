@@ -163,31 +163,6 @@
             </summary>
             <param name="localizationConfiguration"></param>
         </member>
-        <member name="T:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientInput">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientInput.PatientMasterIndexNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientInput.HospitalPatientNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientInput.IdentificationType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientInput.PatientProvince">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Administration.Services.HisPatients.Dtos.HisPatientMapProfile">
             <summary>
             
