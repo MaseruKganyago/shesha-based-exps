@@ -214,6 +214,41 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper._schedules">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="schedules"></param>
+            <param name="scheduleAvailability"></param>
+            <param name="slot"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.GenerateBookingSlotsAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Helpers.Slots.IGenerateBookingSlotsHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.IGenerateBookingSlotsHelper.GenerateBookingSlotsAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.HisBookingsModule">
             <summary>
             Health.His Module
@@ -233,6 +268,13 @@
             <summary>
             inheritedDoc
             </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsAppService.GenerateBookingSlotsAsync">
+            <summary>
+            
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsJob">
             <summary>
