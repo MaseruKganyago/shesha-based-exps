@@ -164,6 +164,21 @@
             Health.His settings DTO
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Domain.Enums.RefListSlotTypes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Bookings.Domain.Enums.RefListSlotTypes.regular">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Bookings.Domain.Enums.RefListSlotTypes.overflow">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointments">
             <summary>
             
@@ -265,20 +280,87 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.#ctor(Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.IBookingManagementHelper)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.#ctor(Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.IBookingManagementHelper,Boxfusion.Health.HealthCommon.Core.Services.Schedules.Helpers.IScheduleHelper{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.CdmScheduleResponse},Boxfusion.Health.HealthCommon.Core.Services.Slots.Helpers.ISlotHelper{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.CdmSlotResponse},Microsoft.AspNetCore.Http.IHttpContextAccessor)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.GetFlattenedAppointments(System.Guid,System.Nullable{System.DateTime},Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto,System.Nullable{System.DateTime})">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.GetFlattenedAppointments(System.Guid,System.Guid,System.Nullable{System.DateTime},Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto,System.Nullable{System.DateTime})">
             <summary>
             
             </summary>
+            <param name="facilityId"></param>
             <param name="scheduleId"></param>
             <param name="startDate"></param>
             <param name="pagination"></param>
             <param name="endDate"></param>
             <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.BookAvailableSlot(Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookAppointmentInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.GetAllAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="facilityId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.GetAllAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="scheduleId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookAppointmentInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookAppointmentInput.Schedule">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookAppointmentInput.Start">
+            <summary>
+            When appointment is to take place.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookAppointmentInput.AppointmentType">
+            <summary>
+            The style of appointment or patient that has been booked in the slot (not service type)
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookAppointmentInput.SlotType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookAppointmentInput.Patient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookAppointmentInput.Slot">
+            <summary>
+            The slots that this appointment is filling.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookAppointmentInput.ContactName">
+            <summary>
+            The name of the contact person in case they are organising on behalf of the patient.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookAppointmentInput.ContactCellphone">
+            <summary>
+            The cellphone of the contact person in case they are organising on behalf of the patient.
+            </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookingAppointmentMapProfile">
             <summary>
@@ -360,20 +442,30 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.BookingManagementHelper.#ctor(AutoMapper.IMapper)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.BookingManagementHelper.#ctor(Boxfusion.Health.HealthCommon.Core.Services.Schedules.Helpers.IScheduleHelper{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.CdmScheduleResponse},AutoMapper.IMapper)">
             <summary>
             
             </summary>
+            <param name="scheduleHelperCrudHelper"></param>
             <param name="mapper"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.BookingManagementHelper.GetFlattenedAppointments(System.Guid,System.Nullable{System.DateTime},Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto,System.Nullable{System.DateTime})">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.BookingManagementHelper.GetFlattenedAppointments(System.Guid,System.Guid,System.Nullable{System.DateTime},Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto,System.Nullable{System.DateTime})">
             <summary>
             
             </summary>
-            <param name="ScheduleId"></param>
-            <param name="FilterStartDate"></param>
+            <param name="facilityId"></param>
+            <param name="scheduleId"></param>
+            <param name="filterStartDate"></param>
             <param name="pagination"></param>
-            <param name="FilterEndDate"></param>
+            <param name="filterEndDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.BookingManagementHelper.GetAllAsync(System.Guid,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <param name="facilityId"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.IBookingManagementHelper">
@@ -381,14 +473,23 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.IBookingManagementHelper.GetFlattenedAppointments(System.Guid,System.Nullable{System.DateTime},Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto,System.Nullable{System.DateTime})">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.IBookingManagementHelper.GetFlattenedAppointments(System.Guid,System.Guid,System.Nullable{System.DateTime},Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto,System.Nullable{System.DateTime})">
             <summary>
             
             </summary>
+            <param name="facilityId"></param>
             <param name="scheduleId"></param>
             <param name="startDate"></param>
             <param name="pagination"></param>
             <param name="endDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.IBookingManagementHelper.GetAllAsync(System.Guid,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <param name="facilityId"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.Util">
@@ -405,6 +506,25 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.IBookingManagementsAppService.GetFlattenedAppointments(System.Guid,System.Guid,System.Nullable{System.DateTime},Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto,System.Nullable{System.DateTime})">
+            <summary>
+            
+            </summary>
+            <param name="facilityContextId"></param>
+            <param name="scheduleId"></param>
+            <param name="startDate"></param>
+            <param name="pagination"></param>
+            <param name="endDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.IBookingManagementsAppService.GetAllAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <param name="facilityId"></param>
+            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsInput">
             <summary>

@@ -28,8 +28,8 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
                                                         LEFT JOIN Core_Persons per ON per.Id = app.PatientId
                                                         LEFT JOIN Fhir_Slots slot ON slot.Id = app.SlotId
                                                         LEFT JOIN Fhir_Schedules sch ON sch.Id = slot.ScheduleId
-                                                        WHERE ((app.[Start] >= :FilterStartDate and app.[Start] < DATEADD(day,1,:FilterEndDate)) OR (:FilterStartDate IS NULL AND :FilterEndDate IS NULL) OR (:FilterEndDate IS NULL AND app.[Start] = :FilterStartDate))
-                                                        AND sch.Id = :ScheduleId
+                                                        WHERE ((app.[Start] >= :filterStartDate and app.[Start] < DATEADD(day,1,:filterEndDate)) OR (:filterStartDate IS NULL AND :filterEndDate IS NULL) OR (:filterEndDate IS NULL AND app.[Start] = :filterStartDate))
+                                                        AND sch.Id = :scheduleId AND (CAST(sch.ActorOwnerId AS UNIQUEIDENTIFIER) = :facilityId)
                                                         ORDER BY [Status]
                                                         OFFSET (:PageNumber-1)*(:RowsOfPage) ROWS
                                                         FETCH NEXT :RowsOfPage ROWS ONLY";
