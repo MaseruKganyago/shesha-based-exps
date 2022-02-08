@@ -1,7 +1,9 @@
 ﻿using Abp.Authorization;
 using Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos;
 using Boxfusion.Health.His.Bookings.Services.FacilityPatients.Helpers;
+using Boxfusion.Health.His.Domain.Domain;
 using Microsoft.AspNetCore.Mvc;
+using Shesha.Web.DataTable;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,6 +27,24 @@ namespace Boxfusion.Health.His.Booking.Services.FacilityPatients
         {
             _hisPatientCrudHelper = hisPatientCrudHelper;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static DataTableConfig FacilityPatientFlattened_Picker()
+        {
+            var table = new DataTableConfig<FacilityPatient, Guid>("FacilityPatientFlattened_Picker");
+            table.AddProperty(e => e.FullName);
+            table.AddProperty(e => e.IdentityNumber, u => u.Caption("ID/Passport No"));
+            //table.AddProperty(e => e.)
+            table.AddProperty(e => e.DateOfBirth, u => u.Caption("Date of Birth"));
+            table.AddProperty(e => e.MobileNumber, u => u.Caption("Cellphone"));
+            table.AddProperty(e => e.Gender);
+
+            
+            return table;
+        }
+
         /// <summary>
         /// 
         /// </summary>

@@ -1,8 +1,6 @@
 ﻿using Abp.Application.Services;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
-using Boxfusion.Health.His.Admissions.Helpers.Dtos;
-using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
-using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
+using Boxfusion.Health.His.Administration.Services.Wards.Dtos;
 using Shesha.AutoMapper.Dto;
 using System;
 using System.Collections.Generic;
@@ -24,19 +22,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Wards
         /// <returns></returns>
         Task<List<HospitalResponse>> GetAssignedHospitals();
        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<WardMidnightCensusReportResponse> ApproveLevel1(WardCensusInput input);
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task<WardMidnightCensusReportResponse> ApproveLevel2(WardCensusInput input);       
-
         /// <summary>
         /// 
         /// </summary>

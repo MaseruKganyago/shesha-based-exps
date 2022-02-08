@@ -8,5 +8,6 @@ namespace Boxfusion.Health.His.Bookings.Authorization
     /// </summary>
     public interface IHisBookingsPermissionChecker
     {
+
     }
 }

@@ -5,7 +5,6 @@ using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.HealthCommon.Core.Services.Schedules.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Services.Slots.Helpers;
-using Boxfusion.Health.His.Bookings.Authorization;
 using Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos;
 using Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers;
 using Microsoft.AspNetCore.Http;

@@ -19,37 +19,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Authorization\**" />
     <Compile Remove="Dtos\**" />
-    <Compile Remove="Services\Admissions\**" />
     <Compile Remove="Services\HisPatients\**" />
     <Compile Remove="Services\Hospitals\**" />
+    <Compile Remove="Services\Separations\**" />
     <Compile Remove="Services\Users\**" />
     <Compile Remove="Services\Wards\**" />
+    <EmbeddedResource Remove="Authorization\**" />
     <EmbeddedResource Remove="Dtos\**" />
-    <EmbeddedResource Remove="Services\Admissions\**" />
     <EmbeddedResource Remove="Services\HisPatients\**" />
     <EmbeddedResource Remove="Services\Hospitals\**" />
+    <EmbeddedResource Remove="Services\Separations\**" />
     <EmbeddedResource Remove="Services\Users\**" />
     <EmbeddedResource Remove="Services\Wards\**" />
+    <None Remove="Authorization\**" />
     <None Remove="Dtos\**" />
-    <None Remove="Services\Admissions\**" />
     <None Remove="Services\HisPatients\**" />
     <None Remove="Services\Hospitals\**" />
+    <None Remove="Services\Separations\**" />
     <None Remove="Services\Users\**" />
     <None Remove="Services\Wards\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Services\Admissions\AdmissionsAppService.cs" />
-    <Compile Include="Services\Admissions\Dto\AcceptOrRejectTransfersInput.cs" />
-    <Compile Include="Services\Admissions\Dto\AcceptOrRejectTransfersResponse.cs" />
-    <Compile Include="Services\Admissions\Dto\AdmissionsMapProfile.cs" />
-    <Compile Include="Services\Admissions\Dto\MonthlyStats.cs" />
-    <Compile Include="Services\Admissions\Dto\DailyStats.cs" />
-    <Compile Include="Services\Admissions\Dto\WardCensusInput.cs" />
-    <Compile Include="Services\Admissions\Dto\WardCensusResponse.cs" />
-    <Compile Include="Services\Admissions\Dto\WardMidnightCensusReportResponse.cs" />
-    <Compile Include="Services\Admissions\IAdmissionsAppService.cs" />
   </ItemGroup>
 
 
@@ -70,6 +60,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Boxfusion.Health.His.Domain\Boxfusion.Health.His.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\Dtos\" />
   </ItemGroup>
 
 </Project>

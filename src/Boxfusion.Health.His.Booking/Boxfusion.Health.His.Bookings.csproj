@@ -19,8 +19,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Authorization\**" />
     <Compile Remove="Services\Wards\**" />
+    <EmbeddedResource Remove="Authorization\**" />
     <EmbeddedResource Remove="Services\Wards\**" />
+    <None Remove="Authorization\**" />
     <None Remove="Services\Wards\**" />
   </ItemGroup>
 

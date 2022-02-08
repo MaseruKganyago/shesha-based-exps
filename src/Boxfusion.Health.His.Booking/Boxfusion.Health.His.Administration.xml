@@ -4,97 +4,6 @@
         <name>Boxfusion.Health.His.Bookings</name>
     </assembly>
     <members>
-        <member name="T:Boxfusion.Health.His.Bookings.Authorization.HisBookingsAuthorizationProvider">
-            <summary>
-            Health.His Authorization Provider
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Authorization.HisBookingsAuthorizationProvider.SetPermissions(Abp.Authorization.IPermissionDefinitionContext)">
-            <summary>
-            Register permissions declared in the <see cref="T:Boxfusion.Health.His.Bookings.Authorization.PermissionNames"/> class
-            </summary>
-            <param name="context"></param>
-        </member>
-        <member name="T:Boxfusion.Health.His.Bookings.Authorization.HisBookingsPermissionChecker">
-            <summary>
-            Health.His Permission checker
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Authorization.HisBookingsPermissionChecker.#ctor(Abp.Domain.Repositories.IRepository{Shesha.Domain.Person,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointmentEntity,System.Guid})">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Authorization.HisBookingsPermissionChecker.IsGrantedAsync(System.Int64,System.String)">
-            inheritedDoc
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Authorization.HisBookingsPermissionChecker.IsInAnyOfRoles(Shesha.Domain.Person,System.String[])">
-            inheritedDoc
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Authorization.HisBookingsPermissionChecker.IsGranted(System.Int64,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="userId"></param>
-            <param name="permissionName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Authorization.HisBookingsPermissionChecker.IsSystemAdministrator(Shesha.Domain.Person)">
-            <summary>
-            
-            </summary>
-            <param name="person"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Authorization.HisBookingsPermissionChecker.IsScheduleManager(Shesha.Domain.Person)">
-            <summary>
-            
-            </summary>
-            <param name="person"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Authorization.HisBookingsPermissionChecker.IsScheduleFulfiller(Shesha.Domain.Person)">
-            <summary>
-            
-            </summary>
-            <param name="person"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Boxfusion.Health.His.Bookings.Authorization.IHisBookingsPermissionChecker">
-            <summary>
-            Health.His Permission checker
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Bookings.Authorization.PermissionNames">
-            <summary>
-            Health.His Permission names
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Bookings.Authorization.PermissionNames.DailyAppointmentBooking">
-            <summary>
-            Pages: Admission Dashboard
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Bookings.Authorization.RoleNames">
-            <summary>
-            Health.His Role Names
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Bookings.Authorization.RoleNames.ScheduleManager">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Bookings.Authorization.RoleNames.ScheduleFulfiller">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Bookings.Authorization.RoleNames.SystemAdministrator">
-            <summary>
-            System Administrator
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Configuration.HisBookingsSettingNames">
             <summary>
             Contains setting names for Health.Hiss
@@ -248,6 +157,30 @@
             <summary>
             inheritedDoc
             </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsJob">
+            <summary>
+            Creates booking slots so that they can be made available for the booking of appointments.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsJob.Logger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsJob.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="schedules"></param>
+            <param name="scheduleAvailability"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsJob.DoExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Localization.HisBookingsLocalizationConfigurer">
             <summary>
@@ -599,6 +532,12 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Booking.Services.FacilityPatients.HisFacilityPatientsAppService.FacilityPatientFlattened_Picker">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Booking.Services.FacilityPatients.HisFacilityPatientsAppService.CreateAsync(Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsInput)">
             <summary>

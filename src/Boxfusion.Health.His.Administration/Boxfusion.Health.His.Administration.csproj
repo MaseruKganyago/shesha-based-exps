@@ -19,11 +19,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Domain\**" />
+    <Compile Remove="Authorization\**" />
     <Compile Remove="Migrations\**" />
-    <EmbeddedResource Remove="Domain\**" />
+    <EmbeddedResource Remove="Authorization\**" />
     <EmbeddedResource Remove="Migrations\**" />
-    <None Remove="Domain\**" />
+    <None Remove="Authorization\**" />
     <None Remove="Migrations\**" />
   </ItemGroup>
 
@@ -43,12 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.csproj" />
     <ProjectReference Include="..\Boxfusion.Health.His.Domain\Boxfusion.Health.His.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\Wards\Helpers\" />
   </ItemGroup>
 
 </Project>

@@ -6,7 +6,6 @@ using Castle.MicroKernel.Registration;
 using Shesha;
 using Shesha.Authorization;
 using Boxfusion.Health.His.Domain;
-using Boxfusion.Health.His.Bookings.Authorization;
 using Boxfusion.Health.His.Bookings.Localization;
 
 namespace Boxfusion.Health.His.Bookings
@@ -26,9 +25,9 @@ namespace Boxfusion.Health.His.Bookings
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-            IocManager.IocContainer.Register(
-              Component.For<ICustomPermissionChecker>().Forward<IHisBookingsPermissionChecker>().Forward<HisBookingsPermissionChecker>().ImplementedBy<HisBookingsPermissionChecker>().LifestyleTransient()
-          );
+          //  IocManager.IocContainer.Register(
+          //    Component.For<ICustomPermissionChecker>().Forward<IHisBookingsPermissionChecker>().Forward<HisBookingsPermissionChecker>().ImplementedBy<HisBookingsPermissionChecker>().LifestyleTransient()
+          //);
 
             var thisAssembly = Assembly.GetExecutingAssembly();
             IocManager.RegisterAssemblyByConvention(thisAssembly);
@@ -47,7 +46,7 @@ namespace Boxfusion.Health.His.Bookings
             base.PreInitialize();
 
             //Configuration.Settings.Providers.Add<HisAdmisSettingProvider>();
-            Configuration.Authorization.Providers.Add<HisBookingsAuthorizationProvider>();
+            //Configuration.Authorization.Providers.Add<HisBookingsAuthorizationProvider>();
 
             HisBookingsLocalizationConfigurer.Configure(Configuration.Localization);
         }
