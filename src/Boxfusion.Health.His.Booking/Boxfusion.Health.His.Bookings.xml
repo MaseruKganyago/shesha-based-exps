@@ -302,6 +302,12 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsAppService.SendSms">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsJob">
             <summary>
             Creates booking slots so that they can be made available for the booking of appointments.
