@@ -26,7 +26,7 @@ namespace Boxfusion.Health.His.Domain
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
             IocManager.IocContainer.Register(
-              Component.For<ICustomPermissionChecker>().Forward<IHisDomainPermissionChecker>().Forward<HisDomainPermissionChecker>().ImplementedBy<HisDomainPermissionChecker>().LifestyleTransient()
+              Component.For<ICustomPermissionChecker>().Forward<IHisPermissionChecker>().Forward<HisPermissionChecker>().ImplementedBy<HisPermissionChecker>().LifestyleTransient()
           );
 
             var thisAssembly = Assembly.GetExecutingAssembly();
@@ -44,7 +44,7 @@ namespace Boxfusion.Health.His.Domain
             base.PreInitialize();
 
             //Configuration.Settings.Providers.Add<HisDomainSettingProvider>();
-            Configuration.Authorization.Providers.Add<HisDomainAuthorizationProvider>();
+            Configuration.Authorization.Providers.Add<HisAuthorizationProvider>();
 
             HisDomainLocalizationConfigurer.Configure(Configuration.Localization);
         }

@@ -27,5 +27,33 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
         /// <param name="hospitalId"></param>
         /// <returns></returns>
         Task<List<DashboardResponseDto>> GetDashboardAsync(Guid? hospitalId);
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="input"></param>
+        ///// <returns></returns>
+        //Task<WardMidnightCensusReportResponse> GetWardDailyReport(WardCensusInput input);
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="input"></param>
+        ///// <returns></returns>
+        //Task<WardMidnightCensusReportResponse> GetWardMonthlyReport(WardCensusInput input);
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="input"></param>
+        ///// <returns></returns>
+        //Task<WardMidnightCensusReportResponse> SubmitForApproval(WardCensusInput input);
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="input"></param>
+        ///// <returns></returns>
+        //Task<WardMidnightCensusReportResponse> Reject(RejectReportInput input);
     }
 }

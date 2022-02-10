@@ -17,9 +17,9 @@ using Shesha.Domain;
 using Abp.Domain.Repositories;
 using Boxfusion.Health.His.Domain.Domain;
 using System.Linq;
-using Boxfusion.Health.His.Admissions.Domain.Views;
 using Boxfusion.Health.His.Administration.Services.Hospitals.Helpers;
 using Boxfusion.Health.His.Contracts.Interfaces.Hospitals;
+using Boxfusion.Health.His.Administration.Domain.Views;
 
 namespace Boxfusion.Health.His.Administration.Services.Hospitals
 {

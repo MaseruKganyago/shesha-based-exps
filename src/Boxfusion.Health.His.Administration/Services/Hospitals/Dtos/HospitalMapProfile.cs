@@ -3,8 +3,6 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
-using Boxfusion.Health.His.Admissions.Helpers.Dtos;
-using Boxfusion.Health.His.Admissions.Services.Wards.Dto;
 using Boxfusion.Health.His.Domain.Domain;
 using Shesha.AutoMapper;
 using Shesha.AutoMapper.Dto;

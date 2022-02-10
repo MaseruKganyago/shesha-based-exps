@@ -1,5 +1,4 @@
 ﻿using Abp.AutoMapper;
-using Boxfusion.Health.His.Administration.Services.HisPatients.Dtos;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Dtos;
 using System;

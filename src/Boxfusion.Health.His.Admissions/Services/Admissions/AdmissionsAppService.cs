@@ -1,92 +1,93 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
-using Abp.Runtime.Session;
 using Abp.UI;
-using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
-using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
-using Boxfusion.Health.HealthCommon.Core.Dtos;
-using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
-using Boxfusion.Health.HealthCommon.Core.Services.Conditions.Helpers;
-using Boxfusion.Health.HealthCommon.Core.Services.Encounters.Helpers;
-using Boxfusion.Health.His.Admissions.Authorization;
-using Boxfusion.Health.His.Admissions.Domain.Views;
-using Boxfusion.Health.His.Admissions.Helpers;
-using Boxfusion.Health.His.Admissions.Services.Admissions.Dto;
+using Boxfusion.Health.HealthCommon.Core.Services;
+using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
+using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers;
+using local = Boxfusion.Health.His.Admissions.Helpers;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
-using Boxfusion.Health.His.Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using Shesha;
-using Shesha.AutoMapper.Dto;
-using Shesha.Domain;
-using Shesha.Extensions;
-using Shesha.NHibernate;
-using Shesha.Web.DataTable;
+using NHibernate.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Boxfusion.Health.His.Admissions.Hubs;
+using Boxfusion.Health.His.Admissions.Helpers;
+using Shesha.NHibernate;
+using Abp.Domain.Uow;
+using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
+using Boxfusion.Health.HealthCommon.Core.Dtos;
+using Shesha.Web.DataTable;
+using Boxfusion.Health.His.Admissions.Domain.Views;
+using Boxfusion.Health.His.Domain.Dtos;
+using Shesha.AutoMapper.Dto;
+using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
+using Boxfusion.Health.HealthCommon.Core.Services.Conditions.Helpers;
+using Shesha.Extensions;
+using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
+using Abp.Runtime.Session;
+using Shesha.Domain;
+using Boxfusion.Health.His.Domain.Helpers;
+using Boxfusion.Health.His.Admissions.Services.Reports.Helpers;
+using Boxfusion.Health.His.Admissions.Services.Reports.Dto;
+using Boxfusion.Health.His.Domain.Authorization;
 
-namespace Boxfusion.Health.His.Admissions.Services.Admissions
+namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions
 {
     /// <summary>
     /// 
     /// </summary>
     [AbpAuthorize]
     [ApiVersion("1")]
-    [Route("api/v{version:apiVersion}/HisAdmis/[controller]")]
-    public class AdmissionsAppService : SheshaAppServiceBase, IAdmissionsAppService
+    [Route("api/v{version:apiVersion}/His/[controller]")]
+    public class AdmissionsAppService : CdmAppServiceBase, IAdmissionsAppService
     {
-        private readonly IEncounterCrudHelper<WardAdmission> _wardAdmissionCrudHelper;
-        private readonly IEncounterCrudHelper<HospitalAdmission> _hospitalisationEncounterCrudHelper;
-        private readonly IRepository<HisPatient, Guid> _patientRepository;
-        private readonly IRepository<HisWard, Guid> _wardRepository;
-        private readonly IConditionsCrudHelper _conditionsCrudHelper;
-        private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;
-        private readonly IRepository<ConditionIcdTenCode, Guid> _conditionIcdTenCodeRepository;
-        private readonly IRepository<Condition, Guid> _conditionRepository;
-        private readonly ISessionDataProvider _sessionDataProvider;
-        private readonly IHisWardMidnightCensusReportsHelper _hisWardMidnightCensusReportsHelper;
+        private readonly IAdmissionCrudHelper _admissionCrudHelper;
+
+        private readonly IRepository<HisPatient, Guid> _hisPatientRepositiory;
         private readonly IHisAdmissionAuditTrailService _hisAdmissionAuditTrailRepository;
+        private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
+        private readonly IRepository<HisWard, Guid> _wardRepositiory;
+        private readonly IHisPermissionChecker _hisAdmissPermissionChecker;
+        private readonly IRepository<WardMidnightCensusReport, Guid> _wardMidnightCensusReport;
+        private readonly IHisWardMidnightCensusReportsHelper _hisWardMidnightCensusReportsHelper;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="wardAdmissionCrudHelper"></param>
-        /// <param name="patientRepository"></param>
-        /// <param name="wardRepository"></param>
-        /// <param name="conditionsCrudHelper"></param>
-        /// <param name="diagnosisRepository"></param>
-        /// <param name="conditionIcdTenCodeRepository"></param>
-        /// <param name="hospitalisationEncounterCrudHelper"></param>
-        /// <param name="conditionRepository"></param>
-        /// <param name="sessionDataProvider"></param>
+        /// <param name="wardAdmissionRepository"></param>
+        /// <param name="admissionCrudHelper"></param>
+        /// <param name="hisPatientRepositiory"></param>
+        /// <param name="wardRepositiory"></param>
         /// <param name="hisWardMidnightCensusReportsHelper"></param>
         /// <param name="hisAdmissionAuditTrailRepository"></param>
-        public AdmissionsAppService(IEncounterCrudHelper<WardAdmission> wardAdmissionCrudHelper,
-            IRepository<HisPatient, Guid> patientRepository,
-            IRepository<HisWard, Guid> wardRepository,
-            IConditionsCrudHelper conditionsCrudHelper,
-            IRepository<Diagnosis, Guid> diagnosisRepository,
-            IRepository<ConditionIcdTenCode, Guid> conditionIcdTenCodeRepository,
-            IEncounterCrudHelper<HospitalAdmission> hospitalisationEncounterCrudHelper,
-            IRepository<Condition, Guid> conditionRepository, ISessionDataProvider sessionDataProvider,
-            IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper,
-            IHisAdmissionAuditTrailService hisAdmissionAuditTrailRepository)
+        /// <param name="hisAdmissPermissionChecker"></param>
+        /// <param name="wardMidnightCensusReport"></param>
+        /// <param name="userAccessRightService"></param>
+        public AdmissionsAppService(
+            IRepository<WardAdmission, Guid> wardAdmissionRepository,
+            IAdmissionCrudHelper admissionCrudHelper,
+            IRepository<HisPatient, Guid> hisPatientRepositiory,
+            IRepository<HisWard, Guid> wardRepositiory,
+            IHisAdmissionAuditTrailService hisAdmissionAuditTrailRepository,
+            IHisPermissionChecker hisAdmissPermissionChecker,
+            IRepository<WardMidnightCensusReport, Guid> wardMidnightCensusReport,
+            IUserAccessRightService userAccessRightService,
+            IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper
+            )
         {
-            _wardAdmissionCrudHelper = wardAdmissionCrudHelper;
-            _patientRepository = patientRepository;
-            _wardRepository = wardRepository;
-            _conditionsCrudHelper = conditionsCrudHelper;
-            _diagnosisRepository = diagnosisRepository;
-            _conditionIcdTenCodeRepository = conditionIcdTenCodeRepository;
-            _hospitalisationEncounterCrudHelper = hospitalisationEncounterCrudHelper;
-            _conditionRepository = conditionRepository;
-            _sessionDataProvider = sessionDataProvider;
-            _hisWardMidnightCensusReportsHelper = hisWardMidnightCensusReportsHelper;
+            _admissionCrudHelper = admissionCrudHelper;
+            _hisPatientRepositiory = hisPatientRepositiory;
+            _wardAdmissionRepositiory = wardAdmissionRepository;
+            _wardRepositiory = wardRepositiory;
             _hisAdmissionAuditTrailRepository = hisAdmissionAuditTrailRepository;
+            _hisAdmissPermissionChecker = hisAdmissPermissionChecker;
+            _wardMidnightCensusReport = wardMidnightCensusReport;
+            _hisWardMidnightCensusReportsHelper = hisWardMidnightCensusReportsHelper;
         }
 
         /// <summary>
@@ -122,7 +123,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             table.OnRequestToFilterStaticAsync = async (criteria, form) =>
             {
                 var session = Abp.Dependency.IocManager.Instance.Resolve<IAbpSession>();
-                var _hisAdmissPermissionChecker = Abp.Dependency.IocManager.Instance.Resolve<IHisAdmissPermissionChecker>();
+                var _hisAdmissPermissionChecker = Abp.Dependency.IocManager.Instance.Resolve<IHisPermissionChecker>();
                 var personService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<Person, Guid>>();
                 var hisHospitalRoleAppointedPersonService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
 
@@ -138,6 +139,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
             };
             return table;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -186,7 +188,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
 
             await wardAdmissionService.UpdateAsync(wardAdmission);
 
-            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput() { reportDate = (DateTime)wardAdmission.StartDateTime.Value.Date, wardId = (Guid)wardAdmission.Ward.Id });
+            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput{ reportDate = (DateTime)wardAdmission.StartDateTime.Value.Date, wardId = (Guid)wardAdmission.Ward.Id });
 
             var person = await GetCurrentPersonAsync();
             var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(wardAdmission.Id, wardAdmission.StartDateTime);
@@ -225,55 +227,330 @@ namespace Boxfusion.Health.His.Admissions.Services.Admissions
         {
             if (string.IsNullOrEmpty(identityNumber)) throw new UserFriendlyException("identityNumber can not be null.");
 
-            var patient = await _patientRepository.FirstOrDefaultAsync(x => x.IdentityNumber == identityNumber);
+            var patient = await _hisPatientRepositiory.FirstOrDefaultAsync(x => x.IdentityNumber == identityNumber);
             if (patient == null) throw new UserFriendlyException("identityNumber can not be null.");
 
             return ObjectMapper.Map<HisPatientResponse>(patient);
         }
-       
+
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wardId"></param>
+        /// <param name="admissionStatus"></param>
+        /// <returns></returns>
+        [HttpGet, Route("GetAllByAdmissionStatus")]
+        public async Task<List<AdmissionResponse>> GetAllByStatusAsync(Guid wardId, RefListAdmissionStatuses admissionStatus)
+        {
+            var admissions = await _wardAdmissionRepositiory.GetAllListAsync(r => r.Ward != null && r.Ward.Id == wardId && r.AdmissionStatus == admissionStatus);
+
+            return ObjectMapper.Map<List<AdmissionResponse>>(admissions);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("")]
+        public async Task<List<AdmissionResponse>> GetAllAsync(Guid wardId, DateTime admissionDate)
+        {
+            var admissions = await _admissionCrudHelper.GetAllAsync(wardId, admissionDate);
+
+            return admissions;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("wardadmissions/partof/{partOfId}")]
+        public async Task<List<AdmissionResponse>> GetPatientAuditTrailAsync(Guid partOfId)
+        {
+            var admissions = await _admissionCrudHelper.GetPatientAuditTrailAsync(partOfId);
+
+            return admissions;
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private async Task<ConditionResponse> GetCondition(Guid id)
+        [HttpGet, Route("{id}")]
+        public async Task<AdmissionResponse> GetAsync(Guid id)
         {
-            if (id == Guid.Empty) throw new UserFriendlyException("id cannot be null.");
+            var admission = await _admissionCrudHelper.GetAsync(id);
 
-            var entity = await _conditionRepository.GetAsync(id);
-            if (entity == null) throw new UserFriendlyException("Condition with specified id does not exist.");
-            var conditionResult = ObjectMapper.Map<ConditionResponse>(entity);
-
-            //Gets all conditionIcdTenCodeAssignments for the condition and maps to result
-            var list = await _conditionIcdTenCodeRepository.GetAllListAsync();
-            list.RemoveAll(a => a.Condition?.Id != conditionResult?.Id);
-
-            conditionResult.Code = ObjectMapper.Map<List<EntityWithDisplayNameDto<Guid?>>>(list);
-
-            return conditionResult;
+            return admission;
         }
 
-        private async Task<DiagnosisResponse> SaveOrUpdateDiagnosis(DiagnosisInput diagnosis, WardAdmission ownerEntity)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPut, Route("[action]")]
+        public async Task ValidateIdentityNumber(ValidateIdDto input)
         {
-            //Creates new Condition for Diagnosis if the was no existing condition to relate to the diagnosis
-            var condition = new ConditionResponse();
-            if (Validation.ValidateId(diagnosis.Condition.Id) == null)
+            await _admissionCrudHelper.ValidateIdentityNumber(input?.IdentityNumber, (Guid)input?.CurrentWardId);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost, Route("")]
+        public async Task<AdmissionResponse> CreateAsync(AdmissionInput input)
+        {
+            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            Validation.ValidateEntityWithDisplayNameDto(input?.Ward, "Ward");
+            Validation.ValidateEntityWithDisplayNameDto(input?.Subject, "Patient");
+            Validation.ValidateNullableType(input?.StartDateTime, "Admission Date");
+            Validation.ValidateText(input?.WardAdmissionNumber, "Ward Admission Number");
+            Validation.ValidateReflist(input?.AdmissionType, "Admission Type");
+
+            if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided && input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
             {
-                condition = await _conditionsCrudHelper.CreateAsync(diagnosis.Condition);
-                diagnosis.Condition.Id = condition.Id;
-                diagnosis.Condition.Code = condition.Code;
+                Validation.ValidateReflist(input?.Classification, "Classification");
+                Validation.ValidateText(input?.HospitalAdmissionNumber, "Hospital Admission Number");
             }
 
-            var entity = await SaveOrUpdateEntityAsync<Diagnosis>((Guid?)Validation.ValidateId(diagnosis.Id), async item =>
+            var patient = await _hisPatientRepositiory.GetAsync(input.Subject.Id.Value);
+            if (patient == null)
+                throw new UserFriendlyException("Patient Id cannot be empty");
+
+            var wardAdmissionCount = await _wardAdmissionRepositiory.GetAll().Where(x => x.AdmissionStatus == RefListAdmissionStatuses.admitted && x.IsDeleted == false && x.Ward.Id == input.Ward.Id.Value).ToListAsync();
+            var wardCount = await _wardRepositiory.GetAsync(input.Ward.Id.Value);
+
+            if (wardAdmissionCount.Count() >= wardCount.NumberOfBeds)
+                throw new UserFriendlyException("The total number of admitted patients has exceeded the total number of beds");
+
+            var admission = await _admissionCrudHelper.CreateAsync(input, person, patient);
+
+            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput{ reportDate = (DateTime)admission.StartDateTime.Value.Date, wardId = (Guid)admission.Ward.Id });
+
+            var wardAdmission = await GetEntityAsync<WardAdmission>(admission.Id);
+
+            var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(input.Id, admission.StartDateTime);
+
+            if (admissionAudit != null)
             {
-                ObjectMapper.Map(diagnosis, item);
-                item.OwnerId = ownerEntity.Id.ToString();
-                item.OwnerType = ownerEntity.GetTypeShortAlias();
+                await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(admissionAudit.Id, async item =>
+                {
+                    item.Admission = wardAdmission;
+                    item.AdmissionStatus = RefListAdmissionStatuses.admitted;
+                    item.AuditTime = admission.StartDateTime.Value.Date;
+                    item.Initiator = person;
+                });
+            }
+            else
+            {
+                await _hisAdmissionAuditTrailRepository.CreateAudit(new HisAdmissionAuditTrail()
+                {
+                    Admission = wardAdmission,
+                    AdmissionStatus = (RefListAdmissionStatuses?)admission.AdmissionStatus.ItemValue,
+                    AuditTime = admission.StartDateTime.Value.Date,
+                    Initiator = person
+                });
+            }
+
+            return admission;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+		[HttpPut, Route("")]
+        public async Task<AdmissionResponse> UpdateAsync(AdmissionInput input)
+        {
+            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            Validation.ValidateEntityWithDisplayNameDto(input?.Ward, "Ward");
+            Validation.ValidateEntityWithDisplayNameDto(input?.Subject, "Patient");
+            Validation.ValidateEntityWithDisplayNameDto(input?.PartOf, "Hospital Admission");
+            Validation.ValidateNullableType(input?.StartDateTime, "Admission Date");
+            Validation.ValidateText(input?.WardAdmissionNumber, "Ward Admission Number");
+            Validation.ValidateReflist(input?.AdmissionType, "Admission Type");
+
+            if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided && input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
+            {
+                Validation.ValidateText(input?.HospitalAdmissionNumber, "Hospital Admission Number");
+                Validation.ValidateReflist(input?.Classification, "Classification");
+            }
+
+            var patient = await _hisPatientRepositiory.GetAsync(input.Subject.Id.Value);
+            if (patient == null)
+                throw new UserFriendlyException("Patient Id cannot be empty");
+
+            var admission = await _admissionCrudHelper.UpdateAsync(input, person);
+
+            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput{ reportDate = (DateTime)admission.StartDateTime.Value.Date, wardId = (Guid)admission.Ward.Id });
+
+            var wardAdmission = await GetEntityAsync<WardAdmission>(admission.Id);
+            var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(wardAdmission.Id, admission.StartDateTime);
+
+            if (admissionAudit != null)
+            {
+                await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(admissionAudit.Id, async item =>
+                {
+                    item.Admission = wardAdmission;
+                    item.AdmissionStatus = (RefListAdmissionStatuses?)admission.AdmissionStatus.ItemValue;
+                    item.AuditTime = admission.StartDateTime.Value.Date;
+                    item.Initiator = person;
+                });
+            }
+            else
+            {
+                await _hisAdmissionAuditTrailRepository.CreateAudit(new HisAdmissionAuditTrail()
+                {
+                    Admission = wardAdmission,
+                    AdmissionStatus = (RefListAdmissionStatuses?)admission.AdmissionStatus.ItemValue,
+                    AuditTime = admission.StartDateTime.Value.Date,
+                    Initiator = person
+                });
+            }
+
+            return admission;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPut, Route("separate")]
+        public async Task<AdmissionResponse> SeparatePatientAsync(AdmissionInput input)
+        {
+            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            Validation.ValidateIdWithException(input?.Id, "Admission Id cannot be empty.");
+            Validation.ValidateReflist(input?.SeparationType, "Separation Type");
+            Validation.ValidateNullableType(input?.SeparationDate, "Separation Date");
+            Validation.ValidateEntityWithDisplayNameDto(input?.SeparationCode, "Separation Code");
+
+            var admission = await _wardAdmissionRepositiory.FirstOrDefaultAsync(x => x.Id == input.Id);
+
+            if (admission?.Subject?.DateOfBirth != null)
+            {
+                if (local.UtilityHelper.GetAge(admission.Subject.DateOfBirth.Value) < 5)
+                {
+                    Validation.ValidateReflist(input?.SeparationChildHealth, "Separation Child Health");
+                }
+            }
+
+            if (input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.internalTransfer)
+                Validation.ValidateEntityWithDisplayNameDto(input?.SeparationDestinationWard, "Ward");
+            if (input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.externalTransfer)
+            {
+                if (input.IsGautengGovFacility)
+                {
+                    Validation.ValidateEntityWithDisplayNameDto(input?.TransferToHospital, "Transfer to hospital");
+                }
+                else
+                {
+                    Validation.ValidateText(input?.TransferToNonGautengHospital, "Transfer To Non Gauteng Hospital");
+                }
+            }
+
+            var admissionResponse = await _admissionCrudHelper.SeparatePatientAsync(input, person);
+
+            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput{ reportDate = (DateTime)admissionResponse.StartDateTime.Value.Date, wardId = (Guid)admissionResponse.Ward.Id });
+
+            await _hisWardMidnightCensusReportsHelper.CreateAdmissionAuditTrailAsync(new HisAdmissionAuditTrailInput()
+            {
+                Admission = input.Id,
+                AdmissionStatus = RefListAdmissionStatuses.separated,
+                AuditTime = admissionResponse.SeparationDate.Value.Date,
+                Initiator = person.Id,
+                UserId = person.User.Id
             });
 
-            var result = ObjectMapper.Map<DiagnosisResponse>(entity);
-            result.Condition = condition;
-            return result;
+            return admissionResponse;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="admission"></param>
+        /// <returns></returns>
+        [HttpPut, Route("undoSeparation")]
+        public async Task<AdmissionResponse> UndoSeparationAsync(UndoSeparationDto admission)
+        {
+            if (!await _hisAdmissPermissionChecker.IsApproverLevel1(await GetCurrentPersonAsync()))
+            {
+                throw new UserFriendlyException("The logged user is not a level 1 approver");
+            }
+
+            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+
+            var separation = await _admissionCrudHelper.UndoSeparation(admission, person);
+
+            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput{ reportDate = (DateTime)separation.StartDateTime.Value.Date, wardId = (Guid)separation.Ward.Id });
+
+            var wardAdmission = await GetEntityAsync<WardAdmission>((separation.Id));
+            var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(wardAdmission.Id, wardAdmission.StartDateTime);
+
+            if (admissionAudit != null)
+            {
+                await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(admissionAudit.Id, async item =>
+                {
+                    item.Admission = wardAdmission;
+                    item.AdmissionStatus = (RefListAdmissionStatuses?)wardAdmission.AdmissionStatus;
+                    item.AuditTime = wardAdmission.StartDateTime.Value.Date;
+                    item.Initiator = person;
+                });
+            }
+            else
+            {
+                await _hisAdmissionAuditTrailRepository.CreateAudit(new HisAdmissionAuditTrail()
+                {
+                    Admission = wardAdmission,
+                    AdmissionStatus = (RefListAdmissionStatuses?)wardAdmission.AdmissionStatus,
+                    AuditTime = wardAdmission.StartDateTime.Value.Date,
+                    Initiator = person
+                });
+            }
+
+            return separation;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+ 		[HttpDelete, Route("{id}")]
+        public async Task DeleteAsync(Guid id)
+        {
+            await _admissionCrudHelper.DeleteAsync(id);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet, Route("wardAdmission/{id}")]
+        public async Task<AdmissionResponse> GetWardAdmission(Guid id)
+        {
+            var wardAdmission = await _admissionCrudHelper.GetAsync(id);
+            return wardAdmission;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet, Route("wardAdmissions/{id}")]
+        public async Task<List<AdmissionResponse>> GetWardAdmissions(Guid id)
+        {
+            var wardAdmissions = await _admissionCrudHelper.GetWardAdmissions(id);
+            return wardAdmissions;
         }
     }
 }
