@@ -6,6 +6,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
 using Boxfusion.Health.His.Bookings.Helpers.Slots;
 using NHibernate.Linq;
+using Shesha.Sms;
 using System;
 using System.Collections.Generic;
 using System.Linq;

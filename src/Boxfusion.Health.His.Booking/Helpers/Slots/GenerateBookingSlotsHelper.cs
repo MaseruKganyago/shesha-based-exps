@@ -4,6 +4,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
 using NHibernate.Linq;
+using Shesha.Sms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,7 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
             _scheduleAvailability = scheduleAvailability;
             _slotRepo = slot;
         }
+        
         /// <summary>
         /// 
         /// </summary>
