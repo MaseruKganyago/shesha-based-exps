@@ -1,4 +1,5 @@
-﻿using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
+﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,9 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
         /// <param name="scheduleId"></param>
         /// <param name="startDate"></param>
         /// <param name="pagination"></param>
-        /// <param name="endDate"></param>
+        /// <param name="filterEndDate"></param>
         /// <returns></returns>
-        Task<List<FlattenedAppointmentDto>> GetFlattenedAppointments(Guid facilityId, Guid scheduleId, DateTime? startDate, PaginationDto pagination, DateTime? endDate);
+        Task<List<FlattenedAppointmentDto>> GetFlattenedAppointmentsAsync(Guid facilityId, Guid scheduleId, DateTime? startDate, PaginationDto pagination, DateTime? filterEndDate);
 
         /// <summary>
         /// 
@@ -30,5 +31,35 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
         /// <param name="facilityId"></param>
         /// <returns></returns>
         Task<List<CdmScheduleResponse>> GetAllAsync(Guid person, string facilityId = null);
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="scheduleId"></param>
+        ///// <returns></returns>
+        //Task<List<CdmSlotResponse>> GetAllAsync(Guid scheduleId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <returns></returns>
+        Task<bool> IsAppointmentStatusBooked(Guid appointmentId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="slot"></param>
+        /// <returns></returns>
+        Task<CdmAppointmentResponse> BookAvailableSlotAsync(BookAppointmentInput input, CdmSlot slot);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="slot"></param>
+        /// <returns></returns>
+        Task<CdmAppointmentResponse> RescheduleAppointment(RescheduleInput input, CdmSlot slot);
     }
 }

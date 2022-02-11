@@ -94,5 +94,15 @@
         /// Pages: Admission Dashboard
         /// </summary>
         public const string DailyAppointmentBooking = "pages:dailyAppointmentBooking";
+
+        /// <summary>
+        /// Pages: Admission Dashboard
+        /// </summary>
+        public const string BookAppointment = "pages:bookAppointment";
+
+        /// <summary>
+        /// Pages: Admission Dashboard
+        /// </summary>
+        public const string RescheduleAppointment = "pages:rescheduleAppointment";
     }
 }

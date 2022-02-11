@@ -82,6 +82,12 @@ namespace Boxfusion.Health.His.Domain.Authorization
             if (permissionName == PermissionNames.DailyAppointmentBooking)
                 return await this.IsScheduleManager(person) || await this.IsScheduleFulfiller(person) || await this.IsAdmin(person);
 
+            if (permissionName == PermissionNames.BookAppointment)
+                return await this.IsScheduleManager(person) || await this.IsAdmin(person);
+
+            if (permissionName == PermissionNames.RescheduleAppointment)
+                return await this.IsScheduleManager(person) || await this.IsAdmin(person);
+
             return false;
         }
 

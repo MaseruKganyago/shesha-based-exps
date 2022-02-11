@@ -303,6 +303,16 @@
             Pages: Admission Dashboard
             </summary>
         </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.BookAppointment">
+            <summary>
+            Pages: Admission Dashboard
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.RescheduleAppointment">
+            <summary>
+            Pages: Admission Dashboard
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Domain.Authorization.RoleNames">
             <summary>
             Health.His Role Names
