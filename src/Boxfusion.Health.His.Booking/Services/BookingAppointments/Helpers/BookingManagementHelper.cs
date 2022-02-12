@@ -69,7 +69,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
                       .SetParameter("filterStartDate", filterStartDate)
                       .SetParameter("filterEndDate", filterEndDate)
                       .SetParameter("pageNumber", pagination.PageNumber)
-                      .SetParameter("rowsOfPage", pagination.RowsOfPage)
+                      .SetParameter("pageSize", pagination.PageSize)
                       .ListAsync<FlattenedAppointments>();
 
             return _mapper.Map<List<FlattenedAppointmentDto>>(flattenedAppointmentQuery);
@@ -93,11 +93,11 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
         /// </summary>
         /// <param name="appointmentId"></param>
         /// <returns></returns>
-        public async Task<CdmScheduleResponse> GetAsync(Guid appointmentId)
+        public async Task<CdmAppointmentResponse> GetAsync(Guid appointmentId)
         {
             var appointment = await _cdmAppointmentRepository.GetAsync(appointmentId);
 
-            return _mapper.Map<CdmScheduleResponse>(appointment);
+            return _mapper.Map<CdmAppointmentResponse>(appointment);
         }
 
         /// <summary>
@@ -144,6 +144,21 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
                 return false;
 
             return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <returns></returns>
+        public async Task<CdmAppointmentResponse> ConfirmAppointmentArrival(Guid appointmentId)
+        {
+            var appointment = await _cdmAppointmentRepository.GetAsync(appointmentId);
+            appointment.Status = RefListAppointmentStatuses.checkedIn;
+            appointment.ArrivalTime = DateTime.Now;
+            var updatedAppointment = await _cdmAppointmentRepository.UpdateAsync(appointment);
+
+            return _mapper.Map<CdmAppointmentResponse>(updatedAppointment);
         }
     }
 }

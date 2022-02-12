@@ -44,7 +44,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos
                 .ForMember(c => c.ServiceType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "ServiceTypes", (long?)c.ServiceType)))
                 .ForMember(c => c.Speciality, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "PracticeSettingCodeValueSets", (long?)c.Speciality)))
                 .ForMember(c => c.AppointmentType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "AppointmentReasonCodes", (long?)c.AppointmentType)))
-                .ForMember(c => c.ReasonCode, options => options.MapFrom(c => UtilityHelper.GetMultiReferenceListItemValueList((RefListServiceRequestProcedureReasons)c.ReasonCode)))
+                .ForMember(c => c.ReasonCode, options => options.MapFrom(c => UtilityHelper.GetMultiReferenceListItemValueList(c.ReasonCode != null ? (RefListEncounterReasonCodes)c.ReasonCode : 0)))
                 .ForMember(c => c.BasedOn, options => options.MapFrom(c => c.BasedOn != null ? new EntityWithDisplayNameDto<Guid?>(c.BasedOn.Id, c.BasedOn.Identifier) : null))
                 .ForMember(c => c.Patient, options => options.MapFrom(c => c.Patient != null ? new EntityWithDisplayNameDto<Guid?>(c.Patient.Id, c.Patient.FullName) : null))
                 .ForMember(c => c.Practitioner, options => options.MapFrom(c => c.Practitioner != null ? new EntityWithDisplayNameDto<Guid?>(c.Practitioner.Id, c.Practitioner.FullName) : null))

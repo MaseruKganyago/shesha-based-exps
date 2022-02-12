@@ -61,5 +61,12 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
         /// <param name="slot"></param>
         /// <returns></returns>
         Task<CdmAppointmentResponse> RescheduleAppointment(RescheduleInput input, CdmSlot slot);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <returns></returns>
+        Task<CdmAppointmentResponse> ConfirmAppointmentArrival(Guid appointmentId);
     }
 }

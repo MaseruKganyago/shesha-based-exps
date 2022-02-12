@@ -55,8 +55,9 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         /// <param name="facilityId"></param>
         /// <returns></returns>
         [HttpGet, Route("Schedules/SchedulesAssociatedToUser")]
-        public async Task<List<CdmScheduleResponse>> GetAllAsync(string facilityId = null)
+        public async Task<List<CdmScheduleResponse>> GetAllAsync()
         {
+            var facilityId = _httpContextAccessor.HttpContext.Request.Query["facilityId"].ToString();
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
             var schedules = await _scheduleHelperCrudHelper.GetAllAsync(person.Id, facilityId);
 
@@ -87,15 +88,15 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         /// <returns></returns>
         [HttpGet, Route("Appointments/FlattenedDailyFacilityAppointments")]
         [AbpAuthorize(PermissionNames.DailyAppointmentBooking)]
-        public async Task<List<FlattenedAppointmentDto>> GetFlattenedAppointmentsAsync(Guid facilityId, Guid scheduleId, DateTime? startDate, PaginationDto pagination, DateTime? endDate)
+        public async Task<List<FlattenedAppointmentDto>> GetFlattenedAppointmentsAsync(Guid scheduleId, DateTime? startDate, PaginationDto pagination, DateTime? endDate)
         {
-            facilityId = Guid.Parse(_httpContextAccessor.HttpContext.Request.Query["facilityId"].ToString());
+            var facilityId = Guid.Parse(_httpContextAccessor.HttpContext.Request.Query["facilityId"].ToString());
 
             Validation.ValidateIdWithException(facilityId, "Facility Context Id cannot be empty");
             Validation.ValidateIdWithException(scheduleId, "Schedule Id cannot be empty");
             Validation.ValidateNullableType(startDate, "Filtering Start Date");
             Validation.ValidateNullableType(pagination.PageNumber, "PageNumber");
-            Validation.ValidateNullableType(pagination.RowsOfPage, "RowsOfPage");
+            Validation.ValidateNullableType(pagination.PageSize, "RowsOfPage");
 
             var flattenedAppointments = await _bookingManagementHelper.GetFlattenedAppointmentsAsync(facilityId, scheduleId, startDate, pagination, endDate);
 
@@ -151,24 +152,22 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
             return await _bookingManagementHelper.RescheduleAppointment(input, availableSlots.FirstOrDefault());
         }
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="appointmentId"></param>
-        ///// <returns></returns>
-        //[HttpPut, Route("Appointments/{appointmentId}/ConfirmArrival")]
-        //[AbpAuthorize(PermissionNames.RescheduleAppointment)]
-        //public async Task<CdmAppointmentResponse> ConfirmAppointmentArrival(Guid appointmentId)
-        //{
-        //    var isAppointmentStatusBooked = await _bookingManagementHelper.IsAppointmentStatusBooked(input.Id);
-        //    if (!isAppointmentStatusBooked)
-        //        throw new UserFriendlyException("Cannot reschedule an appointment that does not have a booked status");
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <returns></returns>
+        [HttpPut, Route("Appointments/{appointmentId}/ConfirmArrival")]
+        [AbpAuthorize(PermissionNames.RescheduleAppointment)]
+        public async Task<CdmAppointmentResponse> ConfirmAppointmentArrival(Guid appointmentId)
+        {
+            var isAppointmentStatusBooked = await _bookingManagementHelper.IsAppointmentStatusBooked(appointmentId);
+            if (!isAppointmentStatusBooked)
+                throw new UserFriendlyException("Cannot reschedule an appointment that does not have a booked status");
 
-        //    var availableSlots = await _slotHelperCrudHelper.GetBookingSlots((RefListSlotCapacityTypes)input.SlotType.ItemValue, input.Start.Value);
-        //    if (!availableSlots.Any())
-        //        throw new UserFriendlyException("There are no available slots");
+            var confirmedAppointmentArrivalTime = await _bookingManagementHelper.ConfirmAppointmentArrival(appointmentId);
 
-        //    return await _bookingManagementHelper.RescheduleAppointment(input, availableSlots.FirstOrDefault());
-        //}
+            return confirmedAppointmentArrivalTime;
+        }
     }
 }

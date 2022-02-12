@@ -40,11 +40,6 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos
         public EntityWithDisplayNameDto<Guid?> Patient { get; set; }
 
         /// <summary>
-        /// The slots that this appointment is filling.
-        /// </summary>
-        public EntityWithDisplayNameDto<Guid?> Slot { get; set; }
-
-        /// <summary>
         /// The name of the contact person in case they are organising on behalf of the patient.
         /// </summary>
         public string ContactName { get; set; }

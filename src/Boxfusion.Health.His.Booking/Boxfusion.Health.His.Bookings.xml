@@ -226,12 +226,6 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsAppService.SendSms">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsJob">
             <summary>
             Creates booking slots so that they can be made available for the booking of appointments.
@@ -292,7 +286,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.GetAllAsync(System.String)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.GetAllAsync">
             <summary>
             
             </summary>
@@ -306,7 +300,7 @@
             <param name="scheduleId"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.GetFlattenedAppointmentsAsync(System.Guid,System.Guid,System.Nullable{System.DateTime},Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto,System.Nullable{System.DateTime})">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.GetFlattenedAppointmentsAsync(System.Guid,System.Nullable{System.DateTime},Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto,System.Nullable{System.DateTime})">
             <summary>
             
             </summary>
@@ -329,6 +323,13 @@
             
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.ConfirmAppointmentArrival(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="appointmentId"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookAppointmentInput">
@@ -359,11 +360,6 @@
         <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookAppointmentInput.Patient">
             <summary>
             
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookAppointmentInput.Slot">
-            <summary>
-            The slots that this appointment is filling.
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.BookAppointmentInput.ContactName">
@@ -446,7 +442,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto.RowsOfPage">
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto.PageSize">
             <summary>
             
             </summary>
@@ -538,6 +534,13 @@
             <param name="appointmentId"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.BookingManagementHelper.ConfirmAppointmentArrival(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="appointmentId"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.IBookingManagementHelper">
             <summary>
             
@@ -585,6 +588,13 @@
             <param name="slot"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.IBookingManagementHelper.ConfirmAppointmentArrival(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="appointmentId"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.Util">
             <summary>
             
@@ -600,11 +610,10 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.IBookingManagementsAppService.GetAllAsync(System.String)">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.IBookingManagementsAppService.GetAllAsync">
             <summary>
             
             </summary>
-            <param name="person"></param>
             <param name="facilityId"></param>
             <returns></returns>
         </member>
@@ -615,7 +624,7 @@
             <param name="scheduleId"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.IBookingManagementsAppService.GetFlattenedAppointmentsAsync(System.Guid,System.Guid,System.Nullable{System.DateTime},Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto,System.Nullable{System.DateTime})">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.IBookingManagementsAppService.GetFlattenedAppointmentsAsync(System.Guid,System.Nullable{System.DateTime},Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto,System.Nullable{System.DateTime})">
             <summary>
             
             </summary>

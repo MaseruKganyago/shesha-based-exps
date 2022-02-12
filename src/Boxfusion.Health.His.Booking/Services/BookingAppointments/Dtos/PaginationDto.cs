@@ -17,6 +17,6 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos
         /// <summary>
         /// 
         /// </summary>
-        public int? RowsOfPage { get; set; }
+        public int? PageSize { get; set; }
     }
 }

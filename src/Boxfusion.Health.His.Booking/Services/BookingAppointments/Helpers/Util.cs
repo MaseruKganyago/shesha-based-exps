@@ -31,7 +31,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
                                                         WHERE ((app.[Start] >= :filterStartDate and app.[Start] < DATEADD(day,1,:filterEndDate)) OR (:filterStartDate IS NULL AND :filterEndDate IS NULL) OR (:filterEndDate IS NULL AND app.[Start] = :filterStartDate))
                                                         AND sch.Id = :scheduleId AND (CAST(sch.ActorOwnerId AS UNIQUEIDENTIFIER) = :facilityId)
                                                         ORDER BY [Status]
-                                                        OFFSET (:PageNumber-1)*(:RowsOfPage) ROWS
-                                                        FETCH NEXT :RowsOfPage ROWS ONLY";
+                                                        OFFSET (:pageNumber-1)*(:pageSize) ROWS
+                                                        FETCH NEXT :pageSize ROWS ONLY";
     }
 }

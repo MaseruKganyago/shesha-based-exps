@@ -16,10 +16,9 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="person"></param>
         /// <param name="facilityId"></param>
         /// <returns></returns>
-        Task<List<CdmScheduleResponse>> GetAllAsync(string facilityId = null);
+        Task<List<CdmScheduleResponse>> GetAllAsync();
 
         /// <summary>
         /// 
@@ -37,7 +36,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         /// <param name="pagination"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        Task<List<FlattenedAppointmentDto>> GetFlattenedAppointmentsAsync(Guid facilityId, Guid scheduleId, DateTime? startDate, PaginationDto pagination, DateTime? endDate);
+        Task<List<FlattenedAppointmentDto>> GetFlattenedAppointmentsAsync(Guid scheduleId, DateTime? startDate, PaginationDto pagination, DateTime? endDate);
 
         /// <summary>
         /// 
