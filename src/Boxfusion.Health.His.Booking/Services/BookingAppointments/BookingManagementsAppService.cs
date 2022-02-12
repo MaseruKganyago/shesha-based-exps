@@ -80,15 +80,14 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="facilityId"></param>
         /// <param name="scheduleId"></param>
         /// <param name="startDate"></param>
         /// <param name="pagination"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
         [HttpGet, Route("Appointments/FlattenedDailyFacilityAppointments")]
-        [AbpAuthorize(PermissionNames.DailyAppointmentBooking)]
-        public async Task<List<FlattenedAppointmentDto>> GetFlattenedAppointmentsAsync(Guid scheduleId, DateTime? startDate, PaginationDto pagination, DateTime? endDate)
+        //[AbpAuthorize(PermissionNames.DailyAppointmentBooking)]
+        public async Task<PagedResponse> GetFlattenedAppointmentsAsync(Guid scheduleId, DateTime? startDate, PaginationDto pagination, DateTime? endDate)
         {
             var facilityId = Guid.Parse(_httpContextAccessor.HttpContext.Request.Query["facilityId"].ToString());
 
@@ -96,11 +95,11 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
             Validation.ValidateIdWithException(scheduleId, "Schedule Id cannot be empty");
             Validation.ValidateNullableType(startDate, "Filtering Start Date");
             Validation.ValidateNullableType(pagination.PageNumber, "PageNumber");
-            Validation.ValidateNullableType(pagination.PageSize, "RowsOfPage");
-
+            Validation.ValidateNullableType(pagination.PageSize, "PageSize");
+            
             var flattenedAppointments = await _bookingManagementHelper.GetFlattenedAppointmentsAsync(facilityId, scheduleId, startDate, pagination, endDate);
 
-            return flattenedAppointments;
+            return new PagedResponse(items: flattenedAppointments, paging: new Paging(pagination.PageNumber, pagination.PageSize, (flattenedAppointments.Any()) ? flattenedAppointments.FirstOrDefault().TotalCount : 0));
         }
 
         /// <summary>
@@ -109,7 +108,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("Appointments/BookAvailableSlot")]
-        [AbpAuthorize(PermissionNames.BookAppointment)]
+        //[AbpAuthorize(PermissionNames.BookAppointment)]
         public async Task<CdmAppointmentResponse> BookAvailableSlotAsync(BookAppointmentInput input)
         {
             Validation.ValidateEntityWithDisplayNameDto(input?.Schedule, "Schedule");
@@ -134,7 +133,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPut, Route("Appointments/{appointmentId}/Reschedule")]
-        [AbpAuthorize(PermissionNames.RescheduleAppointment)]
+        //[AbpAuthorize(PermissionNames.RescheduleAppointment)]
         public async Task<CdmAppointmentResponse> RescheduleAppointment(RescheduleInput input)
         {
             Validation.ValidateIdWithException(input?.Id, "Appointment Id cannot be empty");

@@ -138,6 +138,11 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointments.TotalCount">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper">
             <summary>
             
@@ -432,6 +437,33 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.FlattenedAppointmentDto.TotalCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PagedResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PagedResponse.#ctor(System.Collections.Generic.List{Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.FlattenedAppointmentDto},Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.Paging)">
+            <summary>
+            
+            </summary>
+            <param name="items"></param>
+            <param name="paging"></param>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PagedResponse.Paging">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PagedResponse.Items">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto">
             <summary>
             
@@ -443,6 +475,40 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto.PageSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.Paging">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.Paging.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="totalCount"></param>
+            <param name="totalPagesCount"></param>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.Paging.PageNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.Paging.PageSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.Paging.TotalCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.Paging.TotalPagesCount">
             <summary>
             
             </summary>

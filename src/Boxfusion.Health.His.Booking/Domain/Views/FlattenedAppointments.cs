@@ -55,5 +55,10 @@ namespace Boxfusion.Health.His.Bookings.Domain.Views
         /// 
         /// </summary>
         public virtual string Schedule { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual int TotalCount { get; set; }
     }
 }

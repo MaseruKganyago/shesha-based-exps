@@ -12,11 +12,10 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
         /// <summary>
         /// 
         /// </summary>
-        public static string FlattenedAppointmentSqlQuery = @"
-                                                        SELECT 
+        public static string FlattenedAppointmentSqlQuery = @"SELECT 
                                                          app.Id
                                                         ,app.RefNumber
-                                                        ,app.[Start]
+                                                        ,app.[Start] 
                                                         ,app.AppointmentTypeLkp AppointmentType
                                                         ,app.StatusLkp [Status]
                                                         ,(SELECT [value] FROM Fhir_Identifiers WHERE TypeLkp = 5 and CAST(OwnerId AS UNIQUEIDENTIFIER) = app.PatientId) AS PatientFileId
@@ -24,6 +23,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
                                                         ,per.FullName
                                                         ,per.MobileNumber1 ContactNumber
                                                         ,sch.[Name] Schedule
+														,COUNT(*) OVER () as TotalCount
                                                         FROM Fhir_Appointments app
                                                         LEFT JOIN Core_Persons per ON per.Id = app.PatientId
                                                         LEFT JOIN Fhir_Slots slot ON slot.Id = app.SlotId

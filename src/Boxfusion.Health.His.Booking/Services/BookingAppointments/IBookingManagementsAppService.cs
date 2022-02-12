@@ -36,7 +36,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         /// <param name="pagination"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        Task<List<FlattenedAppointmentDto>> GetFlattenedAppointmentsAsync(Guid scheduleId, DateTime? startDate, PaginationDto pagination, DateTime? endDate);
+        Task<PagedResponse> GetFlattenedAppointmentsAsync(Guid scheduleId, DateTime? startDate, PaginationDto pagination, DateTime? endDate);
 
         /// <summary>
         /// 

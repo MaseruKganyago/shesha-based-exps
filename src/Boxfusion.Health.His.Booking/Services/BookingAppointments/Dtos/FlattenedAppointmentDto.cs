@@ -58,5 +58,10 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos
         /// 
         /// </summary>
         public virtual string Schedule { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual int? TotalCount { get; set; }
     }
 }
