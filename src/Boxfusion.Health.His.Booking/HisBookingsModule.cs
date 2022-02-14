@@ -7,6 +7,7 @@ using Shesha;
 using Shesha.Authorization;
 using Boxfusion.Health.His.Domain;
 using Boxfusion.Health.His.Bookings.Localization;
+using Shesha.Startup;
 
 namespace Boxfusion.Health.His.Bookings
 {
@@ -25,10 +26,7 @@ namespace Boxfusion.Health.His.Bookings
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-          //  IocManager.IocContainer.Register(
-          //    Component.For<ICustomPermissionChecker>().Forward<IHisBookingsPermissionChecker>().Forward<HisBookingsPermissionChecker>().ImplementedBy<HisBookingsPermissionChecker>().LifestyleTransient()
-          //);
-
+          
             var thisAssembly = Assembly.GetExecutingAssembly();
             IocManager.RegisterAssemblyByConvention(thisAssembly);
 
@@ -60,6 +58,7 @@ namespace Boxfusion.Health.His.Bookings
                 typeof(HisBookingsModule).Assembly,
                 moduleName: "HisBookings",
                 useConventionalHttpVerbs: true);
+            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(this.GetType().Assembly, "HisBookings");
         }
     }
 }

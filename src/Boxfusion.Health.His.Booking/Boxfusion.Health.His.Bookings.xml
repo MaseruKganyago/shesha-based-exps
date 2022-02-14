@@ -309,7 +309,6 @@
             <summary>
             
             </summary>
-            <param name="facilityId"></param>
             <param name="scheduleId"></param>
             <param name="startDate"></param>
             <param name="pagination"></param>
