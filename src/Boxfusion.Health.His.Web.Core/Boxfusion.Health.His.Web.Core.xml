@@ -25,23 +25,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Swagger.SwaggerHelper">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Swagger.SwaggerHelper.AddDocumentsPerService(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions)">
-            <summary>
-            
-            </summary>
-            <param name="options"></param>
-        </member>
-        <member name="M:Boxfusion.Health.His.Swagger.SwaggerHelper.AddXmlDocuments(Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenOptions)">
-            <summary>
-            
-            </summary>
-            <param name="options"></param>
-        </member>
         <member name="M:Boxfusion.Health.His.Swagger.SwaggerOperationFilter.GetSingleAttributeOfMemberOrDeclaringTypeOrDefault``1(System.Reflection.MemberInfo,``0,System.Boolean)">
             <summary>
             Copied from ABP

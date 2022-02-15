@@ -26,12 +26,14 @@ using Shesha.Identity;
 using Shesha.Scheduler.Extensions;
 using Shesha.Web;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Boxfusion.Health.His.Web.Host.Swagger;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Boxfusion.Health.His.Admissions.Hubs;
+using Shesha.DynamicEntities;
+using Shesha.Swagger;
+using Boxfusion.Health.His.Web.Host.Swagger;
 
 namespace Boxfusion.Health.His.Web.Host.Startup
 {
@@ -61,7 +63,10 @@ namespace Boxfusion.Health.His.Web.Host.Startup
             services.AddMvcCore(options =>
                 {
                     options.EnableEndpointRouting = false;
-                    options.Conventions.Add(new ApiExplorerGroupPerControllerConvention());
+                    options.Conventions.Add(new Shesha.Swagger.ApiExplorerGroupPerControllerConvention());
+                    
+                    options.EnableDynamicDtoBinding();
+                    options.AddDynamicAppServices(services);
                 })
                 .AddApiExplorer()
                 .AddNewtonsoftJson(options =>
@@ -212,7 +217,6 @@ namespace Boxfusion.Health.His.Web.Host.Startup
                 options.CustomOperationIds(desc => desc.ActionDescriptor is ControllerActionDescriptor d
                     ? d.ControllerName.ToCamelCase() + d.ActionName.ToPascalCase()
                     : null);
-
 
                 options.AddDocumentsPerService();
 

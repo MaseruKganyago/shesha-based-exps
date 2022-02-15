@@ -35,12 +35,12 @@
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
-    <PackageReference Include="Shesha.Application" Version="0.3.31" />
-    <PackageReference Include="Shesha.Core" Version="0.3.31" />
-    <PackageReference Include="Shesha.Framework" Version="0.3.31" />
-    <PackageReference Include="Shesha.NHibernate" Version="0.3.31" />
-    <PackageReference Include="Shesha.Scheduler" Version="0.3.31" />
-    <PackageReference Include="Shesha.Web.Controls" Version="0.3.31" />
+    <PackageReference Include="Shesha.Application" Version="0.3.38" />
+    <PackageReference Include="Shesha.Core" Version="0.3.38" />
+    <PackageReference Include="Shesha.Framework" Version="0.3.38" />
+    <PackageReference Include="Shesha.NHibernate" Version="0.3.38" />
+    <PackageReference Include="Shesha.Scheduler" Version="0.3.38" />
+    <PackageReference Include="Shesha.Web.Controls" Version="0.3.38" />
   </ItemGroup>
 
   <ItemGroup>

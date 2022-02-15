@@ -1,13 +1,12 @@
-﻿using System.Reflection;
-using Abp.AspNetCore.Configuration;
+﻿using Abp.AspNetCore.Configuration;
 using Abp.AutoMapper;
 using Abp.Modules;
-using Castle.MicroKernel.Registration;
-using Shesha;
-using Shesha.Authorization;
-using Boxfusion.Health.His.Domain;
+using Boxfusion.Health.HealthCommon.Core;
 using Boxfusion.Health.His.Bookings.Localization;
+using Boxfusion.Health.His.Domain;
+using Shesha;
 using Shesha.Startup;
+using System.Reflection;
 
 namespace Boxfusion.Health.His.Bookings
 {
@@ -16,7 +15,9 @@ namespace Boxfusion.Health.His.Bookings
     /// </summary>
     [DependsOn(
         typeof(HisDomainModule),
-        typeof(SheshaCoreModule)
+        typeof(SheshaCoreModule),
+        typeof(SheshaApplicationModule),
+        typeof(HealthCommonModule)
     )]
     public class HisBookingsModule : AbpModule
     {
@@ -58,7 +59,8 @@ namespace Boxfusion.Health.His.Bookings
                 typeof(HisBookingsModule).Assembly,
                 moduleName: "HisBookings",
                 useConventionalHttpVerbs: true);
-            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(this.GetType().Assembly, "HisBookings");
+
+            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(HealthCommonModule).Assembly, "HisBookings");
         }
     }
 }
