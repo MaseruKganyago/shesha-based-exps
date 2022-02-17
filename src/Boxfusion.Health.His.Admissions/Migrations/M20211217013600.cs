@@ -1,5 +1,6 @@
 ﻿using FluentMigrator;
 using Shesha;
+using Shesha.Domain;
 using Shesha.FluentMigrator;
 using System;
 using System.Collections.Generic;

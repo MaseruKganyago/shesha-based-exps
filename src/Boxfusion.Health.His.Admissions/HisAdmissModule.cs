@@ -3,12 +3,11 @@ using Abp.AspNetCore.Configuration;
 using Abp.AutoMapper;
 using Abp.Modules;
 using Castle.MicroKernel.Registration;
-using Boxfusion.Health.His.Admissions.Authorization;
-//using Boxfusion.Health.His.Admissions.Configuration;
 using Boxfusion.Health.His.Admissions.Localization;
 using Shesha;
 using Shesha.Authorization;
 using Boxfusion.Health.His.Domain;
+using Boxfusion.Health.His.Domain.Authorization;
 
 namespace Boxfusion.Health.His.Admissions
 {
@@ -27,9 +26,9 @@ namespace Boxfusion.Health.His.Admissions
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-            IocManager.IocContainer.Register(
-              Component.For<ICustomPermissionChecker>().Forward<IHisAdmissPermissionChecker>().Forward<HisAdmissPermissionChecker>().ImplementedBy<HisAdmissPermissionChecker>().LifestyleTransient()
-          );
+          //  IocManager.IocContainer.Register(
+          //    Component.For<ICustomPermissionChecker>().Forward<IHisPermissionChecker>().Forward<HisPermissionChecker>().ImplementedBy<HisPermissionChecker>().LifestyleTransient()
+          //);
 
             var thisAssembly = Assembly.GetExecutingAssembly();
             IocManager.RegisterAssemblyByConvention(thisAssembly);
@@ -48,7 +47,7 @@ namespace Boxfusion.Health.His.Admissions
             base.PreInitialize();
 
             //Configuration.Settings.Providers.Add<HisAdmisSettingProvider>();
-            Configuration.Authorization.Providers.Add<HisAdmissAuthorizationProvider>();
+            //Configuration.Authorization.Providers.Add<HisAuthorizationProvider>();
 
             HisAdmissLocalizationConfigurer.Configure(Configuration.Localization);
         }

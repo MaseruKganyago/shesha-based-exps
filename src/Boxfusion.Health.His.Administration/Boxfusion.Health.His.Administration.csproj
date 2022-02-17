@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
@@ -19,11 +19,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Domain\**" />
+    <Compile Remove="Authorization\**" />
     <Compile Remove="Migrations\**" />
-    <EmbeddedResource Remove="Domain\**" />
+    <EmbeddedResource Remove="Authorization\**" />
     <EmbeddedResource Remove="Migrations\**" />
-    <None Remove="Domain\**" />
+    <None Remove="Authorization\**" />
     <None Remove="Migrations\**" />
   </ItemGroup>
 
@@ -34,21 +34,16 @@
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
-    <PackageReference Include="Shesha.Application" Version="0.3.28" />
-    <PackageReference Include="Shesha.Core" Version="0.3.28" />
-    <PackageReference Include="Shesha.Framework" Version="0.3.28" />
-    <PackageReference Include="Shesha.NHibernate" Version="0.3.28" />
-    <PackageReference Include="Shesha.Scheduler" Version="0.3.28" />
-    <PackageReference Include="Shesha.Web.Controls" Version="0.3.28" />
+    <PackageReference Include="Shesha.Application" Version="0.3.40" />
+    <PackageReference Include="Shesha.Core" Version="0.3.40" />
+    <PackageReference Include="Shesha.Framework" Version="0.3.40" />
+    <PackageReference Include="Shesha.NHibernate" Version="0.3.40" />
+    <PackageReference Include="Shesha.Scheduler" Version="0.3.40" />
+    <PackageReference Include="Shesha.Web.Controls" Version="0.3.40" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.csproj" />
     <ProjectReference Include="..\Boxfusion.Health.His.Domain\Boxfusion.Health.His.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\Wards\Helpers\" />
   </ItemGroup>
 
 </Project>

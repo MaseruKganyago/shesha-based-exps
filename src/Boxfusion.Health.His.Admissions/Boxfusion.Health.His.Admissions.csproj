@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
@@ -19,37 +19,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Authorization\**" />
     <Compile Remove="Dtos\**" />
-    <Compile Remove="Services\Admissions\**" />
     <Compile Remove="Services\HisPatients\**" />
     <Compile Remove="Services\Hospitals\**" />
+    <Compile Remove="Services\Separations\**" />
     <Compile Remove="Services\Users\**" />
     <Compile Remove="Services\Wards\**" />
+    <EmbeddedResource Remove="Authorization\**" />
     <EmbeddedResource Remove="Dtos\**" />
-    <EmbeddedResource Remove="Services\Admissions\**" />
     <EmbeddedResource Remove="Services\HisPatients\**" />
     <EmbeddedResource Remove="Services\Hospitals\**" />
+    <EmbeddedResource Remove="Services\Separations\**" />
     <EmbeddedResource Remove="Services\Users\**" />
     <EmbeddedResource Remove="Services\Wards\**" />
+    <None Remove="Authorization\**" />
     <None Remove="Dtos\**" />
-    <None Remove="Services\Admissions\**" />
     <None Remove="Services\HisPatients\**" />
     <None Remove="Services\Hospitals\**" />
+    <None Remove="Services\Separations\**" />
     <None Remove="Services\Users\**" />
     <None Remove="Services\Wards\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Services\Admissions\AdmissionsAppService.cs" />
-    <Compile Include="Services\Admissions\Dto\AcceptOrRejectTransfersInput.cs" />
-    <Compile Include="Services\Admissions\Dto\AcceptOrRejectTransfersResponse.cs" />
-    <Compile Include="Services\Admissions\Dto\AdmissionsMapProfile.cs" />
-    <Compile Include="Services\Admissions\Dto\MonthlyStats.cs" />
-    <Compile Include="Services\Admissions\Dto\DailyStats.cs" />
-    <Compile Include="Services\Admissions\Dto\WardCensusInput.cs" />
-    <Compile Include="Services\Admissions\Dto\WardCensusResponse.cs" />
-    <Compile Include="Services\Admissions\Dto\WardMidnightCensusReportResponse.cs" />
-    <Compile Include="Services\Admissions\IAdmissionsAppService.cs" />
   </ItemGroup>
 
 
@@ -60,16 +50,20 @@
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
-    <PackageReference Include="Shesha.Application" Version="0.3.28" />
-    <PackageReference Include="Shesha.Core" Version="0.3.28" />
-    <PackageReference Include="Shesha.Framework" Version="0.3.28" />
-    <PackageReference Include="Shesha.NHibernate" Version="0.3.28" />
-    <PackageReference Include="Shesha.Scheduler" Version="0.3.28" />
-    <PackageReference Include="Shesha.Web.Controls" Version="0.3.28" />
+    <PackageReference Include="Shesha.Application" Version="0.3.40" />
+    <PackageReference Include="Shesha.Core" Version="0.3.40" />
+    <PackageReference Include="Shesha.Framework" Version="0.3.40" />
+    <PackageReference Include="Shesha.NHibernate" Version="0.3.40" />
+    <PackageReference Include="Shesha.Scheduler" Version="0.3.40" />
+    <PackageReference Include="Shesha.Web.Controls" Version="0.3.40" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Boxfusion.Health.His.Domain\Boxfusion.Health.His.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\Dtos\" />
   </ItemGroup>
 
 </Project>

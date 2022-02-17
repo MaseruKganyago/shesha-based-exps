@@ -4,46 +4,204 @@
         <name>Boxfusion.Health.His.Domain</name>
     </assembly>
     <members>
-        <member name="T:Boxfusion.Health.His.Domain.Authorization.HisDomainAuthorizationProvider">
+        <member name="T:Boxfusion.Health.His.Domain.Authorization.HisAuthorizationProvider">
             <summary>
             Health.His Authorization Provider
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisDomainAuthorizationProvider.SetPermissions(Abp.Authorization.IPermissionDefinitionContext)">
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisAuthorizationProvider.SetPermissions(Abp.Authorization.IPermissionDefinitionContext)">
             <summary>
             Register permissions declared in the <see cref="T:Boxfusion.Health.His.Domain.Authorization.PermissionNames"/> class
             </summary>
             <param name="context"></param>
         </member>
-        <member name="T:Boxfusion.Health.His.Domain.Authorization.HisDomainPermissionChecker">
+        <member name="T:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker">
             <summary>
             Health.His Permission checker
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisDomainPermissionChecker.#ctor(Abp.Domain.Repositories.IRepository{Shesha.Domain.Person,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointmentEntity,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.#ctor(Abp.Domain.Repositories.IRepository{Shesha.Domain.Person,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.ShaRoleAppointmentEntity,System.Guid})">
             <summary>
             Default constructor
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisDomainPermissionChecker.IsGrantedAsync(System.Int64,System.String)">
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.IsGrantedAsync(System.Int64,System.String)">
+            <summary>
             inheritedDoc
+            </summary>
+            <param name="userId"></param>
+            <param name="permissionName"></param>
+            <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisDomainPermissionChecker.IsInAnyOfRoles(Shesha.Domain.Person,System.String[])">
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.IsInAnyOfRoles(Shesha.Domain.Person,System.String[])">
+            <summary>
             inheritedDoc
+            </summary>
+            <param name="person"></param>
+            <param name="roles"></param>
+            <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisDomainPermissionChecker.IsDataAdministrator(Shesha.Domain.Person)">
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.IsDataAdministrator(Shesha.Domain.Person)">
             <summary>
             
             </summary>
             <param name="person"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Domain.Authorization.IHisDomainPermissionChecker">
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.IsAdmin(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.IsGranted(System.Int64,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="permissionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.IsApproverLevel1(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.IsApproverLevel2(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.IsManager(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.IsGlobalAdmin(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.IsFacilityAdmin(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.IsCapturer(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.IsViewer(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.IsScheduleManager(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.HisPermissionChecker.IsScheduleFulfiller(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Authorization.IHisPermissionChecker">
             <summary>
             Health.His Permission checker
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Domain.Authorization.IHisDomainPermissionChecker.IsDataAdministrator(Shesha.Domain.Person)">
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.IHisPermissionChecker.IsDataAdministrator(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.IHisPermissionChecker.IsGlobalAdmin(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.IHisPermissionChecker.IsFacilityAdmin(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.IHisPermissionChecker.IsCapturer(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.IHisPermissionChecker.IsViewer(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.IHisPermissionChecker.IsApproverLevel1(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.IHisPermissionChecker.IsApproverLevel2(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.IHisPermissionChecker.IsManager(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.IHisPermissionChecker.IsAdmin(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.IHisPermissionChecker.IsScheduleManager(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Authorization.IHisPermissionChecker.IsScheduleFulfiller(Shesha.Domain.Person)">
             <summary>
             
             </summary>
@@ -56,6 +214,101 @@
             </summary>
         </member>
         <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.AdmissionDashboard">
+            <summary>
+            Pages: Admission Dashboard
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.DailyAdmissionDashboard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.AllAdmissionDashboard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.ApproveReport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.DisapproveReport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.DailyReports">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.MonthlyReports">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.CreateFacility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.Facilities">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.CaptureAdmissions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.SeparateAndTransfer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.SubmitsReportsForApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.ReportsAndStats">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.Administration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.Wards">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.Speciality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.Reports">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.DailyAppointmentBooking">
+            <summary>
+            Pages: Admission Dashboard
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.BookAppointment">
+            <summary>
+            Pages: Admission Dashboard
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.PermissionNames.RescheduleAppointment">
             <summary>
             Pages: Admission Dashboard
             </summary>
@@ -73,6 +326,51 @@
         <member name="F:Boxfusion.Health.His.Domain.Authorization.RoleNames.SystemAdministrator">
             <summary>
             System Administrator
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.RoleNames.ApproverLevel1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.RoleNames.ApproverLevel2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.RoleNames.Manager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.RoleNames.Viewer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.RoleNames.Capturer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.RoleNames.FacilityAdmin">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.RoleNames.GlobalAdmin">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.RoleNames.ScheduleManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Domain.Authorization.RoleNames.ScheduleFulfiller">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Domain.Domain.Enums.RefListAdmissionStatuses">
@@ -1089,6 +1387,56 @@
             <summary>
             Used to like the serparations
             </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService.IsPersonAssignedToHospital(System.Guid,Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="currentPerson"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService.IsPersonAssignedToWard(System.Guid,Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="currentPerson"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Helpers.UserAccessRightService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Helpers.UserAccessRightService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HospitalRoleAppointedPerson,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="repository"></param>
+            <param name="wardRoleAppointedPersonRepository"></param>
+            <param name="hospitalRoleAppointedPersonRepository"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Helpers.UserAccessRightService.IsPersonAssignedToHospital(System.Guid,Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="currentPerson"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Helpers.UserAccessRightService.IsPersonAssignedToWard(System.Guid,Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="currentPerson"></param>
+            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Domain.HisDomainModule">
             <summary>
