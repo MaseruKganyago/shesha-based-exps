@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 //using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos;
 using System;
