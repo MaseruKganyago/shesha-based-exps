@@ -440,6 +440,35 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.CdmAppointments.CancelAppointmentAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.CdmAppointments.CancelAppointmentAppService.#ctor(Boxfusion.Health.His.Bookings.Services.CancelAppointments.Helpers.ICancelAppointmentHelper)">
+            <summary>
+            
+            </summary>
+            <param name="cdmAppointmentHelper"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.CdmAppointments.CancelAppointmentAppService.CancelAppointment(System.Guid,System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="facilityId"></param>
+            <param name="appointmentId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.Patient">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.IBookingManagementsAppService.GetFlattenedAppointments(System.Guid,System.Guid,System.Nullable{System.DateTime},Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos.PaginationDto,System.Nullable{System.DateTime})">
             <summary>
             
@@ -457,6 +486,142 @@
             </summary>
             <param name="person"></param>
             <param name="facilityId"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.Practitioner">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.ArrivalTime">
+            <summary>
+            The time the client registered as arrived at the facility/in the queue.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.RefNumber">
+            <summary>
+            A reference number issued to the patient.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.ContactName">
+            <summary>
+            The name of the contact person in case they are organising on behalf of the patient.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.ContactCellphone">
+            <summary>
+            The cellphone of the contact person in case they are organising on behalf of the patient.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.IssuedTicketNumber">
+            <summary>
+            The ticket number issued to the client upon arrival (could be linked to a physical ticket issued at the facility so they can easily be called)
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.QueuePosition">
+            <summary>
+            Indicates the queue position within the Queue/slot
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.QueuePriority">
+            <summary>
+            Allows repriritising within the queue regardless of queue position. The higher the better.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.DropOutTime">
+            <summary>
+            If the client dropped out of the queue whilst waiting to be serviced, specifies the time he did so.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.FirstTimeCalled">
+            <summary>
+            The first time the client was called to be seen.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.LastTimeCalled">
+            <summary>
+            The last time the client was called to be seen.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.NumTimesCalled">
+            <summary>
+            The number of times the client was called to be seen.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.FulfilledTime">
+            <summary>
+            The time the appointment was fulfilled i.e. appointment with practioner initiated.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.WaitingTime">
+            <summary>
+            The duration between arrival time (or start time if later) and the FirstCalledTime
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.AlternateContactName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos.CancelAppointmentInput.AlternateContactCellphone">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.CdmAppointments.ICancelAppointmentAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.CdmAppointments.ICancelAppointmentAppService.CancelAppointment(System.Guid,System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="facilityId"></param>
+            <param name="appointmentId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.CancelAppointments.Dtos.CancelAppointmentMapProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.CancelAppointments.Dtos.CancelAppointmentMapProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.CancelAppointments.Helpers.CancelAppointmentHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.CancelAppointments.Helpers.CancelAppointmentHelper.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmAppointment,System.Guid},AutoMapper.IMapper,Shesha.Sms.ISmsGateway,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            
+            </summary>
+            <param name="appointmentRepository"></param>
+            <param name="mapper"></param>
+            <param name="smsSender"></param>
+            <param name="httpContextAccessor"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.CancelAppointments.Helpers.CancelAppointmentHelper.CancelAppointment(System.Guid,System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="facilityId"></param>
+            <param name="appointmentId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.CancelAppointments.Helpers.ICancelAppointmentHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.CancelAppointments.Helpers.ICancelAppointmentHelper.CancelAppointment(System.Guid,System.Guid)">
+            <summary>
+            
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Services.FacilityPatients.Dtos.FacilityPatientsInput">
