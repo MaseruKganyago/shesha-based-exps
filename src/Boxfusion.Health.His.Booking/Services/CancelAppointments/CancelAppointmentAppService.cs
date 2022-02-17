@@ -49,5 +49,5 @@ namespace Boxfusion.Health.His.Bookings.Services.CdmAppointments
             return canceledAppointment;
 
         }
-}
+    }
 }

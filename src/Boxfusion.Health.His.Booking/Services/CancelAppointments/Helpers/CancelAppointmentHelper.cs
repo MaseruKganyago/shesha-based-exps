@@ -22,7 +22,7 @@ namespace Boxfusion.Health.His.Bookings.Services.CancelAppointments.Helpers
     /// <summary>
     /// 
     /// </summary>
-    public class CancelAppointmentHelper : ICancelAppointmentHelper, ITransientDependency
+    public class CancelAppointmentHelper : ICancelAppointmentHelper 
     {
         private readonly IRepository<CdmAppointment, Guid> _cdmAppointmentRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -65,8 +65,8 @@ namespace Boxfusion.Health.His.Bookings.Services.CancelAppointments.Helpers
                 appointment.DropOutTime = DateTime.Now;
 
                 //Send Notification
-                await _smsSender.SendSmsAsync(appointment.Patient.MobileNumber, "Appointment for {appointment.RefNumber} is canceled");
-                await _smsSender.SendSmsAsync(appointment.AlternateContactCellphone, "Appointment for {appointment.RefNumber} is canceled");
+                await _smsSender.SendSmsAsync(appointment.Patient.MobileNumber, $"Appointment for {appointment.RefNumber} is canceled");
+                //await _smsSender.SendSmsAsync(appointment.AlternateContactCellphone, $"Appointment for {appointment.RefNumber} is canceled");
 
                 await _cdmAppointmentRepository.UpdateAsync(appointment);
             }

@@ -25,10 +25,10 @@ namespace Boxfusion.Health.His.Bookings.Services.CancelAppointments.Dtos
                 .ForMember(a => a.Slot, options => options.MapFrom(b => b.Slot != null ? new EntityWithDisplayNameDto<Guid?>(b.Slot.Id, b.Slot.Identifier) : null))
                 .MapReferenceListValuesToDto();
 
-            //CreateMap<CdmAppointmentResponse, CdmAppointment>()
-            //     .ForMember(a => a.Practitioner, options => options.MapFrom(b => GetEntity<CdmPractitioner>(b.Practitioner)))
-            //     .ForMember(a => a.Patient, options => options.MapFrom(b => GetEntity<CdmPatient>(b.Patient)))
-            // .MapReferenceListValuesToDto();
+            CreateMap<CdmAppointmentResponse, CdmAppointment>()
+                 .ForMember(a => a.Practitioner, options => options.MapFrom(b => GetEntity<CdmPractitioner>(b.Practitioner)))
+                 .ForMember(a => a.Patient, options => options.MapFrom(b => GetEntity<CdmPatient>(b.Patient)))
+             .MapReferenceListValuesToDto();
 
         }
     }

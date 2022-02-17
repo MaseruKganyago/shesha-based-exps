@@ -1,4 +1,5 @@
 ﻿using Abp.Application.Services;
+using Abp.Dependency;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
@@ -14,7 +15,7 @@ namespace Boxfusion.Health.His.Bookings.Services.CancelAppointments.Helpers
     /// <summary>
     /// 
     /// </summary>
-    public interface ICancelAppointmentHelper
+    public interface ICancelAppointmentHelper : ITransientDependency
     {
         /// <summary>
         /// 
