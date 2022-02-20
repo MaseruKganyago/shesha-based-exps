@@ -17,11 +17,6 @@
     <None Remove="Forms\**" />
   </ItemGroup>
   <ItemGroup>
-    <Content Remove="appsettings.json" />
-    <Content Remove="appsettings.Local.json" />
-    <Content Remove="appsettings.Moses.json" />
-    <Content Remove="appsettings.Production.json" />
-    <Content Remove="appsettings.QA.json" />
     <Content Remove="appsettings.Test.json" />
     <Content Remove="wwwroot\swagger\ui\index.html" />
   </ItemGroup>
