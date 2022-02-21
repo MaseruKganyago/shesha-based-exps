@@ -52,7 +52,6 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="facilityId"></param>
         /// <returns></returns>
         [HttpGet, Route("Schedules/SchedulesAssociatedToUser")]
         public async Task<List<CdmScheduleResponse>> GetAllAsync()
@@ -62,6 +61,18 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
             var schedules = await _scheduleHelperCrudHelper.GetAllAsync(person.Id, facilityId);
 
             return ObjectMapper.Map<List<CdmScheduleResponse>>(schedules);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        [HttpGet, Route("Appointments/{appointmentId}")]
+        public async Task<CdmAppointmentResponse> GetAppointmentAsync(Guid appointmentId)
+        {
+            return await _bookingManagementHelper.GetAppointmentAsync(appointmentId);
         }
 
         /// <summary>
@@ -118,7 +129,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
             Validation.ValidateEntityWithDisplayNameDto(input?.Patient, "Patient");
 
             var isScheduleActive = await _scheduleHelperCrudHelper.IsScheduleActive(input.Schedule.Id.Value);
-            if(!isScheduleActive) throw new UserFriendlyException("");
+            if(!isScheduleActive) throw new UserFriendlyException("The schedule is not active");
 
             var availableSlots = await _slotHelperCrudHelper.GetBookingSlots((RefListSlotCapacityTypes)input.SlotType.ItemValue, input.Start.Value);
             if (!availableSlots.Any())

@@ -1,9 +1,13 @@
 ﻿using Abp.Domain.Repositories;
+using Abp.Domain.Uow;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
+using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
 using NHibernate.Linq;
+using Shesha.NHibernate;
+using Shesha.Services;
 using Shesha.Sms;
 using System;
 using System.Collections.Generic;
@@ -46,12 +50,12 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
         /// <returns></returns>
         public async Task GenerateBookingSlotsAsync()
         {
-            var schedules = await Getschedules();
+            var schedules = await GetSchedules();
             var scheduleAvailabilities = new List<ScheduleAvailabilityForBooking>();
 
             foreach (var schedule in schedules)
             {
-                scheduleAvailabilities.AddRange(await GetscheduleAvailability(schedule));
+                scheduleAvailabilities.AddRange(await GetScheduleAvailability(schedule));
             }
 
             foreach (var scheduleAvailability in scheduleAvailabilities)
@@ -59,68 +63,131 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
                 if (scheduleAvailability.ApplicableDays == null)
                     continue;
 
-                var bookingHor = (DateTime.Now.AddDays(scheduleAvailability.BookingHorizon.Value));
+                var bookingHorizon = (DateTime.Now.AddDays(scheduleAvailability.BookingHorizon.Value));
 
                 //Unit Testable Logic
-                if (!((scheduleAvailability.LastGeneratedSlotDate > scheduleAvailability.ValidFromDate && scheduleAvailability.LastGeneratedSlotDate < scheduleAvailability.ValidToDate) && (bookingHor > scheduleAvailability.ValidFromDate && bookingHor < scheduleAvailability.ValidToDate)))
+                if (!((scheduleAvailability.LastGeneratedSlotDate >= scheduleAvailability.ValidFromDate && scheduleAvailability.LastGeneratedSlotDate <= scheduleAvailability.ValidToDate) 
+                    && (bookingHorizon >= scheduleAvailability.ValidFromDate && bookingHorizon <= scheduleAvailability.ValidToDate)))
                     continue;
-
 
                 var resultsOfConversion = UtilityHelper.GetMultiReferenceListItemValueList(scheduleAvailability.ApplicableDays.Value);
                 var dates = new List<DateTime>();
                 if (resultsOfConversion != null)
                 {
-                    for (var dt = scheduleAvailability.LastGeneratedSlotDate.Value; dt <= bookingHor; dt = dt.AddDays(1))
+                    for (var dt = scheduleAvailability.LastGeneratedSlotDate.Value; dt <= bookingHorizon; dt = dt.AddDays(1))
                     {
-                        //var applicableDay = resultsOfConversion.Select(x => x.ItemValue).Where(x => x == dt.Day).FirstOrDefault();
-                        var applicableDay = resultsOfConversion.FirstOrDefault(r => r.ItemValue == dt.Day);
+                        var applicableDay = resultsOfConversion.Select(x => x.ItemValue).Where(x => x == transformedDayOfWeek((int)dt.DayOfWeek)).FirstOrDefault();
                         if (applicableDay != null)
                             dates.Add(dt);
                     }
                 }
 
-                var tempSlot = new Slot();
-                tempSlot.EndDateTime = DateTime.Now;
+                var initialSlot = new Slot();
+                initialSlot.StartDateTime = dates.Min().Date + scheduleAvailability.StartTime;// OrderBy(x => x).FirstOrDefault();
 
                 int i = 1;
                 foreach (var date in dates)
                 {
-                    var tempSlotEndDateTime = tempSlot.
-                        EndDateTime.Value.AddMinutes(scheduleAvailability.BreakIntervalAfterSlot.Value).AddMinutes(scheduleAvailability.SlotDuration.Value);
+                    var initialSlotEndDateTime = initialSlot.StartDateTime.Value
+                        .AddMinutes(scheduleAvailability.SlotDuration.Value)
+                        .AddMinutes(scheduleAvailability.BreakIntervalAfterSlot.Value);
 
-                    if (tempSlotEndDateTime > date.Add(scheduleAvailability.EndTime.Value))
+                    if (initialSlotEndDateTime > date.Add(scheduleAvailability.EndTime.Value))
                         continue;
+                    var startDateTime = (i == 1)
+                        ? initialSlot.StartDateTime
+                        : initialSlot.EndDateTime;
 
-                    var slot = await _slotRepo.InsertAsync(new CdmSlot()
+                    var endDateTime = (i == 1)
+                        ? initialSlotEndDateTime
+                        : initialSlot.EndDateTime.Value
+                        .AddMinutes(scheduleAvailability.BreakIntervalAfterSlot.Value)
+                        .AddDays(scheduleAvailability.SlotDuration.Value).AddMinutes(scheduleAvailability.SlotDuration.Value);
+
+                    CdmSlot slot = null;
+
+                    slot = await _slotRepo.InsertAsync(new CdmSlot()
                     {
-                        StartDateTime = (i == 1) ? date.Add(scheduleAvailability.StartTime.Value) : tempSlot.EndDateTime.Value.AddMinutes(scheduleAvailability.BreakIntervalAfterSlot.Value).AddMinutes(scheduleAvailability.SlotDuration.Value),
-
-                        EndDateTime = (i == 1) ? date.Add(scheduleAvailability.StartTime.Value).AddMinutes(scheduleAvailability.SlotDuration.Value) : tempSlot.EndDateTime.Value.AddMinutes(scheduleAvailability.BreakIntervalAfterSlot.Value).AddDays(scheduleAvailability.SlotDuration.Value).AddMinutes(scheduleAvailability.SlotDuration.Value),
+                        Status = RefListSlotStatuses.free,
+                        Capacity = scheduleAvailability.SlotRegularCapacity,
+                        CapacityType = RefListSlotCapacityTypes.Regular, //To confirm with Ian
+                        StartDateTime = startDateTime,
+                        EndDateTime = endDateTime,
+                        Schedule = scheduleAvailability.Schedule,
                     });
 
-                    tempSlot = slot;
+                    initialSlot = slot;
                     i++;
                 }
+
+                //Update Last Generated Slot
+                scheduleAvailability.LastGeneratedSlotDate = dates.Max().Date + scheduleAvailability.EndTime;
+                await _scheduleAvailability.UpdateAsync(scheduleAvailability);
             }
+        }
+
+        /// <summary>
+        /// ******************************************************************Move to CDM***************************************************
+        /// </summary>
+        /// <param name="schedule"></param>
+        /// <returns></returns>
+        public async Task<List<ScheduleAvailabilityForBooking>> GetScheduleAvailability(CdmSchedule schedule)
+        {
+            return await _scheduleAvailability.GetAll().Where(r => r.Active == true && r.Schedule.Id == schedule.Id).ToListAsync();
+        }
+
+        /// <summary>
+        /// Used for getting Schedules as a single unit for easy unit testing
+        /// ******************************************************************Move to CDM***************************************************
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<CdmSchedule>> GetSchedules()
+        {
+            var scheduleAvailability = await _schedules.GetAll().Where(r => r.SchedulingModel == RefListSchedulingModels.Appointment && r.Active == true).ToListAsync();
+            return scheduleAvailability;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="schedule"></param>
+        /// <param name="dayOfWeek"></param>
         /// <returns></returns>
-        public async Task<List<ScheduleAvailabilityForBooking>> GetscheduleAvailability(CdmSchedule schedule)
+        private int transformedDayOfWeek(int dayOfWeek)
         {
-            return await _scheduleAvailability.GetAll().Where(r => r.Active == true && r.Schedule == schedule).ToListAsync();
-        }
+            int result = 128;
 
-        /// <summary>
-        /// Used for getting Schedules as a single unit for easy unit testing
-        /// </summary>
-        /// <returns></returns>
-        public async Task<List<CdmSchedule>> Getschedules()
-        {
-            return await _schedules.GetAll().Where(r => r.SchedulingModel == RefListSchedulingModels.Appointment).ToListAsync();
+            switch (dayOfWeek)
+            {
+                case 0:
+                    result = (int)Math.Pow(2, 6);
+                    break;
+
+                case 1:
+                    result = (int)Math.Pow(2, 0);
+                    break;
+
+                case 2:
+                    result = (int)Math.Pow(2, 1);
+                    break;
+
+                case 3:
+                    result = (int)Math.Pow(2, 2);
+                    break;
+
+                case 4:
+                    result = (int)Math.Pow(2, 3);
+                    break;
+
+                case 5:
+                    result = (int)Math.Pow(2, 4);
+                    break;
+
+                case 6:
+                    result = (int)Math.Pow(2, 5);
+                    break;
+            }
+
+            return result;
         }
     }
 }

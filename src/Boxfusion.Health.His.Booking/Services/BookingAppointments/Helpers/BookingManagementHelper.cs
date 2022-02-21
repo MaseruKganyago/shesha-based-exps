@@ -160,5 +160,16 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
 
             return _mapper.Map<CdmAppointmentResponse>(updatedAppointment);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task<CdmAppointmentResponse> GetAppointmentAsync(Guid Id)
+        {
+            return _mapper.Map<CdmAppointmentResponse>(await _cdmAppointmentRepository.GetAsync(Id));
+        }
     }
 }

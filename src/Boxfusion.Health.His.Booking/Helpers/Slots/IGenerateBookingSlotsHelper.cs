@@ -21,12 +21,12 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
         /// 
         /// </summary>
         /// <returns></returns>
-        Task<List<CdmSchedule>> Getschedules();
+        Task<List<CdmSchedule>> GetSchedules();
         /// <summary>
         /// 
         /// </summary>
         /// <param name="schedule"></param>
         /// <returns></returns>
-        Task<List<ScheduleAvailabilityForBooking>> GetscheduleAvailability(CdmSchedule schedule);
+        Task<List<ScheduleAvailabilityForBooking>> GetScheduleAvailability(CdmSchedule schedule);
     }
 }

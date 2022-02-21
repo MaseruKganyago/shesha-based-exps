@@ -167,17 +167,25 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.GetscheduleAvailability(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule)">
+        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.GetScheduleAvailability(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule)">
             <summary>
-            
+            ******************************************************************Move to CDM***************************************************
             </summary>
             <param name="schedule"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.Getschedules">
+        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.GetSchedules">
             <summary>
             Used for getting Schedules as a single unit for easy unit testing
+            ******************************************************************Move to CDM***************************************************
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.transformedDayOfWeek(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="dayOfWeek"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Helpers.Slots.IGenerateBookingSlotsHelper">
@@ -191,13 +199,13 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.IGenerateBookingSlotsHelper.Getschedules">
+        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.IGenerateBookingSlotsHelper.GetSchedules">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.IGenerateBookingSlotsHelper.GetscheduleAvailability(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule)">
+        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.IGenerateBookingSlotsHelper.GetScheduleAvailability(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule)">
             <summary>
             
             </summary>
@@ -224,11 +232,21 @@
             inheritedDoc
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsAppService.#ctor(Boxfusion.Health.His.Bookings.Helpers.Slots.IGenerateBookingSlotsHelper)">
+            <summary>
+            
+            </summary>
+            <param name="generateBookingSlots"></param>
+        </member>
         <member name="M:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsAppService.GenerateBookingSlotsAsync">
             <summary>
             
             </summary>
-            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsJob">
@@ -240,8 +258,7 @@
             <summary>
             
             </summary>
-            <param name="schedules"></param>
-            <param name="scheduleAvailability"></param>
+            <param name="generateBookingSlots"></param>
         </member>
         <member name="M:Boxfusion.Health.His.Bookings.Jobs.GenerateBookingSlotsJob.DoExecuteAsync(System.Threading.CancellationToken)">
             <summary>
@@ -290,8 +307,15 @@
             <summary>
             
             </summary>
-            <param name="facilityId"></param>
             <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.GetAppointmentAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="appointmentId"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.GetSlotsByScheduleAsync(System.Guid)">
             <summary>
@@ -601,6 +625,14 @@
             <param name="appointmentId"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.BookingManagementHelper.GetAppointmentAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.IBookingManagementHelper">
             <summary>
             
@@ -655,6 +687,13 @@
             <param name="appointmentId"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.IBookingManagementHelper.GetAppointmentAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers.Util">
             <summary>
             
@@ -700,6 +739,13 @@
             
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.IBookingManagementsAppService.GetAppointmentAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="Id"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Services.CdmAppointments.CancelAppointmentAppService">
