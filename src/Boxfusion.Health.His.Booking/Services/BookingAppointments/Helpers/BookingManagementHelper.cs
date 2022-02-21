@@ -124,6 +124,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
         public async Task<CdmAppointmentResponse> RescheduleAppointment(RescheduleInput input, CdmSlot slot)
         {
             var cdmAppointment = await _cdmAppointmentRepository.GetAsync(input.Id);
+            cdmAppointment.Status = RefListAppointmentStatuses.booked;
             _mapper.Map(input, cdmAppointment);
             _mapper.Map(slot, cdmAppointment);
             var updatedCdmAppointment = await _cdmAppointmentRepository.UpdateAsync(cdmAppointment);
