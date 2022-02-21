@@ -45,6 +45,11 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         /// <returns></returns>
         Task<CdmAppointmentResponse> BookAvailableSlotAsync(BookAppointmentInput input);
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        Task<CdmAppointmentResponse> GetAppointmentAsync(Guid Id);
     }
 }

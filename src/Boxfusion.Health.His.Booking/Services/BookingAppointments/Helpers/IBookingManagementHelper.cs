@@ -68,5 +68,11 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
         /// <param name="appointmentId"></param>
         /// <returns></returns>
         Task<CdmAppointmentResponse> ConfirmAppointmentArrival(Guid appointmentId);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        Task<CdmAppointmentResponse> GetAppointmentAsync(Guid Id);
     }
 }

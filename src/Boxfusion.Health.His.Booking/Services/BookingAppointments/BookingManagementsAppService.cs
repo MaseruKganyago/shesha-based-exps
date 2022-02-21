@@ -168,5 +168,16 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
 
             return confirmedAppointmentArrivalTime;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        [HttpGet, Route("Appointments/appointmentId")]
+        public async Task<CdmAppointmentResponse> GetAppointmentAsync(Guid Id)
+        {
+             return await _bookingManagementHelper.GetAppointmentAsync(Id);
+        }
     }
 }

@@ -31,8 +31,7 @@ namespace Boxfusion.Health.His.Bookings.Jobs
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="schedules"></param>
-        /// <param name="scheduleAvailability"></param>
+        /// <param name="generateBookingSlots"></param>
         public GenerateBookingSlotsJob(IGenerateBookingSlotsHelper generateBookingSlots)
         {
             _generateBookingSlots = generateBookingSlots;

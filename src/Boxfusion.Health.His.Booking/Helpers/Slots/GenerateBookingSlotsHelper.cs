@@ -72,8 +72,8 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
                 {
                     for (var dt = scheduleAvailability.LastGeneratedSlotDate.Value; dt <= bookingHor; dt = dt.AddDays(1))
                     {
-                        //var applicableDay = resultsOfConversion.Select(x => x.ItemValue).Where(x => x == dt.Day).FirstOrDefault();
-                        var applicableDay = resultsOfConversion.FirstOrDefault(r => r.ItemValue == dt.Day);
+                        var applicableDay = resultsOfConversion.Select(x => x.ItemValue).Where(x => x == dt.Day).FirstOrDefault();
+                        //var applicableDay = resultsOfConversion.FirstOrDefault(r => r.ItemValue == dt.Day);
                         if (applicableDay != null)
                             dates.Add(dt);
                     }
@@ -96,11 +96,18 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
                         StartDateTime = (i == 1) ? date.Add(scheduleAvailability.StartTime.Value) : tempSlot.EndDateTime.Value.AddMinutes(scheduleAvailability.BreakIntervalAfterSlot.Value).AddMinutes(scheduleAvailability.SlotDuration.Value),
 
                         EndDateTime = (i == 1) ? date.Add(scheduleAvailability.StartTime.Value).AddMinutes(scheduleAvailability.SlotDuration.Value) : tempSlot.EndDateTime.Value.AddMinutes(scheduleAvailability.BreakIntervalAfterSlot.Value).AddDays(scheduleAvailability.SlotDuration.Value).AddMinutes(scheduleAvailability.SlotDuration.Value),
+                        Schedule = scheduleAvailability.Schedule,
                     });
+
+                    //Update Last Generated Slot
+                    scheduleAvailability.LastGeneratedSlotDate = slot.StartDateTime;
+                    await _scheduleAvailability.UpdateAsync(scheduleAvailability);
 
                     tempSlot = slot;
                     i++;
                 }
+
+               
             }
         }
 
@@ -111,7 +118,7 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
         /// <returns></returns>
         public async Task<List<ScheduleAvailabilityForBooking>> GetscheduleAvailability(CdmSchedule schedule)
         {
-            return await _scheduleAvailability.GetAll().Where(r => r.Active == true && r.Schedule == schedule).ToListAsync();
+            return await _scheduleAvailability.GetAll().Where(r => r.Active == true && r.Schedule.Id == schedule.Id).ToListAsync();
         }
 
         /// <summary>
