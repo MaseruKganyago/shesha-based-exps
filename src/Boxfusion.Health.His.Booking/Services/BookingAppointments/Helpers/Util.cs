@@ -40,7 +40,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
 				WHERE (
 						(
 							app.[Start] >= @filterStartDate 
-							AND app.[Start] < DATEADD(day,1,@filterEndDate)
+							--AND app.[Start] < DATEADD(day,1,@filterEndDate)
 						) 
 						 OR (@filterStartDate IS NULL AND @filterEndDate IS NULL) 
 						 OR (@filterEndDate IS NULL AND app.[Start] = @filterStartDate)
