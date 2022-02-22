@@ -84,39 +84,49 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
 
                 var initialSlot = new Slot();
                 initialSlot.StartDateTime = dates.Min().Date + scheduleAvailability.StartTime;// OrderBy(x => x).FirstOrDefault();
+                var initialSlotEndDateTime = initialSlot.StartDateTime.Value
+                    .AddMinutes(scheduleAvailability.SlotDuration.Value)
+                    .AddMinutes(scheduleAvailability.BreakIntervalAfterSlot.Value);
 
                 int i = 1;
+                var totalSlots = ((scheduleAvailability.EndTime.Value.Ticks - scheduleAvailability.StartTime.Value.Ticks)
+                    / (new TimeSpan(initialSlotEndDateTime.Hour, initialSlotEndDateTime.Minute, initialSlotEndDateTime.Second).Ticks - new TimeSpan(initialSlot.StartDateTime.Value.Hour, initialSlot.StartDateTime.Value.Minute, initialSlot.StartDateTime.Value.Second).Ticks));
+
                 foreach (var date in dates)
                 {
-                    var initialSlotEndDateTime = initialSlot.StartDateTime.Value
+                    initialSlotEndDateTime = initialSlot.StartDateTime.Value
                         .AddMinutes(scheduleAvailability.SlotDuration.Value)
                         .AddMinutes(scheduleAvailability.BreakIntervalAfterSlot.Value);
 
-                    if (initialSlotEndDateTime > date.Add(scheduleAvailability.EndTime.Value))
-                        continue;
-                    var startDateTime = (i == 1)
-                        ? initialSlot.StartDateTime
-                        : initialSlot.EndDateTime;
-
-                    var endDateTime = (i == 1)
-                        ? initialSlotEndDateTime
-                        : initialSlot.EndDateTime.Value
-                        .AddMinutes(scheduleAvailability.BreakIntervalAfterSlot.Value)
-                        .AddDays(scheduleAvailability.SlotDuration.Value).AddMinutes(scheduleAvailability.SlotDuration.Value);
-
-                    CdmSlot slot = null;
-
-                    slot = await _slotRepo.InsertAsync(new CdmSlot()
+                    for (var j = 0; j < totalSlots; j++)
                     {
-                        Status = RefListSlotStatuses.free,
-                        Capacity = scheduleAvailability.SlotRegularCapacity,
-                        CapacityType = RefListSlotCapacityTypes.Regular, //To confirm with Ian
-                        StartDateTime = startDateTime,
-                        EndDateTime = endDateTime,
-                        Schedule = scheduleAvailability.Schedule,
-                    });
+                        if (initialSlotEndDateTime > date.Add(scheduleAvailability.EndTime.Value))
+                            continue;
+                        var startDateTime = (i == 1)
+                            ? initialSlot.StartDateTime
+                            : initialSlot.EndDateTime;
 
-                    initialSlot = slot;
+                        var endDateTime = (i == 1)
+                            ? initialSlotEndDateTime
+                            : initialSlot.EndDateTime.Value
+                            .AddMinutes(scheduleAvailability.BreakIntervalAfterSlot.Value)
+                            .AddDays(scheduleAvailability.SlotDuration.Value).AddMinutes(scheduleAvailability.SlotDuration.Value);
+
+                        CdmSlot slot = null;
+
+                        slot = await _slotRepo.InsertAsync(new CdmSlot()
+                        {
+                            Status = RefListSlotStatuses.free,
+                            Capacity = scheduleAvailability.SlotRegularCapacity,
+                            CapacityType = RefListSlotCapacityTypes.Regular, //To confirm with Ian
+                            StartDateTime = startDateTime,
+                            EndDateTime = endDateTime,
+                            Schedule = scheduleAvailability.Schedule,
+                        });
+
+                        initialSlot = slot;
+                    }
+
                     i++;
                 }
 
