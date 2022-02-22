@@ -344,6 +344,12 @@
             </summary>
             <param name="hisPatientCrudHelper"></param>
         </member>
+        <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.HisPatientsAppService.PatientsIndex">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Administration.Services.HisPatients.HisPatientsAppService.GetAllAsync">
             <summary>
             
