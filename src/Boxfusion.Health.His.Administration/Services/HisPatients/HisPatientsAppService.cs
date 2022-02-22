@@ -3,9 +3,11 @@ using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Administration.Services.HisPatients.Helpers;
+using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Boxfusion.Health.His.Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Shesha.Web.DataTable;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,6 +33,21 @@ namespace Boxfusion.Health.His.Administration.Services.HisPatients
             IHisPatientCrudHelper hisPatientCrudHelper)
         {
             _hisPatientCrudHelper = hisPatientCrudHelper;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static DataTableConfig PatientsIndex()
+        {
+            var table = new DataTableConfig<HisPatient, Guid>("Patients_Index");
+            
+
+            table.AddProperty(e => e.FullName, d => d.Caption("Name"));
+            table.AddProperty(e => e.IdentityNumber, c => c.Caption("Identity Number"));
+
+            return table;
         }
 
         /// <summary>
