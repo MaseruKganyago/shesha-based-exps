@@ -26,7 +26,7 @@ namespace Boxfusion.Health.His.Tests.BookingSlots
         public async Task Should_Getschedules()
         {
             LoginAsHost("admin");
-            Schedules = await _generateBookingSlotsHelper.Getschedules();
+            //Schedules = await _generateBookingSlotsHelper.Getschedules();
 
             Assert.NotNull(Schedules);
 
@@ -39,7 +39,7 @@ namespace Boxfusion.Health.His.Tests.BookingSlots
             LoginAsHost("admin");
             foreach (var schedule in Schedules)
             {
-                ScheduleAvailabilities.AddRange(await _generateBookingSlotsHelper.GetscheduleAvailability(schedule));
+                //ScheduleAvailabilities.AddRange(await _generateBookingSlotsHelper.GetscheduleAvailability(schedule));
             }
 
             Assert.NotNull(ScheduleAvailabilities);
