@@ -61,6 +61,7 @@ namespace Boxfusion.Health.His.Bookings
                 useConventionalHttpVerbs: true);
 
             Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(HealthCommonModule).Assembly, "HisBookings");
+            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(SheshaCoreModule).Assembly, "HisBookings");
         }
     }
 }

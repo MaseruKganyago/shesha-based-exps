@@ -1,11 +1,16 @@
 ﻿using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
+using AutoMapper;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
+using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
+using Boxfusion.Health.HealthCommon.Core.Services.Schedules.Helpers;
+using Boxfusion.Health.His.Bookings.Domain.Dtos;
 using NHibernate.Linq;
+using Shesha.Domain;
 using Shesha.NHibernate;
 using Shesha.Services;
 using Shesha.Sms;
@@ -28,6 +33,9 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
         private readonly IRepository<CdmSchedule, Guid> _schedules;
         private readonly IRepository<ScheduleAvailabilityForBooking, Guid> _scheduleAvailability;
         private readonly IRepository<CdmSlot, Guid> _slotRepo;
+        private readonly IRepository<PublicHoliday, Guid> _publicHolidayRepo;
+        private readonly IMapper _mapper;
+        private readonly IScheduleHelper<CdmSchedule, CdmScheduleResponse> _scheduleHelperCrudHelper;
 
         /// <summary>
         /// 
@@ -35,13 +43,19 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
         /// <param name="schedules"></param>
         /// <param name="scheduleAvailability"></param>
         /// <param name="slot"></param>
+        /// <param name="publicHolidayRepo"></param>
+        /// <param name="mapper"></param>
         public GenerateBookingSlotsHelper(IRepository<CdmSchedule, Guid> schedules,
             IRepository<ScheduleAvailabilityForBooking, Guid> scheduleAvailability,
-            IRepository<CdmSlot, Guid> slot)
+            IRepository<CdmSlot, Guid> slot,
+            IRepository<PublicHoliday, Guid> publicHolidayRepo,
+            IMapper mapper)
         {
             _schedules = schedules;
             _scheduleAvailability = scheduleAvailability;
             _slotRepo = slot;
+            _publicHolidayRepo = publicHolidayRepo;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -148,6 +162,15 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
                 scheduleAvailability.LastGeneratedSlotDate = dates.Max().Date + scheduleAvailability.EndTime;
                 await _scheduleAvailability.UpdateAsync(scheduleAvailability);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<PublicHolidaysDto>> GetPublicHolidays()
+        {
+            return _mapper.Map<List<PublicHolidaysDto>>(await _publicHolidayRepo.GetAllListAsync());
         }
 
         /// <summary>
