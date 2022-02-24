@@ -36,6 +36,7 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
         private readonly IRepository<PublicHoliday, Guid> _publicHolidayRepo;
         private readonly IMapper _mapper;
         private readonly IScheduleHelper<CdmSchedule, CdmScheduleResponse> _scheduleHelperCrudHelper;
+        private readonly IScheduleAvailabilityForBookingHelper  _scheduleAvailabilityForBookingHelper;
 
         /// <summary>
         /// 
@@ -45,17 +46,23 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
         /// <param name="slot"></param>
         /// <param name="publicHolidayRepo"></param>
         /// <param name="mapper"></param>
+        /// <param name="scheduleHelperCrudHelper"></param>
+        /// <param name="scheduleAvailabilityForBookingHelper"></param>
         public GenerateBookingSlotsHelper(IRepository<CdmSchedule, Guid> schedules,
             IRepository<ScheduleAvailabilityForBooking, Guid> scheduleAvailability,
             IRepository<CdmSlot, Guid> slot,
             IRepository<PublicHoliday, Guid> publicHolidayRepo,
-            IMapper mapper)
+            IMapper mapper,
+            IScheduleHelper<CdmSchedule, CdmScheduleResponse> scheduleHelperCrudHelper,
+            IScheduleAvailabilityForBookingHelper scheduleAvailabilityForBookingHelper)
         {
             _schedules = schedules;
             _scheduleAvailability = scheduleAvailability;
             _slotRepo = slot;
             _publicHolidayRepo = publicHolidayRepo;
             _mapper = mapper;
+            _scheduleHelperCrudHelper = scheduleHelperCrudHelper;
+            _scheduleAvailabilityForBookingHelper = scheduleAvailabilityForBookingHelper;
         }
 
         /// <summary>
@@ -180,7 +187,7 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
         /// <returns></returns>
         public async Task<List<ScheduleAvailabilityForBooking>> GetScheduleAvailability(CdmSchedule schedule)
         {
-            return await _scheduleAvailability.GetAll().Where(r => r.Active == true && r.Schedule.Id == schedule.Id).ToListAsync();
+            return await _scheduleAvailabilityForBookingHelper.GetScheduleAvailability(schedule);
         }
 
         /// <summary>
@@ -190,7 +197,7 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
         /// <returns></returns>
         public async Task<List<CdmSchedule>> GetSchedules()
         {
-            var scheduleAvailability = await _schedules.GetAll().Where(r => r.SchedulingModel == RefListSchedulingModels.Appointment && r.Active == true).ToListAsync();
+            var scheduleAvailability = await _scheduleHelperCrudHelper.GetAllAsync();
             return scheduleAvailability;
         }
 
