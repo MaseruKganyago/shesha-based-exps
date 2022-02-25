@@ -179,5 +179,21 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
 
             return confirmedAppointmentArrivalTime;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="facilityId"></param>
+        /// <param name="appointmentId"></param>
+        /// <returns></returns>
+        [HttpPut, Route("Appointments/CancelAppointment")]
+        public async Task<CdmAppointmentResponse> CancelAppointment(Guid facilityId, Guid appointmentId)
+        {
+
+            Validation.ValidateIdWithException(appointmentId, "Appointment Id cannot be null");
+            var canceledAppointment = await _bookingManagementHelper.CancelAppointment(facilityId, appointmentId);
+
+            return canceledAppointment;
+        }
     }
 }

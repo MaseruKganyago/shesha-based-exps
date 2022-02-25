@@ -181,7 +181,7 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
         }
 
         /// <summary>
-        /// ******************************************************************Move to CDM***************************************************
+        /// 
         /// </summary>
         /// <param name="schedule"></param>
         /// <returns></returns>
@@ -192,7 +192,6 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
 
         /// <summary>
         /// Used for getting Schedules as a single unit for easy unit testing
-        /// ******************************************************************Move to CDM***************************************************
         /// </summary>
         /// <returns></returns>
         public async Task<List<CdmSchedule>> GetSchedules()

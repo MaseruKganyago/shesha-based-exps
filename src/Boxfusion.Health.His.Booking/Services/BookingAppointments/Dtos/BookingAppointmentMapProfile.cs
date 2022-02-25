@@ -59,6 +59,17 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos
                 .ForMember(c => c.Start, options => options.MapFrom(c => c.StartDateTime))
                 .ForMember(c => c.End, options => options.MapFrom(c => c.EndDateTime))
                 .MapReferenceListValuesToDto();
+
+            CreateMap<CdmAppointment, CdmAppointmentResponse>()
+                .ForMember(a => a.Practitioner, options => options.MapFrom(b => b.Practitioner != null ? new EntityWithDisplayNameDto<Guid?>(b.Practitioner.Id, b.ContactName) : null))
+                .ForMember(a => a.Patient, options => options.MapFrom(b => b.Patient != null ? new EntityWithDisplayNameDto<Guid?>(b.Patient.Id, b.Patient.FirstName) : null))
+                .ForMember(a => a.Slot, options => options.MapFrom(b => b.Slot != null ? new EntityWithDisplayNameDto<Guid?>(b.Slot.Id, b.Slot.Identifier) : null))
+                .MapReferenceListValuesToDto();
+
+            CreateMap<CdmAppointmentResponse, CdmAppointment>()
+                 .ForMember(a => a.Practitioner, options => options.MapFrom(b => GetEntity<CdmPractitioner>(b.Practitioner)))
+                 .ForMember(a => a.Patient, options => options.MapFrom(b => GetEntity<CdmPatient>(b.Patient)))
+             .MapReferenceListValuesToDto();
         }
     }
 }

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Bookings.Services.CdmAppointments.Dtos
+namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos
 {
     /// <summary>
     /// 
