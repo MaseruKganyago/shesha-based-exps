@@ -26,6 +26,8 @@ using Castle.Facilities.Logging;
 using Abp.Castle.Logging.Log4Net;
 using Abp.AspNetCore.Configuration;
 using Microsoft.Extensions.Hosting;
+using Boxfusion.Health.His.Bookings;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace Boxfusion.Health.His.Tests
 {
@@ -36,7 +38,8 @@ namespace Boxfusion.Health.His.Tests
         typeof(SheshaNHibernateModule),
         typeof(SheshaFrameworkModule),
         typeof(HisAdmissModule),
-        typeof(HisAdminisModule)
+        typeof(HisAdminisModule),
+        typeof(HisBookingsModule)
         )]
     public class HisTestModule : AbpModule
     {
@@ -108,6 +111,9 @@ namespace Boxfusion.Health.His.Tests
             Configuration.ReplaceService<IDbPerTenantConnectionStringResolver, TestConnectionStringResolver>(DependencyLifeStyle.Transient);
 
             Configuration.ReplaceService<ICurrentUnitOfWorkProvider, AsyncLocalCurrentUnitOfWorkProvider>(DependencyLifeStyle.Singleton);
+
+            if (!IocManager.IsRegistered<ApplicationPartManager>())
+                IocManager.IocContainer.Register(Component.For<ApplicationPartManager>().ImplementedBy<ApplicationPartManager>());
         }
 
         public override void Initialize()
