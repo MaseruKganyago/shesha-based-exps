@@ -74,7 +74,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         {
             if (schedule.SchedulingModel != RefListSchedulingModels.Appointment) throw new InvalidOperationException("Operation is only valid if Schedule.SchedulingModel is Appointment.");
 
-            var scheduleAvailabilities = await _scheduleAvailabilityRepo.GetAllListAsync(e => e.Schedule == schedule && e.Active);
+            var scheduleAvailabilities = await _scheduleAvailabilityRepo.GetAllListAsync(e => e.Schedule.Id == schedule.Id && e.Active);
 
             foreach (var scheduleAvailability in scheduleAvailabilities)
             {
@@ -90,13 +90,13 @@ namespace Boxfusion.Health.His.Bookings.Domain
             //TODO:IH Wrapp all changes in a transaction to ensure data consistency.
 
             // Determining the date range for which slots are to be generated
-            var startDate = scheduleAvailability.LastGeneratedSlotDate ?? DateTime.Now.Date;
+            var startDate = scheduleAvailability.LastGeneratedSlotDate.HasValue ? scheduleAvailability.LastGeneratedSlotDate.Value.Date : DateTime.Now.Date;
             if (scheduleAvailability.ValidFromDate.HasValue && scheduleAvailability.ValidFromDate > startDate)
-                startDate = scheduleAvailability.ValidFromDate.Value;
+                startDate = scheduleAvailability.ValidFromDate.Value.Date;
 
-            var endDate = (DateTime.Now.AddDays(scheduleAvailability.BookingHorizon.Value));
+            var endDate = (DateTime.Now.Date.AddDays(scheduleAvailability.BookingHorizon.Value));
             if (scheduleAvailability.ValidToDate.HasValue && scheduleAvailability.ValidToDate < endDate)
-                endDate = scheduleAvailability.ValidToDate.Value;
+                endDate = scheduleAvailability.ValidToDate.Value.Date;
 
             // Generating slots for each of the days within date range to which the schedule applies
             var currentDate = startDate;
@@ -133,7 +133,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             var slotEndTime = slotStartTime.AddMinutes(scheduleAvailability.SlotDuration.Value);
 
             // Creates new time slots until reach the end of the day
-            while (slotEndTime.TimeOfDay <= scheduleAvailability.EndTime || slotEndTime.Date == d.Date)
+            while (slotEndTime.TimeOfDay <= scheduleAvailability.EndTime && slotEndTime.Date == d.Date)
             {
                 if ((scheduleAvailability.SlotRegularCapacity ?? 0) > 0)
                     await GenerateBookingSlotsForTimeSlotAsync(scheduleAvailability, slotStartTime, slotEndTime, RefListSlotCapacityTypes.Regular, scheduleAvailability.SlotRegularCapacity.Value);
@@ -218,5 +218,10 @@ namespace Boxfusion.Health.His.Bookings.Domain
 
         #endregion
 
+
+
+        //TODO: BookAppointment
+        // Should not be able to book in the past
+        // 
     }
 }
