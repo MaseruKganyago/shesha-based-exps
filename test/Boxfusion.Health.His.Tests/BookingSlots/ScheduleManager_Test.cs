@@ -92,42 +92,56 @@ namespace Boxfusion.Health.His.BookingManagement.Tests
                 };
                 safb = _safbRepository.Insert(safb);
 
-                uow.Complete();
-            }
-
-            try
-            {
                 // Generate Slots
                 //await _scheduleManager.GenerateBookingSlotsForScheduleAsync(schedule);
                 await _generateBookingSlotsHelper.GenerateBookingSlotsForScheduleAsync(schedule);
 
-                // Assertions
-                var slots = _slotsRepository.GetAllList(e => e.Schedule == schedule);
-                Assert.Equal(slots.Count, 14 * 8);  // 8 slots generated per day over the 14 day window
+                uow.Complete();
+            }
 
-                var updatedSafb = _safbRepository.Get(safb.Id);
+            /*
+             NOTE: the main reason of exceptions - session is was not available because a unit of work already closed
+                I wrapped the assertion block into another unit of work to provide a session and to isolate the code (by this way we ensure that DB is already updated)
+                another important thing - you can't use entities in the new session (and new unit of work) because it was fetched in another session and is linked to it. Ideally we should share only property values between the data preparation block and assertion block (using DTOs or raw values).
+                That's why I changed this line to use Id instead of entity object: var slots = _slotsRepository.GetAllList(e => e.Schedule.Id == schedule.Id);
+            
+                Note: access to any of navigation properties of the safb entity may throw exceptions because of lazy loading and unavailability of the session that was used to load the safb entity
+             */
 
-                // LastGeneratedSlotDate within range expected
-                Assert.True(updatedSafb.LastGeneratedSlotDate > DateTime.Now.AddDays(safb.BookingHorizon.Value - 1));
-                Assert.True(updatedSafb.LastGeneratedSlotDate < DateTime.Now.AddDays(safb.BookingHorizon.Value + 1));
+            try
+            {
+                using (var uow = _uowManager.Begin()) 
+                {
+                    // Assertions
+                    var slots = _slotsRepository.GetAllList(e => e.Schedule.Id == schedule.Id);
+                    Assert.Equal(slots.Count, 14 * 8);  // 8 slots generated per day over the 14 day window
 
-                //no slots after LastGeneratedDate
-                Assert.True(slots.Count(e => e.StartDateTime > updatedSafb.LastGeneratedSlotDate) == 0);
+                    var updatedSafb = _safbRepository.Get(safb.Id);
 
-                // Not slots generated beyond the Horizon
-                Assert.True(slots.Count(e => e.StartDateTime > DateTime.Now.Date.AddDays(safb.BookingHorizon.Value)) == 0);
+                    // LastGeneratedSlotDate within range expected
+                    Assert.True(updatedSafb.LastGeneratedSlotDate > DateTime.Now.AddDays(safb.BookingHorizon.Value - 1));
+                    Assert.True(updatedSafb.LastGeneratedSlotDate < DateTime.Now.AddDays(safb.BookingHorizon.Value + 1));
 
-                // Does not generate slots that end after the end of day
-                Assert.True(slots.Count(e => e.EndDateTime.Value.TimeOfDay > safb.EndTime) == 0);
+                    //no slots after LastGeneratedDate
+                    Assert.True(slots.Count(e => e.StartDateTime > updatedSafb.LastGeneratedSlotDate) == 0);
 
-                // Does not generate slots that start before the start of day
-                Assert.True(slots.Count(e => e.StartDateTime.Value.TimeOfDay < safb.StartTime) == 0);
+                    // Not slots generated beyond the Horizon
+                    Assert.True(slots.Count(e => e.StartDateTime > DateTime.Now.Date.AddDays(safb.BookingHorizon.Value)) == 0);
 
-                // First slot always starts at the start of the day
-                Assert.True(slots.Count(e => e.StartDateTime.Value.TimeOfDay == safb.StartTime) == 14);
+                    // Does not generate slots that end after the end of day
+                    Assert.True(slots.Count(e => e.EndDateTime.Value.TimeOfDay > safb.EndTime) == 0);
 
-                // No Overflow slots since Overflow capacity specified as 0
-                Assert.True(slots.Count(e => e.CapacityType == RefListSlotCapacityTypes.Overflow) == 0);
+                    // Does not generate slots that start before the start of day
+                    Assert.True(slots.Count(e => e.StartDateTime.Value.TimeOfDay < safb.StartTime) == 0);
+
+                    // First slot always starts at the start of the day
+                    Assert.True(slots.Count(e => e.StartDateTime.Value.TimeOfDay == safb.StartTime) == 14);
+
+                    // No Overflow slots since Overflow capacity specified as 0
+                    Assert.True(slots.Count(e => e.CapacityType == RefListSlotCapacityTypes.Overflow) == 0);
+
+                    await uow.CompleteAsync();
+                }
             }
             finally
             {
