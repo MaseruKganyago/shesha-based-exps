@@ -34,5 +34,18 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
         /// </summary>
         /// <returns></returns>
         Task<List<PublicHolidaysDto>> GetPublicHolidays();
+
+        /// <summary>
+        /// Generate booking slots for all active Schedules.
+        /// </summary>
+        /// <returns></returns>
+        Task GenerateBookingSlotsForAllSchedulesAsync();
+
+        /// <summary>
+        /// Generate booking slots for the specified Schedule accross all its ScheduleAvailabilities
+        /// </summary>
+        /// <param name="schedule"></param>
+        /// <returns></returns>
+        Task GenerateBookingSlotsForScheduleAsync(CdmSchedule schedule);
     }
 }

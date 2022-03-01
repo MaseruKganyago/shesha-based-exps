@@ -11,6 +11,8 @@ namespace Boxfusion.Health.His.Bookings.Domain.Dtos
     /// <summary>
     /// 
     /// </summary>
+    /// 
+    //TODO:IH-Should use the PublicHoliday entity and Dto from Shesha enterprise
     [AutoMap(typeof(PublicHoliday))]
     public class PublicHolidaysDto
     {

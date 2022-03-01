@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Boxfusion.Health.His.Tests.BookingSlots
 {
+    //TODO:IH - It actually doesn't look like this is testing any of the generation logic; Needs to be moved into a separate project BookingManagement.Tests project
     public class BookingSlots_Test : SheshaNhTestBase<HisTestModule>
     {
         private readonly IGenerateBookingSlotsHelper _generateBookingSlotsHelper;
