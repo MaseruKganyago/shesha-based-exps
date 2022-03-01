@@ -98,9 +98,7 @@ namespace Boxfusion.Health.His.BookingManagement.Tests
             try
             {
                 // Generate Slots
-                //await _scheduleManager.GenerateBookingSlotsForScheduleAsync(schedule);
-                await _generateBookingSlotsHelper.GenerateBookingSlotsForScheduleAsync(schedule);
-
+                await _scheduleManager.GenerateBookingSlotsForScheduleAsync(schedule);
                 // Assertions
                 var slots = _slotsRepository.GetAllList(e => e.Schedule == schedule);
                 Assert.Equal(slots.Count, 14 * 8);  // 8 slots generated per day over the 14 day window
