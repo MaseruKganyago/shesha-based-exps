@@ -4,6 +4,8 @@ using Abp.Domain.Services;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
+using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
+using Shesha.AutoMapper.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +18,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
     /// Domain Service for the Schedule entity.
     /// Includes logic for the generation of Appoitment Booking Slots.
     /// </summary>
-    public class ScheduleManager : DomainService
+    public class BookingSlotsGenerator : DomainService
     {
         private readonly IRepository<CdmSchedule, Guid> _schedulesRepo;
         private readonly IRepository<ScheduleAvailabilityForBooking, Guid> _scheduleAvailabilityRepo;
@@ -28,7 +30,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// <param name="schedulesRepo"></param>
         /// <param name="scheduleAvailabilityRepo"></param>
         /// <param name="slotsRepo"></param>
-        public ScheduleManager(IRepository<CdmSchedule, Guid> schedulesRepo,
+        public BookingSlotsGenerator(IRepository<CdmSchedule, Guid> schedulesRepo,
             IRepository<ScheduleAvailabilityForBooking, Guid> scheduleAvailabilityRepo,
             IRepository<CdmSlot, Guid> slotsRepo)
         {
@@ -48,8 +50,6 @@ namespace Boxfusion.Health.His.Bookings.Domain
         //    _safbRepository = Resolve<IRepository<ScheduleAvailabilityForBooking, Guid>>();
         //    _slotsRepository
         //}
-
-        #region GenerateBookingSlots
 
         /// <summary>
         /// Generate booking slots for all active Schedules where SchedulingModel is Appointment.
@@ -216,12 +216,5 @@ namespace Boxfusion.Health.His.Bookings.Domain
             }
         }
 
-        #endregion
-
-
-
-        //TODO: BookAppointment
-        // Should not be able to book in the past
-        // 
     }
 }

@@ -51,7 +51,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
 
 				ORDER BY [Status]
 					OFFSET (@pageNumber-1)*(@pageSize) ROWS
-				FETCH NEXT @pageSize ROWS ONLY
+				FETCH NEXT @pageSize ROWS ONLY	
 ";
     }
 }

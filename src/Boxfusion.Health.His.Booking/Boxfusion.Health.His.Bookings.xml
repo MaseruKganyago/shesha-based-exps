@@ -73,6 +73,99 @@
             Health.His settings DTO
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Domain.AppointmentForBookingManager">
+            <summary>
+            Domain Service for managing Appointments specifically where they belong to schedules
+            where Schedule.SchedulingModel is Appointment Booking.
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentForBookingManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmAppointment,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="schedulesRepo"></param>
+            <param name="scheduleAvailabilityRepo"></param>
+            <param name="slotsRepo"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentForBookingManager.BookAvailableSlotAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum.RefListSlotCapacityTypes,System.DateTime,System.Nullable{System.Int32},Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmPatient,System.String,System.String)">
+            <summary>
+            Creates a new Appointment to book the first available Slot for the specified schedule, slotType and requestedTime.
+            </summary>
+            <returns>Returns the appointment created to book the requested time. Will throw an exception if a slot at that time was not found.</returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentForBookingManager.FindAvailableBookingSlot(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum.RefListSlotCapacityTypes,System.DateTime)">
+            <summary>
+            Returns the first Available booking slot within the specified Schedule for the specified time and SlotType
+            </summary>
+            <returns>Returns the first slot found, otherwise returns null.</returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentForBookingManager.GetAllAvailableBookingSlotsAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum.RefListSlotCapacityTypes,System.DateTime,System.DateTime)">
+            <summary>
+            Returns a list of all Slots with available capacity that start and end between the specified dates
+            and for the specified Schedule.
+            </summary>
+            <param name="schedule"></param>
+            <param name="slotType"></param>
+            <param name="fromDateTime"></param>
+            <param name="toDateTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentForBookingManager.CancelAppointment(System.Guid)">
+            <summary>
+            Cancels the specified Appointment.
+            </summary>
+            <param name="appointmentId">Id of the appointment to cancel.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentForBookingManager.RescheduleAppointment(System.Guid,Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum.RefListSlotCapacityTypes,System.DateTime,System.String,System.String)">
+            <summary>
+            RescheduleAppointment the specified Appointment.
+            </summary>
+            <param name="appointmentId">Id of the appointment to cancel.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentForBookingManager.ConfirmAppointmentArrival(System.Guid)">
+            <summary>
+            Confirms Arrival of the the specified Appointment.
+            </summary>
+            <param name="appointmentId">Id of the appointment.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator">
+            <summary>
+            Domain Service for the Schedule entity.
+            Includes logic for the generation of Appoitment Booking Slots.
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="schedulesRepo"></param>
+            <param name="scheduleAvailabilityRepo"></param>
+            <param name="slotsRepo"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.GenerateBookingSlotsForAllSchedulesAsync">
+            <summary>
+            Generate booking slots for all active Schedules where SchedulingModel is Appointment.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.GenerateBookingSlotsForScheduleAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule)">
+            <summary>
+            Generate booking slots for the specified Schedule accross all its ScheduleAvailabilities
+            </summary>
+            <param name="schedule"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.GenerateBookingsSlotsForTheDayAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.DateTime)">
+            <summary>
+            Generates all the time slots (both Regular and Overflow) required for the specified day.
+            </summary>
+            <param name="scheduleAvailability"></param>
+            <param name="d"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Domain.Dtos.PublicHolidaysDto">
             <summary>
             
@@ -88,56 +181,6 @@
             <summary>
             
             </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Bookings.Domain.Enums.RefListSlotTypes">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Bookings.Domain.Enums.RefListSlotTypes.regular">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Bookings.Domain.Enums.RefListSlotTypes.overflow">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Bookings.Domain.ScheduleManager">
-            <summary>
-            Domain Service for the Schedule entity.
-            Includes logic for the generation of Appoitment Booking Slots.
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.ScheduleManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,System.Guid})">
-            <summary>
-            
-            </summary>
-            <param name="schedulesRepo"></param>
-            <param name="scheduleAvailabilityRepo"></param>
-            <param name="slotsRepo"></param>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.ScheduleManager.GenerateBookingSlotsForAllSchedulesAsync">
-            <summary>
-            Generate booking slots for all active Schedules where SchedulingModel is Appointment.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.ScheduleManager.GenerateBookingSlotsForScheduleAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule)">
-            <summary>
-            Generate booking slots for the specified Schedule accross all its ScheduleAvailabilities
-            </summary>
-            <param name="schedule"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.ScheduleManager.GenerateBookingsSlotsForTheDayAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.DateTime)">
-            <summary>
-            Generates all the time slots (both Regular and Overflow) required for the specified day.
-            </summary>
-            <param name="scheduleAvailability"></param>
-            <param name="d"></param>
-            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointments">
             <summary>
@@ -215,27 +258,6 @@
             <param name="publicHolidayRepo"></param>
             <param name="mapper"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.GenerateBookingSlotsForAllSchedulesAsync">
-            <summary>
-            Generate booking slots for all active Schedules.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.GenerateBookingSlotsForScheduleAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule)">
-            <summary>
-            Generate booking slots for the specified Schedule accross all its ScheduleAvailabilities
-            </summary>
-            <param name="schedule"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.GenerateBookingsSlotsForTheDayAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.DateTime)">
-            <summary>
-            Generates all the time slots (both Regular and Overflow) required for the specified day.
-            </summary>
-            <param name="scheduleAvailability"></param>
-            <param name="d"></param>
-            <returns></returns>
-        </member>
         <!-- Badly formed XML comment ignored for member "M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.GenerateBookingSlotsAsync" -->
         <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.GetPublicHolidays">
             <summary>
@@ -292,19 +314,6 @@
             <summary>
             
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.IGenerateBookingSlotsHelper.GenerateBookingSlotsForAllSchedulesAsync">
-            <summary>
-            Generate booking slots for all active Schedules.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.IGenerateBookingSlotsHelper.GenerateBookingSlotsForScheduleAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule)">
-            <summary>
-            Generate booking slots for the specified Schedule accross all its ScheduleAvailabilities
-            </summary>
-            <param name="schedule"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.HisBookingsModule">
