@@ -1838,5 +1838,35 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Application.HisAppServiceBase">
+            <summary>
+            To be used as the Base class for all AppServices
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Application.HisAppServiceBase.HasContextFacilityId">
+            <summary>
+            Returns true if a  ContextFacilityId (i.e. the Facility from which the user is making requests for) has been provided.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Application.HisAppServiceBase.ContextFacilityId">
+            <summary>
+            Returns the Id of the Context Facility (i.e. the Facility from which the user is making requests for)
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Application.RequestContextHelper">
+            <summary>
+            Helper class to easily retrieve information related to the request context.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Application.RequestContextHelper.HasFacilityId">
+            <summary>
+            Returns true if a  ContextFacilityId (i.e. the Facility from which the user is making requests for) has been provided.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Application.RequestContextHelper.FacilityId">
+            <summary>
+            Returns the Id of the Context Facility (i.e. the Facility from which the user is making requests for)
+            </summary>
+        </member>
     </members>
 </doc>

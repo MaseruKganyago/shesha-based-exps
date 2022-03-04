@@ -27,6 +27,10 @@
     <None Remove="Services\Wards\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Services\BookingAppointments\AppointmentForBookingAppService.cs" />
+  </ItemGroup>
+
 
 
   <ItemGroup>

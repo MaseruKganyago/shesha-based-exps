@@ -166,6 +166,29 @@
             <param name="d"></param>
             <returns></returns>
         </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Domain.CmdScheduleManager">
+            <summary>
+            Domain Service for managing Appointments specifically where they belong to schedules
+            where Schedule.SchedulingModel is Appointment Booking.
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.CmdScheduleManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmAppointment,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleRoleAppointment,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="schedulesRepo"></param>
+            <param name="scheduleAvailabilityRepo"></param>
+            <param name="slotsRepo"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.CmdScheduleManager.GetSchedulesAssociatedToUserAsync(System.Guid,System.String,System.String)">
+            <summary>
+            Returns the list of schedules associated with to the specified user through a Role appointment.
+            </summary>
+            <param name="personId"></param>
+            <param name="roleName"></param>
+            <param name="facilityId"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Domain.Dtos.PublicHolidaysDto">
             <summary>
             
@@ -397,6 +420,16 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.AppointmentBookingAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.AppointmentBookingTestDataAppService">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService">
             <summary>
             
@@ -407,7 +440,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.GetAllAsync">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.GetSchedulesAssociatedToUser">
             <summary>
             
             </summary>
@@ -453,6 +486,13 @@
             <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.ConfirmAppointmentArrival(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="appointmentId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.GenerateSlots">
             <summary>
             
             </summary>
@@ -813,7 +853,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.IBookingManagementsAppService.GetAllAsync">
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.IBookingManagementsAppService.GetSchedulesAssociatedToUser">
             <summary>
             
             </summary>

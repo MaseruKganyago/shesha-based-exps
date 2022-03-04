@@ -18,7 +18,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         /// </summary>
         /// <param name="facilityId"></param>
         /// <returns></returns>
-        Task<List<CdmScheduleResponse>> GetAllAsync();
+        Task<List<CdmScheduleResponse>> GetSchedulesAssociatedToUser();
 
         /// <summary>
         /// 
