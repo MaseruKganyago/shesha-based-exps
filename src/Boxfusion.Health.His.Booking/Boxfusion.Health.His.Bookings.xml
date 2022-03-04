@@ -79,7 +79,7 @@
             where Schedule.SchedulingModel is Appointment Booking.
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentForBookingManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmAppointment,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentForBookingManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmAppointment,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid})">
             <summary>
             
             </summary>
@@ -87,13 +87,13 @@
             <param name="scheduleAvailabilityRepo"></param>
             <param name="slotsRepo"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentForBookingManager.BookAvailableSlotAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum.RefListSlotCapacityTypes,System.DateTime,System.Nullable{System.Int32},Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmPatient,System.String,System.String)">
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentForBookingManager.BookAvailableSlotAsync(System.Guid,Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum.RefListSlotCapacityTypes,System.DateTime,System.Nullable{System.Int32},Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmPatient,System.String,System.String)">
             <summary>
             Creates a new Appointment to book the first available Slot for the specified schedule, slotType and requestedTime.
             </summary>
             <returns>Returns the appointment created to book the requested time. Will throw an exception if a slot at that time was not found.</returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentForBookingManager.FindAvailableBookingSlot(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum.RefListSlotCapacityTypes,System.DateTime)">
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentForBookingManager.FindAvailableBookingSlot(System.Guid,Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum.RefListSlotCapacityTypes,System.DateTime)">
             <summary>
             Returns the first Available booking slot within the specified Schedule for the specified time and SlotType
             </summary>

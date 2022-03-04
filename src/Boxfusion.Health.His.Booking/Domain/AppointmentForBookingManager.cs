@@ -21,8 +21,9 @@ namespace Boxfusion.Health.His.Bookings.Domain
     /// </summary>
     public class AppointmentForBookingManager : DomainService
     {
-        private readonly IRepository<CdmSlot, Guid> _slotsRepo;
-        private readonly IRepository<CdmAppointment, Guid> _appointmentsRepo;
+        private readonly IRepository<CdmSchedule, Guid> _scheduleRepo;
+        private readonly IRepository<CdmSlot, Guid> _slotRepo;
+        private readonly IRepository<CdmAppointment, Guid> _appointmentRepo;
 
         /// <summary>
         /// 
@@ -33,17 +34,19 @@ namespace Boxfusion.Health.His.Bookings.Domain
         public AppointmentForBookingManager(IRepository<CdmSchedule, Guid> schedulesRepo,
             IRepository<ScheduleAvailabilityForBooking, Guid> scheduleAvailabilityRepo,
             IRepository<CdmSlot, Guid> slotsRepo,
-            IRepository<CdmAppointment, Guid> appointmentsRepo)
+            IRepository<CdmAppointment, Guid> appointmentsRepo,
+            IRepository<CdmSchedule, Guid> scheduleRepo)
         {
-            _slotsRepo = slotsRepo;
-            _appointmentsRepo = appointmentsRepo;
+            _slotRepo = slotsRepo;
+            _appointmentRepo = appointmentsRepo;
+            _scheduleRepo = scheduleRepo;
         }
 
         /// <summary>
         /// Creates a new Appointment to book the first available Slot for the specified schedule, slotType and requestedTime.
         /// </summary>
         /// <returns>Returns the appointment created to book the requested time. Will throw an exception if a slot at that time was not found.</returns>
-        public async Task<CdmAppointment> BookAvailableSlotAsync(CdmSchedule schedule,
+        public async Task<CdmAppointment> BookAvailableSlotAsync(Guid scheduleId,
                                                                 RefListSlotCapacityTypes slotType,
                                                                 DateTime requiredTime,
                                                                 int? appointmentType,
@@ -51,16 +54,18 @@ namespace Boxfusion.Health.His.Bookings.Domain
                                                                 string contactName,
                                                                 string contactCellphone)
         {
-            if (schedule is null) throw new ArgumentNullException("schedule");
             if (patient is null) throw new ArgumentNullException("Patient");
             if (requiredTime < DateTime.Now.Date) throw new ArgumentOutOfRangeException("requiredTime", "Cannot request to book an appointment in the past.");
-            if (!schedule.Active) throw new ArgumentOutOfRangeException("schedule.Active", "Schedule must be active.");
 
-
-            var slot = await FindAvailableBookingSlot(schedule, slotType, requiredTime);
+            var slot = await FindAvailableBookingSlot(scheduleId, slotType, requiredTime);
 
             if (slot is null)
-                return null;    // No available slots so will return null
+                throw new InvalidOperationException("No slots are available for booking at the requested time.");
+
+            var schedule = await _scheduleRepo.GetAsync(scheduleId);
+            if (!schedule.Active)
+                throw new InvalidOperationException("Cannot book an appointment for the specified Schedule as it is inactive.");
+
 
             // Completing the booking
             var appointment = new CdmAppointment()
@@ -87,7 +92,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
                 //Speciality = slot.Speciality ?? schedule.Speciality   ??TODO: Should be made Int as should be configuration driven
             };
 
-            var res = await _appointmentsRepo.InsertAsync(appointment);
+            var res = await _appointmentRepo.InsertAsync(appointment);
 
             return res;
         }
@@ -96,14 +101,13 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// Returns the first Available booking slot within the specified Schedule for the specified time and SlotType
         /// </summary>
         /// <returns>Returns the first slot found, otherwise returns null.</returns>
-        public async Task<CdmSlot> FindAvailableBookingSlot(CdmSchedule schedule,
-                                                                RefListSlotCapacityTypes slotType,
-                                                                DateTime requiredTime)
+        public async Task<CdmSlot> FindAvailableBookingSlot(Guid scheduleId,
+                                                        RefListSlotCapacityTypes slotType,
+                                                        DateTime requiredTime)
         {
-            if (!schedule.Active) throw new ArgumentOutOfRangeException("schedule.Active", "Schedule must be active.");
-
-            var slot = await _slotsRepo.FirstOrDefaultAsync(e =>
-                e.Schedule.Id == schedule.Id
+            var slot = await _slotRepo.FirstOrDefaultAsync(e =>
+                e.Schedule.Id == scheduleId
+                && e.Schedule.Active == true
                 && e.IsGeneratedFrom.Active == true
                 && e.CapacityType == slotType
                 && e.StartDateTime <= requiredTime && e.EndDateTime > requiredTime
@@ -129,21 +133,11 @@ namespace Boxfusion.Health.His.Bookings.Domain
         {
             if (!schedule.Active) throw new ArgumentOutOfRangeException("schedule.Active", "Schedule must be active.");
 
-            //var slots = _slotsRepo.GetAll().Where(e =>
-            //    e.Schedule.Id == schedule.Id
-            //    && e.IsGeneratedFrom.Active == true
-            //    && e.CapacityType == slotType
-            //    && e.StartDateTime >= fromDateTime && e.EndDateTime < toDateTime
-            //    && e.RemainingCapacity > 0)
-            //    .Distinct(new AvailableSlotComparer())
-            //    .OrderBy(e => e.StartDateTime)
-            //    .ToList();
-
-            var slots = _slotsRepo.GetAll().Where(e =>
+            var slots = _slotRepo.GetAll().Where(e =>
                 e.Schedule.Id == schedule.Id
                 && e.IsGeneratedFrom.Active == true
                 && e.CapacityType == slotType
-                && e.StartDateTime >= fromDateTime && e.EndDateTime < toDateTime
+                && e.StartDateTime >= fromDateTime && e.EndDateTime <= toDateTime
                 && e.RemainingCapacity > 0)
                 .OrderBy(e => e.StartDateTime)
                 .ToList();
@@ -179,7 +173,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// <returns></returns>
         public async Task<CdmAppointment> CancelAppointment(Guid appointmentId)
         {
-            var appointment = await _appointmentsRepo.GetAsync(appointmentId);
+            var appointment = await _appointmentRepo.GetAsync(appointmentId);
             if (appointment is null)
                 throw new ArgumentException("appointmentId is not recognised.", "appointmentId");
 
@@ -192,7 +186,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             // Updating appointment
             appointment.Status = RefListAppointmentStatuses.cancelled;
 
-            var res = await _appointmentsRepo.UpdateAsync(appointment);
+            var res = await _appointmentRepo.UpdateAsync(appointment);
 
             return res;
         }
@@ -204,7 +198,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// <returns></returns>
         public async Task<CdmAppointment> RescheduleAppointment(Guid appointmentId, RefListSlotCapacityTypes slotType, DateTime requiredTime, string contactName, string contactCellphone)
         {
-            var appointment = await _appointmentsRepo.GetAsync(appointmentId);
+            var appointment = await _appointmentRepo.GetAsync(appointmentId);
             if (appointment is null)
                 throw new ArgumentException("appointmentId is not recognised.", "appointmentId");
 
@@ -215,10 +209,10 @@ namespace Boxfusion.Health.His.Bookings.Domain
                 throw new ArgumentOutOfRangeException("appointment.Status", "Specified appointment.Status does not support Rescheduling.");
 
             // Checking if there is an available slot at the required time
-            var newSlot = await FindAvailableBookingSlot((CdmSchedule)appointment.Slot.Schedule, slotType, requiredTime);
+            var newSlot = await FindAvailableBookingSlot(appointment.Slot.Schedule.Id, slotType, requiredTime);
 
             if (newSlot is null)
-                return null;    // No available slots so will return null
+                throw new InvalidOperationException("No slots are available for booking at the requested time.");
 
             // Updating new appointment properties
             appointment.Status = RefListAppointmentStatuses.booked;
@@ -238,7 +232,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             appointment.ServiceType = newSlot.ServiceType ?? newSlot.Schedule.ServiceType; //Should be made Int as should be configuration driven
                                                                                            //Speciality = slot.Speciality ?? schedule.Speciality   ??TODO: Should be made Int as should be configuration driven
 
-            var res = await _appointmentsRepo.UpdateAsync(appointment);
+            var res = await _appointmentRepo.UpdateAsync(appointment);
             return res;
         }
 
@@ -249,7 +243,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// <returns></returns>
         public async Task<CdmAppointment> ConfirmAppointmentArrival(Guid appointmentId)
         {
-            var appointment = await _appointmentsRepo.GetAsync(appointmentId);
+            var appointment = await _appointmentRepo.GetAsync(appointmentId);
             if (appointment is null)
                 throw new ArgumentException("appointmentId is not recognised.", "appointmentId");
 
@@ -260,7 +254,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             appointment.Status = RefListAppointmentStatuses.checkedIn;
             appointment.ArrivalTime = DateTime.Now;
 
-            var res = await _appointmentsRepo.UpdateAsync(appointment);
+            var res = await _appointmentRepo.UpdateAsync(appointment);
 
             return res;
         }

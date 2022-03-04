@@ -21,6 +21,8 @@ namespace Boxfusion.Health.His.BookingManagement.Tests
         protected IRepository<ScheduleAvailabilityForBooking, Guid> _availabilityRepository;
         protected readonly BookingSlotsGenerator _bookingSlotsGenerator;
         protected IRepository<CdmSlot, Guid> _slotsRepository;
+        protected IRepository<CdmPatient, Guid> _patientRepository;
+        protected IRepository<CdmAppointment, Guid> _appointmentRepository;
         protected IUnitOfWorkManager _uowManager;
 
         public BookingManagementTestBase()
@@ -29,6 +31,9 @@ namespace Boxfusion.Health.His.BookingManagement.Tests
             _facilityRepository = Resolve<IRepository<Hospital, Guid>>();
             _availabilityRepository = Resolve<IRepository<ScheduleAvailabilityForBooking, Guid>>();
             _slotsRepository = Resolve<IRepository<CdmSlot, Guid>>();
+            _patientRepository = Resolve<IRepository<CdmPatient, Guid>>();
+            _appointmentRepository = Resolve<IRepository<CdmAppointment, Guid>>();
+
             _bookingSlotsGenerator = Resolve<BookingSlotsGenerator>();
 
             _uowManager = Resolve<IUnitOfWorkManager>();
@@ -58,37 +63,14 @@ namespace Boxfusion.Health.His.BookingManagement.Tests
             }
         }
 
-        protected CdmSchedule CreateTestData_NeedsUoW_NewSchedule(string name, string facilityName)
-        {
-            var hostpital = _facilityRepository.FirstOrDefault(e => e.Name == facilityName);
-            var schedule = _scheduleRepository.FirstOrDefault(e => e.Name == facilityName);
-
-            if (schedule is not null)
-            {
-                return schedule;
-            }
-            else
-            {
-                var newSchedule = new CdmSchedule()
-                {
-                    Active = true,
-                    Name = name,
-                    ActorOwnerId = hostpital.Id.ToString(),
-                    ActorOwnerType = "His.HisHospital",
-                    SchedulingModel = RefListSchedulingModels.Appointment,
-                };
-                newSchedule = _scheduleRepository.Insert(newSchedule);
-
-                return newSchedule;
-            }
-        }
 
         protected void CleanUpTestData_ForSchedule(Guid scheduleId)
         {
             using (var session = OpenSession())
             {
-                //result = func(session);
-                var query = session.CreateSQLQuery("DELETE FROM Fhir_Slots WHERE ScheduleId = '" + scheduleId.ToString() + "'");
+                var query = session.CreateSQLQuery("DELETE apps FROM Fhir_Appointments apps INNER JOIN Fhir_Slots slots ON apps.SlotId = slots.Id WHERE slots.ScheduleId = '" + scheduleId.ToString() + "'");
+                query.ExecuteUpdate();
+                query = session.CreateSQLQuery("DELETE FROM Fhir_Slots WHERE ScheduleId = '" + scheduleId.ToString() + "'");
                 query.ExecuteUpdate(); 
                 query = session.CreateSQLQuery("DELETE FROM Fhir_ScheduleAvailabilities WHERE ScheduleId = '" + scheduleId.ToString() + "'");
                 query.ExecuteUpdate(); 
@@ -98,6 +80,18 @@ namespace Boxfusion.Health.His.BookingManagement.Tests
                 session.Flush();
             }
         }
+
+        protected void CleanUpTestData_Patient(Guid patientId)
+        {
+            using (var session = OpenSession())
+            {
+                var query = session.CreateSQLQuery("DELETE FROM Core_Persons WHERE Id = '" + patientId.ToString() + "'");
+                query.ExecuteUpdate();
+
+                session.Flush();
+            }
+        }
+        
 
         protected async Task<CdmSchedule> CreateTestData_NewSchedule(string scheduleName, ScheduleAvailabilityForBooking safb, bool generateSlots)
         {
@@ -132,6 +126,25 @@ namespace Boxfusion.Health.His.BookingManagement.Tests
             }
 
             return schedule;
+        }
+
+        protected async Task<CdmPatient> CreateTestData_NewPatient(string name)
+        {
+            CdmPatient patient;
+
+            using (var uow = _uowManager.Begin())
+            {
+                patient = new CdmPatient()
+                {
+                    FirstName = name,
+                    LastName = name
+                };
+                patient = _patientRepository.Insert(patient);
+
+                uow.Complete();
+            }
+
+            return patient;
         }
 
     }
