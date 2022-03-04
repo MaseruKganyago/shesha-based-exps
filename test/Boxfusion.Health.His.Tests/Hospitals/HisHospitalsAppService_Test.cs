@@ -15,35 +15,35 @@ namespace Boxfusion.Health.His.Tests.Hospitals
             _hisHospitalsAppService = Resolve<IHisHospitalsAppService>();
         }
 
-        [Fact]
-        public async Task Should_Create_Hospital()
-        {
-            LoginAsHost("admin");
-            var hospital = await _hisHospitalsAppService.CreateHospitalAsync(new HealthCommon.Core.Dtos.Cdm.HospitalInput()
-            {
-                Description = "Unit Testing Hospital",
-                District = new Shesha.AutoMapper.Dto.ReferenceListItemValueDto() { ItemValue = 1 },
-                FreeTextAddress = "266 Pretorius",
-                CompanyRegistrationNo = "12325",
-                FacilityType = new Shesha.AutoMapper.Dto.ReferenceListItemValueDto() { ItemValue = 1 },
-                Name = "Boxfusion Hospital",
-                Latitude = 1212121,
-                Longitude = 1544,
-                OrganisationType = new Shesha.AutoMapper.Dto.ReferenceListItemValueDto() { ItemValue = 1 },
-                Speciality = new Shesha.AutoMapper.Dto.ReferenceListItemValueDto() { ItemValue = 1 },
-                PrimaryContactTelephone = "015255454"
-            });
+        //[Fact]
+        //public async Task Should_Create_Hospital()
+        //{
+        //    LoginAsHost("admin");
+        //    var hospital = await _hisHospitalsAppService.CreateHospitalAsync(new HealthCommon.Core.Dtos.Cdm.HospitalInput()
+        //    {
+        //        Description = "Unit Testing Hospital",
+        //        District = new Shesha.AutoMapper.Dto.ReferenceListItemValueDto() { ItemValue = 1 },
+        //        FreeTextAddress = "266 Pretorius",
+        //        CompanyRegistrationNo = "12325",
+        //        FacilityType = new Shesha.AutoMapper.Dto.ReferenceListItemValueDto() { ItemValue = 1 },
+        //        Name = "Boxfusion Hospital",
+        //        Latitude = 1212121,
+        //        Longitude = 1544,
+        //        OrganisationType = new Shesha.AutoMapper.Dto.ReferenceListItemValueDto() { ItemValue = 1 },
+        //        Speciality = new Shesha.AutoMapper.Dto.ReferenceListItemValueDto() { ItemValue = 1 },
+        //        PrimaryContactTelephone = "015255454"
+        //    });
 
-            Assert.NotNull(hospital);
-        }
+        //    Assert.NotNull(hospital);
+        //}
         
-        [Fact]
-        public async Task Should_Get_ALL_Hospital()
-        {
-            LoginAsHost("admin");
-            var hospital = await _hisHospitalsAppService.GetHospitalsAsync();
+        //[Fact]
+        //public async Task Should_Get_ALL_Hospital()
+        //{
+        //    LoginAsHost("admin");
+        //    var hospital = await _hisHospitalsAppService.GetHospitalsAsync();
 
-            Assert.NotNull(hospital);
-        }
+        //    Assert.NotNull(hospital);
+        //}
     }
 }
