@@ -271,7 +271,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.PublicHoliday,System.Guid},AutoMapper.IMapper)">
+        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.PublicHoliday,System.Guid},AutoMapper.IMapper,Boxfusion.Health.HealthCommon.Core.Services.Schedules.Helpers.IScheduleHelper{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.CdmScheduleResponse},Boxfusion.Health.HealthCommon.Core.Services.Schedules.Helpers.IScheduleAvailabilityForBookingHelper)">
             <summary>
             
             </summary>
@@ -280,14 +280,10 @@
             <param name="slot"></param>
             <param name="publicHolidayRepo"></param>
             <param name="mapper"></param>
+            <param name="scheduleHelperCrudHelper"></param>
+            <param name="scheduleAvailabilityForBookingHelper"></param>
         </member>
         <!-- Badly formed XML comment ignored for member "M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.GenerateBookingSlotsAsync" -->
-        <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.GetPublicHolidays">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Boxfusion.Health.His.Bookings.Helpers.Slots.GenerateBookingSlotsHelper.GetPublicHolidays">
             <summary>
             
@@ -501,6 +497,14 @@
             <summary>
             
             </summary>
+            <param name="appointmentId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.CancelAppointment(System.Guid,System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="facilityId"></param>
             <param name="appointmentId"></param>
             <returns></returns>
         </member>
