@@ -14,6 +14,7 @@ using Shesha.Domain;
 using Shesha.NHibernate;
 using Shesha.Services;
 using Shesha.Sms;
+using Shesha.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +66,6 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
             _scheduleAvailabilityForBookingHelper = scheduleAvailabilityForBookingHelper;
         }
 
-        /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
@@ -242,5 +242,6 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
 
             return result;
         }
+
     }
 }

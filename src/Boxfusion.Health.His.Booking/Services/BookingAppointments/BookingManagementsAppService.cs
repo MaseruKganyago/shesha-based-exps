@@ -8,6 +8,8 @@ using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.HealthCommon.Core.Services.Schedules.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Services.Slots.Helpers;
+using Boxfusion.Health.His.Application;
+using Boxfusion.Health.His.Bookings.Domain;
 using Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos;
 using Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers;
 using Boxfusion.Health.His.Domain.Authorization;
@@ -27,12 +29,11 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/His/[controller]")]
-    public class BookingManagementsAppService : CdmAppServiceBase, IBookingManagementsAppService
+    public class BookingManagementsAppService : HisAppServiceBase, IBookingManagementsAppService
     {
         private readonly IScheduleHelper<CdmSchedule, CdmScheduleResponse> _scheduleHelperCrudHelper;
         private readonly ISlotHelper<CdmSlot, CdmSlotResponse> _slotHelperCrudHelper;
         private readonly IBookingManagementHelper _bookingManagementHelper;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
         /// <summary>
         /// 
@@ -46,7 +47,6 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
             _bookingManagementHelper = bookingManagementHelper;
             _scheduleHelperCrudHelper = scheduleHelperCrudHelper;
             _slotHelperCrudHelper = slotCrudHelper;
-            _httpContextAccessor = httpContextAccessor;
         }
 
         /// <summary>
@@ -54,11 +54,16 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         /// </summary>
         /// <returns></returns>
         [HttpGet, Route("Schedules/SchedulesAssociatedToUser")]
-        public async Task<List<CdmScheduleResponse>> GetAllAsync()
+        public async Task<List<CdmScheduleResponse>> GetSchedulesAssociatedToUser()
         {
-            var facilityId = _httpContextAccessor.HttpContext.Request.Query["facilityId"].ToString();
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
-            var schedules = await _scheduleHelperCrudHelper.GetAllAsync(person.Id, facilityId);
+            var manager = this.IocManager.Resolve<CmdScheduleManager>();
+
+
+            //TODO: Introduce Context Facility limitation 
+            var schedules = await manager.GetSchedulesAssociatedToUserAsync(person.Id, "Schedule Manager");
+
+            //var schedules = await _scheduleHelperCrudHelper.GetAllAsync(person.Id, facilityId);
 
             return ObjectMapper.Map<List<CdmScheduleResponse>>(schedules);
         }
@@ -100,15 +105,19 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         //[AbpAuthorize(PermissionNames.DailyAppointmentBooking)]
         public async Task<PagedResponse> GetFlattenedAppointmentsAsync(Guid scheduleId, DateTime? startDate, PaginationDto pagination, DateTime? endDate)
         {
-            var facilityId = Guid.Parse(_httpContextAccessor.HttpContext.Request.Query["facilityId"].ToString());
-
-            Validation.ValidateIdWithException(facilityId, "Facility Context Id cannot be empty");
+            //Validation.ValidateIdWithException(this.ContextFacilityId, "Facility Context Id cannot be empty");
             Validation.ValidateIdWithException(scheduleId, "Schedule Id cannot be empty");
             Validation.ValidateNullableType(startDate, "Filtering Start Date");
             Validation.ValidateNullableType(pagination.PageNumber, "PageNumber");
             Validation.ValidateNullableType(pagination.PageSize, "PageSize");
-            
-            var flattenedAppointments = await _bookingManagementHelper.GetFlattenedAppointmentsAsync(facilityId, scheduleId, startDate, pagination, endDate);
+
+            //TODO : Restrict by User and this.ContextFacilityId;
+
+            var scheduleRepo = IocManager.Resolve<IRepository<CdmSchedule, Guid>>();
+            var schedule = await scheduleRepo.GetAsync(scheduleId);
+
+            var facilityId = schedule.ActorOwnerId; 
+            var flattenedAppointments = await _bookingManagementHelper.GetFlattenedAppointmentsAsync(Guid.Parse(facilityId), scheduleId, startDate, pagination, endDate);
 
             return new PagedResponse(items: flattenedAppointments, paging: new Paging(pagination.PageNumber, pagination.PageSize, (flattenedAppointments.Any()) ? flattenedAppointments.FirstOrDefault().TotalCount : 0));
         }
@@ -178,6 +187,22 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
             var confirmedAppointmentArrivalTime = await _bookingManagementHelper.ConfirmAppointmentArrival(appointmentId);
 
             return confirmedAppointmentArrivalTime;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appointmentId"></param>
+        /// <returns></returns>
+        [HttpPost, Route("GenerateSlots")]
+        public async Task<object> GenerateSlots()
+        {
+            var bookingSlotsGenerator = this.IocManager.Resolve<BookingSlotsGenerator>();
+
+            await bookingSlotsGenerator.GenerateBookingSlotsForAllSchedulesAsync();
+
+            return new object();
         }
 
         /// <summary>

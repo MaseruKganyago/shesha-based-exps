@@ -9,6 +9,8 @@ namespace Boxfusion.Health.His.Bookings.Domain.Views
     /// <summary>
     /// 
     /// </summary>
+    /// 
+    //TODO:IH - Entity name should be singular
     public class FlattenedAppointments : EntityDto<Guid>
     {
         /// <summary>

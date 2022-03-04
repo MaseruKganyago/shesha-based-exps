@@ -88,7 +88,7 @@ namespace Boxfusion.Health.His.Tests
             }
         }
 
-        private ISession OpenSession()
+        protected ISession OpenSession()
         {
             return LocalIocManager.Resolve<ISessionFactory>().OpenSession();
         }

@@ -34,5 +34,6 @@ namespace Boxfusion.Health.His.Bookings.Helpers.Slots
         /// </summary>
         /// <returns></returns>
         Task<List<PublicHolidaysDto>> GetPublicHolidays();
+
     }
 }

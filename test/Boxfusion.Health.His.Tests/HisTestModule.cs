@@ -44,14 +44,17 @@ namespace Boxfusion.Health.His.Tests
     public class HisTestModule : AbpModule
     {
         //private const string ConnectionString = @"Data Source=sql-shared-nonprod.database.windows.net;Initial Catalog=boxhealthhis-test;User=boxdbadmin;Password=n0-hack.2020;MultipleActiveResultSets=True;TrustServerCertificate=True";
-        private const string ConnectionString = "Data Source=.;Initial Catalog=mpdoh-test;MultipleActiveResultSets=True;Trusted_Connection=True;";
+        private string ConnectionString;
 
         public HisTestModule(SheshaNHibernateModule nhModule)
         {
+            var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            ConnectionString = config.GetConnectionString("TestDB");
+
             nhModule.ConnectionString = ConnectionString;
             nhModule.SkipDbSeed = true;
         }
-        
+
         public override void PreInitialize()
         {
             Configuration.UnitOfWork.Timeout = TimeSpan.FromMinutes(30);
@@ -70,7 +73,7 @@ namespace Boxfusion.Health.His.Tests
                     .ImplementedBy<AbpAspNetCoreConfiguration>()
                     .LifestyleSingleton()
             );
-            
+
             var appLifetimeMoq = new Mock<IHostApplicationLifetime>();
             IocManager.IocContainer.Register(
                 Component.For<IHostApplicationLifetime>()
@@ -101,7 +104,7 @@ namespace Boxfusion.Health.His.Tests
             Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
             RegisterFakeService<SheshaDbMigrator>();
-            
+
             Configuration.ReplaceService<IDynamicRepository, DynamicRepository>(DependencyLifeStyle.Transient);
 
             // replace email sender
@@ -124,7 +127,7 @@ namespace Boxfusion.Health.His.Tests
             IocManager.IocContainer.AddFacility<LoggingFacility>(f => f.UseAbpLog4Net().WithConfig("log4net.config"));
 
             StaticContext.SetIocManager(IocManager);
-            
+
             ServiceCollectionRegistrar.Register(IocManager);
         }
 
