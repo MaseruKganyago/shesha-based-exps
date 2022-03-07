@@ -55,6 +55,7 @@
 
   <ItemGroup>
     <Folder Include="Domain\Enums\" />
+    <Folder Include="Domain\Enums\" />
   </ItemGroup>
 
 </Project>

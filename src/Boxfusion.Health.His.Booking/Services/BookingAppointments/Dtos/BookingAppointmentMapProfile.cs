@@ -22,7 +22,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos
         /// </summary>
         public BookingAppointmentMapProfile()
         {
-            CreateMap<FlattenedAppointments, FlattenedAppointmentDto>()
+            CreateMap<FlattenedAppointment, FlattenedAppointmentDto>()
                 .ForMember(c => c.AppointmentType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "AppointmentReasonCodes", (int?)c.AppointmentType)))
                 .ForMember(c => c.Status, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "AppointmentStatuses", (long?)c.Status)))
                 .MapReferenceListValuesToDto();

@@ -1,7 +1,9 @@
 ﻿using Abp.Application.Services.Dto;
 using Shesha.AutoMapper.Dto;
+using Shesha.Domain.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Boxfusion.Health.His.Bookings.Domain.Views
@@ -10,8 +12,8 @@ namespace Boxfusion.Health.His.Bookings.Domain.Views
     /// 
     /// </summary>
     /// 
-    //TODO:IH - Entity name should be singular
-    public class FlattenedAppointments : EntityDto<Guid>
+    [Obsolete]
+    public class FlattenedAppointment : EntityDto<Guid>
     {
         /// <summary>
         /// A reference number issued to the patient.

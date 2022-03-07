@@ -9,6 +9,7 @@ using Boxfusion.Health.His.Domain.Localization;
 using Shesha;
 using Shesha.Authorization;
 using Boxfusion.Health.HealthCommon.Core;
+using Shesha.Startup;
 
 namespace Boxfusion.Health.His.Domain
 {
@@ -52,9 +53,17 @@ namespace Boxfusion.Health.His.Domain
         /// inheritedDoc
         public override void PostInitialize()
         {
+            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(HisDomainModule).Assembly, "HisCore");
+            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(HealthCommonModule).Assembly, "HisCore");
+
+            Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
+                typeof(HealthCommonModule).Assembly,
+                moduleName: "HisCore",
+                useConventionalHttpVerbs: true);
+
             Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
                 typeof(HisDomainModule).Assembly,
-                moduleName: "HisDomain",
+                moduleName: "HisCore",
                 useConventionalHttpVerbs: true);
         }
     }

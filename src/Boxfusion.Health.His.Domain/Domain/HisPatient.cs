@@ -26,7 +26,8 @@ namespace Boxfusion.Health.His.Domain.Domain
         /// <summary>
         /// 
         /// </summary>
-        public virtual RefListIdentificationTypes IdentificationType { get; set; }
+        [ReferenceList("His", "IdentificationTypes")]
+        public virtual RefListIdentificationTypes? IdentificationType { get; set; }
 
         /// <summary>
         /// 

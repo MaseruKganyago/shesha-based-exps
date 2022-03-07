@@ -26,6 +26,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Views
 		/// <summary>
 		/// 
 		/// </summary>
+		[ReferenceList("His", "IdentificationTypes")]
 		public virtual RefListIdentificationTypes IdentificationType { get; set; }
 
 		/// <summary>

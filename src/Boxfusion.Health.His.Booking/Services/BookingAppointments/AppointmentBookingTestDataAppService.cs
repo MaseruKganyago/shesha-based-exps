@@ -34,7 +34,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
     public class AppointmentBookingTestDataAppService : CdmAppServiceBase //, IBookingManagementsAppService
     {
         protected IRepository<CdmSchedule, Guid> _scheduleRepository;
-        protected IRepository<Hospital, Guid> _facilityRepository;
+        protected IRepository<HisHospital, Guid> _facilityRepository;
         protected IRepository<ScheduleAvailabilityForBooking, Guid> _availabilityRepository;
         protected readonly BookingSlotsGenerator _bookingSlotsGenerator;
         protected IRepository<CdmSlot, Guid> _slotsRepository;
@@ -45,7 +45,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
 
         public AppointmentBookingTestDataAppService(
                 IRepository<CdmSchedule, Guid> scheduleRepository,
-                IRepository<Hospital, Guid> facilityRepository,
+                IRepository<HisHospital, Guid> facilityRepository,
                 IRepository<ScheduleAvailabilityForBooking, Guid> availabilityRepository,
                 IRepository<CdmSlot, Guid> slotsRepository,
                 IRepository<CdmPatient, Guid> patientRepository,
@@ -142,7 +142,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
             var hostpital = await _facilityRepository.FirstOrDefaultAsync(e => e.Name == name);
             if (hostpital is null)
             {
-                var newHospital = new Hospital()
+                var newHospital = new HisHospital()
                 {
                     Name = name,
                 };

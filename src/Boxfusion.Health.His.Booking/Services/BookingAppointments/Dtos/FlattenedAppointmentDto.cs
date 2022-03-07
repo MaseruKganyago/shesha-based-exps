@@ -11,7 +11,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos
     /// <summary>
     /// 
     /// </summary>
-    [AutoMap(typeof(FlattenedAppointments))]
+    [AutoMap(typeof(FlattenedAppointment))]
     public class FlattenedAppointmentDto : EntityDto<Guid>
     {
         /// <summary>

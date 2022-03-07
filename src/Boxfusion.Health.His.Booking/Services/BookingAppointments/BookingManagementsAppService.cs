@@ -103,6 +103,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         /// <returns></returns>
         [HttpGet, Route("Appointments/FlattenedDailyFacilityAppointments")]
         //[AbpAuthorize(PermissionNames.DailyAppointmentBooking)]
+        [Obsolete]
         public async Task<PagedResponse> GetFlattenedAppointmentsAsync(Guid scheduleId, DateTime? startDate, PaginationDto pagination, DateTime? endDate)
         {
             //Validation.ValidateIdWithException(this.ContextFacilityId, "Facility Context Id cannot be empty");

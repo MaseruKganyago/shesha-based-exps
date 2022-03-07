@@ -1123,6 +1123,11 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Domain.FlattenedFacilityPatient">
+            <summary>
+            Flattened/Optimised version of the Patient record joining in the Facility specific Patient Identifier.
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Domain.Dtos.HisAdmissionInput">
             <summary>
             
@@ -1834,6 +1839,21 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220125141700.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220306151900">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220306151900.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220306151900.Down">
             <summary>
             
             </summary>

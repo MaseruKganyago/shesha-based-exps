@@ -205,58 +205,65 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointments">
+        <member name="T:Boxfusion.Health.His.Bookings.Domain.FlattenedFacilityAppointment">
+            <summary>
+            Flattened version of the Appointment entity joining in fields from the Patient and Schedule entities.
+            Note: The DB view behind this entity only returns Facility based appointments i.e. where the Owner of the schedule the appointment 
+            relates to is Health Facility
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointment">
             <summary>
             
             </summary>
             
         </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointments.RefNumber">
+        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointment.RefNumber">
             <summary>
             A reference number issued to the patient.
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointments.Start">
+        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointment.Start">
             <summary>
             When appointment is to take place.
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointments.AppointmentType">
+        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointment.AppointmentType">
             <summary>
             The style of appointment or patient that has been booked in the slot (not service type)
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointments.Status">
+        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointment.Status">
             <summary>
             proposed | pending | booked | arrived | fulfilled | cancelled | noshow | entered-in-error | checked-in | waitlist
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointments.PatientFileId">
+        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointment.PatientFileId">
             <summary>
             A reference number issued to the patient.
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointments.IDNumberPassportNumber">
+        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointment.IDNumberPassportNumber">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointments.FullName">
+        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointment.FullName">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointments.ContactNumber">
+        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointment.ContactNumber">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointments.Schedule">
+        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointment.Schedule">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointments.TotalCount">
+        <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointment.TotalCount">
             <summary>
             
             </summary>
@@ -417,6 +424,21 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220125225300.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Migrations.M20220307055501">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220307055501.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220307055501.Down">
             <summary>
             
             </summary>

@@ -55,13 +55,12 @@ namespace Boxfusion.Health.His.Bookings
         /// </summary>
         public override void PostInitialize()
         {
+            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(HisBookingsModule).Assembly, "HisBookings");
+            
             Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
                 typeof(HisBookingsModule).Assembly,
                 moduleName: "HisBookings",
                 useConventionalHttpVerbs: true);
-
-            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(HealthCommonModule).Assembly, "HisBookings");
-            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(SheshaCoreModule).Assembly, "HisBookings");
         }
     }
 }

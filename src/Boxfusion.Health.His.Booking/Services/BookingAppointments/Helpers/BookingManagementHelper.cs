@@ -72,14 +72,14 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
         {
             var flattenedAppointmentQuery = await _sessionProvider.Session
                       .CreateSQLQuery(Util.FlattenedAppointmentSqlQuery)
-                      .SetResultTransformer(Transformers.AliasToBean<FlattenedAppointments>())
+                      .SetResultTransformer(Transformers.AliasToBean<FlattenedAppointment>())
                       .SetParameter("facilityId", facilityId)
                       .SetParameter("scheduleId", scheduleId)
                       .SetParameter("filterStartDate", filterStartDate)
                       .SetParameter("filterEndDate", filterEndDate)
                       .SetParameter("pageNumber", pagination.PageNumber)
                       .SetParameter("pageSize", pagination.PageSize)
-                      .ListAsync<FlattenedAppointments>();
+                      .ListAsync<FlattenedAppointment>();
 
             return _mapper.Map<List<FlattenedAppointmentDto>>(flattenedAppointmentQuery);
         }
