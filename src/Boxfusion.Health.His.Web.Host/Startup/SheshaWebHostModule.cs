@@ -2,7 +2,6 @@
 using Abp.Hangfire.Configuration;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
-using Boxfusion.Health.His.Admissions;
 
 namespace Boxfusion.Health.His.Web.Host.Startup
 {

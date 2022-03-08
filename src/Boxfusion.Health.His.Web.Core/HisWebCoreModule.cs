@@ -27,21 +27,27 @@ using Shesha.Web;
 using Shesha.Web.FormsDesigner;
 using Shesha.Reporting;
 using Boxfusion.Health.His.Bookings;
+using Boxfusion.Health.His.Common;
 
-namespace Boxfusion.Health.His.Admissions
+namespace Boxfusion.Health.His
 {
     /// <summary>
     /// ReSharper disable once InconsistentNaming
     /// </summary>
     [DependsOn(
+         // Adding all the His Modules
+         //typeof(HisAdmissModule),
+         //typeof(HisAdminisModule),
+         typeof(HisCommonDomainModule),
+         typeof(HisCommonApplicationModule),
+         typeof(HisBookingsDomainModule),
+         typeof(HisBookingsApplicationModule),
+
          typeof(SheshaApplicationModule),
          typeof(SheshaNHibernateModule),
          typeof(AbpAspNetCoreModule),
          typeof(AbpAspNetCoreSignalRModule),
          typeof(AbpAutoMapperModule),
-         typeof(HisAdmissModule),
-         typeof(HisAdminisModule),
-         typeof(HisBookingsModule),
          typeof(SheshaSchedulerModule),
          typeof(SheshaImportModule),
          typeof(SheshaWebControlsModule),
