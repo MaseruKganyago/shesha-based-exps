@@ -28,6 +28,9 @@ using Shesha.Web.FormsDesigner;
 using Shesha.Reporting;
 using Boxfusion.Health.His.Bookings;
 using Boxfusion.Health.His.Common;
+using Castle.MicroKernel.Registration;
+using Shesha.Authorization;
+using Boxfusion.Health.His.Common.Authorization;
 
 namespace Boxfusion.Health.His
 {
@@ -90,6 +93,9 @@ namespace Boxfusion.Health.His
             // Use database for language management
             Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
+
+            Configuration.Authorization.Providers.Add<HisAuthorizationProvider>();
+
             Configuration.Modules.AbpAspNetCore()
                  .CreateControllersForAppServices(
                      typeof(SheshaApplicationModule).GetAssembly()
@@ -116,6 +122,12 @@ namespace Boxfusion.Health.His
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(typeof(HisWebCoreModule).GetAssembly());
+
+            //TODO: Should probably be moved to a Solutions module or move to His.Common (i.e. a module whose main purpose is to pull all the other separate modules together
+            IocManager.IocContainer.Register(
+                  Component.For<ICustomPermissionChecker>().Forward<IHisPermissionChecker>().Forward<HisPermissionChecker>().ImplementedBy<HisPermissionChecker>().LifestyleTransient()
+                );
+
         }
     }
 }

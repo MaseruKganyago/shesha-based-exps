@@ -3,12 +3,12 @@ using Abp.Localization.Dictionaries;
 using Abp.Localization.Dictionaries.Xml;
 using Abp.Reflection.Extensions;
 
-namespace Boxfusion.Health.His.Domain.Localization
+namespace Boxfusion.Health.His.Common.Localization
 {
     /// <summary>
     /// 
     /// </summary>
-    public static class HisDomainLocalizationConfigurer
+    public static class HisCommonLocalizationConfigurer
     {
         /// <summary>
         /// 
@@ -17,10 +17,10 @@ namespace Boxfusion.Health.His.Domain.Localization
         public static void Configure(ILocalizationConfiguration localizationConfiguration)
         {
             localizationConfiguration.Sources.Add(
-                new DictionaryBasedLocalizationSource("HisDomain",
+                new DictionaryBasedLocalizationSource("HisCommon",
                     new XmlEmbeddedFileLocalizationDictionaryProvider(
-                        typeof(HisDomainLocalizationConfigurer).GetAssembly(),
-                        "Boxfusion.Health.His.Domain.Localization.SourceFiles"
+                        typeof(HisCommonLocalizationConfigurer).GetAssembly(),
+                        "Boxfusion.Health.His.Common.Localization.SourceFiles"
                     )
                 )
             );

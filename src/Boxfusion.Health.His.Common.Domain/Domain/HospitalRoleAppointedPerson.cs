@@ -14,6 +14,6 @@ namespace Boxfusion.Health.His.Common
         /// <summary>
         /// 
         /// </summary>
-        public virtual HisHospital Hospital { get; set; }
+        public virtual HisHealthFacility Hospital { get; set; }
     }
 }

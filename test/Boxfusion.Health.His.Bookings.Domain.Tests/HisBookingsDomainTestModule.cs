@@ -31,7 +31,7 @@ using Hangfire.SqlServer;
 namespace Boxfusion.Health.His.Bookings.Tests
 {
     [DependsOn(
-        typeof(HisBookingsDomainModule),
+        //typeof(HisBookingsDomainModule),
 
         typeof(AbpKernelModule),
         typeof(AbpTestBaseModule),

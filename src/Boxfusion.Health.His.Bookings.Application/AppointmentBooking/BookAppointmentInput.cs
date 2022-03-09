@@ -12,7 +12,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
     /// 
     /// </summary>
     [AutoMap(typeof(CdmAppointment))]
-    public class BookAppointmentInput : EntityDto<Guid>
+    public class BookAppointmentInput //: EntityDto<Guid>
     {
         /// <summary>
         /// 
@@ -43,6 +43,16 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// The cellphone of the contact person in case they are organising on behalf of the patient.
         /// </summary>
         public string ContactCellphone { get; set; }
+
+        /// <summary>
+        /// Additional comments
+        /// </summary>
+        public virtual string Comment { get; set; }
+
+        /// <summary>
+        /// Detailed information and instructions for the patient
+        /// </summary>
+        public virtual string PatientInstruction { get; set; }
 
     }
 }

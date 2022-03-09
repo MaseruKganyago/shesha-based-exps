@@ -4,20 +4,20 @@ using System.Reflection;
 using Abp.Authorization;
 using Abp.Localization;
 
-namespace Boxfusion.Health.His.Bookings.Authorization
+namespace Boxfusion.Health.His.Common.Authorization
 {
     /// <summary>
     /// Health.His Authorization Provider
     /// </summary>
-    public class HisBookingsAuthorizationProvider : AuthorizationProvider
+    public class HisAuthorizationProvider : AuthorizationProvider
     {
         /// <summary>
-        /// Register permissions declared in the <see cref="PermissionNames"/> class
+        /// Register permissions declared in the <see cref="CommonPermissions"/> class
         /// </summary>
         /// <param name="context"></param>
         public override void SetPermissions(IPermissionDefinitionContext context)
         {
-            var permissions = typeof(PermissionNames)
+            var permissions = typeof(CommonPermissions)
                 .GetFields(BindingFlags.Public | BindingFlags.Static)
                 .Where(p => p.IsLiteral)
                 .Select(p => new
@@ -35,7 +35,7 @@ namespace Boxfusion.Health.His.Bookings.Authorization
 
         private static ILocalizableString L(string name)
         {
-            return new LocalizableString(name, "HisBookings");
+            return new LocalizableString(name, "HisAdmiss");
         }
     }
 }

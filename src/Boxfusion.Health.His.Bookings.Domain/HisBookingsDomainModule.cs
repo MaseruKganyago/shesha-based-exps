@@ -46,9 +46,6 @@ namespace Boxfusion.Health.His.Bookings
             base.PreInitialize();
 
             //Configuration.Settings.Providers.Add<HisAdmisSettingProvider>();
-            //Configuration.Authorization.Providers.Add<HisBookingsAuthorizationProvider>();
-
-            HisBookingsLocalizationConfigurer.Configure(Configuration.Localization);
         }
 
         /// <summary>

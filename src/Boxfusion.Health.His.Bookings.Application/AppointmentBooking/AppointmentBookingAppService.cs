@@ -8,7 +8,7 @@ using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Bookings.Domain;
-using Boxfusion.Health.His.Domain.Authorization;
+using Boxfusion.Health.His.Common.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shesha.DynamicEntities.Dtos;
 using System;
@@ -64,23 +64,20 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("Appointments/BookAvailableSlot")]
-        [AbpAuthorize(PermissionNames.BookAppointment)]
+        [AbpAuthorize(CommonPermissions.BookAppointment)]
         public async Task<DynamicDto<CdmAppointment, Guid>> BookAvailableSlotAsync(BookAppointmentInput input)
         {
             Validation.ValidateEntityWithDisplayNameDto(input?.Schedule, "Schedule");
             Validation.ValidateNullableType(input?.Start, "Appointment Date");
             Validation.ValidateEntityWithDisplayNameDto(input?.Patient, "Patient");
 
+            var mapper = IocManager.Resolve<IMapper>();
+
             try
             {
-                var newAppointment = await _appointmentBookingManager.BookAvailableSlotAsync(
-                        input.Schedule.Id.Value,
-                        input.Start.Value,
-                        input.AppointmentType.ItemValue,
-                        input.Patient.Id.Value,
-                        input.ContactName,
-                        input.ContactCellphone
-                        );
+                var inAppointment = mapper.Map<CdmAppointment>(input);
+
+                var newAppointment = await _appointmentBookingManager.BookAvailableSlotAsync(input.Schedule.Id.Value, inAppointment);
 
                 if (newAppointment is null)
                     throw new UserFriendlyException("No slots are available for booking at the requested time.");
@@ -131,7 +128,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="appointmentId"></param>
         /// <returns></returns>
         [HttpPut, Route("Appointments/{appointmentId}/ConfirmArrival")]
-        [AbpAuthorize(PermissionNames.RescheduleAppointment)]
+        [AbpAuthorize(CommonPermissions.RescheduleAppointment)]
         public async Task<DynamicDto<CdmAppointment, Guid>> ConfirmAppointmentArrival(Guid appointmentId)
         {
             try
@@ -154,7 +151,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="appointmentId"></param>
         /// <returns></returns>
         [HttpPut, Route("Appointments/CancelAppointment")]
-        [Obsolete]
+        [AbpAuthorize(CommonPermissions.RescheduleAppointment)]
         public async Task<DynamicDto<CdmAppointment, Guid>> CancelAppointment(Guid appointmentId)
         {
             try

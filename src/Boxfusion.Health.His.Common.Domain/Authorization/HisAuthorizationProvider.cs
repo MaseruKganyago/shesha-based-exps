@@ -4,7 +4,7 @@ using System.Reflection;
 using Abp.Authorization;
 using Abp.Localization;
 
-namespace Boxfusion.Health.His.Domain.Authorization
+namespace Boxfusion.Health.His.Common.Authorization
 {
     /// <summary>
     /// Health.His Authorization Provider
@@ -12,12 +12,12 @@ namespace Boxfusion.Health.His.Domain.Authorization
     public class HisAuthorizationProvider : AuthorizationProvider
     {
         /// <summary>
-        /// Register permissions declared in the <see cref="PermissionNames"/> class
+        /// Register permissions declared in the <see cref="CommonPermissions"/> class
         /// </summary>
         /// <param name="context"></param>
         public override void SetPermissions(IPermissionDefinitionContext context)
         {
-            var permissions = typeof(PermissionNames)
+            var permissions = typeof(CommonPermissions)
                 .GetFields(BindingFlags.Public | BindingFlags.Static)
                 .Where(p => p.IsLiteral)
                 .Select(p => new

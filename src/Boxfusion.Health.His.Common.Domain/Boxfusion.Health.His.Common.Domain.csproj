@@ -19,9 +19,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Authorization\**" />
     <Compile Remove="Configuration\**" />
+    <Compile Remove="Dtos\**" />
+    <EmbeddedResource Remove="Authorization\**" />
     <EmbeddedResource Remove="Configuration\**" />
+    <EmbeddedResource Remove="Dtos\**" />
+    <None Remove="Authorization\**" />
     <None Remove="Configuration\**" />
+    <None Remove="Dtos\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,7 +41,7 @@
 
   <ItemGroup>
     <PackageReference Include="Abp" Version="5.0.0" />
-    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.1.2" />
+    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.1.5" />
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />

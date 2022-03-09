@@ -7,7 +7,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Bookings.Domain;
 using Boxfusion.Health.His.Common;
-using Boxfusion.Health.His.Domain.Authorization;
+using Boxfusion.Health.His.Common.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shesha.Domain;
 using System;
@@ -27,7 +27,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
     public class AppointmentBookingTestDataAppService : CdmAppServiceBase //, IBookingManagementsAppService
     {
         protected IRepository<CdmSchedule, Guid> _scheduleRepository;
-        protected IRepository<HisHospital, Guid> _facilityRepository;
+        protected IRepository<HisHealthFacility, Guid> _facilityRepository;
         protected IRepository<ScheduleAvailabilityForBooking, Guid> _availabilityRepository;
         protected readonly BookingSlotsGenerator _bookingSlotsGenerator;
         protected IRepository<CdmSlot, Guid> _slotsRepository;
@@ -38,7 +38,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
 
         public AppointmentBookingTestDataAppService(
                 IRepository<CdmSchedule, Guid> scheduleRepository,
-                IRepository<HisHospital, Guid> facilityRepository,
+                IRepository<HisHealthFacility, Guid> facilityRepository,
                 IRepository<ScheduleAvailabilityForBooking, Guid> availabilityRepository,
                 IRepository<CdmSlot, Guid> slotsRepository,
                 IRepository<CdmPatient, Guid> patientRepository,
@@ -135,7 +135,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             var hostpital = await _facilityRepository.FirstOrDefaultAsync(e => e.Name == name);
             if (hostpital is null)
             {
-                var newHospital = new HisHospital()
+                var newHospital = new HisHealthFacility()
                 {
                     Name = name,
                 };

@@ -1,9 +1,9 @@
-﻿namespace Boxfusion.Health.His.Domain.Authorization
+﻿namespace Boxfusion.Health.His.Common.Authorization
 {
     /// <summary>
     /// Health.His Permission names
     /// </summary>
-    public static class PermissionNames
+    public static class CommonPermissions
     {
         /// <summary>
         /// Pages: Admission Dashboard

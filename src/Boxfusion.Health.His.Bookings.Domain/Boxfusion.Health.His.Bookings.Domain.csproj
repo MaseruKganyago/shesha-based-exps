@@ -22,7 +22,7 @@
     <Compile Remove="Application\**" />
     <Compile Remove="Authorization\**" />
     <Compile Remove="Domain\Dtos\**" />
-    <Compile Remove="Helpers\Slots\**" />
+    <Compile Remove="Helpers\**" />
     <Compile Remove="Jobs\**" />
     <Compile Remove="Services\BookingAppointments\Helpers\**" />
     <Compile Remove="Services\FacilityPatients\**" />
@@ -30,7 +30,7 @@
     <EmbeddedResource Remove="Application\**" />
     <EmbeddedResource Remove="Authorization\**" />
     <EmbeddedResource Remove="Domain\Dtos\**" />
-    <EmbeddedResource Remove="Helpers\Slots\**" />
+    <EmbeddedResource Remove="Helpers\**" />
     <EmbeddedResource Remove="Jobs\**" />
     <EmbeddedResource Remove="Services\BookingAppointments\Helpers\**" />
     <EmbeddedResource Remove="Services\FacilityPatients\**" />
@@ -38,7 +38,7 @@
     <None Remove="Application\**" />
     <None Remove="Authorization\**" />
     <None Remove="Domain\Dtos\**" />
-    <None Remove="Helpers\Slots\**" />
+    <None Remove="Helpers\**" />
     <None Remove="Jobs\**" />
     <None Remove="Services\BookingAppointments\Helpers\**" />
     <None Remove="Services\FacilityPatients\**" />
@@ -49,7 +49,6 @@
     <Compile Remove="Services\BookingAppointments\AppointmentBookingAppService.cs" />
     <Compile Remove="Services\BookingAppointments\AppointmentBookingTestDataAppService.cs" />
     <Compile Remove="Services\BookingAppointments\AppointmentForBookingAppService.cs" />
-    <Compile Remove="Services\BookingAppointments\BookingManagementsAppService.cs" />
     <Compile Remove="Services\BookingAppointments\Dtos\BookAppointmentInput.cs" />
     <Compile Remove="Services\BookingAppointments\Dtos\CancelAppointmentInput.cs" />
     <Compile Remove="Services\BookingAppointments\Dtos\RescheduleInput.cs" />
@@ -65,7 +64,7 @@
 
   <ItemGroup>
     <PackageReference Include="Abp" Version="5.0.0" />
-    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.1.2" />
+    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.1.5" />
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
@@ -81,10 +80,10 @@
   <ItemGroup>
     <Folder Include="Domain\Enums\" />
     <Folder Include="Domain\Enums\" />
-    <Folder Include="Helpers\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Boxfusion.Health.His.Common.Application\Boxfusion.Health.His.Common.Application.csproj" />
     <ProjectReference Include="..\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
   </ItemGroup>
 

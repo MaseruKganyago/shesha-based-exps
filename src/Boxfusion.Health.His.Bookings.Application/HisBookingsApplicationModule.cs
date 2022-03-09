@@ -2,9 +2,6 @@
 using Abp.AutoMapper;
 using Abp.Modules;
 using Boxfusion.Health.HealthCommon.Core;
-using Boxfusion.Health.His.Domain;
-using Boxfusion.Health.His.Domain.Authorization;
-using Boxfusion.Health.His.Domain.Localization;
 using Shesha;
 using Shesha.Authorization;
 using Shesha.Startup;
@@ -12,6 +9,7 @@ using System;
 using Castle.MicroKernel.Registration;
 using System.Reflection;
 using Boxfusion.Health.His.Bookings;
+using Boxfusion.Health.His.Bookings.Localization;
 
 namespace Boxfusion.Health.His.Bookings
 {
@@ -29,9 +27,9 @@ namespace Boxfusion.Health.His.Bookings
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-            IocManager.IocContainer.Register(
-              Component.For<ICustomPermissionChecker>().Forward<IHisPermissionChecker>().Forward<HisPermissionChecker>().ImplementedBy<HisPermissionChecker>().LifestyleTransient()
-          );
+            //IocManager.IocContainer.Register(
+            //  Component.For<ICustomPermissionChecker>().Forward<IHisPermissionChecker>().Forward<HisPermissionChecker>().ImplementedBy<HisPermissionChecker>().LifestyleTransient()
+            //);
 
             var thisAssembly = Assembly.GetExecutingAssembly();
             IocManager.RegisterAssemblyByConvention(thisAssembly);
@@ -48,9 +46,9 @@ namespace Boxfusion.Health.His.Bookings
             base.PreInitialize();
 
             //Configuration.Settings.Providers.Add<HisDomainSettingProvider>();
-            Configuration.Authorization.Providers.Add<HisAuthorizationProvider>();
+            //Configuration.Authorization.Providers.Add<HisBookingsAuthorizationProvider>();    //TODO: To reinstitute permissions later - currently being handled with Common
 
-            HisDomainLocalizationConfigurer.Configure(Configuration.Localization);
+            HisBookingsLocalizationConfigurer.Configure(Configuration.Localization);
         }
 
         /// inheritedDoc
@@ -59,9 +57,15 @@ namespace Boxfusion.Health.His.Bookings
             Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(HisBookingsDomainModule).Assembly, "HisBookings");
 
             Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
-                typeof(HisBookingsDomainModule).Assembly,
+                assembly: typeof(HisBookingsDomainModule).Assembly,
                 moduleName: "HisBookings",
                 useConventionalHttpVerbs: true);
+
+            Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
+                assembly: typeof(HisBookingsApplicationModule).Assembly,
+                moduleName: "HisBookings",
+                useConventionalHttpVerbs: true);
+
         }
     }
 

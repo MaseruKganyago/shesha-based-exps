@@ -3,9 +3,7 @@ using Abp.AspNetCore.Configuration;
 using Abp.AutoMapper;
 using Abp.Modules;
 using Castle.MicroKernel.Registration;
-using Boxfusion.Health.His.Domain.Authorization;
-//using Boxfusion.Health.His.Domain.Configuration;
-using Boxfusion.Health.His.Domain.Localization;
+using Boxfusion.Health.His.Common.Localization;
 using Shesha;
 using Shesha.Authorization;
 using Boxfusion.Health.HealthCommon.Core;
@@ -25,10 +23,10 @@ namespace Boxfusion.Health.His.Common
         /// inheritedDoc
         public override void Initialize()
         {
-            IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-            IocManager.IocContainer.Register(
-              Component.For<ICustomPermissionChecker>().Forward<IHisPermissionChecker>().Forward<HisPermissionChecker>().ImplementedBy<HisPermissionChecker>().LifestyleTransient()
-          );
+            //IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
+            //IocManager.IocContainer.Register(
+            //    Component.For<ICustomPermissionChecker>().Forward<IHisPermissionChecker>().Forward<HisPermissionChecker>().ImplementedBy<HisPermissionChecker>().LifestyleTransient()
+            //);
 
             var thisAssembly = Assembly.GetExecutingAssembly();
             IocManager.RegisterAssemblyByConvention(thisAssembly);
@@ -45,9 +43,6 @@ namespace Boxfusion.Health.His.Common
             base.PreInitialize();
 
             //Configuration.Settings.Providers.Add<HisDomainSettingProvider>();
-            Configuration.Authorization.Providers.Add<HisAuthorizationProvider>();
-
-            HisDomainLocalizationConfigurer.Configure(Configuration.Localization);
         }
 
         /// inheritedDoc

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Boxfusion.Health.His.Domain
+namespace Boxfusion.Health.His.Common.Patients
 {
     /// <summary>
     /// Flattened/Optimised version of the Patient record joining in the Facility specific Patient Identifier.

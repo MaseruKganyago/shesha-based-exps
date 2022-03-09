@@ -60,10 +60,6 @@ namespace Boxfusion.Health.His.Bookings.Domain
         {
             if (requiredTime < DateTime.Now.Date) throw new ArgumentOutOfRangeException("requiredTime", "Cannot request to book an appointment in the past.");
 
-            HisPatient patient = null;
-            if (patientId.HasValue)
-                patient = await _patientRepo.GetAsync(patientId.Value);
-
             var slot = await FindAvailableBookingSlot(scheduleId, requiredTime);
 
             if (slot is null)
@@ -73,15 +69,9 @@ namespace Boxfusion.Health.His.Bookings.Domain
             if (!schedule.Active)
                 throw new InvalidOperationException("Cannot book an appointment for the specified Schedule as it is inactive.");
 
-            if (patient is not null)
-            {
-                // Defaulting appointment contact details to patient contact information if it has not been populated
-                if (string.IsNullOrWhiteSpace(contactName))
-                    contactName = patient.FullName;
-
-                if (string.IsNullOrWhiteSpace(contactCellphone))
-                    contactCellphone = patient.MobileNumber;
-            }
+            HisPatient patient = null;
+            if (patientId.HasValue)
+                patient = await _patientRepo.GetAsync(patientId.Value);
 
             // Completing the booking
             var appointment = new CdmAppointment()
@@ -91,27 +81,57 @@ namespace Boxfusion.Health.His.Bookings.Domain
                 ContactName = contactName,
                 Patient = patient,
                 AppointmentType = appointmentType,
-                Slot = slot,
-                Description = "",
-                AlternateContactCellphone = "",
-                AlternateContactName = "",
-                //BasedOn
-                Comment = "",
-                Start = slot.StartDateTime,
-                End = slot.EndDateTime,
-                MinutesDuration = (slot.EndDateTime.Value - slot.StartDateTime.Value).Minutes,
-                PatientInstruction = "",
-                Priority = 2,
-                //ReasonCode
-                ServiceCategory = slot.ServiceCategory,
-                ServiceType = slot.ServiceType ?? schedule.ServiceType, //Should be made Int as should be configuration driven
-                Speciality = slot.Speciality ?? schedule.Speciality
             };
+
+            return await BookAvailableSlotAsync(scheduleId, appointment);
+
+        }
+
+        /// <summary>
+        /// Creates a new Appointment to book the first available Slot for the specified schedule and requestedTime.
+        /// </summary>
+        public async Task<CdmAppointment> BookAvailableSlotAsync(Guid scheduleId, CdmAppointment appointment)
+        {
+            if (!appointment.Start.HasValue) throw new ArgumentNullException("Appointment Start Time", "Appointment Start Time must be specified.");
+            if (appointment.Start < DateTime.Now.Date) throw new ArgumentOutOfRangeException("Appointment Start Time", "Cannot request to book an appointment in the past.");
+            if (appointment.Patient is null) throw new ArgumentNullException("Patient", "Patient must be specified.");
+            if (!appointment.IsTransient()) throw new InvalidOperationException("Can only be performed for a new appointment, not on a pre-existing one.");
+
+            var schedule = await _scheduleRepo.GetAsync(scheduleId);
+            if (!schedule.Active)
+                throw new InvalidOperationException("Cannot book an appointment for the specified Schedule as it is inactive.");
+
+            var slot = await FindAvailableBookingSlot(scheduleId, appointment.Start.Value);
+
+            if (slot is null)
+                return null;
+
+            //Completing the booking
+            appointment.Status = RefListAppointmentStatuses.booked;
+            appointment.Slot = slot;
+            if (appointment.Patient is not null)
+            {
+                // Defaulting appointment contact details to patient contact information if it has not been populated
+                if (string.IsNullOrWhiteSpace(appointment.ContactName))
+                    appointment.ContactName = appointment.Patient.FullName;
+
+                if (string.IsNullOrWhiteSpace(appointment.ContactCellphone))
+                    appointment.ContactCellphone = appointment.Patient.MobileNumber;
+            }
+            appointment.Start = slot.StartDateTime;
+            appointment.End = slot.EndDateTime;
+            appointment.MinutesDuration = (slot.EndDateTime.Value - slot.StartDateTime.Value).Minutes;
+            appointment.Priority = 2;
+            //ReasonCode
+            appointment.ServiceCategory = slot.ServiceCategory;
+            appointment.ServiceType = slot.ServiceType ?? schedule.ServiceType;
+            appointment.Speciality = slot.Speciality ?? schedule.Speciality;
 
             var res = await _appointmentRepo.InsertAsync(appointment);
 
             return res;
         }
+
 
         /// <summary>
         /// Returns the first Available booking slot within the specified Schedule for the specified time and SlotType
@@ -125,7 +145,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
                 && e.Schedule.Active == true
                 && e.IsGeneratedFrom.Active == true
                 && e.StartDateTime <= requiredTime && e.EndDateTime > requiredTime
-                && e.RemainingCapacity > 0);
+                && e.NumValidAppointments < (e.Capacity ?? 0 + e.OverflowCapacity ?? 0));
 
             return slot;
         }
@@ -153,7 +173,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
                 && e.IsGeneratedFrom.Active == true
                 //&& e.CapacityType == slotType
                 && e.StartDateTime >= fromDateTime && e.EndDateTime <= toDateTime
-                && e.RemainingCapacity > 0)
+                && e.NumValidAppointments < (e.Capacity + e.OverflowCapacity))
                 .OrderBy(e => e.StartDateTime)
                 .ToList();
 

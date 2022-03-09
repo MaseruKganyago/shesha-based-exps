@@ -93,6 +93,11 @@
             </summary>
             <returns>Returns the appointment created to book the requested time. Will return null if a slot at that time was not found.</returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentBookingManager.BookAvailableSlotAsync(System.Guid,Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmAppointment)">
+            <summary>
+            Creates a new Appointment to book the first available Slot for the specified schedule and requestedTime.
+            </summary>
+        </member>
         <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentBookingManager.FindAvailableBookingSlot(System.Guid,System.DateTime)">
             <summary>
             Returns the first Available booking slot within the specified Schedule for the specified time and SlotType
@@ -311,6 +316,16 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220307055501.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Services.BookingAppointments.BookingManagementsAppService.#ctor">
             <summary>
             
             </summary>

@@ -12,7 +12,7 @@ using Boxfusion.Health.His.Bookings.Domain;
 using Boxfusion.Health.His.Bookings.Domain.Views;
 using Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos;
 using Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers;
-using Boxfusion.Health.His.Domain.Authorization;
+using Boxfusion.Health.His.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NHibernate;
@@ -31,7 +31,6 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/His/[controller]")]
-    [Obsolete]
     public class BookingManagementsAppService : HisAppServiceBase //, IBookingManagementsAppService
     {
 
@@ -101,7 +100,6 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         //TODO:IH ELIMINATE ONCE ABLE TO USE MORE GENERIC APPROACH
         [HttpGet, Route("Appointments/FlattenedDailyFacilityAppointments")]
         //[AbpAuthorize(PermissionNames.DailyAppointmentBooking)]
-        [Obsolete]
         public async Task<PagedResponse> GetFlattenedAppointmentsAsync(Guid scheduleId, DateTime? startDate, PaginationDto pagination, DateTime? endDate)
         {
             //Validation.ValidateIdWithException(this.ContextFacilityId, "Facility Context Id cannot be empty");

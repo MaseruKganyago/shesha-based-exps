@@ -1,9 +1,9 @@
-﻿namespace Boxfusion.Health.His.Domain.Authorization
+﻿namespace Boxfusion.Health.His.Common.Authorization
 {
     /// <summary>
     /// Health.His Role Names
     /// </summary>
-    public static class RoleNames
+    public static class CommonRoles
     {
         /// <summary>
         /// Data Administrator
