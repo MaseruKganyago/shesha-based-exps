@@ -50,7 +50,6 @@ namespace Boxfusion.Health.His.Bookings.Schedules
             //TODO: Introduce Context Facility limitation 
             var schedules = await _scheduleManager.GetSchedulesAssociatedToUserAsync(person.Id, "Schedule Manager");
 
-            //var schedules = await _scheduleHelperCrudHelper.GetAllAsync(person.Id, facilityId);
             var list = new List<DynamicDto<CdmSchedule, Guid>>();
 
             foreach (var schedule in schedules)

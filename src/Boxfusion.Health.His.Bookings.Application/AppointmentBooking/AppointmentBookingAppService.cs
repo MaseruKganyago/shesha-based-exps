@@ -51,9 +51,13 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
 
             var slots = await _appointmentBookingManager.GetAllAvailableBookingSlotsAsync(scheduleId, startTime.Value, endTime.Value);
 
-            //var schedules = await _scheduleHelperCrudHelper.GetAllAsync(person.Id, facilityId);
             var list = new List<DynamicDto<CdmSlot, Guid>>();
-            slots.ForEach(async o => list.Add(await this.MapToDynamicDtoAsync<CdmSlot, Guid>(o)));
+
+            foreach (var slot in slots)
+            {
+                var slotDto = await this.MapToDynamicDtoAsync<CdmSlot, Guid>(slot);
+                list.Add(slotDto);
+            }
 
             return list;
         }
