@@ -399,21 +399,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Common.FacilityPatient">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.FacilityPatient.FacilityPatientIdentifier">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Common.Patients.FlattenedFacilityPatient">
-            <summary>
-            Flattened/Optimised version of the Patient record joining in the Facility specific Patient Identifier.
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Common.HisAdmission">
             <summary>
             
@@ -455,36 +440,6 @@
             </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Common.HisHealthFacility">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Common.HisPatient">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HisPatient.PatientMasterIndexNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HisPatient.HospitalPatientNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HisPatient.IdentificationType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HisPatient.PatientProvince">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Common.HisUser">
             <summary>
             
             </summary>
@@ -558,6 +513,72 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Patients.FacilityPatient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.FacilityPatient.FacilityPatientIdentifier">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Patients.FlattenedFacilityPatient">
+            <summary>
+            Flattened/Optimised version of the Patient record joining in the Facility specific Patient Identifier.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Patients.HisPatient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.PatientMasterIndexNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.HospitalPatientNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.IdentificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.PatientProvince">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Users.HisUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Users.HisUserManager">
+            <summary>
+            Domain Service for user related methods.
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Users.HisUserManager.#ctor">
+            <summary>
+            
+            </summary>
+            <param name="schedulesRepo"></param>
+            <param name="scheduleAvailabilityRepo"></param>
+            <param name="slotsRepo"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Users.HisUserManager.GetFacilitiesAssociatedToUserAsync(System.Guid,System.String)">
+            <summary>
+            Returns the list of Facilities that the specified user is associated with.
+            </summary>
+            <param name="personId"></param>
+            <param name="roleName"></param>
+            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Common.WardAdmission">
             <summary>

@@ -9,7 +9,7 @@ namespace Boxfusion.Health.His.Common
     /// <summary>
     /// 
     /// </summary>
-    [Entity(TypeShortAlias = "His.HisHospital")]
+    [Entity(TypeShortAlias = "His.HisHealthFacility")]
     public class HisHealthFacility : Hospital
     {
 

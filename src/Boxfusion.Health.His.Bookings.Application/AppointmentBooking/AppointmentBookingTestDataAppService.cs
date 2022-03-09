@@ -8,6 +8,7 @@ using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Bookings.Domain;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Authorization;
+using Boxfusion.Health.His.Common.Patients;
 using Microsoft.AspNetCore.Mvc;
 using Shesha.Domain;
 using System;

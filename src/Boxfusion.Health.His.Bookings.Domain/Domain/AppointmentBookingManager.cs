@@ -6,6 +6,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.His.Common;
+using Boxfusion.Health.His.Common.Patients;
 using Shesha.AutoMapper.Dto;
 using System;
 using System.Collections.Generic;

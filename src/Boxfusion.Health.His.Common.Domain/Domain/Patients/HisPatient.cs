@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Common
+namespace Boxfusion.Health.His.Common.Patients
 {
     /// <summary>
     /// 
