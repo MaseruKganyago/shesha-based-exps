@@ -52,8 +52,14 @@ namespace Boxfusion.Health.His.Bookings.Schedules
 
             //var schedules = await _scheduleHelperCrudHelper.GetAllAsync(person.Id, facilityId);
             var list = new List<DynamicDto<CdmSchedule, Guid>>();
-            schedules.ForEach(async o => list.Add(await this.MapToDynamicDtoAsync<CdmSchedule, Guid>(o)));
-            return ObjectMapper.Map<List<DynamicDto<CdmSchedule, Guid>>>(schedules);
+
+            foreach (var schedule in schedules)
+            {
+                var scheduleDto = await this.MapToDynamicDtoAsync<CdmSchedule, Guid>(schedule);
+                list.Add(scheduleDto);
+            }
+
+            return list;
         }
 
         /// <summary>
