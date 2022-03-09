@@ -73,7 +73,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         {
             Validation.ValidateEntityWithDisplayNameDto(input?.Schedule, "Schedule");
             Validation.ValidateNullableType(input?.Start, "Appointment Date");
-            //Validation.ValidateEntityWithDisplayNameDto(input?.Patient, "Patient");
+            Validation.ValidateEntityWithDisplayNameDto(input?.Patient, "Patient");
 
             var mapper = IocManager.Resolve<IMapper>();
 

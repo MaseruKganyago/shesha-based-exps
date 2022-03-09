@@ -46,10 +46,13 @@ namespace Boxfusion.Health.His.Common.Patients
             table.AddProperty(e => e.DateOfBirth, u => u.Caption("Date of Birth"));
             table.AddProperty(e => e.MobileNumber1, u => u.Caption("Cellphone"));
             table.AddProperty(e => e.Gender);
-            //table.OnRequestToFilterStatic = (criteria, input) =>
-            //{
-            //    criteria.FilterClauses.Add($"{nameof(Person.User)} != null");
-            //};
+            table.OnRequestToFilterStatic = (criteria, input) =>
+            {
+                Guid facilityId = RequestContextHelper.HasFacilityId 
+                                    ? RequestContextHelper.FacilityId 
+                                    : Guid.Parse("0CDAD6B0-A3B2-4CF6-9B7D-238D753F0657");  // TODO: Temporary test facility whilst awaiting the Facility selection feature to be implemented and passed in through from the front-end
+                criteria.FilterClauses.Add($"ent.FacilityId = '{facilityId}'");
+            };
 
             return table;
         }

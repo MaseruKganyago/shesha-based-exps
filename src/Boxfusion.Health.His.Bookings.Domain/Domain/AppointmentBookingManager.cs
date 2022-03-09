@@ -95,7 +95,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         {
             if (!appointment.Start.HasValue) throw new ArgumentNullException("Appointment Start Time", "Appointment Start Time must be specified.");
             if (appointment.Start < DateTime.Now.Date) throw new ArgumentOutOfRangeException("Appointment Start Time", "Cannot request to book an appointment in the past.");
-            //if (appointment.Patient is null) throw new ArgumentNullException("Patient", "Patient must be specified.");
+            if (appointment.Patient is null) throw new ArgumentNullException("Patient", "Patient must be specified.");
             if (!appointment.IsTransient()) throw new InvalidOperationException("Can only be performed for a new appointment, not on a pre-existing one.");
 
             var schedule = await _scheduleRepo.GetAsync(scheduleId);

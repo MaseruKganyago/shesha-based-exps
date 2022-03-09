@@ -12,7 +12,7 @@ namespace Boxfusion.Health.His.Common
     /// </summary>
     public class RequestContextHelper
     {
-        private const string CONTEXT_FACILITY_ID_HEADER_NAME = "his-facilityId";
+        private const string CONTEXT_FACILITY_ID_HEADER_NAME = "boxhis-facilityId";
         private readonly IHttpContextAccessor _httpContextAccessor;
 
 
@@ -33,7 +33,7 @@ namespace Boxfusion.Health.His.Common
             get
             {
                 var stringContextFacilityId = HttpContext.Request.Headers[CONTEXT_FACILITY_ID_HEADER_NAME];
-                return string.IsNullOrEmpty(stringContextFacilityId);
+                return !string.IsNullOrEmpty(stringContextFacilityId);
             }
         }
 
