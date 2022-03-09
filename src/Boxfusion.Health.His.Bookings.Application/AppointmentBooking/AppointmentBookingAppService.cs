@@ -73,25 +73,18 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         {
             Validation.ValidateEntityWithDisplayNameDto(input?.Schedule, "Schedule");
             Validation.ValidateNullableType(input?.Start, "Appointment Date");
-            Validation.ValidateEntityWithDisplayNameDto(input?.Patient, "Patient");
+            //Validation.ValidateEntityWithDisplayNameDto(input?.Patient, "Patient");
 
             var mapper = IocManager.Resolve<IMapper>();
 
-            try
-            {
-                var inAppointment = mapper.Map<CdmAppointment>(input);
+            var inAppointment = mapper.Map<CdmAppointment>(input);
 
-                var newAppointment = await _appointmentBookingManager.BookAvailableSlotAsync(input.Schedule.Id.Value, inAppointment);
+            var newAppointment = await _appointmentBookingManager.BookAvailableSlotAsync(input.Schedule.Id.Value, inAppointment);
 
-                if (newAppointment is null)
-                    throw new UserFriendlyException("No slots are available for booking at the requested time.");
+            if (newAppointment is null)
+                throw new UserFriendlyException("No slots are available for booking at the requested time.");
 
-                return await this.MapToDynamicDtoAsync<CdmAppointment, Guid>(newAppointment);
-            }
-            catch (Exception e)
-            {
-                throw new UserFriendlyException("An unexepected error occured. Could not complete the booking.", e);
-            }
+            return await this.MapToDynamicDtoAsync<CdmAppointment, Guid>(newAppointment);
         }
 
         /// <summary>
@@ -99,8 +92,8 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [HttpPut, Route("Appointments/{appointmentId}/Reschedule")]
-        //[AbpAuthorize(PermissionNames.RescheduleAppointment)]
+        [HttpPost, Route("Appointments/{appointmentId}/Reschedule")]
+        [AbpAuthorize(CommonPermissions.BookAppointment)]
         public async Task<DynamicDto<CdmAppointment, Guid>> RescheduleAppointment(RescheduleInput input)
         {
             Validation.ValidateIdWithException(input?.Id, "Appointment Id cannot be empty");
@@ -131,20 +124,13 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// </summary>  
         /// <param name="appointmentId"></param>
         /// <returns></returns>
-        [HttpPut, Route("Appointments/{appointmentId}/ConfirmArrival")]
-        [AbpAuthorize(CommonPermissions.RescheduleAppointment)]
+        [HttpPost, Route("Appointments/{appointmentId}/ConfirmArrival")]
+        [AbpAuthorize(CommonPermissions.BookAppointment)]
         public async Task<DynamicDto<CdmAppointment, Guid>> ConfirmAppointmentArrival(Guid appointmentId)
         {
-            try
-            {
-                var app = await _appointmentBookingManager.ConfirmAppointmentArrival(appointmentId);
-                
-                return await this.MapToDynamicDtoAsync<CdmAppointment, Guid>(app);
-            }
-            catch (Exception e)
-            {
-                throw new UserFriendlyException("An unexepected error occured. Could not confirm arrival.", e);
-            }
+            var app = await _appointmentBookingManager.ConfirmAppointmentArrival(appointmentId);
+
+            return await this.MapToDynamicDtoAsync<CdmAppointment, Guid>(app);
         }
 
 
@@ -154,9 +140,9 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="facilityId"></param>
         /// <param name="appointmentId"></param>
         /// <returns></returns>
-        [HttpPut, Route("Appointments/CancelAppointment")]
-        [AbpAuthorize(CommonPermissions.RescheduleAppointment)]
-        public async Task<DynamicDto<CdmAppointment, Guid>> CancelAppointment(Guid appointmentId)
+        [HttpPost, Route("Appointments/CancelAppointment")]
+        [AbpAuthorize(CommonPermissions.BookAppointment)]
+        public async Task<DynamicDto<CdmAppointment, Guid>> CancelAppointment(Guid appointmentId, Guid? facilityId)
         {
             try
             {

@@ -38,7 +38,7 @@ namespace Boxfusion.Health.His.Common.Patients
 
         public static DataTableConfig FlattenedFacilityPatient_Picker()
         {
-            var table = new DataTableConfig<FlattenedFacilityPatient, Guid>("FlattenedFacilityPatient_Picker");
+            var table = new DataTableConfig<FlattenedFacilityPatient, Guid>("Patients_Index");
             table.AddProperty(e => e.FullName);
             table.AddProperty(e => e.FacilityPatientIdentifier);
             table.AddProperty(e => e.IdentityNumber, u => u.Caption("ID/Passport No"));
