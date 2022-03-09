@@ -10,7 +10,6 @@ using Abp.MultiTenancy;
 using Abp.Net.Mail;
 using Abp.TestBase;
 using Abp.Zero.Configuration;
-using Boxfusion.Health.His.Bookings.Domain.Tests;
 using Boxfusion.Health.His.Tests.DependencyInjection;
 using Castle.Facilities.Logging;
 using Castle.MicroKernel.Registration;
