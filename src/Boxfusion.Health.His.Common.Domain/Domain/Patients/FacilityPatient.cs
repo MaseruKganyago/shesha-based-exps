@@ -9,6 +9,8 @@ namespace Boxfusion.Health.His.Common.Patients
     /// 
     /// </summary>
     [Entity(TypeShortAlias = "His.FacilityPatient")]
+    [DiscriminatorValue("His.HisPatient")]
+    [Discriminator]
     public class FacilityPatient : HisPatient
     {
         /// <summary>
