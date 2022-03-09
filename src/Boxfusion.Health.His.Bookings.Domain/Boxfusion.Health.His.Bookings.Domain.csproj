@@ -68,13 +68,13 @@
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
-    <PackageReference Include="Shesha.Application" Version="0.3.51" />
-    <PackageReference Include="Shesha.Core" Version="0.3.51" />
+    <PackageReference Include="Shesha.Application" Version="0.3.54" />
+    <PackageReference Include="Shesha.Core" Version="0.3.54" />
     <PackageReference Include="Shesha.Enterprise" Version="0.0.17" />
-    <PackageReference Include="Shesha.Framework" Version="0.3.51" />
-    <PackageReference Include="Shesha.NHibernate" Version="0.3.51" />
-    <PackageReference Include="Shesha.Scheduler" Version="0.3.51" />
-    <PackageReference Include="Shesha.Web.Controls" Version="0.3.51" />
+    <PackageReference Include="Shesha.Framework" Version="0.3.54" />
+    <PackageReference Include="Shesha.NHibernate" Version="0.3.54" />
+    <PackageReference Include="Shesha.Scheduler" Version="0.3.54" />
+    <PackageReference Include="Shesha.Web.Controls" Version="0.3.54" />
   </ItemGroup>
 
   <ItemGroup>
@@ -83,7 +83,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Boxfusion.Health.His.Common.Application\Boxfusion.Health.His.Common.Application.csproj" />
     <ProjectReference Include="..\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
   </ItemGroup>
 

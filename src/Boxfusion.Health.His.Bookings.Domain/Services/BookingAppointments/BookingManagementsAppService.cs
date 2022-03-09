@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NHibernate;
 using NHibernate.Transform;
+using Shesha;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/His/[controller]")]
-    public class BookingManagementsAppService : HisAppServiceBase //, IBookingManagementsAppService
+    public class BookingManagementsAppService : SheshaAppServiceBase //, IBookingManagementsAppService
     {
 
         /// <summary>

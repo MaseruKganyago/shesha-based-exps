@@ -1,37 +1,39 @@
-using System;
 using Abp;
+using Abp.AspNetCore.Configuration;
 using Abp.AutoMapper;
+using Abp.Castle.Logging.Log4Net;
 using Abp.Configuration.Startup;
 using Abp.Dependency;
+using Abp.Domain.Uow;
 using Abp.Modules;
 using Abp.MultiTenancy;
 using Abp.Net.Mail;
 using Abp.TestBase;
 using Abp.Zero.Configuration;
+using Boxfusion.Health.His.Bookings.Domain.Tests;
+using Boxfusion.Health.His.Tests.DependencyInjection;
+using Castle.Facilities.Logging;
 using Castle.MicroKernel.Registration;
 using Hangfire;
+using Hangfire.SqlServer;
+using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Moq;
-using Boxfusion.Health.His.Tests.DependencyInjection;
+using NSubstitute;
 using Shesha;
 using Shesha.NHibernate;
 using Shesha.Services;
-using Abp.Domain.Uow;
+using System;
 using System.Reflection;
-using Castle.Facilities.Logging;
-using Abp.Castle.Logging.Log4Net;
-using Abp.AspNetCore.Configuration;
-using Microsoft.Extensions.Hosting;
-using Boxfusion.Health.His.Bookings;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using NSubstitute;
-using Hangfire.SqlServer;
 
 namespace Boxfusion.Health.His.Bookings.Tests
 {
     [DependsOn(
-        //typeof(HisBookingsDomainModule),
+        typeof(HisBookingsDomainModule),
 
         typeof(AbpKernelModule),
         typeof(AbpTestBaseModule),
@@ -67,10 +69,10 @@ namespace Boxfusion.Health.His.Bookings.Tests
             IocManager.IocContainer.Register(Component.For<IWebHostEnvironment>().ImplementedBy<TestWebHostEnvironment>().LifestyleSingleton());
 
             IocManager.IocContainer.Register(
-                Component.For<IAbpAspNetCoreConfiguration>()
-                    .ImplementedBy<AbpAspNetCoreConfiguration>()
-                    .LifestyleSingleton()
-            );
+                            Component.For<IAbpAspNetCoreConfiguration>()
+                                .ImplementedBy<AbpAspNetCoreConfiguration>()
+                                .LifestyleSingleton()
+                        );
 
             var appLifetimeMoq = new Mock<IHostApplicationLifetime>();
             IocManager.IocContainer.Register(
