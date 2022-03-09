@@ -26,30 +26,31 @@
     <PackageReference Include="Abp.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Abp.AspNetCore.SignalR" Version="5.0.0" />
     <PackageReference Include="Abp.ZeroCore" Version="5.0.0" />
-    <PackageReference Include="Shesha.Application" Version="0.3.46" />
+    <PackageReference Include="Shesha.Application" Version="0.3.51" />
     <PackageReference Include="Shesha.Reporting" Version="0.0.13" />
-    <PackageReference Include="Shesha.AzureAD" Version="0.3.46" />
-    <PackageReference Include="Shesha.Core" Version="0.3.46" />
-    <PackageReference Include="Shesha.Elmah" Version="0.3.46" />
-    <PackageReference Include="Shesha.Firebase" Version="0.3.46" />
-    <PackageReference Include="Shesha.Import" Version="0.3.46" />
-    <PackageReference Include="Shesha.Ldap" Version="0.3.46" />
-    <PackageReference Include="Shesha.NHibernate" Version="0.3.46" />
-    <PackageReference Include="Shesha.Scheduler" Version="0.3.46" />
-    <PackageReference Include="Shesha.Sms.BulkSms" Version="0.3.46" />
-    <PackageReference Include="Shesha.Sms.Clickatell" Version="0.3.46" />
-    <PackageReference Include="Shesha.Sms.SmsPortal" Version="0.3.46" />
-    <PackageReference Include="Shesha.Sms.Xml2Sms" Version="0.3.46" />
-    <PackageReference Include="Shesha.Web.Controls" Version="0.3.46" />
-    <PackageReference Include="Shesha.Web.FormsDesigner" Version="0.3.46" />
+    <PackageReference Include="Shesha.AzureAD" Version="0.3.51" />
+    <PackageReference Include="Shesha.Core" Version="0.3.51" />
+    <PackageReference Include="Shesha.Elmah" Version="0.3.51" />
+    <PackageReference Include="Shesha.Firebase" Version="0.3.51" />
+    <PackageReference Include="Shesha.Import" Version="0.3.51" />
+    <PackageReference Include="Shesha.Ldap" Version="0.3.51" />
+    <PackageReference Include="Shesha.NHibernate" Version="0.3.51" />
+    <PackageReference Include="Shesha.Scheduler" Version="0.3.51" />
+    <PackageReference Include="Shesha.Sms.BulkSms" Version="0.3.51" />
+    <PackageReference Include="Shesha.Sms.Clickatell" Version="0.3.51" />
+    <PackageReference Include="Shesha.Sms.SmsPortal" Version="0.3.51" />
+    <PackageReference Include="Shesha.Sms.Xml2Sms" Version="0.3.51" />
+    <PackageReference Include="Shesha.Web.Controls" Version="0.3.51" />
+    <PackageReference Include="Shesha.Web.FormsDesigner" Version="0.3.51" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.0.1" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Boxfusion.Health.His.Administration\Boxfusion.Health.His.Administration.csproj" />
-    <ProjectReference Include="..\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.csproj" />
-    <ProjectReference Include="..\Boxfusion.Health.His.Booking\Boxfusion.Health.His.Bookings.csproj" />
+    <ProjectReference Include="..\Boxfusion.Health.His.Bookings.Application\Boxfusion.Health.His.Bookings.Application.csproj" />
+    <ProjectReference Include="..\Boxfusion.Health.His.Bookings.Domain\Boxfusion.Health.His.Bookings.Domain.csproj" />
+    <ProjectReference Include="..\Boxfusion.Health.His.Common.Application\Boxfusion.Health.His.Common.Application.csproj" />
+    <ProjectReference Include="..\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
   </ItemGroup>
 </Project>

@@ -59,7 +59,7 @@ namespace Boxfusion.Health.His.Admissions
         {
             Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
                 typeof(HisAdminisModule).Assembly,
-                moduleName: "HisAdminis",
+                moduleName: "Administration",
                 useConventionalHttpVerbs: true);
         }
     }

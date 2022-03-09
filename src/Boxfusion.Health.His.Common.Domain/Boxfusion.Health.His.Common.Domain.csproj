@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath></OutputPath>
+    <DocumentationFile>.\Boxfusion.Health.His.Domain.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>.\Boxfusion.Health.His.Domain.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Authorization\**" />
+    <Compile Remove="Configuration\**" />
+    <Compile Remove="Dtos\**" />
+    <EmbeddedResource Remove="Authorization\**" />
+    <EmbeddedResource Remove="Configuration\**" />
+    <EmbeddedResource Remove="Dtos\**" />
+    <None Remove="Authorization\**" />
+    <None Remove="Configuration\**" />
+    <None Remove="Dtos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domain\Enums\RefListDistrictTypes.cs" />
+    <Compile Remove="Domain\Enums\RefListHospitalTypes.cs" />
+    <Compile Remove="Domain\HisHospitalRoleAppointedPerson.cs" />
+    <Compile Remove="Migrations\M20211215134300.cs" />
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <PackageReference Include="Abp" Version="5.0.0" />
+    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.1.5" />
+    <PackageReference Include="FluentMigrator" Version="3.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
+    <PackageReference Include="Shesha.Application" Version="0.3.51" />
+    <PackageReference Include="Shesha.Core" Version="0.3.51" />
+    <PackageReference Include="Shesha.Framework" Version="0.3.51" />
+  </ItemGroup>
+</Project>

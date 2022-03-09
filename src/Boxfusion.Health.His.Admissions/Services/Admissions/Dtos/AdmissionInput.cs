@@ -123,7 +123,7 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
         /// </summary>
         public virtual EntityWithDisplayNameDto<Guid?> InternalTransferDestinationWard { get; set; }
 
-        // <summary>
+        /// <summary>
         /// 
         /// </summary>
         public string AgeBreakdown { get; set; }

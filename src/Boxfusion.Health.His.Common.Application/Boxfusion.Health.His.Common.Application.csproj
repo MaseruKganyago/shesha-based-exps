@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Boxfusion.Health.His.Common</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Abp" Version="5.0.0" />
+    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.1.5" />
+    <PackageReference Include="Shesha.Application" Version="0.3.51" />
+    <PackageReference Include="Shesha.Core" Version="0.3.51" />
+    <PackageReference Include="Shesha.Framework" Version="0.3.51" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

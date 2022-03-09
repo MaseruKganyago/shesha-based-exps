@@ -1,0 +1,1243 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Boxfusion.Health.His.Common.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses.admitted">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses.separated">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses.inTransit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses.rejected">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Enums.RefListAdmissionTypes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListAdmissionTypes.normalAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListAdmissionTypes.internalTransferIn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListAdmissionTypes.externalTransferIn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Enums.RefListApprovalStatuses">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListApprovalStatuses.Inprogress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListApprovalStatuses.approved">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListApprovalStatuses.awaitingApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListApprovalStatuses.awaitingFinalApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListApprovalStatuses.Rejected">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Enums.RefListClassifications">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListClassifications.h0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListClassifications.h1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListClassifications.h2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListClassifications.h3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListClassifications.hg">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListClassifications.pg">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListClassifications.pf">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListClassifications.ph">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListClassifications.ws">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Enums.RefListHospitalAdmissionStatuses">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListHospitalAdmissionStatuses.admitted">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListHospitalAdmissionStatuses.separated">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListHospitalAdmissionStatuses.inTransit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Enums.RefListIdentificationTypes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListIdentificationTypes.SAID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListIdentificationTypes.Passport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListIdentificationTypes.ImmigrationDocuments">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListIdentificationTypes.AsylumDocuments">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListIdentificationTypes.NotProvided">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListIdentificationTypes.Other">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListMidnightCensusApprovalModel.SingleApprover">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListMidnightCensusApprovalModel.TwoApprover">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Enums.RefListOtherCategories">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListOtherCategories.maternalDeaths">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListOtherCategories.prisoner">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListOtherCategories.mva">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListOtherCategories.gunshot">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListOtherCategories.burnWounds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListOtherCategories.stabWounds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListOtherCategories.dayPatients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListOtherCategories.lodgers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListOtherCategories.cancellations">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Enums.RefListProvinces">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.EasternCape">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.FreeState">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.Gauteng">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.KwaZuluNatal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.Limpopo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.Mpumalanga">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.NorthernCape">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.NorthWest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.WesternCape">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Enums.RefListReportTypes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListReportTypes.Daily">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListReportTypes.Monthly">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Enums.RefListSeparationChildHealths">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListSeparationChildHealths.samUnder5Years">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListSeparationChildHealths.mamUnder5Years">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListSeparationChildHealths.namUnder5Years">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListSeparationChildHealths.pneumoniaUnder5Years">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListSeparationChildHealths.diarrhoeaUnder5Years">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListSeparationChildHealths.hivTesting">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Enums.RefListSeparationTypes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListSeparationTypes.dischargeNormal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListSeparationTypes.dischargeAbscondment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListSeparationTypes.dischargeRHT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListSeparationTypes.internalTransfer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListSeparationTypes.externalTransfer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListSeparationTypes.death">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Enums.RefListTransferRejectionReasons">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListTransferRejectionReasons.noAvailability">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListTransferRejectionReasons.transferredToIncorrectWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListTransferRejectionReasons.other">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.FacilityPatient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.FacilityPatient.FacilityPatientIdentifier">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Patients.FlattenedFacilityPatient">
+            <summary>
+            Flattened/Optimised version of the Patient record joining in the Facility specific Patient Identifier.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.HisAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.HisAdmissionAuditTrail">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HisAdmissionAuditTrail.Admission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HisAdmissionAuditTrail.AuditTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HisAdmissionAuditTrail.Initiator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HisAdmissionAuditTrail.AdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.HisConditionIcdTenCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HisConditionIcdTenCode.AdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.HisHealthFacility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.HisPatient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HisPatient.PatientMasterIndexNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HisPatient.HospitalPatientNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HisPatient.IdentificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HisPatient.PatientProvince">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.HisUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.HisWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HisWard.MidnightCensusApprovalModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.HospitalAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.HospitalAdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.HospitalAdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.Classification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.OtherCategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.TransferFroHospital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.TransferToHospital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.TransferToNonGautengHospital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.IsGautengGovFacility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.CapturedAfterApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.HospitalRoleAppointedPerson">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HospitalRoleAppointedPerson.Hospital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.WardAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardAdmission.Ward">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardAdmission.WardAdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardAdmission.AdmissionType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardAdmission.AdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardAdmission.TransferRejectionReason">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardAdmission.TransferRejectionReasonComment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardAdmission.SeparationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardAdmission.SeparationDestinationWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardAdmission.SeparationChildHealth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardAdmission.SeparationDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardAdmission.SeparationComment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardAdmission.CapturedAfterApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardAdmission.InternalTransferOriginalWard">
+            <summary>
+            Used to like the serparations
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardAdmission.InternalTransferDestinationWard">
+            <summary>
+            Used to like the serparations
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.WardMidnightCensusReport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.Ward">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.ReportDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.ApprovalStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.ReportType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.ApprovedBy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.ApprovedBy2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.ApprovalTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.ApprovalTime2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.RejectionComments">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.RejectedBy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.MidnightCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.TotalAdmittedPatients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.TotalSeparatedPatients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.TotalBedAvailability">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.NumBedsInWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.BedUtilisation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.AverageLengthofStay">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.AverageBedAvailability">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.TodaysAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.TotalAdmissions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardMidnightCensusReport.TotalSeparations">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.WardRoleAppointedPerson">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardRoleAppointedPerson.Ward">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.HisCommonDomainModule">
+            <summary>
+            Health.His Module
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.HisCommonDomainModule.Initialize">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.HisCommonDomainModule.PreInitialize">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.HisCommonDomainModule.PostInitialize">
+            inheritedDoc
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Localization.HisCommonLocalizationConfigurer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Localization.HisCommonLocalizationConfigurer.Configure(Abp.Configuration.Startup.ILocalizationConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="localizationConfiguration"></param>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService.IsPersonAssignedToHospital(System.Guid,Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="currentPerson"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService.IsPersonAssignedToWard(System.Guid,Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="currentPerson"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Helpers.UserAccessRightService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Helpers.UserAccessRightService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HospitalRoleAppointedPerson,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="repository"></param>
+            <param name="wardRoleAppointedPersonRepository"></param>
+            <param name="hospitalRoleAppointedPersonRepository"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Helpers.UserAccessRightService.IsPersonAssignedToHospital(System.Guid,Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="currentPerson"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Helpers.UserAccessRightService.IsPersonAssignedToWard(System.Guid,Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="wardId"></param>
+            <param name="currentPerson"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211115085300">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211115085300.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211115085300.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211115233700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211115233700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211115233700.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211116194100">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211116194100.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211116194100.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211116214600">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211116214600.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211116214600.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211116224700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211116224700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211116224700.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211117084400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211117084400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211117084400.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211120113700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211120113700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211120113700.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211122005200">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211122005200.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211122005200.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211122111700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211122111700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211122111700.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211129095000">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211129095000.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211129095000.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211129102900">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211129102900.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211129102900.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211201153400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201153400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201153400.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211201154400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201154400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201154400.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211201193100">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201193100.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201193100.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211201201200">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201201200.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201201200.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211201212700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201212700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211201212700.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211202135100">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211202135100.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211202135100.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211202140000">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211202140000.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211202140000.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211212175000">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211212175000.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211212175000.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211219055000">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211219055000.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211219055000.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211219141900">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211219141900.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211219141900.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211219190600">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211219190600.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211219190600.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211219213000">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211219213000.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211219213000.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20211221155200">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211221155200.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20211221155200.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220125141700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220125141700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220125141700.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220306151900">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220306151900.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220306151900.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Application.RequestContextHelper">
+            <summary>
+            Helper class to easily retrieve information related to the request context.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Application.RequestContextHelper.HasFacilityId">
+            <summary>
+            Returns true if a  ContextFacilityId (i.e. the Facility from which the user is making requests for) has been provided.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Application.RequestContextHelper.FacilityId">
+            <summary>
+            Returns the Id of the Context Facility (i.e. the Facility from which the user is making requests for)
+            </summary>
+        </member>
+    </members>
+</doc>
