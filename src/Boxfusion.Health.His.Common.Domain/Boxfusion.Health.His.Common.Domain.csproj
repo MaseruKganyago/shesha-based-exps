@@ -33,6 +33,7 @@
   <ItemGroup>
     <Compile Remove="Domain\Enums\RefListDistrictTypes.cs" />
     <Compile Remove="Domain\Enums\RefListHospitalTypes.cs" />
+    <Compile Remove="Domain\Enums\RefListProvinces.cs" />
     <Compile Remove="Domain\HisHospitalRoleAppointedPerson.cs" />
     <Compile Remove="Migrations\M20211215134300.cs" />
   </ItemGroup>

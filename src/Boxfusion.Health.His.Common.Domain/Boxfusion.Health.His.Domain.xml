@@ -244,56 +244,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Common.Enums.RefListProvinces">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.EasternCape">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.FreeState">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.Gauteng">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.KwaZuluNatal">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.Limpopo">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.Mpumalanga">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.NorthernCape">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.NorthWest">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListProvinces.WesternCape">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Common.Enums.RefListReportTypes">
             <summary>
             

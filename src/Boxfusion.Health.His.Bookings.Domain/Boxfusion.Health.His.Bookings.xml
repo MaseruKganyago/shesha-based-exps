@@ -259,6 +259,54 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Domain.Notifications.BookingNotificationSender">
+            <summary>
+            Booking notification sender
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.Notifications.BookingNotificationSender.NotifyCompletionOfNewBookingAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmAppointment)">
+            inheritedDoc
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Domain.Notifications.IBookingNotificationSender">
+            <summary>
+            Booking notification sender
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.Notifications.IBookingNotificationSender.NotifyCompletionOfNewBookingAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmAppointment)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Domain.Notifications.Models.CompletionOfNewBookingModel">
+            <summary>
+            Model of the <see cref="F:Boxfusion.Health.His.Bookings.Domain.Notifications.NotificationTemplateIds.CompletionOfNewBooking"/> notification
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Domain.Notifications.Models.CompletionOfNewBookingModel.Fullname">
+            <summary>
+            Recipient name
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Domain.Notifications.Models.CompletionOfNewBookingModel.FacilityName">
+            <summary>
+            Facility name
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Bookings.Domain.Notifications.Models.CompletionOfNewBookingModel.StartDate">
+            <summary>
+            Appointment start date
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Domain.Notifications.NotificationTemplateIds">
+            <summary>
+            Notification template identifiers
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Bookings.Domain.Notifications.NotificationTemplateIds.CompletionOfNewBooking">
+            <summary>
+            All The Bursary Management Notifications Will be under this category of notifications
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.HisBookingsDomainModule">
             <summary>
             Health.His Module

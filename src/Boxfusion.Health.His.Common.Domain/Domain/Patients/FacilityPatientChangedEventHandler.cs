@@ -49,13 +49,11 @@ namespace Boxfusion.Health.His.Common.Patients
                              @facilityPatientIdentifier = :facilityPatientIdentifier,
                              @currentUserId = :currentUserId")
                       .SetParameter("patientId", eventData.Entity.Id)
-                      .SetParameter("facilityId", RequestContextHelper.FacilityId)
+                      .SetParameter("facilityId", facilityId)
                       .SetParameter("facilityPatientIdentifier", eventData.Entity.FacilityPatientIdentifier)
                       .SetParameter("currentUserId", currentUserId);
 
                     query.ExecuteUpdate();
-
-                    session.Flush();
                 }
             }
         }

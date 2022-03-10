@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="RequestContextHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Abp" Version="5.0.0" />
     <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.1.5" />
     <PackageReference Include="Shesha.Application" Version="0.3.54" />
