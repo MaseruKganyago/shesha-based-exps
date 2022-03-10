@@ -8,6 +8,7 @@ using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Bookings.Domain;
+using Boxfusion.Health.His.Bookings.Domain.Notifications;
 using Boxfusion.Health.His.Common.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shesha.DynamicEntities.Dtos;
@@ -28,13 +29,15 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
     public class AppointmentBookingAppService : CdmAppServiceBase
     {
         private readonly AppointmentBookingManager _appointmentBookingManager;
+        private readonly IBookingNotificationSender _bookingNotificationSender;
 
         /// <summary>
         /// 
         /// </summary>
-        public AppointmentBookingAppService(AppointmentBookingManager appointmentBookingManager)
+        public AppointmentBookingAppService(AppointmentBookingManager appointmentBookingManager, IBookingNotificationSender bookingNotificationSender)
         {
             _appointmentBookingManager = appointmentBookingManager;
+            _bookingNotificationSender = bookingNotificationSender;
         }
 
         /// <summary>
@@ -83,6 +86,11 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
 
             if (newAppointment is null)
                 throw new UserFriendlyException("No slots are available for booking at the requested time.");
+
+            // send notification
+            await _bookingNotificationSender.NotifyCompletionOfNewBookingAsync(newAppointment);
+
+            // send SMS notification
 
             return await this.MapToDynamicDtoAsync<CdmAppointment, Guid>(newAppointment);
         }
