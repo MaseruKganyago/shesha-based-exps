@@ -27,12 +27,12 @@ namespace Boxfusion.Health.His.Common.Users
     [Route("api/v{version:apiVersion}/Bookings/[controller]")]
     public class HisUserAppService : CdmAppServiceBase
     {
-        private readonly HisUserManager _userManager;
+        private readonly PatientManager _userManager;
 
         /// <summary>
         /// 
         /// </summary>
-        public HisUserAppService(HisUserManager userManager)
+        public HisUserAppService(PatientManager userManager)
         {
             _userManager = userManager;
         }

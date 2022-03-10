@@ -499,17 +499,34 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Common.Patients.PatientManager">
+            <summary>
+            Domain Service for user related methods.
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Patients.PatientManager.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Patients.PatientManager.GetContextFacilityPatientIdentifier(System.Guid)">
+            <summary>
+            Returns the Facility specific Patient Identifier for the specified patient and current Facility Context.
+            </summary>
+            <param name="patientId"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Common.Users.HisUser">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Common.Users.HisUserManager">
+        <member name="T:Boxfusion.Health.His.Common.Users.PatientManager">
             <summary>
             Domain Service for user related methods.
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Common.Users.HisUserManager.#ctor">
+        <member name="M:Boxfusion.Health.His.Common.Users.PatientManager.#ctor">
             <summary>
             
             </summary>
@@ -517,7 +534,7 @@
             <param name="scheduleAvailabilityRepo"></param>
             <param name="slotsRepo"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Common.Users.HisUserManager.GetFacilitiesAssociatedToUserAsync(System.Guid,System.String)">
+        <member name="M:Boxfusion.Health.His.Common.Users.PatientManager.GetFacilitiesAssociatedToUserAsync(System.Guid,System.String)">
             <summary>
             Returns the list of Facilities that the specified user is associated with.
             </summary>

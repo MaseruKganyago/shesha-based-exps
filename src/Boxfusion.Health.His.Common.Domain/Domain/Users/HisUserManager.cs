@@ -20,7 +20,7 @@ namespace Boxfusion.Health.His.Common.Users
     /// <summary>
     /// Domain Service for user related methods.
     /// </summary>
-    public class HisUserManager : DomainService
+    public class PatientManager : DomainService
     {
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Boxfusion.Health.His.Common.Users
         /// <param name="schedulesRepo"></param>
         /// <param name="scheduleAvailabilityRepo"></param>
         /// <param name="slotsRepo"></param>
-        public HisUserManager()
+        public PatientManager()
         {
 
         }

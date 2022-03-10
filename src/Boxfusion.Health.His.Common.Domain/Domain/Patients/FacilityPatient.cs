@@ -1,6 +1,7 @@
 ﻿using Shesha.Domain.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Boxfusion.Health.His.Common.Patients
@@ -13,10 +14,23 @@ namespace Boxfusion.Health.His.Common.Patients
     [Discriminator]
     public class FacilityPatient : HisPatient
     {
+        private string _facilityPatientIdentifier = null;
         /// <summary>
         /// 
         /// </summary>
-        [ReadonlyProperty]
-        public virtual string FacilityPatientIdentifier { get; set; }
+        [NotMapped]
+        public virtual string FacilityPatientIdentifier 
+        {
+            get
+            {
+                if (_facilityPatientIdentifier is null)
+                {
+                    var patientManager = new PatientManager();
+                    _facilityPatientIdentifier = patientManager.GetContextFacilityPatientIdentifier(this.Id);
+                }
+                return _facilityPatientIdentifier; 
+            } 
+            set { _facilityPatientIdentifier = value;  }
+        }
     }
 }
