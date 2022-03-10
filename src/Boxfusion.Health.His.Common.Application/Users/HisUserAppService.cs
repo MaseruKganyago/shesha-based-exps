@@ -8,6 +8,7 @@ using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Authorization;
+using Boxfusion.Health.His.Common.Practitioners;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shesha.DynamicEntities.Dtos;
@@ -27,14 +28,14 @@ namespace Boxfusion.Health.His.Common.Users
     [Route("api/v{version:apiVersion}/Bookings/[controller]")]
     public class HisUserAppService : CdmAppServiceBase
     {
-        private readonly PatientManager _userManager;
+        private readonly HisPractitionerManager _practitionerManager;
 
         /// <summary>
         /// 
         /// </summary>
-        public HisUserAppService(PatientManager userManager)
+        public HisUserAppService(HisPractitionerManager practitionerManager)
         {
-            _userManager = userManager;
+            _practitionerManager = practitionerManager;
         }
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace Boxfusion.Health.His.Common.Users
         {
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
 
-            var facilities = await _userManager.GetFacilitiesAssociatedToUserAsync(person.Id);
+            var facilities = await _practitionerManager.GetFacilitiesAssociatedToUserAsync(person.Id);
 
             var list = new List<DynamicDto<HisHealthFacility, Guid>>();
 
@@ -58,6 +59,24 @@ namespace Boxfusion.Health.His.Common.Users
 
             return list;
         }
+
+        //[HttpGet, Route("GetFacilitiesAssociatedToUser")]
+        //public async Task<List<DynamicDto<HisHealthFacility, Guid>>> GetFacilitiesAssociatedToUserAsync()
+        //{
+        //    var person = await GetCurrentLoggedPersonFhirBaseAsync();
+
+        //    var facilities = await _userManager.GetFacilitiesAssociatedToUserAsync(person.Id);
+
+        //    var list = new List<DynamicDto<HisHealthFacility, Guid>>();
+
+        //    foreach (var facility in facilities)
+        //    {
+        //        var facilityDto = await this.MapToDynamicDtoAsync<HisHealthFacility, Guid>(facility);
+        //        list.Add(facilityDto);
+        //    }
+
+        //    return list;
+        //}
 
     }
 }

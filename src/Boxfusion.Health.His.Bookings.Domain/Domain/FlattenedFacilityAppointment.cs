@@ -16,6 +16,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
     /// Note: The DB view behind this entity only returns Facility based appointments i.e. where the Owner of the schedule the appointment 
     /// relates to is Health Facility
     /// </summary>
+    [Entity(TypeShortAlias = "His.FlatFacilityAppointment")]
     [Table("vw_His_FlattenedFacilityAppointments")]
     [ImMutable]
     public class FlattenedFacilityAppointment : Entity<Guid>

@@ -516,17 +516,12 @@
             <param name="patientId"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Common.Users.HisUser">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Common.Users.PatientManager">
+        <member name="T:Boxfusion.Health.His.Common.Practitioners.HisPractitionerManager">
             <summary>
             Domain Service for user related methods.
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Common.Users.PatientManager.#ctor">
+        <member name="M:Boxfusion.Health.His.Common.Practitioners.HisPractitionerManager.#ctor">
             <summary>
             
             </summary>
@@ -534,13 +529,18 @@
             <param name="scheduleAvailabilityRepo"></param>
             <param name="slotsRepo"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Common.Users.PatientManager.GetFacilitiesAssociatedToUserAsync(System.Guid,System.String)">
+        <member name="M:Boxfusion.Health.His.Common.Practitioners.HisPractitionerManager.GetFacilitiesAssociatedToUserAsync(System.Guid,System.String)">
             <summary>
             Returns the list of Facilities that the specified user is associated with.
             </summary>
             <param name="personId"></param>
             <param name="roleName"></param>
             <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Practitioners.HisPractitioner">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Common.WardAdmission">
             <summary>

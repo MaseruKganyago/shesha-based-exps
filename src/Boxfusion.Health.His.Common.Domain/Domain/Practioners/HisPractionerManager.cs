@@ -15,12 +15,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Common.Users
+namespace Boxfusion.Health.His.Common.Practitioners
 {
     /// <summary>
     /// Domain Service for user related methods.
     /// </summary>
-    public class PatientManager : DomainService
+    public class HisPractitionerManager : DomainService
     {
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Boxfusion.Health.His.Common.Users
         /// <param name="schedulesRepo"></param>
         /// <param name="scheduleAvailabilityRepo"></param>
         /// <param name="slotsRepo"></param>
-        public PatientManager()
+        public HisPractitionerManager()
         {
 
         }
@@ -67,6 +67,15 @@ namespace Boxfusion.Health.His.Common.Users
 
             return facilities;
         }
+
+        ///// <summary>
+        ///// Creates a practioner
+        ///// </summary>
+        ///// <returns></returns>
+        //public async Task<HisPractitioner> CreateUserWithPractioner()
+        //{
+
+        //}
 
 
     }
