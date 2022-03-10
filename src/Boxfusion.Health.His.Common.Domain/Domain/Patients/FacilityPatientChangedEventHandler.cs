@@ -30,19 +30,24 @@ namespace Boxfusion.Health.His.Common.Patients
 
         public void HandleEvent(EntityChangedEventData<FacilityPatient> eventData)
         {
-            //if (!RequestContextHelper.HasFacilityId) return;
-            //TODO:NOW Reinstate above once we know data gets passed
+            if (!RequestContextHelper.HasFacilityId) return;
 
             var abpSession = IocManager.Instance.Resolve<IAbpSession>();
             var currentUserId = abpSession.GetUserId();
+            var facilityId = RequestContextHelper.FacilityId;
 
-                // make sure that we have active session
+            // make sure that we have active session
             using (_unitOfWorkManager.Current == null ? _unitOfWorkManager.Begin() : null)
                 {
                 using (var session = IocManager.Instance.Resolve<ISessionFactory>().OpenSession())
                 {
                     var query = session
-                      .CreateSQLQuery("EXEC Sp_His_UpsertFacilityPatientIdentifier ")
+                      .CreateSQLQuery(@"
+                            EXEC Sp_His_UpsertFacilityPatientIdentifier 
+                             @patientId = :patientId,
+                             @facilityId = :facilityId,
+                             @facilityPatientIdentifier = :facilityPatientIdentifier,
+                             @currentUserId = :currentUserId")
                       .SetParameter("patientId", eventData.Entity.Id)
                       .SetParameter("facilityId", RequestContextHelper.FacilityId)
                       .SetParameter("facilityPatientIdentifier", eventData.Entity.FacilityPatientIdentifier)
@@ -53,9 +58,6 @@ namespace Boxfusion.Health.His.Common.Patients
                     session.Flush();
                 }
             }
-
-
-            throw new NotImplementedException();
         }
     }
 }

@@ -48,9 +48,7 @@ namespace Boxfusion.Health.His.Common.Patients
             table.AddProperty(e => e.Gender);
             table.OnRequestToFilterStatic = (criteria, input) =>
             {
-                Guid facilityId = RequestContextHelper.HasFacilityId 
-                                    ? RequestContextHelper.FacilityId 
-                                    : Guid.Parse("0CDAD6B0-A3B2-4CF6-9B7D-238D753F0657");  // TODO: Temporary test facility whilst awaiting the Facility selection feature to be implemented and passed in through from the front-end
+                Guid facilityId = RequestContextHelper.FacilityId;
                 criteria.FilterClauses.Add($"ent.FacilityId = '{facilityId}'");
             };
 

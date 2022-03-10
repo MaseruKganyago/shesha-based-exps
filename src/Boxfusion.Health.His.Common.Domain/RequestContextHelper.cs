@@ -12,7 +12,7 @@ namespace Boxfusion.Health.His.Common
     /// </summary>
     public class RequestContextHelper
     {
-        private const string CONTEXT_FACILITY_ID_HEADER_NAME = "his-facilityId";
+        private const string CONTEXT_FACILITY_ID_HEADER_NAME = "boxhis-facilityId";
         private readonly IHttpContextAccessor _httpContextAccessor;
 
 
@@ -32,8 +32,9 @@ namespace Boxfusion.Health.His.Common
         {
             get
             {
+                return true;        //TODO: TEMPORARILY FAKING NOW
                 var stringContextFacilityId = HttpContext.Request.Headers[CONTEXT_FACILITY_ID_HEADER_NAME];
-                return string.IsNullOrEmpty(stringContextFacilityId);
+                return !string.IsNullOrEmpty(stringContextFacilityId);
             }
         }
 
@@ -44,6 +45,9 @@ namespace Boxfusion.Health.His.Common
         {
             get
             {
+                if (string.IsNullOrEmpty(HttpContext.Request.Headers[CONTEXT_FACILITY_ID_HEADER_NAME]))
+                    return Guid.Parse("0CDAD6B0-A3B2-4CF6-9B7D-238D753F0657");     //TODO:NOW REMOVE ONCE FACILITY IS GETTING PAST (Rob's Ferreira Hospital)
+
 
                 var stringContextFacilityId = HttpContext.Request.Headers[CONTEXT_FACILITY_ID_HEADER_NAME];
 
