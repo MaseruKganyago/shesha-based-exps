@@ -100,7 +100,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [HttpPost, Route("Appointments/{appointmentId}/Reschedule")]
+        [HttpPut, Route("Appointments/{appointmentId}/Reschedule")]
         [AbpAuthorize(CommonPermissions.BookAppointment)]
         public async Task<DynamicDto<CdmAppointment, Guid>> RescheduleAppointment(RescheduleInput input)
         {
@@ -132,7 +132,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// </summary>  
         /// <param name="appointmentId"></param>
         /// <returns></returns>
-        [HttpPost, Route("Appointments/{appointmentId}/ConfirmArrival")]
+        [HttpPut, Route("Appointments/{appointmentId}/ConfirmArrival")]
         [AbpAuthorize(CommonPermissions.BookAppointment)]
         public async Task<DynamicDto<CdmAppointment, Guid>> ConfirmAppointmentArrival(Guid appointmentId)
         {
@@ -148,9 +148,9 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="facilityId"></param>
         /// <param name="appointmentId"></param>
         /// <returns></returns>
-        [HttpPost, Route("Appointments/CancelAppointment")]
+        [HttpPut, Route("Appointments/CancelAppointment")]
         [AbpAuthorize(CommonPermissions.BookAppointment)]
-        public async Task<DynamicDto<CdmAppointment, Guid>> CancelAppointment(Guid appointmentId, Guid? facilityId)
+        public async Task<DynamicDto<CdmAppointment, Guid>> CancelAppointment(Guid appointmentId)
         {
             try
             {
