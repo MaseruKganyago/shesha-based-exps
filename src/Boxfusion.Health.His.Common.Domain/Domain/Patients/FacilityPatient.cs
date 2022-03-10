@@ -16,6 +16,7 @@ namespace Boxfusion.Health.His.Common.Patients
         /// <summary>
         /// 
         /// </summary>
+        [ReadonlyProperty]
         public virtual string FacilityPatientIdentifier { get; set; }
     }
 }

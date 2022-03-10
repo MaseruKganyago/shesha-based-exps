@@ -21,11 +21,6 @@ namespace Boxfusion.Health.His.Common.Patients
         /// <summary>
         /// 
         /// </summary>
-        public virtual string HospitalPatientNumber { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         [ReferenceList("His", "IdentificationTypes")]
         public virtual long? IdentificationType { get; set; }
 

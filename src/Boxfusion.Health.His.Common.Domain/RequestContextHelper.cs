@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Application
+namespace Boxfusion.Health.His.Common
 {
     /// <summary>
     /// Helper class to easily retrieve information related to the request context.

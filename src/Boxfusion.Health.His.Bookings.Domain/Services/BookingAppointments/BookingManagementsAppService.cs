@@ -7,7 +7,6 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
-using Boxfusion.Health.His.Application;
 using Boxfusion.Health.His.Bookings.Domain;
 using Boxfusion.Health.His.Bookings.Domain.Views;
 using Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos;
