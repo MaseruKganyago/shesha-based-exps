@@ -110,6 +110,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             //Completing the booking
             appointment.Status = RefListAppointmentStatuses.booked;
             appointment.Slot = slot;
+            appointment.Schedule = slot.Schedule;
             if (appointment.Patient is not null)
             {
                 // Defaulting appointment contact details to patient contact information if it has not been populated

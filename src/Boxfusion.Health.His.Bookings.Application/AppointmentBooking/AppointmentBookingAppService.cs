@@ -91,7 +91,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             await _bookingNotificationSender.NotifyCompletionOfNewBookingAsync(newAppointment);
 
             // send SMS notification
-
+            
             return await this.MapToDynamicDtoAsync<CdmAppointment, Guid>(newAppointment);
         }
 
