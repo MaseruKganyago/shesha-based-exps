@@ -46,7 +46,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// <returns></returns>
         public async Task GenerateBookingSlotsForAllSchedulesAsync()
         {
-            var schedules = await _schedulesRepo.GetAllListAsync(e => e.SchedulingModel == RefListSchedulingModels.Appointment && e.Active);
+            var schedules = await _schedulesRepo.GetAllListAsync(e => e.SchedulingModel == RefListSchedulingModels.Appointment /*&& e.Active*/);
 
             foreach (var schedule in schedules)
             {
@@ -63,7 +63,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         {
             if (schedule.SchedulingModel != RefListSchedulingModels.Appointment) throw new InvalidOperationException("Operation is only valid if Schedule.SchedulingModel is Appointment.");
 
-            var scheduleAvailabilities = await _scheduleAvailabilityRepo.GetAllListAsync(e => e.Schedule.Id == schedule.Id && e.Active);
+            var scheduleAvailabilities = await _scheduleAvailabilityRepo.GetAllListAsync(e => e.Schedule.Id == schedule.Id /*&& e.Active*/);
 
             foreach (var scheduleAvailability in scheduleAvailabilities)
             {

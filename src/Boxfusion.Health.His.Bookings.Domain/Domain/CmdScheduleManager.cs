@@ -54,7 +54,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// <param name="roleName"></param>
         /// <param name="facilityId"></param>
         /// <returns></returns>
-        public async Task<List<CdmSchedule>> GetSchedulesAssociatedToUserAsync(Guid personId, string roleName, string facilityId = null)
+        public async Task<List<CdmSchedule>> GetSchedulesAssociatedToUserAsync(Guid personId, string roleName, Guid? facilityId = null)
         {
             if (string.IsNullOrWhiteSpace(roleName)) throw new ArgumentNullException("role");
 
@@ -63,7 +63,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             if (role is null) throw new InvalidOperationException("No such role exists");
 
 
-            var roleAppointments = await _scheduleRoleAppointRepo.GetAllListAsync(e => e.Person.Id == personId && e.Role.Id == role.Id);
+            var roleAppointments = await _scheduleRoleAppointRepo.GetAllListAsync(e => e.Person.Id == personId && e.Role.Id == role.Id && (facilityId == null || e.Schedule.HealthFacilityOwner.Id == facilityId) );
 
             var schedules = new List<CdmSchedule>();
 

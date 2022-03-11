@@ -187,7 +187,7 @@
             <param name="scheduleAvailabilityRepo"></param>
             <param name="slotsRepo"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.CmdScheduleManager.GetSchedulesAssociatedToUserAsync(System.Guid,System.String,System.String)">
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.CmdScheduleManager.GetSchedulesAssociatedToUserAsync(System.Guid,System.String,System.Nullable{System.Guid})">
             <summary>
             Returns the list of schedules associated with to the specified user through a Role appointment.
             </summary>

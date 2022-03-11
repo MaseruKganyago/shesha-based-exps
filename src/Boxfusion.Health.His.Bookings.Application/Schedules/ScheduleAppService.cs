@@ -3,11 +3,13 @@ using Abp.Domain.Repositories;
 using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
+using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Bookings.Domain;
 using Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos;
+using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -47,8 +49,8 @@ namespace Boxfusion.Health.His.Bookings.Schedules
         {
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
 
-            //TODO: Introduce Context Facility limitation 
-            var schedules = await _scheduleManager.GetSchedulesAssociatedToUserAsync(person.Id, "Schedule Manager");
+            Guid? facilityId = RequestContextHelper.HasFacilityId ? RequestContextHelper.FacilityId : null;
+            var schedules = await _scheduleManager.GetSchedulesAssociatedToUserAsync(person.Id, "Schedule Manager", facilityId);
 
             var list = new List<DynamicDto<CdmSchedule, Guid>>();
 

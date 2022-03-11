@@ -80,7 +80,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
                 SlotGenerationMode = RefListSlotGenerationModes.OneSlotForAllResources,
             };
 
-            await this.CreateTestData_NewSchedule("TestSchedule1228", availability, true);
+            await this.CreateTestData_NewSchedule("TestSchedule1228", "TestSchedule1228", 29, availability, true);
             await this.CreateTestData_NewPatient("TestPatient1228-1");
             await this.CreateTestData_NewPatient("TestPatient1228-2");
             await this.CreateTestData_NewPatient("TestPatient1228-3");
@@ -88,16 +88,141 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             return new object();
         }
 
-        protected async Task<CdmSchedule> CreateTestData_NewSchedule(string scheduleName, ScheduleAvailabilityForBooking safb, bool generateSlots)
+        [HttpGet, Route("BookingManagement/TestData/Generate2")]
+        public async Task<object> GenerateTestData2()
+        {
+            var availability = new ScheduleAvailabilityForBooking()
+            {
+                Active = true,
+                ValidFromDate = null,
+                ValidToDate = null,
+                BookingHorizon = 90,
+                ApplicableDays = RefListDaysOfWeek.mon | RefListDaysOfWeek.tue | RefListDaysOfWeek.wed | RefListDaysOfWeek.thu | RefListDaysOfWeek.fri,
+                StartTime = new TimeSpan(8, 0, 0),
+                EndTime = new TimeSpan(9, 0, 0),
+                SlotDuration = 60,
+                BreakIntervalAfterSlot = 0,
+                SlotRegularCapacity = 40,
+                SlotOverflowCapacity = 20,
+                LastGeneratedSlotDate = null,
+                SlotGenerationMode = RefListSlotGenerationModes.OneSlotForAllResources,
+            };
+            await this.CreateTestData_NewSchedule("Rob Ferreira Hospital", "RFH-General Practice", 29, availability, true);
+
+            var availability2 = new ScheduleAvailabilityForBooking()
+            {
+                Active = true,
+                ValidFromDate = null,
+                ValidToDate = null,
+                BookingHorizon = 90,
+                ApplicableDays = RefListDaysOfWeek.mon | RefListDaysOfWeek.tue | RefListDaysOfWeek.wed | RefListDaysOfWeek.thu | RefListDaysOfWeek.fri,
+                StartTime = new TimeSpan(8, 0, 0),
+                EndTime = new TimeSpan(9, 0, 0),
+                SlotDuration = 60,
+                BreakIntervalAfterSlot = 0,
+                SlotRegularCapacity = 40,
+                SlotOverflowCapacity = 20,
+                LastGeneratedSlotDate = null,
+                SlotGenerationMode = RefListSlotGenerationModes.OneSlotForAllResources,
+            };
+            await this.CreateTestData_NewSchedule("Rob Ferreira Hospital", "RFH-Ophthalmology", 52, availability2, true);
+
+
+            var availability3 = new ScheduleAvailabilityForBooking()
+            {
+                Active = true,
+                ValidFromDate = null,
+                ValidToDate = null,
+                BookingHorizon = 90,
+                ApplicableDays = RefListDaysOfWeek.mon | RefListDaysOfWeek.tue | RefListDaysOfWeek.wed | RefListDaysOfWeek.thu | RefListDaysOfWeek.fri,
+                StartTime = new TimeSpan(8, 0, 0),
+                EndTime = new TimeSpan(9, 0, 0),
+                SlotDuration = 60,
+                BreakIntervalAfterSlot = 0,
+                SlotRegularCapacity = 40,
+                SlotOverflowCapacity = 20,
+                LastGeneratedSlotDate = null,
+                SlotGenerationMode = RefListSlotGenerationModes.OneSlotForAllResources,
+            };
+            await this.CreateTestData_NewSchedule("Middleburg Hospital", "Middleburg-Dermatology", 20, availability3, true);
+
+            var availability4 = new ScheduleAvailabilityForBooking()
+            {
+                Active = true,
+                ValidFromDate = null,
+                ValidToDate = null,
+                BookingHorizon = 90,
+                ApplicableDays = RefListDaysOfWeek.mon | RefListDaysOfWeek.tue | RefListDaysOfWeek.wed | RefListDaysOfWeek.thu | RefListDaysOfWeek.fri,
+                StartTime = new TimeSpan(8, 0, 0),
+                EndTime = new TimeSpan(9, 0, 0),
+                SlotDuration = 60,
+                BreakIntervalAfterSlot = 0,
+                SlotRegularCapacity = 40,
+                SlotOverflowCapacity = 20,
+                LastGeneratedSlotDate = null,
+                SlotGenerationMode = RefListSlotGenerationModes.OneSlotForAllResources,
+            };
+            await this.CreateTestData_NewSchedule("Middleburg Hospital", "Middleburg-Clinical physiology", 15, availability4, true);
+
+
+            var availability5 = new ScheduleAvailabilityForBooking()
+            {
+                Active = true,
+                ValidFromDate = null,
+                ValidToDate = null,
+                BookingHorizon = 90,
+                ApplicableDays = RefListDaysOfWeek.mon | RefListDaysOfWeek.tue | RefListDaysOfWeek.wed | RefListDaysOfWeek.thu | RefListDaysOfWeek.fri,
+                StartTime = new TimeSpan(8, 0, 0),
+                EndTime = new TimeSpan(9, 0, 0),
+                SlotDuration = 60,
+                BreakIntervalAfterSlot = 0,
+                SlotRegularCapacity = 40,
+                SlotOverflowCapacity = 20,
+                LastGeneratedSlotDate = null,
+                SlotGenerationMode = RefListSlotGenerationModes.OneSlotForAllResources,
+            };
+            await this.CreateTestData_NewSchedule("Charlotte Maxeke", "Charlotte Maxke-General Practice", 29, availability5, true);
+
+            var availability6 = new ScheduleAvailabilityForBooking()
+            {
+                Active = true,
+                ValidFromDate = null,
+                ValidToDate = null,
+                BookingHorizon = 90,
+                ApplicableDays = RefListDaysOfWeek.mon | RefListDaysOfWeek.tue | RefListDaysOfWeek.wed | RefListDaysOfWeek.thu | RefListDaysOfWeek.fri,
+                StartTime = new TimeSpan(8, 0, 0),
+                EndTime = new TimeSpan(9, 0, 0),
+                SlotDuration = 60,
+                BreakIntervalAfterSlot = 0,
+                SlotRegularCapacity = 40,
+                SlotOverflowCapacity = 20,
+                LastGeneratedSlotDate = null,
+                SlotGenerationMode = RefListSlotGenerationModes.OneSlotForAllResources,
+            };
+            await this.CreateTestData_NewSchedule("Charlotte Maxeke", "Charlotte Maxeke-Dermatology", 20, availability6, true);
+
+            /*
+General practice    29
+Ophthalmology   52
+Clinical physiology 15
+Dermatology 20*/
+
+            return new object();
+        }
+
+
+        protected async Task<CdmSchedule> CreateTestData_NewSchedule(string hospitalName, string scheduleName, int speciality, ScheduleAvailabilityForBooking safb, bool generateSlots)
         {
 
-            var hospital = await CreateTestData_HealthFacility("TestHospital1228");
+            var hospital = await CreateTestData_HealthFacility(hospitalName);
 
             CdmSchedule schedule = new CdmSchedule()
             {
                 Active = true,
                 Name = scheduleName,
                 SchedulingModel = RefListSchedulingModels.Appointment,
+                Speciality = speciality,
+                HealthFacilityOwner = hospital,
                 ActorOwnerId = hospital.Id.ToString(),
                 ActorOwnerType = "His.HisHospital"
             };
@@ -129,6 +254,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
 
             return schedule;
         }
+
 
         protected async Task<Hospital> CreateTestData_HealthFacility(string name)
         {
