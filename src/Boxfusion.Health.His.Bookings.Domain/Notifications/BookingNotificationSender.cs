@@ -32,11 +32,9 @@ namespace Boxfusion.Health.His.Bookings.Domain.Notifications
             if (appointment.Start == null)
                 throw new Exception($"{nameof(appointment.Start)} must not be null");
 
-            /*
-            var recipient = appointment.Patient;
-            var mobileNo = recipient?.MobileNumber;
-            */
-            var mobileNo = appointment.ContactCellphone;
+            var mobileNo = !string.IsNullOrWhiteSpace(appointment.ContactCellphone)
+                ? appointment.ContactCellphone
+                : appointment.Patient.MobileNumber;
             if (string.IsNullOrWhiteSpace(mobileNo))
                 return;
 
@@ -50,7 +48,9 @@ namespace Boxfusion.Health.His.Bookings.Domain.Notifications
             
             var notificationData = new CompletionOfNewBookingModel
             {
-                Fullname = appointment.ContactName,
+                Fullname = !string.IsNullOrWhiteSpace(appointment.ContactName)
+                    ? appointment.ContactName
+                    : appointment.Patient.FullName,
                 StartDate = appointment.Start?.FormatDate(),
                 FacilityName = hospital?.Name
             };
