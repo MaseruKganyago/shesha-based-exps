@@ -102,19 +102,17 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
         //[AbpAuthorize(PermissionNames.DailyAppointmentBooking)]
         public async Task<PagedResponse> GetFlattenedAppointmentsAsync(Guid scheduleId, DateTime? startDate, PaginationDto pagination, DateTime? endDate)
         {
-            //Validation.ValidateIdWithException(this.ContextFacilityId, "Facility Context Id cannot be empty");
+            Validation.ValidateIdWithException(!RequestContextHelper.HasFacilityId, "Facility Context Id cannot be empty");
             Validation.ValidateIdWithException(scheduleId, "Schedule Id cannot be empty");
             Validation.ValidateNullableType(startDate, "Filtering Start Date");
             Validation.ValidateNullableType(pagination.PageNumber, "PageNumber");
             Validation.ValidateNullableType(pagination.PageSize, "PageSize");
 
-            //TODO : Restrict by User and this.ContextFacilityId;
-
             var scheduleRepo = IocManager.Resolve<IRepository<CdmSchedule, Guid>>();
             var schedule = await scheduleRepo.GetAsync(scheduleId);
 
-            var facilityId = schedule.ActorOwnerId; 
-            var flattenedAppointments = await GetFlattenedAppointmentsAsync(Guid.Parse(facilityId), scheduleId, startDate, pagination, endDate);
+            var facilityId = RequestContextHelper.FacilityId; 
+            var flattenedAppointments = await GetFlattenedAppointmentsAsync(facilityId, scheduleId, startDate, pagination, endDate);
 
             return new PagedResponse(items: flattenedAppointments, paging: new Paging(pagination.PageNumber, pagination.PageSize, (flattenedAppointments.Any()) ? flattenedAppointments.FirstOrDefault().TotalCount : 0));
         }
