@@ -215,7 +215,6 @@ namespace Boxfusion.Health.His.Web.Host.Startup
                 options.IgnoreObsoleteActions();
                 options.AddXmlDocuments();
 
-                options.OperationFilter<SwaggerOperationFilter>();
                 options.OperationFilter<SwaggerDefaultValues>();
 
                 options.CustomOperationIds(desc => desc.ActionDescriptor is ControllerActionDescriptor d
