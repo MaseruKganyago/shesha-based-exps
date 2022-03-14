@@ -33,6 +33,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shesha.DynamicEntities;
 using Shesha.Swagger;
 using Boxfusion.Health.His.Web.Host.Swagger;
+using Shesha.DynamicEntities.Swagger;
 
 namespace Boxfusion.Health.His.Web.Host.Startup
 {
@@ -215,7 +216,9 @@ namespace Boxfusion.Health.His.Web.Host.Startup
                 options.IgnoreObsoleteActions();
                 options.AddXmlDocuments();
 
-                options.OperationFilter<SwaggerDefaultValues>();
+                options.SchemaFilter<DynamicDtoSchemaFilter>();
+
+                options.CustomSchemaIds(type => SwaggerHelper.GetSchemaId(type));
 
                 options.CustomOperationIds(desc => desc.ActionDescriptor is ControllerActionDescriptor d
                     ? d.ControllerName.ToCamelCase() + d.ActionName.ToPascalCase()
@@ -231,6 +234,7 @@ namespace Boxfusion.Health.His.Web.Host.Startup
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey
                 });
+                //options.SchemaFilter<DynamicDtoSchemaFilter>();
             });
 
             services.AddApiVersioning(options =>
@@ -245,12 +249,6 @@ namespace Boxfusion.Health.His.Web.Host.Startup
                 options.GroupNameFormat = "'v'VVV";
                 options.SubstituteApiVersionInUrl = true;
             });
-
-
-            //services.ConfigureSwaggerGen(options =>
-            //{
-            //    options.CustomSchemaIds(x => x.FullName);
-            //});
         }
 
         private void ConfigureApiVersioning(
