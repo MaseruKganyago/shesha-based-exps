@@ -6,6 +6,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.His.Bookings.Domain;
 using Boxfusion.Health.His.Bookings.Tests;
 using Boxfusion.Health.His.Tests;
+using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,30 +53,30 @@ namespace Boxfusion.Health.His.Bookings.Schedules
                 {
                     // Has generated the expected number of slots
                     var slots = _slotsRepository.GetAllList(e => e.Schedule.Id == schedule.Id);
-                    Assert.Equal(slots.Count, (14 + 1) * 8);  // 8 slots generated per day from today + the 14 day window
+                   slots.Count.ShouldBe((14 + 1) * 8);  // 8 slots generated per day from today + the 14 day window
 
                     var updatedSafb = _availabilityRepository.Get(safb.Id);
 
                     // LastGeneratedSlotDate end of day of the last day of the booking horizon
-                    Assert.True(updatedSafb.LastGeneratedSlotDate == DateTime.Now.Date.AddDays(safb.BookingHorizon.Value).Add(safb.EndTime.Value));
+                    updatedSafb.LastGeneratedSlotDate.ShouldBe(DateTime.Now.Date.AddDays(safb.BookingHorizon.Value).Add(safb.EndTime.Value));
 
                     //no slots after LastGeneratedDate
-                    Assert.True(slots.Count(e => e.StartDateTime > updatedSafb.LastGeneratedSlotDate) == 0);
+                    slots.Count(e => e.StartDateTime > updatedSafb.LastGeneratedSlotDate).ShouldBe(0);
 
                     // Not slots generated beyond the Horizon
-                    Assert.True(slots.Count(e => e.StartDateTime.Value.Date > DateTime.Now.Date.AddDays(safb.BookingHorizon.Value)) == 0);
+                    slots.Count(e => e.StartDateTime.Value.Date > DateTime.Now.Date.AddDays(safb.BookingHorizon.Value)).ShouldBe(0);
 
                     // Does not generate slots that end after the end of day
-                    Assert.True(slots.Count(e => e.EndDateTime.Value.TimeOfDay > safb.EndTime) == 0);
+                    slots.Count(e => e.EndDateTime.Value.TimeOfDay > safb.EndTime).ShouldBe(0);
 
                     // Does not generate slots that start before the start of day
-                    Assert.True(slots.Count(e => e.StartDateTime.Value.TimeOfDay < safb.StartTime) == 0);
+                    slots.Count(e => e.StartDateTime.Value.TimeOfDay < safb.StartTime).ShouldBe(0);
 
                     // First slot always starts at the start of the day
-                    Assert.True(slots.Count(e => e.StartDateTime.Value.TimeOfDay == safb.StartTime) == 15);
+                    slots.Count(e => e.StartDateTime.Value.TimeOfDay == safb.StartTime).ShouldBe(15);
 
                     // No Overflow slots since Overflow capacity specified as 0
-                    Assert.True(slots.Count(e => e.OverflowCapacity == 0) == 0);
+                    slots.Count(e => e.OverflowCapacity > 0).ShouldBe(0);
 
                     await uow.CompleteAsync();
                 }
@@ -118,7 +119,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
                 {
                     // Has generated the expected number of slots
                     var slots = _slotsRepository.GetAllList(e => e.Schedule.Id == schedule.Id);
-                    Assert.Equal(slots.Count, (14 + 1) * 6);  // 6 slots generated per day from today + the 14 day window
+                   slots.Count.ShouldBe((14 + 1) * 6);  // 6 slots generated per day from today + the 14 day window
 
                     await uow.CompleteAsync();
                 }
@@ -162,8 +163,9 @@ namespace Boxfusion.Health.His.Bookings.Schedules
                 {
                     // Has generated the expected number of slots
                     var slots = _slotsRepository.GetAllList(e => e.Schedule.Id == schedule.Id);
-                    Assert.Equal(slots.Count, (14 + 1) * 6);  // 6 slots generated per day from today + the 14 day window
-                    slots.ForEach(o => Assert.Equal(15, o.Capacity));
+                    slots.Count.ShouldBe((14 + 1) * 6);  // 6 slots generated per day from today + the 14 day window
+                    slots.ForEach(o => o.Capacity.ShouldBe(10));
+                    slots.ForEach(o => o.OverflowCapacity.ShouldBe(5));
 
                     await uow.CompleteAsync();
                 }
@@ -207,7 +209,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
                 {
                     // Has generated the expected number of slots
                     var regularSlots = _slotsRepository.Count(e => e.Schedule.Id == schedule.Id && e.Capacity == 1);
-                    Assert.Equal(regularSlots, (14 + 1) * 8 * 5);  // 8 time slots generated per day from today + the 14 day window * 5 slots for time
+                    regularSlots.ShouldBe((14 + 1) * 8 * 5);  // 8 time slots generated per day from today + the 14 day window * 5 slots for time
 
                     await uow.CompleteAsync();
                 }
@@ -251,7 +253,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
                 {
                     // Has generated the expected number of slots
                     var regularSlots = _slotsRepository.GetAllList(e => e.Schedule.Id == schedule.Id);
-                    Assert.Equal(regularSlots.Count, ((safb.ValidToDate.Value - safb.ValidFromDate.Value).Days + 1) * 8);  // 8 slots generated per day on the validity period
+                    regularSlots.Count.ShouldBe(((safb.ValidToDate.Value - safb.ValidFromDate.Value).Days + 1) * 8);  // 8 slots generated per day on the validity period
 
                     await uow.CompleteAsync();
                 }
@@ -301,7 +303,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
                 {
                     // Has generated the expected number of slots
                     var regularSlots = _slotsRepository.GetAllList(e => e.Schedule.Id == schedule.Id);
-                    Assert.Equal(8, regularSlots.Count);  // 8 slots generated on the Public Holiday generated 
+                    regularSlots.Count.ShouldBe(8);  // 8 slots generated on the Public Holiday generated 
 
                     await uow.CompleteAsync();
                 }

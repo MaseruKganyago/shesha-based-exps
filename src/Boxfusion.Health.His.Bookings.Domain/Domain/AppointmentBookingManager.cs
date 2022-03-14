@@ -26,7 +26,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         private readonly IRepository<CdmSchedule, Guid> _scheduleRepo;
         private readonly IRepository<CdmSlot, Guid> _slotRepo;
         private readonly IRepository<CdmAppointment, Guid> _appointmentRepo;
-        private readonly IRepository<HisPatient, Guid> _patientRepo;
+        private readonly IRepository<CdmPatient, Guid> _patientRepo;
 
         /// <summary>
         /// 
@@ -39,7 +39,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             IRepository<CdmSlot, Guid> slotsRepo,
             IRepository<CdmAppointment, Guid> appointmentsRepo,
             IRepository<CdmSchedule, Guid> scheduleRepo,
-            IRepository<HisPatient, Guid> patientRepo
+            IRepository<CdmPatient, Guid> patientRepo
             )
         {
             _slotRepo = slotsRepo;
@@ -70,7 +70,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             if (!schedule.Active)
                 throw new InvalidOperationException("Cannot book an appointment for the specified Schedule as it is inactive.");
 
-            HisPatient patient = null;
+            CdmPatient patient = null;
             if (patientId.HasValue)
                 patient = await _patientRepo.GetAsync(patientId.Value);
 
@@ -82,6 +82,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
                 ContactName = contactName,
                 Patient = patient,
                 AppointmentType = appointmentType,
+                Start = requiredTime
             };
 
             return await BookAvailableSlotAsync(scheduleId, appointment);

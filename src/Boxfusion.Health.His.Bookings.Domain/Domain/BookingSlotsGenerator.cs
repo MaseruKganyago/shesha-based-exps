@@ -155,7 +155,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
 
         private async Task CreateSlotAsync(ScheduleAvailabilityForBooking scheduleAvailability, DateTime slotStartTime, DateTime slotEndTime, int capacity, int overflowCapacity = 0)
         {
-            if (capacity <= 0) throw new InvalidOperationException("capacity must be larger than 0");
+            if ((capacity + overflowCapacity) <= 0) throw new InvalidOperationException("capacity must be larger than 0");
 
             await _slotsRepo.InsertAsync(new CdmSlot()
             {
