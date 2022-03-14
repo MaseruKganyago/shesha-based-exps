@@ -216,7 +216,6 @@ namespace Boxfusion.Health.His.Web.Host.Startup
                 options.IgnoreObsoleteActions();
                 options.AddXmlDocuments();
 
-                options.OperationFilter<SwaggerOperationFilter>();
                 options.SchemaFilter<DynamicDtoSchemaFilter>();
 
                 options.CustomSchemaIds(type => SwaggerHelper.GetSchemaId(type));
