@@ -1,4 +1,5 @@
-﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+﻿using Boxfusion.Health.Cdm.Patients;
+using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.His.Common.Enums;
 using Shesha.Domain.Attributes;
 using System;

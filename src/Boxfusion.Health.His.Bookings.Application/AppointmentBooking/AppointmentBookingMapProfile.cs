@@ -1,4 +1,6 @@
-﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+﻿using Boxfusion.Health.Cdm.Appointments;
+using Boxfusion.Health.Cdm.Patients;
+using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
 using Shesha.AutoMapper;
@@ -19,15 +21,12 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         public AppointmentBookingMapProfile()
         {
             CreateMap<BookAppointmentInput, CdmAppointment>()
-                .ForMember(c => c.Status, options => options.MapFrom(c => RefListAppointmentStatuses.booked))
-                .ForMember(c => c.AppointmentType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.AppointmentType)))
-                .ForMember(c => c.Patient, options => options.MapFrom(c => GetEntity<CdmPatient>(c.Patient)))
+                .ForMember(@out => @out.Status, options => options.MapFrom(@in => RefListAppointmentStatuses.booked))
+                .ForMember(@out => @out.AppointmentType, options => options.MapFrom(@in => UtilityHelper.GetRefListItemValue(@in.AppointmentType)))
+                .ForMember(@out => @out.Patient, options => options.MapFrom(@in => GetEntity<CdmPatient>(@in.Patient)))
                 .IgnoreNotMapped()
                 .MapReferenceListValuesToDto();
 
-            CreateMap<RescheduleInput, CdmAppointment>()
-                .ForMember(c => c.Status, options => options.MapFrom(c => RefListAppointmentStatuses.booked))
-                 .MapReferenceListValuesToDto();
 
         }
     }

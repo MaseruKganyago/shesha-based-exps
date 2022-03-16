@@ -1,6 +1,10 @@
 ﻿using Abp;
 using Abp.Domain.Repositories;
 using Abp.Domain.Services;
+using Boxfusion.Health.Cdm.Appointments;
+using Boxfusion.Health.Cdm.Patients;
+using Boxfusion.Health.Cdm.Schedules;
+using Boxfusion.Health.Cdm.Slots;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
@@ -35,7 +39,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// <param name="scheduleAvailabilityRepo"></param>
         /// <param name="slotsRepo"></param>
         public AppointmentBookingManager(IRepository<CdmSchedule, Guid> schedulesRepo,
-            IRepository<ScheduleAvailabilityForBooking, Guid> scheduleAvailabilityRepo,
+            IRepository<ScheduleAvailabilityForTimeBooking, Guid> scheduleAvailabilityRepo,
             IRepository<CdmSlot, Guid> slotsRepo,
             IRepository<CdmAppointment, Guid> appointmentsRepo,
             IRepository<CdmSchedule, Guid> scheduleRepo,
@@ -159,7 +163,6 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// and for the specified Schedule.
         /// </summary>
         /// <param name="schedule"></param>
-        /// <param name="slotType"></param>
         /// <param name="fromDateTime"></param>
         /// <param name="toDateTime"></param>
         /// <returns></returns>
@@ -174,7 +177,6 @@ namespace Boxfusion.Health.His.Bookings.Domain
             var slots = _slotRepo.GetAll().Where(e =>
                 e.Schedule.Id == schedule.Id
                 && e.IsGeneratedFrom.Active == true
-                //&& e.CapacityType == slotType
                 && e.StartDateTime >= fromDateTime && e.EndDateTime <= toDateTime
                 && e.NumValidAppointments < (e.Capacity + e.OverflowCapacity))
                 .OrderBy(e => e.StartDateTime)

@@ -1,11 +1,13 @@
 ﻿using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
+using Boxfusion.Health.Cdm.Schedules;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.His.Bookings.Domain;
 using Boxfusion.Health.His.Bookings.Tests;
 using Boxfusion.Health.His.Tests;
+using Shesha.Domain;
 using Shouldly;
 using System;
 using System.Collections.Generic;
@@ -28,7 +30,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
         public async Task Should_Generate_8_Slots_per_day_When_8_hour_day_with_no_breaks()
         {
             //Creating the test data
-            var safb = new ScheduleAvailabilityForBooking()
+            var safb = new ScheduleAvailabilityForTimeBooking()
             {
                 Active = true,
                 ValidFromDate = null,
@@ -95,7 +97,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
             try
             {
                 //Creating the test data
-                var safb = new ScheduleAvailabilityForBooking()
+                var safb = new ScheduleAvailabilityForTimeBooking()
                 {
                     Active = true,
                     ValidFromDate = null,
@@ -139,7 +141,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
             try
             {
                 //Creating the test data
-                var safb = new ScheduleAvailabilityForBooking()
+                var safb = new ScheduleAvailabilityForTimeBooking()
                 {
                     Active = true,
                     ValidFromDate = null,
@@ -185,7 +187,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
             try
             {
                 //Creating the test data
-                var safb = new ScheduleAvailabilityForBooking()
+                var safb = new ScheduleAvailabilityForTimeBooking()
                 {
                     Active = true,
                     ValidFromDate = null,
@@ -229,7 +231,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
             try
             {
                 //Creating the test data
-                var safb = new ScheduleAvailabilityForBooking()
+                var safb = new ScheduleAvailabilityForTimeBooking()
                 {
                     Active = true,
                     ValidFromDate = DateTime.Now.Date.AddDays(2),
@@ -275,11 +277,28 @@ namespace Boxfusion.Health.His.Bookings.Schedules
                 //Creating the test data
 
 
-                //********************************************
-                //TODO: NEED TO ADD ONE PUBLIC HOLIDAY WITHIN THE 14 DAY HORIZON
-                //********************************************
+                // Creating some holidays
+                using (var uow = _uowManager.Begin())
+                {
+                    var holiday1 = new PublicHoliday()
+                    {
+                        Date = DateTime.Now.Date.AddDays(2),
+                        Name = "Test6: Holiday 1"
+                    };
+                    _holidayRepository.Insert(holiday1);
 
-                var safb = new ScheduleAvailabilityForBooking()
+                    var holiday2 = new PublicHoliday()
+                    {
+                        Date = DateTime.Now.Date.AddDays(5),
+                        Name = "Test6: Holiday 2"
+                    };
+
+                    _holidayRepository.Insert(holiday2); 
+                    
+                    uow.Complete();
+                }
+
+                var safb = new ScheduleAvailabilityForTimeBooking()
                 {
                     Active = true,
                     ValidFromDate = null,
@@ -303,7 +322,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
                 {
                     // Has generated the expected number of slots
                     var regularSlots = _slotsRepository.GetAllList(e => e.Schedule.Id == schedule.Id);
-                    regularSlots.Count.ShouldBe(8);  // 8 slots generated on the Public Holiday generated 
+                    regularSlots.Count.ShouldBe(8 * 2);  // 8 slots generated on each of the two Public Holiday generated 
 
                     await uow.CompleteAsync();
                 }
@@ -312,7 +331,10 @@ namespace Boxfusion.Health.His.Bookings.Schedules
             {
                 // Clean-up Generated data
                 if (schedule is not null)
+                {
                     CleanUpTestData_ForSchedule(schedule.Id);
+                    CleanUpTestData_ForPublicHolidays("Test6");
+                }
             }
         }
 

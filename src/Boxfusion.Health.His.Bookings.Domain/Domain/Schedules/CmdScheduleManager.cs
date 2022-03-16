@@ -1,6 +1,9 @@
 ﻿using Abp;
 using Abp.Domain.Repositories;
 using Abp.Domain.Services;
+using Boxfusion.Health.Cdm.Appointments;
+using Boxfusion.Health.Cdm.Schedules;
+using Boxfusion.Health.Cdm.Slots;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
@@ -34,7 +37,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// <param name="scheduleAvailabilityRepo"></param>
         /// <param name="slotsRepo"></param>
         public CmdScheduleManager(IRepository<CdmSchedule, Guid> schedulesRepo,
-            IRepository<ScheduleAvailabilityForBooking, Guid> scheduleAvailabilityRepo,
+            IRepository<ScheduleAvailabilityForTimeBooking, Guid> scheduleAvailabilityRepo,
             IRepository<CdmSlot, Guid> slotsRepo,
             IRepository<CdmAppointment, Guid> appointmentsRepo,
             IRepository<CdmSchedule, Guid> scheduleRepo,

@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using Boxfusion.Health.Cdm.Appointments;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Shesha.AutoMapper.Dto;
 using System;

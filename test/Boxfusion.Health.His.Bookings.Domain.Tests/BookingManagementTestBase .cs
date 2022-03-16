@@ -1,9 +1,14 @@
 ﻿using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
+using Boxfusion.Health.Cdm.Appointments;
+using Boxfusion.Health.Cdm.Patients;
+using Boxfusion.Health.Cdm.Schedules;
+using Boxfusion.Health.Cdm.Slots;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.His.Bookings.Domain;
+using Shesha.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,22 +22,23 @@ namespace Boxfusion.Health.His.Bookings.Tests
     {
         protected IRepository<CdmSchedule, Guid> _scheduleRepository;
         protected IRepository<Hospital, Guid> _facilityRepository;
-        protected IRepository<ScheduleAvailabilityForBooking, Guid> _availabilityRepository;
+        protected IRepository<ScheduleAvailabilityForTimeBooking, Guid> _availabilityRepository;
         protected readonly BookingSlotsGenerator _bookingSlotsGenerator;
         protected IRepository<CdmSlot, Guid> _slotsRepository;
         protected IRepository<CdmPatient, Guid> _patientRepository;
         protected IRepository<CdmAppointment, Guid> _appointmentRepository;
+        protected IRepository<PublicHoliday, Guid> _holidayRepository;
         protected IUnitOfWorkManager _uowManager;
 
         public BookingManagementTestBase()
         {
             _scheduleRepository = Resolve<IRepository<CdmSchedule, Guid>>();
             _facilityRepository = Resolve<IRepository<Hospital, Guid>>();
-            _availabilityRepository = Resolve<IRepository<ScheduleAvailabilityForBooking, Guid>>();
+            _availabilityRepository = Resolve<IRepository<ScheduleAvailabilityForTimeBooking, Guid>>();
             _slotsRepository = Resolve<IRepository<CdmSlot, Guid>>();
             _patientRepository = Resolve<IRepository<CdmPatient, Guid>>();
             _appointmentRepository = Resolve<IRepository<CdmAppointment, Guid>>();
-
+            _holidayRepository = Resolve<IRepository<PublicHoliday, Guid>>();
             _bookingSlotsGenerator = Resolve<BookingSlotsGenerator>();
 
             _uowManager = Resolve<IUnitOfWorkManager>();
@@ -75,7 +81,18 @@ namespace Boxfusion.Health.His.Bookings.Tests
                 query.ExecuteUpdate(); 
                 query = session.CreateSQLQuery("DELETE FROM Fhir_Schedules WHERE Id = '" + scheduleId.ToString() + "'");
                 query.ExecuteUpdate();
+                query = session.CreateSQLQuery("DELETE FROM Core_PublicHolidays WHERE Id = '" + scheduleId.ToString() + "'");
+                query.ExecuteUpdate();
+                session.Flush();
+            }
+        }
 
+        protected void CleanUpTestData_ForPublicHolidays(string name)
+        {
+            using (var session = OpenSession())
+            {
+                var query = session.CreateSQLQuery("DELETE FROM Core_PublicHolidays WHERE Name Like '" + name + "%'");
+                query.ExecuteUpdate();
                 session.Flush();
             }
         }
@@ -92,7 +109,7 @@ namespace Boxfusion.Health.His.Bookings.Tests
         }
         
 
-        protected async Task<CdmSchedule> CreateTestData_NewSchedule(string scheduleName, ScheduleAvailabilityForBooking safb, bool generateSlots)
+        protected async Task<CdmSchedule> CreateTestData_NewSchedule(string scheduleName, ScheduleAvailabilityForTimeBooking safb, bool generateSlots)
         {
             CdmSchedule schedule;
 
@@ -102,7 +119,7 @@ namespace Boxfusion.Health.His.Bookings.Tests
                 {
                     Active = true,
                     Name = scheduleName,
-                    SchedulingModel = RefListSchedulingModels.Appointment,
+                    SchedulingModel = RefListSchedulingModels.TimeBasedAppointment,
                 };
                 schedule = _scheduleRepository.Insert(schedule);
 

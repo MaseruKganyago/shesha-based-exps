@@ -13,6 +13,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 using Shouldly;
+using Boxfusion.Health.Cdm.Schedules;
+using Boxfusion.Health.Cdm.Patients;
+using Boxfusion.Health.Cdm.Appointments;
 
 namespace Boxfusion.Health.His.Bookings.AppointmentBooking
 {
@@ -33,7 +36,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             try
             {
                 // Creating test data - 8 slots per day for the next 10 days
-                var availability = new ScheduleAvailabilityForBooking()
+                var availability = new ScheduleAvailabilityForTimeBooking()
                 {
                     Active = true,
                     ValidFromDate = null,
@@ -80,7 +83,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             try
             {
                 // Creating test data - 8 slots per day for the next 10 days
-                var availability = new ScheduleAvailabilityForBooking()
+                var availability = new ScheduleAvailabilityForTimeBooking()
                 {
                     Active = true,
                     ValidFromDate = null,
@@ -128,7 +131,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             try
             {
                 // Creating test data - 8 slots per day for the next 10 days
-                var availability = new ScheduleAvailabilityForBooking()
+                var availability = new ScheduleAvailabilityForTimeBooking()
                 {
                     Active = true,
                     ValidFromDate = null,
@@ -215,7 +218,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             try
             {
                 // Creating test data - 8 slots per day for the next 10 days
-                var availability = new ScheduleAvailabilityForBooking()
+                var availability = new ScheduleAvailabilityForTimeBooking()
                 {
                     Active = true,
                     ValidFromDate = null,
@@ -290,7 +293,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             try
             {
                 // Creating test data - 8 slots per day for the next 10 days
-                var availability = new ScheduleAvailabilityForBooking()
+                var availability = new ScheduleAvailabilityForTimeBooking()
                 {
                     Active = true,
                     ValidFromDate = null,

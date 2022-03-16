@@ -79,7 +79,7 @@
             where Schedule.SchedulingModel is Appointment Booking.
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentBookingManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmAppointment,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmPatient,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentBookingManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Schedules.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Schedules.ScheduleAvailabilityForTimeBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Slots.CdmSlot,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Appointments.CdmAppointment,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Schedules.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Patients.CdmPatient,System.Guid})">
             <summary>
             
             </summary>
@@ -93,7 +93,7 @@
             </summary>
             <returns>Returns the appointment created to book the requested time. Will return null if a slot at that time was not found.</returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentBookingManager.BookAvailableSlotAsync(System.Guid,Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmAppointment)">
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentBookingManager.BookAvailableSlotAsync(System.Guid,Boxfusion.Health.Cdm.Appointments.CdmAppointment)">
             <summary>
             Creates a new Appointment to book the first available Slot for the specified schedule and requestedTime.
             </summary>
@@ -110,7 +110,6 @@
             and for the specified Schedule.
             </summary>
             <param name="schedule"></param>
-            <param name="slotType"></param>
             <param name="fromDateTime"></param>
             <param name="toDateTime"></param>
             <returns></returns>
@@ -138,13 +137,20 @@
             <param name="appointmentId">Id of the appointment.</param>
             <returns></returns>
         </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Domain.FlattenedFacilityAppointment">
+            <summary>
+            Flattened version of the Appointment entity joining in fields from the Patient and Schedule entities.
+            Note: The DB view behind this entity only returns Facility based appointments i.e. where the Owner of the schedule the appointment 
+            relates to is Health Facility
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator">
             <summary>
             Domain Service for the Schedule entity.
             Includes logic for the generation of Appoitment Booking Slots.
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Schedules.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Schedules.ScheduleAvailabilityForTimeBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Slots.CdmSlot,System.Guid},Shesha.Enterprise.PublicHolidays.PublicHolidayManager)">
             <summary>
             
             </summary>
@@ -158,14 +164,14 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.GenerateBookingSlotsForScheduleAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule)">
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.GenerateBookingSlotsForScheduleAsync(Boxfusion.Health.Cdm.Schedules.CdmSchedule)">
             <summary>
             Generate booking slots for the specified Schedule accross all its ScheduleAvailabilities
             </summary>
             <param name="schedule"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.GenerateBookingsSlotsForTheDayAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.DateTime)">
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.GenerateBookingsSlotsForTheDayAsync(Boxfusion.Health.Cdm.Schedules.ScheduleAvailabilityForTimeBooking,System.DateTime)">
             <summary>
             Generates all the time slots (both Regular and Overflow) required for the specified day.
             </summary>
@@ -179,7 +185,7 @@
             where Schedule.SchedulingModel is Appointment Booking.
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.CmdScheduleManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleAvailabilityForBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSlot,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmAppointment,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.ScheduleRoleAppointment,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.CmdScheduleManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Schedules.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Schedules.ScheduleAvailabilityForTimeBooking,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Slots.CdmSlot,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Appointments.CdmAppointment,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Schedules.CdmSchedule,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Schedules.ScheduleRoleAppointment,System.Guid})">
             <summary>
             
             </summary>
@@ -195,13 +201,6 @@
             <param name="roleName"></param>
             <param name="facilityId"></param>
             <returns></returns>
-        </member>
-        <member name="T:Boxfusion.Health.His.Bookings.Domain.FlattenedFacilityAppointment">
-            <summary>
-            Flattened version of the Appointment entity joining in fields from the Patient and Schedule entities.
-            Note: The DB view behind this entity only returns Facility based appointments i.e. where the Owner of the schedule the appointment 
-            relates to is Health Facility
-            </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointment">
             <summary>
@@ -264,7 +263,7 @@
             Booking notification sender
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.Notifications.BookingNotificationSender.NotifyCompletionOfNewBookingAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmAppointment)">
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.Notifications.BookingNotificationSender.NotifyCompletionOfNewBookingAsync(Boxfusion.Health.Cdm.Appointments.CdmAppointment)">
             inheritedDoc
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Domain.Notifications.IBookingNotificationSender">
@@ -272,7 +271,7 @@
             Booking notification sender
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.Notifications.IBookingNotificationSender.NotifyCompletionOfNewBookingAsync(Boxfusion.Health.HealthCommon.Core.Domain.Cdm.CdmAppointment)">
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.Notifications.IBookingNotificationSender.NotifyCompletionOfNewBookingAsync(Boxfusion.Health.Cdm.Appointments.CdmAppointment)">
             <summary>
             
             </summary>
@@ -523,6 +522,35 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="T:Shesha.Enterprise.PublicHolidays.PublicHolidayManager">
+            <summary>
+            Domain Service for Managing Public Holidays
+            </summary>
+        </member>
+        <member name="M:Shesha.Enterprise.PublicHolidays.PublicHolidayManager.#ctor(Abp.Domain.Repositories.IRepository{Shesha.Domain.PublicHoliday,System.Guid},Abp.Runtime.Caching.ICacheManager)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Shesha.Enterprise.PublicHolidays.PublicHolidayManager.IsHolidayAsync(System.DateTime)">
+            <summary>
+            Checks if the specified date is a Public Holiday or not.
+            </summary>
+            <param name="appointmentId">Id of the appointment.</param>
+            <returns>Returns true if the specified date is a Public Holiday, otherwise returns false.</returns>
+        </member>
+        <member name="M:Shesha.Enterprise.PublicHolidays.PublicHolidayManager.ClearCacheAsync">
+            <summary>
+            Ckears the cache with all public holidays.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Shesha.Enterprise.PublicHolidays.PublicHolidayManager.HandleEvent(Abp.Events.Bus.Entities.EntityChangedEventData{Shesha.Domain.PublicHoliday})">
+            <summary>
+            Clears the Holiday cache any time a new holiday has been added/modified.
+            </summary>
+            <param name="eventData"></param>
         </member>
     </members>
 </doc>

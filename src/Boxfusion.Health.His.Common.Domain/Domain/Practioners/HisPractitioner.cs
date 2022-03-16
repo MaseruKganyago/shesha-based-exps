@@ -1,4 +1,5 @@
-﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+﻿using Boxfusion.Health.Cdm.Practitioners;
+using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Shesha.Domain.Attributes;
 using System;
 using System.Collections.Generic;

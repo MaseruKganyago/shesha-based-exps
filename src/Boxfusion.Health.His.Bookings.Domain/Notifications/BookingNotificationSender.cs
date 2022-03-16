@@ -1,5 +1,6 @@
 ﻿using Abp.Dependency;
 using Abp.Domain.Repositories;
+using Boxfusion.Health.Cdm.Appointments;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.His.Bookings.Domain.Notifications.Models;
 using Shesha.Notifications;

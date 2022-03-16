@@ -1,6 +1,10 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.UI;
+using Boxfusion.Health.Cdm.Appointments;
+using Boxfusion.Health.Cdm.Patients;
+using Boxfusion.Health.Cdm.Schedules;
+using Boxfusion.Health.Cdm.Slots;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
@@ -29,7 +33,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
     {
         protected IRepository<CdmSchedule, Guid> _scheduleRepository;
         protected IRepository<HisHealthFacility, Guid> _facilityRepository;
-        protected IRepository<ScheduleAvailabilityForBooking, Guid> _availabilityRepository;
+        protected IRepository<ScheduleAvailabilityForTimeBooking, Guid> _availabilityRepository;
         protected readonly BookingSlotsGenerator _bookingSlotsGenerator;
         protected IRepository<CdmSlot, Guid> _slotsRepository;
         protected IRepository<CdmPatient, Guid> _patientRepository;
@@ -40,7 +44,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         public AppointmentBookingTestDataAppService(
                 IRepository<CdmSchedule, Guid> scheduleRepository,
                 IRepository<HisHealthFacility, Guid> facilityRepository,
-                IRepository<ScheduleAvailabilityForBooking, Guid> availabilityRepository,
+                IRepository<ScheduleAvailabilityForTimeBooking, Guid> availabilityRepository,
                 IRepository<CdmSlot, Guid> slotsRepository,
                 IRepository<CdmPatient, Guid> patientRepository,
                 IRepository<CdmAppointment, Guid> appointmentRepository,
@@ -63,7 +67,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         //[AbpAuthorize(PermissionNames.DailyAppointmentBooking)]
         public async Task<object> GenerateTestData()
         {
-            var availability = new ScheduleAvailabilityForBooking()
+            var availability = new ScheduleAvailabilityForTimeBooking()
             {
                 Active = true,
                 ValidFromDate = null,
@@ -91,7 +95,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         [HttpGet, Route("BookingManagement/TestData/Generate2")]
         public async Task<object> GenerateTestData2()
         {
-            var availability = new ScheduleAvailabilityForBooking()
+            var availability = new ScheduleAvailabilityForTimeBooking()
             {
                 Active = true,
                 ValidFromDate = null,
@@ -109,7 +113,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             };
             await this.CreateTestData_NewSchedule("Rob Ferreira Hospital", "RFH-General Practice", 29, availability, true);
 
-            var availability2 = new ScheduleAvailabilityForBooking()
+            var availability2 = new ScheduleAvailabilityForTimeBooking()
             {
                 Active = true,
                 ValidFromDate = null,
@@ -128,7 +132,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             await this.CreateTestData_NewSchedule("Rob Ferreira Hospital", "RFH-Ophthalmology", 52, availability2, true);
 
 
-            var availability3 = new ScheduleAvailabilityForBooking()
+            var availability3 = new ScheduleAvailabilityForTimeBooking()
             {
                 Active = true,
                 ValidFromDate = null,
@@ -146,7 +150,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             };
             await this.CreateTestData_NewSchedule("Middleburg Hospital", "Middleburg-Dermatology", 20, availability3, true);
 
-            var availability4 = new ScheduleAvailabilityForBooking()
+            var availability4 = new ScheduleAvailabilityForTimeBooking()
             {
                 Active = true,
                 ValidFromDate = null,
@@ -165,7 +169,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             await this.CreateTestData_NewSchedule("Middleburg Hospital", "Middleburg-Clinical physiology", 15, availability4, true);
 
 
-            var availability5 = new ScheduleAvailabilityForBooking()
+            var availability5 = new ScheduleAvailabilityForTimeBooking()
             {
                 Active = true,
                 ValidFromDate = null,
@@ -183,7 +187,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             };
             await this.CreateTestData_NewSchedule("Charlotte Maxeke", "Charlotte Maxke-General Practice", 29, availability5, true);
 
-            var availability6 = new ScheduleAvailabilityForBooking()
+            var availability6 = new ScheduleAvailabilityForTimeBooking()
             {
                 Active = true,
                 ValidFromDate = null,
@@ -211,7 +215,7 @@ Dermatology 20*/
         }
 
 
-        protected async Task<CdmSchedule> CreateTestData_NewSchedule(string hospitalName, string scheduleName, int speciality, ScheduleAvailabilityForBooking safb, bool generateSlots)
+        protected async Task<CdmSchedule> CreateTestData_NewSchedule(string hospitalName, string scheduleName, int speciality, ScheduleAvailabilityForTimeBooking safb, bool generateSlots)
         {
 
             var hospital = await CreateTestData_HealthFacility(hospitalName);
@@ -220,7 +224,7 @@ Dermatology 20*/
             {
                 Active = true,
                 Name = scheduleName,
-                SchedulingModel = RefListSchedulingModels.Appointment,
+                SchedulingModel = RefListSchedulingModels.TimeBasedAppointment,
                 Speciality = speciality,
                 HealthFacilityOwner = hospital,
                 ActorOwnerId = hospital.Id.ToString(),

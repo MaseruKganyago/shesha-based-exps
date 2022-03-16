@@ -1,4 +1,5 @@
-﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+﻿using Boxfusion.Health.Cdm.Appointments;
+using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Bookings.Domain.Notifications

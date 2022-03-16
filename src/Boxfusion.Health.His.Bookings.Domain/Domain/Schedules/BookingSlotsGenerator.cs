@@ -1,12 +1,16 @@
 ﻿using Abp;
 using Abp.Domain.Repositories;
 using Abp.Domain.Services;
+using Boxfusion.Health.Cdm.Schedules;
+using Boxfusion.Health.Cdm.Slots;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Shesha.AutoMapper.Dto;
+using Shesha.Enterprise.PublicHolidays;
+using Shesha.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +26,9 @@ namespace Boxfusion.Health.His.Bookings.Domain
     public class BookingSlotsGenerator : DomainService
     {
         private readonly IRepository<CdmSchedule, Guid> _schedulesRepo;
-        private readonly IRepository<ScheduleAvailabilityForBooking, Guid> _scheduleAvailabilityRepo;
+        private readonly IRepository<ScheduleAvailabilityForTimeBooking, Guid> _scheduleAvailabilityRepo;
         private readonly IRepository<CdmSlot, Guid> _slotsRepo;
+        private readonly PublicHolidayManager _publicHolidayManager;
 
         /// <summary>
         /// 
@@ -32,12 +37,14 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// <param name="scheduleAvailabilityRepo"></param>
         /// <param name="slotsRepo"></param>
         public BookingSlotsGenerator(IRepository<CdmSchedule, Guid> schedulesRepo,
-            IRepository<ScheduleAvailabilityForBooking, Guid> scheduleAvailabilityRepo,
-            IRepository<CdmSlot, Guid> slotsRepo)
+            IRepository<ScheduleAvailabilityForTimeBooking, Guid> scheduleAvailabilityRepo,
+            IRepository<CdmSlot, Guid> slotsRepo,
+            PublicHolidayManager publicHolidayManager)
         {
             _schedulesRepo = schedulesRepo;
             _scheduleAvailabilityRepo = scheduleAvailabilityRepo;
             _slotsRepo = slotsRepo;
+            _publicHolidayManager = publicHolidayManager;
         }
 
         /// <summary>
@@ -46,7 +53,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// <returns></returns>
         public async Task GenerateBookingSlotsForAllSchedulesAsync()
         {
-            var schedules = await _schedulesRepo.GetAllListAsync(e => e.SchedulingModel == RefListSchedulingModels.Appointment /*&& e.Active*/);
+            var schedules = await _schedulesRepo.GetAllListAsync(e => e.SchedulingModel == RefListSchedulingModels.TimeBasedAppointment/*&& e.Active*/);
 
             foreach (var schedule in schedules)
             {
@@ -61,7 +68,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// <returns></returns>
         public async Task GenerateBookingSlotsForScheduleAsync(CdmSchedule schedule)
         {
-            if (schedule.SchedulingModel != RefListSchedulingModels.Appointment) throw new InvalidOperationException("Operation is only valid if Schedule.SchedulingModel is Appointment.");
+            if (schedule.SchedulingModel != RefListSchedulingModels.TimeBasedAppointment) throw new InvalidOperationException("Operation is only valid if Schedule.SchedulingModel is Appointment.");
 
             var scheduleAvailabilities = await _scheduleAvailabilityRepo.GetAllListAsync(e => e.Schedule.Id == schedule.Id /*&& e.Active*/);
 
@@ -71,7 +78,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             }
         }
 
-        private async Task GenerateBookingSlotsForScheduleAvailabilityAsync(ScheduleAvailabilityForBooking scheduleAvailability)
+        private async Task GenerateBookingSlotsForScheduleAvailabilityAsync(ScheduleAvailabilityForTimeBooking scheduleAvailability)
         {
             if (scheduleAvailability.ApplicableDays == null)
                 return;
@@ -110,7 +117,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// <param name="scheduleAvailability"></param>
         /// <param name="d"></param>
         /// <returns></returns>
-        private async Task GenerateBookingsSlotsForTheDayAsync(ScheduleAvailabilityForBooking scheduleAvailability, DateTime d)
+        private async Task GenerateBookingsSlotsForTheDayAsync(ScheduleAvailabilityForTimeBooking scheduleAvailability, DateTime d)
         {
             // Check pre-requisite state
             if (!scheduleAvailability.StartTime.HasValue) throw new InvalidOperationException("scheduleAvailability.StartTime should have been defined.");
@@ -134,7 +141,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             }
         }
 
-        private async Task GenerateBookingSlotsForTimeSlotAsync(ScheduleAvailabilityForBooking scheduleAvailability, DateTime slotStartTime, DateTime slotEndTime, int capacity, int overflowCapacity = 0)
+        private async Task GenerateBookingSlotsForTimeSlotAsync(ScheduleAvailabilityForTimeBooking scheduleAvailability, DateTime slotStartTime, DateTime slotEndTime, int capacity, int overflowCapacity = 0)
         {
             if (scheduleAvailability.SlotGenerationMode == RefListSlotGenerationModes.OneSlotForAllResources)
             {
@@ -153,7 +160,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             }
         }
 
-        private async Task CreateSlotAsync(ScheduleAvailabilityForBooking scheduleAvailability, DateTime slotStartTime, DateTime slotEndTime, int capacity, int overflowCapacity = 0)
+        private async Task CreateSlotAsync(ScheduleAvailabilityForTimeBooking scheduleAvailability, DateTime slotStartTime, DateTime slotEndTime, int capacity, int overflowCapacity = 0)
         {
             if ((capacity + overflowCapacity) <= 0) throw new InvalidOperationException("capacity must be larger than 0");
 
@@ -173,7 +180,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             });
         }
 
-        private bool CheckScheduleApplies(ScheduleAvailabilityForBooking scheduleAvailability, DateTime dt)
+        private bool CheckScheduleApplies(ScheduleAvailabilityForTimeBooking scheduleAvailability, DateTime dt)
         {
             var daysOfWeek = ConverToDaysOfWeek(dt);
             return scheduleAvailability.ApplicableDays.Value.HasFlag(daysOfWeek);
@@ -181,7 +188,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
 
         private RefListDaysOfWeek ConverToDaysOfWeek(DateTime d)
         {
-            bool isPublicHoliday = false; //Check if the day is a public holiday (TODO: Should be made available within framework)
+            bool isPublicHoliday = _publicHolidayManager.IsHolidayAsync(d).Result; //Check if the day is a public holiday
 
             if (isPublicHoliday)
                 return RefListDaysOfWeek.pub;

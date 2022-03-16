@@ -2,6 +2,8 @@
 using Abp.Domain.Repositories;
 using Abp.UI;
 using AutoMapper;
+using Boxfusion.Health.Cdm.Appointments;
+using Boxfusion.Health.Cdm.Slots;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
