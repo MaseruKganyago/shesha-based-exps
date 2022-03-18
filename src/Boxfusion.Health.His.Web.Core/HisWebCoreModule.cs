@@ -41,16 +41,16 @@ namespace Boxfusion.Health.His
          // Adding all the His Modules
          //typeof(HisAdmissModule),
          //typeof(HisAdminisModule),
+         typeof(MpDoh.HisMpDohCustomisationsModule),
          typeof(HisCommonDomainModule),
          typeof(HisCommonApplicationModule),
          typeof(HisBookingsDomainModule),
          typeof(HisBookingsApplicationModule),
 
+         typeof(SheshaReportingModule),
          typeof(SheshaApplicationModule),
          typeof(SheshaNHibernateModule),
-         typeof(AbpAspNetCoreModule),
-         typeof(AbpAspNetCoreSignalRModule),
-         typeof(AbpAutoMapperModule),
+         typeof(SheshaFormsDesignerModule),
          typeof(SheshaSchedulerModule),
          typeof(SheshaImportModule),
          typeof(SheshaWebControlsModule),
@@ -63,8 +63,10 @@ namespace Boxfusion.Health.His
          typeof(SheshaBulkSmsModule),
          typeof(SheshaXml2SmsModule),
          typeof(SheshaSmsPortalModule),
-         typeof(SheshaFormsDesignerModule),
-         typeof(SheshaReportingModule)
+
+         typeof(AbpAspNetCoreModule),
+         typeof(AbpAspNetCoreSignalRModule),
+         typeof(AbpAutoMapperModule)
      )]
     public class HisWebCoreModule : AbpModule
     {
@@ -92,7 +94,6 @@ namespace Boxfusion.Health.His
 
             // Use database for language management
             Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
-
 
             Configuration.Authorization.Providers.Add<HisAuthorizationProvider>();
 
@@ -123,7 +124,6 @@ namespace Boxfusion.Health.His
         {
             IocManager.RegisterAssemblyByConvention(typeof(HisWebCoreModule).GetAssembly());
 
-            //TODO: Should probably be moved to a Solutions module or move to His.Common (i.e. a module whose main purpose is to pull all the other separate modules together
             IocManager.IocContainer.Register(
                   Component.For<ICustomPermissionChecker>().Forward<IHisPermissionChecker>().Forward<HisPermissionChecker>().ImplementedBy<HisPermissionChecker>().LifestyleTransient()
                 );

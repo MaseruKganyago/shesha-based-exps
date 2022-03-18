@@ -7,6 +7,7 @@
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace>Boxfusion.Health.His.MpDoh</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -24,8 +25,6 @@
     <Compile Remove="Domain\Dtos\**" />
     <Compile Remove="Helpers\**" />
     <Compile Remove="Jobs\**" />
-    <Compile Remove="Notifications\**" />
-    <Compile Remove="Services\BookingAppointments\Helpers\**" />
     <Compile Remove="Services\FacilityPatients\**" />
     <Compile Remove="Services\Wards\**" />
     <EmbeddedResource Remove="Application\**" />
@@ -33,8 +32,6 @@
     <EmbeddedResource Remove="Domain\Dtos\**" />
     <EmbeddedResource Remove="Helpers\**" />
     <EmbeddedResource Remove="Jobs\**" />
-    <EmbeddedResource Remove="Notifications\**" />
-    <EmbeddedResource Remove="Services\BookingAppointments\Helpers\**" />
     <EmbeddedResource Remove="Services\FacilityPatients\**" />
     <EmbeddedResource Remove="Services\Wards\**" />
     <None Remove="Application\**" />
@@ -42,25 +39,8 @@
     <None Remove="Domain\Dtos\**" />
     <None Remove="Helpers\**" />
     <None Remove="Jobs\**" />
-    <None Remove="Notifications\**" />
-    <None Remove="Services\BookingAppointments\Helpers\**" />
     <None Remove="Services\FacilityPatients\**" />
     <None Remove="Services\Wards\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Services\BookingAppointments\AppointmentBookingAppService.cs" />
-    <Compile Remove="Services\BookingAppointments\AppointmentBookingTestDataAppService.cs" />
-    <Compile Remove="Services\BookingAppointments\AppointmentForBookingAppService.cs" />
-    <Compile Remove="Services\BookingAppointments\Dtos\BookAppointmentInput.cs" />
-    <Compile Remove="Services\BookingAppointments\Dtos\CancelAppointmentInput.cs" />
-    <Compile Remove="Services\BookingAppointments\Dtos\RescheduleInput.cs" />
-    <Compile Remove="Services\BookingAppointments\IBookingManagementsAppService.cs" />
-    <Compile Remove="Services\BookingAppointments\ScheduleAppService.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Services\BookingAppointments\Helpers\Util.cs" />
   </ItemGroup>
 
 
@@ -82,7 +62,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Boxfusion.Health.His.Bookings.Domain\Boxfusion.Health.His.Bookings.Domain.csproj" />
     <ProjectReference Include="..\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Notifications\Models\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

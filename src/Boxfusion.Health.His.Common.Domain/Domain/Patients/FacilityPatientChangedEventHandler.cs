@@ -20,11 +20,8 @@ namespace Boxfusion.Health.His.Common.Patients
 {
     public class FacilityPatientChangedEventHandler : IEventHandler<EntityChangedEventData<FacilityPatient>>, ITransientDependency
     {
-        private readonly IUnitOfWorkManager _unitOfWorkManager;
-
-        public FacilityPatientChangedEventHandler(IUnitOfWorkManager unitOfWorkManager)
+        public FacilityPatientChangedEventHandler()
         {
-            _unitOfWorkManager = unitOfWorkManager;
 
         }
 
@@ -32,12 +29,13 @@ namespace Boxfusion.Health.His.Common.Patients
         {
             if (!RequestContextHelper.HasFacilityId) return;
 
+            var unitOfWorkManager = IocManager.Instance.Resolve<IUnitOfWorkManager>();
             var abpSession = IocManager.Instance.Resolve<IAbpSession>();
             var currentUserId = abpSession.GetUserId();
             var facilityId = RequestContextHelper.FacilityId;
 
             // make sure that we have active session
-            using (_unitOfWorkManager.Current == null ? _unitOfWorkManager.Begin() : null)
+            using (unitOfWorkManager.Current == null ? unitOfWorkManager.Begin() : null)
                 {
                 using (var session = IocManager.Instance.Resolve<ISessionFactory>().OpenSession())
                 {

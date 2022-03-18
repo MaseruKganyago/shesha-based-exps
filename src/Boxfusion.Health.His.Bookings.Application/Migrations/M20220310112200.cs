@@ -1,4 +1,4 @@
-﻿using Boxfusion.Health.His.Bookings.Domain.Notifications;
+﻿using Boxfusion.Health.His.Bookings.Notifications;
 using FluentMigrator;
 using System;
 
