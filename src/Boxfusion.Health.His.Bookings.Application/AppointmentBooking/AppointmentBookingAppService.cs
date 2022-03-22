@@ -152,7 +152,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="facilityId"></param>
         /// <param name="appointmentId"></param>
         /// <returns></returns>
-        [HttpPut, Route("Appointments/CancelAppointment")]
+        [HttpPut, Route("Appointments/{appointmentId}/CancelAppointment")]
         [AbpAuthorize(CommonPermissions.BookAppointment)]
         public async Task<DynamicDto<CdmAppointment, Guid>> CancelAppointment(Guid appointmentId)
         {

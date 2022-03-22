@@ -47,6 +47,7 @@ namespace Boxfusion.Health.His
          typeof(HisBookingsDomainModule),
          typeof(HisBookingsApplicationModule),
 
+         typeof(SheshaEnterpriseModule),
          typeof(SheshaReportingModule),
          typeof(SheshaApplicationModule),
          typeof(SheshaNHibernateModule),

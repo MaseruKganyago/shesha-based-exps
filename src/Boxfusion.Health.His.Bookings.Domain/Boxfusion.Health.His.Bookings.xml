@@ -171,6 +171,13 @@
             <param name="schedule"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.GenerateBookingSlotsForScheduleAsync(System.Guid)">
+            <summary>
+            Generate booking slots for the specified Schedule accross all its ScheduleAvailabilities
+            </summary>
+            <param name="scheduleId">Id of the schedule for which slots should be generated.</param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.GenerateBookingsSlotsForTheDayAsync(Boxfusion.Health.Cdm.Schedules.ScheduleAvailabilityForTimeBooking,System.DateTime)">
             <summary>
             Generates all the time slots (both Regular and Overflow) required for the specified day.

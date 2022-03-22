@@ -78,6 +78,18 @@ namespace Boxfusion.Health.His.Bookings.Domain
             }
         }
 
+        /// <summary>
+        /// Generate booking slots for the specified Schedule accross all its ScheduleAvailabilities
+        /// </summary>
+        /// <param name="scheduleId">Id of the schedule for which slots should be generated.</param>
+        /// <returns></returns>
+        public async Task GenerateBookingSlotsForScheduleAsync(Guid scheduleId)
+        {
+            var schedule = _schedulesRepo.Get(scheduleId);
+
+            await GenerateBookingSlotsForScheduleAsync(schedule);
+        }
+
         private async Task GenerateBookingSlotsForScheduleAvailabilityAsync(ScheduleAvailabilityForTimeBooking scheduleAvailability)
         {
             if (scheduleAvailability.ApplicableDays == null)

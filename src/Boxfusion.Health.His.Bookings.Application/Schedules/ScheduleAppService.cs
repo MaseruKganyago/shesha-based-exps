@@ -68,7 +68,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
         /// Generate booking slots for all active Schedules where SchedulingModel is Appointment.
         /// </summary>
         [HttpPost, Route("GenerateSlotsForAll")]
-        public async Task<object> GenerateSlotsAsync()
+        public async Task<object> GenerateSlotsForAllAsync()
         {
             var bookingSlotsGenerator = this.IocManager.Resolve<BookingSlotsGenerator>();
 
@@ -77,6 +77,18 @@ namespace Boxfusion.Health.His.Bookings.Schedules
             return new object();
         }
 
+        /// <summary>
+        /// Generate booking slots for the specified schedule
+        /// </summary>
+        [HttpPost, Route("{id}/GenerateSlots")]
+        public async Task<object> GenerateSlotsAsync(Guid id)
+        {
+            var bookingSlotsGenerator = this.IocManager.Resolve<BookingSlotsGenerator>();
+
+            await bookingSlotsGenerator.GenerateBookingSlotsForScheduleAsync(id);
+
+            return new object();
+        }
 
     }
 }
