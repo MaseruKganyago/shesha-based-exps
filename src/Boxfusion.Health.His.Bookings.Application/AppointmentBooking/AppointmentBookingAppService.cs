@@ -10,7 +10,7 @@ using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Bookings.Domain;
-using Boxfusion.Health.His.Bookings.Domain.Notifications;
+using Boxfusion.Health.His.Bookings.Notifications;
 using Boxfusion.Health.His.Common.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shesha.DynamicEntities.Dtos;
@@ -92,8 +92,6 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             // send notification
             await _bookingNotificationSender.NotifyCompletionOfNewBookingAsync(newAppointment);
 
-            // send SMS notification
-            
             return await this.MapToDynamicDtoAsync<CdmAppointment, Guid>(newAppointment);
         }
 
@@ -120,6 +118,10 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
 
                 if (app is null)
                     throw new UserFriendlyException("No slots are available for booking at the requested time.");
+
+                var bookingNotificationSender = IocManager.Resolve<IBookingNotificationSender>();
+                // send notification
+                await _bookingNotificationSender.NotifyBookingRescheduledAsync(app);
 
                 return await this.MapToDynamicDtoAsync<CdmAppointment, Guid>(app);
             }
@@ -150,13 +152,16 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="facilityId"></param>
         /// <param name="appointmentId"></param>
         /// <returns></returns>
-        [HttpPut, Route("Appointments/CancelAppointment")]
+        [HttpPut, Route("Appointments/{appointmentId}/CancelAppointment")]
         [AbpAuthorize(CommonPermissions.BookAppointment)]
         public async Task<DynamicDto<CdmAppointment, Guid>> CancelAppointment(Guid appointmentId)
         {
             try
             {
                 var app = await _appointmentBookingManager.CancelAppointment(appointmentId);
+
+                // Send notification
+                await _bookingNotificationSender.NotifyBookingCancelledAsync(app);
 
                 return await this.MapToDynamicDtoAsync<CdmAppointment, Guid>(app);
             }

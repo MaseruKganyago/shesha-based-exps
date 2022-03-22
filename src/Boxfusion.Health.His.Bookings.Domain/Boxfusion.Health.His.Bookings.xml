@@ -171,6 +171,13 @@
             <param name="schedule"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.GenerateBookingSlotsForScheduleAsync(System.Guid)">
+            <summary>
+            Generate booking slots for the specified Schedule accross all its ScheduleAvailabilities
+            </summary>
+            <param name="scheduleId">Id of the schedule for which slots should be generated.</param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.GenerateBookingsSlotsForTheDayAsync(Boxfusion.Health.Cdm.Schedules.ScheduleAvailabilityForTimeBooking,System.DateTime)">
             <summary>
             Generates all the time slots (both Regular and Overflow) required for the specified day.
@@ -256,54 +263,6 @@
         <member name="P:Boxfusion.Health.His.Bookings.Domain.Views.FlattenedAppointment.TotalCount">
             <summary>
             
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Bookings.Domain.Notifications.BookingNotificationSender">
-            <summary>
-            Booking notification sender
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.Notifications.BookingNotificationSender.NotifyCompletionOfNewBookingAsync(Boxfusion.Health.Cdm.Appointments.CdmAppointment)">
-            inheritedDoc
-        </member>
-        <member name="T:Boxfusion.Health.His.Bookings.Domain.Notifications.IBookingNotificationSender">
-            <summary>
-            Booking notification sender
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Bookings.Domain.Notifications.IBookingNotificationSender.NotifyCompletionOfNewBookingAsync(Boxfusion.Health.Cdm.Appointments.CdmAppointment)">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Bookings.Domain.Notifications.Models.CompletionOfNewBookingModel">
-            <summary>
-            Model of the <see cref="F:Boxfusion.Health.His.Bookings.Domain.Notifications.NotificationTemplateIds.CompletionOfNewBooking"/> notification
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Domain.Notifications.Models.CompletionOfNewBookingModel.Fullname">
-            <summary>
-            Recipient name
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Domain.Notifications.Models.CompletionOfNewBookingModel.FacilityName">
-            <summary>
-            Facility name
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Bookings.Domain.Notifications.Models.CompletionOfNewBookingModel.StartDate">
-            <summary>
-            Appointment start date
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Bookings.Domain.Notifications.NotificationTemplateIds">
-            <summary>
-            Notification template identifiers
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Bookings.Domain.Notifications.NotificationTemplateIds.CompletionOfNewBooking">
-            <summary>
-            All The Bursary Management Notifications Will be under this category of notifications
             </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.HisBookingsDomainModule">
@@ -522,35 +481,6 @@
             <summary>
             
             </summary>
-        </member>
-        <member name="T:Shesha.Enterprise.PublicHolidays.PublicHolidayManager">
-            <summary>
-            Domain Service for Managing Public Holidays
-            </summary>
-        </member>
-        <member name="M:Shesha.Enterprise.PublicHolidays.PublicHolidayManager.#ctor(Abp.Domain.Repositories.IRepository{Shesha.Domain.PublicHoliday,System.Guid},Abp.Runtime.Caching.ICacheManager)">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Shesha.Enterprise.PublicHolidays.PublicHolidayManager.IsHolidayAsync(System.DateTime)">
-            <summary>
-            Checks if the specified date is a Public Holiday or not.
-            </summary>
-            <param name="appointmentId">Id of the appointment.</param>
-            <returns>Returns true if the specified date is a Public Holiday, otherwise returns false.</returns>
-        </member>
-        <member name="M:Shesha.Enterprise.PublicHolidays.PublicHolidayManager.ClearCacheAsync">
-            <summary>
-            Ckears the cache with all public holidays.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Shesha.Enterprise.PublicHolidays.PublicHolidayManager.HandleEvent(Abp.Events.Bus.Entities.EntityChangedEventData{Shesha.Domain.PublicHoliday})">
-            <summary>
-            Clears the Holiday cache any time a new holiday has been added/modified.
-            </summary>
-            <param name="eventData"></param>
         </member>
     </members>
 </doc>
