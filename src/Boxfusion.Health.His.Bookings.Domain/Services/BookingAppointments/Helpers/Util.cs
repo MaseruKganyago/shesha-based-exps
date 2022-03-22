@@ -26,7 +26,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
 					,app.[Start] 
 					,app.AppointmentTypeLkp AppointmentType
 					,app.StatusLkp [Status]
-					,(SELECT [value] FROM Fhir_Identifiers WHERE TypeLkp = 5 and CAST(OwnerId AS UNIQUEIDENTIFIER) = app.PatientId) AS PatientFileId
+					,(SELECT TOP 1 [value] FROM Fhir_Identifiers WHERE TypeLkp = 5 and CAST(OwnerId AS UNIQUEIDENTIFIER) = app.PatientId) AS PatientFileId
 					,per.IdentityNumber IDNumberPassportNumber
 					,per.FullName
 					,per.MobileNumber1 ContactNumber
