@@ -34,6 +34,7 @@ using Shesha.DynamicEntities;
 using Shesha.Swagger;
 using Boxfusion.Health.His.Web.Host.Swagger;
 using Shesha.DynamicEntities.Swagger;
+using Boxfusion.Health.His.Hangfire;
 
 namespace Boxfusion.Health.His.Web.Host.Startup
 {
@@ -196,7 +197,11 @@ namespace Boxfusion.Health.His.Web.Host.Startup
                 //Queues = new[] { "alpha", "beta", "default" }
             };
             app.UseHangfireServer(options);
-            app.UseHangfireDashboard();
+            app.UseHangfireDashboard("/hangfire",
+                new DashboardOptions
+                {
+                    Authorization = new[] { new HangfireAuthorizationFilter() }
+                });
         }
 
 

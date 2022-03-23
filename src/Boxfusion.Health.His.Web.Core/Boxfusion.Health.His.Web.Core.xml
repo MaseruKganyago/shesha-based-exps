@@ -4,6 +4,11 @@
         <name>Boxfusion.Health.His.Web.Core</name>
     </assembly>
     <members>
+        <member name="T:Boxfusion.Health.His.Hangfire.HangfireAuthorizationFilter">
+            <summary>
+            Hangfire authorization filter
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.HisWebCoreModule">
             <summary>
             ReSharper disable once InconsistentNaming
