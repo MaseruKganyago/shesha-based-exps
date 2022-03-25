@@ -11,6 +11,7 @@ using Shesha.Startup;
 using System;
 using Castle.MicroKernel.Registration;
 using System.Reflection;
+using Abp.Reflection.Extensions;
 
 namespace Boxfusion.Health.His.Common
 {
@@ -72,6 +73,13 @@ namespace Boxfusion.Health.His.Common
                 assembly: typeof(HisCommonApplicationModule).Assembly,
                 moduleName: "Common",
                 useConventionalHttpVerbs: true);
+
+            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(SheshaCoreModule).Assembly, "Core");
+            Configuration.Modules.AbpAspNetCore()
+                 .CreateControllersForAppServices(
+                     typeof(SheshaCoreModule).GetAssembly()
+                 );
+
 
         }
     }

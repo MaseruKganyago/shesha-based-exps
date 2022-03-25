@@ -31,6 +31,7 @@ using Boxfusion.Health.His.Common;
 using Castle.MicroKernel.Registration;
 using Shesha.Authorization;
 using Boxfusion.Health.His.Common.Authorization;
+using Shesha.Startup;
 
 namespace Boxfusion.Health.His
 {
@@ -97,11 +98,6 @@ namespace Boxfusion.Health.His
             Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
             Configuration.Authorization.Providers.Add<HisAuthorizationProvider>();
-
-            Configuration.Modules.AbpAspNetCore()
-                 .CreateControllersForAppServices(
-                     typeof(SheshaApplicationModule).GetAssembly()
-                 );
 
             ConfigureTokenAuth();
         }
