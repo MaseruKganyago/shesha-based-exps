@@ -74,6 +74,13 @@ namespace Boxfusion.Health.His.Common
                 moduleName: "Common",
                 useConventionalHttpVerbs: true);
 
+            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(SheshaApplicationModule).Assembly, "App");
+            Configuration.Modules.AbpAspNetCore()
+                 .CreateControllersForAppServices(
+                     typeof(SheshaApplicationModule).GetAssembly()
+                 );
+
+
             Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(SheshaCoreModule).Assembly, "Core");
             Configuration.Modules.AbpAspNetCore()
                  .CreateControllersForAppServices(
