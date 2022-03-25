@@ -12,9 +12,9 @@
 
   <ItemGroup>
     <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.1.16" />
-    <PackageReference Include="Shesha.Application" Version="0.3.64" />
-    <PackageReference Include="Shesha.Core" Version="0.3.64" />
-    <PackageReference Include="Shesha.Framework" Version="0.3.64" />
+    <PackageReference Include="Shesha.Application" Version="0.3.67" />
+    <PackageReference Include="Shesha.Core" Version="0.3.67" />
+    <PackageReference Include="Shesha.Framework" Version="0.3.67" />
   </ItemGroup>
 
   <ItemGroup>
