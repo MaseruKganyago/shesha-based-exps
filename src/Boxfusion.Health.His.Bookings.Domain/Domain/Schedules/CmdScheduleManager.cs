@@ -63,7 +63,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
 
 
             //TODO: REMOVE TEMP - WANT TO SHOW ALL SCHEDULES FOR FACILITY
-            var schedules = await _scheduleRepo.GetAllListAsync(o => o.HealthFacilityOwner.Id == facilityId);
+            var schedules = await _scheduleRepo.GetAllListAsync(o => o.HealthFacilityOwner.Id == facilityId && o.Active == true);
 
             //var roleRepo = Abp.Dependency.IocManager.Instance.Resolve<IRepository<ShaRole, Guid>>();
             //var role = await roleRepo.FirstOrDefaultAsync(e => e.Name == roleName);
