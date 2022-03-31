@@ -70,7 +70,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             //if (role is null) throw new InvalidOperationException("No such role exists");
 
 
-            //var roleAppointments = await _scheduleRoleAppointRepo.GetAllListAsync(e => e.Person.Id == personId && e.Role.Id == role.Id && (facilityId == null || e.Schedule.HealthFacilityOwner.Id == facilityId) );
+            //var roleAppointments = await _scheduleRoleAppointRepo.GetAllListAsync(e => e.Person.Id == personId && e.Role.Id == role.Id && (facilityId == null || e.Schedule.HealthFacilityOwner.Id == facilityId));
 
             //var schedules = new List<CdmSchedule>();
 
@@ -80,7 +80,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             //    {
             //        schedules.Add(_scheduleRepo.Get(roleApp.Schedule.Id));
             //    }
-                    
+
             //}
 
             return schedules;

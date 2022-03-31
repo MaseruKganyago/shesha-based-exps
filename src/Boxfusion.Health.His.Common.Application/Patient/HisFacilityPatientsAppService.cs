@@ -16,7 +16,7 @@ namespace Boxfusion.Health.His.Common.Patients
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/HisBookings/[controller]")]
     [Obsolete("Should remove once configuration driven entity pickers are implemented")]
-    public class HisFacilityPatientsAppService : HisAppServiceBase
+    public class HisFacilityPatientAppService : HisAppServiceBase
     {
 
         /// <summary>

@@ -42,7 +42,7 @@ namespace Boxfusion.Health.His.Common.Authorization
             // system administrator has all rights
             if (await IsInAnyOfRoles(person, CommonRoles.SystemAdministrator))
             {
-                if (permissionName == CommonPermissions.AdmissionDashboard || permissionName == CommonPermissions.Wards)
+                if (permissionName == CommonPermissionsObsolete.AdmissionDashboard || permissionName == CommonPermissionsObsolete.Wards)
                 {
                     return false;
                 }
@@ -52,7 +52,7 @@ namespace Boxfusion.Health.His.Common.Authorization
             // data administrator has all rights
             if (await IsInAnyOfRoles(person, CommonRoles.GlobalAdmin))
             {
-                if (permissionName == CommonPermissions.AdmissionDashboard || permissionName == CommonPermissions.Wards)
+                if (permissionName == CommonPermissionsObsolete.AdmissionDashboard || permissionName == CommonPermissionsObsolete.Wards)
                 {
                     return false;
                 }
@@ -60,32 +60,32 @@ namespace Boxfusion.Health.His.Common.Authorization
             }
             
             // add custom permission checks here...
-            if (permissionName == CommonPermissions.ApproveReport || permissionName == CommonPermissions.DisapproveReport 
-                || permissionName == CommonPermissions.DailyReports || permissionName == CommonPermissions.MonthlyReports)
+            if (permissionName == CommonPermissionsObsolete.ApproveReport || permissionName == CommonPermissionsObsolete.DisapproveReport 
+                || permissionName == CommonPermissionsObsolete.DailyReports || permissionName == CommonPermissionsObsolete.MonthlyReports)
                 return await this.IsApproverLevel1(person) || await this.IsApproverLevel2(person);
 
-            if (permissionName == Shesha.Authorization.PermissionNames.Pages_Users || permissionName == CommonPermissions.Wards || permissionName == CommonPermissions.Speciality)
+            if (permissionName == Shesha.Authorization.PermissionNames.Pages_Users || permissionName == CommonPermissionsObsolete.Wards || permissionName == CommonPermissionsObsolete.Speciality)
                 return await this.IsFacilityAdmin(person);
             
-            if (permissionName == CommonPermissions.SeparateAndTransfer || permissionName == CommonPermissions.SubmitsReportsForApproval)
+            if (permissionName == CommonPermissionsObsolete.SeparateAndTransfer || permissionName == CommonPermissionsObsolete.SubmitsReportsForApproval)
                 return await this.IsCapturer(person);
 
-            if (permissionName == CommonPermissions.ReportsAndStats || permissionName == CommonPermissions.DailyReports 
-                || permissionName == CommonPermissions.AdmissionDashboard || permissionName == CommonPermissions.AllAdmissionDashboard 
-                || permissionName == CommonPermissions.DailyAdmissionDashboard)
+            if (permissionName == CommonPermissionsObsolete.ReportsAndStats || permissionName == CommonPermissionsObsolete.DailyReports 
+                || permissionName == CommonPermissionsObsolete.AdmissionDashboard || permissionName == CommonPermissionsObsolete.AllAdmissionDashboard 
+                || permissionName == CommonPermissionsObsolete.DailyAdmissionDashboard)
                 return await this.IsViewer(person) || await this.IsCapturer(person) || await this.IsManager(person) || await this.IsApproverLevel1(person) || await this.IsApproverLevel2(person);
-            if (permissionName == CommonPermissions.Administration || permissionName == CommonPermissions.CreateFacility)
+            if (permissionName == CommonPermissionsObsolete.Administration || permissionName == CommonPermissionsObsolete.CreateFacility)
                 return await this.IsFacilityAdmin(person);
-            if (permissionName == CommonPermissions.Reports)
+            if (permissionName == CommonPermissionsObsolete.Reports)
                 return await this.IsManager(person);
 
-            if (permissionName == CommonPermissions.DailyAppointmentBooking)
+            if (permissionName == CommonPermissionsObsolete.DailyAppointmentBooking)
                 return await this.IsScheduleManager(person) || await this.IsScheduleFulfiller(person) || await this.IsAdmin(person);
 
-            if (permissionName == CommonPermissions.BookAppointment)
+            if (permissionName == CommonPermissionsObsolete.BookAppointment)
                 return await this.IsScheduleManager(person) || await this.IsAdmin(person);
 
-            if (permissionName == CommonPermissions.RescheduleAppointment)
+            if (permissionName == CommonPermissionsObsolete.RescheduleAppointment)
                 return await this.IsScheduleManager(person) || await this.IsAdmin(person);
 
             return false;

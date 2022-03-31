@@ -56,14 +56,25 @@ namespace Boxfusion.Health.His.Common
         /// inheritedDoc
         public override void PostInitialize()
         {
-            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(HisCommonDomainModule).Assembly, "Common");
-            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(HealthCommonModule).Assembly, "Cdm");
+            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(SheshaCoreModule).Assembly, "Core");
+            Configuration.Modules.AbpAspNetCore()
+                 .CreateControllersForAppServices(
+                     typeof(SheshaCoreModule).GetAssembly()
+                 );
 
+            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(SheshaApplicationModule).Assembly, "App");
+            Configuration.Modules.AbpAspNetCore()
+                 .CreateControllersForAppServices(
+                     typeof(SheshaApplicationModule).GetAssembly()
+                 );
+
+            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(HealthCommonModule).Assembly, "Cdm");
             Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
                 typeof(HealthCommonModule).Assembly,
                 moduleName: "Cdm",
                 useConventionalHttpVerbs: true);
 
+            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(HisCommonDomainModule).Assembly, "Common");
             Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
                 typeof(HisCommonDomainModule).Assembly,
                 moduleName: "Common",
@@ -73,20 +84,6 @@ namespace Boxfusion.Health.His.Common
                 assembly: typeof(HisCommonApplicationModule).Assembly,
                 moduleName: "Common",
                 useConventionalHttpVerbs: true);
-
-            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(SheshaApplicationModule).Assembly, "App");
-            Configuration.Modules.AbpAspNetCore()
-                 .CreateControllersForAppServices(
-                     typeof(SheshaApplicationModule).GetAssembly()
-                 );
-
-
-            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(SheshaCoreModule).Assembly, "Core");
-            Configuration.Modules.AbpAspNetCore()
-                 .CreateControllersForAppServices(
-                     typeof(SheshaCoreModule).GetAssembly()
-                 );
-
 
         }
     }

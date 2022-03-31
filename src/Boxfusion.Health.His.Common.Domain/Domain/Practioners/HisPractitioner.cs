@@ -11,7 +11,8 @@ namespace Boxfusion.Health.His.Common.Practitioners
     /// <summary>
     /// 
     /// </summary>
-    [Entity(TypeShortAlias = "His.HisPractitioner", ApplicationServiceName = "HisPractitionerCrud")]
+    [Entity(TypeShortAlias = "His.HisPractitioner"
+        , ApplicationServiceName = "HisPractitionerCrud")]
     [DiscriminatorValue("His.HisPractitioner")]
     [Discriminator]
     [Table("Core_Persons")]

@@ -11,6 +11,7 @@ using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Bookings.Domain;
 using Boxfusion.Health.His.Bookings.Notifications;
+using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shesha.DynamicEntities.Dtos;
@@ -28,7 +29,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
     [AbpAuthorize]
     [ApiVersion("2")]
     [Route("api/v{version:apiVersion}/His/[controller]")]
-    public class AppointmentBookingAppService : CdmAppServiceBase
+    public class AppointmentBookingAppService : HisAppServiceBase
     {
         private readonly AppointmentBookingManager _appointmentBookingManager;
         private readonly IBookingNotificationSender _bookingNotificationSender;
@@ -73,7 +74,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("Appointments/BookAvailableSlot")]
-        [AbpAuthorize(CommonPermissions.BookAppointment)]
+        [AbpAuthorize(CommonPermissionsObsolete.BookAppointment)]
         public async Task<DynamicDto<CdmAppointment, Guid>> BookAvailableSlotAsync(BookAppointmentInput input)
         {
             Validation.ValidateEntityWithDisplayNameDto(input?.Schedule, "Schedule");
@@ -101,7 +102,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPut, Route("Appointments/{appointmentId}/Reschedule")]
-        [AbpAuthorize(CommonPermissions.BookAppointment)]
+        [AbpAuthorize(CommonPermissionsObsolete.BookAppointment)]
         public async Task<DynamicDto<CdmAppointment, Guid>> RescheduleAppointment(RescheduleInput input)
         {
             Validation.ValidateIdWithException(input?.Id, "Appointment Id cannot be empty");
@@ -137,7 +138,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="appointmentId"></param>
         /// <returns></returns>
         [HttpPut, Route("Appointments/{appointmentId}/ConfirmArrival")]
-        [AbpAuthorize(CommonPermissions.BookAppointment)]
+        [AbpAuthorize(CommonPermissionsObsolete.BookAppointment)]
         public async Task<DynamicDto<CdmAppointment, Guid>> ConfirmAppointmentArrival(Guid appointmentId)
         {
             var app = await _appointmentBookingManager.ConfirmAppointmentArrival(appointmentId);
@@ -153,7 +154,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="appointmentId"></param>
         /// <returns></returns>
         [HttpPut, Route("Appointments/{appointmentId}/CancelAppointment")]
-        [AbpAuthorize(CommonPermissions.BookAppointment)]
+        [AbpAuthorize(CommonPermissionsObsolete.BookAppointment)]
         public async Task<DynamicDto<CdmAppointment, Guid>> CancelAppointment(Guid appointmentId)
         {
             try

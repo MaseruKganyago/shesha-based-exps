@@ -31,7 +31,7 @@ namespace Boxfusion.Health.His.Common.Users
     [AbpAuthorize]
     [ApiVersion("1")]
     //[Route("api/v{version:apiVersion}/Bookings/[controller]")]
-    public class HisPractitionerAppService : CdmAppServiceBase // DynamicCrudAppService<HisPractitioner, DynamicDto<HisPractitioner, Guid>, Guid>, ITransientDependency
+    public class HisUserAppService : CdmAppServiceBase // DynamicCrudAppService<HisPractitioner, DynamicDto<HisPractitioner, Guid>, Guid>, ITransientDependency
     {
         private readonly HisPractitionerManager _practitionerManager;
         private readonly IRepository<HisPractitioner, Guid> _practitionerRepo;
@@ -39,7 +39,7 @@ namespace Boxfusion.Health.His.Common.Users
         /// <summary>
         /// 
         /// </summary>
-        public HisPractitionerAppService(IRepository<HisPractitioner, Guid> repository, HisPractitionerManager practitionerManager) //:  base(repository)
+        public HisUserAppService(IRepository<HisPractitioner, Guid> repository, HisPractitionerManager practitionerManager) //:  base(repository)
         {
             _practitionerRepo = repository;
             _practitionerManager = practitionerManager;
@@ -49,7 +49,7 @@ namespace Boxfusion.Health.His.Common.Users
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("api/v{version:apiVersion}/Bookings/[controller]/GetFacilitiesAssociatedToUser")]
+        [Route("api/v{version:apiVersion}/Common/[controller]/GetFacilitiesAssociatedToUser")]
         [Route("api/v{version:apiVersion}/Bookings/HisUser/GetFacilitiesAssociatedToUser")]// For legacy
         public async Task<List<DynamicDto<HisHealthFacility, Guid>>> GetFacilitiesAssociatedToUserAsync()
         {
@@ -67,38 +67,6 @@ namespace Boxfusion.Health.His.Common.Users
             }
 
             return list;
-        }
-
-
-        /// <summary>
-        /// Creates a basic (skeletal) HisPractioner record together with a linked user account.
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost, Route("api/v{version:apiVersion}/Bookings/[controller]/CreateWithUser")]
-        public async Task<UserDto> CreateWithUser(CreateUserDto input)
-        {
-            // Creating the user account first
-            var userAppService = IocManager.Resolve<UserAppService>();
-
-            var newUser = await userAppService.CreateAsync(input);
-
-
-            var userManager = IocManager.Resolve<UserManager>();
-            var user = await userManager.GetUserByIdAsync(newUser.Id);
-
-
-            var practitioner = new HisPractitioner()
-            {
-                User = user,
-                FirstName = newUser.Name,
-                LastName = newUser.Surname,
-                EmailAddress1 = newUser.EmailAddress
-            };
-
-            var practitionerRepo = IocManager.Resolve<IRepository<HisPractitioner, Guid>>();
-            var newPractioner = await practitionerRepo.InsertAsync(practitioner);
-
-            return newUser;
         }
 
     }

@@ -1,10 +1,28 @@
-﻿namespace Boxfusion.Health.His.Common.Authorization
+﻿using System;
+
+namespace Boxfusion.Health.His.Common.Authorization
 {
     /// <summary>
     /// Health.His Permission names
     /// </summary>
-    public static class CommonPermissions
+    /// 
+    public class CommonPermissions
     {
+        public const string GroupName = "Common";
+
+        public static class UserManagement
+        {
+            public const string Default = GroupName + ".UserManagement";
+            public const string Create = Default + ".Create";
+            public const string Edit = Default + ".Edit";
+            public const string Delete = Default + ".Delete";
+        }
+    }
+
+    [Obsolete("Replace with CommonPermissions wherever you find this")]
+    public static class CommonPermissionsObsolete
+    {
+
         /// <summary>
         /// Pages: Admission Dashboard
         /// </summary>

@@ -12,12 +12,12 @@ namespace Boxfusion.Health.His.Common.Authorization
     public class HisAuthorizationProvider : AuthorizationProvider
     {
         /// <summary>
-        /// Register permissions declared in the <see cref="CommonPermissions"/> class
+        /// Register permissions declared in the <see cref="CommonPermissionsObsolete"/> class
         /// </summary>
         /// <param name="context"></param>
         public override void SetPermissions(IPermissionDefinitionContext context)
         {
-            var permissions = typeof(CommonPermissions)
+            var permissions = typeof(CommonPermissionsObsolete)
                 .GetFields(BindingFlags.Public | BindingFlags.Static)
                 .Where(p => p.IsLiteral)
                 .Select(p => new
