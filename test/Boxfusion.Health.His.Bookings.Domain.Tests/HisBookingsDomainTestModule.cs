@@ -33,12 +33,13 @@ namespace Boxfusion.Health.His.Bookings.Tests
 {
     [DependsOn(
         typeof(HisBookingsDomainModule),
-
+        typeof(HisBookingsApplicationModule),
         typeof(AbpKernelModule),
         typeof(AbpTestBaseModule),
         typeof(SheshaApplicationModule),
         typeof(SheshaNHibernateModule),
-        typeof(SheshaFrameworkModule)
+        typeof(SheshaFrameworkModule),
+        typeof(SheshaEnterpriseModule)
         )]
     public class HisBookingsDomainTestModule : AbpModule
     {

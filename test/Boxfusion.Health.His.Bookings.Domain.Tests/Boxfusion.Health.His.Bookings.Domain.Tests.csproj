@@ -38,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Boxfusion.Health.His.Bookings.Application\Boxfusion.Health.His.Bookings.Application.csproj" />
     <ProjectReference Include="..\..\src\Boxfusion.Health.His.Bookings.Domain\Boxfusion.Health.His.Bookings.Domain.csproj" />
   </ItemGroup>
 
