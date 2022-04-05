@@ -53,7 +53,7 @@ namespace Boxfusion.Health.His.Common.Practitioners
 
             var facilitiesRepo = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HisHealthFacility, Guid>>();
 
-            var facilities = facilitiesRepo.GetAll().Take(7).ToList();
+            var facilities = facilitiesRepo.GetAll().ToList();
 
             //var schedules = new List<CdmSchedule>();
 
