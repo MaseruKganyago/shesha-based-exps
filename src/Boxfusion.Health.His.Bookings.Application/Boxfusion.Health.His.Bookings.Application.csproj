@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.1.16" />
+    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.1.19" />
     <PackageReference Include="Shesha.Application" Version="0.3.71" />
     <PackageReference Include="Shesha.Core" Version="0.3.71" />
     <PackageReference Include="Shesha.Framework" Version="0.3.71" />
