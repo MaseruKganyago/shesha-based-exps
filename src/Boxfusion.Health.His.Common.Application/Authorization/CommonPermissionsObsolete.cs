@@ -27,6 +27,8 @@ namespace Boxfusion.Health.His.Common.Authorization
         /// Pages: Admission Dashboard
         /// </summary>
         public const string AdmissionDashboard = "pages:admissionDashboard";
+        
+        public const string ScheduleManager = "pages:ScheduleManager";
 
         /// <summary>
         /// 

@@ -58,7 +58,12 @@ namespace Boxfusion.Health.His.Common.Authorization
                 }
                 return true;
             }
-            
+
+            if (permissionName == CommonPermissionsObsolete.ScheduleManager
+                || permissionName == CommonPermissionsObsolete.BookAppointment
+                || permissionName == CommonPermissionsObsolete.RescheduleAppointment)
+                return await this.IsScheduleManager(person);
+
             // add custom permission checks here...
             if (permissionName == CommonPermissionsObsolete.ApproveReport || permissionName == CommonPermissionsObsolete.DisapproveReport 
                 || permissionName == CommonPermissionsObsolete.DailyReports || permissionName == CommonPermissionsObsolete.MonthlyReports)
@@ -92,6 +97,17 @@ namespace Boxfusion.Health.His.Common.Authorization
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="permissionName"></param>
+        /// <returns></returns>
+        public bool IsGranted(long userId, string permissionName)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// inheritedDoc
         /// </summary>
         /// <param name="person"></param>
@@ -121,17 +137,6 @@ namespace Boxfusion.Health.His.Common.Authorization
         public async Task<bool> IsAdmin(Person person)
         {
             return await IsInAnyOfRoles(person, CommonRoles.SystemAdministrator);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="permissionName"></param>
-        /// <returns></returns>
-        public bool IsGranted(long userId, string permissionName)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
