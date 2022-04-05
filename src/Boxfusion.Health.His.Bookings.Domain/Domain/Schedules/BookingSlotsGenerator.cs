@@ -98,7 +98,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             //TODO:IH Wrapp all changes in a transaction to ensure data consistency.
 
             // Determining the date range for which slots are to be generated
-            var startDate = scheduleAvailability.LastGeneratedSlotDate.HasValue ? scheduleAvailability.LastGeneratedSlotDate.Value.Date : DateTime.Now.Date;
+            var startDate = scheduleAvailability.LastGeneratedSlotDate.HasValue ? scheduleAvailability.LastGeneratedSlotDate.Value.Date.AddDays(1) : DateTime.Now.Date;
             if (scheduleAvailability.ValidFromDate.HasValue && scheduleAvailability.ValidFromDate > startDate)
                 startDate = scheduleAvailability.ValidFromDate.Value.Date;
 
