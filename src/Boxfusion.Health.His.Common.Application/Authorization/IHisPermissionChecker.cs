@@ -22,47 +22,47 @@ namespace Boxfusion.Health.His.Common.Authorization
         /// <returns></returns>
         Task<bool> IsGlobalAdmin(Person person);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        Task<bool> IsFacilityAdmin(Person person);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="person"></param>
+        ///// <returns></returns>
+        //Task<bool> IsFacilityAdmin(Person person);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        Task<bool> IsCapturer(Person person);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="person"></param>
+        ///// <returns></returns>
+        //Task<bool> IsCapturer(Person person);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        Task<bool> IsViewer(Person person);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="person"></param>
+        ///// <returns></returns>
+        //Task<bool> IsViewer(Person person);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        Task<bool> IsApproverLevel1(Person person);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="person"></param>
+        ///// <returns></returns>
+        //Task<bool> IsApproverLevel1(Person person);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        Task<bool> IsApproverLevel2(Person person);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="person"></param>
+        ///// <returns></returns>
+        //Task<bool> IsApproverLevel2(Person person);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        Task<bool> IsManager(Person person);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="person"></param>
+        ///// <returns></returns>
+        //Task<bool> IsManager(Person person);
 
         /// <summary>
         /// 
@@ -78,11 +78,11 @@ namespace Boxfusion.Health.His.Common.Authorization
         /// <returns></returns>
         Task<bool> IsScheduleManager(Person person);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        Task<bool> IsScheduleFulfiller(Person person);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="person"></param>
+        ///// <returns></returns>
+        //Task<bool> IsScheduleFulfiller(Person person);
     }
 }

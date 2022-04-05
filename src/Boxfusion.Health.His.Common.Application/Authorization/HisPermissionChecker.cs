@@ -39,61 +39,85 @@ namespace Boxfusion.Health.His.Common.Authorization
             if (person == null)
                 return false;
 
-            // system administrator has all rights
-            if (await IsInAnyOfRoles(person, CommonRoles.SystemAdministrator))
-            {
-                if (permissionName == CommonPermissionsObsolete.AdmissionDashboard || permissionName == CommonPermissionsObsolete.Wards)
-                {
-                    return false;
-                }
+            if (person.User.UserName.ToLower() == "admin")
                 return true;
-            }
-                           
-            // data administrator has all rights
-            if (await IsInAnyOfRoles(person, CommonRoles.GlobalAdmin))
+
+            switch (permissionName)
             {
-                if (permissionName == CommonPermissionsObsolete.AdmissionDashboard || permissionName == CommonPermissionsObsolete.Wards)
-                {
+                case CommonPermissionsObsolete.BookingAdministration:
+                    return await IsBookingAdministrator(person);
+                case CommonPermissionsObsolete.ScheduleManagement:
+                    return await IsScheduleManager(person);
+                case CommonPermissionsObsolete.SystemAdministration:
+                    return await IsAdmin(person);
+                case CommonPermissionsObsolete.UserAdministration:
+                    return await IsDataAdministrator(person);
+                default:
                     return false;
-                }
-                return true;
             }
 
-            if (permissionName == CommonPermissionsObsolete.ScheduleManager
-                || permissionName == CommonPermissionsObsolete.BookAppointment
-                || permissionName == CommonPermissionsObsolete.RescheduleAppointment)
-                return await this.IsScheduleManager(person);
+            //// system administrator has all rights
+            //if (await IsInAnyOfRoles(person, CommonRoles.SystemAdministrator))
+            //{
+            //    if (permissionName == CommonPermissionsObsolete.AdmissionDashboard || permissionName == CommonPermissionsObsolete.Wards)
+            //    {
+            //        return false;
+            //    }
+            //    return true;
+            //}
 
-            // add custom permission checks here...
-            if (permissionName == CommonPermissionsObsolete.ApproveReport || permissionName == CommonPermissionsObsolete.DisapproveReport 
-                || permissionName == CommonPermissionsObsolete.DailyReports || permissionName == CommonPermissionsObsolete.MonthlyReports)
-                return await this.IsApproverLevel1(person) || await this.IsApproverLevel2(person);
+            //// data administrator has all rights
+            //if (await IsInAnyOfRoles(person, CommonRoles.GlobalAdmin))
+            //{
+            //    if (permissionName == CommonPermissionsObsolete.AdmissionDashboard || permissionName == CommonPermissionsObsolete.Wards)
+            //    {
+            //        return false;
+            //    }
+            //    return true;
+            //}
 
-            if (permissionName == Shesha.Authorization.PermissionNames.Pages_Users || permissionName == CommonPermissionsObsolete.Wards || permissionName == CommonPermissionsObsolete.Speciality)
-                return await this.IsFacilityAdmin(person);
-            
-            if (permissionName == CommonPermissionsObsolete.SeparateAndTransfer || permissionName == CommonPermissionsObsolete.SubmitsReportsForApproval)
-                return await this.IsCapturer(person);
+            //switch (permissionName)
+            //{
+            //    case CommonPermissionsObsolete.Administration:
 
-            if (permissionName == CommonPermissionsObsolete.ReportsAndStats || permissionName == CommonPermissionsObsolete.DailyReports 
-                || permissionName == CommonPermissionsObsolete.AdmissionDashboard || permissionName == CommonPermissionsObsolete.AllAdmissionDashboard 
-                || permissionName == CommonPermissionsObsolete.DailyAdmissionDashboard)
-                return await this.IsViewer(person) || await this.IsCapturer(person) || await this.IsManager(person) || await this.IsApproverLevel1(person) || await this.IsApproverLevel2(person);
-            if (permissionName == CommonPermissionsObsolete.Administration || permissionName == CommonPermissionsObsolete.CreateFacility)
-                return await this.IsFacilityAdmin(person);
-            if (permissionName == CommonPermissionsObsolete.Reports)
-                return await this.IsManager(person);
 
-            if (permissionName == CommonPermissionsObsolete.DailyAppointmentBooking)
-                return await this.IsScheduleManager(person) || await this.IsScheduleFulfiller(person) || await this.IsAdmin(person);
+            //    default:
+            //}
+            //if (permissionName == CommonPermissionsObsolete.ScheduleManager
+            //    || permissionName == CommonPermissionsObsolete.BookAppointment
+            //    || permissionName == CommonPermissionsObsolete.RescheduleAppointment)
+            //    return await this.IsScheduleManager(person);
 
-            if (permissionName == CommonPermissionsObsolete.BookAppointment)
-                return await this.IsScheduleManager(person) || await this.IsAdmin(person);
+            //// add custom permission checks here...
+            //if (permissionName == CommonPermissionsObsolete.ApproveReport || permissionName == CommonPermissionsObsolete.DisapproveReport 
+            //    || permissionName == CommonPermissionsObsolete.DailyReports || permissionName == CommonPermissionsObsolete.MonthlyReports)
+            //    return await this.IsApproverLevel1(person) || await this.IsApproverLevel2(person);
 
-            if (permissionName == CommonPermissionsObsolete.RescheduleAppointment)
-                return await this.IsScheduleManager(person) || await this.IsAdmin(person);
+            //if (permissionName == Shesha.Authorization.PermissionNames.Pages_Users || permissionName == CommonPermissionsObsolete.Wards || permissionName == CommonPermissionsObsolete.Speciality)
+            //    return await this.IsFacilityAdmin(person);
 
-            return false;
+            //if (permissionName == CommonPermissionsObsolete.SeparateAndTransfer || permissionName == CommonPermissionsObsolete.SubmitsReportsForApproval)
+            //    return await this.IsCapturer(person);
+
+            //if (permissionName == CommonPermissionsObsolete.ReportsAndStats || permissionName == CommonPermissionsObsolete.DailyReports 
+            //    || permissionName == CommonPermissionsObsolete.AdmissionDashboard || permissionName == CommonPermissionsObsolete.AllAdmissionDashboard 
+            //    || permissionName == CommonPermissionsObsolete.DailyAdmissionDashboard)
+            //    return await this.IsViewer(person) || await this.IsCapturer(person) || await this.IsManager(person) || await this.IsApproverLevel1(person) || await this.IsApproverLevel2(person);
+            //if (permissionName == CommonPermissionsObsolete.Administration || permissionName == CommonPermissionsObsolete.CreateFacility)
+            //    return await this.IsFacilityAdmin(person);
+            //if (permissionName == CommonPermissionsObsolete.Reports)
+            //    return await this.IsManager(person);
+
+            //if (permissionName == CommonPermissionsObsolete.DailyAppointmentBooking)
+            //    return await this.IsScheduleManager(person) || await this.IsScheduleFulfiller(person) || await this.IsAdmin(person);
+
+            //if (permissionName == CommonPermissionsObsolete.BookAppointment)
+            //    return await this.IsScheduleManager(person) || await this.IsAdmin(person);
+
+            //if (permissionName == CommonPermissionsObsolete.RescheduleAppointment)
+            //    return await this.IsScheduleManager(person) || await this.IsAdmin(person);
+
+            //return false;
         }
 
         /// <summary>
@@ -144,29 +168,13 @@ namespace Boxfusion.Health.His.Common.Authorization
         /// </summary>
         /// <param name="person"></param>
         /// <returns></returns>
-        public async Task<bool> IsApproverLevel1(Person person)
+        public async Task<bool> IsScheduleManager(Person person)
         {
-            return await IsInAnyOfRoles(person, CommonRoles.ApproverLevel1);
+            return await IsInAnyOfRoles(person, CommonRoles.ScheduleManager);
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        public async Task<bool> IsApproverLevel2(Person person)
+        public async Task<bool> IsBookingAdministrator(Person person)
         {
-            return await IsInAnyOfRoles(person, CommonRoles.ApproverLevel2);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        public async Task<bool> IsManager(Person person)
-        {
-            return await IsInAnyOfRoles(person, CommonRoles.Manager);
+            return await IsInAnyOfRoles(person, CommonRoles.BookingAdministrator);
         }
 
         /// <summary>
@@ -179,54 +187,76 @@ namespace Boxfusion.Health.His.Common.Authorization
             return await IsInAnyOfRoles(person, CommonRoles.GlobalAdmin);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        public async Task<bool> IsFacilityAdmin(Person person)
-        {
-            return await IsInAnyOfRoles(person, CommonRoles.FacilityAdmin);
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="person"></param>
+        ///// <returns></returns>
+        //public async Task<bool> IsApproverLevel1(Person person)
+        //{
+        //    return await IsInAnyOfRoles(person, CommonRoles.ApproverLevel1);
+        //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        public async Task<bool> IsCapturer(Person person)
-        {
-            return await IsInAnyOfRoles(person, CommonRoles.Capturer);
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="person"></param>
+        ///// <returns></returns>
+        //public async Task<bool> IsApproverLevel2(Person person)
+        //{
+        //    return await IsInAnyOfRoles(person, CommonRoles.ApproverLevel2);
+        //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        public async Task<bool> IsViewer(Person person)
-        {
-            return await IsInAnyOfRoles(person, CommonRoles.Viewer);
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="person"></param>
+        ///// <returns></returns>
+        //public async Task<bool> IsManager(Person person)
+        //{
+        //    return await IsInAnyOfRoles(person, CommonRoles.Manager);
+        //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        public async Task<bool> IsScheduleManager(Person person)
-        {
-            return await IsInAnyOfRoles(person, CommonRoles.ScheduleManager);
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        public async Task<bool> IsScheduleFulfiller(Person person)
-        {
-            return await IsInAnyOfRoles(person, CommonRoles.ScheduleFulfiller);
-        }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="person"></param>
+        ///// <returns></returns>
+        //public async Task<bool> IsFacilityAdmin(Person person)
+        //{
+        //    return await IsInAnyOfRoles(person, CommonRoles.FacilityAdmin);
+        //}
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="person"></param>
+        ///// <returns></returns>
+        //public async Task<bool> IsCapturer(Person person)
+        //{
+        //    return await IsInAnyOfRoles(person, CommonRoles.Capturer);
+        //}
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="person"></param>
+        ///// <returns></returns>
+        //public async Task<bool> IsViewer(Person person)
+        //{
+        //    return await IsInAnyOfRoles(person, CommonRoles.Viewer);
+        //}
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="person"></param>
+        ///// <returns></returns>
+        //public async Task<bool> IsScheduleFulfiller(Person person)
+        //{
+        //    return await IsInAnyOfRoles(person, CommonRoles.ScheduleFulfiller);
+        //}
     }
 }

@@ -18,6 +18,13 @@ namespace Boxfusion.Health.His.Common.Practitioners
     [Table("Core_Persons")]
     public class HisPractitioner : CdmPractitioner
     {
-
+        [NotMapped]
+        public virtual long? TempUserId
+        {
+            get
+            {
+                return User?.Id;
+            }
+        }
     }
 }
