@@ -14,7 +14,6 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
         /// </summary>
         public static string FlattenedAppointmentSqlQuery = @"
 		
-				DECLARE @facilityId UNIQUEIDENTIFIER = :facilityId
 				DECLARE @scheduleId UNIQUEIDENTIFIER = :scheduleId
 				DECLARE @filterEndDate DATETIME = :filterEndDate
 				DECLARE @filterStartDate DATETIME = :filterStartDate
@@ -47,7 +46,6 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
 						 OR (@filterEndDate IS NULL AND app.[Start] = @filterStartDate)
 					  )
 					AND sch.Id = @scheduleId 
-					AND (CAST(sch.ActorOwnerId AS UNIQUEIDENTIFIER) = @facilityId)
 
 				ORDER BY [Status]
 					OFFSET (@pageNumber-1)*(@pageSize) ROWS

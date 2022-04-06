@@ -125,11 +125,9 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
 
             using (var session = this.IocManager.Resolve<ISessionFactory>().OpenSession())
             {
-
                 appointments = await session
                   .CreateSQLQuery(Util.FlattenedAppointmentSqlQuery)
                   .SetResultTransformer(Transformers.AliasToBean<FlattenedAppointment>())
-                  .SetParameter("facilityId", facilityId)
                   .SetParameter("scheduleId", scheduleId)
                   .SetParameter("filterStartDate", filterStartDate)
                   .SetParameter("filterEndDate", filterEndDate)
@@ -139,8 +137,8 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments
                 session.Flush();
             }
 
-            var mapper = IocManager.Resolve<IMapper>()
-;
+            var mapper = IocManager.Resolve<IMapper>();
+
             return mapper.Map<List<FlattenedAppointmentDto>>(appointments);
 
         }
