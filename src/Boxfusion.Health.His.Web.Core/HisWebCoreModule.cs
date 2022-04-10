@@ -32,6 +32,7 @@ using Castle.MicroKernel.Registration;
 using Shesha.Authorization;
 using Boxfusion.Health.His.Common.Authorization;
 using Shesha.Startup;
+using Boxfusion.Health.His.GpDoh;
 
 namespace Boxfusion.Health.His
 {
@@ -47,6 +48,8 @@ namespace Boxfusion.Health.His
          typeof(HisCommonApplicationModule),
          typeof(HisBookingsDomainModule),
          typeof(HisBookingsApplicationModule),
+
+         typeof(HisGpDohCustomisationsModule),
 
          typeof(SheshaEnterpriseModule),
          typeof(SheshaReportingModule),
