@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Boxfusion.Health.His.Admissions.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingNames">
+            <summary>
+            Contains setting names for Health.Hiss
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingProvider">
+            <summary>
+            Defines Health.His settings
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingProvider.LocalizationSourceName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingProvider.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingProvider.GetSettingDefinitions(Abp.Configuration.SettingDefinitionProviderContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingProvider.L(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingsAppService.#ctor(Abp.Configuration.ISettingManager)">
+            <summary>
+            
+            </summary>
+            <param name="settingManager"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingsAppService.Update(Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingsDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingsAppService.Get">
+            <summary>
+            Returns Health.His settings
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingsAppService.ChangeSettingAsync(System.String,System.String)">
+            <summary>
+            Changes setting for tenant with fallback to application
+            </summary>
+            <param name="name">Setting name</param>
+            <param name="value">Setting value</param>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingsDto">
+            <summary>
+            Health.His settings DTO
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.HisAdmissionsDomainModule">
+            <summary>
+            Health.His Module
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.HisAdmissionsDomainModule.Initialize">
+            <summary>
+            inheritedDoc
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.HisAdmissionsDomainModule.PreInitialize">
+            <summary>
+            inheritedDoc
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.HisAdmissionsDomainModule.PostInitialize">
+            <summary>
+            inheritedDoc
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Localization.HisAdmissionsLocalizationConfigurer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Localization.HisAdmissionsLocalizationConfigurer.Configure(Abp.Configuration.Startup.ILocalizationConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="localizationConfiguration"></param>
+        </member>
+    </members>
+</doc>
