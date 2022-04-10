@@ -25,7 +25,6 @@ using Shesha.Sms.SmsPortal;
 using Shesha.Sms.Xml2Sms;
 using Shesha.Web;
 using Shesha.Web.FormsDesigner;
-using Shesha.Reporting;
 using Boxfusion.Health.His.Bookings;
 using Boxfusion.Health.His.Common;
 using Castle.MicroKernel.Registration;
@@ -49,7 +48,6 @@ namespace Boxfusion.Health.His
          typeof(HisBookingsApplicationModule),
 
          typeof(SheshaEnterpriseModule),
-         typeof(SheshaReportingModule),
          typeof(SheshaApplicationModule),
          typeof(SheshaNHibernateModule),
          typeof(SheshaFormsDesignerModule),

@@ -12,9 +12,9 @@
   <ItemGroup>
     <PackageReference Include="Abp" Version="5.0.0" />
     <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.1.20" />
-    <PackageReference Include="Shesha.Application" Version="0.3.71" />
-    <PackageReference Include="Shesha.Core" Version="0.3.71" />
-    <PackageReference Include="Shesha.Framework" Version="0.3.71" />
+    <ProjectReference Include="..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
+    <ProjectReference Include="..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Core\Shesha.Core.csproj" />
+    <ProjectReference Include="..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Framework\Shesha.Framework.csproj" />
   </ItemGroup>
 
   <ItemGroup>
