@@ -1,6 +1,7 @@
 ﻿using Abp.Domain.Entities;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
+using Boxfusion.Health.His.Admissions.Domain.Domain.RefLists;
 using Boxfusion.Health.His.Common.Enums;
 using Shesha.Domain.Attributes;
 using Shesha.Domain.Enums;

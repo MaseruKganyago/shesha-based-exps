@@ -71,7 +71,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
