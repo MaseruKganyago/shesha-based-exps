@@ -10,8 +10,8 @@ using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers;
-using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
-using local = Boxfusion.Health.His.Admissions.Helpers;
+using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos;
+using local = Boxfusion.Health.His.Admissions.Application.Helpers;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using NHibernate.Linq;
@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 using System.Transactions;
 using Shesha.NHibernate;
 
-namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
+namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers
 {
     /// <summary>
     /// 

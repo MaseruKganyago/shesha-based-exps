@@ -1,11 +1,11 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
-using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
+using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos;
 using Boxfusion.Health.His.Domain.Domain;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Helpers
+namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers
 {
     /// <summary>
     /// 

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
+namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos
 {
     /// <summary>
     /// 
@@ -84,10 +84,10 @@ namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
 }
 
 //using Abp.Application.Services.Dto;
-//using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
+//using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos;
 //using System;
 
-//namespace Boxfusion.Health.His.Admissions.Services.Separations.Dto
+//namespace Boxfusion.Health.His.Admissions.Application.Services.Separations.Dto
 //{
 ///// <summary>
 ///// 

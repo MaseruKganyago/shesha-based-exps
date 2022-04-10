@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
+namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
 {
 	/// <summary>
 	/// 

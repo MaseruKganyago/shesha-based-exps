@@ -7,7 +7,7 @@ using Shesha.Attributes;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Boxfusion.Health.His.Admissions")]
+[assembly: AssemblyProduct("Boxfusion.Health.His.Admissions.Application")]
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

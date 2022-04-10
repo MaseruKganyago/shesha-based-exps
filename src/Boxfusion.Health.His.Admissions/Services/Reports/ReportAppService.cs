@@ -2,8 +2,8 @@
 using Abp.Domain.Repositories;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Services.Patients;
-using Boxfusion.Health.His.Admissions.Domain;
-using Boxfusion.Health.His.Admissions.Services.Reports.Dto;
+using Boxfusion.Health.His.Admissions.Application.Domain;
+using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
@@ -14,13 +14,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Abp.UI;
-using Boxfusion.Health.His.Admissions.Services.Reports.Helpers;
+using Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Domain.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Domain.Authorization;
 
-namespace Boxfusion.Health.His.Admissions.Services.Reports
+namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
 {
     /// <summary>
     /// 

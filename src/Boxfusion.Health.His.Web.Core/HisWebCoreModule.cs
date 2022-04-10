@@ -30,7 +30,7 @@ using Boxfusion.Health.His.Common;
 using Castle.MicroKernel.Registration;
 using Shesha.Authorization;
 using Boxfusion.Health.His.Common.Authorization;
-using Boxfusion.Health.His.Admissions;
+using Boxfusion.Health.His.Admissions.Application;
 
 namespace Boxfusion.Health.His
 {
@@ -47,7 +47,7 @@ namespace Boxfusion.Health.His
          typeof(HisBookingsDomainModule),
          typeof(HisBookingsApplicationModule),
 
-         typeof(HisAdmissionsDomainModule),
+         typeof(HisAdmissionsApplicationModule),
 
          typeof(SheshaEnterpriseModule),
          typeof(SheshaReportingModule),

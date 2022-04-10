@@ -3,7 +3,7 @@ using Abp.Localization.Dictionaries;
 using Abp.Localization.Dictionaries.Xml;
 using Abp.Reflection.Extensions;
 
-namespace Boxfusion.Health.His.Admissions.Localization
+namespace Boxfusion.Health.His.Admissions.Application.Localization
 {
     /// <summary>
     /// 
@@ -17,10 +17,10 @@ namespace Boxfusion.Health.His.Admissions.Localization
         public static void Configure(ILocalizationConfiguration localizationConfiguration)
         {
             localizationConfiguration.Sources.Add(
-                new DictionaryBasedLocalizationSource("HisAdmiss",
+                new DictionaryBasedLocalizationSource("HisAdmissions",
                     new XmlEmbeddedFileLocalizationDictionaryProvider(
                         typeof(HisAdmissLocalizationConfigurer).GetAssembly(),
-                        "Boxfusion.Health.His.Admissions.Localization.SourceFiles"
+                        "Boxfusion.Health.His.Admissions.Application.Localization.SourceFiles"
                     )
                 )
             );

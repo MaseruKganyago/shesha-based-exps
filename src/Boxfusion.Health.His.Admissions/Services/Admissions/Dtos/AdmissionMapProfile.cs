@@ -2,16 +2,16 @@
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
-using local = Boxfusion.Health.His.Admissions.Helpers;
+using local = Boxfusion.Health.His.Admissions.Application.Helpers;
 using Boxfusion.Health.His.Domain.Domain;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using Shesha.AutoMapper;
 using Shesha.AutoMapper.Dto;
 using Shesha.Domain;
 using System;
-using Boxfusion.Health.His.Admissions.Services.Reports.Dto;
+using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
 
-namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
+namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos
 {
     /// <summary>
     /// 

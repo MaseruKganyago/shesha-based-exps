@@ -5,7 +5,7 @@ using Shesha.AutoMapper.Dto;
 using System;
 using System.Collections.Generic;
 
-namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
+namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos
 {
     /// <summary>
     /// 

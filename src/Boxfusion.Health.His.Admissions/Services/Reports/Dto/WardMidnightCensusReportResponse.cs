@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Services.Reports.Dto
+namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto
 {
     /// <summary>
     /// 

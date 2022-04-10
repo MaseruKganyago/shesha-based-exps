@@ -5,12 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Configuration
+namespace Boxfusion.Health.His.Admissions.Application.Configuration
 {
     /// <summary>
     /// 
     /// </summary>
-	public class HisAdmissSetting: IHisAdmissSettings, ITransientDependency
+	public class HisAdmissionsSetting: IHisAdmissionsSettings, ITransientDependency
 	{
         /// <summary>
         /// 
@@ -21,7 +21,7 @@ namespace Boxfusion.Health.His.Admissions.Configuration
         /// 
         /// </summary>
         /// <param name="settingManager"></param>
-        public HisAdmissSetting(ISettingManager settingManager)
+        public HisAdmissionsSetting(ISettingManager settingManager)
         {
             _settingManager = settingManager;
         }
@@ -31,8 +31,8 @@ namespace Boxfusion.Health.His.Admissions.Configuration
         /// </summary>
         public string HospitalIdentifier
         {
-            get => _settingManager.GetSettingValue(HisAdmissSettingNames.HospitalIdentifier);
-            set => _settingManager.ChangeSetting(HisAdmissSettingNames.HospitalIdentifier, value);
+            get => _settingManager.GetSettingValue(HisAdmissionsSettingNames.HospitalIdentifier);
+            set => _settingManager.ChangeSetting(HisAdmissionsSettingNames.HospitalIdentifier, value);
         }
     }
 }

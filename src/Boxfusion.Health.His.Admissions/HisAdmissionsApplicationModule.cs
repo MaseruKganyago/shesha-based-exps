@@ -3,22 +3,20 @@ using Abp.AspNetCore.Configuration;
 using Abp.AutoMapper;
 using Abp.Modules;
 using Castle.MicroKernel.Registration;
-using Boxfusion.Health.His.Admissions.Localization;
+using Boxfusion.Health.His.Admissions.Application.Localization;
 using Shesha;
 using Shesha.Authorization;
-using Boxfusion.Health.His.Domain;
-using Boxfusion.Health.His.Domain.Authorization;
 
-namespace Boxfusion.Health.His.Admissions
+namespace Boxfusion.Health.His.Admissions.Application
 {
     /// <summary>
     /// Health.His Module
     /// </summary>
     [DependsOn(
-        typeof(HisDomainModule),
+        //typeof(HisDomainModule),
         typeof(SheshaCoreModule)
     )]
-    public class HisAdmissModule : AbpModule
+    public class HisAdmissionsApplicationModule : AbpModule
     {
         /// <summary>
         /// inheritedDoc
@@ -26,10 +24,7 @@ namespace Boxfusion.Health.His.Admissions
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
-          //  IocManager.IocContainer.Register(
-          //    Component.For<ICustomPermissionChecker>().Forward<IHisPermissionChecker>().Forward<HisPermissionChecker>().ImplementedBy<HisPermissionChecker>().LifestyleTransient()
-          //);
-
+         
             var thisAssembly = Assembly.GetExecutingAssembly();
             IocManager.RegisterAssemblyByConvention(thisAssembly);
 
@@ -46,9 +41,6 @@ namespace Boxfusion.Health.His.Admissions
         {
             base.PreInitialize();
 
-            //Configuration.Settings.Providers.Add<HisAdmisSettingProvider>();
-            //Configuration.Authorization.Providers.Add<HisAuthorizationProvider>();
-
             HisAdmissLocalizationConfigurer.Configure(Configuration.Localization);
         }
 
@@ -60,7 +52,7 @@ namespace Boxfusion.Health.His.Admissions
             try
             {
                 Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
-                    typeof(HisAdmissModule).Assembly,
+                    typeof(HisAdmissionsApplicationModule).Assembly,
                     moduleName: "HisAdmis",
                     useConventionalHttpVerbs: true);
             }

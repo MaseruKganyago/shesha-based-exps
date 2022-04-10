@@ -1,8 +1,8 @@
 ﻿using Abp.Dependency;
 using Abp.UI;
 using AutoMapper;
-using Boxfusion.Health.His.Admissions.Domain.Views;
-using Boxfusion.Health.His.Admissions.Services.Reports.Dto;
+using Boxfusion.Health.His.Admissions.Application.Domain.Views;
+using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using NHibernate.Transform;
 using Shesha.NHibernate;
@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
+namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
 {
     /// <summary>
     /// 

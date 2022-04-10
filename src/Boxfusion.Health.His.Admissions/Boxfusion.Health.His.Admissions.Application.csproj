@@ -21,6 +21,7 @@
   <ItemGroup>
     <Compile Remove="Authorization\**" />
     <Compile Remove="Dtos\**" />
+    <Compile Remove="Helpers\Dtos\**" />
     <Compile Remove="Services\HisPatients\**" />
     <Compile Remove="Services\Hospitals\**" />
     <Compile Remove="Services\Separations\**" />
@@ -28,6 +29,7 @@
     <Compile Remove="Services\Wards\**" />
     <EmbeddedResource Remove="Authorization\**" />
     <EmbeddedResource Remove="Dtos\**" />
+    <EmbeddedResource Remove="Helpers\Dtos\**" />
     <EmbeddedResource Remove="Services\HisPatients\**" />
     <EmbeddedResource Remove="Services\Hospitals\**" />
     <EmbeddedResource Remove="Services\Separations\**" />
@@ -35,6 +37,7 @@
     <EmbeddedResource Remove="Services\Wards\**" />
     <None Remove="Authorization\**" />
     <None Remove="Dtos\**" />
+    <None Remove="Helpers\Dtos\**" />
     <None Remove="Services\HisPatients\**" />
     <None Remove="Services\Hospitals\**" />
     <None Remove="Services\Separations\**" />
@@ -59,11 +62,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
     <ProjectReference Include="..\Boxfusion.Health.His.Domain\Boxfusion.Health.His.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Helpers\Dtos\" />
   </ItemGroup>
 
 </Project>

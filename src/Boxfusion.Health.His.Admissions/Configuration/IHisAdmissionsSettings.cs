@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Configuration
+namespace Boxfusion.Health.His.Admissions.Application.Configuration
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public interface IHisAdmissSettings
+	public interface IHisAdmissionsSettings
 	{
 		/// <summary>
 		/// 

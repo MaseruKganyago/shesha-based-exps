@@ -28,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Bookin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.MpDoh.Customisations", "src\Boxfusion.Health.His.MpDoh.Domain\Boxfusion.Health.His.MpDoh.Customisations.csproj", "{B1F6252A-5959-42E5-9915-8CD570440884}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admissions.Domain", "src\Boxfusion.Health.His.MidnightCensus.Domain\Boxfusion.Health.His.Admissions.Domain.csproj", "{9BDA8DE9-75A1-4205-825A-2B9720AA76CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admissions.Application", "src\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.Application.csproj", "{86E577DD-0F87-4C6A-A181-576A3D1107C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,10 +72,10 @@ Global
 		{B1F6252A-5959-42E5-9915-8CD570440884}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1F6252A-5959-42E5-9915-8CD570440884}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1F6252A-5959-42E5-9915-8CD570440884}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9BDA8DE9-75A1-4205-825A-2B9720AA76CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9BDA8DE9-75A1-4205-825A-2B9720AA76CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9BDA8DE9-75A1-4205-825A-2B9720AA76CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9BDA8DE9-75A1-4205-825A-2B9720AA76CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86E577DD-0F87-4C6A-A181-576A3D1107C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86E577DD-0F87-4C6A-A181-576A3D1107C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86E577DD-0F87-4C6A-A181-576A3D1107C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86E577DD-0F87-4C6A-A181-576A3D1107C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

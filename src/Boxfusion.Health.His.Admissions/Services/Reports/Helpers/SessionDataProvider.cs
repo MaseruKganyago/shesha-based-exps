@@ -1,6 +1,6 @@
 ﻿using Abp.UI;
-using Boxfusion.Health.His.Admissions.Services.Reports.Dto;
-using Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos;
+using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
+using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos;
 using NHibernate.Transform;
 using Shesha.NHibernate;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Admissions.Services.Reports.Helpers
+namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
 {
     /// <summary>
     /// 

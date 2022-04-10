@@ -1,12 +1,12 @@
 ﻿using Abp.Application.Services;
-using Boxfusion.Health.His.Admissions.Services.Reports.Dto;
+using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
 using Boxfusion.Health.His.Domain.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Admissions.Services 
+namespace Boxfusion.Health.His.Admissions.Application.Services 
 { 
     /// <summary>
     /// 

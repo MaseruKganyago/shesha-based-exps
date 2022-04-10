@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
+namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos
 {
     public class MonthlyStats
     {

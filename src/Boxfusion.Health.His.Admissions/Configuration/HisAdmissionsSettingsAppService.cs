@@ -3,14 +3,14 @@ using Abp.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 
-namespace Boxfusion.Health.His.Admissions.Configuration
+namespace Boxfusion.Health.His.Admissions.Application.Configuration
 {
     /// <summary>
     /// 
     /// </summary>
     public class HisAdmisSettingsAppService: SheshaAppServiceBase
     {
-        private readonly IHisAdmissSettings _hisAdmissSettingManager;
+        private readonly IHisAdmissionsSettings _hisAdmissSettingManager;
         private readonly ISettingManager _settingManager;
 
 		/// <summary>
@@ -18,7 +18,7 @@ namespace Boxfusion.Health.His.Admissions.Configuration
 		/// </summary>
 		/// <param name="hisAdmissSettingManager"></param>
 		/// <param name="settingManager"></param>
-		public HisAdmisSettingsAppService(IHisAdmissSettings hisAdmissSettingManager, ISettingManager settingManager)
+		public HisAdmisSettingsAppService(IHisAdmissionsSettings hisAdmissSettingManager, ISettingManager settingManager)
         {
             _hisAdmissSettingManager = hisAdmissSettingManager;
             _settingManager = settingManager;
@@ -30,7 +30,7 @@ namespace Boxfusion.Health.His.Admissions.Configuration
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task Update(HisAdmissSettingsDto input)
+        public async Task Update(HisAdmissionsSettingsDto input)
         {
             if (input.HospitalIdentifier != null)
                 _hisAdmissSettingManager.HospitalIdentifier = input.HospitalIdentifier;
@@ -39,9 +39,9 @@ namespace Boxfusion.Health.His.Admissions.Configuration
         /// <summary>
         /// Returns Health.His settings
         /// </summary>
-        public async Task<HisAdmissSettingsDto> Get()
+        public async Task<HisAdmissionsSettingsDto> Get()
         {
-            var result = new HisAdmissSettingsDto()
+            var result = new HisAdmissionsSettingsDto()
             {
                 HospitalIdentifier = _hisAdmissSettingManager.HospitalIdentifier
             };

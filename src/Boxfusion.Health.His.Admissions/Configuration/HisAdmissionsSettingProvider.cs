@@ -2,12 +2,12 @@
 using Abp.Configuration;
 using Abp.Localization;
 
-namespace Boxfusion.Health.His.Admissions.Configuration
+namespace Boxfusion.Health.His.Admissions.Application.Configuration
 {
     /// <summary>
     /// Defines Health.His settings
     /// </summary>
-    public class HisAdmissSettingProvider : SettingProvider
+    public class HisAdmissionsSettingProvider : SettingProvider
     {
         /// <summary>
         /// 
@@ -17,7 +17,7 @@ namespace Boxfusion.Health.His.Admissions.Configuration
         /// <summary>
         /// 
         /// </summary>
-        public HisAdmissSettingProvider()
+        public HisAdmissionsSettingProvider()
         {
             LocalizationSourceName = "HisAdmiss";
         }
@@ -31,7 +31,7 @@ namespace Boxfusion.Health.His.Admissions.Configuration
         {
             return new SettingDefinition[]
             {
-                new SettingDefinition(HisAdmissSettingNames.HospitalIdentifier, false.ToString(), L("HospitalIdentifier"), scopes: SettingScopes.Application | SettingScopes.Tenant, isInherited: false),
+                new SettingDefinition(HisAdmissionsSettingNames.HospitalIdentifier, false.ToString(), L("HospitalIdentifier"), scopes: SettingScopes.Application | SettingScopes.Tenant, isInherited: false),
             };
         }
 

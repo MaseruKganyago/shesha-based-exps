@@ -2,7 +2,7 @@
 using Boxfusion.Health.His.Domain.Domain;
 using System.Collections.Generic;
 
-namespace Boxfusion.Health.His.Admissions.Services.TempAdmissions.Dtos
+namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos
 {
     /// <summary>
     /// 

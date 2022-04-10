@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Boxfusion.Health.His.Admissions.Hubs
+namespace Boxfusion.Health.His.Admissions.Application.Hubs
 {
     public class HisAdmisSignalRHub : Hub, ITransientDependency
     {
