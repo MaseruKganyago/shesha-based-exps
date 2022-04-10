@@ -499,6 +499,11 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.HospitalPatientNumber">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Common.Patients.PatientManager">
             <summary>
             Domain Service for user related methods.

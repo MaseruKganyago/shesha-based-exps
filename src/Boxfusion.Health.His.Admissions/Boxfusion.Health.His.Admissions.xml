@@ -4,55 +4,80 @@
         <name>Boxfusion.Health.His.Admissions.Application</name>
     </assembly>
     <members>
-        <member name="T:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissSetting">
+        <member name="T:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSetting">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissSetting._settingManager">
+        <member name="P:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSetting._settingManager">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissSetting.#ctor(Abp.Configuration.ISettingManager)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSetting.#ctor(Abp.Configuration.ISettingManager)">
             <summary>
             
             </summary>
             <param name="settingManager"></param>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissSetting.HospitalIdentifier">
+        <member name="P:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSetting.HospitalIdentifier">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissSettingNames">
+        <member name="T:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSettingNames">
             <summary>
             Contains setting names for Health.Hiss
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissSettingProvider">
+        <member name="F:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSettingNames.HospitalIdentifier">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSettingNames.ApproveReport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSettingNames.ReportsAndStats">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSettingNames.DisapproveReport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSettingNames.SubmitsReportsForApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSettingProvider">
             <summary>
             Defines Health.His settings
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissSettingProvider.LocalizationSourceName">
+        <member name="P:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSettingProvider.LocalizationSourceName">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissSettingProvider.#ctor">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSettingProvider.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissSettingProvider.GetSettingDefinitions(Abp.Configuration.SettingDefinitionProviderContext)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSettingProvider.GetSettingDefinitions(Abp.Configuration.SettingDefinitionProviderContext)">
             <summary>
             
             </summary>
             <param name="context"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissSettingProvider.L(System.String)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSettingProvider.L(System.String)">
             <summary>
             
             </summary>
@@ -64,14 +89,14 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmisSettingsAppService.#ctor(Boxfusion.Health.His.Admissions.Application.Configuration.IHisAdmissSettings,Abp.Configuration.ISettingManager)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmisSettingsAppService.#ctor(Boxfusion.Health.His.Admissions.Application.Configuration.IHisAdmissionsSettings,Abp.Configuration.ISettingManager)">
             <summary>
             
             </summary>
             <param name="hisAdmissSettingManager"></param>
             <param name="settingManager"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmisSettingsAppService.Update(Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissSettingsDto)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmisSettingsAppService.Update(Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSettingsDto)">
             <summary>
             
             </summary>
@@ -90,22 +115,29 @@
             <param name="name">Setting name</param>
             <param name="value">Setting value</param>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissSettingsDto">
+        <member name="T:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSettingsDto">
             <summary>
             Health.His settings DTO
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissSettingsDto.HospitalIdentifier">
+        <member name="P:Boxfusion.Health.His.Admissions.Application.Configuration.HisAdmissionsSettingsDto.HospitalIdentifier">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Application.Configuration.IHisAdmissSettings">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Configuration.IHisAdmissionPermissionChecker.IsApproverLevel1(Shesha.Domain.Person)">
+            <summary>
+            
+            </summary>
+            <param name="person"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Application.Configuration.IHisAdmissionsSettings">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Configuration.IHisAdmissSettings.HospitalIdentifier">
+        <member name="P:Boxfusion.Health.His.Admissions.Application.Configuration.IHisAdmissionsSettings.HospitalIdentifier">
             <summary>
             
             </summary>
@@ -220,13 +252,13 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Helpers.HisAdmissionAuditTrailService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisAdmissionAuditTrail,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Helpers.HisAdmissionAuditTrailService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisAdmissionAuditTrail,System.Guid})">
             <summary>
             
             </summary>
             <param name="hisAdmissionAuditTrailRepository"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Helpers.HisAdmissionAuditTrailService.CreateAudit(Boxfusion.Health.His.Domain.Domain.HisAdmissionAuditTrail)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Helpers.HisAdmissionAuditTrailService.CreateAudit(Boxfusion.Health.His.Common.HisAdmissionAuditTrail)">
             <summary>
             
             </summary>
@@ -241,7 +273,7 @@
             <param name="StartDateTime"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Helpers.ServiceBusHelper.TransferAddmission(Boxfusion.Health.His.Domain.Domain.WardAdmission)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Helpers.ServiceBusHelper.TransferAddmission(Boxfusion.Health.His.Common.WardAdmission)">
             <summary>
             I am using this as an example for sending a massage to a topic named ExampleTopic
             </summary>
@@ -281,22 +313,22 @@
             <param name="dob"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Application.HisAdmissModule">
+        <member name="T:Boxfusion.Health.His.Admissions.Application.HisAdmissionsApplicationModule">
             <summary>
             Health.His Module
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.HisAdmissModule.Initialize">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.HisAdmissionsApplicationModule.Initialize">
             <summary>
             inheritedDoc
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.HisAdmissModule.PreInitialize">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.HisAdmissionsApplicationModule.PreInitialize">
             <summary>
             inheritedDoc
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.HisAdmissModule.PostInitialize">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.HisAdmissionsApplicationModule.PostInitialize">
             <summary>
             inheritedDoc
             </summary>
@@ -337,7 +369,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers.IAdmissionCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisWard,System.Guid},Boxfusion.Health.His.Admissions.Application.Helpers.IHisAdmissionAuditTrailService,Boxfusion.Health.His.Domain.Authorization.IHisPermissionChecker,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport,System.Guid},Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService,Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.IHisWardMidnightCensusReportsHelper)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers.IAdmissionCrudHelper,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Boxfusion.Health.His.Admissions.Application.Helpers.IHisAdmissionAuditTrailService,Boxfusion.Health.His.Admissions.Application.Configuration.IHisAdmissionPermissionChecker,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardMidnightCensusReport,System.Guid},Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService,Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.IHisWardMidnightCensusReportsHelper)">
             <summary>
             
             </summary>
@@ -371,7 +403,7 @@
             <param name="identityNumber"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.GetAllByStatusAsync(System.Guid,Boxfusion.Health.His.Domain.Domain.Enums.RefListAdmissionStatuses)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.GetAllByStatusAsync(System.Guid,Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses)">
             <summary>
             
             </summary>
@@ -1060,7 +1092,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers.AdmissionCrudHelper.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HospitalAdmission,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers.IPatientCrudHelper{Boxfusion.Health.His.Domain.Domain.HisPatient,Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.NonUserCdmPatientResponse},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.EncounterLocation,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisConditionIcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.HisWard,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager,AutoMapper.IMapper)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers.AdmissionCrudHelper.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HospitalAdmission,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers.IPatientCrudHelper{Boxfusion.Health.His.Common.Patients.HisPatient,Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.NonUserCdmPatientResponse},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.EncounterLocation,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisConditionIcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager,AutoMapper.IMapper)">
             <summary>
             
             </summary>
@@ -1111,7 +1143,7 @@
             <param name="currentWardId"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers.AdmissionCrudHelper.CreateAsync(Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos.AdmissionInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase,Boxfusion.Health.His.Domain.Domain.HisPatient)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers.AdmissionCrudHelper.CreateAsync(Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos.AdmissionInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase,Boxfusion.Health.His.Common.Patients.HisPatient)">
             <summary>
             
             </summary>
@@ -1151,7 +1183,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers.AdmissionCrudHelper.DeleteConditionIcdTenCode(Boxfusion.Health.His.Domain.Domain.HisConditionIcdTenCode)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers.AdmissionCrudHelper.DeleteConditionIcdTenCode(Boxfusion.Health.His.Common.HisConditionIcdTenCode)">
             <summary>
             
             </summary>
@@ -1200,7 +1232,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.CreateAsync(Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos.AdmissionInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase,Boxfusion.Health.His.Domain.Domain.HisPatient)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers.IAdmissionCrudHelper.CreateAsync(Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos.AdmissionInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase,Boxfusion.Health.His.Common.Patients.HisPatient)">
             <summary>
             
             </summary>
@@ -1259,7 +1291,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.IAdmissionsAppService.GetAllByStatusAsync(System.Guid,Boxfusion.Health.His.Domain.Domain.Enums.RefListAdmissionStatuses)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.IAdmissionsAppService.GetAllByStatusAsync(System.Guid,Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses)">
             <summary>
             
             </summary>
@@ -1836,7 +1868,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.HisWardMidnightCensusReportsHelper.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport,System.Guid},Shesha.NHibernate.ISessionProvider)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.HisWardMidnightCensusReportsHelper.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardMidnightCensusReport,System.Guid},Shesha.NHibernate.ISessionProvider)">
             <summary>
             
             </summary>
@@ -1881,7 +1913,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.IReportHelper.GetReportAsync(Boxfusion.Health.His.Domain.Domain.Enums.RefListReportTypes,System.Guid,System.DateTime)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.IReportHelper.GetReportAsync(Boxfusion.Health.His.Common.Enums.RefListReportTypes,System.Guid,System.DateTime)">
             <summary>
             
             </summary>
@@ -1959,7 +1991,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.ReportHelper.GetReportAsync(Boxfusion.Health.His.Domain.Domain.Enums.RefListReportTypes,System.Guid,System.DateTime)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.ReportHelper.GetReportAsync(Boxfusion.Health.His.Common.Enums.RefListReportTypes,System.Guid,System.DateTime)">
             <summary>
             
             </summary>
@@ -2053,7 +2085,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.#ctor(Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.IReportHelper,Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.IHisWardMidnightCensusReportsHelper,Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.ISessionDataProvider,Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Domain.Domain.WardMidnightCensusReport,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.#ctor(Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.IReportHelper,Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.IHisWardMidnightCensusReportsHelper,Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.ISessionDataProvider,Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardMidnightCensusReport,System.Guid})">
             <summary>
             
             </summary>
@@ -2063,7 +2095,7 @@
             <param name="userAccessRightService"></param>
             <param name="wardMidnightCensusReport"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.GetReport(Boxfusion.Health.His.Domain.Domain.Enums.RefListReportTypes,System.Guid,System.DateTime)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.GetReport(Boxfusion.Health.His.Common.Enums.RefListReportTypes,System.Guid,System.DateTime)">
             <summary>
             
             </summary>
@@ -2126,7 +2158,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.IReportAppService.GetReport(Boxfusion.Health.His.Domain.Domain.Enums.RefListReportTypes,System.Guid,System.DateTime)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.IReportAppService.GetReport(Boxfusion.Health.His.Common.Enums.RefListReportTypes,System.Guid,System.DateTime)">
             <summary>
             
             </summary>
