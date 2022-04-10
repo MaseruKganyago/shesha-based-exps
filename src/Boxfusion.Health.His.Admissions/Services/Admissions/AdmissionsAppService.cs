@@ -35,6 +35,8 @@ using Boxfusion.Health.His.Common.Patients;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Authorization;
+using Boxfusion.Health.His.Admissions.Domain.Dtos;
+using Boxfusion.Health.His.Admissions.Application.Configuration;
 
 namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
 {
@@ -52,7 +54,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
         private readonly IHisAdmissionAuditTrailService _hisAdmissionAuditTrailRepository;
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         private readonly IRepository<HisWard, Guid> _wardRepositiory;
-        private readonly IHisPermissionChecker _hisAdmissPermissionChecker;
+        private readonly IHisAdmissionPermissionChecker _hisAdmissPermissionChecker;
         private readonly IRepository<WardMidnightCensusReport, Guid> _wardMidnightCensusReport;
         private readonly IHisWardMidnightCensusReportsHelper _hisWardMidnightCensusReportsHelper;
 
@@ -74,7 +76,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
             IRepository<HisPatient, Guid> hisPatientRepositiory,
             IRepository<HisWard, Guid> wardRepositiory,
             IHisAdmissionAuditTrailService hisAdmissionAuditTrailRepository,
-            IHisPermissionChecker hisAdmissPermissionChecker,
+            IHisAdmissionPermissionChecker hisAdmissPermissionChecker,
             IRepository<WardMidnightCensusReport, Guid> wardMidnightCensusReport,
             IUserAccessRightService userAccessRightService,
             IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper

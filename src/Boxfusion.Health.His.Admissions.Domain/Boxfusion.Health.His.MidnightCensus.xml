@@ -4,73 +4,79 @@
         <name>Boxfusion.Health.His.Admissions.Domain</name>
     </assembly>
     <members>
-        <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingNames">
-            <summary>
-            Contains setting names for Health.Hiss
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingProvider">
-            <summary>
-            Defines Health.His settings
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingProvider.LocalizationSourceName">
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.RefLists.RefListProvinces">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingProvider.#ctor">
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Domain.RefLists.RefListProvinces.EasternCape">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingProvider.GetSettingDefinitions(Abp.Configuration.SettingDefinitionProviderContext)">
-            <summary>
-            
-            </summary>
-            <param name="context"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingProvider.L(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="name"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingsAppService">
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Domain.RefLists.RefListProvinces.FreeState">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingsAppService.#ctor(Abp.Configuration.ISettingManager)">
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Domain.RefLists.RefListProvinces.Gauteng">
             <summary>
             
             </summary>
-            <param name="settingManager"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingsAppService.Update(Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingsDto)">
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Domain.RefLists.RefListProvinces.KwaZuluNatal">
             <summary>
             
             </summary>
-            <param name="input"></param>
-            <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingsAppService.Get">
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Domain.RefLists.RefListProvinces.Limpopo">
             <summary>
-            Returns Health.His settings
+            
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingsAppService.ChangeSettingAsync(System.String,System.String)">
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Domain.RefLists.RefListProvinces.Mpumalanga">
             <summary>
-            Changes setting for tenant with fallback to application
+            
             </summary>
-            <param name="name">Setting name</param>
-            <param name="value">Setting value</param>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Configuration.HisAdmissionsSettingsDto">
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Domain.RefLists.RefListProvinces.NorthernCape">
             <summary>
-            Health.His settings DTO
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Domain.RefLists.RefListProvinces.NorthWest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Domain.RefLists.RefListProvinces.WesternCape">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Dtos.HisPatientResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Dtos.HisPatientResponse.PatientMasterIndexNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Dtos.HisPatientResponse.HospitalPatientNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Dtos.HisPatientResponse.IdentificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Dtos.HisPatientResponse.PatientProvince">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.HisAdmissionsDomainModule">
