@@ -3,7 +3,7 @@ using Abp.UI;
 using Boxfusion.Health.His.Admissions.Application.Helpers;
 using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
 using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos;
-using Boxfusion.Health.His.Domain.Domain;
+using Boxfusion.Health.His.Common;
 using Shesha.NHibernate;
 using System;
 using System.Collections.Generic;

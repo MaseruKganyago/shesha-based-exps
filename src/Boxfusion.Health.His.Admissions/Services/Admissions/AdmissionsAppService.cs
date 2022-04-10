@@ -7,8 +7,6 @@ using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos;
 using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers;
 using local = Boxfusion.Health.His.Admissions.Application.Helpers;
-using Boxfusion.Health.His.Domain.Domain;
-using Boxfusion.Health.His.Domain.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 using NHibernate.Linq;
 using System;
@@ -23,7 +21,6 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Dtos;
 using Shesha.Web.DataTable;
 using Boxfusion.Health.His.Admissions.Application.Domain.Views;
-using Boxfusion.Health.His.Domain.Dtos;
 using Shesha.AutoMapper.Dto;
 using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
 using Boxfusion.Health.HealthCommon.Core.Services.Conditions.Helpers;
@@ -34,7 +31,10 @@ using Shesha.Domain;
 using Boxfusion.Health.His.Domain.Helpers;
 using Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers;
 using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
-using Boxfusion.Health.His.Domain.Authorization;
+using Boxfusion.Health.His.Common.Patients;
+using Boxfusion.Health.His.Common;
+using Boxfusion.Health.His.Common.Enums;
+using Boxfusion.Health.His.Common.Authorization;
 
 namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
 {

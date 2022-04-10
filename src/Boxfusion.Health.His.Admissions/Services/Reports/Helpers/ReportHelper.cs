@@ -3,7 +3,7 @@ using Abp.UI;
 using AutoMapper;
 using Boxfusion.Health.His.Admissions.Application.Domain.Views;
 using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
-using Boxfusion.Health.His.Domain.Domain.Enums;
+using Boxfusion.Health.His.Common.Enums;
 using NHibernate.Transform;
 using Shesha.NHibernate;
 using System;

@@ -1,6 +1,6 @@
 ﻿using Abp.Dependency;
 using Abp.Domain.Repositories;
-using Boxfusion.Health.His.Domain.Domain;
+using Boxfusion.Health.His.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;

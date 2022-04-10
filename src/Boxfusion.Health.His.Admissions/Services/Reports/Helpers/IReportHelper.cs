@@ -1,5 +1,5 @@
 ﻿using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
-using Boxfusion.Health.His.Domain.Domain.Enums;
+using Boxfusion.Health.His.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;

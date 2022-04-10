@@ -1,8 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
-using Boxfusion.Health.His.Domain.Domain;
-using Boxfusion.Health.His.Domain.Domain.Enums;
 using Shesha.AutoMapper.Dto;
 using Shesha.Domain.Enums;
 using System;

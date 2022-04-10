@@ -24,6 +24,7 @@
     <Compile Remove="Domain\Dtos\**" />
     <Compile Remove="Helpers\**" />
     <Compile Remove="Jobs\**" />
+    <Compile Remove="Migrations\**" />
     <Compile Remove="Notifications\**" />
     <Compile Remove="Services\FacilityPatients\**" />
     <Compile Remove="Services\Wards\**" />
@@ -32,6 +33,7 @@
     <EmbeddedResource Remove="Domain\Dtos\**" />
     <EmbeddedResource Remove="Helpers\**" />
     <EmbeddedResource Remove="Jobs\**" />
+    <EmbeddedResource Remove="Migrations\**" />
     <EmbeddedResource Remove="Notifications\**" />
     <EmbeddedResource Remove="Services\FacilityPatients\**" />
     <EmbeddedResource Remove="Services\Wards\**" />
@@ -40,6 +42,7 @@
     <None Remove="Domain\Dtos\**" />
     <None Remove="Helpers\**" />
     <None Remove="Jobs\**" />
+    <None Remove="Migrations\**" />
     <None Remove="Notifications\**" />
     <None Remove="Services\FacilityPatients\**" />
     <None Remove="Services\Wards\**" />
@@ -53,13 +56,13 @@
     <PackageReference Include="FluentMigrator" Version="3.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
-    <PackageReference Include="Shesha.Application" Version="0.3.71" />
-    <PackageReference Include="Shesha.Core" Version="0.3.71" />
+    <PackageReference Include="Shesha.Application" Version="0.3.73" />
+    <PackageReference Include="Shesha.Core" Version="0.3.73" />
     <PackageReference Include="Shesha.Enterprise" Version="0.0.40" />
-    <PackageReference Include="Shesha.Framework" Version="0.3.71" />
-    <PackageReference Include="Shesha.NHibernate" Version="0.3.71" />
-    <PackageReference Include="Shesha.Scheduler" Version="0.3.71" />
-    <PackageReference Include="Shesha.Web.Controls" Version="0.3.71" />
+    <PackageReference Include="Shesha.Framework" Version="0.3.73" />
+    <PackageReference Include="Shesha.NHibernate" Version="0.3.73" />
+    <PackageReference Include="Shesha.Scheduler" Version="0.3.73" />
+    <PackageReference Include="Shesha.Web.Controls" Version="0.3.73" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
   </ItemGroup>
 
@@ -69,7 +72,6 @@
 
   <ItemGroup>
     <Folder Include="Domain\" />
-    <Folder Include="Migrations\" />
     <Folder Include="Services\" />
   </ItemGroup>
 

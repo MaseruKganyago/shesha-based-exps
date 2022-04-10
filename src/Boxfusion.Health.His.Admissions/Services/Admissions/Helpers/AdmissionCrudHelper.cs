@@ -12,8 +12,6 @@ using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers;
 using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos;
 using local = Boxfusion.Health.His.Admissions.Application.Helpers;
-using Boxfusion.Health.His.Domain.Domain;
-using Boxfusion.Health.His.Domain.Domain.Enums;
 using NHibernate.Linq;
 using Shesha.AutoMapper.Dto;
 using Shesha.Extensions;
@@ -23,6 +21,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 using Shesha.NHibernate;
+using Boxfusion.Health.His.Common;
+using Boxfusion.Health.His.Common.Patients;
+using Boxfusion.Health.His.Common.Enums;
 
 namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers
 {

@@ -13,7 +13,7 @@ namespace Boxfusion.Health.His.Admissions.Application
     /// Health.His Module
     /// </summary>
     [DependsOn(
-        //typeof(HisDomainModule),
+        typeof(HisAdmissionsDomainModule),
         typeof(SheshaCoreModule)
     )]
     public class HisAdmissionsApplicationModule : AbpModule

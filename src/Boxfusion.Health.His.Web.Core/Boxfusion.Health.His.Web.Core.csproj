@@ -27,22 +27,22 @@
     <PackageReference Include="Abp.AspNetCore.SignalR" Version="5.0.0" />
     <PackageReference Include="Abp.HangFire.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Abp.ZeroCore" Version="5.0.0" />
-    <PackageReference Include="Shesha.Application" Version="0.3.71" />
+    <PackageReference Include="Shesha.Application" Version="0.3.73" />
     <PackageReference Include="Shesha.Reporting" Version="0.0.19" />
-    <PackageReference Include="Shesha.AzureAD" Version="0.3.71" />
-    <PackageReference Include="Shesha.Core" Version="0.3.71" />
-    <PackageReference Include="Shesha.Elmah" Version="0.3.71" />
-    <PackageReference Include="Shesha.Firebase" Version="0.3.71" />
-    <PackageReference Include="Shesha.Import" Version="0.3.71" />
-    <PackageReference Include="Shesha.Ldap" Version="0.3.71" />
-    <PackageReference Include="Shesha.NHibernate" Version="0.3.71" />
-    <PackageReference Include="Shesha.Scheduler" Version="0.3.71" />
-    <PackageReference Include="Shesha.Sms.BulkSms" Version="0.3.71" />
-    <PackageReference Include="Shesha.Sms.Clickatell" Version="0.3.71" />
-    <PackageReference Include="Shesha.Sms.SmsPortal" Version="0.3.71" />
-    <PackageReference Include="Shesha.Sms.Xml2Sms" Version="0.3.71" />
-    <PackageReference Include="Shesha.Web.Controls" Version="0.3.71" />
-    <PackageReference Include="Shesha.Web.FormsDesigner" Version="0.3.71" />
+    <PackageReference Include="Shesha.AzureAD" Version="0.3.73" />
+    <PackageReference Include="Shesha.Core" Version="0.3.73" />
+    <PackageReference Include="Shesha.Elmah" Version="0.3.73" />
+    <PackageReference Include="Shesha.Firebase" Version="0.3.73" />
+    <PackageReference Include="Shesha.Import" Version="0.3.73" />
+    <PackageReference Include="Shesha.Ldap" Version="0.3.73" />
+    <PackageReference Include="Shesha.NHibernate" Version="0.3.73" />
+    <PackageReference Include="Shesha.Scheduler" Version="0.3.73" />
+    <PackageReference Include="Shesha.Sms.BulkSms" Version="0.3.73" />
+    <PackageReference Include="Shesha.Sms.Clickatell" Version="0.3.73" />
+    <PackageReference Include="Shesha.Sms.SmsPortal" Version="0.3.73" />
+    <PackageReference Include="Shesha.Sms.Xml2Sms" Version="0.3.73" />
+    <PackageReference Include="Shesha.Web.Controls" Version="0.3.73" />
+    <PackageReference Include="Shesha.Web.FormsDesigner" Version="0.3.73" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.0.1" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />

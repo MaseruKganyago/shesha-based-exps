@@ -1,6 +1,6 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos;
-using Boxfusion.Health.His.Domain.Domain;
+using Boxfusion.Health.His.Common.Patients;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

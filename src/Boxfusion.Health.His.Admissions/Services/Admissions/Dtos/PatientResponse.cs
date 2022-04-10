@@ -1,5 +1,5 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
-using Boxfusion.Health.His.Domain.Domain;
+using Boxfusion.Health.His.Common.Patients;
 using System.Collections.Generic;
 
 namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos

@@ -1,6 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
-using Boxfusion.Health.His.Domain.Domain;
+using Boxfusion.Health.His.Common;
 using Shesha.AutoMapper.Dto;
 using System;
 using System.Collections.Generic;
