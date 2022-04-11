@@ -36,6 +36,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// <param name="schedulesRepo"></param>
         /// <param name="scheduleAvailabilityRepo"></param>
         /// <param name="slotsRepo"></param>
+        /// <param name="publicHolidayManager"></param>
         public BookingSlotsGenerator(IRepository<CdmSchedule, Guid> schedulesRepo,
             IRepository<ScheduleAvailabilityForTimeBooking, Guid> scheduleAvailabilityRepo,
             IRepository<CdmSlot, Guid> slotsRepo,

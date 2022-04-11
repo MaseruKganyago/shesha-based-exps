@@ -1,29 +1,33 @@
-﻿using Abp.Application.Services.Dto;
-using Abp.AutoMapper;
+﻿using Abp.AutoMapper;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.His.Common;
 using Shesha.AutoMapper.Dto;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos
+namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos
 {
     /// <summary>
     /// 
     /// </summary>
     [AutoMap(typeof(WardAdmission))]
-    public class AdmissionInput : HospitalisationEncounterInput
+    public class AdmissionResponse : HospitalisationEncounterResponse
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public ReferenceListItemValueDto IdentificationType { get; set; }
-
+        //Ward: Ward(rather use Encounter.Location)
         /// <summary>
         /// 
         /// </summary>
         public string WardAdmissionNumber { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto AdmissionStatus { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto HospitalAdmissionStatus { get; set; }
 
         /// <summary>
         /// 
@@ -61,6 +65,57 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dt
         /// </summary>
         public EntityWithDisplayNameDto<Guid?> TransferToHospital { get; set; }
 
+        //Patient properties
+        /// <summary>
+        /// 
+        /// </summary>
+        public string PatientMasterIndexNumber { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string HospitalPatientNumber { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto IdentificationType { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string IdentityNumber { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto PatientProvince { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? DateOfBirth { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto Gender { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string LastName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReferenceListItemValueDto Nationality { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -70,6 +125,17 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dt
         /// 
         /// </summary>
         public List<EntityWithDisplayNameDto<Guid?>> Code { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<EntityWithDisplayNameDto<Guid?>> SeparationCode { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EntityWithDisplayNameDto<Guid?> HisAdmission { get; set; }
+
 
         /* Separation Related properties */
 
@@ -111,19 +177,19 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dt
         /// <summary>
         /// 
         /// </summary>
-        ReferenceListItemValueDto Speciality { get; set; }
+        public ReferenceListItemValueDto Speciality { get; set; }
 
         /// <summary>
         /// Used to like the serparations
         /// </summary>
-        public virtual EntityWithDisplayNameDto<Guid?> InternalTransferOriginalWard { get; set; }
+        public EntityWithDisplayNameDto<Guid?> InternalTransferOriginalWard { get; set; }
 
         /// <summary>
         /// Used to like the serparations
         /// </summary>
-        public virtual EntityWithDisplayNameDto<Guid?> InternalTransferDestinationWard { get; set; }
+        public EntityWithDisplayNameDto<Guid?> InternalTransferDestinationWard { get; set; }
 
-        /// <summary>
+        // <summary>
         /// 
         /// </summary>
         public string AgeBreakdown { get; set; }
@@ -137,10 +203,5 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dt
         /// 
         /// </summary>
         public string TransferToNonGautengHospital { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<EntityWithDisplayNameDto<Guid?>> SeparationCode { get; set; }
     }
 }

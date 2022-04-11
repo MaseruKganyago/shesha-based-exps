@@ -157,6 +157,7 @@
             <param name="schedulesRepo"></param>
             <param name="scheduleAvailabilityRepo"></param>
             <param name="slotsRepo"></param>
+            <param name="publicHolidayManager"></param>
         </member>
         <member name="M:Boxfusion.Health.His.Bookings.Domain.BookingSlotsGenerator.GenerateBookingSlotsForAllSchedulesAsync">
             <summary>

@@ -1,6 +1,5 @@
 ﻿using Abp.Dependency;
 using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
-using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,11 +19,5 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
         /// <returns></returns>
         Task ResertReportAsync(ResertReportInput input);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        Task CreateAdmissionAuditTrailAsync(HisAdmissionAuditTrailInput input);
     }
 }

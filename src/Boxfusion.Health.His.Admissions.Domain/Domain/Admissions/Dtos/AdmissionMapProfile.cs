@@ -2,17 +2,16 @@
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
-using local = Boxfusion.Health.His.Admissions.Application.Helpers;
 using Shesha.AutoMapper;
 using Shesha.AutoMapper.Dto;
 using Shesha.Domain;
 using System;
-using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
+using Boxfusion.Health.His.Admissions.Domain.Helpers;
 
-namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos
+namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos
 {
     /// <summary>
     /// 
@@ -191,7 +190,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dt
                 .ForMember(c => c.SeparationDestinationWard, options => options.MapFrom(c => c.SeparationDestinationWard != null ? new EntityWithDisplayNameDto<Guid?>(c.SeparationDestinationWard.Id, c.SeparationDestinationWard.Name) : null))
                 .ForMember(c => c.SeparationChildHealth, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("His", "SeparationChildHealths", (long?)c.SeparationChildHealth)))
                 .ForMember(c => c.SeparationComment, options => options.MapFrom(c => c.SeparationComment))
-                .ForMember(c => c.AgeBreakdown, options => options.MapFrom(c => c.Subject.DateOfBirth != null ? local.UtilityHelper.AgeBreakdown(c.Subject.DateOfBirth.Value, DateTime.Now) : ""))
+                .ForMember(c => c.AgeBreakdown, options => options.MapFrom(c => c.Subject.DateOfBirth != null ? AdmissionsUtilityHelper.AgeBreakdown(c.Subject.DateOfBirth.Value, DateTime.Now) : ""))
                 .ForMember(c => c.InternalTransferOriginalWard, options => options.MapFrom(c => c.InternalTransferOriginalWard != null ? new EntityWithDisplayNameDto<Guid?>(c.InternalTransferOriginalWard.Id, c.InternalTransferOriginalWard.Identifier) : null))
                 .ForMember(c => c.InternalTransferDestinationWard, options => options.MapFrom(c => c.InternalTransferDestinationWard != null ? new EntityWithDisplayNameDto<Guid?>(c.InternalTransferDestinationWard.Id, c.InternalTransferDestinationWard.Identifier) : null))
                 .MapReferenceListValuesFromDto();
@@ -271,14 +270,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dt
                 .ForMember(c => c.Type, options => options.Ignore())
                 .ForMember(c => c.Performer, options => options.MapFrom(c => GetEntity<Person>(c.Id)))
                 .MapReferenceListValuesToDto();
-
-            CreateMap<WardMidnightCensusReport, WardMidnightCensusReportResponse>()
-                .ForMember(c => c.ApprovedBy, options => options.MapFrom(c => c.ApprovedBy != null ? new EntityWithDisplayNameDto<Guid?>(c.ApprovedBy.Id, c.ApprovedBy.FullName) : null))
-                .ForMember(c => c.ApprovedBy2, options => options.MapFrom(c => c.ApprovedBy2 != null ? new EntityWithDisplayNameDto<Guid?>(c.ApprovedBy2.Id, c.ApprovedBy2.FullName) : null))
-                .ForMember(c => c.RejectedBy, options => options.MapFrom(c => c.RejectedBy != null ? new EntityWithDisplayNameDto<Guid?>(c.RejectedBy.Id, c.RejectedBy.FullName) : null))
-                .ForMember(c => c.Ward, options => options.MapFrom(c => c.Ward != null ? new EntityWithDisplayNameDto<Guid?>(c.Ward.Id, c.Ward.Name) : null))
-                .MapReferenceListValuesToDto();
-
+                       
             CreateMap<DailyStats, WardMidnightCensusReport>()
                 .ForMember(c => c.MidnightCount, options => options.MapFrom(r => r.MidnightCount))
                 .ForMember(c => c.TotalAdmittedPatients, opt => opt.MapFrom(r => r.TotalAdmittedPatients))

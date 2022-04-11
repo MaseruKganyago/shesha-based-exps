@@ -6,14 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos
+namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos
 {
     /// <summary>
     /// 
     /// </summary>
-    [AutoMapFrom(typeof(AdmissionInput))]
-    [AutoMapTo(typeof(WardAdmission))]
-    public class SeparationInput : EntityDto<Guid>
+    [AutoMapFrom(typeof(WardAdmission))]
+    [AutoMapTo(typeof(AdmissionResponse))]
+    public class SeparationResponse : EntityDto<Guid>
     {
         /// <summary>
         /// 
@@ -34,6 +34,18 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dt
         /// 
         /// </summary>
         public EntityWithDisplayNameDto<Guid?> TransferToHospital { get; set; }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EntityWithDisplayNameDto<Guid?> InternalTransferOriginalWard { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public EntityWithDisplayNameDto<Guid?> InternalTransferDestinationWard { get; set; }
+        
 
         /// <summary>
         /// 
@@ -70,3 +82,36 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dt
         //public EntityWithDisplayNameDto<Guid?> Ward { get; internal set; }
     }
 }
+
+//using Abp.Application.Services.Dto;
+//using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
+//using System;
+
+//namespace Boxfusion.Health.His.Admissions.Application.Services.Separations.Dto
+//{
+///// <summary>
+///// 
+///// </summary>
+//public class SeparationResponse : EntityDto<Guid?>
+//{
+//    /// <summary>
+//    /// 
+//    /// </summary>
+//    // public HisPatientResponse Patient { get; set; }
+
+//    /// <summary>
+//    /// 
+//    /// </summary>
+//    // public WardAdmissionResponse WardAdmission { get; set; }
+
+//    // <summary>
+//    /// 
+//    /// </summary>
+//    // public WardAdmissionResponse DestinationWardAdmission { get; set; }
+
+//    /// <summary>
+//    /// 
+//    /// </summary>
+//    public AdmissionResponse HospitalAdmission { get; set; }
+//}
+//}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos
+namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos
 {
 	/// <summary>
 	/// 

@@ -4,8 +4,6 @@ using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
-using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos;
-using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers;
 using local = Boxfusion.Health.His.Admissions.Application.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using NHibernate.Linq;
@@ -37,6 +35,8 @@ using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Authorization;
 using Boxfusion.Health.His.Admissions.Domain.Dtos;
 using Boxfusion.Health.His.Admissions.Application.Configuration;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
 
 namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
 {
@@ -48,7 +48,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
     [Route("api/v{version:apiVersion}/His/[controller]")]
     public class AdmissionsAppService : CdmAppServiceBase, IAdmissionsAppService
     {
-        private readonly IAdmissionCrudHelper _admissionCrudHelper;
+        private readonly AdmissionsManager _admissionCrudHelper;
 
         private readonly IRepository<HisPatient, Guid> _hisPatientRepositiory;
         private readonly IHisAdmissionAuditTrailService _hisAdmissionAuditTrailRepository;
@@ -56,7 +56,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
         private readonly IRepository<HisWard, Guid> _wardRepositiory;
         private readonly IHisAdmissionPermissionChecker _hisAdmissPermissionChecker;
         private readonly IRepository<WardMidnightCensusReport, Guid> _wardMidnightCensusReport;
-        private readonly IHisWardMidnightCensusReportsHelper _hisWardMidnightCensusReportsHelper;
 
         /// <summary>
         /// 
@@ -72,14 +71,13 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
         /// <param name="userAccessRightService"></param>
         public AdmissionsAppService(
             IRepository<WardAdmission, Guid> wardAdmissionRepository,
-            IAdmissionCrudHelper admissionCrudHelper,
+            AdmissionsManager admissionCrudHelper,
             IRepository<HisPatient, Guid> hisPatientRepositiory,
             IRepository<HisWard, Guid> wardRepositiory,
             IHisAdmissionAuditTrailService hisAdmissionAuditTrailRepository,
             IHisAdmissionPermissionChecker hisAdmissPermissionChecker,
             IRepository<WardMidnightCensusReport, Guid> wardMidnightCensusReport,
-            IUserAccessRightService userAccessRightService,
-            IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper
+            IUserAccessRightService userAccessRightService
             )
         {
             _admissionCrudHelper = admissionCrudHelper;
@@ -89,7 +87,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
             _hisAdmissionAuditTrailRepository = hisAdmissionAuditTrailRepository;
             _hisAdmissPermissionChecker = hisAdmissPermissionChecker;
             _wardMidnightCensusReport = wardMidnightCensusReport;
-            _hisWardMidnightCensusReportsHelper = hisWardMidnightCensusReportsHelper;
         }
 
         /// <summary>
@@ -189,8 +186,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
             }
 
             await wardAdmissionService.UpdateAsync(wardAdmission);
-
-            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput{ reportDate = (DateTime)wardAdmission.StartDateTime.Value.Date, wardId = (Guid)wardAdmission.Ward.Id });
 
             var person = await GetCurrentPersonAsync();
             var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(wardAdmission.Id, wardAdmission.StartDateTime);
@@ -333,8 +328,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
 
             var admission = await _admissionCrudHelper.CreateAsync(input, person, patient);
 
-            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput{ reportDate = (DateTime)admission.StartDateTime.Value.Date, wardId = (Guid)admission.Ward.Id });
-
             var wardAdmission = await GetEntityAsync<WardAdmission>(admission.Id);
 
             var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(input.Id, admission.StartDateTime);
@@ -390,8 +383,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
                 throw new UserFriendlyException("Patient Id cannot be empty");
 
             var admission = await _admissionCrudHelper.UpdateAsync(input, person);
-
-            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput{ reportDate = (DateTime)admission.StartDateTime.Value.Date, wardId = (Guid)admission.Ward.Id });
 
             var wardAdmission = await GetEntityAsync<WardAdmission>(admission.Id);
             var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(wardAdmission.Id, admission.StartDateTime);
@@ -460,17 +451,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
 
             var admissionResponse = await _admissionCrudHelper.SeparatePatientAsync(input, person);
 
-            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput{ reportDate = (DateTime)admissionResponse.StartDateTime.Value.Date, wardId = (Guid)admissionResponse.Ward.Id });
-
-            await _hisWardMidnightCensusReportsHelper.CreateAdmissionAuditTrailAsync(new HisAdmissionAuditTrailInput()
-            {
-                Admission = input.Id,
-                AdmissionStatus = RefListAdmissionStatuses.separated,
-                AuditTime = admissionResponse.SeparationDate.Value.Date,
-                Initiator = person.Id,
-                UserId = person.User.Id
-            });
-
             return admissionResponse;
         }
 
@@ -490,8 +470,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
 
             var separation = await _admissionCrudHelper.UndoSeparation(admission, person);
-
-            await _hisWardMidnightCensusReportsHelper.ResertReportAsync(new ResertReportInput{ reportDate = (DateTime)separation.StartDateTime.Value.Date, wardId = (Guid)separation.Ward.Id });
 
             var wardAdmission = await GetEntityAsync<WardAdmission>((separation.Id));
             var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(wardAdmission.Id, wardAdmission.StartDateTime);

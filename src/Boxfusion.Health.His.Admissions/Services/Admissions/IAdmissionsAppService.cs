@@ -1,6 +1,6 @@
 ﻿using Abp.Application.Services;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
-using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
 using Boxfusion.Health.His.Common.Enums;
 using System;
 using System.Collections.Generic;

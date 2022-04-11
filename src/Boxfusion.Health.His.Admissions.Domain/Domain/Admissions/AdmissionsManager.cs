@@ -1,36 +1,36 @@
-﻿using Abp.Dependency;
-using Abp.Domain.Repositories;
+﻿using Abp.Domain.Repositories;
+using Abp.Domain.Services;
 using Abp.Domain.Uow;
-using Abp.UI;
 using AutoMapper;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
-using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
-using Boxfusion.Health.HealthCommon.Core.Helpers;
-using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
-using Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers;
-using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos;
-using local = Boxfusion.Health.His.Admissions.Application.Helpers;
-using NHibernate.Linq;
-using Shesha.AutoMapper.Dto;
-using Shesha.Extensions;
+using Boxfusion.Health.His.Common;
+using Boxfusion.Health.His.Common.Patients;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using System.Transactions;
-using Shesha.NHibernate;
-using Boxfusion.Health.His.Common;
-using Boxfusion.Health.His.Common.Patients;
+using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
+using Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers;
+using Shesha.AutoMapper.Dto;
+using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.His.Common.Enums;
+using NHibernate.Linq;
+using Shesha.Extensions;
+using Boxfusion.Health.HealthCommon.Core.Helpers;
+using Shesha.NHibernate;
+using Abp.UI;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
+using Boxfusion.Health.His.Admissions.Domain.Helpers;
 
-namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Helpers
+namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
 {
     /// <summary>
-    /// 
+    ///  Domain Service for the Admission entity.
     /// </summary>
-    public class AdmissionCrudHelper : IAdmissionCrudHelper, ITransientDependency
+    public class AdmissionsManager : DomainService
     {
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepositiory;
@@ -44,7 +44,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.He
         private readonly IRepository<HisWard, Guid> _wardRepositiory;
         private readonly IUnitOfWorkManager _unitOfWork;
         private readonly IMapper _mapper;
-
+       
         /// <summary>
         /// 
         /// </summary>
@@ -60,7 +60,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.He
         /// <param name="wardRepositiory"></param>
         /// <param name="unitOfWork"></param>
         /// <param name="mapper"></param>
-        public AdmissionCrudHelper(
+        public AdmissionsManager(
             IRepository<WardAdmission, Guid> wardAdmissionRepositiory,
             IRepository<HospitalAdmission, Guid> hospitalAdmissionRepositiory,
             IPatientCrudHelper<HisPatient, NonUserCdmPatientResponse> patientCrudHelper,
@@ -133,10 +133,10 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.He
             List<EntityWithDisplayNameDto<Guid?>> separationCodes = results.Item2;
 
             AdmissionResponse admissionResponse = null;
-            if(hospitalAdmission != null)
+            if (hospitalAdmission != null)
                 admissionResponse = _mapper.Map<AdmissionResponse>(hospitalAdmission);
 
-            if(admissionResponse != null)
+            if (admissionResponse != null)
                 _mapper.Map(wardAdmission, admissionResponse);
             else
                 admissionResponse = _mapper.Map<AdmissionResponse>(wardAdmission);
@@ -147,7 +147,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.He
             UtilityHelper.TrySetProperty(admissionResponse, "SeparationCode", separationCodes);
 
             if (hisPatient.DateOfBirth.HasValue && wardAdmission.SeparationDate.HasValue)
-                admissionResponse.AgeBreakdown = local.UtilityHelper.AgeBreakdown(hisPatient.DateOfBirth.Value, wardAdmission.SeparationDate.Value);
+                admissionResponse.AgeBreakdown = AdmissionsUtilityHelper.AgeBreakdown(hisPatient.DateOfBirth.Value, wardAdmission.SeparationDate.Value);
 
             return admissionResponse;
         }
@@ -470,7 +470,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.He
 
             var conditions = await _conditionRepositiory.GetAll().Where(x => x.FhirEncounter == wardAdmission).ToListAsync();
             if (conditions.Any())
-            {     
+            {
                 //Admission Icd10Codes
                 var conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.admitted && x.IsDeleted == false);
                 if (conditionIcdTenCodes.Any())
@@ -545,9 +545,9 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.He
                     var taskDeleteConditionIcdTenCodes = new List<Task>();
                     dbConditionIcdTenCodes.ForEach((conditionIcdTenCode) => taskDeleteConditionIcdTenCodes.Add(DeleteConditionIcdTenCode(conditionIcdTenCode)));
 
-                    var condition = await _conditionIcdTenCodeRepositiory.GetAll().Where(x => dbConditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.separated && x.IsDeleted == false).Select(x => x.Condition).FirstOrDefaultAsync() 
+                    var condition = await _conditionIcdTenCodeRepositiory.GetAll().Where(x => dbConditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.separated && x.IsDeleted == false).Select(x => x.Condition).FirstOrDefaultAsync()
                         ?? new Condition { RecordedDate = DateTime.Now, Subject = hisPatient, Recorder = currentLoggedInPerson, FhirEncounter = insertedWardAdmission, HospitalisationEncounter = insertedHospitalAdmission };
-                    
+
                     Condition insertedCondition = null;
                     //Create a condition
                     if (!Validation.IsValidateId(condition.Id))
@@ -590,7 +590,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.He
                     Condition = condition,
                     IcdTenCode = icdTenCode,
                     AdmissionStatus = isSeparation == false ? RefListAdmissionStatuses.admitted : RefListAdmissionStatuses.separated
-                    
+
                 };
 
                 insertedConditionIcdTenCode = await _conditionIcdTenCodeRepositiory.InsertAsync(conditionIcdTenCode);
@@ -599,5 +599,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.He
 
             return new EntityWithDisplayNameDto<Guid?>(icdTenCode.Id, $"{icdTenCode.ICDTenCode} {icdTenCode.WHOFullDesc}");
         }
+
     }
 }

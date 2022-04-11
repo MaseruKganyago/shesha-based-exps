@@ -1,6 +1,6 @@
 ﻿using Abp.UI;
 using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
-using Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.Dtos;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
 using NHibernate.Transform;
 using Shesha.NHibernate;
 using System;
