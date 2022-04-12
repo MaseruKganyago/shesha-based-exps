@@ -333,6 +333,26 @@
             inheritedDoc
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Application.Hubs.HisAdmisSignalRHub">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Application.Hubs.HisAdmisSignalRHub.AbpSession">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Application.Hubs.HisAdmisSignalRHub.Logger">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Hubs.HisAdmisSignalRHub.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Application.Hubs.HisAdmisSignalRHub.SendMessage(System.String)">
             <summary>
             Used for sending SignalR Messages

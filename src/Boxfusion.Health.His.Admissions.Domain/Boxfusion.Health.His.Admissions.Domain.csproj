@@ -25,24 +25,18 @@
     <Compile Remove="Jobs\**" />
     <Compile Remove="Migrations\**" />
     <Compile Remove="Notifications\**" />
-    <Compile Remove="Services\FacilityPatients\**" />
-    <Compile Remove="Services\Wards\**" />
     <EmbeddedResource Remove="Application\**" />
     <EmbeddedResource Remove="Authorization\**" />
     <EmbeddedResource Remove="Domain\Dtos\**" />
     <EmbeddedResource Remove="Jobs\**" />
     <EmbeddedResource Remove="Migrations\**" />
     <EmbeddedResource Remove="Notifications\**" />
-    <EmbeddedResource Remove="Services\FacilityPatients\**" />
-    <EmbeddedResource Remove="Services\Wards\**" />
     <None Remove="Application\**" />
     <None Remove="Authorization\**" />
     <None Remove="Domain\Dtos\**" />
     <None Remove="Jobs\**" />
     <None Remove="Migrations\**" />
     <None Remove="Notifications\**" />
-    <None Remove="Services\FacilityPatients\**" />
-    <None Remove="Services\Wards\**" />
   </ItemGroup>
 
 
@@ -65,11 +59,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Configuration\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
