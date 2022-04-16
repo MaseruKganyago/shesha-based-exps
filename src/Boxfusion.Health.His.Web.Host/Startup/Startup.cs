@@ -64,6 +64,7 @@ namespace Boxfusion.Health.His.Web.Host.Startup
                 //options.LogPath = "~/App_Data/ElmahLogs";
                 options.LogPath = Path.Combine(_hostEnvironment.ContentRootPath, "App_Data", "ElmahLogs");
                 //options.CheckPermissionAction = context => context.User.Identity.IsAuthenticated; //note: looks like we have to use cookies for it
+                options.Filters.Add(new ElmahFilter());
             });
 
             services.AddMvcCore(options =>
