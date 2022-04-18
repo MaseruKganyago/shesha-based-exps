@@ -66,6 +66,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Web.Controls", "shes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Web.FormsDesigner", "shesha-core-enterprise\shesha-core\src\Shesha.Web.FormsDesigner\Shesha.Web.FormsDesigner.csproj", "{CC28FB01-2000-4E8F-A8A4-5E1863C2BDB7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.MpDoh.Customisations", "src\Boxfusion.Health.His.MpDoh.Domain\Boxfusion.Health.His.MpDoh.Customisations.csproj", "{51220A9F-B109-404F-B510-99D7539D40FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -180,6 +182,10 @@ Global
 		{CC28FB01-2000-4E8F-A8A4-5E1863C2BDB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC28FB01-2000-4E8F-A8A4-5E1863C2BDB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC28FB01-2000-4E8F-A8A4-5E1863C2BDB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51220A9F-B109-404F-B510-99D7539D40FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51220A9F-B109-404F-B510-99D7539D40FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51220A9F-B109-404F-B510-99D7539D40FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51220A9F-B109-404F-B510-99D7539D40FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
