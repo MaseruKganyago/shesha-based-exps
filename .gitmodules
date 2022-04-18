@@ -1,6 +1,3 @@
-[submodule "Shesha"]
-	path = Shesha
-	url = https://MaziMuhlari:h7z4mwhc3bpwc3qjn232qeimnmsm2fctpaywbmij6qnwltkksgtq@dev.azure.com/boxfusion/SheshaBackendv3/_git/SheshaBackendv3
-	branch = d/Release3
-	
-  
+[submodule "shesha-core-enterprise"]
+	path = shesha-core-enterprise
+	url = https://dev.azure.com/boxfusion/Shesha%20Web%20v3.0/_git/shesha-core-enterprise
