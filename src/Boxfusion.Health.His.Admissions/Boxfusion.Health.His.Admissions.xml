@@ -384,12 +384,12 @@
             </summary>
             <param name="localizationConfiguration"></param>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService">
+        <member name="T:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Boxfusion.Health.His.Admissions.Application.Helpers.IHisAdmissionAuditTrailService,Boxfusion.Health.His.Admissions.Application.Configuration.IHisAdmissionPermissionChecker,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardMidnightCensusReport,System.Guid},Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Boxfusion.Health.His.Admissions.Application.Helpers.IHisAdmissionAuditTrailService,Boxfusion.Health.His.Admissions.Application.Configuration.IHisAdmissionPermissionChecker,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardMidnightCensusReport,System.Guid},Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService)">
             <summary>
             
             </summary>
@@ -397,33 +397,38 @@
             <param name="admissionCrudHelper"></param>
             <param name="hisPatientRepositiory"></param>
             <param name="wardRepositiory"></param>
-            <param name="hisWardMidnightCensusReportsHelper"></param>
             <param name="hisAdmissionAuditTrailRepository"></param>
             <param name="hisAdmissPermissionChecker"></param>
             <param name="wardMidnightCensusReport"></param>
             <param name="userAccessRightService"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.IndexTable">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.IndexTable">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.AcceptOrRejectTransfers(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AcceptOrRejectTransfersInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.GetAsync(System.Guid)">
             <summary>
             
             </summary>
-            <param name="input"></param>
+            <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.GetPatientByIdentityNumber(System.String)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.GetAllAsync(System.Guid,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.GetPatientByIdentityNumber(System.String)">
             <summary>
             
             </summary>
             <param name="identityNumber"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.GetAllByStatusAsync(System.Guid,Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.GetAllByStatusAsync(System.Guid,Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses)">
             <summary>
             
             </summary>
@@ -431,94 +436,91 @@
             <param name="admissionStatus"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.GetAllAsync(System.Guid,System.DateTime)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.GetWardAdmissionsByHospitalId(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="hospitalId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.GetPatientAuditTrailAsync(System.Guid)">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.GetPatientAuditTrailAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.GetAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.ValidateIdentityNumber(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.ValidateIdDto)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.ValidateIdentityNumber(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.ValidateIdDto)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.CreateAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.CreateAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.UpdateAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.UpdateAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.SeparatePatientAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.AcceptOrRejectTransfers(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AcceptOrRejectTransfersInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.UndoSeparationAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.UndoSeparationDto)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.SeparatePatientAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.UndoSeparationAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.UndoSeparationDto)">
             <summary>
             
             </summary>
             <param name="admission"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.DeleteAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.DeleteAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.GetWardAdmission(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.AdmissionsAppService.GetWardAdmissions(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.IAdmissionsAppService">
+        <member name="T:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsMapProfile">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.IAdmissionsAppService.AcceptOrRejectTransfers(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AcceptOrRejectTransfersInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsMapProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.AcceptOrRejectTransfers(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AcceptOrRejectTransfersInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.IAdmissionsAppService.GetAllByStatusAsync(System.Guid,Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.GetAllByStatusAsync(System.Guid,Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses)">
             <summary>
             
             </summary>
@@ -526,13 +528,13 @@
             <param name="admissionStatus"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.IAdmissionsAppService.GetAllAsync(System.Guid,System.DateTime)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.GetAllAsync(System.Guid,System.DateTime)">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.IAdmissionsAppService.GetPatientAuditTrailAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.GetPatientAuditTrailAsync(System.Guid)">
             <summary>
             
             </summary>
@@ -540,35 +542,35 @@
             <param name="partOfId"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.IAdmissionsAppService.ValidateIdentityNumber(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.ValidateIdDto)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.ValidateIdentityNumber(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.ValidateIdDto)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.IAdmissionsAppService.GetAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.GetAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.IAdmissionsAppService.CreateAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.CreateAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.IAdmissionsAppService.UpdateAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.UpdateAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions.IAdmissionsAppService.DeleteAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.DeleteAsync(System.Guid)">
             <summary>
             
             </summary>

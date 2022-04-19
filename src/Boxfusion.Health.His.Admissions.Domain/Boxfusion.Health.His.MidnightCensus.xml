@@ -38,19 +38,19 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.GetAsync(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.GetByIdWithRelationsAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="id"></param>
-            <returns></returns>
+            <returns>Returns WardAdmission entity with it's relations using the WardAdmissionWithRelations class</returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.GetWardAdmissions(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.GetByHospitalAdmissionIdWithRelationsAsync(System.Guid)">
             <summary>
             
             </summary>
             <param name="hospitalAdmissionId"></param>
-            <returns></returns>
+            <returns>Returns WardAdmission entity with it's relations using the WardAdmissionWithRelations class</returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.ValidateIdentityNumber(System.String,System.Guid)">
             <summary>
@@ -712,6 +712,46 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.ValidateIdDto.CurrentWardId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.WardAdmissionWithRelations">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.WardAdmissionWithRelations.#ctor(Boxfusion.Health.His.Common.WardAdmission,Boxfusion.Health.His.Common.HospitalAdmission,Boxfusion.Health.His.Common.Patients.HisPatient,System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode},System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode})">
+            <summary>
+            
+            </summary>
+            <param name="wardAdmission"></param>
+            <param name="hospitalAdmission"></param>
+            <param name="patient"></param>
+            <param name="icdTenCodes"></param>
+            <param name="separationIcdTenCodes"></param>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.WardAdmissionWithRelations.WardAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.WardAdmissionWithRelations.HospitalAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.WardAdmissionWithRelations.Patient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.WardAdmissionWithRelations.IcdTenCodes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.WardAdmissionWithRelations.SeparationIcdTenCodes">
             <summary>
             
             </summary>

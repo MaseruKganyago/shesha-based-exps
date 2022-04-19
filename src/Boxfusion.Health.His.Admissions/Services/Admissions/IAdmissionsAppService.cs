@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Admissions.Application.Services.TempAdmissions
+namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
 {
     /// <summary>
     /// 
