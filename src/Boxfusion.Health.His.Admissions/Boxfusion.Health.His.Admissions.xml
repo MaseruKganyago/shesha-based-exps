@@ -389,18 +389,19 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Boxfusion.Health.His.Admissions.Application.Helpers.IHisAdmissionAuditTrailService,Boxfusion.Health.His.Admissions.Application.Configuration.IHisAdmissionPermissionChecker,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardMidnightCensusReport,System.Guid},Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Boxfusion.Health.His.Admissions.Application.Helpers.IHisAdmissionAuditTrailService,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardMidnightCensusReport,System.Guid},Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Domain.Domain.HisUser,System.Guid})">
             <summary>
             
             </summary>
             <param name="wardAdmissionRepository"></param>
-            <param name="admissionCrudHelper"></param>
+            <param name="admissionsManager"></param>
             <param name="hisPatientRepositiory"></param>
             <param name="wardRepositiory"></param>
             <param name="hisAdmissionAuditTrailRepository"></param>
             <param name="hisAdmissPermissionChecker"></param>
             <param name="wardMidnightCensusReport"></param>
             <param name="userAccessRightService"></param>
+            <param name="hisUserRepository"></param>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.IndexTable">
             <summary>

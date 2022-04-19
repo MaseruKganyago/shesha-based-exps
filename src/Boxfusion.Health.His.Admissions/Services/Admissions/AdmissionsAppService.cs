@@ -41,6 +41,7 @@ using Boxfusion.Health.HealthCommon.Core.Helpers;
 using Boxfusion.Health.His.Admissions.Application.Helpers;
 using AdmissionsUtilityHelper = Boxfusion.Health.His.Admissions.Application.Helpers.UtilityHelper;
 using UtilityHelper = Boxfusion.Health.HealthCommon.Core.Helpers.UtilityHelper;
+using Boxfusion.Health.His.Common.Domain.Domain;
 
 namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
 {
@@ -58,29 +59,32 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
         private readonly IHisAdmissionAuditTrailService _hisAdmissionAuditTrailRepository;
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         private readonly IRepository<HisWard, Guid> _wardRepositiory;
-        private readonly IHisAdmissionPermissionChecker _hisAdmissPermissionChecker;
+        //private readonly IHisAdmissionPermissionChecker _hisAdmissPermissionChecker;
         private readonly IRepository<WardMidnightCensusReport, Guid> _wardMidnightCensusReport;
+        private readonly IRepository<HisUser, Guid> _hisUserRepository;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="wardAdmissionRepository"></param>
-        /// <param name="admissionsManager"></param>
-        /// <param name="hisPatientRepositiory"></param>
-        /// <param name="wardRepositiory"></param>
-        /// <param name="hisAdmissionAuditTrailRepository"></param>
-        /// <param name="hisAdmissPermissionChecker"></param>
-        /// <param name="wardMidnightCensusReport"></param>
-        /// <param name="userAccessRightService"></param>
-        public AdmissionsAppService(
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="wardAdmissionRepository"></param>
+		/// <param name="admissionsManager"></param>
+		/// <param name="hisPatientRepositiory"></param>
+		/// <param name="wardRepositiory"></param>
+		/// <param name="hisAdmissionAuditTrailRepository"></param>
+		/// <param name="hisAdmissPermissionChecker"></param>
+		/// <param name="wardMidnightCensusReport"></param>
+		/// <param name="userAccessRightService"></param>
+		/// <param name="hisUserRepository"></param>
+		public AdmissionsAppService(
             IRepository<WardAdmission, Guid> wardAdmissionRepository,
             AdmissionsManager admissionsManager,
             IRepository<HisPatient, Guid> hisPatientRepositiory,
             IRepository<HisWard, Guid> wardRepositiory,
             IHisAdmissionAuditTrailService hisAdmissionAuditTrailRepository,
-            IHisAdmissionPermissionChecker hisAdmissPermissionChecker,
+            //IHisAdmissionPermissionChecker hisAdmissPermissionChecker,
             IRepository<WardMidnightCensusReport, Guid> wardMidnightCensusReport,
-            IUserAccessRightService userAccessRightService
+            IUserAccessRightService userAccessRightService,
+            IRepository<HisUser, Guid> hisUserRepository
             )
         {
             _admissionsManager = admissionsManager;
@@ -88,8 +92,9 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
             _wardAdmissionRepositiory = wardAdmissionRepository;
             _wardRepositiory = wardRepositiory;
             _hisAdmissionAuditTrailRepository = hisAdmissionAuditTrailRepository;
-            _hisAdmissPermissionChecker = hisAdmissPermissionChecker;
+            //_hisAdmissPermissionChecker = hisAdmissPermissionChecker;
             _wardMidnightCensusReport = wardMidnightCensusReport;
+            _hisUserRepository = hisUserRepository;
         }
 
         /// <summary>
@@ -155,6 +160,10 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
             var admissionResponse = new AdmissionResponse();
             if (admission is not null)
                 admissionResponse = ObjectMapper.Map<AdmissionResponse>(admission.WardAdmission);
+
+            //Manually map performer to response, which is ignored in automapper
+            var userPerformer = await _hisUserRepository.GetAsync(admission.WardAdmission.Performer.Id);
+            MapRelationalEntityAsDto(admissionResponse.Performer, userPerformer.Id, userPerformer.FullName);
 
             //Map relational enitties to admissionResponse Dto
             MapAdmissionRelationsToResponse(admission, admissionResponse);
@@ -241,22 +250,10 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
             return ObjectMapper.Map<List<AdmissionResponse>>(admissions);
         }
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns></returns>
-        //[HttpGet, Route("wardAdmission/{id}")]
-        //public async Task<AdmissionResponse> GetWardAdmission(Guid id)
-        //{
-        //    var wardAdmission = await _admissionCrudHelper.GetAsync(id);
-        //    return wardAdmission;
-        //}
-
         
 		private void MapAdmissionRelationsToResponse(WardAdmissionWithRelations adm, AdmissionResponse resp)
 		{
-            MapRelationalEntityAsDto<HospitalAdmission>(resp.PartOf, adm.HospitalAdmission);
+            MapRelationalEntityAsDto(resp.PartOf, adm.HospitalAdmission.Id);
             ObjectMapper.Map(adm.Patient, resp);
             UtilityHelper.TrySetProperty(resp, "Code", ObjectMapper.Map<List<EntityWithDisplayNameDto<Guid?>>>(adm.IcdTenCodes));
             UtilityHelper.TrySetProperty(resp, "SeparationCode",
@@ -266,9 +263,9 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
                 resp.AgeBreakdown = AdmissionsUtilityHelper.AgeBreakdown(adm.Patient.DateOfBirth.Value, adm.WardAdmission.SeparationDate.Value);
         }
 
-		private void MapRelationalEntityAsDto<T>(EntityWithDisplayNameDto<Guid?> entityResponse, T entity, string entityName = "") where T: FullAuditedEntity<Guid>
+		private void MapRelationalEntityAsDto(EntityWithDisplayNameDto<Guid?> entityResponse, Guid id, string entityName = "")
 		{
-            entityResponse = new EntityWithDisplayNameDto<Guid?>(entity.Id, entityName);
+            entityResponse = new EntityWithDisplayNameDto<Guid?>(id, entityName);
         }
 
 		/// <summary>
@@ -524,6 +521,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
         [HttpPut, Route("undoSeparation")]
         public async Task<AdmissionResponse> UndoSeparationAsync(UndoSeparationDto admission)
         {
+            var _hisAdmissPermissionChecker = Abp.Dependency.IocManager.Instance.Resolve<IHisAdmissionPermissionChecker>();
             if (!await _hisAdmissPermissionChecker.IsApproverLevel1(await GetCurrentPersonAsync()))
             {
                 throw new UserFriendlyException("The logged user is not a level 1 approver");
