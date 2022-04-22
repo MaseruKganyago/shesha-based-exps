@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32328.378
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9695FC1C-6D7C-4FE8-A47B-0D35F0A6649D}"
 	ProjectSection(SolutionItems) = preProject
@@ -31,6 +31,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admissions.Application", "src\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.Application.csproj", "{86E577DD-0F87-4C6A-A181-576A3D1107C6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admissions.Domain", "src\Boxfusion.Health.His.Admissions.Domain\Boxfusion.Health.His.Admissions.Domain.csproj", "{96A9F3A6-EF57-4EB5-83A8-680DE956005E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.GpDoh.Customisation", "src\Boxfusion.Health.His.GpDoh.Customisation\Boxfusion.Health.His.GpDoh.Customisation.csproj", "{667CEEAE-6B9D-4F49-893A-81CF551A5936}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +84,10 @@ Global
 		{96A9F3A6-EF57-4EB5-83A8-680DE956005E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96A9F3A6-EF57-4EB5-83A8-680DE956005E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96A9F3A6-EF57-4EB5-83A8-680DE956005E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{667CEEAE-6B9D-4F49-893A-81CF551A5936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{667CEEAE-6B9D-4F49-893A-81CF551A5936}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{667CEEAE-6B9D-4F49-893A-81CF551A5936}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{667CEEAE-6B9D-4F49-893A-81CF551A5936}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
