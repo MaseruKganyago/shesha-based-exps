@@ -22,10 +22,6 @@
     <DocumentationFile>.\Boxfusion.Health.His.Web.Core.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Abp.AspNetCore" Version="5.0.0" />
-    <PackageReference Include="Abp.AspNetCore.SignalR" Version="5.0.0" />
-    <PackageReference Include="Abp.HangFire.AspNetCore" Version="5.0.0" />
-    <PackageReference Include="Abp.ZeroCore" Version="5.0.0" />
     <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
     <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.AzureAD\Shesha.AzureAD.csproj" />
     <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Core\Shesha.Core.csproj" />
@@ -41,6 +37,8 @@
     <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Sms.Xml2Sms\Shesha.Sms.Xml2Sms.csproj" />
     <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Web.Controls\Shesha.Web.Controls.csproj" />
     <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Web.FormsDesigner\Shesha.Web.FormsDesigner.csproj" />
+    <PackageReference Include="Abp.AspNetCore.SignalR" Version="6.6.2" />
+    <PackageReference Include="Abp.HangFire.AspNetCore" Version="6.6.2" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.0.1" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
