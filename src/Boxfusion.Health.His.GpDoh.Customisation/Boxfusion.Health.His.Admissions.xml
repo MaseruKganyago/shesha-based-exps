@@ -14,6 +14,12 @@
             
             </summary>
         </member>
+        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients.FacilityPatientEntityChangingEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangingEventData{Boxfusion.Health.His.Common.Patients.FacilityPatient})">
+            <summary>
+            
+            </summary>
+            <param name="eventData"></param>
+        </member>
         <member name="T:Boxfusion.Health.His.GpDoh.Customisation.HisGpDohCustomisationsModule">
             <summary>
             Health.His Module

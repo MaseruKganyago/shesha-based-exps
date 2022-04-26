@@ -31,6 +31,7 @@ using Castle.MicroKernel.Registration;
 using Shesha.Authorization;
 using Boxfusion.Health.His.Common.Authorization;
 using Boxfusion.Health.His.Admissions.Application;
+using Boxfusion.Health.His.GpDoh.Customisation;
 
 namespace Boxfusion.Health.His
 {
@@ -41,6 +42,7 @@ namespace Boxfusion.Health.His
          // Adding all the His Modules
          //typeof(HisAdmissModule),
          //typeof(HisAdminisModule),
+         typeof(HisGpDohCustomisationsModule),
          typeof(MpDoh.HisMpDohCustomisationsModule),
          typeof(HisCommonDomainModule),
          typeof(HisCommonApplicationModule),

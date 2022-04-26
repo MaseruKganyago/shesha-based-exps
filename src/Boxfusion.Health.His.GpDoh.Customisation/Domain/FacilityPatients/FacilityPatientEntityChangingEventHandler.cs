@@ -18,7 +18,7 @@ namespace Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients
 	/// Intercepts entity before create/updated and runs validation on the specific fields.
 	/// </summary>
 	public class FacilityPatientEntityChangingEventHandler: IEventHandler<EntityChangingEventData<FacilityPatient>>, ITransientDependency
-	{
+    {
 		/// <summary>
 		/// 
 		/// </summary>
@@ -26,13 +26,17 @@ namespace Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients
 		{
 
 		}
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eventData"></param>
 		public void HandleEvent(EntityChangingEventData<FacilityPatient> eventData)
 		{
 			ValidateFacilityPatiententity(eventData.Entity);
         }
 
-        private static void ValidateFacilityPatiententity(FacilityPatient entity)
+        private void ValidateFacilityPatiententity(FacilityPatient entity)
         {
             var validationResults = new List<ValidationResult>();
 
