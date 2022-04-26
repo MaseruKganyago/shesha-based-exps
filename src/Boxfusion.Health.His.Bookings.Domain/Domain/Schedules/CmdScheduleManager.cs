@@ -61,27 +61,21 @@ namespace Boxfusion.Health.His.Bookings.Domain
         {
             if (string.IsNullOrWhiteSpace(roleName)) throw new ArgumentNullException("role");
 
+            var roleRepo = Abp.Dependency.IocManager.Instance.Resolve<IRepository<ShaRole, Guid>>();
+            var role = await roleRepo.FirstOrDefaultAsync(e => e.Name == roleName);
+            if (role is null) throw new InvalidOperationException("No such role exists");
 
-            //TODO: REMOVE TEMP - WANT TO SHOW ALL SCHEDULES FOR FACILITY
-            var schedules = await _scheduleRepo.GetAllListAsync(o => o.HealthFacilityOwner.Id == facilityId && o.Active == true);
+            var roleAppointments = await _scheduleRoleAppointRepo.GetAllListAsync(e => e.Person.Id == personId && e.Role.Id == role.Id && (facilityId == null || e.Schedule.HealthFacilityOwner.Id == facilityId));
 
-            //var roleRepo = Abp.Dependency.IocManager.Instance.Resolve<IRepository<ShaRole, Guid>>();
-            //var role = await roleRepo.FirstOrDefaultAsync(e => e.Name == roleName);
-            //if (role is null) throw new InvalidOperationException("No such role exists");
+            var schedules = new List<CdmSchedule>();
 
-
-            //var roleAppointments = await _scheduleRoleAppointRepo.GetAllListAsync(e => e.Person.Id == personId && e.Role.Id == role.Id && (facilityId == null || e.Schedule.HealthFacilityOwner.Id == facilityId));
-
-            //var schedules = new List<CdmSchedule>();
-
-            //foreach (var roleApp in roleAppointments)
-            //{
-            //    if (!schedules.Exists(e => e.Id == roleApp.Schedule.Id))
-            //    {
-            //        schedules.Add(_scheduleRepo.Get(roleApp.Schedule.Id));
-            //    }
-
-            //}
+            foreach (var roleApp in roleAppointments)
+            {
+                if (!schedules.Exists(e => e.Id == roleApp.Schedule.Id))
+                {
+                    schedules.Add(_scheduleRepo.Get(roleApp.Schedule.Id));
+                }
+            }
 
             return schedules;
         }

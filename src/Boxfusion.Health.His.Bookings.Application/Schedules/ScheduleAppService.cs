@@ -8,6 +8,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.HealthCommon.Core.Services;
+using Boxfusion.Health.His.Bookings.Authorization;
 using Boxfusion.Health.His.Bookings.Domain;
 using Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos;
 using Boxfusion.Health.His.Common;
@@ -51,7 +52,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
 
             Guid? facilityId = RequestContextHelper.HasFacilityId ? RequestContextHelper.FacilityId : null;
-            var schedules = await _scheduleManager.GetSchedulesAssociatedToUserAsync(person.Id, "Schedule Manager", facilityId);
+            var schedules = await _scheduleManager.GetSchedulesAssociatedToUserAsync(person.Id, BookingsRoles.ScheduleManager, facilityId);
 
             var list = new List<DynamicDto<CdmSchedule, Guid>>();
 

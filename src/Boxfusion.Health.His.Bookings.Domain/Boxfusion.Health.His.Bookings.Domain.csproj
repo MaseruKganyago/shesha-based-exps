@@ -60,6 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Authorization\BookingsRoles.cs" />
     <Compile Include="Services\BookingAppointments\Helpers\Util.cs" />
   </ItemGroup>
 

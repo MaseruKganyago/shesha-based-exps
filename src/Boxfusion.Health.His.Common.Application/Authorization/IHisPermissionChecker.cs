@@ -76,7 +76,7 @@ namespace Boxfusion.Health.His.Common.Authorization
         /// </summary>
         /// <param name="person"></param>
         /// <returns></returns>
-        Task<bool> IsScheduleManager(Person person);
+        //Task<bool> IsScheduleManager(Person person);
 
         ///// <summary>
         ///// 
