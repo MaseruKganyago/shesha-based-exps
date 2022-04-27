@@ -6,6 +6,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.His.Common;
+using Boxfusion.Health.His.Common.Authorization;
 using Shesha.AutoMapper.Dto;
 using Shesha.Domain;
 using System;
@@ -22,13 +23,6 @@ namespace Boxfusion.Health.His.Common.Practitioners
     /// </summary>
     public class HisPractitionerManager : DomainService
     {
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="schedulesRepo"></param>
-        /// <param name="scheduleAvailabilityRepo"></param>
-        /// <param name="slotsRepo"></param>
         public HisPractitionerManager()
         {
 
@@ -39,44 +33,25 @@ namespace Boxfusion.Health.His.Common.Practitioners
         /// Returns the list of Facilities that the specified user is associated with.
         /// </summary>
         /// <param name="personId"></param>
-        /// <param name="roleName"></param>
         /// <returns></returns>
-        public async Task<List<HisHealthFacility>> GetFacilitiesAssociatedToUserAsync(Guid personId, string roleName = null)
+        public async Task<List<HisHealthFacility>> GetFacilitiesAssociatedToUserAsync(Guid personId)
         {
-            //var roleRepo = Abp.Dependency.IocManager.Instance.Resolve<IRepository<ShaRole, Guid>>();
-            //var role = await roleRepo.FirstOrDefaultAsync(e => e.Name == roleName);
-            //if (role is null) throw new InvalidOperationException("No such role exists");
+            var facilityRoleAppointedPersonRepo = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
 
-            //var roleAppointments = await _scheduleRoleAppointRepo.GetAllListAsync(e => e.Person.Id == personId && e.Role.Id == role.Id);
+            var appointedFacilities = await facilityRoleAppointedPersonRepo.GetAllListAsync(e => e.Person.Id == personId && e.Role.Name == CommonRoles.FacilityPractitioner);
 
-            //TODO:IH-NOW For the time being will just return all the Facilities
+            var facilities = new List<HisHealthFacility>();
 
-            var facilitiesRepo = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HisHealthFacility, Guid>>();
-
-            var facilities = facilitiesRepo.GetAll().ToList();
-
-            //var schedules = new List<CdmSchedule>();
-
-            //foreach (var roleApp in roleAppointments)
-            //{
-            //    if (!schedules.Exists(e => e.Id == roleApp.Schedule.Id))
-            //    {
-            //        schedules.Add(_scheduleRepo.Get(roleApp.Schedule.Id));
-            //    }
-            //}
+            foreach (var appointedFacility in appointedFacilities)
+            {
+                if (!facilities.Exists(e => e.Id == appointedFacility.Hospital.Id))
+                {
+                    facilities.Add(appointedFacility.Hospital);
+                }
+            }
 
             return facilities;
         }
-
-        ///// <summary>
-        ///// Creates a practioner
-        ///// </summary>
-        ///// <returns></returns>
-        //public async Task<HisPractitioner> CreateUserWithPractioner()
-        //{
-
-        //}
-
 
     }
 }

@@ -20,6 +20,8 @@
         /// </summary>
         public const string GlobalAdmin = "Global Admin";
 
+        public const string FacilityPractitioner = "Facility Practitioner";
+
         /// <summary>
         /// 
         /// </summary>

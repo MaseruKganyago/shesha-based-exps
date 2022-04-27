@@ -44,10 +44,10 @@ namespace Boxfusion.Health.His.Common.Authorization
 
             switch (permissionName)
             {
-                case CommonPermissionsObsolete.BookingAdministration:
-                    return await IsBookingAdministrator(person);
-                case CommonPermissionsObsolete.ScheduleManagement:
-                    return await IsScheduleManager(person);
+                //case CommonPermissionsObsolete.BookingAdministration:
+                //    return await IsBookingAdministrator(person);
+                //case CommonPermissionsObsolete.ScheduleManagement:
+                //    return await IsScheduleManager(person);
                 case CommonPermissionsObsolete.SystemAdministration:
                     return await IsAdmin(person);
                 case CommonPermissionsObsolete.UserAdministration:
@@ -161,20 +161,6 @@ namespace Boxfusion.Health.His.Common.Authorization
         public async Task<bool> IsAdmin(Person person)
         {
             return await IsInAnyOfRoles(person, CommonRoles.SystemAdministrator);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="person"></param>
-        /// <returns></returns>
-        public async Task<bool> IsScheduleManager(Person person)
-        {
-            return await IsInAnyOfRoles(person, CommonRoles.ScheduleManager);
-        }
-        public async Task<bool> IsBookingAdministrator(Person person)
-        {
-            return await IsInAnyOfRoles(person, CommonRoles.BookingAdministrator);
         }
 
         /// <summary>

@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Authorization\CommonRoles.cs" />
     <Compile Remove="RequestContextHelper.cs" />
   </ItemGroup>
 

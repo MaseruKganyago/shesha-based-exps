@@ -521,20 +521,11 @@
             Domain Service for user related methods.
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Common.Practitioners.HisPractitionerManager.#ctor">
-            <summary>
-            
-            </summary>
-            <param name="schedulesRepo"></param>
-            <param name="scheduleAvailabilityRepo"></param>
-            <param name="slotsRepo"></param>
-        </member>
-        <member name="M:Boxfusion.Health.His.Common.Practitioners.HisPractitionerManager.GetFacilitiesAssociatedToUserAsync(System.Guid,System.String)">
+        <member name="M:Boxfusion.Health.His.Common.Practitioners.HisPractitionerManager.GetFacilitiesAssociatedToUserAsync(System.Guid)">
             <summary>
             Returns the list of Facilities that the specified user is associated with.
             </summary>
             <param name="personId"></param>
-            <param name="roleName"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Common.Practitioners.HisPractitioner">
@@ -780,6 +771,31 @@
         <member name="P:Boxfusion.Health.His.Common.RequestContextHelper.FacilityId">
             <summary>
             Returns the Id of the Context Facility (i.e. the Facility from which the user is making requests for)
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Authorization.CommonRoles">
+            <summary>
+            Health.His Role Names
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Authorization.CommonRoles.DataAdministrator">
+            <summary>
+            Data Administrator
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Authorization.CommonRoles.SystemAdministrator">
+            <summary>
+            System Administrator
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Authorization.CommonRoles.GlobalAdmin">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Authorization.CommonRoles.FacilityPractitioner">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService">
@@ -1233,6 +1249,21 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220310025401.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220425134100">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220425134100.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220425134100.Down">
             <summary>
             
             </summary>

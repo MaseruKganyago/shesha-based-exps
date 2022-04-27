@@ -482,5 +482,20 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Authorization.BookingsRoles">
+            <summary>
+            Health.His.Bookings Role Names
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Bookings.Authorization.BookingsRoles.ScheduleManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Bookings.Authorization.BookingsRoles.BookingAdministrator">
+            <summary>
+            
+            </summary>
+        </member>
     </members>
 </doc>

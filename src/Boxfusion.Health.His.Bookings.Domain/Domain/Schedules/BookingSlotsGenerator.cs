@@ -176,16 +176,19 @@ namespace Boxfusion.Health.His.Bookings.Domain
         {
             if ((capacity + overflowCapacity) <= 0) throw new InvalidOperationException("capacity must be larger than 0");
 
+            // Retrieving fresh Schedule since when this was being triggered from a background job scheduleAvailability.Schedule was failing to initialise due to having no NHibernate session.
+            var schedule = _schedulesRepo.Get(scheduleAvailability.Schedule.Id);
+
             await _slotsRepo.InsertAsync(new CdmSlot()
             {
-                Schedule = scheduleAvailability.Schedule,
+                Schedule = schedule,
                 IsGeneratedFrom = scheduleAvailability,
                 StartDateTime = slotStartTime,
                 EndDateTime = slotEndTime,
                 Status = RefListSlotStatuses.free,
-                ServiceCategory = scheduleAvailability.Schedule.ServiceCategory,
-                Speciality = scheduleAvailability.Schedule.Speciality,
-                ServiceType = scheduleAvailability.Schedule.ServiceType,
+                ServiceCategory = schedule.ServiceCategory,
+                Speciality = schedule.Speciality,
+                ServiceType = schedule.ServiceType,
                 Capacity = capacity,
                 OverflowCapacity = overflowCapacity
                 //AppointmentType = RefListAppointmentReasonCodes.ROUTINE
