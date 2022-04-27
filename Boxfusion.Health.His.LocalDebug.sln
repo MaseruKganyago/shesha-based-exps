@@ -68,6 +68,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Web.FormsDesigner", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.MpDoh.Customisations", "src\Boxfusion.Health.His.MpDoh.Domain\Boxfusion.Health.His.MpDoh.Customisations.csproj", "{51220A9F-B109-404F-B510-99D7539D40FF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Boxfusion.HealthCommon", "Boxfusion.HealthCommon", "{B79C1E6E-B8C3-4223-B88D-54016676BEF2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.HealthCommon.Core", "boxfusion-health-common\src\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj", "{4F167128-54AA-4DCD-850D-6733FC673C37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -186,6 +190,10 @@ Global
 		{51220A9F-B109-404F-B510-99D7539D40FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51220A9F-B109-404F-B510-99D7539D40FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51220A9F-B109-404F-B510-99D7539D40FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F167128-54AA-4DCD-850D-6733FC673C37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F167128-54AA-4DCD-850D-6733FC673C37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F167128-54AA-4DCD-850D-6733FC673C37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F167128-54AA-4DCD-850D-6733FC673C37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -212,6 +220,7 @@ Global
 		{BA7A77F8-0393-4925-9CD2-8F2E2DD42813} = {9475DB0D-A03B-4EBE-9D83-C0348855056D}
 		{35CFD663-DE17-4E47-AE75-29E48FAE1F00} = {9475DB0D-A03B-4EBE-9D83-C0348855056D}
 		{CC28FB01-2000-4E8F-A8A4-5E1863C2BDB7} = {9475DB0D-A03B-4EBE-9D83-C0348855056D}
+		{4F167128-54AA-4DCD-850D-6733FC673C37} = {B79C1E6E-B8C3-4223-B88D-54016676BEF2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95ED23F3-8DEA-456E-A44B-87A161CB696A}

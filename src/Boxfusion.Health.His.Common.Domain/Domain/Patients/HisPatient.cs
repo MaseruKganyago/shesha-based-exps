@@ -1,10 +1,10 @@
-﻿using Boxfusion.Health.Cdm.Patients;
-using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.His.Common.Enums;
 using Shesha.Domain.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Boxfusion.Health.Cdm.Patients;
 
 namespace Boxfusion.Health.His.Common.Patients
 {
