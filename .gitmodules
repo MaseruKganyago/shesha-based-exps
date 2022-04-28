@@ -4,3 +4,4 @@
 [submodule "boxfusion-health-common"]
 	path = boxfusion-health-common
 	url = https://dev.azure.com/boxfusion/PD-HealthCommon/_git/PD-Health-Core
+	branch = clients/mpdoh-his
