@@ -1,4 +1,5 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
@@ -30,6 +31,21 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
 				.ForMember(a => a.DisplayText, b => b.MapFrom(c => $"{c.ICDTenCode} {c.WHOFullDesc}"));
 
             //WardAdmission
+            CreateMap<AdmissionInput, WardAdmission>()
+                .ForMember(a => a.ReasonCode, b => b.MapFrom(c => UtilityHelper.SetMultiValueReferenceList(c.ReasonCode)))
+                .ForMember(a => a.Subject, b => b.MapFrom(c => GetEntity<HisPatient>(c.Subject.Id)))
+                .ForMember(a => a.PartOf, b => b.MapFrom(c => GetEntity<HospitalAdmission>(c.PartOf.Id)))
+                .ForMember(a => a.ServiceProvider, b => b.MapFrom(c => GetEntity<FhirOrganisation>(c.ServiceProvider.Id)))
+                .ForMember(a => a.Appointment, b => b.MapFrom(c => GetEntity<Appointment>(c.Appointment.Id)))
+                .ForMember(a => a.Performer, b => b.Ignore())
+                .ForMember(a => a.BasedOn, b => b.MapFrom(c => GetEntity<ServiceRequest>(c.BasedOn.Id)))
+                .ForMember(a => a.EpisodeOfCare, b => b.MapFrom(c =>  GetEntity<EpisodeOfCare>(c.EpisodeOfCare.Id)))
+                .ForMember(a => a.Ward, b => b.MapFrom(c => GetEntity<HisWard>(c.Ward.Id)))
+                .ForMember(a => a.SeparationDestinationWard, b => b.MapFrom(c => GetEntity<HisWard>(c.SeparationDestinationWard.Id)))
+                .ForMember(a => a.InternalTransferOriginalWard, b => b.MapFrom(c => GetEntity<WardAdmission>(c.InternalTransferOriginalWard.Id)))
+                .ForMember(a => a.InternalTransferDestinationWard, b => b.MapFrom(c => GetEntity<WardAdmission>(c.InternalTransferDestinationWard.Id)))
+                .MapReferenceListValuesToDto();
+
             CreateMap<WardAdmission, AdmissionResponse>()
                 .ForMember(c => c.ReasonCode, options => options.MapFrom(c => UtilityHelper.GetMultiReferenceListItemValueList((RefListServiceRequestProcedureReasons)c.ReasonCode)))
                 .ForMember(c => c.Subject, options => options.MapFrom(c => c.Subject != null ? new EntityWithDisplayNameDto<Guid?>(c.Subject.Id, c.Subject.FullName) : null))
@@ -59,16 +75,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
                 .ForMember(c => c.TransferToHospital, options => options.MapFrom(c => c.TransferToHospital != null ? new EntityWithDisplayNameDto<Guid?>(c.TransferToHospital.Id, c.TransferToHospital.Name) : null))
                 .ForMember(c => c.TransferFroHospital, options => options.MapFrom(c => c.TransferFroHospital != null ? new EntityWithDisplayNameDto<Guid?>(c.TransferFroHospital.Id, c.TransferFroHospital.Name) : null))
                 .MapReferenceListValuesToDto();
-
-            //Patient
-            CreateMap<HisPatient, AdmissionResponse>()
-                //.ForMember(c => c.IdentityNumber, opt => opt.MapFrom(c => c.IdentityNumber))
-                //.ForMember(c => c.DateOfBirth, opt => opt.MapFrom(c => c.DateOfBirth))
-                //.ForMember(c => c.FirstName, opt => opt.MapFrom(c => c.FirstName))
-                //.ForMember(c => c.LastName, opt => opt.MapFrom(c => c.LastName))
-                //.ForMember(c => c.HospitalAdmissionNumber, opt => opt.MapFrom(c => c.HospitalPatientNumber))
-                .MapReferenceListValuesToDto();
-
         }
 		
 	}

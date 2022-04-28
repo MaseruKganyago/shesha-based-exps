@@ -121,6 +121,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
         public async Task<WardAdmissionWithRelations> GetByIdWithRelationsAsync(Guid id)
         {
             var wardAdmission = await _wardAdmissionRepositiory.GetAsync(id);
+
             HospitalAdmission hospitalAdmission = null;
             if (wardAdmission?.PartOf != null)
                 hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
@@ -138,7 +139,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
         /// 
         /// </summary>
         /// <param name="hospitalAdmissionId"></param>
-        /// <returns>Returns WardAdmission entity with it's relations using the WardAdmissionWithRelations class</returns>
+        /// <returns>Returns WardAdmission entity list with it's relations using the WardAdmissionWithRelations class</returns>
         public async Task<List<WardAdmissionWithRelations>> GetByHospitalAdmissionIdWithRelationsAsync(Guid hospitalAdmissionId)
         {
             var wardAdmissions = await _wardAdmissionRepositiory.GetAll().Where(r => r.Ward.OwnerOrganisation.Id == hospitalAdmissionId).ToListAsync();
@@ -146,7 +147,6 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             var admissionsResponse = new List<WardAdmissionWithRelations>();
             foreach (var wardAdmission in wardAdmissions)
             {
-                var admissionResponse = _mapper.Map<AdmissionResponse>(wardAdmission);
                 HospitalAdmission hospitalAdmission = null;
                 if (wardAdmission?.PartOf != null)
                     hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
@@ -191,6 +191,20 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wardId"></param>
+        /// <returns></returns>
+        public async Task<bool> IsBedStillAvailable(Guid wardId)
+        {
+            var wardAdmissionCount = await _wardAdmissionRepositiory.GetAll()
+                                                                    .Where(x => x.AdmissionStatus == RefListAdmissionStatuses.admitted &&
+                                                                     x.IsDeleted == false && x.Ward.Id == wardId).ToListAsync();
+            var wardCount = await _wardRepositiory.GetAsync(wardId);
+
+            return wardAdmissionCount.Count() >= wardCount.NumberOfBeds;
+        }
 
         /// <summary>
         /// 
@@ -442,7 +456,9 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             if (conditions.Any())
             {
                 //Admission Icd10Codes
-                var conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.admitted && x.IsDeleted == false);
+                var conditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition) &&
+                                                                                 x.AdmissionStatus == RefListAdmissionStatuses.admitted &&
+                                                                                 x.IsDeleted == false);
                 if (conditionIcdTenCodes.Any())
                 {
                     var icdTenCodeIds = conditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
@@ -450,11 +466,14 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
                 }
 
                 //Separation Icd10Codes
-                var separationConditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition) && x.AdmissionStatus == RefListAdmissionStatuses.separated && x.IsDeleted == false);
+                var separationConditionIcdTenCodes = await _conditionIcdTenCodeRepositiory.GetAllListAsync(x => conditions.Contains(x.Condition) &&
+                                                                                            x.AdmissionStatus == RefListAdmissionStatuses.separated &&
+                                                                                            x.IsDeleted == false);
                 if (separationConditionIcdTenCodes.Any())
                 {
                     var separationIcdTenCodeIds = separationConditionIcdTenCodes.Select(x => x.IcdTenCode.Id).ToList();
-                    separationIcdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => separationIcdTenCodeIds.Contains(x.Id) && x.IsDeleted == false).ToListAsync();
+                    separationIcdTenCodes = await _icdTenCodeRepositiory.GetAll().Where(x => separationIcdTenCodeIds.Contains(x.Id) &&
+                                                                                        x.IsDeleted == false).ToListAsync();
                 }
             }
 
