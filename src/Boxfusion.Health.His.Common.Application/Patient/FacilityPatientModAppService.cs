@@ -1,4 +1,6 @@
-﻿using Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers;
+﻿
+using Boxfusion.Health.His.Common.Domain.Domain.Dtos.Patients;
+using Boxfusion.Health.His.Common.Domain.Domain.Patients;
 using Boxfusion.Health.His.Common.Patients;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,17 +13,33 @@ namespace Boxfusion.Health.His.Common.Patient
 {
     public class FacilityPatientModAppService : HisAppServiceBase
     {
-        private readonly IPatientCrudHelper<FacilityPatient, FacilityPatient> _patientCrudHelper;
-
+   
+        private readonly IFacilityPatientRepository _patientRepository;
 
         [HttpGet, Route("/api/services/Common/FacilityPatient/GetByIdentityNumber/{identityNumber}")]
-        public async Task<FacilityPatient> GetPatientByIdNumberAsync(string identityNumber)
+        public async Task<FacilityPatientDto> GetPatientByIdNumberAsync(string identityNumber)
         {
-           var patient =  await _patientCrudHelper.GetByIdNumberAsync(identityNumber);
+           var patients =  await _patientRepository.GetAllListAsync(facilityPatient => facilityPatient.IdentityNumber == identityNumber);
 
-            if (patient == null)
-                return null;
-            return patient;
+            var response = new FacilityPatientDto();
+            
+            if (patients.Count == 0)
+            {
+                response.Code = "OK";
+                response.Message = "That ID is unique";
+                return response;
+            }
+            else
+            {
+                var patientNames = "";
+                patients.ForEach(patient => patientNames += patient.FullNameWithTitle + "\n");
+
+                response.Code = "DUPLICATE";
+                response.Message = "That ID already belongs to : \n " + patientNames;
+                return response;
+            }
+               
+           
         }
     }
 }
