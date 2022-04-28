@@ -3,4 +3,4 @@
 	url = https://dev.azure.com/boxfusion/Shesha%20Web%20v3.0/_git/shesha-core-enterprise
 [submodule "boxfusion-health-common"]
 	path = boxfusion-health-common
-	url = https://boxfusion@dev.azure.com/boxfusion/PD-HealthCommon/_git/PD-Health-Core
+	url = https://dev.azure.com/boxfusion/PD-HealthCommon/_git/PD-Health-Core
