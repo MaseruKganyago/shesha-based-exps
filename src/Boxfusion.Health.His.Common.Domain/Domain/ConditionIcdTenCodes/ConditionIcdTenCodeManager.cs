@@ -2,8 +2,10 @@
 using Abp.Domain.Repositories;
 using Abp.Domain.Services;
 using Abp.Domain.Uow;
+using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
+using Shesha.NHibernate;
 using Shesha.Services;
 using System;
 using System.Collections.Generic;
@@ -20,13 +22,39 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes
 	public class ConditionIcdTenCodeManager: DomainService
 	{
 		private readonly IDynamicRepository _dynamicRepository;
+		private readonly IRepository<IcdTenCode, Guid> _icdTenCodeRepository;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public ConditionIcdTenCodeManager(IDynamicRepository dynamicRepository)
+		/// <param name="dynamicRepository"></param>
+		/// <param name="icdTenCodeRepository"></param>
+		public ConditionIcdTenCodeManager(IDynamicRepository dynamicRepository, 
+			IRepository<IcdTenCode, Guid> icdTenCodeRepository)
 		{
 			_dynamicRepository = dynamicRepository;
+			_icdTenCodeRepository = icdTenCodeRepository;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="inputCodes"></param>
+		/// <returns></returns>
+		public async Task<List<IcdTenCode>> GetIcdTenCodes(List<Guid> inputCodes)
+		{
+			var codes = new List<IcdTenCode>();
+			inputCodes.ForEach(async codeId =>
+			{
+				codes.Add(await _icdTenCodeRepository.GetAsync(codeId));
+			});
+
+			return codes;
+		}
+
+		private async Task<IcdTenCode> GetIcdTenCode(Guid codeId)
+		{
+			return await _icdTenCodeRepository.GetAsync(codeId);
 		}
 
 		/// <summary>
@@ -40,13 +68,13 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes
 		public async Task<List<T>> AssignIcdTenCodeToCondition<T>(List<IcdTenCode> icdTenCodes, Condition condition, Func<T, Task> action = null) 
 			where T: ConditionIcdTenCode
 		{
-			var tasks = new List<Task<T>>();
-			icdTenCodes.ForEach(code =>
+			var resultList = new List<T>();
+			icdTenCodes.ForEach(async code =>
 			{
-				tasks.Add(DoAssigment(code, condition, action));
+				resultList.Add(await DoAssigment(code, condition, action));
 			});
 
-			return (await Task.WhenAll<T>(tasks)).ToList();
+			return resultList;
 		}
 
 		/// <summary>
@@ -119,15 +147,23 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes
 
 		private async Task<T> DoAssigment<T>(IcdTenCode code, Condition condition, Func<T, Task> action) where T : ConditionIcdTenCode
 		{
-			var assignment = (T)Activator.CreateInstance(typeof(T));
-			if (action is not null) await action.Invoke(assignment);
+			try
+			{				
+				var assignment = (T)Activator.CreateInstance(typeof(T));
+				if (action is not null) await action.Invoke(assignment);
 
-			assignment.IcdTenCode = code;
-			assignment.Condition = condition;
+				assignment.IcdTenCode = code;
+				assignment.Condition = condition;
 
-			await _dynamicRepository.SaveOrUpdateAsync(assignment);
+				await _dynamicRepository.SaveOrUpdateAsync(assignment);
 
-			return assignment;
+				return assignment;
+			}
+			catch (Exception ex)
+			{
+
+				throw new UserFriendlyException(ex.Message, ex.InnerException);
+			}
 		}
 	}
 }

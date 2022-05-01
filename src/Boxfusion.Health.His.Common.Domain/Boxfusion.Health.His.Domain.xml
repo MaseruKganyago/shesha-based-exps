@@ -4,6 +4,109 @@
         <name>Boxfusion.Health.His.Common.Domain</name>
     </assembly>
     <members>
+        <member name="T:Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager">
+            <summary>
+            TO DO: Code to be moved to CDM
+            Implements generic methods of ConditionIcdTenCode
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager.#ctor(Shesha.Services.IDynamicRepository,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="dynamicRepository"></param>
+            <param name="icdTenCodeRepository"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager.GetIcdTenCodes(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="inputCodes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager.AssignIcdTenCodeToCondition``1(System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode},Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="icdTenCodes"></param>
+            <param name="condition"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager.UpdateAssignedIcdTenCodes``1(System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode},Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="icdTenCodes"></param>
+            <param name="condition"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager.ActionUpdate``1(System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode},``0)">
+            <summary>
+            Iterates through existing assigments and current codes and update the codes accordingly.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="codes"></param>
+            <param name="assignement"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Domain.Domain.Diagnoses.DiagnosisManager">
+            <summary>
+            TO DO: Code to be moved to CDM
+            Implements Generic method constraint to Encounter(As diagnosis is backbone-element to Encounter) and Condition(As Diagnosis relates to condition)
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Domain.Domain.Diagnoses.DiagnosisManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Shesha.Services.IDynamicRepository)">
+            <summary>
+            
+            </summary>
+            <param name="diagnosisRepository"></param>
+            <param name="dynamicRepository"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Domain.Domain.Diagnoses.DiagnosisManager.AddNewDiagnosis``2(``0,System.Int32,System.Nullable{System.Int32},System.Func{``1,System.Threading.Tasks.Task})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <param name="encouter"></param>
+            <param name="use"></param>
+            <param name="rank"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Domain.Domain.Diagnoses.DiagnosisManager.UpdateDiagnosis``1(Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="updatedEntity"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Domain.Domain.Helpers.HisCommonDomainUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Domain.Domain.Helpers.HisCommonDomainUtil.GetEntityAsync``2(``1,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TId"></typeparam>
+            <param name="id"></param>
+            <param name="throwException"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Domain.Domain.HisUser">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses">
             <summary>
             
@@ -390,11 +493,6 @@
             </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Common.HisHealthFacility">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Common.Domain.Domain.HisUser">
             <summary>
             
             </summary>

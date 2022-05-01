@@ -389,7 +389,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Boxfusion.Health.His.Admissions.Application.Helpers.IHisAdmissionAuditTrailService,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardMidnightCensusReport,System.Guid},Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Domain.Domain.HisUser,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Boxfusion.Health.His.Admissions.Application.Helpers.IHisAdmissionAuditTrailService,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardMidnightCensusReport,System.Guid},Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Domain.Domain.HisUser,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager)">
             <summary>
             
             </summary>
@@ -398,50 +398,16 @@
             <param name="hisPatientRepositiory"></param>
             <param name="wardRepositiory"></param>
             <param name="hisAdmissionAuditTrailRepository"></param>
-            <param name="hisAdmissPermissionChecker"></param>
             <param name="wardMidnightCensusReport"></param>
             <param name="userAccessRightService"></param>
             <param name="hisUserRepository"></param>
+            <param name="icdTenCodeRepository"></param>
+            <param name="conditionIcdTenCodeManager"></param>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.IndexTable">
             <summary>
             
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.GetAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.GetAllAsync(System.Guid,System.DateTime)">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.GetPatientByIdentityNumber(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="identityNumber"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.GetAllByStatusAsync(System.Guid,Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses)">
-            <summary>
-            
-            </summary>
-            <param name="wardId"></param>
-            <param name="admissionStatus"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.GetWardAdmissionsByHospitalId(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="hospitalId"></param>
             <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.GetPatientAuditTrailAsync(System.Guid)">
@@ -457,7 +423,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.CreateAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.AdmitPatientAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
             <summary>
             
             </summary>

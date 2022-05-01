@@ -1,7 +1,9 @@
 ﻿using Abp.Application.Services;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
+using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Enums;
+using Shesha.DynamicEntities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -61,7 +63,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<AdmissionResponse> CreateAsync(AdmissionInput input);
+        Task<DynamicDto<WardAdmission, Guid>> CreateAsync(AdmissionInput input);
 
         /// <summary>
         /// 
