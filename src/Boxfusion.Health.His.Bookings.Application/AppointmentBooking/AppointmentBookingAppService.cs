@@ -74,7 +74,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("Appointments/BookAvailableSlot")]
-        [AbpAuthorize(CommonPermissionsObsolete.ScheduleManagement)]
+        [AbpAuthorize()]
         public async Task<DynamicDto<CdmAppointment, Guid>> BookAvailableSlotAsync(BookAppointmentInput input)
         {
             Validation.ValidateEntityWithDisplayNameDto(input?.Schedule, "Schedule");
@@ -102,7 +102,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPut, Route("Appointments/{appointmentId}/Reschedule")]
-        [AbpAuthorize(CommonPermissionsObsolete.ScheduleManagement)]
+        [AbpAuthorize()]
         public async Task<DynamicDto<CdmAppointment, Guid>> RescheduleAppointment(RescheduleInput input)
         {
             Validation.ValidateIdWithException(input?.Id, "Appointment Id cannot be empty");
@@ -138,7 +138,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="appointmentId"></param>
         /// <returns></returns>
         [HttpPut, Route("Appointments/{appointmentId}/ConfirmArrival")]
-        [AbpAuthorize(CommonPermissionsObsolete.ScheduleManagement)]
+        [AbpAuthorize()]
         public async Task<DynamicDto<CdmAppointment, Guid>> ConfirmAppointmentArrival(Guid appointmentId)
         {
             var app = await _appointmentBookingManager.ConfirmAppointmentArrival(appointmentId);
@@ -154,7 +154,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         /// <param name="appointmentId"></param>
         /// <returns></returns>
         [HttpPut, Route("Appointments/{appointmentId}/CancelAppointment")]
-        [AbpAuthorize(CommonPermissionsObsolete.ScheduleManagement)]
+        [AbpAuthorize()]
         public async Task<DynamicDto<CdmAppointment, Guid>> CancelAppointment(Guid appointmentId)
         {
             try
