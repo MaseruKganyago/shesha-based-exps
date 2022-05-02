@@ -28,6 +28,20 @@
             <param name="diagnosisManager"></param>
             <param name="conditionIcdTenCodeManager"></param>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.GetWardAdmissionAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.GetHospitalAdmissionAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.GetPatientAuditTrailAsync(System.Guid)">
             <summary>
             
@@ -58,12 +72,13 @@
             <param name="codes"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.UpdateAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.UpdateAsync(Boxfusion.Health.His.Common.WardAdmission,Boxfusion.Health.His.Common.HospitalAdmission,System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode})">
             <summary>
             
             </summary>
-            <param name="input"></param>
-            <param name="currentLoggedInPerson"></param>
+            <param name="wardAdmission"></param>
+            <param name="hospitalAdmission"></param>
+            <param name="codes"></param>
             <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.SeparatePatientAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
@@ -80,13 +95,6 @@
             </summary>
             <param name="admission"></param>
             <param name="currentLoggedInPerson"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.DeleteAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.DeleteConditionIcdTenCode(Boxfusion.Health.His.Common.HisConditionIcdTenCode)">

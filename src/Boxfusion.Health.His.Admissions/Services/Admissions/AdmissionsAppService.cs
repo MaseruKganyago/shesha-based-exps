@@ -188,36 +188,22 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
         public async Task<DynamicDto<WardAdmission, Guid>> AdmitPatientAsync(AdmissionInput input)
         {
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            var codes = await _conditionIcdTenCodeManager.GetIcdTenCodes(input.Code.Select(a => (Guid)a.Id).ToList());
+
             var newWardAdmission = ObjectMapper.Map<WardAdmission>(input);
+            var hospitalAdmission = ObjectMapper.Map<HospitalAdmission>(input);
 
             #region Validations for an admission
-            Validation.ValidateEntityWithDisplayNameDto(input?.Ward, "Ward");
-            Validation.ValidateEntityWithDisplayNameDto(input?.Subject, "Patient");
-            Validation.ValidateNullableType(input?.StartDateTime, "Admission Date");
-            Validation.ValidateText(input?.WardAdmissionNumber, "Ward Admission Number");
-            Validation.ValidateReflist(input?.AdmissionType, "Admission Type");
-
-            if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided && input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
-            {
-                Validation.ValidateReflist(input?.Classification, "Classification");
-                Validation.ValidateText(input?.HospitalAdmissionNumber, "Hospital Admission Number");
-            }
-
-            if (newWardAdmission.Subject is null)
-                throw new UserFriendlyException("Patient Id cannot be empty");
+            ValidateWardAdmissionInput(input);
 
             if (await _admissionsManager.IsBedStillAvailable(newWardAdmission.Ward.Id))
                 throw new UserFriendlyException("The total number of admitted patients has exceeded the total number of beds");
             #endregion
 
             newWardAdmission.Performer = person;
-            var hospitalAdmission = ObjectMapper.Map<HospitalAdmission>(input);
-            var codes = await _conditionIcdTenCodeManager.GetIcdTenCodes(input.Code.Select(a => (Guid)a.Id).ToList());
-
-
             var admission = await _admissionsManager.AdmitPatientAsync(newWardAdmission, hospitalAdmission, codes);
-            var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(input.Id, admission.StartDateTime);
 
+            var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(admission.Id, admission.StartDateTime);
             //Create or update AdmissionAuditTrail
             await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(EntityId(admissionAudit?.Id), async item =>
             {
@@ -230,65 +216,38 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
             return await MapToDynamicDtoAsync<WardAdmission, Guid>(admission);
         }
 
-		private Guid? EntityId(Guid? id)
-		{
-            if (id.HasValue) return id;
-            else return null;
-		}
-
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="input"></param>
 		/// <returns></returns>
-		[HttpPut, Route("")]
-        public async Task<AdmissionResponse> UpdateAsync(AdmissionInput input)
+		[HttpPut, Route("Admissions/UpdateAdmission")]
+        public async Task<DynamicDto<WardAdmission, Guid>> UpdateAdmissionAsync(AdmissionInput input)
         {
+            ValidateWardAdmissionInput(input);
             var person = await GetCurrentLoggedPersonFhirBaseAsync();
-            Validation.ValidateEntityWithDisplayNameDto(input?.Ward, "Ward");
-            Validation.ValidateEntityWithDisplayNameDto(input?.Subject, "Patient");
-            Validation.ValidateEntityWithDisplayNameDto(input?.PartOf, "Hospital Admission");
-            Validation.ValidateNullableType(input?.StartDateTime, "Admission Date");
-            Validation.ValidateText(input?.WardAdmissionNumber, "Ward Admission Number");
-            Validation.ValidateReflist(input?.AdmissionType, "Admission Type");
 
-            if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided && input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
+            var codes = await _conditionIcdTenCodeManager.GetIcdTenCodes(input.Code.Select(a => (Guid)a.Id).ToList());
+            var wardAdmission = await _admissionsManager.GetWardAdmissionAsync(input.Id);
+            var hospitalAdmission = await _admissionsManager.GetHospitalAdmissionAsync((Guid)input.PartOf?.Id);
+
+
+            ObjectMapper.Map(input, wardAdmission);
+            ObjectMapper.Map(input, hospitalAdmission);
+
+            wardAdmission.Performer = person;
+            var admission = await _admissionsManager.UpdateAsync(wardAdmission, hospitalAdmission, codes);
+
+            var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(admission.Id, admission.StartDateTime);
+            await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(EntityId(admissionAudit?.Id), async item =>
             {
-                Validation.ValidateText(input?.HospitalAdmissionNumber, "Hospital Admission Number");
-                Validation.ValidateReflist(input?.Classification, "Classification");
-            }
+                item.Admission = admission;
+                item.AdmissionStatus = (RefListAdmissionStatuses?)admission.AdmissionStatus;
+                item.AuditTime = admission.StartDateTime.Value.Date;
+                item.Initiator = person;
+            });
 
-            var patient = await _hisPatientRepositiory.GetAsync(input.Subject.Id.Value);
-            if (patient == null)
-                throw new UserFriendlyException("Patient Id cannot be empty");
-
-            var admission = await _admissionsManager.UpdateAsync(input, person);
-
-            var wardAdmission = await GetEntityAsync<WardAdmission>(admission.Id);
-            var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(wardAdmission.Id, admission.StartDateTime);
-
-            if (admissionAudit != null)
-            {
-                await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(admissionAudit.Id, async item =>
-                {
-                    item.Admission = wardAdmission;
-                    item.AdmissionStatus = (RefListAdmissionStatuses?)admission.AdmissionStatus.ItemValue;
-                    item.AuditTime = admission.StartDateTime.Value.Date;
-                    item.Initiator = person;
-                });
-            }
-            else
-            {
-                await _hisAdmissionAuditTrailRepository.CreateAudit(new HisAdmissionAuditTrail()
-                {
-                    Admission = wardAdmission,
-                    AdmissionStatus = (RefListAdmissionStatuses?)admission.AdmissionStatus.ItemValue,
-                    AuditTime = admission.StartDateTime.Value.Date,
-                    Initiator = person
-                });
-            }
-
-            return admission;
+            return await MapToDynamicDtoAsync<WardAdmission, Guid>(admission);
         }
 
         /// <summary>
@@ -454,32 +413,30 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
             return separation;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
- 		[HttpDelete, Route("{id}")]
-        public async Task DeleteAsync(Guid id)
+
+        private void ValidateWardAdmissionInput(AdmissionInput input)
         {
-            await _admissionsManager.DeleteAsync(id);
+            Validation.ValidateEntityWithDisplayNameDto(input?.Ward, "Ward");
+            Validation.ValidateEntityWithDisplayNameDto(input?.Subject, "Patient");
+            Validation.ValidateNullableType(input?.StartDateTime, "Admission Date");
+            Validation.ValidateText(input?.WardAdmissionNumber, "Ward Admission Number");
+            Validation.ValidateReflist(input?.AdmissionType, "Admission Type");
+
+            if (input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.NotProvided && input?.IdentificationType?.ItemValue != (int)RefListIdentificationTypes.Other)
+            {
+                Validation.ValidateReflist(input?.Classification, "Classification");
+                Validation.ValidateText(input?.HospitalAdmissionNumber, "Hospital Admission Number");
+            }
+
+            if (EntityId(input.Subject?.Id) is null)
+                throw new UserFriendlyException("Patient Id cannot be empty");
         }
 
-        private void MapAdmissionRelationsToResponse(WardAdmissionWithRelations adm, AdmissionResponse resp)
+        private Guid? EntityId(Guid? id)
         {
-            MapRelationalEntityAsDto(resp.PartOf, adm.HospitalAdmission.Id);
-            ObjectMapper.Map(adm.Patient, resp);
-            UtilityHelper.TrySetProperty(resp, "Code", ObjectMapper.Map<List<EntityWithDisplayNameDto<Guid?>>>(adm.IcdTenCodes));
-            UtilityHelper.TrySetProperty(resp, "SeparationCode",
-                                                                    ObjectMapper.Map<List<EntityWithDisplayNameDto<Guid?>>>(adm.SeparationIcdTenCodes));
-
-            if (adm.Patient.DateOfBirth.HasValue && adm.WardAdmission.SeparationDate.HasValue)
-                resp.AgeBreakdown = AdmissionsUtilityHelper.AgeBreakdown(adm.Patient.DateOfBirth.Value, adm.WardAdmission.SeparationDate.Value);
+            if (id.HasValue) return id;
+            else return null;
         }
 
-        private void MapRelationalEntityAsDto(EntityWithDisplayNameDto<Guid?> entityResponse, Guid id, string entityName = "")
-        {
-            entityResponse = new EntityWithDisplayNameDto<Guid?>(id, entityName);
-        }
     }
 }

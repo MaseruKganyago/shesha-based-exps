@@ -430,7 +430,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.UpdateAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.UpdateAdmissionAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
             <summary>
             
             </summary>
@@ -458,13 +458,6 @@
             <param name="admission"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsAppService.DeleteAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsMapProfile">
             <summary>
             
@@ -474,75 +467,6 @@
             <summary>
             
             </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.AcceptOrRejectTransfers(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AcceptOrRejectTransfersInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.GetAllByStatusAsync(System.Guid,Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses)">
-            <summary>
-            
-            </summary>
-            <param name="wardId"></param>
-            <param name="admissionStatus"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.GetAllAsync(System.Guid,System.DateTime)">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.GetPatientAuditTrailAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="patientIdGuid"></param>
-            <param name="partOfId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.ValidateIdentityNumber(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.ValidateIdDto)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.GetAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.CreateAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.UpdateAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.IAdmissionsAppService.DeleteAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.DashboardModelQuery">
             <summary>
