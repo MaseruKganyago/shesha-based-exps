@@ -55,8 +55,8 @@
         </member>
         <member name="T:Boxfusion.Health.His.Common.Domain.Domain.Diagnoses.DiagnosisManager">
             <summary>
-            TO DO: Code to be moved to CDM
-            Implements Generic method constraint to Encounter(As diagnosis is backbone-element to Encounter) and Condition(As Diagnosis relates to condition)
+            To Do: Code to be moved to CDM
+            Implements Generic methods constraint to Encounter(As diagnosis is backbone-element to Encounter) and Condition(As Diagnosis relates to condition)
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Common.Domain.Domain.Diagnoses.DiagnosisManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Shesha.Services.IDynamicRepository)">
@@ -75,7 +75,7 @@
             <param name="encouter"></param>
             <param name="use"></param>
             <param name="rank"></param>
-            <param name="action"></param>
+            <param name="action">Accepts an awaitable method which actions on the condition of the diagnosis.</param>
             <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Common.Domain.Domain.Diagnoses.DiagnosisManager.UpdateDiagnosis``1(Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Func{``0,System.Threading.Tasks.Task})">

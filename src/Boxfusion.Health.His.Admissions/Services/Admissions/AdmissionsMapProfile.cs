@@ -49,6 +49,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
 
             //HospitalAdmission
             CreateMap<AdmissionInput, HospitalAdmission>()
+                .ForMember(a => a.Id, options => options.Ignore())
                  .ForMember(a => a.HospitalAdmissionNumber, options => options.MapFrom(c => c.HospitalAdmissionNumber))
                  .ForMember(a => a.OriginOwnerId, options => options.MapFrom(c => c.OriginOwnerId))
                  .ForMember(a => a.OriginOwnerType, options => options.MapFrom(c => c.OriginOwnerType))
@@ -64,6 +65,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
                  .ForMember(a => a.Subject, options => options.MapFrom(b => GetEntity<Patient>(b.Subject)))
                  .ForMember(a => a.TransferToNonGautengHospital, options => options.MapFrom(c => c.TransferToNonGautengHospital))
                  .ForMember(a => a.IsGautengGovFacility, options => options.MapFrom(c => c.IsGautengGovFacility))
+                 .ForMember(a => a.Performer, b => b.Ignore())
                  .IgnoreNotMapped()
                  .MapReferenceListValuesFromDto();
         }

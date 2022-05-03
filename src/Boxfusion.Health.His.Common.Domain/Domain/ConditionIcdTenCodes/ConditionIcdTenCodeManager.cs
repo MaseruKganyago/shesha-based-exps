@@ -52,11 +52,6 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes
 			return codes;
 		}
 
-		private async Task<IcdTenCode> GetIcdTenCode(Guid codeId)
-		{
-			return await _icdTenCodeRepository.GetAsync(codeId);
-		}
-
 		/// <summary>
 		/// 
 		/// </summary>
@@ -142,6 +137,7 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes
 			else
 			{
 				if (!assignement.IsDeleted) await repo.DeleteAsync(assignement);
+				codes.Remove(assignement.IcdTenCode);
 			}
 		}
 

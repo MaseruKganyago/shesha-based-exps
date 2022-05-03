@@ -51,7 +51,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
     /// 
     /// </summary>
     [AbpAuthorize]
-    [ApiVersion("2")]
+    [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/His/[controller]")]
     public class AdmissionsAppService : HisAppServiceBase
     {
@@ -234,6 +234,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
 
             ObjectMapper.Map(input, wardAdmission);
             ObjectMapper.Map(input, hospitalAdmission);
+            hospitalAdmission.Id = (Guid)input.PartOf.Id; //Manual assign hospitalAdmissionId back after automapping on line: 236
 
             wardAdmission.Performer = person;
             var admission = await _admissionsManager.UpdateAsync(wardAdmission, hospitalAdmission, codes);

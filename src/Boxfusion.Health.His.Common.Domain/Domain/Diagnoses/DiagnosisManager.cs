@@ -15,8 +15,8 @@ using System.Threading.Tasks;
 namespace Boxfusion.Health.His.Common.Domain.Domain.Diagnoses
 {
 	/// <summary>
-	/// TO DO: Code to be moved to CDM
-	/// Implements Generic method constraint to Encounter(As diagnosis is backbone-element to Encounter) and Condition(As Diagnosis relates to condition)
+	/// To Do: Code to be moved to CDM
+	/// Implements Generic methods constraint to Encounter(As diagnosis is backbone-element to Encounter) and Condition(As Diagnosis relates to condition)
 	/// </summary>
 	public class DiagnosisManager: DomainService
 	{
@@ -42,7 +42,7 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.Diagnoses
 		/// <param name="encouter"></param>
 		/// <param name="use"></param>
 		/// <param name="rank"></param>
-		/// <param name="action"></param>
+		/// <param name="action">Accepts an awaitable method which actions on the condition of the diagnosis.</param>
 		/// <returns></returns>
 		public async Task<Diagnosis> AddNewDiagnosis<T1, T2>(T1 encouter, int use, int? rank, Func<T2, Task> action) where T1: Encounter where T2: Condition
 		{
