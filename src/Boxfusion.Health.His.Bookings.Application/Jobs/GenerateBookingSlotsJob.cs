@@ -34,11 +34,7 @@ namespace Boxfusion.Health.His.Bookings.Jobs
         /// <returns></returns>
         public override async Task DoExecuteAsync(CancellationToken cancellationToken)
         {
-            using (var uow = UnitOfWorkManager.Begin()) 
-            {
-                await _bookingSlotsGenerator.GenerateBookingSlotsForAllSchedulesAsync();
-                await uow.CompleteAsync();
-            }                
+            await _bookingSlotsGenerator.GenerateBookingSlotsForAllSchedulesAsync();
         }
     }
 }
