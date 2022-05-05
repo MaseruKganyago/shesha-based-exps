@@ -23,7 +23,7 @@ namespace Boxfusion.Health.His.Common.Patient
 
             try
             {
-                var patients = await _patientRepository.GetAllListAsync(facilityPatient => facilityPatient.IdentityNumber == identityNumber);
+                var patients = await _patientRepository.GetAllListAsync(facilityPatient => facilityPatient.IdentityNumber == identityNumber || facilityPatient.OtherIdentityNumber == identityNumber || facilityPatient.PassportNumber == identityNumber);
 
 
                 if (patients.Count == 0)
