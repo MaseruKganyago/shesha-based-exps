@@ -8,7 +8,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos
     /// <summary>
     /// 
     /// </summary>
-    public class HisAdmissionAuditTrailInput
+    public class HisAdmissionAuditTrailDto
     {
         /// <summary>
         /// 
@@ -23,7 +23,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos
         /// </summary>
         public Guid Initiator { get; set; }
         /// <summary>
-        /// 
+         
         /// </summary>
         public RefListAdmissionStatuses? AdmissionStatus { get; set; }
 

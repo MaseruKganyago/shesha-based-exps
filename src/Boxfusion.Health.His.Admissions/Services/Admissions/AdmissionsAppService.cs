@@ -33,7 +33,6 @@ using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Authorization;
 using Boxfusion.Health.His.Admissions.Domain.Dtos;
-using Boxfusion.Health.His.Admissions.Application.Configuration;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
 using Abp.Domain.Entities.Auditing;
@@ -45,7 +44,7 @@ using Boxfusion.Health.His.Common.Domain.Domain;
 using Shesha.DynamicEntities.Dtos;
 using Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes;
 
-namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
+namespace Boxfusion.Health.His.Admissions.Admissions
 {
     /// <summary>
     /// 
@@ -60,7 +59,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
         private readonly ConditionIcdTenCodeManager _conditionIcdTenCodeManager;
 
         private readonly IRepository<HisPatient, Guid> _hisPatientRepositiory;
-        private readonly IHisAdmissionAuditTrailService _hisAdmissionAuditTrailRepository;
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         private readonly IRepository<HisWard, Guid> _wardRepositiory;
         //private readonly IHisAdmissionPermissionChecker _hisAdmissPermissionChecker;
@@ -85,7 +83,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
             AdmissionsManager admissionsManager,
             IRepository<HisPatient, Guid> hisPatientRepositiory,
             IRepository<HisWard, Guid> wardRepositiory,
-            IHisAdmissionAuditTrailService hisAdmissionAuditTrailRepository,
             //IHisAdmissionPermissionChecker hisAdmissPermissionChecker,
             IRepository<WardMidnightCensusReport, Guid> wardMidnightCensusReport,
             IUserAccessRightService userAccessRightService,
@@ -98,7 +95,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
             _hisPatientRepositiory = hisPatientRepositiory;
             _wardAdmissionRepositiory = wardAdmissionRepository;
             _wardRepositiory = wardRepositiory;
-            _hisAdmissionAuditTrailRepository = hisAdmissionAuditTrailRepository;
             //_hisAdmissPermissionChecker = hisAdmissPermissionChecker;
             _wardMidnightCensusReport = wardMidnightCensusReport;
             _hisUserRepository = hisUserRepository;
@@ -161,11 +157,15 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
         /// </summary>
         /// <returns></returns>
         [HttpGet, Route("wardadmissions/partof/{partOfId}")]
-        public async Task<List<AdmissionResponse>> GetPatientAuditTrailAsync(Guid partOfId)
+        public async Task<List<HisAdmissionAuditTrailDto>> GetPatientAuditTrailAsync(Guid partOfId)
         {
-            var admissions = await _admissionsManager.GetPatientAuditTrailAsync(partOfId);
+            //var admissions = await _admissionsManager.GetPatientAuditTrailAsync(partOfId);
 
-            return ObjectMapper.Map<List<AdmissionResponse>>(admissions);
+            //return ObjectMapper.Map<List<AdmissionResponse>>(admissions);
+
+            //TODO: Generate list on the fly from list of HospitalAdmissions
+
+            throw new NotImplementedException();
         }
 
 		/// <summary>
@@ -200,18 +200,8 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
                 throw new UserFriendlyException("The total number of admitted patients has exceeded the total number of beds");
             #endregion
 
-            newWardAdmission.Performer = person;
+            newWardAdmission.Performer = person; //Manually assign current loggedIn person as performer
             var admission = await _admissionsManager.AdmitPatientAsync(newWardAdmission, hospitalAdmission, codes);
-
-            var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(admission.Id, admission.StartDateTime);
-            //Create or update AdmissionAuditTrail
-            await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(EntityId(admissionAudit?.Id), async item =>
-            {
-                item.Admission = admission;
-                item.AdmissionStatus = admission.AdmissionStatus;
-                item.AuditTime = admission.StartDateTime.Value.Date;
-                item.Initiator = person;
-            });
 
             return await MapToDynamicDtoAsync<WardAdmission, Guid>(admission);
         }
@@ -236,17 +226,8 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
             ObjectMapper.Map(input, hospitalAdmission);
             hospitalAdmission.Id = (Guid)input.PartOf.Id; //Manual assign hospitalAdmissionId back after automapping on line: 236
 
-            wardAdmission.Performer = person;
+            wardAdmission.Performer = person; //Manually assign current loggedId person as performer
             var admission = await _admissionsManager.UpdateAsync(wardAdmission, hospitalAdmission, codes);
-
-            var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(admission.Id, admission.StartDateTime);
-            await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(EntityId(admissionAudit?.Id), async item =>
-            {
-                item.Admission = admission;
-                item.AdmissionStatus = (RefListAdmissionStatuses?)admission.AdmissionStatus;
-                item.AuditTime = admission.StartDateTime.Value.Date;
-                item.Initiator = person;
-            });
 
             return await MapToDynamicDtoAsync<WardAdmission, Guid>(admission);
         }
@@ -256,7 +237,47 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [HttpPost, Route("AcceptOrRejectTransfers")]
+        [HttpPut, Route("Admissions/SeparatePatient")]
+        public async Task<DynamicDto<WardAdmission, Guid>> SeparatePatientAsync(SeparationDto input)
+        {
+            Validation.ValidateIdWithException(input.Id, "Admission Id cannot be empty.");
+            var admission = await _admissionsManager.GetWardAdmissionAsync(input.Id);
+
+            ValidateAdmissionDischargeInputs(input, admission);
+
+            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            var hospitalAdmission = await _admissionsManager.GetHospitalAdmissionAsync(admission.PartOf.Id);
+            var codes = await _conditionIcdTenCodeManager.GetIcdTenCodes(input.SeparationCodes.Select(a => (Guid)a.Id).ToList());
+
+            ObjectMapper.Map(input, admission);
+            ObjectMapper.Map(input, hospitalAdmission);
+            admission.Performer = person; //Manually assign current loggedIn person as performer
+            var separatedAdmission = await _admissionsManager.SeparatePatientAsync(admission, hospitalAdmission, codes);
+
+            return await MapToDynamicDtoAsync<WardAdmission, Guid>(separatedAdmission);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="admissionId"></param>
+        /// <returns></returns>
+        [HttpPut, Route("Admissions/UndoSeparation/{admissionId}")]
+        public async Task<DynamicDto<WardAdmission, Guid>> UndoSeparationAsync([FromRoute]Guid admissionId)
+        {
+            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+
+            var reAdmission = await _admissionsManager.UndoSeparation(admissionId, person);
+
+            return await MapToDynamicDtoAsync<WardAdmission, Guid>(reAdmission);
+        }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="input"></param>
+		/// <returns></returns>
+		[HttpPost, Route("AcceptOrRejectTransfers")]
         public async Task<AcceptOrRejectTransfersResponse> AcceptOrRejectTransfers(AcceptOrRejectTransfersInput input)
         {
             var wardAdmissionService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<WardAdmission, Guid>>();
@@ -300,118 +321,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
             await wardAdmissionService.UpdateAsync(wardAdmission);
 
             var person = await GetCurrentPersonAsync();
-            var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(wardAdmission.Id, wardAdmission.StartDateTime);
-
-            if (admissionAudit != null)
-            {
-                await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(admissionAudit.Id, async item =>
-                {
-                    item.Admission = wardAdmission;
-                    item.AdmissionStatus = (RefListAdmissionStatuses?)wardAdmission.AdmissionStatus;
-                    item.AuditTime = wardAdmission.StartDateTime.Value.Date;
-                    item.Initiator = person;
-                });
-            }
-            else
-            {
-                await _hisAdmissionAuditTrailRepository.CreateAudit(new HisAdmissionAuditTrail()
-                {
-                    Admission = wardAdmission,
-                    AdmissionStatus = (RefListAdmissionStatuses?)wardAdmission.AdmissionStatus,
-                    AuditTime = wardAdmission.StartDateTime.Value.Date,
-                    Initiator = person
-                });
-            }
-
             return respose;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        [HttpPut, Route("separate")]
-        public async Task<AdmissionResponse> SeparatePatientAsync(AdmissionInput input)
-        {
-            var person = await GetCurrentLoggedPersonFhirBaseAsync();
-            Validation.ValidateIdWithException(input?.Id, "Admission Id cannot be empty.");
-            Validation.ValidateReflist(input?.SeparationType, "Separation Type");
-            Validation.ValidateNullableType(input?.SeparationDate, "Separation Date");
-            Validation.ValidateEntityWithDisplayNameDto(input?.SeparationCode, "Separation Code");
-
-            var admission = await _wardAdmissionRepositiory.FirstOrDefaultAsync(x => x.Id == input.Id);
-
-            if (admission?.Subject?.DateOfBirth != null)
-            {
-                if (local.UtilityHelper.GetAge(admission.Subject.DateOfBirth.Value) < 5)
-                {
-                    Validation.ValidateReflist(input?.SeparationChildHealth, "Separation Child Health");
-                }
-            }
-
-            if (input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.internalTransfer)
-                Validation.ValidateEntityWithDisplayNameDto(input?.SeparationDestinationWard, "Ward");
-            if (input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.externalTransfer)
-            {
-                if (input.IsGautengGovFacility)
-                {
-                    Validation.ValidateEntityWithDisplayNameDto(input?.TransferToHospital, "Transfer to hospital");
-                }
-                else
-                {
-                    Validation.ValidateText(input?.TransferToNonGautengHospital, "Transfer To Non Gauteng Hospital");
-                }
-            }
-
-            var admissionResponse = await _admissionsManager.SeparatePatientAsync(input, person);
-
-            return admissionResponse;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="admission"></param>
-        /// <returns></returns>
-        [HttpPut, Route("undoSeparation")]
-        public async Task<AdmissionResponse> UndoSeparationAsync(UndoSeparationDto admission)
-        {
-            var _hisAdmissPermissionChecker = Abp.Dependency.IocManager.Instance.Resolve<IHisAdmissionPermissionChecker>();
-            if (!await _hisAdmissPermissionChecker.IsApproverLevel1(await GetCurrentPersonAsync()))
-            {
-                throw new UserFriendlyException("The logged user is not a level 1 approver");
-            }
-
-            var person = await GetCurrentLoggedPersonFhirBaseAsync();
-
-            var separation = await _admissionsManager.UndoSeparation(admission, person);
-
-            var wardAdmission = await GetEntityAsync<WardAdmission>((separation.Id));
-            var admissionAudit = await _hisAdmissionAuditTrailRepository.GetAudit(wardAdmission.Id, wardAdmission.StartDateTime);
-
-            if (admissionAudit != null)
-            {
-                await SaveOrUpdateEntityAsync<HisAdmissionAuditTrail>(admissionAudit.Id, async item =>
-                {
-                    item.Admission = wardAdmission;
-                    item.AdmissionStatus = (RefListAdmissionStatuses?)wardAdmission.AdmissionStatus;
-                    item.AuditTime = wardAdmission.StartDateTime.Value.Date;
-                    item.Initiator = person;
-                });
-            }
-            else
-            {
-                await _hisAdmissionAuditTrailRepository.CreateAudit(new HisAdmissionAuditTrail()
-                {
-                    Admission = wardAdmission,
-                    AdmissionStatus = (RefListAdmissionStatuses?)wardAdmission.AdmissionStatus,
-                    AuditTime = wardAdmission.StartDateTime.Value.Date,
-                    Initiator = person
-                });
-            }
-
-            return separation;
         }
 
 
@@ -437,6 +347,35 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
         {
             if (id.HasValue) return id;
             else return null;
+        }
+
+        private void ValidateAdmissionDischargeInputs(SeparationDto input, WardAdmission admission)
+        {
+            Validation.ValidateReflist(input?.SeparationType, "Separation Type");
+            Validation.ValidateNullableType(input?.SeparationDate, "Separation Date");
+            Validation.ValidateEntityWithDisplayNameDto(input?.SeparationCodes, "Separation Code");
+
+            if (admission?.Subject?.DateOfBirth != null)
+            {
+                if (local.UtilityHelper.GetAge(admission.Subject.DateOfBirth.Value) < 5)
+                {
+                    Validation.ValidateReflist(input?.SeparationChildHealth, "Separation Child Health");
+                }
+            }
+
+            if (input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.internalTransfer)
+                Validation.ValidateEntityWithDisplayNameDto(input?.SeparationDestinationWard, "Ward");
+            if (input?.SeparationType?.ItemValue == (int)RefListSeparationTypes.externalTransfer)
+            {
+                if (input.IsGautengGovFacility)
+                {
+                    Validation.ValidateEntityWithDisplayNameDto(input?.TransferToHospital, "Transfer to hospital");
+                }
+                else
+                {
+                    Validation.ValidateText(input?.TransferToNonGautengHospital, "Transfer To Non Gauteng Hospital");
+                }
+            }
         }
 
     }

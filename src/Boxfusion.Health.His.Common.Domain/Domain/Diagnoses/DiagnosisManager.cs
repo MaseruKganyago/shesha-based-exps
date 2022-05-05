@@ -87,5 +87,17 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.Diagnoses
 
 			return updatedDiagnosis;
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public async Task<Diagnosis> DeleteDiagnosis(Guid id)
+		{
+			await _diagnosisRepository.DeleteAsync(id);
+
+			return await _diagnosisRepository.GetAsync(id);
+		}
 	}
 }

@@ -14,7 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
+namespace Boxfusion.Health.His.Admissions.Admissions
 {
 	/// <summary>
 	/// 
@@ -47,27 +47,28 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Admissions
                 .ForMember(a => a.InternalTransferDestinationWard, b => b.MapFrom(c => GetEntity<WardAdmission>(c.InternalTransferDestinationWard.Id)))
                 .MapReferenceListValuesFromDto();
 
+            CreateMap<SeparationDto, WardAdmission>()
+                .ForMember(a => a.SeparationDestinationWard, options => options.MapFrom(b => GetEntity<HisWard>(b.SeparationDestinationWard.Id)))
+                .MapReferenceListValuesFromDto();
+
             //HospitalAdmission
             CreateMap<AdmissionInput, HospitalAdmission>()
+               .ForMember(a => a.Id, options => options.Ignore())
+               .ForMember(a => a.HospitalAdmissionStatus, options => options.MapFrom(u => RefListHospitalAdmissionStatuses.admitted))
+               .ForMember(a => a.Classification, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.Classification)))
+               .ForMember(a => a.OtherCategory, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.OtherCategory)))
+               .ForMember(a => a.TransferFroHospital, options => options.MapFrom(b => GetEntity<FhirOrganisation>(b.TransferFroHospital)))
+               .ForMember(a => a.TransferToHospital, options => options.MapFrom(b => GetEntity<FhirOrganisation>(b.TransferToHospital)))
+               .ForMember(a => a.PartOf, options => options.MapFrom(b => GetEntity<Encounter>(b.PartOf)))
+               .ForMember(a => a.Subject, options => options.MapFrom(b => GetEntity<Patient>(b.Subject)))
+               .ForMember(a => a.Performer, b => b.Ignore())
+               .IgnoreNotMapped()
+               .MapReferenceListValuesFromDto();
+
+            CreateMap<SeparationDto, HospitalAdmission>()
                 .ForMember(a => a.Id, options => options.Ignore())
-                 .ForMember(a => a.HospitalAdmissionNumber, options => options.MapFrom(c => c.HospitalAdmissionNumber))
-                 .ForMember(a => a.OriginOwnerId, options => options.MapFrom(c => c.OriginOwnerId))
-                 .ForMember(a => a.OriginOwnerType, options => options.MapFrom(c => c.OriginOwnerType))
-                 .ForMember(a => a.DestinationOwnerId, options => options.MapFrom(c => c.DestinationOwnerId))
-                 .ForMember(a => a.EndDateTime, options => options.MapFrom(c => c.EndDateTime))
-                 .ForMember(a => a.StartDateTime, options => options.MapFrom(c => c.StartDateTime))
-                 .ForMember(a => a.HospitalAdmissionStatus, options => options.MapFrom(u => RefListHospitalAdmissionStatuses.admitted))
-                 .ForMember(a => a.Classification, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.Classification)))
-                 .ForMember(a => a.OtherCategory, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.OtherCategory)))
-                 .ForMember(a => a.TransferFroHospital, options => options.MapFrom(b => GetEntity<FhirOrganisation>(b.TransferFroHospital)))
-                 .ForMember(a => a.TransferToHospital, options => options.MapFrom(b => GetEntity<FhirOrganisation>(b.TransferToHospital)))
-                 .ForMember(a => a.PartOf, options => options.MapFrom(b => GetEntity<Encounter>(b.PartOf)))
-                 .ForMember(a => a.Subject, options => options.MapFrom(b => GetEntity<Patient>(b.Subject)))
-                 .ForMember(a => a.TransferToNonGautengHospital, options => options.MapFrom(c => c.TransferToNonGautengHospital))
-                 .ForMember(a => a.IsGautengGovFacility, options => options.MapFrom(c => c.IsGautengGovFacility))
-                 .ForMember(a => a.Performer, b => b.Ignore())
-                 .IgnoreNotMapped()
-                 .MapReferenceListValuesFromDto();
+                .ForMember(a => a.TransferToHospital, options => options.MapFrom(b => GetEntity<FhirOrganisation>(b.TransferToHospital)))
+                .MapReferenceListValuesFromDto();
         }
 		
 	}

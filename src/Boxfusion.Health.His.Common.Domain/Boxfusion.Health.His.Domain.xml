@@ -10,12 +10,13 @@
             Implements generic methods of ConditionIcdTenCode
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager.#ctor(Shesha.Services.IDynamicRepository,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager.#ctor(Shesha.Services.IDynamicRepository,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid})">
             <summary>
             
             </summary>
             <param name="dynamicRepository"></param>
             <param name="icdTenCodeRepository"></param>
+            <param name="conditionRepository"></param>
         </member>
         <member name="M:Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager.GetIcdTenCodes(System.Collections.Generic.List{System.Guid})">
             <summary>
@@ -42,6 +43,14 @@
             <param name="icdTenCodes"></param>
             <param name="condition"></param>
             <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager.DeleteAssignment``1(Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition"></param>
             <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager.ActionUpdate``1(System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode},``0)">
@@ -85,6 +94,13 @@
             <typeparam name="T"></typeparam>
             <param name="updatedEntity"></param>
             <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Domain.Domain.Diagnoses.DiagnosisManager.DeleteDiagnosis(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Common.Domain.Domain.Helpers.HisCommonDomainUtil">

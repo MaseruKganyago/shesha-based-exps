@@ -23,17 +23,21 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes
 	{
 		private readonly IDynamicRepository _dynamicRepository;
 		private readonly IRepository<IcdTenCode, Guid> _icdTenCodeRepository;
+		private readonly IRepository<Condition, Guid> _conditionRepository;
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="dynamicRepository"></param>
 		/// <param name="icdTenCodeRepository"></param>
+		/// <param name="conditionRepository"></param>
 		public ConditionIcdTenCodeManager(IDynamicRepository dynamicRepository, 
-			IRepository<IcdTenCode, Guid> icdTenCodeRepository)
+			IRepository<IcdTenCode, Guid> icdTenCodeRepository,
+			IRepository<Condition, Guid> conditionRepository)
 		{
 			_dynamicRepository = dynamicRepository;
 			_icdTenCodeRepository = icdTenCodeRepository;
+			_conditionRepository = conditionRepository;
 		}
 
 		/// <summary>
@@ -100,6 +104,25 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes
 			});
 
 			return (await Task.WhenAll<T>(tasks)).ToList();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="condition"></param>
+		/// <returns></returns>
+		public async Task DeleteAssignment<T>(Condition condition) where T: ConditionIcdTenCode
+		{
+			var repo = IocManager.Instance.Resolve<IRepository<T, Guid>>();
+			var assignments = await repo.GetAllListAsync(a => a.Condition.Id == condition.Id);
+
+			assignments.ForEach(async asgn =>
+			{
+				await repo.DeleteAsync(asgn.Id);
+			});
+
+			await _conditionRepository.DeleteAsync(condition.Id);
 		}
 
 		private async Task UpdateExisistingAssignments<T>(List<IcdTenCode> codes, List<T> existingAssignments) where T : ConditionIcdTenCode

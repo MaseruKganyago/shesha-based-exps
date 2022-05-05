@@ -81,35 +81,21 @@
             <param name="codes"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.SeparatePatientAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.SeparatePatientAsync(Boxfusion.Health.His.Common.WardAdmission,Boxfusion.Health.His.Common.HospitalAdmission,System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode})">
             <summary>
             
             </summary>
-            <param name="input"></param>
-            <param name="currentLoggedInPerson"></param>
+            <param name="wardAdmission"></param>
+            <param name="hospitalAdmission"></param>
+            <param name="codes"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.UndoSeparation(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.UndoSeparationDto,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.PersonFhirBase)">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.UndoSeparation(System.Guid,Shesha.Domain.Person)">
             <summary>
             
             </summary>
-            <param name="admission"></param>
-            <param name="currentLoggedInPerson"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.DeleteConditionIcdTenCode(Boxfusion.Health.His.Common.HisConditionIcdTenCode)">
-            <summary>
-            
-            </summary>
-            <param name="conditionIcdTenCode"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.CreateICdTenCode(Shesha.AutoMapper.Dto.EntityWithDisplayNameDto{System.Nullable{System.Guid}},Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <param name="condition"></param>
+            <param name="wardAdmissionId"></param>
+            <param name="person"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AcceptOrRejectTransfersInput">
@@ -282,202 +268,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionMapProfile">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionMapProfile.#ctor">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.WardAdmissionNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.AdmissionStatus">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.HospitalAdmissionStatus">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.AdmissionType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.CapturedAfterApproval">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.HospitalAdmissionNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.Classification">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.OtherCategory">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.TransferFroHospital">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.TransferToHospital">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.PatientMasterIndexNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.HospitalPatientNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.IdentificationType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.IdentityNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.PatientProvince">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.DateOfBirth">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.Gender">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.FirstName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.LastName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.Nationality">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.Ward">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.Code">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.SeparationCode">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.HisAdmission">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.SeparationDate">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.TransferRejectionReason">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.TransferRejectionReasonComment">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.SeparationType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.SeparationDestinationWard">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.SeparationChildHealth">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.SeparationComment">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.Speciality">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.InternalTransferOriginalWard">
-            <summary>
-            Used to like the serparations
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.InternalTransferDestinationWard">
-            <summary>
-            Used to like the serparations
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.AgeBreakdown" -->
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.IsGautengGovFacility">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionResponse.TransferToNonGautengHospital">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats">
             <summary>
             
@@ -528,172 +318,93 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailInput">
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailInput.Admission">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto.Admission">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailInput.AuditTime">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto.AuditTime">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailInput.Initiator">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto.Initiator">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailInput.AdmissionStatus">
+        <!-- Badly formed XML comment ignored for member "P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto.AdmissionStatus" -->
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto.UserId">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailInput.UserId">
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.PatientResponse">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto.SeparationDate">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.PatientResponse.Patient">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto.SeparationType">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.PatientResponse.IcdTenCodes">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto.SeparationDestinationWard">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationInput">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto.TransferToHospital">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationInput.SeparationDate">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto.TransferToNonGautengHospital">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationInput.SeparationType">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto.SeparationChildHealth">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationInput.SeparationDestinationWard">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto.SeparationComment">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationInput.TransferToHospital">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto.IsGautengGovFacility">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationInput.TransferToNonGautengHospital">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto.SeparationCodes">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationInput.SeparationChildHealth">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto.InternalTransferOriginalWard">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationInput.SeparationComment">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto.InternalTransferDestinationWard">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationInput.Code">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationInput.IsGautengGovFacility">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationInput.SeparationCode">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationResponse">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationResponse.SeparationDate">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationResponse.SeparationType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationResponse.SeparationDestinationWard">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationResponse.TransferToHospital">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationResponse.InternalTransferOriginalWard">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationResponse.InternalTransferDestinationWard">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationResponse.TransferToNonGautengHospital">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationResponse.SeparationChildHealth">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationResponse.SeparationComment">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationResponse.Code">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationResponse.IsGautengGovFacility">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationResponse.SeparationCode">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.UndoSeparationDto">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto.Code">
             <summary>
             
             </summary>

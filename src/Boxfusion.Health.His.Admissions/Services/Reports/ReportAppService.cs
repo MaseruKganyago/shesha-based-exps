@@ -19,7 +19,6 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Enums;
 using Shesha.Authorization;
-using Boxfusion.Health.His.Admissions.Application.Configuration;
 
 namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
 {
@@ -93,7 +92,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("ApproveLevel1")]
-        [AbpAuthorize(HisAdmissionsSettingNames.ApproveReport)]
         public async Task<WardMidnightCensusReportResponse> ApproveLevel1(WardCensusInput input)
         {
             var currentPerson = await GetCurrentPersonAsync();
@@ -132,7 +130,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("ApproveLevel2")]
-        [AbpAuthorize(HisAdmissionsSettingNames.ApproveReport)]
         public async Task<WardMidnightCensusReportResponse> ApproveLevel2(WardCensusInput input)
         {
             var currentPerson = await GetCurrentPersonAsync();
@@ -222,7 +219,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet, Route("DailyReport")]
-        [AbpAuthorize(HisAdmissionsSettingNames.ReportsAndStats)]
         public async Task<WardMidnightCensusReportResponse> GetWardDailyReport(WardCensusInput input)
         {
             var currentPerson = await GetCurrentPersonAsync();
@@ -475,7 +471,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("Reject")]
-        [AbpAuthorize(HisAdmissionsSettingNames.DisapproveReport)]
         public async Task<WardMidnightCensusReportResponse> Reject(RejectReportInput input)
         {
             var currentPerson = await GetCurrentPersonAsync();
@@ -516,7 +511,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("SubmitForApproval")]
-        [AbpAuthorize(HisAdmissionsSettingNames.SubmitsReportsForApproval)]
         public async Task<WardMidnightCensusReportResponse> SubmitForApproval(WardCensusInput input)
         {
             var currentPerson = await GetCurrentPersonAsync();
