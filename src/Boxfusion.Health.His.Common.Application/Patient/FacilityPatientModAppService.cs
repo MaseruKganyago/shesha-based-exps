@@ -44,8 +44,8 @@ namespace Boxfusion.Health.His.Common.Patient
             }
             catch (Exception ex)
             {
-                response.Code = "OK";
-                response.Message = "That ID wasn't found";
+                response.Code = "ERROR";
+                response.Message = ex.Message + "\n" + ex.Data;
                 return response;
             }
           
