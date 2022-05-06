@@ -1,4 +1,5 @@
 ﻿
+using Abp.Domain.Repositories;
 using Boxfusion.Health.His.Common.Domain.Domain.Dtos.Patients;
 using Boxfusion.Health.His.Common.Domain.Domain.Patients;
 using Boxfusion.Health.His.Common.Patients;
@@ -13,8 +14,13 @@ namespace Boxfusion.Health.His.Common.Patient
 {
     public class FacilityPatientModAppService : HisAppServiceBase
     {
-   
-        private readonly IFacilityPatientRepository _patientRepository;
+ 
+        IRepository<FacilityPatient, Guid> _patientRepository;
+
+        public FacilityPatientModAppService(IRepository<FacilityPatient, Guid> repository) 
+        {
+            _patientRepository = repository;
+        }
 
         [HttpGet, Route("/api/services/Common/FacilityPatient/GetByIdentityNumber/{identityNumber}")]
         public async Task<FacilityPatientDto> GetPatientByIdNumberAsync(string identityNumber)
@@ -24,8 +30,7 @@ namespace Boxfusion.Health.His.Common.Patient
             try
             {
                 var patients = await _patientRepository.GetAllListAsync(facilityPatient => facilityPatient.IdentityNumber == identityNumber || facilityPatient.OtherIdentityNumber == identityNumber || facilityPatient.PassportNumber == identityNumber);
-
-
+      
                 if (patients.Count == 0)
                 {
                     response.Code = "OK";
@@ -35,17 +40,17 @@ namespace Boxfusion.Health.His.Common.Patient
                 else
                 {
                     var patientNames = "";
-                    patients.ForEach(patient => patientNames += patient.FullNameWithTitle + "\n");
+                    patients.ForEach(patient => patientNames += patient.FullNameWithTitle + Environment.NewLine);
 
                     response.Code = "DUPLICATE";
-                    response.Message = "That ID already belongs to : \n " + patientNames;
+                    response.Message = "That ID already belongs to : " + Environment.NewLine + patientNames;
                     return response;
                 }
             }
             catch (Exception ex)
             {
                 response.Code = "ERROR";
-                response.Message = ex.Message + "\n" + ex.Data;
+                response.Message = ex.Message;
                 return response;
             }
           
