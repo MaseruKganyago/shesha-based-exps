@@ -1,5 +1,7 @@
 ﻿using Abp.Application.Services;
 using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Reports;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos;
 using Boxfusion.Health.His.Common.Enums;
 using System;
 using System.Collections.Generic;

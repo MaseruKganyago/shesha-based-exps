@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boxfusion.Health.His.Admissions.Domain.Domain.Reports;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

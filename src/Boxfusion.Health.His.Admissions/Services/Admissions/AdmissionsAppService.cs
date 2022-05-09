@@ -43,6 +43,7 @@ using UtilityHelper = Boxfusion.Health.HealthCommon.Core.Helpers.UtilityHelper;
 using Boxfusion.Health.His.Common.Domain.Domain;
 using Shesha.DynamicEntities.Dtos;
 using Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Reports;
 
 namespace Boxfusion.Health.His.Admissions.Admissions
 {

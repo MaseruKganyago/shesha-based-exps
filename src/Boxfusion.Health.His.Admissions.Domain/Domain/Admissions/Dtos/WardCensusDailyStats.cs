@@ -7,7 +7,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos
     /// <summary>
     /// 
     /// </summary>
-    public class DailyStats
+    public class WardCensusDailyStats
     {
         /// <summary>
         /// 
@@ -32,7 +32,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos
         /// <summary>
         /// 
         /// </summary>
-        public Single TotalBedInWard { get; set; }
+        public Single NumBedsInWard { get; set; }
 
         /// <summary>
         /// 

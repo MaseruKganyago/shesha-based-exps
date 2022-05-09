@@ -1,6 +1,10 @@
-﻿using Abp.UI;
-using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
+﻿using Abp.Domain.Services;
+using Abp.UI;
+using AutoMapper;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos;
+using Boxfusion.Health.His.Admissions.Domain.Helpers;
+using Boxfusion.Health.His.Common.Enums;
 using NHibernate.Transform;
 using Shesha.NHibernate;
 using System;
@@ -9,22 +13,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
+namespace Boxfusion.Health.His.Admissions.Domain.Domain.Reports
 {
     /// <summary>
     /// 
     /// </summary>
-    public class SessionDataProvider : ISessionDataProvider
+    public class WardMidnightCensusReportManager : DomainService
     {
         private readonly ISessionProvider _sessionProvider;
+        private readonly IMapper _mapper;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sessionProvider"></param>
-        public SessionDataProvider(ISessionProvider sessionProvider)
+        public WardMidnightCensusReportManager(ISessionProvider sessionProvider, IMapper mapper)
         {
             _sessionProvider = sessionProvider;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -32,32 +38,22 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<DailyStats>> GetDailyStats(WardCensusInput2 input)
+        public async Task<int> GetDailyStats(WardCensusInput2 input)
         {
-            try
-            {
-                return (await _sessionProvider.Session
-                    .CreateSQLQuery(@"Exec GetWardCensusDailyStats 
+            return (await _sessionProvider.Session
+                   .CreateSQLQuery(@"Exec GetWardCensusDailyStats 
                             @WardId = :WardId,
                             @ReportDate = :ReportDate,
                             @TodaysAdmission = :todaysAdmission,
 		                    @MidnightCount = :midnightCount,
 		                    @DayPatients = :dayPatient
                     ")
-                    .SetParameter("WardId", input.WardId)
-                    .SetParameter("ReportDate", input.ReportDate)
-                    .SetParameter("dayPatient", input.dayPatient)
-                    .SetParameter("todaysAdmission", input.todaysAdmission)
-                    .SetParameter("midnightCount", input.midnightCount)
-                    .SetResultTransformer(Transformers.AliasToBean<DailyStats>())
-                    .ListAsync<DailyStats>())
-                    .ToList();
-            }
-            catch (Exception Ex)
-            {
-
-                throw new UserFriendlyException(Ex.Message);
-            }
+                   .SetParameter("WardId", input.WardId)
+                   .SetParameter("ReportDate", input.ReportDate)
+                   .SetParameter("dayPatient", input.dayPatient)
+                   .SetParameter("todaysAdmission", input.todaysAdmission)
+                   .SetParameter("midnightCount", input.midnightCount)
+                   .UniqueResultAsync<int>());
         }
 
         /// <summary>
@@ -65,11 +61,9 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<DayPatientsResponse>> GetDayPatients(TodaysAdmissionInput input)
+        public async Task<int> GetDayPatients(TodaysAdmissionInput input)
         {
-            try
-            {
-                return (await _sessionProvider.Session
+            return (await _sessionProvider.Session
                     .CreateSQLQuery(@"
                             WITH DayPatients AS (
 	                            SELECT  ROW_NUMBER() OVER(PARTITION BY AuditTrail.AdmissionId
@@ -88,15 +82,8 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
                     ")
                     .SetParameter("WardId", input.WardId)
                     .SetParameter("ReportDate", input.ReportDate)
-                    .SetResultTransformer(Transformers.AliasToBean<DayPatientsResponse>())
-                    .ListAsync<DayPatientsResponse>())
-                    .ToList();
-            }
-            catch (Exception Ex)
-            {
+                    .UniqueResultAsync<int>());
 
-                throw new UserFriendlyException(Ex.Message);
-            }
         }
 
         /// <summary>
@@ -104,38 +91,29 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<MidnightCountResponse>> GetMidnightCount(TodaysAdmissionInput input)
+        public async Task<int> GetMidnightCount(TodaysAdmissionInput input)
         {
-            try
-            {
-                return (await _sessionProvider.Session
-                    .CreateSQLQuery(@"
-                            WITH MidnightCount AS (
-                            SELECT  ROW_NUMBER() OVER(PARTITION BY AuditTrail.AdmissionId
-                                                      ORDER BY AuditTrail.CreationTime DESC) AS FilterProp
-                            FROM His_HisAdmissionAuditTrails AuditTrail
-	                            INNER JOIN Fhir_Encounters Enc 
-		                            ON Enc.Id = AuditTrail.AdmissionId
-                            WHERE AuditTrail.isDeleted = 0
-	                            AND Enc.His_WardId is not null
-	                            AND Enc.IsDeleted = 0
-	                            AND  AuditTrail.AdmissionStatusLkp = 1
-	                            AND Enc.His_WardId =  :WardId
-	                            AND CAST(AuditTrail.AuditTime AS DATE) < CAST(:ReportDate AS date)
-                            )
-                            SELECT count(1) AS MidnightCount FROM MidnightCount WHERE FilterProp = 1
-                    ")
-                    .SetParameter("WardId", input.WardId)
-                    .SetParameter("ReportDate", input.ReportDate)
-                    .SetResultTransformer(Transformers.AliasToBean<MidnightCountResponse>())
-                    .ListAsync<MidnightCountResponse>())
-                    .ToList();
-            }
-            catch (Exception Ex)
-            {
+            return (await _sessionProvider.Session
+                .CreateSQLQuery(@"
+                        WITH MidnightCount AS (
+                        SELECT  ROW_NUMBER() OVER(PARTITION BY AuditTrail.AdmissionId
+                                                    ORDER BY AuditTrail.CreationTime DESC) AS FilterProp
+                        FROM His_HisAdmissionAuditTrails AuditTrail
+	                        INNER JOIN Fhir_Encounters Enc 
+		                        ON Enc.Id = AuditTrail.AdmissionId
+                        WHERE AuditTrail.isDeleted = 0
+	                        AND Enc.His_WardId is not null
+	                        AND Enc.IsDeleted = 0
+	                        AND  AuditTrail.AdmissionStatusLkp = 1
+	                        AND Enc.His_WardId =  :WardId
+	                        AND CAST(AuditTrail.AuditTime AS DATE) < CAST(:ReportDate AS date)
+                        )
+                        SELECT count(1) AS MidnightCount FROM MidnightCount WHERE FilterProp = 1
+                ")
+                .SetParameter("WardId", input.WardId)
+                .SetParameter("ReportDate", input.ReportDate)
+                .UniqueResultAsync<int>());
 
-                throw new UserFriendlyException(Ex.Message);
-            }
         }
 
         /// <summary>
@@ -143,11 +121,9 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<MonthlyStats>> GetMonthlyStats(WardCensusInput input)
+        public async Task<MonthlyStats> GetMonthlyStats(WardCensusInput input)
         {
-            try
-            {
-                return (await _sessionProvider.Session
+            return (await _sessionProvider.Session
                     .CreateSQLQuery(@"Exec GetWardCensusMonthlyStatsProc 
                             @WardId = :WardId,
                             @ReportDate = :ReportDate,
@@ -160,13 +136,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
                     .SetParameter("totalAdmissions", input.TotalMonthlyAdmissions)
                     .SetResultTransformer(Transformers.AliasToBean<MonthlyStats>())
                     .ListAsync<MonthlyStats>())
-                    .ToList();
-            }
-            catch (Exception Ex)
-            {
-
-                throw new UserFriendlyException(Ex.Message);
-            }
+                    .FirstOrDefault();
         }
 
         /// <summary>
@@ -174,12 +144,10 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<TotalAdmissionsResponse>> GetMonthlyTotalAdmissions(TodaysAdmissionInput input)
+        public async Task<int> GetMonthlyTotalAdmissions(TodaysAdmissionInput input)
         {
-            try
-            {
-                return (await _sessionProvider.Session
-                    .CreateSQLQuery(@"
+            return (await _sessionProvider.Session
+                     .CreateSQLQuery(@"
                            WITH TotalAdmissions AS (
                             SELECT  ROW_NUMBER() OVER(PARTITION BY AuditTrail.AdmissionId
                                                         ORDER BY AuditTrail.CreationTime DESC) AS FilterProp
@@ -197,17 +165,9 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
 
 
                     ")
-                    .SetParameter("WardId", input.WardId)
-                    .SetParameter("ReportDate", input.ReportDate)
-                    .SetResultTransformer(Transformers.AliasToBean<TotalAdmissionsResponse>())
-                    .ListAsync<TotalAdmissionsResponse>())
-                    .ToList();
-            }
-            catch (Exception Ex)
-            {
-
-                throw new UserFriendlyException(Ex.Message);
-            }
+                     .SetParameter("WardId", input.WardId)
+                     .SetParameter("ReportDate", input.ReportDate)
+                     .UniqueResultAsync<int>());
         }
 
         /// <summary>
@@ -215,11 +175,9 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<List<TodaysAdmissionResponse>> GetTodaysAdmission(TodaysAdmissionInput input)
+        public async Task<int> GetTodaysAdmission(TodaysAdmissionInput input)
         {
-            try
-            {
-                return (await _sessionProvider.Session
+            return (await _sessionProvider.Session
                     .CreateSQLQuery(@"
                         WITH TodaysAdmission AS ( SELECT
                             ROW_NUMBER() OVER(PARTITION BY AuditTrail.AdmissionId
@@ -239,15 +197,53 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
                     ")
                     .SetParameter("WardId", input.WardId)
                     .SetParameter("ReportDate", input.ReportDate)
-                    .SetResultTransformer(Transformers.AliasToBean<TodaysAdmissionResponse>())
-                    .ListAsync<TodaysAdmissionResponse>())
-                    .ToList();
-            }
-            catch (Exception Ex)
-            {
+                    .UniqueResultAsync<int>());
+        }
 
-                throw new UserFriendlyException(Ex.Message);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reportType"></param>
+        /// <param name="wardId"></param>
+        /// <param name="filterDate"></param>
+        /// <returns></returns>
+        public async Task<ReportModelQuery> GetReportAsync(RefListReportTypes reportType, Guid wardId, DateTime filterDate)
+        {
+            if (reportType == RefListReportTypes.Daily)
+            {
+                return (await _sessionProvider.Session
+                          .CreateSQLQuery(SqlHelper.DailyReportSqlQuery)
+                          .SetResultTransformer(Transformers.AliasToBean<ReportModelQuery>())
+                          .SetParameter("wardId", wardId)
+                          .SetParameter("filterDate", filterDate)
+                          .ListAsync<ReportModelQuery>())
+                          .FirstOrDefault();
             }
+            else
+            {
+                return (await _sessionProvider.Session
+                          .CreateSQLQuery(SqlHelper.MonthReportSqlQuery)
+                          .SetResultTransformer(Transformers.AliasToBean<ReportModelQuery>())
+                          .SetParameter("wardId", wardId)
+                          .SetParameter("filterDate", filterDate)
+                          .ListAsync<ReportModelQuery>())
+                          .FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hospitalId"></param>
+        /// <returns></returns>
+        public async Task<DashboardModelQuery> GetDashboardAsync(Guid? hospitalId)
+        {
+            return (await _sessionProvider.Session
+                    .CreateSQLQuery(SqlHelper.Dashboards)
+                    .SetResultTransformer(Transformers.AliasToBean<DashboardModelQuery>())
+                    .SetParameter("hospitalId", hospitalId)
+                    .ListAsync<DashboardModelQuery>())
+                    .FirstOrDefault();
         }
     }
 }

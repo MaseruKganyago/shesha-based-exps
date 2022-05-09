@@ -7,18 +7,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto
+namespace Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos
 {
     /// <summary>
     /// 
     /// </summary>
-    [AutoMap(typeof(ReportModelQuery))]
-    public class ReportResponseDto : EntityDto<Guid>
+    public class ReportModelQuery : EntityDto<Guid>
     {
         /// <summary>
         /// 
         /// </summary>
-        public ReferenceListItemValueDto IdentificationType { get; set; }
+        public long? IdentificationType { get; set; }
 
         /// <summary>
         /// 
@@ -33,17 +32,12 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto
         /// <summary>
         /// 
         /// </summary>
-        public ReferenceListItemValueDto Gender { get; set; }
+        public int? Gender { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public DateTime? AdmissionDate { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime? SeparationDate { get; set; }
 
         /// <summary>
         /// 
@@ -68,37 +62,42 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto
         /// <summary>
         /// 
         /// </summary>
-        public ReferenceListItemValueDto AdmissionType { get; set; }
+        public long? AdmissionType { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public ReferenceListItemValueDto Speciality { get; set; }
+        public long? Speciality { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public ReferenceListItemValueDto PatientProvince { get; set; }
+        public long? PatientProvince { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public ReferenceListItemValueDto Classification { get; set; }
+        public long? Classification { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public ReferenceListItemValueDto Nationality { get; set; }
+        public long? Nationality { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public ReferenceListItemValueDto OtherCategory { get; set; }
+        public long? OtherCategory { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public ReferenceListItemValueDto AdmissionStatus { get; set; }
+        public long? AdmissionStatus { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime? SeparationDate { get; set; }
 
         /// <summary>
         /// 

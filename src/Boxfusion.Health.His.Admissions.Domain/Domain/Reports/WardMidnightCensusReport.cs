@@ -1,13 +1,15 @@
 ﻿using Abp.Domain.Entities.Auditing;
-using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
+using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Enums;
 using Shesha.Domain.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Common
+namespace Boxfusion.Health.His.Admissions.Domain.Domain.Reports
 {
     /// <summary>
     /// 
@@ -83,18 +85,22 @@ namespace Boxfusion.Health.His.Common
         /// <summary>
         /// 
         /// </summary>
-        public virtual float? TotalSeparatedPatients { get; set; }
+        public virtual float? TotalBedAvailability { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public virtual float? TotalBedAvailability { get; set; }
+        public virtual float? TotalSeparatedPatients { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public virtual float? NumBedsInWard { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual float? TodaysAdmission { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -109,10 +115,7 @@ namespace Boxfusion.Health.His.Common
         /// 
         /// </summary>
         public virtual float? AverageBedAvailability { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual float? TodaysAdmission { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
