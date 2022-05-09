@@ -40,11 +40,24 @@ namespace Boxfusion.Health.His.Common.Patient
                 else
                 {
                     var patientNames = "";
-                    patients.ForEach(patient => patientNames += patient.FullNameWithTitle + Environment.NewLine);
 
-                    response.Code = "DUPLICATE";
-                    response.Message = "That ID already belongs to : " + Environment.NewLine + patientNames;
-                    return response;
+                    if(patients.Count == 1)
+                    {
+                        response.Code = "DUPLICATE";
+                        response.Message = "That ID already belongs to  : " + Environment.NewLine + patients[0].FullName
+                            + Environment.NewLine + "Do not continue to create a record if you wanted to capture for " + patients[0].FullName;
+                        return response;
+                    }
+                    else
+                    {
+                        patients.ForEach(patient => patientNames += patient.FullNameWithTitle + Environment.NewLine);
+
+                        response.Code = "DUPLICATE";
+                        response.Message = "That ID already belongs to  : " + Environment.NewLine + patientNames;
+                        return response;
+
+                    }
+                   
                 }
             }
             catch (Exception ex)
