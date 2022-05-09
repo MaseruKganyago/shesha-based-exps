@@ -268,56 +268,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.MidnightCount">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.TotalAdmittedPatients">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.TotalBedAvailability">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.TotalSeparatedPatients">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.TotalBedInWard">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.TodaysAdmission">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.BedUtilisation">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.AverageLengthOfStay">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.AverageBedAvailability">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto">
             <summary>
             
@@ -420,6 +370,56 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.ValidateIdDto.CurrentWardId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.MidnightCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.TotalAdmittedPatients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.TotalBedAvailability">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.TotalSeparatedPatients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.NumBedsInWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.TodaysAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.BedUtilisation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.AverageLengthOfStay">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.AverageBedAvailability">
             <summary>
             
             </summary>
@@ -784,46 +784,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.TodaysAdmissionResponse">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.TodaysAdmissionResponse.TodaysAdmission">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.MidnightCountResponse">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.MidnightCountResponse.MidnightCount">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.DayPatientsResponse">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.DayPatientsResponse.DayPatients">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.TotalAdmissionsResponse">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.TotalAdmissionsResponse.TotalAdmissions">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.TodaysAdmissionInput">
             <summary>
             
@@ -959,17 +919,22 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.TotalSeparatedPatients">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.TotalBedAvailability">
             <summary>
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.TotalSeparatedPatients">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.NumBedsInWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.TodaysAdmission">
             <summary>
             
             </summary>
@@ -985,11 +950,6 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.AverageBedAvailability">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.TodaysAdmission">
             <summary>
             
             </summary>

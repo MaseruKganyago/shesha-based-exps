@@ -116,13 +116,5 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Reports
         /// </summary>
         public virtual float? AverageBedAvailability { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual int? TotalAdmissions { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual int? TotalSeparations { get; set; }
     }
 }

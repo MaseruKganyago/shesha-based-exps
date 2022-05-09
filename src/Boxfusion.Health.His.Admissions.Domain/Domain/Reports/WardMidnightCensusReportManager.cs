@@ -38,22 +38,27 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Reports
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<int> GetDailyStats(WardCensusInput2 input)
+        public async Task<WardCensusDailyStats> GetDailyStats(Guid WardId, DateTime reportDate)
         {
-            return (await _sessionProvider.Session
-                   .CreateSQLQuery(@"Exec GetWardCensusDailyStats 
-                            @WardId = :WardId,
-                            @ReportDate = :ReportDate,
-                            @TodaysAdmission = :todaysAdmission,
-		                    @MidnightCount = :midnightCount,
-		                    @DayPatients = :dayPatient
-                    ")
-                   .SetParameter("WardId", input.WardId)
-                   .SetParameter("ReportDate", input.ReportDate)
-                   .SetParameter("dayPatient", input.dayPatient)
-                   .SetParameter("todaysAdmission", input.todaysAdmission)
-                   .SetParameter("midnightCount", input.midnightCount)
-                   .UniqueResultAsync<int>());
+            //return (await _sessionProvider.Session
+            //       .CreateSQLQuery(@"Exec GetWardCensusDailyStats 
+            //                @WardId = :WardId,
+            //                @ReportDate = :ReportDate,
+            //                @TodaysAdmission = :todaysAdmission,
+		          //          @MidnightCount = :midnightCount,
+		          //          @DayPatients = :dayPatient
+            //        ")
+            //       .SetParameter("WardId", input.WardId)
+            //       .SetParameter("ReportDate", input.ReportDate)
+            //       .SetParameter("dayPatient", input.dayPatient)
+            //       .SetParameter("todaysAdmission", input.todaysAdmission)
+            //       .SetParameter("midnightCount", input.midnightCount)
+            //       .SetResultTransformer(Transformers.AliasToBean<WardCensusDailyStats>())
+            //       .ListAsync<WardCensusDailyStats>())
+            //       .FirstOrDefault();
+
+            //TODO: Update implementation
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -230,6 +235,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Reports
                           .FirstOrDefault();
             }
         }
+
 
         /// <summary>
         /// 
