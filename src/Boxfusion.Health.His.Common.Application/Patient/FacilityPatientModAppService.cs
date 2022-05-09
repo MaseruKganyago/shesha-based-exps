@@ -1,4 +1,5 @@
 ﻿
+using Abp.Domain.Repositories;
 using Boxfusion.Health.His.Common.Domain.Domain.Dtos.Patients;
 using Boxfusion.Health.His.Common.Domain.Domain.Patients;
 using Boxfusion.Health.His.Common.Patients;
@@ -13,31 +14,59 @@ namespace Boxfusion.Health.His.Common.Patient
 {
     public class FacilityPatientModAppService : HisAppServiceBase
     {
-   
-        private readonly IFacilityPatientRepository _patientRepository;
+ 
+        IRepository<FacilityPatient, Guid> _patientRepository;
+
+        public FacilityPatientModAppService(IRepository<FacilityPatient, Guid> repository) 
+        {
+            _patientRepository = repository;
+        }
 
         [HttpGet, Route("/api/services/Common/FacilityPatient/GetByIdentityNumber/{identityNumber}")]
         public async Task<FacilityPatientDto> GetPatientByIdNumberAsync(string identityNumber)
         {
-           var patients =  await _patientRepository.GetAllListAsync(facilityPatient => facilityPatient.IdentityNumber == identityNumber);
-
             var response = new FacilityPatientDto();
-            
-            if (patients.Count == 0)
-            {
-                response.Code = "OK";
-                response.Message = "That ID is unique";
-                return response;
-            }
-            else
-            {
-                var patientNames = "";
-                patients.ForEach(patient => patientNames += patient.FullNameWithTitle + "\n");
 
-                response.Code = "DUPLICATE";
-                response.Message = "That ID already belongs to : \n " + patientNames;
+            try
+            {
+                var patients = await _patientRepository.GetAllListAsync(facilityPatient => facilityPatient.IdentityNumber == identityNumber || facilityPatient.OtherIdentityNumber == identityNumber || facilityPatient.PassportNumber == identityNumber);
+      
+                if (patients.Count == 0)
+                {
+                    response.Code = "OK";
+                    response.Message = "That ID is unique";
+                    return response;
+                }
+                else
+                {
+                    var patientNames = "";
+
+                    if(patients.Count == 1)
+                    {
+                        response.Code = "DUPLICATE";
+                        response.Message = "That ID already belongs to  : " + Environment.NewLine + patients[0].FullName
+                            + Environment.NewLine + "Do not continue to create a record if you wanted to capture for " + patients[0].FullName;
+                        return response;
+                    }
+                    else
+                    {
+                        patients.ForEach(patient => patientNames += patient.FullNameWithTitle + Environment.NewLine);
+
+                        response.Code = "DUPLICATE";
+                        response.Message = "That ID already belongs to  : " + Environment.NewLine + patientNames;
+                        return response;
+
+                    }
+                   
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Code = "ERROR";
+                response.Message = ex.Message;
                 return response;
             }
+          
                
            
         }

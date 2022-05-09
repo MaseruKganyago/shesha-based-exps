@@ -22,10 +22,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="wwwroot\favicon.ico" />
     <None Update="Dockerfile">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="favicon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="log4net.config">
@@ -67,5 +65,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Boxfusion.Health.His.Web.Core\Boxfusion.Health.His.Web.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="wwwroot\favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
