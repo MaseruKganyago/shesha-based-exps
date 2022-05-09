@@ -150,7 +150,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             var slot = await _slotRepo.FirstOrDefaultAsync(e =>
                 e.Schedule.Id == scheduleId
                 && e.Schedule.Active == true
-                && e.IsGeneratedFrom.Active == true
+                && (e.IsGeneratedFrom.Active == true || e.IsGeneratedFrom == null)
                 && e.StartDateTime <= requiredTime && e.EndDateTime > requiredTime
                 && e.NumValidAppointments < ((e.Capacity ?? 0) + (e.OverflowCapacity ?? 0)));
 
@@ -176,7 +176,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
 
             var slots = _slotRepo.GetAll().Where(e =>
                 e.Schedule.Id == schedule.Id
-                && e.IsGeneratedFrom.Active == true
+                && (e.IsGeneratedFrom.Active == true || e.IsGeneratedFrom == null) 
                 && e.StartDateTime >= fromDateTime && e.EndDateTime <= toDateTime
                 && e.NumValidAppointments < (e.Capacity + e.OverflowCapacity))
                 .OrderBy(e => e.StartDateTime)
