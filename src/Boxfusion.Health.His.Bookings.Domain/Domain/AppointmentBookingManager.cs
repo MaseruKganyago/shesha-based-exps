@@ -182,10 +182,23 @@ namespace Boxfusion.Health.His.Bookings.Domain
                 .OrderBy(e => e.StartDateTime)
                 .ToList();
 
-            // Have to do the Distinct operation here as NHibernate does not support that operator.
-            var distinctSlots = slots.AsQueryable().Distinct(new AvailableSlotComparer()).ToList();
+            return slots;
 
-            return distinctSlots;
+            //var res = slots
+            //    .GroupBy(l => l.StartDateTime.Value.Date)
+            //    .Select(cl => new CdmSlot
+            //    {
+            //        StartDateTime = cl.First().StartDateTime.Value.Date,
+            //        Capacity = cl.Sum(c => c.Capacity),
+            //        OverflowCapacity = cl.Sum(c => c.OverflowCapacity)
+            //    }).ToList();
+
+
+            //// Have to do the Distinct operation here as NHibernate does not support that operator.
+            //var distinctSlots = slots.AsQueryable().Distinct(new AvailableSlotComparer()).ToList();
+
+            //return distinctSlots;
+            //return res;
         }
 
 
