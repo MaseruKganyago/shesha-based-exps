@@ -150,7 +150,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
             var slot = await _slotRepo.FirstOrDefaultAsync(e =>
                 e.Schedule.Id == scheduleId
                 && e.Schedule.Active == true
-                && e.IsGeneratedFrom.Active == true
+                && (e.IsGeneratedFrom.Active == true || e.IsGeneratedFrom == null)
                 && e.StartDateTime <= requiredTime && e.EndDateTime > requiredTime
                 && e.NumValidAppointments < ((e.Capacity ?? 0) + (e.OverflowCapacity ?? 0)));
 
@@ -176,34 +176,22 @@ namespace Boxfusion.Health.His.Bookings.Domain
 
             var slots = _slotRepo.GetAll().Where(e =>
                 e.Schedule.Id == schedule.Id
-                && e.IsGeneratedFrom.Active == true
+                && (e.IsGeneratedFrom.Active == true || e.IsGeneratedFrom == null) 
                 && e.StartDateTime >= fromDateTime && e.EndDateTime <= toDateTime
-                && e.NumValidAppointments < (e.Capacity + e.OverflowCapacity))
+                && e.NumValidAppointments < (e.Capacity??0 + e.OverflowCapacity??0))
                 .OrderBy(e => e.StartDateTime)
                 .ToList();
 
-            // Have to do the Distinct operation here as NHibernate does not support that operator.
-            var distinctSlots = slots.AsQueryable().Distinct(new AvailableSlotComparer()).ToList();
-
-            return distinctSlots;
-        }
-
-
-        private class AvailableSlotComparer : IEqualityComparer<CdmSlot>
-        {
-            public bool Equals(CdmSlot b1, CdmSlot b2)
-            {
-                return (b1.StartDateTime == b2.StartDateTime
-                    && b1.RemainingCapacity > 0
-                    && b2.RemainingCapacity > 0) ;
-            }
-
-            public int GetHashCode([DisallowNull] CdmSlot obj)
-            {
-                return (obj.StartDateTime.ToString() + 
-                    (obj.RemainingCapacity > 0).ToString()
-                    ).GetHashCode();
-            }
+            var combinedSlotCapacity = slots
+                .GroupBy(l => l.StartDateTime.Value.Date)
+                .Select(cl => new CdmSlot
+                {
+                    Schedule = cl.First().Schedule,
+                    StartDateTime = cl.First().StartDateTime.Value.Date,
+                    Capacity = cl.Sum(c => c.Capacity),
+                    OverflowCapacity = cl.Sum(c => c.OverflowCapacity)
+                }).ToList();
+            return combinedSlotCapacity;
         }
 
         /// <summary>
