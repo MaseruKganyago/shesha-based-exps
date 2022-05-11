@@ -35,5 +35,11 @@ namespace Boxfusion.Health.His.Common.Practitioners
                 return User?.IsActive;
             }
         }
+
+        [NotMapped]
+        public virtual string? PractitionerUserName
+        {
+            get { return User?.UserName; }
+        }
     }
 }
