@@ -7,7 +7,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Reports
     /// <summary>
     /// 
     /// </summary>
-    public class WardCensusInput
+    public class WardCensusQueryInput
     {
         /// <summary>
         /// 
@@ -17,10 +17,5 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Reports
         /// 
         /// </summary>
         public DateTime? ReportDate { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int? TotalMonthlyAdmissions { get; set; }
     }
-
 }

@@ -400,116 +400,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.Ward">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.ReportDate">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.ApprovalStatus">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.ReportType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.Description">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.ApprovedBy">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.ApprovedBy2">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.ApprovalTime">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.ApprovalTime2">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.RejectionComments">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.RejectedBy">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.MidnightCount">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.TotalAdmittedPatients">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.TotalSeparatedPatients">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.TotalBedAvailability">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.NumBedsInWard">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.TodaysAdmission">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.TotalAdmissions">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.TotalSeparations">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.BedUtilisation">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.WardMidnightCensusReportResponse.AverageLengthofStay">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers.HisWardMidnightCensusReportsHelper">
             <summary>
             
@@ -571,28 +461,36 @@
             <param name="hospitalId"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.ApproveLevel1(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.SubmitForApproval(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput)">
+            <summary>
+            Initial submission of the Census Report for approval.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.ApproveLevel1(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput)">
+            <summary>
+            Only valid if Approval Model requires Two Approvers.
+            Provides first approval of a Two-step approval process for the Census report.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.ApproveLevel2(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput)">
+            <summary>
+            Final Approval of Census Report
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.GetWardDailyReport(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.ApproveLevel2(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.GetWardDailyReport(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.GetWardMonthlyReport(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.GetWardMonthlyReport(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput)">
             <summary>
             
             </summary>
@@ -602,13 +500,6 @@
         <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.Reject(Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.RejectReportInput)">
             <summary>
             Used to reject the report
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Reports.ReportAppService.SubmitForApproval(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput)">
-            <summary>
-            
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -634,35 +525,35 @@
             <param name="hospitalId"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.IReportAppService.ApproveLevel1(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.IReportAppService.ApproveLevel1(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.IReportAppService.ApproveLevel2(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.IReportAppService.ApproveLevel2(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.IReportAppService.GetWardDailyReport(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.IReportAppService.GetWardDailyReport(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.IReportAppService.GetWardMonthlyReport(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.IReportAppService.GetWardMonthlyReport(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput)">
             <summary>
             
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.IReportAppService.SubmitForApproval(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.IReportAppService.SubmitForApproval(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput)">
             <summary>
             
             </summary>

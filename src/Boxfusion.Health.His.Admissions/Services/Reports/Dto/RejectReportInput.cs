@@ -8,7 +8,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto
     /// <summary>
     /// 
     /// </summary>
-    public class RejectReportInput: WardCensusInput
+    public class RejectReportInput: WardCensusQueryInput
     {
         /// <summary>
         /// 

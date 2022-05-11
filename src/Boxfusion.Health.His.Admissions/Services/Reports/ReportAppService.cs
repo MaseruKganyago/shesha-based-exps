@@ -56,6 +56,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
             _hisWardMidnightCensusReportsHelper = hisWardMidnightCensusReportsHelper;
             _userAccessRightService = userAccessRightService;
             _wardMidnightCensusReport = wardMidnightCensusReport;
+            _wardMidnightCensusReportManager = wardMidnightCensusReportManager;
         }
 
         /// <summary>
@@ -88,7 +89,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("SubmitForApproval")]
-        public async Task<WardMidnightCensusReportResponse> SubmitForApproval(WardCensusInput input)
+        public async Task<DynamicDto<WardMidnightCensusReport, Guid>> SubmitForApproval(WardCensusQueryInput input)
         {
             await validateUserAssignedToWard(input);
 
@@ -111,7 +112,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
 
             censusReport = await _wardMidnightCensusReport.UpdateAsync(censusReport);
 
-            return ObjectMapper.Map<WardMidnightCensusReportResponse>(censusReport);
+            return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(censusReport);  
         }
 
         /// <summary>
@@ -121,7 +122,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("ApproveLevel1")]
-        public async Task<WardMidnightCensusReportResponse> ApproveLevel1(WardCensusInput input)
+        public async Task<DynamicDto<WardMidnightCensusReport, Guid>> ApproveLevel1(WardCensusQueryInput input)
         {
             await validateUserAssignedToWard(input);
 
@@ -137,7 +138,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
 
             censusReport = await _wardMidnightCensusReport.UpdateAsync(censusReport);
 
-            return ObjectMapper.Map<WardMidnightCensusReportResponse>(censusReport);
+            return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(censusReport);
         }
 
         /// <summary>
@@ -146,7 +147,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("ApproveLevel2")]
-        public async Task<WardMidnightCensusReportResponse> ApproveLevel2(WardCensusInput input)
+        public async Task<DynamicDto<WardMidnightCensusReport, Guid>> ApproveLevel2(WardCensusQueryInput input)
         {
             await validateUserAssignedToWard(input);
 
@@ -159,23 +160,20 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
             censusReport.ApprovedBy2 = await GetCurrentPersonAsync() as PersonFhirBase;
             censusReport.ApprovalTime2 = DateTime.Now;
 
-
-
-
             //Calculate stats for the day and save to the WardReport table
-            //var dailyStats = await CalculateDailyStats(input);
+            //TODO: var dailyStats = await CalculateDailyStats(input);
 
             censusReport = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(censusReport.Id, async (item) =>
             {
                 item.ApprovalStatus = RefListApprovalStatuses.approved;
-                item.BedUtilisation = (double?)dailyStats.BedUtilisation;
-                item.AverageLengthofStay = (float?)dailyStats.AverageLengthOfStay;
+                //item.BedUtilisation = (double?)dailyStats.BedUtilisation;
+                //item.AverageLengthofStay = (float?)dailyStats.AverageLengthOfStay;
                 item.ReportType = RefListReportType.Daily;
                 item.ReportDate = input.ReportDate;
-                item.Ward = ward;
+                item.Ward.Id = input.WardId;
             });
 
-            return ObjectMapper.Map<WardMidnightCensusReportResponse>(censusReport);
+            return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(censusReport);
         }
 
         /// <summary>
@@ -184,7 +182,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet, Route("DailyReport")]
-        public async Task<DynamicDto<WardMidnightCensusReport, Guid>> GetWardDailyReport(WardCensusInput input)
+        public async Task<DynamicDto<WardMidnightCensusReport, Guid>> GetWardDailyReport(WardCensusQueryInput input)
         {
             await validateUserAssignedToWard(input);
             if (input.ReportDate == null) throw new ArgumentNullException(nameof(input.ReportDate));
@@ -214,10 +212,9 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
                 });
             };
 
-            //ObjectMapper.Map(item, wardMidnightCensusReport);
+            
             var dailyStats = await _wardMidnightCensusReportManager.GetDailyStats(input.WardId, input.ReportDate.Value.Date);
-
-            //TODO: Map DailyStats to wardMidnightCensusReport properties
+            ObjectMapper.Map(dailyStats, wardMidnightCensusReport);
 
             return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(wardMidnightCensusReport);
         }
@@ -228,22 +225,20 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet, Route("MonthlyReport")]
-        public async Task<WardMidnightCensusReportResponse> GetWardMonthlyReport(WardCensusInput input)
+        public async Task<DynamicDto<WardMidnightCensusReport, Guid>> GetWardMonthlyReport(WardCensusQueryInput input)
         {
+            var monthlyStat = await _wardMidnightCensusReportManager.GetMonthlyStats(
+                new WardCensusQueryInput() { ReportDate = input.ReportDate, WardId = input.WardId });
+
+            if (monthlyStat == null)            
+                return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(null);
+
             var ward = await GetEntityAsync<HisWard>(input.WardId);
-
-            var wardMidnightCunsus = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate.Value.Year == input.ReportDate.Value.Year && r.ReportDate.Value.Month == input.ReportDate.Value.Month && r.ReportType == RefListReportType.Monthly);
-
-            var inputObj = new TodaysAdmissionInput()
-            {
-                ReportDate = input.ReportDate,
-                WardId = input.WardId,
-            };
-
-            var TotalAdmissions = await _wardMidnightCensusReportManager.GetMonthlyTotalAdmissions(inputObj);  
-            var monthlyStat = await _wardMidnightCensusReportManager.GetMonthlyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId, TotalMonthlyAdmissions = TotalAdmissions });
-
-            if (monthlyStat != null)
+            var wardMidnightCensus = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate.Value.Year == input.ReportDate.Value.Year 
+                                                                                            && r.ReportDate.Value.Month == input.ReportDate.Value.Month 
+                                                                                            && r.ReportType == RefListReportType.Monthly);
+                        
+            if(wardMidnightCensus == null)
             {
                 var wardMidnightCensusReport = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(null, async (item) =>
                 {
@@ -253,53 +248,45 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
                     item.Ward = ward;
                     ObjectMapper.Map(monthlyStat, item);
                 });
-
-                if (wardMidnightCunsus == null)
-                {
-                    return ObjectMapper.Map<WardMidnightCensusReportResponse>(wardMidnightCensusReport);
-                }
-                else
-                {
-                    var resultsEntity = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(wardMidnightCunsus.Id, async (item) =>
-                    {
-                        ObjectMapper.Map(wardMidnightCensusReport, item);
-                    });
-                    return ObjectMapper.Map<WardMidnightCensusReportResponse>(resultsEntity);
-                }
+                return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(wardMidnightCensusReport);
             }
-            return ObjectMapper.Map<WardMidnightCensusReportResponse>(null);
+            else
+            {
+
+                var resultsEntity = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(wardMidnightCensus.Id, async (item) =>
+                {
+                    ObjectMapper.Map(monthlyStat, item);
+                });
+                return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(resultsEntity);
+            }
         }
+
         /// <summary>
         /// Used to reject the report
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("Reject")]
-        public async Task<WardMidnightCensusReportResponse> Reject(RejectReportInput input)
+        public async Task<DynamicDto<WardMidnightCensusReport, Guid>> Reject(RejectReportInput input)
         {
             await validateUserAssignedToWard(input);
 
             var ward = await GetEntityAsync<HisWard>(input.WardId);
 
-            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
+            var wardMidnightCensus = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
 
-            if (entity.ApprovalStatus == RefListApprovalStatuses.awaitingApproval || entity.ApprovalStatus == RefListApprovalStatuses.awaitingFinalApproval)
-            {
-                entity.ApprovalStatus = RefListApprovalStatuses.Rejected;
-                entity.RejectionComments = input.RejectionReason;
-                entity.RejectedBy = await GetCurrentPersonAsync() as PersonFhirBase;
-
-                await _wardMidnightCensusReport.UpdateAsync(entity);
-            }
-            else
-            {
+            if (wardMidnightCensus.ApprovalStatus != RefListApprovalStatuses.awaitingApproval || wardMidnightCensus.ApprovalStatus != RefListApprovalStatuses.awaitingFinalApproval)
                 throw new UserFriendlyException("Cannot reject report since it is not awaiting approaval");
-            }
 
-            return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
+                wardMidnightCensus.ApprovalStatus = RefListApprovalStatuses.Rejected;
+                wardMidnightCensus.RejectionComments = input.RejectionReason;
+                wardMidnightCensus.RejectedBy = await GetCurrentPersonAsync() as PersonFhirBase;
+                wardMidnightCensus = await _wardMidnightCensusReport.UpdateAsync(wardMidnightCensus);
+           
+            return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(wardMidnightCensus);
         }
 
-        private async Task validateUserAssignedToWard(WardCensusInput input)
+        private async Task validateUserAssignedToWard(WardCensusQueryInput input)
         {
             var currentPerson = await GetCurrentPersonAsync();
             var isPersonAssignedToHospital = await _userAccessRightService.IsPersonAssignedToHospital(input.WardId, currentPerson);

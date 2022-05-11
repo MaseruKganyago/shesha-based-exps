@@ -21,23 +21,23 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Reports
     public class WardMidnightCensusReportManager : DomainService
     {
         private readonly ISessionProvider _sessionProvider;
-        private readonly IMapper _mapper;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sessionProvider"></param>
-        public WardMidnightCensusReportManager(ISessionProvider sessionProvider, IMapper mapper)
+        public WardMidnightCensusReportManager(ISessionProvider sessionProvider)
         {
             _sessionProvider = sessionProvider;
-            _mapper = mapper;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="WardId"></param>
+        /// <param name="reportDate"></param>
         /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public async Task<WardCensusDailyStats> GetDailyStats(Guid WardId, DateTime reportDate)
         {
             //return (await _sessionProvider.Session
@@ -66,143 +66,20 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Reports
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<int> GetDayPatients(TodaysAdmissionInput input)
-        {
-            return (await _sessionProvider.Session
-                    .CreateSQLQuery(@"
-                            WITH DayPatients AS (
-	                            SELECT  ROW_NUMBER() OVER(PARTITION BY AuditTrail.AdmissionId
-                                                      ORDER BY AuditTrail.CreationTime DESC) AS FilterProp
-	                            FROM His_HisAdmissionAuditTrails AuditTrail
-		                            INNER JOIN Fhir_Encounters Enc 
-			                            ON Enc.Id = AuditTrail.AdmissionId
-	                            WHERE AuditTrail.isDeleted = 0
-		                            AND Enc.His_WardId is not null
-		                            AND Enc.IsDeleted = 0
-		                            AND  AuditTrail.AdmissionStatusLkp = 1
-		                            AND Enc.His_WardId =  :WardId
-		                            AND CAST(AuditTrail.AuditTime AS DATE) = DATEADD(day, 0, CAST(:ReportDate AS date))
-                            )
-                            SELECT COUNT (1) AS DayPatients FROM DayPatients WHERE FilterProp = 1
-                    ")
-                    .SetParameter("WardId", input.WardId)
-                    .SetParameter("ReportDate", input.ReportDate)
-                    .UniqueResultAsync<int>());
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<int> GetMidnightCount(TodaysAdmissionInput input)
-        {
-            return (await _sessionProvider.Session
-                .CreateSQLQuery(@"
-                        WITH MidnightCount AS (
-                        SELECT  ROW_NUMBER() OVER(PARTITION BY AuditTrail.AdmissionId
-                                                    ORDER BY AuditTrail.CreationTime DESC) AS FilterProp
-                        FROM His_HisAdmissionAuditTrails AuditTrail
-	                        INNER JOIN Fhir_Encounters Enc 
-		                        ON Enc.Id = AuditTrail.AdmissionId
-                        WHERE AuditTrail.isDeleted = 0
-	                        AND Enc.His_WardId is not null
-	                        AND Enc.IsDeleted = 0
-	                        AND  AuditTrail.AdmissionStatusLkp = 1
-	                        AND Enc.His_WardId =  :WardId
-	                        AND CAST(AuditTrail.AuditTime AS DATE) < CAST(:ReportDate AS date)
-                        )
-                        SELECT count(1) AS MidnightCount FROM MidnightCount WHERE FilterProp = 1
-                ")
-                .SetParameter("WardId", input.WardId)
-                .SetParameter("ReportDate", input.ReportDate)
-                .UniqueResultAsync<int>());
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<MonthlyStats> GetMonthlyStats(WardCensusInput input)
+        public async Task<MonthlyStats> GetMonthlyStats(WardCensusQueryInput input)
         {
             return (await _sessionProvider.Session
                     .CreateSQLQuery(@"Exec GetWardCensusMonthlyStatsProc 
                             @WardId = :WardId,
                             @ReportDate = :ReportDate,
-                            @DaysLapsed = :DaysLapsed,
-                            @TotalAdmissions = :totalAdmissions
+                            @DaysLapsed = :DaysLapsed
                     ")
                     .SetParameter("WardId", input.WardId)
                     .SetParameter("ReportDate", input.ReportDate)
                     .SetParameter("DaysLapsed", input.ReportDate.Value.Day)
-                    .SetParameter("totalAdmissions", input.TotalMonthlyAdmissions)
                     .SetResultTransformer(Transformers.AliasToBean<MonthlyStats>())
                     .ListAsync<MonthlyStats>())
                     .FirstOrDefault();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<int> GetMonthlyTotalAdmissions(TodaysAdmissionInput input)
-        {
-            return (await _sessionProvider.Session
-                     .CreateSQLQuery(@"
-                           WITH TotalAdmissions AS (
-                            SELECT  ROW_NUMBER() OVER(PARTITION BY AuditTrail.AdmissionId
-                                                        ORDER BY AuditTrail.CreationTime DESC) AS FilterProp
-                            FROM His_HisAdmissionAuditTrails AuditTrail
-	                            INNER JOIN Fhir_Encounters Enc 
-		                            ON Enc.Id = AuditTrail.AdmissionId
-                            WHERE AuditTrail.isDeleted = 0
-	                            AND Enc.His_WardId is not null
-	                            AND Enc.IsDeleted = 0
-	                            AND  AuditTrail.AdmissionStatusLkp = 1
-	                            AND Enc.His_WardId = :WardId
-	                            AND month(Enc.StartDateTime) = month(:ReportDate) and year(Enc.StartDateTime) = year(:ReportDate)
-                            )
-                            SELECT count(1) AS TotalAdmissions FROM TotalAdmissions WHERE FilterProp = 1
-
-
-                    ")
-                     .SetParameter("WardId", input.WardId)
-                     .SetParameter("ReportDate", input.ReportDate)
-                     .UniqueResultAsync<int>());
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public async Task<int> GetTodaysAdmission(TodaysAdmissionInput input)
-        {
-            return (await _sessionProvider.Session
-                    .CreateSQLQuery(@"
-                        WITH TodaysAdmission AS ( SELECT
-                            ROW_NUMBER() OVER(PARTITION BY AuditTrail.AdmissionId
-                                                             ORDER BY AuditTrail.CreationTime DESC) AS FilterProp
-                            FROM His_HisAdmissionAuditTrails AuditTrail
-                            INNER JOIN Fhir_Encounters Enc
-	                            ON Enc.Id = AuditTrail.AdmissionId
-                            WHERE
-	                            AuditTrail.isDeleted = 0
-	                            AND Enc.His_WardId is not null
-	                            AND Enc.IsDeleted = 0
-	                            AND AuditTrail.AdmissionStatusLkp = 1
-	                            AND Enc.His_WardId =  :WardId
-	                            AND CAST(AuditTrail.AuditTime AS DATE) = DATEADD(day, 0, CAST(:ReportDate AS date))
-                            )
-                            Select count(1) AS  TodaysAdmission From TodaysAdmission Where FilterProp = 1
-                    ")
-                    .SetParameter("WardId", input.WardId)
-                    .SetParameter("ReportDate", input.ReportDate)
-                    .UniqueResultAsync<int>());
         }
 
         /// <summary>

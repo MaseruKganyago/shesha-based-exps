@@ -784,67 +784,17 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.TodaysAdmissionInput">
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.TodaysAdmissionInput.WardId">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput.WardId">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.TodaysAdmissionInput.ReportDate">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput.WardId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput.ReportDate">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput.TotalMonthlyAdmissions">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput2">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput2.WardId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput2.ReportDate">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput2.todaysAdmission">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput2.midnightCount">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput2.dayPatient">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput.ReportDate">
             <summary>
             
             </summary>
@@ -954,63 +904,27 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.TotalAdmissions">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.TotalSeparations">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.#ctor(Shesha.NHibernate.ISessionProvider,AutoMapper.IMapper)">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.#ctor(Shesha.NHibernate.ISessionProvider)">
             <summary>
             
             </summary>
             <param name="sessionProvider"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.GetDailyStats(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput2)">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.GetDailyStats(System.Guid,System.DateTime)">
             <summary>
             
             </summary>
-            <param name="input"></param>
+            <param name="WardId"></param>
+            <param name="reportDate"></param>
             <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.GetDayPatients(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.TodaysAdmissionInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.GetMidnightCount(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.TodaysAdmissionInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.GetMonthlyStats(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.GetMonthlyTotalAdmissions(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.TodaysAdmissionInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.GetTodaysAdmission(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.TodaysAdmissionInput)">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.GetMonthlyStats(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput)">
             <summary>
             
             </summary>
