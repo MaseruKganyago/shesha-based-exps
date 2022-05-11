@@ -69,6 +69,40 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         }
 
         /// <summary>
+        /// Returns the available capacity for Day bookings (i.e. where people book for a day rather than particular time slot)
+        /// between the specified date range (inclusive).
+        /// If multiple slots are available for the same day, their capacities will be combined.
+        /// </summary>
+        /// <param name="scheduleId">The Id of the schedule for which capacity is required.</param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        [HttpGet, Route("GetAvailableDayBookingCapacity")]
+        public async Task<List<BookingCapacityDto>> GetAvailableDayBookingCapacityAsync(Guid scheduleId, DateTime? startDate, DateTime? endDate)
+        {
+            if (startDate is null) startDate = DateTime.Now.Date;
+            if (endDate is null) endDate = startDate.Value.AddMonths(3);
+
+            endDate = endDate.Value.AddDays(1);
+
+            var slots = await _appointmentBookingManager.GetAllAvailableBookingSlotsAsync(scheduleId, startDate.Value, endDate.Value);
+
+            var combinedCapacity = slots
+                .GroupBy(l => l.StartDateTime.Value.Date)
+                .Select(cl => new BookingCapacityDto
+                {
+                    ScheduleId = cl.First().Schedule.Id,
+                    StartDateTime = startDate,
+                    Capacity = cl.Sum(c => c.Capacity),
+                    OverflowCapacity = cl.Sum(c => c.OverflowCapacity),
+                    NumValidAppointments = cl.Sum(c => c.NumValidAppointments)
+                }).ToList();
+
+            return combinedCapacity;
+        }
+
+
+        /// <summary>
         /// Creates a new Appointment to book the first available Slot for the specified schedule and requestedTime.
         /// </summary>
         /// <param name="input"></param>

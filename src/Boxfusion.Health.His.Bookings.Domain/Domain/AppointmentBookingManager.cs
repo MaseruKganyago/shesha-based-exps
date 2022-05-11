@@ -178,20 +178,11 @@ namespace Boxfusion.Health.His.Bookings.Domain
                 e.Schedule.Id == schedule.Id
                 && (e.IsGeneratedFrom.Active == true || e.IsGeneratedFrom == null) 
                 && e.StartDateTime >= fromDateTime && e.EndDateTime <= toDateTime
-                && e.NumValidAppointments < (e.Capacity??0 + e.OverflowCapacity??0))
+                && e.NumValidAppointments < ((e.Capacity??0) + (e.OverflowCapacity??0)))
                 .OrderBy(e => e.StartDateTime)
                 .ToList();
 
-            var combinedSlotCapacity = slots
-                .GroupBy(l => l.StartDateTime.Value.Date)
-                .Select(cl => new CdmSlot
-                {
-                    Schedule = cl.First().Schedule,
-                    StartDateTime = cl.First().StartDateTime.Value.Date,
-                    Capacity = cl.Sum(c => c.Capacity),
-                    OverflowCapacity = cl.Sum(c => c.OverflowCapacity)
-                }).ToList();
-            return combinedSlotCapacity;
+            return slots;
         }
 
         /// <summary>
