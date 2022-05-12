@@ -1,15 +1,12 @@
-﻿using Abp.AspNetCore.Configuration;
+﻿using Abp.AspNetCore;
+using Abp.AspNetCore.Configuration;
 using Abp.AutoMapper;
 using Abp.Modules;
 using Boxfusion.Health.HealthCommon.Core;
-using Shesha;
-using Shesha.Authorization;
-using Shesha.Startup;
-using System;
-using Castle.MicroKernel.Registration;
-using System.Reflection;
-using Boxfusion.Health.His.Bookings;
 using Boxfusion.Health.His.Bookings.Localization;
+using Shesha;
+using Shesha.Startup;
+using System.Reflection;
 
 namespace Boxfusion.Health.His.Bookings
 {
@@ -19,7 +16,8 @@ namespace Boxfusion.Health.His.Bookings
     [DependsOn(
         typeof(HealthCommonModule),
         typeof(SheshaCoreModule),
-        typeof(HisBookingsDomainModule)
+        typeof(HisBookingsDomainModule),
+        typeof(AbpAspNetCoreModule)
     )]
     public class HisBookingsApplicationModule : AbpModule
     {
@@ -45,15 +43,6 @@ namespace Boxfusion.Health.His.Bookings
         {
             base.PreInitialize();
 
-            //Configuration.Settings.Providers.Add<HisDomainSettingProvider>();
-            //Configuration.Authorization.Providers.Add<HisBookingsAuthorizationProvider>();    //TODO: To reinstitute permissions later - currently being handled with Common
-
-            HisBookingsLocalizationConfigurer.Configure(Configuration.Localization);
-        }
-
-        /// inheritedDoc
-        public override void PostInitialize()
-        {
             Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(HisBookingsDomainModule).Assembly, "HisBookings");
 
             Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
@@ -66,7 +55,10 @@ namespace Boxfusion.Health.His.Bookings
                 moduleName: "HisBookings",
                 useConventionalHttpVerbs: true);
 
+            //Configuration.Settings.Providers.Add<HisDomainSettingProvider>();
+            //Configuration.Authorization.Providers.Add<HisBookingsAuthorizationProvider>();    //TODO: To reinstitute permissions later - currently being handled with Common
+
+            HisBookingsLocalizationConfigurer.Configure(Configuration.Localization);
         }
     }
-
 }
