@@ -85,7 +85,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
 
             endDate = endDate.Value.AddDays(1);
 
-            var slots = await _appointmentBookingManager.GetAllAvailableBookingSlotsAsync(scheduleId, startDate.Value, endDate.Value);
+            var slots = await _appointmentBookingManager.GetAllBookingSlotsAsync(scheduleId, startDate.Value, endDate.Value);
 
             var combinedCapacity = slots
                 .GroupBy(l => l.StartDateTime.Value.Date)

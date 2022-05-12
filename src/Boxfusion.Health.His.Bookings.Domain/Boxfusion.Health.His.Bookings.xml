@@ -114,6 +114,16 @@
             <param name="toDateTime"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentBookingManager.GetAllBookingSlotsAsync(System.Guid,System.DateTime,System.DateTime)">
+            <summary>
+            Returns a list of all Slots for the specified scheduled within the specified dates
+            regardless of available capacity.
+            </summary>
+            <param name="schedule"></param>
+            <param name="fromDateTime"></param>
+            <param name="toDateTime"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Bookings.Domain.AppointmentBookingManager.CancelAppointment(System.Guid)">
             <summary>
             Cancels the specified Appointment.
@@ -322,6 +332,21 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220307055501.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Migrations.M20220512190501">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220512190501.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220512190501.Down">
             <summary>
             
             </summary>

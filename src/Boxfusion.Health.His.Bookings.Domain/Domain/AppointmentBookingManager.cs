@@ -178,8 +178,34 @@ namespace Boxfusion.Health.His.Bookings.Domain
                 e.Schedule.Id == schedule.Id
                 && (e.IsGeneratedFrom.Active == true || e.IsGeneratedFrom == null) 
                 && e.StartDateTime >= fromDateTime && e.EndDateTime <= toDateTime
-                && e.NumValidAppointments < ((e.Capacity??0) + (e.OverflowCapacity??0)))
-                .OrderBy(e => e.StartDateTime)
+                && e.NumValidAppointments < ((e.Capacity??0) + (e.OverflowCapacity??0))
+                ).OrderBy(e => e.StartDateTime)
+                .ToList();
+
+            return slots;
+        }
+
+        /// <summary>
+        /// Returns a list of all Slots for the specified scheduled within the specified dates
+        /// regardless of available capacity.
+        /// </summary>
+        /// <param name="schedule"></param>
+        /// <param name="fromDateTime"></param>
+        /// <param name="toDateTime"></param>
+        /// <returns></returns>
+        public async Task<List<CdmSlot>> GetAllBookingSlotsAsync(Guid scheduleId,
+                                                DateTime fromDateTime,
+                                                DateTime toDateTime)
+        {
+            var schedule = await _scheduleRepo.GetAsync(scheduleId);
+
+            if (!schedule.Active) throw new ArgumentOutOfRangeException("schedule.Active", "Schedule must be active.");
+
+            var slots = _slotRepo.GetAll().Where(e =>
+                e.Schedule.Id == schedule.Id
+                && (e.IsGeneratedFrom.Active == true || e.IsGeneratedFrom == null)
+                && e.StartDateTime >= fromDateTime && e.EndDateTime <= toDateTime
+                ).OrderBy(e => e.StartDateTime)
                 .ToList();
 
             return slots;
