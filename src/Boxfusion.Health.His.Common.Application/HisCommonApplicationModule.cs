@@ -1,17 +1,13 @@
 ﻿using Abp.AspNetCore.Configuration;
 using Abp.AutoMapper;
 using Abp.Modules;
+using Abp.Reflection.Extensions;
 using Boxfusion.Health.HealthCommon.Core;
-using Boxfusion.Health.His.Domain;
-using Boxfusion.Health.His.Common.Authorization;
 using Boxfusion.Health.His.Common.Localization;
 using Shesha;
-using Shesha.Authorization;
 using Shesha.Startup;
-using System;
-using Castle.MicroKernel.Registration;
+using Shesha.Web.FormsDesigner;
 using System.Reflection;
-using Abp.Reflection.Extensions;
 
 namespace Boxfusion.Health.His.Common
 {
@@ -85,7 +81,10 @@ namespace Boxfusion.Health.His.Common
                 moduleName: "Common",
                 useConventionalHttpVerbs: true);
 
+            Configuration.Modules.AbpAspNetCore()
+                 .CreateControllersForAppServices(
+                     typeof(SheshaFormsDesignerModule).GetAssembly()
+                 );
         }
     }
-
 }
