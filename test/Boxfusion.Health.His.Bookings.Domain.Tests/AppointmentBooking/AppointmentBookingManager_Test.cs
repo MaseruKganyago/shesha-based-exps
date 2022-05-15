@@ -159,7 +159,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
 
                     // Confirming have expected capacity
                     var slot = avaialbleSlots.Find(e => e.StartDateTime == bookingTime);
-                    slot.Capacity.ShouldBe(3);
+                    slot.RegularCapacity.ShouldBe(3);
                     slot.RemainingCapacity.ShouldBe(3);
 
                     // Making two bookings so can then check if RemainingCapacity has decreased as expected.
@@ -178,7 +178,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
                     var avaialbleSlots = await _bookingManager.GetAllAvailableBookingSlotsAsync(schedule.Id, DateTime.Now.Date.AddDays(1), DateTime.Now.Date.AddDays(2));
                     var slot = avaialbleSlots.Find(e => e.StartDateTime == bookingTime);
                     slotId = slot.Id;
-                    slot.Capacity.ShouldBe(3);
+                    slot.RegularCapacity.ShouldBe(3);
                     slot.RemainingCapacity.ShouldBe(1);
 
                     // Making another booking to fully exhaust the capacity
@@ -253,7 +253,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
                 {
                     // Checking that capacity has decreased by one on the slot.
                     var slot = await _slotsRepository.GetAsync(app.Slot.Id);
-                    slot.RemainingCapacity.ShouldBe(slot.Capacity.Value - 1);
+                    slot.RemainingCapacity.ShouldBe(slot.RegularCapacity.Value - 1);
 
                     // Cancelling appointment and checking if status has been updated.
                     var app2 = await _bookingManager.CancelAppointment(app.Id);
@@ -265,7 +265,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
                 {
                     // Confirming that capacity has been released
                     var slot = await _slotsRepository.GetAsync(app.Slot.Id);
-                    slot.RemainingCapacity.ShouldBe(slot.Capacity.Value);
+                    slot.RemainingCapacity.ShouldBe(slot.RegularCapacity.Value);
                     var app2 = await _appointmentRepository.GetAsync(app.Id);
                     app2.Status.ShouldBe(RefListAppointmentStatuses.cancelled);
 
@@ -331,7 +331,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
                 {
                     // Checking that capacity has decreased by one on the slot.
                     var slot = await _slotsRepository.GetAsync(app.Slot.Id);
-                    slot.RemainingCapacity.ShouldBe(slot.Capacity.Value - 1);
+                    slot.RemainingCapacity.ShouldBe(slot.RegularCapacity.Value - 1);
 
                     // Reschedule appointment and checking if status has been updated.
                     newApp = await _bookingManager.RescheduleAppointment(app.Id, newBookingTime, "", "");
@@ -343,7 +343,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
                 {
                     // Confirming that capacity on original slot has been released
                     var slot = await _slotsRepository.GetAsync(app.Slot.Id);
-                    slot.RemainingCapacity.ShouldBe(slot.Capacity.Value);
+                    slot.RemainingCapacity.ShouldBe(slot.RegularCapacity.Value);
 
                     // Retrieving the new appointment and ensuring key properties are as expected
                     var newApp2 = await _appointmentRepository.GetAsync(newApp.Id);

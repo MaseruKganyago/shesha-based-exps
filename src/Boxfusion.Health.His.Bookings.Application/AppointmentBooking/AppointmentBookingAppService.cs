@@ -93,9 +93,10 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
                 {
                     ScheduleId = cl.First().Schedule.Id,
                     StartDateTime = cl.First().StartDateTime.Value.Date,
-                    Capacity = cl.Sum(c => c.Capacity),
+                    RegularCapacity = cl.Sum(c => c.RegularCapacity),
                     OverflowCapacity = cl.Sum(c => c.OverflowCapacity),
-                    NumValidAppointments = cl.Sum(c => c.NumValidAppointments)
+                    NumAppointments = cl.Sum(c => c.NumValidAppointments),
+
                 }).ToList();
 
             return combinedCapacity;

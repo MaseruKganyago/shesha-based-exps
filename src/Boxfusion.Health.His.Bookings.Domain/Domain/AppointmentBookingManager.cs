@@ -152,7 +152,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
                 && e.Schedule.Active == true
                 && (e.IsGeneratedFrom.Active == true || e.IsGeneratedFrom == null)
                 && e.StartDateTime <= requiredTime && e.EndDateTime > requiredTime
-                && e.NumValidAppointments < ((e.Capacity ?? 0) + (e.OverflowCapacity ?? 0)));
+                && e.NumValidAppointments < ((e.RegularCapacity ?? 0) + (e.OverflowCapacity ?? 0)));
 
             return slot;
         }
@@ -178,7 +178,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
                 e.Schedule.Id == schedule.Id
                 && (e.IsGeneratedFrom.Active == true || e.IsGeneratedFrom == null) 
                 && e.StartDateTime >= fromDateTime && e.EndDateTime <= toDateTime
-                && e.NumValidAppointments < ((e.Capacity??0) + (e.OverflowCapacity??0))
+                && e.NumValidAppointments < ((e.RegularCapacity??0) + (e.OverflowCapacity??0))
                 ).OrderBy(e => e.StartDateTime)
                 .ToList();
 

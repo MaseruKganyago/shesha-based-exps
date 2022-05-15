@@ -189,7 +189,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
                 ServiceCategory = schedule.ServiceCategory,
                 Speciality = schedule.Speciality,
                 ServiceType = schedule.ServiceType,
-                Capacity = capacity,
+                RegularCapacity = capacity,
                 OverflowCapacity = overflowCapacity
                 //AppointmentType = RefListAppointmentReasonCodes.ROUTINE
             });
