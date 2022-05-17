@@ -220,90 +220,6 @@
             </summary>
             <param name="localizationConfiguration"></param>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Application.AdmissionsAppService">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.AdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardMidnightCensusReport,System.Guid},Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Domain.Domain.HisUser,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager)">
-            <summary>
-            
-            </summary>
-            <param name="wardAdmissionRepository"></param>
-            <param name="admissionsManager"></param>
-            <param name="hisPatientRepositiory"></param>
-            <param name="wardRepositiory"></param>
-            <param name="hisAdmissionAuditTrailRepository"></param>
-            <param name="wardMidnightCensusReport"></param>
-            <param name="userAccessRightService"></param>
-            <param name="hisUserRepository"></param>
-            <param name="icdTenCodeRepository"></param>
-            <param name="conditionIcdTenCodeManager"></param>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.AdmissionsAppService.IndexTable">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.AdmissionsAppService.GetPatientAuditTrailAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.AdmissionsAppService.ValidateIdentityNumber(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.ValidateIdDto)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.AdmissionsAppService.AdmitPatientAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.AdmissionsAppService.UpdateAdmissionAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.AdmissionsAppService.SeparatePatientAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.AdmissionsAppService.UndoSeparationAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="admissionId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.AdmissionsAppService.AcceptOrRejectTransfers(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AcceptOrRejectTransfersInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsMapProfile">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Services.Admissions.AdmissionsMapProfile.#ctor">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.DashboardModelQuery">
             <summary>
             
@@ -1158,28 +1074,112 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto">
+        <member name="T:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto.Admission">
+        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardMidnightCensusReport,System.Guid},Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Domain.Domain.HisUser,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager)">
+            <summary>
+            
+            </summary>
+            <param name="wardAdmissionRepository"></param>
+            <param name="admissionsManager"></param>
+            <param name="hisPatientRepositiory"></param>
+            <param name="wardRepositiory"></param>
+            <param name="hisAdmissionAuditTrailRepository"></param>
+            <param name="wardMidnightCensusReport"></param>
+            <param name="userAccessRightService"></param>
+            <param name="hisUserRepository"></param>
+            <param name="icdTenCodeRepository"></param>
+            <param name="conditionIcdTenCodeManager"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.IndexTable">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.GetPatientAuditTrailAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.ValidateIdentityNumber(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.ValidateIdDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.AdmitPatientAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.UpdateAdmissionAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.SeparatePatientAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.UndoSeparationAsync(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="admissionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.AcceptOrRejectTransfers(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AcceptOrRejectTransfersInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Admissions.AdmissionsMapProfile">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto.AuditTime">
+        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsMapProfile.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto.Initiator">
+        <member name="T:Boxfusion.Health.His.Admissions.Admissions.HisAdmissionAuditTrailDto">
             <summary>
             
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto.AdmissionStatus" -->
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto.UserId">
+        <member name="P:Boxfusion.Health.His.Admissions.Admissions.HisAdmissionAuditTrailDto.Admission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Admissions.HisAdmissionAuditTrailDto.AuditTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Admissions.HisAdmissionAuditTrailDto.Initiator">
+            <summary>
+            
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Boxfusion.Health.His.Admissions.Admissions.HisAdmissionAuditTrailDto.AdmissionStatus" -->
+        <member name="P:Boxfusion.Health.His.Admissions.Admissions.HisAdmissionAuditTrailDto.UserId">
             <summary>
             
             </summary>
