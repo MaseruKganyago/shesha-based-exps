@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boxfusion.Health.His.Admissions.Domain.Domain.Reports;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,7 +8,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto
     /// <summary>
     /// 
     /// </summary>
-    public class RejectReportInput: WardCensusInput
+    public class RejectReportInput: WardCensusQueryInput
     {
         /// <summary>
         /// 

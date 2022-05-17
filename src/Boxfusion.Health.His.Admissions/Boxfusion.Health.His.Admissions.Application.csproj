@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Remove="Helpers\HisAdmissionAuditTrailService.cs" />
     <Compile Remove="Helpers\IHisAdmissionAuditTrailService.cs" />
+    <Compile Remove="Services\Reports\Dto\WardMidnightCensusReportResponse.cs" />
   </ItemGroup>
 
 

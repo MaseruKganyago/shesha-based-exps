@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Reports;
 using Boxfusion.Health.His.Common;
 using Shesha.AutoMapper.Dto;
 using System;

@@ -1,6 +1,7 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos;
 using Shesha.AutoMapper;
 using Shesha.AutoMapper.Dto;
 using System;

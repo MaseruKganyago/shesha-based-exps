@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers
+namespace Boxfusion.Health.His.Admissions.Domain.Helpers
 {
 	/// <summary>
 	/// 
 	/// </summary>
-   public static class Util
+   public static class SqlHelper
     {
         #region Report sql
 		/// <summary>
