@@ -12,7 +12,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Abp.UI;
-using Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Domain.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
@@ -34,7 +33,6 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
     [Route("api/v{version:apiVersion}/HisAdmis/[controller]")]
     public class ReportAppService : CdmAppServiceBase, IReportAppService
     {
-        private readonly IHisWardMidnightCensusReportsHelper _hisWardMidnightCensusReportsHelper;
         private readonly WardMidnightCensusReportManager _wardMidnightCensusReportManager;
         private readonly IUserAccessRightService _userAccessRightService;
         private readonly IRepository<WardMidnightCensusReport, Guid> _wardMidnightCensusReport;
@@ -47,13 +45,10 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
         /// <param name="userAccessRightService"></param>
         /// <param name="wardMidnightCensusReport"></param>
         public ReportAppService(
-            IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper,
              WardMidnightCensusReportManager wardMidnightCensusReportManager,
             IUserAccessRightService userAccessRightService,
             IRepository<WardMidnightCensusReport, Guid> wardMidnightCensusReport)
         {
-            _hisWardMidnightCensusReportsHelper = hisWardMidnightCensusReportsHelper;
-            _hisWardMidnightCensusReportsHelper = hisWardMidnightCensusReportsHelper;
             _userAccessRightService = userAccessRightService;
             _wardMidnightCensusReport = wardMidnightCensusReport;
             _wardMidnightCensusReportManager = wardMidnightCensusReportManager;

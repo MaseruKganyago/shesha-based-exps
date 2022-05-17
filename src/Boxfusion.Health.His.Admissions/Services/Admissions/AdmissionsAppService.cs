@@ -26,7 +26,6 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Abp.Runtime.Session;
 using Shesha.Domain;
 using Boxfusion.Health.His.Domain.Helpers;
-using Boxfusion.Health.His.Admissions.Application.Services.Reports.Helpers;
 using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
 using Boxfusion.Health.His.Common.Patients;
 using Boxfusion.Health.His.Common;
