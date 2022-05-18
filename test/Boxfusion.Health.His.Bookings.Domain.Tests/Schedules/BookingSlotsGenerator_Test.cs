@@ -166,7 +166,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
                     // Has generated the expected number of slots
                     var slots = _slotsRepository.GetAllList(e => e.Schedule.Id == schedule.Id);
                     slots.Count.ShouldBe((14 + 1) * 6);  // 6 slots generated per day from today + the 14 day window
-                    slots.ForEach(o => o.Capacity.ShouldBe(10));
+                    slots.ForEach(o => o.RegularCapacity.ShouldBe(10));
                     slots.ForEach(o => o.OverflowCapacity.ShouldBe(5));
 
                     await uow.CompleteAsync();
@@ -210,7 +210,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
                 using (var uow = _uowManager.Begin())
                 {
                     // Has generated the expected number of slots
-                    var regularSlots = _slotsRepository.Count(e => e.Schedule.Id == schedule.Id && e.Capacity == 1);
+                    var regularSlots = _slotsRepository.Count(e => e.Schedule.Id == schedule.Id && e.RegularCapacity == 1);
                     regularSlots.ShouldBe((14 + 1) * 8 * 5);  // 8 time slots generated per day from today + the 14 day window * 5 slots for time
 
                     await uow.CompleteAsync();

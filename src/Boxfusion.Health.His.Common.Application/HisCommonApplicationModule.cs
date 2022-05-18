@@ -1,4 +1,5 @@
-﻿using Abp.AspNetCore.Configuration;
+﻿using Abp.AspNetCore;
+using Abp.AspNetCore.Configuration;
 using Abp.AutoMapper;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
@@ -17,7 +18,8 @@ namespace Boxfusion.Health.His.Common
     [DependsOn(
         typeof(HealthCommonModule),
         typeof(HisCommonDomainModule),
-        typeof(SheshaCoreModule)
+        typeof(SheshaCoreModule),
+        typeof(AbpAspNetCoreModule)
     )]
     public class HisCommonApplicationModule : AbpModule
     {
@@ -47,11 +49,7 @@ namespace Boxfusion.Health.His.Common
             //Configuration.Authorization.Providers.Add<HisAuthorizationProvider>();        // Initiatlisation handled within Web project
 
             HisCommonLocalizationConfigurer.Configure(Configuration.Localization);
-        }
 
-        /// inheritedDoc
-        public override void PostInitialize()
-        {
             Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(SheshaCoreModule).Assembly, "Core");
             Configuration.Modules.AbpAspNetCore()
                  .CreateControllersForAppServices(

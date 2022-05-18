@@ -85,7 +85,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
 
             endDate = endDate.Value.AddDays(1);
 
-            var slots = await _appointmentBookingManager.GetAllAvailableBookingSlotsAsync(scheduleId, startDate.Value, endDate.Value);
+            var slots = await _appointmentBookingManager.GetAllBookingSlotsAsync(scheduleId, startDate.Value, endDate.Value);
 
             var combinedCapacity = slots
                 .GroupBy(l => l.StartDateTime.Value.Date)
@@ -93,9 +93,10 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
                 {
                     ScheduleId = cl.First().Schedule.Id,
                     StartDateTime = cl.First().StartDateTime.Value.Date,
-                    Capacity = cl.Sum(c => c.Capacity),
+                    RegularCapacity = cl.Sum(c => c.RegularCapacity),
                     OverflowCapacity = cl.Sum(c => c.OverflowCapacity),
-                    NumValidAppointments = cl.Sum(c => c.NumValidAppointments)
+                    NumAppointments = cl.Sum(c => c.NumValidAppointments),
+
                 }).ToList();
 
             return combinedCapacity;
