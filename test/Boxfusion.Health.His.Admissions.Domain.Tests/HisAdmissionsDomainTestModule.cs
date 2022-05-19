@@ -10,17 +10,16 @@ using Abp.MultiTenancy;
 using Abp.Net.Mail;
 using Abp.TestBase;
 using Abp.Zero.Configuration;
+using Boxfusion.Health.His.Admissions.Application;
 using Boxfusion.Health.His.Tests.DependencyInjection;
 using Castle.Facilities.Logging;
 using Castle.MicroKernel.Registration;
 using Hangfire;
 using Hangfire.SqlServer;
-using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using Moq;
 using NSubstitute;
 using Shesha;
@@ -32,8 +31,8 @@ using System.Reflection;
 namespace Boxfusion.Health.His.Admissions.Tests
 {
     [DependsOn(
-        //typeof(HisBookingsDomainModule),
-        //typeof(HisBookingsApplicationModule),
+        typeof(HisAdmissionsDomainModule),
+        typeof(HisAdmissionsApplicationModule),
         typeof(AbpKernelModule),
         typeof(AbpTestBaseModule),
         typeof(SheshaApplicationModule),
