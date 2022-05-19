@@ -34,6 +34,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admiss
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.GpDoh.Customisation", "src\Boxfusion.Health.His.GpDoh.Customisation\Boxfusion.Health.His.GpDoh.Customisation.csproj", "{667CEEAE-6B9D-4F49-893A-81CF551A5936}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admissions.Domain.Tests", "test\Boxfusion.Health.His.Admissions.Domain.Tests\Boxfusion.Health.His.Admissions.Domain.Tests.csproj", "{8A7F1BB3-0B9C-4928-8896-1F67B5123E7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,10 @@ Global
 		{667CEEAE-6B9D-4F49-893A-81CF551A5936}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{667CEEAE-6B9D-4F49-893A-81CF551A5936}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{667CEEAE-6B9D-4F49-893A-81CF551A5936}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A7F1BB3-0B9C-4928-8896-1F67B5123E7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A7F1BB3-0B9C-4928-8896-1F67B5123E7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A7F1BB3-0B9C-4928-8896-1F67B5123E7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A7F1BB3-0B9C-4928-8896-1F67B5123E7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +101,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{1E3B0FB7-94E8-48AD-83AC-17EABA2EA5D1} = {244B7A5A-6740-4EE8-BCA3-5484C9DDF56A}
 		{CD807E5E-CD55-48C5-A41E-4CC0BA7886D2} = {244B7A5A-6740-4EE8-BCA3-5484C9DDF56A}
+		{8A7F1BB3-0B9C-4928-8896-1F67B5123E7D} = {244B7A5A-6740-4EE8-BCA3-5484C9DDF56A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95ED23F3-8DEA-456E-A44B-87A161CB696A}
