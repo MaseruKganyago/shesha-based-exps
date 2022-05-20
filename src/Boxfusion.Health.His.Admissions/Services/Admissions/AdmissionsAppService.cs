@@ -43,6 +43,7 @@ using Boxfusion.Health.His.Common.Domain.Domain;
 using Shesha.DynamicEntities.Dtos;
 using Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Reports;
+using Boxfusion.Health.His.Admissions.Services.Admissions;
 
 namespace Boxfusion.Health.His.Admissions.Admissions
 {
@@ -52,7 +53,7 @@ namespace Boxfusion.Health.His.Admissions.Admissions
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/His/[controller]")]
-    public class AdmissionsAppService : HisAppServiceBase
+    public class AdmissionsAppService : HisAppServiceBase, IAdmissionsAppService
     {
         private readonly AdmissionsManager _admissionsManager;
         private readonly IRepository<IcdTenCode, Guid> _icdTenCodeRepository;
@@ -152,21 +153,6 @@ namespace Boxfusion.Health.His.Admissions.Admissions
             return table;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet, Route("wardadmissions/partof/{partOfId}")]
-        public async Task<List<HisAdmissionAuditTrailDto>> GetPatientAuditTrailAsync(Guid partOfId)
-        {
-            //var admissions = await _admissionsManager.GetPatientAuditTrailAsync(partOfId);
-
-            //return ObjectMapper.Map<List<AdmissionResponse>>(admissions);
-
-            //TODO: Generate list on the fly from list of HospitalAdmissions
-
-            throw new NotImplementedException();
-        }
 
 		/// <summary>
 		/// 
@@ -280,47 +266,13 @@ namespace Boxfusion.Health.His.Admissions.Admissions
 		[HttpPost, Route("AcceptOrRejectTransfers")]
         public async Task<AcceptOrRejectTransfersResponse> AcceptOrRejectTransfers(AcceptOrRejectTransfersInput input)
         {
-            var wardAdmissionService = Abp.Dependency.IocManager.Instance.Resolve<IRepository<WardAdmission, Guid>>();
             var wardAdmission = await GetEntityAsync<WardAdmission>(input.WardAdmissionId);
 
             if (wardAdmission == null)
                 throw new UserFriendlyException("The Patient was not found in the ward Admission register");
 
-            var respose = new AcceptOrRejectTransfersResponse();
+            var respose = await _admissionsManager.AcceptOrRejectTransfers(input, wardAdmission);
 
-            if (input.AcceptanceDecision == RefListAcceptanceDecision.Accept)
-            {
-                if (wardAdmission.AdmissionStatus != RefListAdmissionStatuses.inTransit)
-                    throw new UserFriendlyException("The Petient was not transfered from any ward");
-
-                wardAdmission.AdmissionStatus = RefListAdmissionStatuses.admitted;
-                wardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
-                wardAdmission.StartDateTime = DateTime.Now;
-
-                respose.Accepted = true;
-            }
-            else
-            {
-                if (wardAdmission?.InternalTransferOriginalWard?.Id == null)
-                    throw new UserFriendlyException("The Previous ward record was not found");
-
-                var originalWard = await wardAdmissionService.GetAsync(wardAdmission.InternalTransferOriginalWard.Id);
-                wardAdmission.TransferRejectionReason = input?.TransferRejectionReason;
-                wardAdmission.TransferRejectionReasonComment = input?.TransferRejectionReasonComment;
-                wardAdmission.AdmissionStatus = RefListAdmissionStatuses.rejected;
-
-                originalWard.AdmissionStatus = RefListAdmissionStatuses.admitted;
-
-                await wardAdmissionService.UpdateAsync(originalWard);
-                await CurrentUnitOfWork.SaveChangesAsync();
-                var _sessionProvider = Abp.Dependency.IocManager.Instance.Resolve<ISessionProvider>();
-                await _sessionProvider.Session.Transaction.CommitAsync();
-                respose.Rejected = true;
-            }
-
-            await wardAdmissionService.UpdateAsync(wardAdmission);
-
-            var person = await GetCurrentPersonAsync();
             return respose;
         }
 
