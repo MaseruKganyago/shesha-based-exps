@@ -64,5 +64,7 @@ namespace Boxfusion.Health.His.Bookings.Domain.Views
         /// 
         /// </summary>
         public virtual int TotalCount { get; set; }
+
+        public virtual string? Comment { get; set; }
     }
 }
