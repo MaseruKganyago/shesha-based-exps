@@ -101,5 +101,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         [ReferenceList("Shesha.Core", "CommonLanguage")]
         public virtual long? PatientCommunicationLanguage { get; protected set; }
 
+        public virtual string CreatedBy { get; protected set; }
+
     }
 }
