@@ -37,7 +37,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         {
             get
             {
-                return RegularCapacity ?? 0 + OverflowCapacity ?? 0;
+                return (RegularCapacity ?? 0) + (OverflowCapacity ?? 0);
             }
         }
 
