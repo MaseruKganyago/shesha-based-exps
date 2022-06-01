@@ -30,7 +30,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
 					,per.FullName
 					,per.MobileNumber1 ContactNumber
 					,sch.[Name] Schedule
-					,ISNULL(sch.Comment, 'None') Comment
+					,ISNULL(app.Comment, 'None') Comment
 					,COUNT(*) OVER () as TotalCount
 
 				FROM Fhir_Appointments app
