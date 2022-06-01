@@ -43,7 +43,7 @@ namespace Boxfusion.Health.His.Admissions.Tests
     public class HisAdmissionsDomainTestModule : AbpModule
     {
         //private const string ConnectionString = @"Data Source=sql-shared-nonprod.database.windows.net;Initial Catalog=boxhealthhis-test;User=boxdbadmin;Password=n0-hack.2020;MultipleActiveResultSets=True;TrustServerCertificate=True";
-        private string ConnectionString;
+        private readonly string ConnectionString;
 
         public HisAdmissionsDomainTestModule(SheshaNHibernateModule nhModule)
         {

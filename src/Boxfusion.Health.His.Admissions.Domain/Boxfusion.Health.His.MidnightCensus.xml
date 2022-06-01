@@ -28,6 +28,14 @@
             <param name="diagnosisManager"></param>
             <param name="conditionIcdTenCodeManager"></param>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.AcceptOrRejectTransfers(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AcceptOrRejectTransfersInput,Boxfusion.Health.His.Common.WardAdmission)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <param name="wardAdmission"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.GetWardAdmissionAsync(System.Guid)">
             <summary>
             

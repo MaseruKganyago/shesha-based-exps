@@ -40,6 +40,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Boxfusion.Health.His.Admissions.Domain\Boxfusion.Health.His.Admissions.Domain.csproj" />
     <ProjectReference Include="..\..\src\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.Application.csproj" />
+    <ProjectReference Include="..\Boxfusion.Health.His.Common.Domain.Tests\Boxfusion.Health.His.Common.Domain.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>
