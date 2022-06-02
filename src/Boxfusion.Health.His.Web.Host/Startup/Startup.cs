@@ -36,6 +36,7 @@ using Boxfusion.Health.His.Web.Host.Swagger;
 using Shesha.DynamicEntities.Swagger;
 using Boxfusion.Health.His.Hangfire;
 using Shesha.Authorization;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Boxfusion.Health.His.Web.Host.Startup
 {
@@ -245,6 +246,7 @@ namespace Boxfusion.Health.His.Web.Host.Startup
                 });
                 //options.SchemaFilter<DynamicDtoSchemaFilter>();
             });
+            services.Replace(ServiceDescriptor.Transient<ISwaggerProvider, CachingSwaggerProvider>());
 
             services.AddApiVersioning(options =>
             {
