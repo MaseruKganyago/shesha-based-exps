@@ -91,5 +91,24 @@ namespace Boxfusion.Health.His.Bookings.Schedules
             return new object();
         }
 
+        /// <summary>
+        /// Returns the number of Pending appointments (appointment which have been booked but are yet to be fullfiled including proposed and waitlisted) 
+        /// for the specified schedule.
+        /// </summary>
+        [HttpGet, Route("{scheduleId}/GetNumPendingAppointments")]
+        public async Task<object> NumPendingAppointments(Guid scheduleId)
+        {
+
+            var schedulesRepo = IocManager.Resolve<IRepository<CdmSchedule, Guid>>();
+            var schedule = schedulesRepo.Get(scheduleId);
+
+            var numPendingAppointments = schedule.GetNumPendingAppointments();
+
+            return new
+            {
+                numPendingAppointments = numPendingAppointments
+            };
+        }
+
     }
 }
