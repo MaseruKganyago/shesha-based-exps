@@ -51,7 +51,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
 
 
         /// <summary>
-        /// Returns the list of schedules associated with to the specified user through a Role appointment.
+        /// Returns the list of Active schedules associated with to the specified user through a Role appointment.
         /// </summary>
         /// <param name="personId"></param>
         /// <param name="roleName"></param>
@@ -65,7 +65,10 @@ namespace Boxfusion.Health.His.Bookings.Domain
             var role = await roleRepo.FirstOrDefaultAsync(e => e.Name == roleName);
             if (role is null) throw new InvalidOperationException("No such role exists");
 
-            var roleAppointments = await _scheduleRoleAppointRepo.GetAllListAsync(e => e.Person.Id == personId && e.Role.Id == role.Id && (facilityId == null || e.Schedule.HealthFacilityOwner.Id == facilityId));
+            var roleAppointments = await _scheduleRoleAppointRepo.GetAllListAsync(e => e.Person.Id == personId 
+            && e.Role.Id == role.Id 
+            && (facilityId == null || e.Schedule.HealthFacilityOwner.Id == facilityId)
+            && e.Schedule.Active);
 
             var schedules = new List<CdmSchedule>();
 
