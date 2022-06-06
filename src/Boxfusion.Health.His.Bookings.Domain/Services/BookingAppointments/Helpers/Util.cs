@@ -32,6 +32,7 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Helpers
 					,sch.[Name] Schedule
 					,ISNULL(app.Comment, 'None') Comment
 					,COUNT(*) OVER () as TotalCount
+					,sch.CreatedBy CreatedBy
 
 				FROM Fhir_Appointments app
 					LEFT JOIN Core_Persons per ON per.Id = app.PatientId
