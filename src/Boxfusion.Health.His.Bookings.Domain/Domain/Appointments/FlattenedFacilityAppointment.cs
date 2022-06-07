@@ -9,6 +9,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using Boxfusion.Health.Cdm.Schedules;
+using Abp.Domain.Repositories;
+using Shesha.Authorization.Users;
+using Shesha.Services;
 
 namespace Boxfusion.Health.His.Bookings.Domain
 {
@@ -101,7 +104,26 @@ namespace Boxfusion.Health.His.Bookings.Domain
         [ReferenceList("Shesha.Core", "CommonLanguage")]
         public virtual long? PatientCommunicationLanguage { get; protected set; }
 
-        public virtual string? CreatedBy { get; protected set; }
+        public virtual string? CreatedBy {
+            get
+            {
+                return GetCreatedByUserName(CreatorUserId);
+            }
+
+            set
+            {
+                GetCreatedByUserName(CreatorUserId);
+            }
+        }
+
+        public string GetCreatedByUserName(long? id)
+        {
+            var usersRepo = StaticContext.IocManager.Resolve<IRepository<User, long>>();
+
+            var user = usersRepo.Get(id.Value);
+
+            return user.UserName;
+        }
 
     }
 }
