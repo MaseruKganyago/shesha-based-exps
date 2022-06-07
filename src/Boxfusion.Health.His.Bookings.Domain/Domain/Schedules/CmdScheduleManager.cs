@@ -68,7 +68,8 @@ namespace Boxfusion.Health.His.Bookings.Domain
             var roleAppointments = await _scheduleRoleAppointRepo.GetAllListAsync(e => e.Person.Id == personId 
             && e.Role.Id == role.Id 
             && (facilityId == null || e.Schedule.HealthFacilityOwner.Id == facilityId)
-            && e.Schedule.Active);
+            && e.Schedule.Active
+            && e.IsDeleted == false);
 
             var schedules = new List<CdmSchedule>();
 
