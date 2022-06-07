@@ -163,7 +163,16 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
             }
             catch (Exception e)
             {
-                throw new UserFriendlyException("An unexepected error occured. Could not reschedule the booking.", e);
+                if(e.Message.Contains("No slots are available"))
+                {
+                    throw new UserFriendlyException("No slots are available for booking at the requested day.");
+                }
+                else
+                {
+                    throw new UserFriendlyException("An unexepected error occured. Could not reschedule the booking. " + e.Message);
+                }
+
+
             }
         }
 
