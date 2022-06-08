@@ -15,3 +15,5 @@ Upload
 /src/Boxfusion.Health.His.Web.Host/appsettings.Development.json
 src/Boxfusion.Health.His.Web.Host/web.config
 /sh.exe.stackdump
+/src/Boxfusion.Health.His.Bookings.Domain/Boxfusion.Health.His.Bookings.xml
+/src/Boxfusion.Health.His.Bookings.Domain/Boxfusion.Health.His.Administration.xml

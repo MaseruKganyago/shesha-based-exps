@@ -9,8 +9,8 @@ namespace Boxfusion.Health.His.Bookings.Migrations
     /// <summary>
     /// 
     /// </summary>
-    [Migration(20220307055501)]
-    public class M20220307055501 : Migration
+    [Migration(20220608073901)]
+    public class M20220608073901 : Migration
     {
         /// <summary>
         /// 
@@ -92,12 +92,13 @@ namespace Boxfusion.Health.His.Bookings.Migrations
 					,per.[Fhir_OtherIdentityNumber] PatientOtherIdentityNumber
 					,per.[Fhir_CommunicationLanguageLkp] PatientCommunicationLanguageLkp
 					--, dbo.Frwk_GetRefListItem('Shesha.Core', 'CommonLanguage', per.[Fhir_CommunicationLanguageLkp]) PatientCommunicationLanguage
+					, (SELECT COALESCE(Name, '') + ' ' + COALESCE(Surname, ' ') FROM AbpUserAccounts WHERE Id = app.CreatorUserId) CreatedBy
 
 				FROM Fhir_Appointments app
 					LEFT JOIN Core_Persons per ON per.Id = app.PatientId
 					LEFT JOIN Fhir_Slots slot ON slot.Id = app.SlotId
 					LEFT JOIN Fhir_Schedules sch ON sch.Id = slot.ScheduleId
-					LEFT JOIN Core_Organisations hf ON hf.Id = sch.ActorOwnerId
+					LEFT JOIN Core_Organisations hf ON hf.Id = sch.HealthFacilityOwnerId
 				WHERE
 					per.Frwk_Discriminator = 'His.HisPatient'
 					AND hf.Frwk_Discriminator IN ('His.HisHealthFacility', 'His.HisHealthFacility', 'His.HisHospital' /*Should no longer be relevant after entity has been renamed*/, 'Fhir.Hospital' /*Delete - for testing purposes only*/)
