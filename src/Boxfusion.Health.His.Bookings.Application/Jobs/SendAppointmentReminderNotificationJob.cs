@@ -74,28 +74,38 @@ namespace Boxfusion.Health.His.Bookings.Jobs
                 // Retrieving list of notifications to be sent as a ADO.NET DataReader for improved performance as volumes may be significant
                 DbDataReader reader = GetReaderForAllAppointmentsStillToNotify(session, DateTime.Now.Date.AddDays(1), DateTime.Now.Date.AddDays(2), NotificationTemplateIds.AppointmentReminder);
 
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                    // Reads through the full results set record by record
-                    var appointmentId = reader.GetGuid(0);
+                    while (reader.Read())
+                    {
+                        // Reads through the full results set record by record
 
-                    try
-                    {
-                        var appointment = appointmentsRepo.Get(appointmentId);
-                        await bookingNotificationSender.NotifyAppointmentReminderAsync(appointment);
-                        stats.NumSuccess++;
+                        var appointmentId = reader.GetGuid(0);
+
+                        try
+                        {
+                            var appointment = appointmentsRepo.Get(appointmentId);
+                            await bookingNotificationSender.NotifyAppointmentReminderAsync(appointment);
+                            stats.NumSuccess++;
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error($"Failed to send message for appointment Id:{appointmentId}", ex);
+                            stats.NumFailed++;
+                        }
+                        finally
+                        {
+                            numProcessed++;
+                            if (numProcessed % 100 == 0)    // Only logging every 100 messages to reduce overhead and flooding logs
+                                Log.Info($"{numProcessed} appointments have been processed.");
+                        }
+
+
                     }
-                    catch (Exception ex)
-                    {
-                        Log.Error($"Failed to send message for appointment Id:{appointmentId}", ex);
-                        stats.NumFailed++;
-                    }
-                    finally
-                    {
-                        numProcessed++;
-                        if (numProcessed % 100 == 0)    // Only logging every 100 messages to reduce overhead and flooding logs
-                            Log.Info($"{numProcessed} appointments have been processed.");
-                    }
+                }
+                else
+                {
+                    Log.Info("There is no data");
                 }
             }
 
