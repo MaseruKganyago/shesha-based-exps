@@ -75,32 +75,40 @@ namespace Boxfusion.Health.His.Bookings.Jobs
                 // Retrieving list of missed appointments. It is considered missed if the Start time is more than 8 hours from the current time and status is still 'Booked'
                 DbDataReader reader = GetReaderForAllMissedAppointments(session, DateTime.Now.Date.AddHours(-8));
 
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                    // Reads through the full results set record by record
-                    var appointmentId = reader.GetGuid(0);
+                    while (reader.Read())
+                    {
+                        // Reads through the full results set record by record
+                        var appointmentId = reader.GetGuid(0);
 
-                    try
-                    {
-                        var appointment = appointmentsRepo.Get(appointmentId);
-                        appointment.Status = RefListAppointmentStatuses.noshow;
-                        await appointmentsRepo.UpdateAsync(appointment);
-                        session.Flush();
+                        try
+                        {
+                            var appointment = appointmentsRepo.Get(appointmentId);
+                            appointment.Status = RefListAppointmentStatuses.noshow;
+                            await appointmentsRepo.UpdateAsync(appointment);
+                            session.Flush();
 
-                        stats.NumSuccess++;
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Error($"Failed to update missed appointment to 'No Show' for appointment Id:{appointmentId}", ex);
-                        stats.NumFailed++;
-                    }
-                    finally
-                    {
-                        numProcessed++;
-                        if (numProcessed % 100 == 0)    // Only logging every 100 messages to reduce overhead and flooding logs
-                            Log.Info($"{numProcessed} appointments have been processed.");
+                            stats.NumSuccess++;
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error($"Failed to update missed appointment to 'No Show' for appointment Id:{appointmentId}", ex);
+                            stats.NumFailed++;
+                        }
+                        finally
+                        {
+                            numProcessed++;
+                            if (numProcessed % 100 == 0)    // Only logging every 100 messages to reduce overhead and flooding logs
+                                Log.Info($"{numProcessed} appointments have been processed.");
+                        }
                     }
                 }
+                else
+                {
+                    Log.Info("No data from the DB");
+                }
+              
             }
 
             Log.Info($"All missed appointments have been processed - Updated: {stats.NumSuccess} | Failed: {stats.NumFailed} | Skipped: {stats.NumSkipped}");
