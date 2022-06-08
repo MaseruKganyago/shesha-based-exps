@@ -104,26 +104,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         [ReferenceList("Shesha.Core", "CommonLanguage")]
         public virtual long? PatientCommunicationLanguage { get; protected set; }
 
-        public virtual string? CreatedBy {
-            get
-            {
-                return GetCreatedByUserName(CreatorUserId);
-            }
-
-            set
-            {
-                GetCreatedByUserName(CreatorUserId);
-            }
-        }
-
-        public string GetCreatedByUserName(long? id)
-        {
-            var usersRepo = StaticContext.IocManager.Resolve<IRepository<User, long>>();
-
-            var user = usersRepo.Get(id.Value);
-
-            return user.UserName;
-        }
+        public virtual string? CreatedBy { get; protected set; }
 
     }
 }
