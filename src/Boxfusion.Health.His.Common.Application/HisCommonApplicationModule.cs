@@ -18,6 +18,7 @@ namespace Boxfusion.Health.His.Common
     [DependsOn(
         typeof(HealthCommonModule),
         typeof(HisCommonDomainModule),
+        typeof(SheshaEnterpriseModule),
         typeof(SheshaCoreModule),
         typeof(AbpAspNetCoreModule)
     )]
@@ -60,6 +61,12 @@ namespace Boxfusion.Health.His.Common
             Configuration.Modules.AbpAspNetCore()
                  .CreateControllersForAppServices(
                      typeof(SheshaApplicationModule).GetAssembly()
+                 );
+
+            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(SheshaFrameworkModule).Assembly, "Shesha");
+            Configuration.Modules.AbpAspNetCore()
+                 .CreateControllersForAppServices(
+                     typeof(SheshaFrameworkModule).GetAssembly()
                  );
 
             Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(HealthCommonModule).Assembly, "Cdm");
