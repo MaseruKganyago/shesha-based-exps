@@ -126,19 +126,16 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             else
             {
                 if (wardAdmission?.InternalTransferOriginalWard?.Id == null)
-                    throw new UserFriendlyException("The Previous ward record was not found");
+                    throw new UserFriendlyException("The Previous ward record was not found"); 
 
-                var originalWard = await _wardAdmissionRepositiory.GetAsync(wardAdmission.InternalTransferOriginalWard.Id);
                 wardAdmission.TransferRejectionReason = input?.TransferRejectionReason;
                 wardAdmission.TransferRejectionReasonComment = input?.TransferRejectionReasonComment;
                 wardAdmission.AdmissionStatus = RefListAdmissionStatuses.rejected;
 
+                var originalWard = await _wardAdmissionRepositiory.GetAsync(wardAdmission.InternalTransferOriginalWard.Id);
                 originalWard.AdmissionStatus = RefListAdmissionStatuses.admitted;
 
                 await _wardAdmissionRepositiory.UpdateAsync(originalWard);
-                await CurrentUnitOfWork.SaveChangesAsync();
-                var _sessionProvider = Abp.Dependency.IocManager.Instance.Resolve<ISessionProvider>();
-                await _sessionProvider.Session.Transaction.CommitAsync();
                 respose.Rejected = true;
             }
 

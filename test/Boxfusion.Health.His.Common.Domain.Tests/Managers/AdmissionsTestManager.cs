@@ -7,6 +7,7 @@ using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
 using Boxfusion.Health.His.Admissions.Services.Admissions;
 using Boxfusion.Health.His.Common.Tests;
+using Shesha.Domain;
 using Shesha.DynamicEntities.Dtos;
 using System;
 using System.Collections.Generic;
@@ -16,13 +17,14 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Common.Domain.Tests.Managers
 {
-    public class AdmissionsTestManager :  SheshaNhTestBase
+    public class AdmissionsTestManager : SheshaNhTestBase
     {
         protected readonly IUnitOfWorkManager _uowManager;
         private readonly IMapper _ObjectMapper;
         protected IRepository<CdmPatient, Guid> _patientRepository;
         protected IRepository<WardAdmission, Guid> _wardAdmissionRepository;
         protected IRepository<HisWard, Guid> _wardRepository;
+        protected IRepository<Organisation, Guid> _hospRepository;
         protected IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepository;
         protected readonly IAdmissionsAppService _admissionsService;
         protected readonly AdmissionsManager _admissionsManager;
@@ -37,6 +39,7 @@ namespace Boxfusion.Health.His.Common.Domain.Tests.Managers
             _hospitalAdmissionRepository = Resolve<IRepository<HospitalAdmission, Guid>>();
             _admissionsService = Resolve<IAdmissionsAppService>();
             _admissionsManager = Resolve<AdmissionsManager>();
+            _hospRepository = Resolve<IRepository<Organisation, Guid>>();
         }
 
         protected void CleanUpTestData_Ward(Guid wardId)
@@ -86,6 +89,21 @@ namespace Boxfusion.Health.His.Common.Domain.Tests.Managers
             }
             return hospitalAdmission;
         }
+        public async Task<Organisation> CreateTest_Hospital()
+        {
+            var hisHosp = new Organisation();
+            using (var uow = _uowManager.Begin())
+            {
+                hisHosp = new Organisation()
+                {
+                    Name = "Test Hospital"
+                };
+                hisHosp = await _hospRepository.InsertAsync(hisHosp);
+
+                uow.Complete();
+            }
+            return hisHosp;
+        }
         public async Task<HisWard> CreateTestData_NewWard(int wardNumber)
         {
             var hisWard = new HisWard();
@@ -93,7 +111,8 @@ namespace Boxfusion.Health.His.Common.Domain.Tests.Managers
             {
                 hisWard = new HisWard()
                 {
-                    Name = $"Test ward {wardNumber}"
+                    Name = $"Test ward {wardNumber}",
+                    OwnerOrganisation = await CreateTest_Hospital()
                 };
                 hisWard = await _wardRepository.InsertAsync(hisWard);
 
@@ -101,16 +120,34 @@ namespace Boxfusion.Health.His.Common.Domain.Tests.Managers
             }
             return hisWard;
         }
-        public async Task<WardAdmission> AdmitPatient_To_Ward()
+        public async Task<WardAdmission> SeparatePatientAsync()
         {
-            var wardAdmission = new  WardAdmission ();
+
+            var separatedAdmission = new WardAdmission();
             using (var uow = _uowManager.Begin())
             {
                 //Get the created test Patient
                 var patient = await CreateTestData_NewPatient("Bruce");
                 var hospitalAdmission = await CreateTestData_NewHospitalAdmission();
-                wardAdmission = await _admissionsManager.AdmitPatientAsync(new WardAdmission() { Subject = patient}, 
-                    hospitalAdmission, 
+                var ward = await CreateTestData_NewWard(123456);
+                separatedAdmission = await _admissionsManager.SeparatePatientAsync(new WardAdmission() { Subject = patient, Ward = ward },
+                 hospitalAdmission,
+                 new List<IcdTenCode>());
+                uow.Complete();
+            }
+            return separatedAdmission;
+        }
+        public async Task<WardAdmission> AdmitPatient_To_Ward()
+        {
+            var wardAdmission = new WardAdmission();
+            using (var uow = _uowManager.Begin())
+            {
+                //Get the created test Patient
+                var patient = await CreateTestData_NewPatient("Bruce");
+                var hospitalAdmission = await CreateTestData_NewHospitalAdmission();
+                var ward = await CreateTestData_NewWard(123456);
+                wardAdmission = await _admissionsManager.AdmitPatientAsync(new WardAdmission() { Subject = patient, Ward = ward },
+                    hospitalAdmission,
                     new List<IcdTenCode>());
                 uow.Complete();
             }

@@ -1,15 +1,9 @@
-﻿using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
-using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
+﻿using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
 using Boxfusion.Health.His.Admissions.Tests;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Enums;
-using Shesha.AutoMapper.Dto;
-using Shesha.DynamicEntities.Dtos;
 using Shouldly;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -22,7 +16,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         [Fact]
@@ -45,22 +39,20 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
             finally
             {
                 // Clean-up Generated data
-                //CleanUpTestData_Patient((Guid)wardAdmission.Subject.Id);
-                //CleanUpTestData_Ward(wardAdmission.Ward.Id);
-                //CleanUpTestData_HospitalAdmission(wardAdmission.Ward.OwnerOrganisation.Id);
-
+                CleanUpTestData_Patient((Guid)wardAdmission.Subject.Id);
+                CleanUpTestData_Ward(wardAdmission.Ward.Id);
+                CleanUpTestData_HospitalAdmission(wardAdmission.Ward.OwnerOrganisation.Id);
             }
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         //[Fact]
         //public async Task Should_transfer_patient_from_one_ward_to_another()
         //{
         //    var wardAdmission = new WardAdmission();
-        //    var admissionInput = await BuildadmissionInput();
-
         //    try
         //    {
         //        using var uow = _uowManager.Begin();
@@ -75,7 +67,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
         //    finally
         //    {
         //        // Clean-up Generated data
-        //        CleanUpTestData_Patient((Guid)admissionInput.Subject.Id);
+        //        CleanUpTestData_Patient((Guid)wardAdmission.Subject.Id);
         //        CleanUpTestData_Ward(wardAdmission.Ward.Id);
         //        CleanUpTestData_HospitalAdmission(wardAdmission.Ward.OwnerOrganisation.Id);
 
@@ -83,58 +75,75 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
         //}
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
-        //[Fact]
-        //public async Task Should_accept_or_reject_transfered_patient_from_one_ward_to_another()
-        //{
-        //    try
-        //    {
-        //        using var uow = _uowManager.Begin();
-        //        var acceptOrRejectTransfersInput = new AcceptOrRejectTransfersInput()
-        //        {
-        //            AcceptanceDecision = RefListAcceptanceDecision.Accept,
-        //            //WardAdmissionId = 
-        //        };
-        //        var accept = await _admissionsService.AcceptOrRejectTransfers(acceptOrRejectTransfersInput);
+        [Fact]
+        public async Task Should_accept_or_reject_transfered_patient_from_one_ward_to_another()
+        {
+            var wardAdmission = new WardAdmission();
+            try
+            {
+                using var uow = _uowManager.Begin();
 
-        //        acceptOrRejectTransfersInput.AcceptanceDecision = RefListAcceptanceDecision.Reject;
-        //        acceptOrRejectTransfersInput.TransferRejectionReason = RefListTransferRejectionReasons.other;
-        //        acceptOrRejectTransfersInput.TransferRejectionReasonComment = "Comment";
+                wardAdmission = await AdmitPatient_To_Ward();
 
-        //        var reject = await _admissionsService.AcceptOrRejectTransfers(acceptOrRejectTransfersInput);
+                var acceptOrRejectTransfersInput = new AcceptOrRejectTransfersInput()
+                {
+                    AcceptanceDecision = RefListAcceptanceDecision.Accept,
+                    WardAdmissionId = wardAdmission.Id
+                };
+                wardAdmission.AdmissionStatus = RefListAdmissionStatuses.inTransit;
+                await _wardAdmissionRepository.UpdateAsync(wardAdmission);
+                var accept = await _admissionsService.AcceptOrRejectTransfers(acceptOrRejectTransfersInput);
 
-        //        await uow.CompleteAsync();
-        //    }
-        //    finally
-        //    {
-        //        // Clean-up Generated data
+                accept.Accepted.ShouldBeTrue();
+                accept.Rejected.ShouldBeFalse();
 
-        //    }
-        //}
+                acceptOrRejectTransfersInput.AcceptanceDecision = RefListAcceptanceDecision.Reject;
+                acceptOrRejectTransfersInput.TransferRejectionReason = RefListTransferRejectionReasons.other;
+                acceptOrRejectTransfersInput.TransferRejectionReasonComment = "Comment";
+                wardAdmission.InternalTransferOriginalWard = wardAdmission;
+
+                await _wardAdmissionRepository.UpdateAsync(wardAdmission);
+
+                var reject = await _admissionsService.AcceptOrRejectTransfers(acceptOrRejectTransfersInput);
+                reject.Rejected.ShouldBeTrue();
+                reject.Accepted.ShouldBeFalse();
+
+                //Original ward admission
+                var originalWardAdmission = await _wardAdmissionRepository.GetAsync(wardAdmission.InternalTransferOriginalWard.Id);
+                originalWardAdmission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.admitted);
+
+                await uow.CompleteAsync();
+            }
+            finally
+            {
+                // Clean-up Generated data
+                CleanUpTestData_Patient((Guid)wardAdmission.Subject.Id);
+                CleanUpTestData_Ward(wardAdmission.Ward.Id);
+                CleanUpTestData_HospitalAdmission(wardAdmission.Ward.OwnerOrganisation.Id);
+            }
+        }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
-        //[Fact]
-        //public async Task Should_separate_transfered_patient_from_one_ward_to_another()
-        //{
-        //    try
-        //    {
-        //        using var uow = _uowManager.Begin();
+        [Fact]
+        public async Task Should_separate_transfered_patient_from_one_ward_to_another()
+        {
+            try
+            {
+                using var uow = _uowManager.Begin();
+                 
+                var separatedPatient = await SeparatePatientAsync();
+                separatedPatient.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.separated);
+                separatedPatient.ho
 
-        //        var separationDto = new SeparationDto()
-        //        {
-
-        //        };
-        //        var separatedPatient = await _admissionsService.SeparatePatientAsync(separationDto);
-
-
-        //        await uow.CompleteAsync();
-        //    }
-        //    finally { }
-        //}
+                await uow.CompleteAsync();
+            }
+            finally { }
+        }
     }
 }
