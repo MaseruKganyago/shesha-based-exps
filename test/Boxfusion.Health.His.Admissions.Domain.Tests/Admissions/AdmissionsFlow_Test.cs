@@ -139,9 +139,9 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
                  
                 var separatedPatient = await SeparatePatientAsync();
                 separatedPatient.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.separated);
-                separatedPatient.ho
+                //separatedPatient.ho
 
-                await uow.CompleteAsync();
+                //await uow.CompleteAsync();
             }
             finally { }
         }
