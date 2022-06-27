@@ -108,9 +108,6 @@ namespace Boxfusion.Health.His.Bookings.Jobs
             var connection = session.Connection;
             var command = connection.CreateCommand();
             command.CommandText = SQL_SELECT_REMINDERS_TO_SEND;
-            //AddParameter(command, "@fromDate", appointmentsFrom);
-            //AddParameter(command, "@toDate", appointmentsTo);
-            //AddParameter(command, "@templateId", templateId);
 
             var reader = command.ExecuteReader();
             return reader;
