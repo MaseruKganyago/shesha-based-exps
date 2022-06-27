@@ -1,26 +1,13 @@
 ﻿using Abp.Dependency;
 using Abp.Domain.Repositories;
 using Boxfusion.Health.Cdm.Appointments;
-using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
-using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
-using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
-using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
-using Boxfusion.Health.HealthCommon.Core.Helpers;
-using Boxfusion.Health.His.Bookings.Domain;
 using Boxfusion.Health.His.Bookings.Notifications;
-using Castle.Core.Logging;
 using NHibernate;
-using NHibernate.Linq;
-using NHibernate.Transform;
 using Shesha.Scheduler;
 using Shesha.Scheduler.Attributes;
 using Shesha.Scheduler.Domain.Enums;
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Common;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -36,15 +23,14 @@ namespace Boxfusion.Health.His.Bookings.Jobs
         ]
     public class SendAppointmentReminderNotificationJob : ScheduledJobBase, ITransientDependency
     {
-        private const string SQL_SELECT_REMINDERS_TO_SEND = @"SELECT Id 
-                                    FROM 
-                                        Fhir_Appointments 
-                                    WHERE 
-                                            IsDeleted = 0
-                                        AND StatusLkp = 3 /*Booked*/
-                                        AND [Start] >= @fromDate AND [Start] < @toDate
-                                        AND Id NOT IN (SELECT EntityId FROM AbpTenantNotifications WHERE NotificationName = @templateId) -- Reminder notification has not already been sent
-                                ";
+        private const string SQL_SELECT_REMINDERS_TO_SEND = @"SELECT Id
+                                                                FROM 
+                                                                    Fhir_Appointments 
+                                                                WHERE 
+                                                                        IsDeleted = 0
+                                                                    AND StatusLkp = 3 /*Booked*/
+	                                                                And datediff(day, getdate(), [start]) = 1
+	                                                                and HasReminderBeenSent = 0";
 
         /// <summary>
         /// 
@@ -72,7 +58,7 @@ namespace Boxfusion.Health.His.Bookings.Jobs
             using (var session = Shesha.Services.StaticContext.IocManager.Resolve<ISessionFactory>().OpenSession())
             {
                 // Retrieving list of notifications to be sent as a ADO.NET DataReader for improved performance as volumes may be significant
-                DbDataReader reader = GetReaderForAllAppointmentsStillToNotify(session, DateTime.Now.Date.AddDays(1), DateTime.Now.Date.AddDays(2), NotificationTemplateIds.AppointmentReminder);
+                DbDataReader reader = GetReaderForAllAppointmentsStillToNotify(session);
 
                 if (reader.HasRows)
                 {
@@ -87,6 +73,11 @@ namespace Boxfusion.Health.His.Bookings.Jobs
                             var appointment = appointmentsRepo.Get(appointmentId);
                             await bookingNotificationSender.NotifyAppointmentReminderAsync(appointment);
                             stats.NumSuccess++;
+
+                            // We have already notified this person. Update the flag.
+                            appointment.HasReminderBeenSent = true;
+                            await appointmentsRepo.UpdateAsync(appointment);
+                            await UnitOfWorkManager.Current.SaveChangesAsync();
                         }
                         catch (Exception ex)
                         {
@@ -112,15 +103,16 @@ namespace Boxfusion.Health.His.Bookings.Jobs
             Log.Info($"All appointments have been processed - Sent: {stats.NumSuccess} | Failed: {stats.NumFailed} | Skipped: {stats.NumSkipped}");
         }
 
-
-        private static DbDataReader GetReaderForAllAppointmentsStillToNotify(ISession session, DateTime appointmentsFrom, DateTime appointmentsTo, Guid templateId)
+        private static DbDataReader GetReaderForAllAppointmentsStillToNotify(ISession session)
         {
+            // Since the SQL Query doesn't need parameters anymore, there's no need to pass in the 
+            // parameters.
             var connection = session.Connection;
             var command = connection.CreateCommand();
             command.CommandText = SQL_SELECT_REMINDERS_TO_SEND;
-            AddParameter(command, "@fromDate", appointmentsFrom);
-            AddParameter(command, "@toDate", appointmentsTo);
-            AddParameter(command, "@templateId", templateId);
+            //AddParameter(command, "@fromDate", appointmentsFrom);
+            //AddParameter(command, "@toDate", appointmentsTo);
+            //AddParameter(command, "@templateId", templateId);
 
             var reader = command.ExecuteReader();
             return reader;
