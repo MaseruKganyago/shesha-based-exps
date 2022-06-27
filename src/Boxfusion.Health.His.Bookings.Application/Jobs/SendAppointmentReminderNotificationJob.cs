@@ -30,7 +30,7 @@ namespace Boxfusion.Health.His.Bookings.Jobs
                                                                         IsDeleted = 0
                                                                     AND StatusLkp = 3 /*Booked*/
 	                                                                And datediff(day, getdate(), [start]) = 1
-	                                                                and HasReminderBeenSent = 0";
+	                                                                and (HasReminderBeenSent = 0 or HasReminderBeenSent is null)";
 
         /// <summary>
         /// 
