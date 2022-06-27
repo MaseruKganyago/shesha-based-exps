@@ -90,8 +90,6 @@ namespace Boxfusion.Health.His.Bookings.Jobs
                             if (numProcessed % 100 == 0)    // Only logging every 100 messages to reduce overhead and flooding logs
                                 Log.Info($"{numProcessed} appointments have been processed.");
                         }
-
-
                     }
                 }
                 else
