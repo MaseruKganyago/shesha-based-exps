@@ -16,9 +16,9 @@ namespace Boxfusion.Health.His.Bookings.Jobs
     /// <summary>
     /// Sends reminders of appointments the day before the appointments.
     /// </summary>
-    [ScheduledJob("9bc54591-55fb-4e2e-91b6-199cb9c187d0",
-        startupMode: StartUpMode.Manual,
-        cronString: "0 2 * * *",  // Executes everyday at 2am
+    [ScheduledJob("02EE549D-51C7-4D91-8389-96C46B7FD9B6",
+        startupMode: StartUpMode.Automatic,
+        cronString: "0 18 * * *",  // Executes everyday at 6pm
         description: "Sends reminders of appointments the day before the appointments.")
         ]
     public class SendAppointmentReminderNotificationJob : ScheduledJobBase, ITransientDependency
