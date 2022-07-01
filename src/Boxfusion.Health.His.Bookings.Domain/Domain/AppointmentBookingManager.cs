@@ -189,7 +189,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// Returns a list of all Slots for the specified scheduled within the specified dates
         /// regardless of available capacity.
         /// </summary>
-        /// <param name="schedule"></param>
+        /// <param name="scheduleId"></param>
         /// <param name="fromDateTime"></param>
         /// <param name="toDateTime"></param>
         /// <returns></returns>

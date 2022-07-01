@@ -21,6 +21,11 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         public EntityWithDisplayNameDto<Guid?> Schedule { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public EntityWithDisplayNameDto<Guid?> Practitioner { get; set; }
+
+        /// <summary>
         /// When appointment is to take place.
         /// </summary>
         public DateTime? Start { get; set; }
