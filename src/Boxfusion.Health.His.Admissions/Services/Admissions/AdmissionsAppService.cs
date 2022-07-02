@@ -271,9 +271,14 @@ namespace Boxfusion.Health.His.Admissions.Admissions
             if (wardAdmission == null)
                 throw new UserFriendlyException("The Patient was not found in the ward Admission register");
 
-            var respose = await _admissionsManager.AcceptOrRejectTransfers(input, wardAdmission);
+            var admissionEntity = await _admissionsManager.AcceptOrRejectTransfers((RefListAcceptanceDecision)input.AcceptanceDecision, wardAdmission,
+																			(RefListTransferRejectionReasons)input.TransferRejectionReason, input.TransferRejectionReasonComment);
 
-            return respose;
+            var response = new AcceptOrRejectTransfersResponse();
+            if (admissionEntity.AdmissionStatus.Equals(RefListAdmissionStatuses.admitted)) response.Accepted = true;
+            else if (admissionEntity.AdmissionStatus.Equals(RefListAdmissionStatuses.rejected)) response.Rejected = true;
+
+            return response;
         }
 
 
@@ -291,14 +296,8 @@ namespace Boxfusion.Health.His.Admissions.Admissions
                 Validation.ValidateText(input?.HospitalAdmissionNumber, "Hospital Admission Number");
             }
 
-            if (EntityId(input.Subject?.Id) is null)
+            if ((bool)(!input.Subject?.Id.HasValue))
                 throw new UserFriendlyException("Patient Id cannot be empty");
-        }
-
-        private Guid? EntityId(Guid? id)
-        {
-            if (id.HasValue) return id;
-            else return null;
         }
 
         private void ValidateAdmissionDischargeInputs(SeparationDto input, WardAdmission admission)

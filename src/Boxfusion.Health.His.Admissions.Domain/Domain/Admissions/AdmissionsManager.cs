@@ -105,43 +105,41 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="acceptanceDecision"></param>
         /// <param name="wardAdmission"></param>
+        /// <param name="transferRejectionReason"></param>
+        /// <param name="transferRejectionReasonComment"></param>
         /// <returns></returns>
-        public async Task<AcceptOrRejectTransfersResponse> AcceptOrRejectTransfers(AcceptOrRejectTransfersInput input, WardAdmission wardAdmission)
+        public async Task<WardAdmission> AcceptOrRejectTransfers(RefListAcceptanceDecision acceptanceDecision, WardAdmission wardAdmission, 
+                                                                 RefListTransferRejectionReasons transferRejectionReason, string transferRejectionReasonComment)
         {
-            var respose = new AcceptOrRejectTransfersResponse();
-
-            if (input.AcceptanceDecision == RefListAcceptanceDecision.Accept)
+            if (acceptanceDecision == RefListAcceptanceDecision.Accept)
             {
                 if (wardAdmission.AdmissionStatus != RefListAdmissionStatuses.inTransit)
-                    throw new UserFriendlyException("The Petient was not transfered from any ward");
+                    throw new UserFriendlyException("The Patient was not transfered from any ward.");
 
                 wardAdmission.AdmissionStatus = RefListAdmissionStatuses.admitted;
                 wardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
                 wardAdmission.StartDateTime = DateTime.Now;
-
-                respose.Accepted = true;
             }
             else
             {
                 if (wardAdmission?.InternalTransferOriginalWard?.Id == null)
                     throw new UserFriendlyException("The Previous ward record was not found"); 
 
-                wardAdmission.TransferRejectionReason = input?.TransferRejectionReason;
-                wardAdmission.TransferRejectionReasonComment = input?.TransferRejectionReasonComment;
+                wardAdmission.TransferRejectionReason = transferRejectionReason;
+                wardAdmission.TransferRejectionReasonComment = transferRejectionReasonComment;
                 wardAdmission.AdmissionStatus = RefListAdmissionStatuses.rejected;
 
                 var originalWard = await _wardAdmissionRepositiory.GetAsync(wardAdmission.InternalTransferOriginalWard.Id);
                 originalWard.AdmissionStatus = RefListAdmissionStatuses.admitted;
 
                 await _wardAdmissionRepositiory.UpdateAsync(originalWard);
-                respose.Rejected = true;
             }
 
-            await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
+            var result = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
 
-            return respose;
+            return result;
         }
 
         /// <summary>
