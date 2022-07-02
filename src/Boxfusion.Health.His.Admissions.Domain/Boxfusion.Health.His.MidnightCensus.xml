@@ -28,6 +28,14 @@
             <param name="diagnosisManager"></param>
             <param name="conditionIcdTenCodeManager"></param>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.AcceptOrRejectTransfers(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AcceptOrRejectTransfersInput,Boxfusion.Health.His.Common.WardAdmission)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <param name="wardAdmission"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.GetWardAdmissionAsync(System.Guid)">
             <summary>
             
@@ -268,56 +276,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.MidnightCount">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.TotalAdmittedPatients">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.TotalBedAvailability">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.TotalSeparatedPatients">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.TotalBedInWard">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.TodaysAdmission">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.BedUtilisation">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.AverageLengthOfStay">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.DailyStats.AverageBedAvailability">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto">
             <summary>
             
@@ -424,6 +382,56 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.MidnightCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.TotalAdmittedPatients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.TotalBedAvailability">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.TotalSeparatedPatients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.NumBedsInWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.TodaysAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.BedUtilisation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.AverageLengthOfStay">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.WardCensusDailyStats.AverageBedAvailability">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.WardAdmissionWithRelations">
             <summary>
             
@@ -514,6 +522,439 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.DashboardModelQuery">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.DashboardModelQuery.HospitalName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.DashboardModelQuery.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.DashboardModelQuery.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.DashboardModelQuery.BedInWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.DashboardModelQuery.TotalAdmittedPatients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.DashboardModelQuery.TotalBedAvailability">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.DashboardResponseDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.DashboardResponseDto.HospitalName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.DashboardResponseDto.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.DashboardResponseDto.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.DashboardResponseDto.BedInWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.DashboardResponseDto.TotalAdmittedPatients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.DashboardResponseDto.TotalBedAvailability">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.IdentificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.IdentityNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.DateOfBirth">
+            <summary>
+            Date of birth
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.Gender">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.AdmissionDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.WardAdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.HospitalPatientNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.AdmissionType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.Speciality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.PatientProvince">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.Classification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.Nationality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.OtherCategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.AdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.SeparationDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.PatientDays">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.RN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.IdentificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.IdentityNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.DateOfBirth">
+            <summary>
+            Date of birth
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.Gender">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.AdmissionDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.SeparationDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.WardAdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.HospitalPatientNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.AdmissionType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.Speciality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.PatientProvince">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.Classification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.Nationality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.OtherCategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.AdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.PatientDays">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.RN">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput.WardId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput.ReportDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.Ward">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.ReportDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.ApprovalStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.ReportType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.ApprovedBy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.ApprovedBy2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.ApprovalTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.ApprovalTime2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.RejectionComments">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.RejectedBy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.MidnightCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.TotalAdmittedPatients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.TotalBedAvailability">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.TotalSeparatedPatients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.NumBedsInWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.TodaysAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.BedUtilisation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.AverageLengthofStay">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport.AverageBedAvailability">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.#ctor(Shesha.NHibernate.ISessionProvider)">
+            <summary>
+            
+            </summary>
+            <param name="sessionProvider"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.GetDailyStats(System.Guid,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="WardId"></param>
+            <param name="reportDate"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.GetMonthlyStats(Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardCensusQueryInput)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.GetReportAsync(Boxfusion.Health.His.Common.Enums.RefListReportTypes,System.Guid,System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="reportType"></param>
+            <param name="wardId"></param>
+            <param name="filterDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReportManager.GetDashboardAsync(System.Nullable{System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="hospitalId"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.Dtos.HisPatientResponse">
             <summary>
             
@@ -558,6 +999,26 @@
             </summary>
             <param name="dob"></param>
             <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Helpers.SqlHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Helpers.SqlHelper.DailyReportSqlQuery">
+            <summary>
+            SQL 
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Helpers.SqlHelper.MonthReportSqlQuery">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Helpers.SqlHelper.Dashboards">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.HisAdmissionsDomainModule">
             <summary>

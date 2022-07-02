@@ -1,57 +1,57 @@
-using System;
 using Abp;
+using Abp.AspNetCore.Configuration;
 using Abp.AutoMapper;
+using Abp.Castle.Logging.Log4Net;
 using Abp.Configuration.Startup;
 using Abp.Dependency;
+using Abp.Domain.Uow;
 using Abp.Modules;
 using Abp.MultiTenancy;
 using Abp.Net.Mail;
 using Abp.TestBase;
 using Abp.Zero.Configuration;
+using Boxfusion.Health.His.Admissions.Application;
+using Boxfusion.Health.His.Tests.DependencyInjection;
+using Castle.Facilities.Logging;
 using Castle.MicroKernel.Registration;
 using Hangfire;
 using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Moq;
 using NSubstitute;
-using Boxfusion.Health.His.Tests.DependencyInjection;
 using Shesha;
 using Shesha.NHibernate;
 using Shesha.Services;
-using Abp.Domain.Uow;
+using System;
 using System.Reflection;
-using Castle.Facilities.Logging;
-using Abp.Castle.Logging.Log4Net;
-using Abp.AspNetCore.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using Boxfusion.Health.His.Admissions.Application;
 
-namespace Boxfusion.Health.His.Common.Tests
+namespace Boxfusion.Health.His.Admissions.Tests
 {
     [DependsOn(
-        typeof(HisCommonDomainModule),
-
+        typeof(HisAdmissionsDomainModule),
+        typeof(HisAdmissionsApplicationModule),
         typeof(AbpKernelModule),
         typeof(AbpTestBaseModule),
         typeof(SheshaApplicationModule),
         typeof(SheshaNHibernateModule),
         typeof(SheshaFrameworkModule),
-        typeof(HisAdmissionsApplicationModule)
+        typeof(SheshaEnterpriseModule)
         )]
-    public class HisCommonDomainTestModule : AbpModule
+    public class HisAdmissionsDomainTestModule : AbpModule
     {
         //private const string ConnectionString = @"Data Source=sql-shared-nonprod.database.windows.net;Initial Catalog=boxhealthhis-test;User=boxdbadmin;Password=n0-hack.2020;MultipleActiveResultSets=True;TrustServerCertificate=True";
-        private string ConnectionString;
+        private readonly string ConnectionString;
 
-        public HisCommonDomainTestModule(SheshaNHibernateModule nhModule)
+        public HisAdmissionsDomainTestModule(SheshaNHibernateModule nhModule)
         {
             var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             ConnectionString = config.GetConnectionString("TestDB");
 
             nhModule.ConnectionString = ConnectionString;
-            nhModule.SkipDbSeed = false;    // Set to false to apply DB Migration files on start up
+            nhModule.SkipDbSeed = false;     // Set to false to apply DB Migration files on start up
         }
 
         public override void PreInitialize()
@@ -68,10 +68,10 @@ namespace Boxfusion.Health.His.Common.Tests
             IocManager.IocContainer.Register(Component.For<IWebHostEnvironment>().ImplementedBy<TestWebHostEnvironment>().LifestyleSingleton());
 
             IocManager.IocContainer.Register(
-                Component.For<IAbpAspNetCoreConfiguration>()
-                    .ImplementedBy<AbpAspNetCoreConfiguration>()
-                    .LifestyleSingleton()
-            );
+                            Component.For<IAbpAspNetCoreConfiguration>()
+                                .ImplementedBy<AbpAspNetCoreConfiguration>()
+                                .LifestyleSingleton()
+                        );
 
             var appLifetimeMoq = new Mock<IHostApplicationLifetime>();
             IocManager.IocContainer.Register(

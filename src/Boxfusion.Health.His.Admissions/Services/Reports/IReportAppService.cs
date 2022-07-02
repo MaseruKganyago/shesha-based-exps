@@ -1,6 +1,9 @@
 ﻿using Abp.Application.Services;
 using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Reports;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos;
 using Boxfusion.Health.His.Common.Enums;
+using Shesha.DynamicEntities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,40 +37,40 @@ namespace Boxfusion.Health.His.Admissions.Application.Services
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<WardMidnightCensusReportResponse> ApproveLevel1(WardCensusInput input);
+        Task<DynamicDto<WardMidnightCensusReport, Guid>> ApproveLevel1(WardCensusQueryInput input);
         /// <summary>
         /// 
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<WardMidnightCensusReportResponse> ApproveLevel2(WardCensusInput input);
+        Task<DynamicDto<WardMidnightCensusReport, Guid>> ApproveLevel2(WardCensusQueryInput input);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<WardMidnightCensusReportResponse> GetWardDailyReport(WardCensusInput input);
+        Task<DynamicDto<WardMidnightCensusReport, Guid>> GetWardDailyReport(WardCensusQueryInput input);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<WardMidnightCensusReportResponse> GetWardMonthlyReport(WardCensusInput input);
+        Task<DynamicDto<WardMidnightCensusReport, Guid>> GetWardMonthlyReport(WardCensusQueryInput input);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<WardMidnightCensusReportResponse> SubmitForApproval(WardCensusInput input);
+        Task<DynamicDto<WardMidnightCensusReport, Guid>> SubmitForApproval(WardCensusQueryInput input);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        Task<WardMidnightCensusReportResponse> Reject(RejectReportInput input);
+        Task<DynamicDto<WardMidnightCensusReport, Guid>> Reject(RejectReportInput input);
     }
 }

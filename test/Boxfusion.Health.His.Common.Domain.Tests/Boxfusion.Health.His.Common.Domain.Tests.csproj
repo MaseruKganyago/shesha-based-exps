@@ -46,6 +46,7 @@
     <PackageReference Include="Castle.Core" Version="4.4.0" />
   </ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\..\src\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.Application.csproj" />
 	  <ProjectReference Include="..\..\src\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>
