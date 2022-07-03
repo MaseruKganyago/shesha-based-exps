@@ -40,12 +40,12 @@ namespace Boxfusion.Health.His.Admissions.Tests
         typeof(SheshaFrameworkModule),
         typeof(SheshaEnterpriseModule)
         )]
-    public class HisCommonDomainTestModule : AbpModule
+    public class HisAdmissionsDomainTestModule : AbpModule
     {
         //private const string ConnectionString = @"Data Source=sql-shared-nonprod.database.windows.net;Initial Catalog=boxhealthhis-test;User=boxdbadmin;Password=n0-hack.2020;MultipleActiveResultSets=True;TrustServerCertificate=True";
         private string ConnectionString;
 
-        public HisCommonDomainTestModule(SheshaNHibernateModule nhModule)
+        public HisAdmissionsDomainTestModule(SheshaNHibernateModule nhModule)
         {
             var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             ConnectionString = config.GetConnectionString("TestDB");

@@ -55,8 +55,6 @@ namespace Boxfusion.Health.His.Admissions.Admissions
             CreateMap<AdmissionInput, HospitalAdmission>()
                .ForMember(a => a.Id, options => options.Ignore())
                .ForMember(a => a.HospitalAdmissionStatus, options => options.MapFrom(u => RefListHospitalAdmissionStatuses.admitted))
-               .ForMember(a => a.Classification, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.Classification)))
-               .ForMember(a => a.OtherCategory, options => options.MapFrom(c => UtilityHelper.GetRefListItemValue(c.OtherCategory)))
                .ForMember(a => a.TransferFroHospital, options => options.MapFrom(b => GetEntity<FhirOrganisation>(b.TransferFroHospital)))
                .ForMember(a => a.TransferToHospital, options => options.MapFrom(b => GetEntity<FhirOrganisation>(b.TransferToHospital)))
                .ForMember(a => a.PartOf, options => options.MapFrom(b => GetEntity<Encounter>(b.PartOf)))
