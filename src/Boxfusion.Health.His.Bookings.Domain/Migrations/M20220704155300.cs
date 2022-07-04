@@ -17,10 +17,7 @@ namespace Boxfusion.Health.His.Bookings.Migrations
         /// </summary>
         public override void Up()
         {
-            Execute.Sql(@"USE [MPDOH_HIS_LOCAL]
-GO
-
-/****** Object:  View [dbo].[vw_His_FlattenedFacilityAppointments]    Script Date: 2022/07/02 08:56:35 ******/
+            Execute.Sql(@"
 SET ANSI_NULLS ON
 GO
 
