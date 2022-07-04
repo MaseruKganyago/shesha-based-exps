@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32126.315
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9695FC1C-6D7C-4FE8-A47B-0D35F0A6649D}"
 	ProjectSection(SolutionItems) = preProject
@@ -112,8 +112,8 @@ Global
 		{CD807E5E-CD55-48C5-A41E-4CC0BA7886D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD807E5E-CD55-48C5-A41E-4CC0BA7886D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD807E5E-CD55-48C5-A41E-4CC0BA7886D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{73D4ED02-A4F8-4066-8D76-A718825B56A2}.Debug|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
-		{73D4ED02-A4F8-4066-8D76-A718825B56A2}.Debug|Any CPU.Build.0 = DebugLocalShesha|Any CPU
+		{73D4ED02-A4F8-4066-8D76-A718825B56A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73D4ED02-A4F8-4066-8D76-A718825B56A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73D4ED02-A4F8-4066-8D76-A718825B56A2}.Release|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
 		{73D4ED02-A4F8-4066-8D76-A718825B56A2}.Release|Any CPU.Build.0 = DebugLocalShesha|Any CPU
 		{6F80124E-D4FB-4DFA-A24C-440FDC6B3E4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -196,8 +196,8 @@ Global
 		{4F167128-54AA-4DCD-850D-6733FC673C37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F167128-54AA-4DCD-850D-6733FC673C37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F167128-54AA-4DCD-850D-6733FC673C37}.Release|Any CPU.Build.0 = Release|Any CPU
-		{46BDA482-4A01-4420-8FBF-FE07507A8091}.Debug|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
-		{46BDA482-4A01-4420-8FBF-FE07507A8091}.Debug|Any CPU.Build.0 = DebugLocalShesha|Any CPU
+		{46BDA482-4A01-4420-8FBF-FE07507A8091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46BDA482-4A01-4420-8FBF-FE07507A8091}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46BDA482-4A01-4420-8FBF-FE07507A8091}.Release|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
 		{46BDA482-4A01-4420-8FBF-FE07507A8091}.Release|Any CPU.Build.0 = DebugLocalShesha|Any CPU
 	EndGlobalSection

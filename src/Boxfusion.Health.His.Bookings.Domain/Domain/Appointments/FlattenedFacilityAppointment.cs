@@ -37,6 +37,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         public virtual string AlternateContactName { get; protected set; }
         public virtual string AlternateContactCellphone { get; protected set; }
         public virtual string ArrivalTime { get; protected set; }
+        public virtual string PractitionerName { get; set; }
 
         [ReferenceList("Fhir", "AppointmentCancellationReasons")]
         public virtual long? CancelationReason { get; protected set; }
