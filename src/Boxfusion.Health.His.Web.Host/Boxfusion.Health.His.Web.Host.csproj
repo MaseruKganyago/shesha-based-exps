@@ -37,7 +37,8 @@
   <ItemGroup>
     <PackageReference Include="Abp.Castle.Log4Net" Version="6.6.2" />
     <PackageReference Include="Abp.TestBase" Version="6.6.2" />
-    <PackageReference Include="ElmahCore" Version="2.0.6" />
+    <PackageReference Include="ElmahCore" Version="2.1.2" />
+    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="6.1.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Hangfire.SqlServer" Version="1.7.25" />

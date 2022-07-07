@@ -37,6 +37,8 @@ using Shesha.DynamicEntities.Swagger;
 using Boxfusion.Health.His.Hangfire;
 using Shesha.Authorization;
 using Swashbuckle.AspNetCore.Swagger;
+using Shesha.GraphQL;
+using Shesha.GraphQL.Middleware;
 
 namespace Boxfusion.Health.His.Web.Host.Startup
 {
@@ -119,6 +121,9 @@ namespace Boxfusion.Health.His.Web.Host.Startup
             {
                 config.UseSqlServerStorage(_appConfiguration.GetConnectionString("Default"));
             });
+
+            // add Shesha GraphQL
+            services.AddSheshaGraphQL();
 
             // Add ABP and initialize 
             // Configure Abp and Dependency Injection
@@ -207,6 +212,9 @@ namespace Boxfusion.Health.His.Web.Host.Startup
                 {
                     Authorization = new[] { new HangfireAuthorizationFilter() }
                 });
+
+            app.UseMiddleware<GraphQLMiddleware>();
+            app.UseGraphQLPlayground(); //to explorer API navigate https://*DOMAIN*/ui/playground
         }
 
 
