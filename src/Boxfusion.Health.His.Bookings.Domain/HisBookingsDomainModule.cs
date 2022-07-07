@@ -6,6 +6,7 @@ using Boxfusion.Health.His.Bookings.Localization;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Domain;
 using Shesha;
+using Shesha.Enterprise.Reporting;
 using Shesha.Startup;
 using System.Reflection;
 
@@ -18,7 +19,8 @@ namespace Boxfusion.Health.His.Bookings
         typeof(HisCommonDomainModule),
         typeof(SheshaCoreModule),
         typeof(SheshaApplicationModule),
-        typeof(HealthCommonModule)
+        typeof(HealthCommonModule),
+        typeof(SheshaReportingModule)
     )]
     public class HisBookingsDomainModule : AbpModule
     {

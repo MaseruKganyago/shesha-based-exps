@@ -74,6 +74,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.HealthComm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Enterprise.DocumentProcessing", "shesha-core-enterprise\src\Shesha.Enterprise.DocumentProcessing\Shesha.Enterprise.DocumentProcessing.csproj", "{46BDA482-4A01-4420-8FBF-FE07507A8091}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Enterprise.Reporting", "shesha-core-enterprise\src\Shesha.Enterprise.Reporting\Shesha.Enterprise.Reporting.csproj", "{542C52AE-CEB7-4879-8523-2C0CAA92A06E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -200,6 +202,10 @@ Global
 		{46BDA482-4A01-4420-8FBF-FE07507A8091}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46BDA482-4A01-4420-8FBF-FE07507A8091}.Release|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
 		{46BDA482-4A01-4420-8FBF-FE07507A8091}.Release|Any CPU.Build.0 = DebugLocalShesha|Any CPU
+		{542C52AE-CEB7-4879-8523-2C0CAA92A06E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{542C52AE-CEB7-4879-8523-2C0CAA92A06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{542C52AE-CEB7-4879-8523-2C0CAA92A06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{542C52AE-CEB7-4879-8523-2C0CAA92A06E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -228,6 +234,7 @@ Global
 		{CC28FB01-2000-4E8F-A8A4-5E1863C2BDB7} = {9475DB0D-A03B-4EBE-9D83-C0348855056D}
 		{4F167128-54AA-4DCD-850D-6733FC673C37} = {B79C1E6E-B8C3-4223-B88D-54016676BEF2}
 		{46BDA482-4A01-4420-8FBF-FE07507A8091} = {9475DB0D-A03B-4EBE-9D83-C0348855056D}
+		{542C52AE-CEB7-4879-8523-2C0CAA92A06E} = {9475DB0D-A03B-4EBE-9D83-C0348855056D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95ED23F3-8DEA-456E-A44B-87A161CB696A}

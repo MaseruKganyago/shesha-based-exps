@@ -117,7 +117,5 @@ namespace Boxfusion.Health.His.Common.Practitioners
             return await _repository.GetAll().AnyAsync(e =>
                 e.EmailAddress1.Trim().ToLower() == email.Trim().ToLower() && (id == null || e.Id != id));
         }
-
-
     }
 }
