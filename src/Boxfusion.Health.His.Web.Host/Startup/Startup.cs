@@ -37,6 +37,7 @@ using Shesha.DynamicEntities.Swagger;
 using Boxfusion.Health.His.Hangfire;
 using Shesha.Authorization;
 using Swashbuckle.AspNetCore.Swagger;
+using Shesha.GraphQL;
 
 namespace Boxfusion.Health.His.Web.Host.Startup
 {
@@ -119,6 +120,9 @@ namespace Boxfusion.Health.His.Web.Host.Startup
             {
                 config.UseSqlServerStorage(_appConfiguration.GetConnectionString("Default"));
             });
+
+            // add Shesha GraphQL
+            services.AddSheshaGraphQL();
 
             // Add ABP and initialize 
             // Configure Abp and Dependency Injection
