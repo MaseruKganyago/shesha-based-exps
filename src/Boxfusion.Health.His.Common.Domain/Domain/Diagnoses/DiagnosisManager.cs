@@ -1,6 +1,7 @@
 ﻿using Abp.Dependency;
 using Abp.Domain.Repositories;
 using Abp.Domain.Services;
+using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Common.Domain.Domain.Helpers;
@@ -75,17 +76,28 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.Diagnoses
 		/// <returns></returns>
 		public async Task<Diagnosis> UpdateDiagnosis<T>(Diagnosis updatedEntity, Func<T, Task> action = null) where T : Condition
 		{
-			#region Condition related-functionality
-			var conditionItem = await HisCommonDomainUtil.GetEntityAsync<T, Guid>(updatedEntity.Condition.Id);
+			try
+			{
+				#region Condition related-functionality
+				T conditionItem = null;
 
-			if (action is not null) await action.Invoke(conditionItem);
-			await _dynamicRepository.SaveOrUpdateAsync(conditionItem);
-			#endregion
+				var item = (T)(await _dynamicRepository.GetAsync(typeof(T), updatedEntity.Condition.Id.ToString()));
+				if (item is null) throw new UserFriendlyException($"{typeof(T).Name} with the specified id `{updatedEntity.Condition.Id}` not found");
+				else conditionItem = (T)item;
 
-			updatedEntity.Condition = conditionItem;
-			var updatedDiagnosis = await _diagnosisRepository.UpdateAsync(updatedEntity);
+				if (action is not null) await action.Invoke(conditionItem);
+				await _dynamicRepository.SaveOrUpdateAsync(conditionItem);
+				#endregion
 
-			return updatedDiagnosis;
+				updatedEntity.Condition = conditionItem;
+				var updatedDiagnosis = await _diagnosisRepository.UpdateAsync(updatedEntity);
+
+				return updatedDiagnosis;
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
 		}
 
 		/// <summary>

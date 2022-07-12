@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes
 {
 	/// <summary>
-	/// TO DO: Code to be moved to CDM
+	/// TODO: Code to be moved to CDM
 	/// Implements generic methods of ConditionIcdTenCode
 	/// </summary>
 	public class ConditionIcdTenCodeManager: DomainService
@@ -87,23 +87,30 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes
 		public async Task<List<T>> UpdateAssignedIcdTenCodes<T>(List<IcdTenCode> icdTenCodes, Condition condition, Func<T, Task> action = null) 
 			where T : ConditionIcdTenCode
 		{
-			var localCodes = icdTenCodes;
-
-			var repo = IocManager.Instance.Resolve<IRepository<T, Guid>>();
-			List<T> existingAssignments = null;
-			using (UnitOfWorkManager.Current.DisableFilter(AbpDataFilters.SoftDelete))
+			try
 			{
-				existingAssignments = await repo.GetAllListAsync(a => a.Condition.Id == condition.Id);
+				var localCodes = icdTenCodes;
+
+				var repo = StaticContext.IocManager.Resolve<IRepository<T, Guid>>();
+				List<T> existingAssignments = null;
+				using (UnitOfWorkManager.Current.DisableFilter(AbpDataFilters.SoftDelete))
+				{
+					existingAssignments = await repo.GetAllListAsync(a => a.Condition.Id == condition.Id);
+				}
+				await UpdateExisistingAssignments(localCodes, existingAssignments);
+
+				var tasks = new List<Task<T>>();
+				localCodes.ForEach(code =>
+				{
+					tasks.Add(DoAssigment(code, condition, action));
+				});
+
+				return (await Task.WhenAll<T>(tasks)).ToList();
 			}
-			await UpdateExisistingAssignments(localCodes, existingAssignments);
-
-			var tasks = new List<Task<T>>();
-			localCodes.ForEach(code =>
+			catch (Exception ex)
 			{
-				tasks.Add(DoAssigment(code, condition, action));
-			});
-
-			return (await Task.WhenAll<T>(tasks)).ToList();
+				throw new Exception(ex.Message);
+			}
 		}
 
 		/// <summary>
@@ -145,7 +152,7 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes
 		/// <returns></returns>
 		private async Task ActionUpdate<T>(List<IcdTenCode> codes, T assignement) where T : ConditionIcdTenCode
 		{
-			var repo = IocManager.Instance.Resolve<IRepository<T, Guid>>();
+			var repo = StaticContext.IocManager.Resolve<IRepository<T, Guid>>();
 
 			if (codes.Contains(assignement.IcdTenCode))
 			{

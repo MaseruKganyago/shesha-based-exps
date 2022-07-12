@@ -6,7 +6,7 @@
     <members>
         <member name="T:Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager">
             <summary>
-            TO DO: Code to be moved to CDM
+            TODO: Code to be moved to CDM
             Implements generic methods of ConditionIcdTenCode
             </summary>
         </member>

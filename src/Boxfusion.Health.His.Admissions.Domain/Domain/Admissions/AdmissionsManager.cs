@@ -41,63 +41,26 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepositiory;
         private readonly IRepository<HisWard, Guid> _wardRepositiory;
-
-
-        private readonly IPatientCrudHelper<HisPatient, NonUserCdmPatientResponse> _patientCrudHelper;
-        private readonly IRepository<EncounterLocation, Guid> _encounterLocationRepositiory;
-        private readonly IRepository<HisConditionIcdTenCode, Guid> _conditionIcdTenCodeRepositiory;
-        private readonly IRepository<IcdTenCode, Guid> _icdTenCodeRepositiory;
-        private readonly IRepository<Condition, Guid> _conditionRepositiory;
         private readonly IRepository<Diagnosis, Guid> _diagnosisRepositiory;
-        private readonly IRepository<HisPatient, Guid> _hisPatientRepositiory;
-        private readonly IUnitOfWorkManager _unitOfWork;
-        private readonly IMapper _mapper;
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="wardAdmissionRepositiory"></param>
 		/// <param name="hospitalAdmissionRepositiory"></param>
-		/// <param name="patientCrudHelper"></param>
-		/// <param name="encounterLocationRepositiory"></param>
-		/// <param name="conditionIcdTenCodeRepositiory"></param>
-		/// <param name="icdTenCodeRepositiory"></param>
-		/// <param name="conditionRepositiory"></param>
-		/// <param name="diagnosisRepositiory"></param>
-		/// <param name="hisPatientRepositiory"></param>
 		/// <param name="wardRepositiory"></param>
-		/// <param name="unitOfWork"></param>
-		/// <param name="mapper"></param>
 		/// <param name="diagnosisManager"></param>
 		/// <param name="conditionIcdTenCodeManager"></param>
 		public AdmissionsManager(
             IRepository<WardAdmission, Guid> wardAdmissionRepositiory,
             IRepository<HospitalAdmission, Guid> hospitalAdmissionRepositiory,
-            IPatientCrudHelper<HisPatient, NonUserCdmPatientResponse> patientCrudHelper,
-            IRepository<EncounterLocation, Guid> encounterLocationRepositiory,
-            IRepository<HisConditionIcdTenCode, Guid> conditionIcdTenCodeRepositiory,
-            IRepository<IcdTenCode, Guid> icdTenCodeRepositiory,
-            IRepository<Condition, Guid> conditionRepositiory,
-            IRepository<Diagnosis, Guid> diagnosisRepositiory,
-            IRepository<HisPatient, Guid> hisPatientRepositiory,
             IRepository<HisWard, Guid> wardRepositiory,
-            IUnitOfWorkManager unitOfWork,
-            IMapper mapper,
             DiagnosisManager diagnosisManager,
             ConditionIcdTenCodeManager conditionIcdTenCodeManager)
         {
             _wardAdmissionRepositiory = wardAdmissionRepositiory;
             _hospitalAdmissionRepositiory = hospitalAdmissionRepositiory;
-            _patientCrudHelper = patientCrudHelper;
-            _encounterLocationRepositiory = encounterLocationRepositiory;
-            _conditionIcdTenCodeRepositiory = conditionIcdTenCodeRepositiory;
-            _icdTenCodeRepositiory = icdTenCodeRepositiory;
-            _conditionRepositiory = conditionRepositiory;
-            _diagnosisRepositiory = diagnosisRepositiory;
-            _hisPatientRepositiory = hisPatientRepositiory;
             _wardRepositiory = wardRepositiory;
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _diagnosisManager = diagnosisManager;
             _conditionIcdTenCodeManager = conditionIcdTenCodeManager;
         }
@@ -296,19 +259,8 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
 
             if (wardAdmission?.SeparationType == RefListSeparationTypes.internalTransfer)
             {
-                //Create ward admission record
-                WardAdmission newAdmission = wardAdmission;
-                newAdmission.Id = Guid.Empty;
-                newAdmission.PartOf = hospitalAdmission;
-                newAdmission.AdmissionStatus = RefListAdmissionStatuses.inTransit;
-                newAdmission.InternalTransferOriginalWard = separatedAdmission;
-                var insertedWardAdmission = await _wardAdmissionRepositiory.InsertAsync(newAdmission);
-
-                #region Make a diagnosis for the internal new admission
-                //If there's existing codes create a diagnosis
-                if (codes.Any())
-                    await MakeADiagnosis(newAdmission, codes, RefListEncounterDiagnosisRoles.AD, RefListAdmissionStatuses.admitted);
-                #endregion
+                //Create new ward admission record as type internalTransfer
+                await MakeInternalTransfer(wardAdmission, hospitalAdmission, separatedAdmission, codes);                
             }
             else
             {
@@ -319,13 +271,13 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             return separatedAdmission;
         }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="wardAdmissionId"></param>
-		/// <param name="person"></param>
-		/// <returns></returns>
-		public async Task<WardAdmission> UndoSeparation(Guid wardAdmissionId, Person person)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wardAdmissionId"></param>
+        /// <param name="person"></param>
+        /// <returns></returns>
+        public async Task<WardAdmission> UndoSeparation(Guid wardAdmissionId, Person person)
         {
             var wardAdmission = await _wardAdmissionRepositiory.GetAsync(wardAdmissionId);
             var hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
@@ -348,7 +300,23 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             return reAdmissionEntity;
         }
 
-		private async Task UndoWardInternalTransfer(WardAdmission wardAdmission)
+        private async Task MakeInternalTransfer(WardAdmission wardAdmission, HospitalAdmission hospitalAdmission, WardAdmission separatedAdmission, List<IcdTenCode> codes)
+        {
+            WardAdmission newAdmission = wardAdmission;
+            newAdmission.Id = Guid.Empty;
+            newAdmission.PartOf = hospitalAdmission;
+            newAdmission.AdmissionStatus = RefListAdmissionStatuses.inTransit;
+            newAdmission.InternalTransferOriginalWard = separatedAdmission;
+            var insertedWardAdmission = await _wardAdmissionRepositiory.InsertAsync(newAdmission);
+
+            #region Make a diagnosis for the internal new admission
+            //If there's existing codes create a diagnosis
+            if (codes.Any())
+                await MakeADiagnosis(newAdmission, codes, RefListEncounterDiagnosisRoles.AD, RefListAdmissionStatuses.admitted);
+            #endregion
+        }
+
+        private async Task UndoWardInternalTransfer(WardAdmission wardAdmission)
 		{
             var transferedAdmission = await _wardAdmissionRepositiory.GetAsync(wardAdmission.InternalTransferDestinationWard.Id);
             if (transferedAdmission.AdmissionStatus == RefListAdmissionStatuses.separated)

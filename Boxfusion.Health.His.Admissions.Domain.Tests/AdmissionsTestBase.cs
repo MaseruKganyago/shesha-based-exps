@@ -15,6 +15,12 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Abp.Runtime.Session;
+using Boxfusion.Health.His.Common.Domain.Domain.Diagnoses;
+using Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes;
+using Boxfusion.Health.His.Common.Enums;
+using Shouldly;
+using Abp.UI;
+using Boxfusion.Health.His.Admissions.Domain.Tests.Admissions;
 
 namespace Boxfusion.Health.His.Admissions.Tests
 {
@@ -25,6 +31,8 @@ namespace Boxfusion.Health.His.Admissions.Tests
         protected IRepository<HisWard, Guid> _wardRepository;
         protected IRepository<Diagnosis, Guid> _diagnosisRepository;
         protected IRepository<HisConditionIcdTenCode, Guid> _conditionIcdTenCodeRepo;
+        protected readonly DiagnosisManager _diagnosisManager;
+        protected readonly ConditionIcdTenCodeManager _conditionIcdTenCodeManager;
         protected IUnitOfWorkManager _uowManager;
         protected ISessionProvider _sessionProvider;
 
@@ -35,6 +43,8 @@ namespace Boxfusion.Health.His.Admissions.Tests
             _wardRepository = Resolve<IRepository<HisWard, Guid>>();
             _diagnosisRepository = Resolve<IRepository<Diagnosis, Guid>>();
             _conditionIcdTenCodeRepo = Resolve<IRepository<HisConditionIcdTenCode, Guid>>();
+            _diagnosisManager = Resolve<DiagnosisManager>();
+            _conditionIcdTenCodeManager = Resolve<ConditionIcdTenCodeManager>();
             _uowManager = Resolve<IUnitOfWorkManager>();
             _sessionProvider = Resolve<ISessionProvider>();
 		}
@@ -111,6 +121,72 @@ namespace Boxfusion.Health.His.Admissions.Tests
             return patient;
         }
 
+        protected async Task<WardAdmission> CreateTestData_NewAdmission(Guid facilityId, Guid wardId)
+        {
+			try
+			{
+                var admission = new WardAdmission();
+                using (var uow = _uowManager.Begin())
+                {
+                    using var session = OpenSession();
+
+                    var result = (await session.CreateSQLQuery($"exec His_AddAdmissionTestData @ServiceProviderId = :facilityId, @WardId = :wardId")
+                                            .SetParameter("facilityId", facilityId)
+                                            .SetParameter("wardId", wardId)
+                                            .SetResultTransformer(Transformers.AliasToBean<AdmissionDataQueryModel>())
+                                            .ListAsync<AdmissionDataQueryModel>()).FirstOrDefault();
+
+					MapToAdmissionEntity(admission, result);
+                    var codes = await GetTestData_CodesList();
+                    await MakeADiagnosis(admission, codes, RefListEncounterDiagnosisRoles.AD, RefListAdmissionStatuses.admitted);
+
+                    session.Flush();
+                    await uow.CompleteAsync();
+                }
+
+                return admission;
+            }
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+		}
+
+		private static void MapToAdmissionEntity(WardAdmission admission, AdmissionDataQueryModel result)
+		{
+            admission.Id = result.Id;
+            admission.WardAdmissionNumber = result.WardAdmissionNumber;
+            admission.AdmissionStatus = (RefListAdmissionStatuses?)result.AdmissionStatus;
+            admission.AdmissionType = (RefListAdmissionTypes?)result.AdmissionType;
+			admission.PartOf = new HospitalAdmission
+			{
+				Id = result.PartOfId
+			};
+		}
+
+		private async Task MakeADiagnosis(WardAdmission wardAdmissionEntity, List<IcdTenCode> codes, RefListEncounterDiagnosisRoles use, RefListAdmissionStatuses status)
+        {
+            var diagnosisEntity = await _diagnosisManager.AddNewDiagnosis<WardAdmission, Condition>(wardAdmissionEntity,
+                                          (int)use, null,
+                                          //prepares the condtion of this diagnosis
+                                          async item =>
+                                          {
+                                              item.RecordedDate = DateTime.Now;
+                                              item.Subject = wardAdmissionEntity.Subject;
+                                              item.Recorder = (PersonFhirBase)wardAdmissionEntity.Performer;
+                                              item.FhirEncounter = wardAdmissionEntity;
+                                              item.HospitalisationEncounter = (HospitalisationEncounter)wardAdmissionEntity.PartOf;
+                                          });
+
+            await _conditionIcdTenCodeManager.AssignIcdTenCodeToCondition<HisConditionIcdTenCode>(codes, diagnosisEntity.Condition,
+                                                                        //(Optional) extra values required in ConditionIcdTenCode sub-entities
+                                                                        async item =>
+                                                                        {
+                                                                            item.AdmissionStatus = status;
+                                                                        });
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -150,7 +226,14 @@ namespace Boxfusion.Health.His.Admissions.Tests
 
         protected async Task<List<HisConditionIcdTenCode>> GetTestData_IcdTenCodesAssignments(Condition condition)
         {
-            return await _conditionIcdTenCodeRepo.GetAllListAsync(a => a.Condition.Id == condition.Id);
+            var results = new List<HisConditionIcdTenCode>();
+
+            using var uow = _uowManager.Begin();
+            results = _conditionIcdTenCodeRepo.GetAllIncluding(a => a.IcdTenCode)
+                                              .Where(a => a.Condition.Id == condition.Id).ToList();
+            await uow.CompleteAsync();
+
+            return results;
         }
 
         protected void CleanUpTestData_Patient(Guid patientId)
