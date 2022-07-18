@@ -76,7 +76,7 @@ namespace Boxfusion.Health.His.Admissions.Tests
             }
         }
 
-        private HisWard CreateTestData_Ward(string name, HisHealthFacility hospital)
+        protected HisWard CreateTestData_Ward(string name, HisHealthFacility hospital)
         {
             var ward = _wardRepository.FirstOrDefault(a => a.Name == name);
             if (ward is null)
@@ -85,6 +85,7 @@ namespace Boxfusion.Health.His.Admissions.Tests
                 {
                     Name = name,
                     OwnerOrganisation = hospital,
+                    NumberOfBeds = 50
                 };
                 ward = _wardRepository.Insert(newWard);
             }
@@ -245,17 +246,39 @@ namespace Boxfusion.Health.His.Admissions.Tests
             session.Flush();
         }
 
-        protected void CleanUpTestData_PatientAdmission(WardAdmission admission, Diagnosis diagnosis)
+        protected async Task CleanUpTestData_PatientAdmission(WardAdmission admission, Diagnosis diagnosis, bool includePartOf = true)
         {
+            var diagnosisList = await _diagnosisRepository.GetAllListAsync(a => a.OwnerId == admission.Id.ToString());
+
             using var session = OpenSession();
             var query = session.CreateSQLQuery($"Update Fhir_Conditions set FhirEncounterId = null where FhirEncounterId = '{admission.Id}'" +
                 $"DELETE FROM Fhir_Encounters WHERE Id = '{admission.Id}'");
             query.ExecuteUpdate();
 
-            query = session.CreateSQLQuery($"Update Fhir_Conditions set HospitalisationEncounterId = null where HospitalisationEncounterId = '{admission.PartOf.Id}'" +
+            if (includePartOf)
+            {
+                query = session.CreateSQLQuery($"Update Fhir_Conditions set HospitalisationEncounterId = null where HospitalisationEncounterId = '{admission.PartOf.Id}'" +
                 $"DELETE FROM Fhir_Encounters WHERE Id = '{admission.PartOf.Id}'");
-            query.ExecuteUpdate();
+                query.ExecuteUpdate();
+            }
 
+            if (diagnosisList.Count > 1)
+            {
+                diagnosisList.ForEach(diagnosis =>
+                {
+                    DeleteDiagnosisCombo(query, session, diagnosis);
+                });
+            }
+            else
+            {
+                DeleteDiagnosisCombo(query, session, diagnosis);
+            }
+
+            session.Flush();
+        }
+
+		private void DeleteDiagnosisCombo(NHibernate.ISQLQuery query, NHibernate.ISession session, Diagnosis diagnosis)
+		{
             query = session.CreateSQLQuery($"DELETE FROM Fhir_Diagnoses WHERE Id = '{diagnosis.Id}'");
             query.ExecuteUpdate();
 
@@ -264,8 +287,8 @@ namespace Boxfusion.Health.His.Admissions.Tests
 
             query = session.CreateSQLQuery($"DELETE FROM Fhir_Conditions WHERE Id = '{diagnosis.Condition.Id}'");
             query.ExecuteUpdate();
-
-            session.Flush();
         }
-    }
+	}
+
+
 }

@@ -4,8 +4,6 @@ using AutoMapper;
 using Boxfusion.Health.Cdm.Patients;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
-using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
-using Boxfusion.Health.His.Admissions.Services.Admissions;
 using Boxfusion.Health.His.Common.Tests;
 using Shesha.Domain;
 using Shesha.DynamicEntities.Dtos;
@@ -26,7 +24,6 @@ namespace Boxfusion.Health.His.Common.Domain.Tests.Managers
         protected IRepository<HisWard, Guid> _wardRepository;
         protected IRepository<Organisation, Guid> _hospRepository;
         protected IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepository;
-        protected readonly IAdmissionsAppService _admissionsService;
         protected readonly AdmissionsManager _admissionsManager;
 
         public AdmissionsTestManager()
@@ -37,7 +34,6 @@ namespace Boxfusion.Health.His.Common.Domain.Tests.Managers
             _wardAdmissionRepository = Resolve<IRepository<WardAdmission, Guid>>();
             _wardRepository = Resolve<IRepository<HisWard, Guid>>();
             _hospitalAdmissionRepository = Resolve<IRepository<HospitalAdmission, Guid>>();
-            _admissionsService = Resolve<IAdmissionsAppService>();
             _admissionsManager = Resolve<AdmissionsManager>();
             _hospRepository = Resolve<IRepository<Organisation, Guid>>();
         }

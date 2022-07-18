@@ -8,9 +8,7 @@ using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
 using Shouldly;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -19,13 +17,15 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 	public class AdmissionsManager_Test: AdmissionsTestBase
 	{
 		private readonly AdmissionsManager _admissionsManager;
-		private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmission;
+		private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepository;
+		private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepository;
 
 		public AdmissionsManager_Test(): base()
 		{
 			CreateTestData_HealthFacility_And_Ward("UnitTest Hospital", "UnitTest Ward");
 			_admissionsManager = Resolve<AdmissionsManager>();
-			_hospitalAdmission = Resolve<IRepository<HospitalAdmission, Guid>>();
+			_hospitalAdmissionRepository = Resolve<IRepository<HospitalAdmission, Guid>>();
+			_wardAdmissionRepository = Resolve<IRepository<WardAdmission, Guid>>();
 		}
 
 		[Fact]
@@ -77,6 +77,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 				var flag = await _admissionsManager.IsBedStillAvailable(ward.Id);
 				flag.ShouldBe(true);
 
+				//Act
 				using var uow = _uowManager.Begin();
 				admission = await _admissionsManager.AdmitPatientAsync(wardAdmission, hospitalAdmission, codes);
 				await uow.CompleteAsync();
@@ -95,12 +96,12 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 
 				//Check if ConditionIcdTenCode assigments was made
 				var assignments = await GetTestData_IcdTenCodesAssignments(diagnosis.Condition);
-				assignments.Count.ShouldBe(2); //Checks for two since test-data always use random two codes
+				assignments.Count.ShouldBe(2); //Checks for two since test-data always use two random codes
 				#endregion
 			}
 			finally
 			{
-				CleanUpTestData_PatientAdmission(admission, diagnosis);
+				await CleanUpTestData_PatientAdmission(admission, diagnosis);
 				CleanUpTestData_Patient(patient.Id);
 			}
 		}
@@ -140,7 +141,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 				#region Assert: Verify if admission is updated
 				//Check if hospitalAdmission was updated
 				updatedAdmission.ShouldNotBeNull();
-				var updatedHospitalAdmission = await _hospitalAdmission.GetAsync(updatedAdmission.PartOf.Id);
+				var updatedHospitalAdmission = await _hospitalAdmissionRepository.GetAsync(updatedAdmission.PartOf.Id);
 				updatedHospitalAdmission.HospitalAdmissionNumber.ShouldBe("UnitTest: 12345Update");
 
 				//Check if wardAdmission was updated
@@ -163,7 +164,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 			}
 			finally
 			{
-				CleanUpTestData_PatientAdmission(updatedAdmission, diagnosis);
+				await CleanUpTestData_PatientAdmission(updatedAdmission, diagnosis);
 				CleanUpTestData_Patient(patient.Id);
 			}
 		}
@@ -172,8 +173,10 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 		public async Task Should_be_able_to_separate_patient_and_make_internal_transfer()
 		{
 			HisPatient patient = null;
+			WardAdmission separatedAdmission = null;
 			WardAdmission transferedAdmission = null;
 			Diagnosis diagnosis = null;
+			Diagnosis transfererdAdmissionDiagnosis = null;
 			try
 			{
 				#region Arrange: Prepare data for running patient seperation
@@ -192,14 +195,61 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 
 				var hospitalAdmission = (HospitalAdmission)admission.PartOf;
 				hospitalAdmission.HospitalAdmissionNumber = "UnitTest: 12345Update";
+
+				var nextWard = CreateTestData_Ward("UnitTest Ward B", hospital);
+				SeparatePatientValues(admission, hospital, nextWard);
+
+				diagnosis = await GetTestData_AdmissionDiagnosis(admission, RefListEncounterDiagnosisRoles.AD);
 				#endregion
 
+				//Act
+				using var uow = _uowManager.Begin();
+				separatedAdmission = await _admissionsManager.SeparatePatientAsync(admission, hospitalAdmission, codes);
+				await uow.CompleteAsync();
+
+				#region Assert: Verify if patient is separated and admitted in new ward
+				//Check if patient is separated from previous ward
+				separatedAdmission.Subject.Id.ShouldBe(patient.Id);
+				separatedAdmission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.separated);
+
+				var transferedList = await _wardAdmissionRepository.GetAllListAsync(a => a.InternalTransferOriginalWard.Id
+																	== separatedAdmission.Id);
+				transferedAdmission = transferedList.FirstOrDefault();
+
+				//Check that admitted to the next ward
+				transferedAdmission.Ward.Id.ShouldBe(nextWard.Id);
+
+				//Check that newAdmission is inTransit
+				transferedAdmission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.inTransit);
+
+				//Check that newAdmission is still in the current hospitalAdmission
+				transferedAdmission.PartOf.Id.ShouldBe(hospitalAdmission.Id);
+
+				//Check if diagnosis was made for new internalTransfer admission
+				transfererdAdmissionDiagnosis = await GetTestData_AdmissionDiagnosis(transferedAdmission, RefListEncounterDiagnosisRoles.AD);
+				transfererdAdmissionDiagnosis.ShouldNotBe(null);
+
+				//Check if ConditionIcdTenCode assigments was made
+				var assignments = await GetTestData_IcdTenCodesAssignments(transfererdAdmissionDiagnosis.Condition);
+				assignments.Count.ShouldBe(2); //Checks for two since test-data always use two random codes
+				#endregion
 
 			}
-			catch (Exception)
+			finally
 			{
-				throw;
+				await CleanUpTestData_PatientAdmission(transferedAdmission, transfererdAdmissionDiagnosis, false);
+				await CleanUpTestData_PatientAdmission(separatedAdmission, diagnosis);
+				CleanUpTestData_Patient(patient.Id);
 			}
+		}
+
+		private void SeparatePatientValues(WardAdmission admission, HisHealthFacility hospital, HisWard nextWard)
+		{
+			admission.SeparationType = RefListSeparationTypes.internalTransfer;
+			admission.SeparationDestinationWard = nextWard;
+			admission.SeparationDate = DateTime.UtcNow.AddHours(2);
+			admission.SeparationComment = "UnitTest separation";
+			admission.ServiceProvider = hospital;
 		}
 
 		private static void UpdateAdmissionValues(WardAdmission admission)

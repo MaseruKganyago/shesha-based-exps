@@ -51,18 +51,21 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
 		/// <param name="wardRepositiory"></param>
 		/// <param name="diagnosisManager"></param>
 		/// <param name="conditionIcdTenCodeManager"></param>
+		/// <param name="diagnosisRepositiory"></param>
 		public AdmissionsManager(
             IRepository<WardAdmission, Guid> wardAdmissionRepositiory,
             IRepository<HospitalAdmission, Guid> hospitalAdmissionRepositiory,
             IRepository<HisWard, Guid> wardRepositiory,
             DiagnosisManager diagnosisManager,
-            ConditionIcdTenCodeManager conditionIcdTenCodeManager)
+            ConditionIcdTenCodeManager conditionIcdTenCodeManager,
+            IRepository<Diagnosis, Guid> diagnosisRepositiory)
         {
             _wardAdmissionRepositiory = wardAdmissionRepositiory;
             _hospitalAdmissionRepositiory = hospitalAdmissionRepositiory;
             _wardRepositiory = wardRepositiory;
             _diagnosisManager = diagnosisManager;
             _conditionIcdTenCodeManager = conditionIcdTenCodeManager;
+            _diagnosisRepositiory = diagnosisRepositiory;
         }
 
         /// <summary>
@@ -173,12 +176,19 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
         /// <returns></returns>
         public async Task<bool> IsBedStillAvailable(Guid wardId)
         {
-            var wardAdmissionCount = await _wardAdmissionRepositiory.GetAll()
+            List<WardAdmission> wardAdmissionCount = null;
+            HisWard ward = null;
+
+            using (var uow = UnitOfWorkManager.Begin())
+			{
+                wardAdmissionCount = await _wardAdmissionRepositiory.GetAll()
                                                                     .Where(x => x.AdmissionStatus == RefListAdmissionStatuses.admitted &&
                                                                      x.IsDeleted == false && x.Ward.Id == wardId).ToListAsync();
-            var ward = await _wardRepositiory.GetAsync(wardId);
+                ward = await _wardRepositiory.GetAsync(wardId);
 
-            return wardAdmissionCount.Count() >= ward.NumberOfBeds;
+                await uow.CompleteAsync();
+            }
+            return wardAdmissionCount.Count() < ward.NumberOfBeds;
         }
 
 		/// <summary>
@@ -260,7 +270,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             if (wardAdmission?.SeparationType == RefListSeparationTypes.internalTransfer)
             {
                 //Create new ward admission record as type internalTransfer
-                await MakeInternalTransfer(wardAdmission, hospitalAdmission, separatedAdmission, codes);                
+                await MakeInternalTransfer(separatedAdmission, hospitalAdmission, codes);                
             }
             else
             {
@@ -300,13 +310,17 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             return reAdmissionEntity;
         }
 
-        private async Task MakeInternalTransfer(WardAdmission wardAdmission, HospitalAdmission hospitalAdmission, WardAdmission separatedAdmission, List<IcdTenCode> codes)
+        private async Task MakeInternalTransfer(WardAdmission separatedAdmission, HospitalAdmission hospitalAdmission, List<IcdTenCode> codes)
         {
-            WardAdmission newAdmission = wardAdmission;
-            newAdmission.Id = Guid.Empty;
-            newAdmission.PartOf = hospitalAdmission;
-            newAdmission.AdmissionStatus = RefListAdmissionStatuses.inTransit;
-            newAdmission.InternalTransferOriginalWard = separatedAdmission;
+            var newAdmission = new WardAdmission()
+            {
+                PartOf = hospitalAdmission,
+                AdmissionStatus = RefListAdmissionStatuses.inTransit,
+                InternalTransferOriginalWard = separatedAdmission,
+                Ward = separatedAdmission.SeparationDestinationWard,
+                StartDateTime = DateTime.UtcNow.AddHours(2),
+                SeparationChildHealth = RefListSeparationChildHealths.diarrhoeaUnder5Years
+            };
             var insertedWardAdmission = await _wardAdmissionRepositiory.InsertAsync(newAdmission);
 
             #region Make a diagnosis for the internal new admission

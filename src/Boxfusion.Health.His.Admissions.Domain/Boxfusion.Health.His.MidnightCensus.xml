@@ -9,24 +9,16 @@
              Domain Service for the Admission entity.
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HospitalAdmission,System.Guid},Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers.IPatientCrudHelper{Boxfusion.Health.His.Common.Patients.HisPatient,Boxfusion.Health.HealthCommon.Core.Dtos.Cdm.NonUserCdmPatientResponse},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.EncounterLocation,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisConditionIcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager,AutoMapper.IMapper,Boxfusion.Health.His.Common.Domain.Domain.Diagnoses.DiagnosisManager,Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager)">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Boxfusion.Health.His.Common.Domain.Domain.Diagnoses.DiagnosisManager,Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid})">
             <summary>
             
             </summary>
             <param name="wardAdmissionRepositiory"></param>
             <param name="hospitalAdmissionRepositiory"></param>
-            <param name="patientCrudHelper"></param>
-            <param name="encounterLocationRepositiory"></param>
-            <param name="conditionIcdTenCodeRepositiory"></param>
-            <param name="icdTenCodeRepositiory"></param>
-            <param name="conditionRepositiory"></param>
-            <param name="diagnosisRepositiory"></param>
-            <param name="hisPatientRepositiory"></param>
             <param name="wardRepositiory"></param>
-            <param name="unitOfWork"></param>
-            <param name="mapper"></param>
             <param name="diagnosisManager"></param>
             <param name="conditionIcdTenCodeManager"></param>
+            <param name="diagnosisRepositiory"></param>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.AcceptOrRejectTransfers(Boxfusion.Health.His.Common.Enums.RefListAcceptanceDecision,Boxfusion.Health.His.Common.WardAdmission,Boxfusion.Health.His.Common.Enums.RefListTransferRejectionReasons,System.String)">
             <summary>

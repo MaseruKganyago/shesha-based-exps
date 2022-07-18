@@ -43,7 +43,6 @@ using Boxfusion.Health.His.Common.Domain.Domain;
 using Shesha.DynamicEntities.Dtos;
 using Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Reports;
-using Boxfusion.Health.His.Admissions.Services.Admissions;
 
 namespace Boxfusion.Health.His.Admissions.Admissions
 {
@@ -53,7 +52,7 @@ namespace Boxfusion.Health.His.Admissions.Admissions
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/His/[controller]")]
-    public class AdmissionsAppService : HisAppServiceBase, IAdmissionsAppService
+    public class AdmissionsAppService : HisAppServiceBase
     {
         private readonly AdmissionsManager _admissionsManager;
         private readonly IRepository<IcdTenCode, Guid> _icdTenCodeRepository;
@@ -182,7 +181,7 @@ namespace Boxfusion.Health.His.Admissions.Admissions
             #region Validations for an admission
             ValidateWardAdmissionInput(input);
 
-            if (await _admissionsManager.IsBedStillAvailable(newWardAdmission.Ward.Id))
+            if (!(await _admissionsManager.IsBedStillAvailable(newWardAdmission.Ward.Id)))
                 throw new UserFriendlyException("The total number of admitted patients has exceeded the total number of beds");
             #endregion
 

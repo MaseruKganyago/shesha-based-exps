@@ -624,46 +624,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Services.Admissions.IAdmissionsAppService">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.IAdmissionsAppService.AdmitPatientAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.IAdmissionsAppService.UpdateAdmissionAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.IAdmissionsAppService.SeparatePatientAsync(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.SeparationDto)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.IAdmissionsAppService.UndoSeparationAsync(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="admissionId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Admissions.IAdmissionsAppService.AcceptOrRejectTransfers(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AcceptOrRejectTransfersInput)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211108021400">
             <summary>
             
