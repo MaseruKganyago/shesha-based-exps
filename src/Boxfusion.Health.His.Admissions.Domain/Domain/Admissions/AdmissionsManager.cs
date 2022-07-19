@@ -77,7 +77,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
         /// <param name="transferRejectionReasonComment"></param>
         /// <returns></returns>
         public async Task<WardAdmission> AcceptOrRejectTransfers(RefListAcceptanceDecision acceptanceDecision, WardAdmission wardAdmission, 
-                                                                 RefListTransferRejectionReasons transferRejectionReason, string transferRejectionReasonComment)
+                                                                 RefListTransferRejectionReasons transferRejectionReason = 0, string transferRejectionReasonComment = null)
         {
             if (acceptanceDecision == RefListAcceptanceDecision.Accept)
             {

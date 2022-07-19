@@ -266,20 +266,21 @@ namespace Boxfusion.Health.His.Admissions.Tests
             {
                 diagnosisList.ForEach(diagnosis =>
                 {
-                    DeleteDiagnosisCombo(query, session, diagnosis);
+                    DeleteDiagnosisCombo(diagnosis);
                 });
             }
             else
             {
-                DeleteDiagnosisCombo(query, session, diagnosis);
+                DeleteDiagnosisCombo(diagnosis);
             }
 
             session.Flush();
         }
 
-		private void DeleteDiagnosisCombo(NHibernate.ISQLQuery query, NHibernate.ISession session, Diagnosis diagnosis)
+		private void DeleteDiagnosisCombo(Diagnosis diagnosis)
 		{
-            query = session.CreateSQLQuery($"DELETE FROM Fhir_Diagnoses WHERE Id = '{diagnosis.Id}'");
+            using var session = OpenSession();
+            var query = session.CreateSQLQuery($"DELETE FROM Fhir_Diagnoses WHERE Id = '{diagnosis.Id}'");
             query.ExecuteUpdate();
 
             query = session.CreateSQLQuery($"DELETE FROM Fhir_ConditionIcdTenCodes WHERE ConditionId = '{diagnosis.Condition.Id}'");
@@ -287,6 +288,8 @@ namespace Boxfusion.Health.His.Admissions.Tests
 
             query = session.CreateSQLQuery($"DELETE FROM Fhir_Conditions WHERE Id = '{diagnosis.Condition.Id}'");
             query.ExecuteUpdate();
+
+            session.Flush();
         }
 	}
 

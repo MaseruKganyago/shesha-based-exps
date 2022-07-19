@@ -197,7 +197,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 				hospitalAdmission.HospitalAdmissionNumber = "UnitTest: 12345Update";
 
 				var nextWard = CreateTestData_Ward("UnitTest Ward B", hospital);
-				SeparatePatientValues(admission, hospital, nextWard);
+				TransferPatientValues(admission, hospital, nextWard);
 
 				diagnosis = await GetTestData_AdmissionDiagnosis(admission, RefListEncounterDiagnosisRoles.AD);
 				#endregion
@@ -233,7 +233,6 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 				var assignments = await GetTestData_IcdTenCodesAssignments(transfererdAdmissionDiagnosis.Condition);
 				assignments.Count.ShouldBe(2); //Checks for two since test-data always use two random codes
 				#endregion
-
 			}
 			finally
 			{
@@ -243,12 +242,136 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 			}
 		}
 
-		private void SeparatePatientValues(WardAdmission admission, HisHealthFacility hospital, HisWard nextWard)
+		[Fact]
+		public async Task Should_be_able_to_accept_internalTransfer_and_admit_patient_to_new_ward()
+		{
+			HisPatient patient = null;
+			WardAdmission separatedAdmission = null;
+			WardAdmission acceptOrRejectedAdmission = null;
+			Diagnosis diagnosis = null;
+			try
+			{
+				#region Arrange: Prepare data for running Accept or Reject tranfer test
+				var hospital = await GetTestData_HealthFacility("UnitTest Hospital");
+				var ward = await GetTestData_Ward("UnitTest Ward");
+
+				patient = await CreateTestData_NewPatient("John Smith" + ":Test3");
+				var practitioner = await GetCurrentLoggedInPerson();
+
+				var codes = await GetTestData_CodesList();
+
+				var admission = await CreateTestData_NewAdmission(hospital.Id, ward.Id);
+				admission.ShouldNotBeNull();
+				admission.Performer = practitioner;
+				admission.Subject = patient;
+
+				var hospitalAdmission = (HospitalAdmission)admission.PartOf;
+				hospitalAdmission.HospitalAdmissionNumber = "UnitTest: 12345Update";
+
+				var nextWard = CreateTestData_Ward("UnitTest Ward B", hospital);
+				TransferPatientValues(admission, hospital, nextWard);
+
+				diagnosis = await GetTestData_AdmissionDiagnosis(admission, RefListEncounterDiagnosisRoles.AD);
+
+				using var uow = _uowManager.Begin();
+				separatedAdmission = await _admissionsManager.SeparatePatientAsync(admission, hospitalAdmission, codes);
+				await uow.CompleteAsync();
+
+				var transferedList = await _wardAdmissionRepository.GetAllListAsync(a => a.InternalTransferOriginalWard.Id
+																	== separatedAdmission.Id);
+				var transferedAdmission = transferedList.FirstOrDefault();
+				#endregion
+
+				#region Act: Accept or Reject transfer
+				//acceptOrRejectedAdmission = await _admissionsManager.AcceptOrRejectTransfers(RefListAcceptanceDecision.Accept, transferedAdmission);
+
+				acceptOrRejectedAdmission = await _admissionsManager.AcceptOrRejectTransfers(RefListAcceptanceDecision.Reject,
+																	transferedAdmission, RefListTransferRejectionReasons.noAvailability, "UnitTest: Reason");
+				#endregion
+
+				#region Assert: Verify if admission was Accepected or Rejected
+				//-----On accepected------
+				//Veirify that transferedAdmission is admitted
+				//acceptOrRejectedAdmission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.admitted);
+
+				////Verify that transferedAdmission admissionType is internalTransfer
+				//acceptOrRejectedAdmission.AdmissionType.ShouldBe(RefListAdmissionTypes.internalTransferIn);
+
+				//-----On Rejected------
+				//Veirify that transferedAdmission is rejected
+				acceptOrRejectedAdmission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.rejected);
+
+				//Verify original wardAdmission is re-admitted
+				var originalWard = await _wardAdmissionRepository.GetAsync(separatedAdmission.Id);
+				originalWard.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.admitted);
+				#endregion
+			}
+			finally
+			{
+				var transfererdAdmissionDiagnosis = await GetTestData_AdmissionDiagnosis(acceptOrRejectedAdmission, RefListEncounterDiagnosisRoles.AD);
+				await CleanUpTestData_PatientAdmission(acceptOrRejectedAdmission, transfererdAdmissionDiagnosis, false);
+				await CleanUpTestData_PatientAdmission(separatedAdmission, diagnosis);
+				CleanUpTestData_Patient(patient.Id);
+			}
+		}
+
+		[Fact]
+		public async Task Should_be_able_to_undo_a_separation_and_re_admit_patient_in_ward()
+		{
+			HisPatient patient = null;
+			WardAdmission separatedAdmission = null;
+			Diagnosis diagnosis = null;
+			try
+			{
+				#region Arrange: Prepare data for running Accept or Reject tranfer test
+				var hospital = await GetTestData_HealthFacility("UnitTest Hospital");
+				var ward = await GetTestData_Ward("UnitTest Ward");
+
+				patient = await CreateTestData_NewPatient("John Smith" + ":Test3");
+				var practitioner = await GetCurrentLoggedInPerson();
+
+				var codes = await GetTestData_CodesList();
+
+				//Admission in ward
+				var admission = await CreateTestData_NewAdmission(hospital.Id, ward.Id);
+				admission.ShouldNotBeNull();
+				admission.Performer = practitioner;
+				admission.Subject = patient;
+
+				//Admission in hospital
+				var hospitalAdmission = (HospitalAdmission)admission.PartOf;
+
+				//Separation values
+				admission.SeparationType = RefListSeparationTypes.dischargeNormal;
+				admission.SeparationDate = DateTime.UtcNow.AddHours(2);
+				admission.SeparationComment = "UnitTest separation";
+
+				diagnosis = await GetTestData_AdmissionDiagnosis(admission, RefListEncounterDiagnosisRoles.AD);
+				#endregion
+
+				//Act
+				using var uow = _uowManager.Begin();
+				separatedAdmission = await _admissionsManager.SeparatePatientAsync(admission, hospitalAdmission, codes);
+
+				var reAdmission = await _admissionsManager.UndoSeparation(separatedAdmission.Id, practitioner);
+				await uow.CompleteAsync();
+
+				// Assert: Verify if patient is re-admitted
+				reAdmission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.admitted);
+			}
+			finally
+			{
+				await CleanUpTestData_PatientAdmission(separatedAdmission, diagnosis);
+				CleanUpTestData_Patient(patient.Id);
+			}
+		}
+
+		private void TransferPatientValues(WardAdmission admission, HisHealthFacility hospital, HisWard nextWard)
 		{
 			admission.SeparationType = RefListSeparationTypes.internalTransfer;
 			admission.SeparationDestinationWard = nextWard;
 			admission.SeparationDate = DateTime.UtcNow.AddHours(2);
-			admission.SeparationComment = "UnitTest separation";
+			admission.SeparationComment = "UnitTest transfer";
 			admission.ServiceProvider = hospital;
 		}
 
