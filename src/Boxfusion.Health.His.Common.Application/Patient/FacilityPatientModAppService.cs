@@ -1,7 +1,6 @@
 ﻿
 using Abp.Domain.Repositories;
 using Boxfusion.Health.His.Common.Domain.Domain.Dtos.Patients;
-using Boxfusion.Health.His.Common.Domain.Domain.Patients;
 using Boxfusion.Health.His.Common.Patients;
 using Microsoft.AspNetCore.Mvc;
 using System;

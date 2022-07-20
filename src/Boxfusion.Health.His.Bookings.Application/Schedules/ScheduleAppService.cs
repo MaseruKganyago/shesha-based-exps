@@ -5,9 +5,6 @@ using Boxfusion.Health.Cdm.Schedules;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
-using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
-using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
-using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Bookings.Authorization;
 using Boxfusion.Health.His.Bookings.Domain;
 using Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos;
@@ -15,6 +12,7 @@ using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shesha;
 using Shesha.DynamicEntities.Dtos;
 using System;
 using System.Collections.Generic;
@@ -30,7 +28,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
     [AbpAuthorize]
     [ApiVersion("2")]
     [Route("api/v{version:apiVersion}/Bookings/[controller]")]
-    public class ScheduleAppService : CdmAppServiceBase
+    public class ScheduleAppService : SheshaAppServiceBase
     {
         private readonly CmdScheduleManager _scheduleManager;
 
@@ -49,7 +47,7 @@ namespace Boxfusion.Health.His.Bookings.Schedules
         [HttpGet, Route("SchedulesAssociatedToUser")]
         public async Task<List<DynamicDto<CdmSchedule, Guid>>> GetSchedulesAssociatedToUserAsync()
         {
-            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            var person = await GetCurrentPersonAsync();
 
             Guid? facilityId = RequestContextHelper.HasFacilityId ? RequestContextHelper.FacilityId : null;
             var schedules = await _scheduleManager.GetSchedulesAssociatedToUserAsync(person.Id, BookingsRoles.ScheduleManager, facilityId);

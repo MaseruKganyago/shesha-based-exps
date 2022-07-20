@@ -551,7 +551,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport,System.Guid},Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Domain.Domain.HisUser,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager)">
+        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport,System.Guid},Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisUser,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager)">
             <summary>
             
             </summary>
@@ -559,7 +559,6 @@
             <param name="admissionsManager"></param>
             <param name="hisPatientRepositiory"></param>
             <param name="wardRepositiory"></param>
-            <param name="hisAdmissionAuditTrailRepository"></param>
             <param name="wardMidnightCensusReport"></param>
             <param name="userAccessRightService"></param>
             <param name="hisUserRepository"></param>

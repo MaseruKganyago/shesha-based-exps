@@ -4,9 +4,6 @@ using Abp.Domain.Repositories;
 using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
-using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
-using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
-using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Authorization;
 using Boxfusion.Health.His.Common.Practitioners;
@@ -31,7 +28,7 @@ namespace Boxfusion.Health.His.Common.Users
     [AbpAuthorize]
     [ApiVersion("1")]
     //[Route("api/v{version:apiVersion}/Bookings/[controller]")]
-    public class HisUserAppService : CdmAppServiceBase // DynamicCrudAppService<HisPractitioner, DynamicDto<HisPractitioner, Guid>, Guid>, ITransientDependency
+    public class HisUserAppService : SheshaAppServiceBase // DynamicCrudAppService<HisPractitioner, DynamicDto<HisPractitioner, Guid>, Guid>, ITransientDependency
     {
         private readonly HisPractitionerManager _practitionerManager;
         private readonly IRepository<HisPractitioner, Guid> _practitionerRepo;

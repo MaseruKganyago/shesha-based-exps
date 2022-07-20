@@ -1,7 +1,6 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
-using Boxfusion.Health.HealthCommon.Core.Services.Patients;
 using Boxfusion.Health.His.Admissions.Application.Domain;
 using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +11,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Abp.UI;
-using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Domain.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Common;
@@ -31,7 +29,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/HisAdmis/[controller]")]
-    public class ReportAppService : CdmAppServiceBase, IReportAppService
+    public class ReportAppService : SheshaAppServiceBase, IReportAppService
     {
         private readonly WardMidnightCensusReportManager _wardMidnightCensusReportManager;
         private readonly IUserAccessRightService _userAccessRightService;

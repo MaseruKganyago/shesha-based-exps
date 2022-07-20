@@ -15,12 +15,12 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Abp.Runtime.Session;
-using Boxfusion.Health.His.Common.Domain.Domain.Diagnoses;
-using Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes;
 using Boxfusion.Health.His.Common.Enums;
 using Shouldly;
 using Abp.UI;
 using Boxfusion.Health.His.Admissions.Domain.Tests.Admissions;
+using Boxfusion.Health.His.Common.Diagnoses;
+using Boxfusion.Health.His.Common.ConditionIcdTenCodes;
 
 namespace Boxfusion.Health.His.Admissions.Tests
 {

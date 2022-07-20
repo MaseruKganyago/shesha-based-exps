@@ -7,7 +7,6 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
-using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Shesha.AutoMapper.Dto;
 using Shesha.Enterprise.PublicHolidays;
 using Shesha.Extensions;

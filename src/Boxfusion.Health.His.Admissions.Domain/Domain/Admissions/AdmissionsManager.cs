@@ -12,10 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
-using Boxfusion.Health.HealthCommon.Core.Services.Patients.Helpers;
 using Shesha.AutoMapper.Dto;
-using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.His.Common.Enums;
 using NHibernate.Linq;
 using Shesha.Extensions;
@@ -24,10 +21,11 @@ using Shesha.NHibernate;
 using Abp.UI;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
 using Boxfusion.Health.His.Admissions.Domain.Helpers;
-using Boxfusion.Health.His.Common.Domain.Domain.Diagnoses;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
-using Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes;
 using Shesha.Domain;
+using Boxfusion.Health.His.Common.Diagnoses;
+using Boxfusion.Health.His.Common.ConditionIcdTenCodes;
+using Boxfusion.Health.His.Domain.Helpers;
 
 namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
 {
@@ -149,8 +147,8 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
         /// <returns></returns>
         public async Task ValidateIdentityNumber(string identityNumber, Guid currentWardId)
         {
-            if (!Validation.IsValidIdentityNumber(identityNumber))
-                throw new UserFriendlyException("The specified identify number is not a valid South African number.");
+            if (!string.IsNullOrEmpty(identityNumber)) //TODO: Implement SA ID validation in Helper.Validation
+                throw new UserFriendlyException("The specified identify number is not a valid South African ID number.");
 
             var wardAdmissions = await _wardAdmissionRepositiory.GetAllListAsync(x => x.Subject.IdentityNumber == identityNumber);
             if (wardAdmissions.Any())

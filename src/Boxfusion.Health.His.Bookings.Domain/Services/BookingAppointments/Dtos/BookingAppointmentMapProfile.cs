@@ -1,7 +1,5 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
-using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
-using Boxfusion.Health.HealthCommon.Core.Helpers;
 using Boxfusion.Health.His.Bookings.Domain.Views;
 using Shesha.AutoMapper;
 using Shesha.AutoMapper.Dto;
@@ -22,8 +20,8 @@ namespace Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos
         public BookingAppointmentMapProfile()
         {
             CreateMap<FlattenedAppointment, FlattenedAppointmentDto>()
-                .ForMember(c => c.AppointmentType, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "AppointmentReasonCodes", (int?)c.AppointmentType)))
-                .ForMember(c => c.Status, options => options.MapFrom(c => UtilityHelper.GetRefListItemValueDto("Fhir", "AppointmentStatuses", (long?)c.Status)))
+                .ForMember(c => c.AppointmentType, options => options.MapFrom(c => GetRefListItemValueDto("Fhir", "AppointmentReasonCodes", (int?)c.AppointmentType)))
+                .ForMember(c => c.Status, options => options.MapFrom(c => GetRefListItemValueDto("Fhir", "AppointmentStatuses", (int?)c.Status)))
                 .MapReferenceListValuesToDto();
 
             //CreateMap<BookAppointmentInput, CdmAppointment>()

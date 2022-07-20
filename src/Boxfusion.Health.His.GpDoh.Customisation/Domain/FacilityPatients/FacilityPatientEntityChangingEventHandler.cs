@@ -2,9 +2,9 @@
 using Abp.Events.Bus.Entities;
 using Abp.Events.Bus.Handlers;
 using Abp.Runtime.Validation;
-using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
+using Boxfusion.Health.His.Domain.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -70,8 +70,8 @@ namespace Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients
                 {
                     if (string.IsNullOrWhiteSpace(entity.IdentityNumber))
                         validationResults.Add(new ValidationResult("Identity Number is mandatory."));
-                    else if (!Validation.IsValidIdentityNumber(entity.IdentityNumber))
-                        validationResults.Add(new ValidationResult("The specified identify number is not a valid South African number."));
+                    else if (!string.IsNullOrEmpty(entity.IdentityNumber)) //TODO: Implement SA ID validation in Helper.Validation
+                        validationResults.Add(new ValidationResult("The specified identify number is not a valid South African ID number."));
                 }
             }
 

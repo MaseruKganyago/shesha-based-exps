@@ -2,8 +2,6 @@
 using Abp.Domain.Repositories;
 using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
-using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
-using Boxfusion.Health.HealthCommon.Core.Services;
 using local = Boxfusion.Health.His.Admissions.Application.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using NHibernate.Linq;
@@ -15,12 +13,9 @@ using Boxfusion.Health.His.Admissions.Application.Hubs;
 using Shesha.NHibernate;
 using Abp.Domain.Uow;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
-using Boxfusion.Health.HealthCommon.Core.Dtos;
 using Shesha.Web.DataTable;
 using Boxfusion.Health.His.Admissions.Application.Domain.Views;
 using Shesha.AutoMapper.Dto;
-using Boxfusion.Health.HealthCommon.Core.Dtos.BackBoneElements;
-using Boxfusion.Health.HealthCommon.Core.Services.Conditions.Helpers;
 using Shesha.Extensions;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Abp.Runtime.Session;
@@ -31,18 +26,16 @@ using Boxfusion.Health.His.Common.Patients;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Authorization;
-using Boxfusion.Health.His.Admissions.Domain.Dtos;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
 using Abp.Domain.Entities.Auditing;
-using Boxfusion.Health.HealthCommon.Core.Helpers;
 using Boxfusion.Health.His.Admissions.Application.Helpers;
 using AdmissionsUtilityHelper = Boxfusion.Health.His.Admissions.Application.Helpers.UtilityHelper;
-using UtilityHelper = Boxfusion.Health.HealthCommon.Core.Helpers.UtilityHelper;
 using Boxfusion.Health.His.Common.Domain.Domain;
 using Shesha.DynamicEntities.Dtos;
-using Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Reports;
+using Shesha;
+using Boxfusion.Health.His.Common.ConditionIcdTenCodes;
 
 namespace Boxfusion.Health.His.Admissions.Admissions
 {
@@ -52,7 +45,7 @@ namespace Boxfusion.Health.His.Admissions.Admissions
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/His/[controller]")]
-    public class AdmissionsAppService : HisAppServiceBase
+    public class AdmissionsAppService : SheshaAppServiceBase
     {
         private readonly AdmissionsManager _admissionsManager;
         private readonly IRepository<IcdTenCode, Guid> _icdTenCodeRepository;
@@ -72,7 +65,6 @@ namespace Boxfusion.Health.His.Admissions.Admissions
         /// <param name="admissionsManager"></param>
         /// <param name="hisPatientRepositiory"></param>
         /// <param name="wardRepositiory"></param>
-        /// <param name="hisAdmissionAuditTrailRepository"></param>
         /// <param name="wardMidnightCensusReport"></param>
         /// <param name="userAccessRightService"></param>
         /// <param name="hisUserRepository"></param>
@@ -172,7 +164,7 @@ namespace Boxfusion.Health.His.Admissions.Admissions
         [HttpPost, Route("Admissions/AdmitPatient")]
         public async Task<DynamicDto<WardAdmission, Guid>> AdmitPatientAsync(AdmissionInput input)
         {
-            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            var person = await GetCurrentPersonAsync();
             var codes = await _conditionIcdTenCodeManager.GetIcdTenCodes(input.Code.Select(a => (Guid)a.Id).ToList());
 
             var newWardAdmission = ObjectMapper.Map<WardAdmission>(input);
@@ -200,7 +192,7 @@ namespace Boxfusion.Health.His.Admissions.Admissions
         public async Task<DynamicDto<WardAdmission, Guid>> UpdateAdmissionAsync(AdmissionInput input)
         {
             ValidateWardAdmissionInput(input);
-            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            var person = await GetCurrentPersonAsync();
 
             var codes = await _conditionIcdTenCodeManager.GetIcdTenCodes(input.Code.Select(a => (Guid)a.Id).ToList());
             var wardAdmission = await _admissionsManager.GetWardAdmissionAsync(input.Id);
@@ -230,7 +222,7 @@ namespace Boxfusion.Health.His.Admissions.Admissions
 
             ValidateAdmissionDischargeInputs(input, admission);
 
-            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            var person = await GetCurrentPersonAsync();
             var hospitalAdmission = await _admissionsManager.GetHospitalAdmissionAsync(admission.PartOf.Id);
             var codes = await _conditionIcdTenCodeManager.GetIcdTenCodes(input.SeparationCodes.Select(a => (Guid)a.Id).ToList());
 
@@ -250,7 +242,7 @@ namespace Boxfusion.Health.His.Admissions.Admissions
         [HttpPut, Route("Admissions/UndoSeparation/{admissionId}")]
         public async Task<DynamicDto<WardAdmission, Guid>> UndoSeparationAsync([FromRoute]Guid admissionId)
         {
-            var person = await GetCurrentLoggedPersonFhirBaseAsync();
+            var person = await GetCurrentPersonAsync();
 
             var reAdmission = await _admissionsManager.UndoSeparation(admissionId, person);
 

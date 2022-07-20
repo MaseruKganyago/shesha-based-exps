@@ -9,7 +9,7 @@
              Domain Service for the Admission entity.
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Boxfusion.Health.His.Common.Domain.Domain.Diagnoses.DiagnosisManager,Boxfusion.Health.His.Common.Domain.Domain.ConditionIcdTenCodes.ConditionIcdTenCodeManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Boxfusion.Health.His.Common.Diagnoses.DiagnosisManager,Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid})">
             <summary>
             
             </summary>
@@ -150,6 +150,46 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput.IdentityNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput.DateOfBirth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput.Gender">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput.Nationality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput.PatientProvince">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput.StartDateTime">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput.WardAdmissionNumber">
             <summary>
             
@@ -266,6 +306,21 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput.SeparationCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput.PartOf">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput.Subject">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.AdmissionInput.Hospital">
             <summary>
             
             </summary>
@@ -908,31 +963,6 @@
             </summary>
             <param name="hospitalId"></param>
             <returns></returns>
-        </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Domain.Dtos.HisPatientResponse">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Dtos.HisPatientResponse.PatientMasterIndexNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Dtos.HisPatientResponse.HospitalPatientNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Dtos.HisPatientResponse.IdentificationType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Dtos.HisPatientResponse.PatientProvince">
-            <summary>
-            
-            </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.Helpers.AdmissionsUtilityHelper">
             <summary>

@@ -1,6 +1,5 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
-using Boxfusion.Health.HealthCommon.Core.Dtos.Cdm;
 using Boxfusion.Health.His.Common;
 using Shesha.AutoMapper.Dto;
 using System;
@@ -13,7 +12,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos
     /// 
     /// </summary>
     [AutoMap(typeof(WardAdmission))]
-    public class AdmissionInput : HospitalisationEncounterInput
+    public class AdmissionInput: EntityDto<Guid>
     {
         /// <summary>
         /// 
@@ -23,7 +22,47 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos
         /// <summary>
         /// 
         /// </summary>
-        public string WardAdmissionNumber { get; set; }
+		public string IdentityNumber { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public DateTime DateOfBirth { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+		public string LastName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+		public ReferenceListItemValueDto Gender { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+		public ReferenceListItemValueDto Nationality { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+		public ReferenceListItemValueDto PatientProvince { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+		public DateTime StartDateTime { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string WardAdmissionNumber { get; set; }
 
         /// <summary>
         /// 
@@ -142,5 +181,20 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos
         /// 
         /// </summary>
         public List<EntityWithDisplayNameDto<Guid?>> SeparationCode { get; set; }
-    }
+
+        /// <summary>
+        /// 
+        /// </summary>
+		public EntityWithDisplayNameDto<Guid?> PartOf { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+		public EntityWithDisplayNameDto<Guid?> Subject { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+		public EntityWithDisplayNameDto<Guid?> Hospital { get; set; }
+	}
 }

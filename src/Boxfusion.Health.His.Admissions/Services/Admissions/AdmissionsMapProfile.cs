@@ -33,14 +33,10 @@ namespace Boxfusion.Health.His.Admissions.Admissions
 
             //WardAdmission
             CreateMap<AdmissionInput, WardAdmission>()
-                .ForMember(a => a.ReasonCode, b => b.MapFrom(c => UtilityHelper.SetMultiValueReferenceList(c.ReasonCode)))
                 .ForMember(a => a.Subject, b => b.MapFrom(c => GetEntity<HisPatient>(c.Subject.Id)))
                 .ForMember(a => a.PartOf, b => b.MapFrom(c => GetEntity<HospitalAdmission>(c.PartOf.Id)))
-                .ForMember(a => a.ServiceProvider, b => b.MapFrom(c => GetEntity<FhirOrganisation>(c.ServiceProvider.Id)))
-                .ForMember(a => a.Appointment, b => b.MapFrom(c => GetEntity<Appointment>(c.Appointment.Id)))
+                .ForMember(a => a.ServiceProvider, b => b.MapFrom(c => GetEntity<FhirOrganisation>(c.Hospital.Id)))
                 .ForMember(a => a.Performer, b => b.Ignore())
-                .ForMember(a => a.BasedOn, b => b.MapFrom(c => GetEntity<ServiceRequest>(c.BasedOn.Id)))
-                .ForMember(a => a.EpisodeOfCare, b => b.MapFrom(c =>  GetEntity<EpisodeOfCare>(c.EpisodeOfCare.Id)))
                 .ForMember(a => a.Ward, b => b.MapFrom(c => GetEntity<HisWard>(c.Ward.Id)))
                 .ForMember(a => a.SeparationDestinationWard, b => b.MapFrom(c => GetEntity<HisWard>(c.SeparationDestinationWard.Id)))
                 .ForMember(a => a.InternalTransferOriginalWard, b => b.MapFrom(c => GetEntity<WardAdmission>(c.InternalTransferOriginalWard.Id)))
@@ -59,6 +55,7 @@ namespace Boxfusion.Health.His.Admissions.Admissions
                .ForMember(a => a.TransferToHospital, options => options.MapFrom(b => GetEntity<FhirOrganisation>(b.TransferToHospital)))
                .ForMember(a => a.PartOf, options => options.MapFrom(b => GetEntity<Encounter>(b.PartOf)))
                .ForMember(a => a.Subject, options => options.MapFrom(b => GetEntity<Patient>(b.Subject)))
+               .ForMember(a => a.ServiceProvider, options => options.MapFrom(b => GetEntity<FhirOrganisation>(b.Hospital)))
                .ForMember(a => a.Performer, b => b.Ignore())
                .IgnoreNotMapped()
                .MapReferenceListValuesFromDto();

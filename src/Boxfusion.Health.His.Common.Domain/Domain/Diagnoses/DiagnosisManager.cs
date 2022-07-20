@@ -4,7 +4,6 @@ using Abp.Domain.Services;
 using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
-using Boxfusion.Health.His.Common.Domain.Domain.Helpers;
 using Shesha.Extensions;
 using Shesha.Services;
 using System;
@@ -13,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Common.Domain.Domain.Diagnoses
+namespace Boxfusion.Health.His.Common.Diagnoses
 {
 	/// <summary>
 	/// To Do: Code to be moved to CDM

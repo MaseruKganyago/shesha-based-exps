@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Common.Domain.Domain.Helpers
+namespace Boxfusion.Health.His.Common.Helpers
 {
 	/// <summary>
 	/// 
