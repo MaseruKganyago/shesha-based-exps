@@ -53,6 +53,7 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
     <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Elmah\Shesha.Elmah.csproj" />
+    <PackageReference Include="Shesha.Elmah" Version="0.3.73" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +68,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Boxfusion.Health.His.Web.Core\Boxfusion.Health.His.Web.Core.csproj" />
   </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1maseru_1json__JsonSchema="https://docs.renovatebot.com/renovate-schema.json" /></VisualStudio></ProjectExtensions>
   <ItemGroup>
     <None Update="wwwroot\favicon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

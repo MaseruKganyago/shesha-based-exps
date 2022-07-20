@@ -30,6 +30,8 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="Moq" Version="4.14.1" />
     <PackageReference Include="NSubstitute" Version="4.2.1" />
+    <PackageReference Include="Shesha.NHibernate" Version="0.3.73" />
+    <PackageReference Include="Shesha.Application" Version="0.3.73" />
     <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.NHibernate\Shesha.NHibernate.csproj" />
     <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
     <PackageReference Include="Shouldly" Version="3.0.2" />
@@ -44,6 +46,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.2" />
   </ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\..\src\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.Application.csproj" />
 	  <ProjectReference Include="..\..\src\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>

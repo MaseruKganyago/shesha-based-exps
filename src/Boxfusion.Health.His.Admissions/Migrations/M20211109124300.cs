@@ -17,7 +17,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
         /// </summary>
         public override void Up()
         {
-            //Boxfusion.Health.His.Admissions.Domain.AdmissionsPatient
+            //Boxfusion.Health.His.Admissions.Application.Domain.AdmissionsPatient
             Alter.Table("Core_Persons")
                 .AddColumn("AdmissionTypeLkp").AsInt64().Nullable();
         }

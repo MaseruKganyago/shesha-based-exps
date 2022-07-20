@@ -26,7 +26,7 @@ using Abp.Castle.Logging.Log4Net;
 using Abp.AspNetCore.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using Boxfusion.Health.His.Common;
+using Boxfusion.Health.His.Admissions.Application;
 
 namespace Boxfusion.Health.His.Common.Tests
 {
@@ -37,7 +37,8 @@ namespace Boxfusion.Health.His.Common.Tests
         typeof(AbpTestBaseModule),
         typeof(SheshaApplicationModule),
         typeof(SheshaNHibernateModule),
-        typeof(SheshaFrameworkModule)
+        typeof(SheshaFrameworkModule),
+        typeof(HisAdmissionsApplicationModule)
         )]
     public class HisCommonDomainTestModule : AbpModule
     {

@@ -2,10 +2,8 @@
 using Abp.Domain.Repositories;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Services.Patients;
-using Boxfusion.Health.His.Admissions.Domain;
-using Boxfusion.Health.His.Admissions.Services.Reports.Dto;
-using Boxfusion.Health.His.Domain.Domain;
-using Boxfusion.Health.His.Domain.Domain.Enums;
+using Boxfusion.Health.His.Admissions.Application.Domain;
+using Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 using System;
@@ -14,13 +12,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Abp.UI;
-using Boxfusion.Health.His.Admissions.Services.Reports.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Domain.Helpers;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
-using Boxfusion.Health.His.Domain.Authorization;
+using Boxfusion.Health.His.Common;
+using Boxfusion.Health.His.Common.Enums;
+using Shesha.Authorization;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Reports;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos;
+using Shesha.DynamicEntities.Dtos;
 
-namespace Boxfusion.Health.His.Admissions.Services.Reports
+namespace Boxfusion.Health.His.Admissions.Application.Services.Reports
 {
     /// <summary>
     /// 
@@ -28,34 +31,27 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/HisAdmis/[controller]")]
-    public class ReportAppService : CdmAppServiceBase,  IReportAppService
+    public class ReportAppService : CdmAppServiceBase, IReportAppService
     {
-        private readonly IReportHelper _reportHelper;
-        private readonly IHisWardMidnightCensusReportsHelper _hisWardMidnightCensusReportsHelper;
-        private readonly ISessionDataProvider _sessionDataProvider;
+        private readonly WardMidnightCensusReportManager _wardMidnightCensusReportManager;
         private readonly IUserAccessRightService _userAccessRightService;
         private readonly IRepository<WardMidnightCensusReport, Guid> _wardMidnightCensusReport;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="reportHelper"></param>
         /// <param name="hisWardMidnightCensusReportsHelper"></param>
-        /// <param name="sessionDataProvider"></param>
+        /// <param name="wardMidnightCensusReportManager"></param>
         /// <param name="userAccessRightService"></param>
         /// <param name="wardMidnightCensusReport"></param>
         public ReportAppService(
-            IReportHelper reportHelper, 
-            IHisWardMidnightCensusReportsHelper hisWardMidnightCensusReportsHelper, 
-            ISessionDataProvider sessionDataProvider, 
-            IUserAccessRightService userAccessRightService, 
+             WardMidnightCensusReportManager wardMidnightCensusReportManager,
+            IUserAccessRightService userAccessRightService,
             IRepository<WardMidnightCensusReport, Guid> wardMidnightCensusReport)
         {
-            _reportHelper = reportHelper;
-            _hisWardMidnightCensusReportsHelper = hisWardMidnightCensusReportsHelper;
-            _sessionDataProvider = sessionDataProvider;
             _userAccessRightService = userAccessRightService;
             _wardMidnightCensusReport = wardMidnightCensusReport;
+            _wardMidnightCensusReportManager = wardMidnightCensusReportManager;
         }
 
         /// <summary>
@@ -68,9 +64,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
         [HttpGet, Route("Reports")]
         public async Task<List<ReportResponseDto>> GetReport(RefListReportTypes reportType, Guid wardId, DateTime filterDate)
         {
-            var reports = await _reportHelper.GetReportAsync(reportType, wardId, filterDate);
-
-            return reports;
+            return ObjectMapper.Map<List<ReportResponseDto>>(await _wardMidnightCensusReportManager.GetReportAsync(reportType, wardId, filterDate));
         }
 
         /// <summary>
@@ -81,184 +75,101 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
         [HttpGet, Route("Dashboards")]
         public async Task<List<DashboardResponseDto>> GetDashboard(Guid? hospitalId)
         {
-            var dashboards = await _reportHelper.GetDashboardAsync(hospitalId);
-
-            return dashboards;
+            return ObjectMapper.Map<List<DashboardResponseDto>>(await _wardMidnightCensusReportManager.GetDashboardAsync(hospitalId));
         }
 
         /// <summary>
-        /// 
+        /// Initial submission of the Census Report for approval.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost, Route("SubmitForApproval")]
+        public async Task<DynamicDto<WardMidnightCensusReport, Guid>> SubmitForApproval(WardCensusQueryInput input)
+        {
+            await validateUserAssignedToWard(input);
+
+            var censusReport = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward.Id == input.WardId && r.ReportDate == input.ReportDate);
+            //Check Midnight for the day.
+
+            if (censusReport.ApprovalStatus != RefListApprovalStatuses.Inprogress || censusReport.ApprovalStatus != RefListApprovalStatuses.Rejected)
+                throw new UserFriendlyException("Cannot submit report for approaval since it is not in-prograss or previously rejected");
+
+            // TODO: CALCULATE STATS AND SAVE & FREEZE
+
+            if (censusReport.Ward.MidnightCensusApprovalModel == RefListMidnightCensusApprovalModel.SingleApprover)
+            {
+                censusReport.ApprovalStatus = RefListApprovalStatuses.awaitingFinalApproval;
+            }
+            else if (censusReport.Ward.MidnightCensusApprovalModel == RefListMidnightCensusApprovalModel.TwoApprover)
+            {
+                censusReport.ApprovalStatus = RefListApprovalStatuses.awaitingApproval;
+            }
+
+            censusReport = await _wardMidnightCensusReport.UpdateAsync(censusReport);
+
+            return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(censusReport);  
+        }
+
+        /// <summary>
+        /// Only valid if Approval Model requires Two Approvers.
+        /// Provides first approval of a Two-step approval process for the Census report.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("ApproveLevel1")]
-        [AbpAuthorize(PermissionNames.ApproveReport)]
-        public async Task<WardMidnightCensusReportResponse> ApproveLevel1(WardCensusInput input)
+        public async Task<DynamicDto<WardMidnightCensusReport, Guid>> ApproveLevel1(WardCensusQueryInput input)
         {
-            var currentPerson = await GetCurrentPersonAsync();
-            var isPersonAssignedToHospital = await _userAccessRightService.IsPersonAssignedToHospital(input.WardId, currentPerson);
-            if (!isPersonAssignedToHospital)
-            {
-                throw new UserFriendlyException("The Current User is not assigned to this hospital");
-            }
+            await validateUserAssignedToWard(input);
 
-            var isPersonAssignedToWard = await _userAccessRightService.IsPersonAssignedToWard(input.WardId, currentPerson);
-            if (!isPersonAssignedToWard)
-            {
-                throw new UserFriendlyException("The Current User is not assigned to this ward");
-            }
+            var censusReport = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward.Id == input.WardId && r.ReportDate == input.ReportDate);
+            if (censusReport.ApprovalStatus != RefListApprovalStatuses.awaitingApproval
+                || censusReport.Ward.MidnightCensusApprovalModel != RefListMidnightCensusApprovalModel.TwoApprover)
+                throw new UserFriendlyException("Cannot reject report since it is not awaiting approval");
 
-            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward.Id == input.WardId && r.ReportDate == input.ReportDate);
+            
+            censusReport.ApprovalStatus = RefListApprovalStatuses.awaitingFinalApproval;
+            censusReport.ApprovedBy = await GetCurrentPersonAsync() as PersonFhirBase;
+            censusReport.ApprovalTime = DateTime.Now;
 
-            if (entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingApproval && entity.Ward.MidnightCensusApprovalModel == His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.TwoApprover)
-            {
-                entity.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingFinalApproval;
-                entity.ApprovedBy = await GetCurrentPersonAsync() as PersonFhirBase;
-                entity.ApprovalTime = DateTime.Now;
+            censusReport = await _wardMidnightCensusReport.UpdateAsync(censusReport);
 
-                await _wardMidnightCensusReport.UpdateAsync(entity);
-            }
-            else
-            {
-                throw new UserFriendlyException("Cannot reject report since it is not awaiting approaval");
-            }
-
-            return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
+            return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(censusReport);
         }
+
         /// <summary>
-        /// 
+        /// Final Approval of Census Report
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("ApproveLevel2")]
-        [AbpAuthorize(PermissionNames.ApproveReport)]
-        public async Task<WardMidnightCensusReportResponse> ApproveLevel2(WardCensusInput input)
+        public async Task<DynamicDto<WardMidnightCensusReport, Guid>> ApproveLevel2(WardCensusQueryInput input)
         {
-            var currentPerson = await GetCurrentPersonAsync();
-            var isPersonAssignedToHospital = await _userAccessRightService.IsPersonAssignedToHospital(input.WardId, currentPerson);
-            if (!isPersonAssignedToHospital)
+            await validateUserAssignedToWard(input);
+
+            var censusReport = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward.Id == input.WardId && r.ReportDate == input.ReportDate);
+
+            if (censusReport.ApprovalStatus != RefListApprovalStatuses.awaitingFinalApproval)
+                throw new UserFriendlyException("Cannot approve report since it is not awaiting final approval");
+
+            censusReport.ApprovalStatus = RefListApprovalStatuses.approved;
+            censusReport.ApprovedBy2 = await GetCurrentPersonAsync() as PersonFhirBase;
+            censusReport.ApprovalTime2 = DateTime.Now;
+
+            //Calculate stats for the day and save to the WardReport table
+            //TODO: var dailyStats = await CalculateDailyStats(input);
+
+            censusReport = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(censusReport.Id, async (item) =>
             {
-                throw new UserFriendlyException("The Current User is not assigned to this hospital");
-            }
+                item.ApprovalStatus = RefListApprovalStatuses.approved;
+                //item.BedUtilisation = (double?)dailyStats.BedUtilisation;
+                //item.AverageLengthofStay = (float?)dailyStats.AverageLengthOfStay;
+                item.ReportType = RefListReportType.Daily;
+                item.ReportDate = input.ReportDate;
+                item.Ward.Id = input.WardId;
+            });
 
-            var isPersonAssignedToWard = await _userAccessRightService.IsPersonAssignedToWard(input.WardId, currentPerson);
-            if (!isPersonAssignedToWard)
-            {
-                throw new UserFriendlyException("The Current User is not assigned to this ward");
-            }
-
-            var ward = await GetEntityAsync<HisWard>(input.WardId);
-
-            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
-
-            if (entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingFinalApproval)
-            {
-                entity.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.approved;
-                entity.ApprovedBy2 = await GetCurrentPersonAsync() as PersonFhirBase;
-                entity.ApprovalTime2 = DateTime.Now;
-
-                //Todo: Calculate stats for the day and save to the WardReport table
-
-                var inputObj = new TodaysAdmissionInput
-                {
-                    ReportDate = input.ReportDate,
-                    WardId = input.WardId,
-                };
-
-                var todaysAdmissions = await _sessionDataProvider.GetTodaysAdmission(inputObj);
-                var midnightCounts = await _sessionDataProvider.GetMidnightCount(inputObj);
-                var dayPatients = await _sessionDataProvider.GetDayPatients(inputObj);
-                int todaysAdmission = 0;
-                int midnightCount = 0;
-                int dayPatient = 0;
-
-
-                if (dayPatients.Any() && midnightCounts.Any() && todaysAdmissions.Any())
-                {
-                    todaysAdmission = (int)todaysAdmissions[0].TodaysAdmission;
-                    midnightCount = (int)midnightCounts[0].MidnightCount;
-                    dayPatient = (int)dayPatients[0].DayPatients;
-                }
-
-                var calculatedReport = await _sessionDataProvider.GetDailyStats(
-                    new WardCensusInput2()
-                    {
-                        ReportDate = input.ReportDate,
-                        WardId = input.WardId,
-                        dayPatient = dayPatient,
-                        midnightCount = midnightCount,
-                        todaysAdmission = todaysAdmission,
-                    });
-
-                if (!calculatedReport.Any())
-                {
-                    throw new UserFriendlyException("No records found for the ward and date specified");
-                }
-                var dailyStat = calculatedReport[0];
-
-                entity = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(entity.Id, async (item) =>
-                {
-                    ObjectMapper.Map(dailyStat, item);
-                    item.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.approved;
-                    item.BedUtilisation = (double?)dailyStat.BedUtilisation;
-                    item.AverageLengthofStay = (float?)dailyStat.AverageLengthOfStay;
-                    item.ReportType = His.Domain.Domain.Enums.RefListReportType.Daily;
-                    item.ReportDate = input.ReportDate;
-                    item.Ward = ward;
-                });
-            }
-            else
-            {
-                throw new UserFriendlyException("Cannot reject report since it is not awaiting approaval");
-            }
-
-            return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
+            return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(censusReport);
         }
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns></returns>
-        //private async Task<ConditionResponse> GetCondition(Guid id)
-        //{
-        //    if (id == Guid.Empty) throw new UserFriendlyException("id cannot be null.");
-
-        //    var entity = await _conditionRepository.GetAsync(id);
-        //    if (entity == null) throw new UserFriendlyException("Condition with specified id does not exist.");
-        //    var conditionResult = ObjectMapper.Map<ConditionResponse>(entity);
-
-        //    //Gets all conditionIcdTenCodeAssignments for the condition and maps to result
-        //    var list = await _conditionIcdTenCodeRepository.GetAllListAsync();
-        //    list.RemoveAll(a => a.Condition?.Id != conditionResult?.Id);
-
-        //    conditionResult.Code = ObjectMapper.Map<List<EntityWithDisplayNameDto<Guid?>>>(list);
-
-        //    return conditionResult;
-        //}
-
-        //private async Task<DiagnosisResponse> SaveOrUpdateDiagnosis(DiagnosisInput diagnosis, WardAdmission ownerEntity)
-        //{
-        //    //Creates new Condition for Diagnosis if the was no existing condition to relate to the diagnosis
-        //    var condition = new ConditionResponse();
-        //    if (Validation.ValidateId(diagnosis.Condition.Id) == null)
-        //    {
-        //        condition = await _conditionsCrudHelper.CreateAsync(diagnosis.Condition);
-        //        diagnosis.Condition.Id = condition.Id;
-        //        diagnosis.Condition.Code = condition.Code;
-        //    }
-
-        //    var entity = await SaveOrUpdateEntityAsync<Diagnosis>((Guid?)Validation.ValidateId(diagnosis.Id), async item =>
-        //    {
-        //        ObjectMapper.Map(diagnosis, item);
-        //        item.OwnerId = ownerEntity.Id.ToString();
-        //        item.OwnerType = ownerEntity.GetTypeShortAlias();
-        //    });
-
-        //    var result = ObjectMapper.Map<DiagnosisResponse>(entity);
-        //    result.Condition = condition;
-        //    return result;
-        //}
 
         /// <summary>
         /// 
@@ -266,261 +177,111 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet, Route("DailyReport")]
-        [AbpAuthorize(PermissionNames.ReportsAndStats)]
-        public async Task<WardMidnightCensusReportResponse> GetWardDailyReport(WardCensusInput input)
+        public async Task<DynamicDto<WardMidnightCensusReport, Guid>> GetWardDailyReport(WardCensusQueryInput input)
         {
-            var currentPerson = await GetCurrentPersonAsync();
-            var isPersonAssignedToHospital = await _userAccessRightService.IsPersonAssignedToHospital(input.WardId, currentPerson);
-            if (!isPersonAssignedToHospital)
-            {
-                throw new UserFriendlyException("The Current User is not assigned to this hospital");
-            }
-
-            var isPersonAssignedToWard = await _userAccessRightService.IsPersonAssignedToWard(input.WardId, currentPerson);
-            if (!isPersonAssignedToWard)
-            {
-                throw new UserFriendlyException("The Current User is not assigned to this ward");
-            }
+            await validateUserAssignedToWard(input);
+            if (input.ReportDate == null) throw new ArgumentNullException(nameof(input.ReportDate));
 
             var ward = await GetEntityAsync<HisWard>(input.WardId);
-            var results = new WardMidnightCensusReport();
-            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate && r.ReportType == His.Domain.Domain.Enums.RefListReportType.Daily);
+            var wardMidnightCensusReport = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate && r.ReportType == RefListReportType.Daily);
 
 
-            if (entity == null) //Create the report since it doesn't exist
+            if (wardMidnightCensusReport != null 
+                   && (wardMidnightCensusReport.ApprovalStatus == RefListApprovalStatuses.awaitingApproval 
+                   || wardMidnightCensusReport.ApprovalStatus == RefListApprovalStatuses.awaitingFinalApproval
+                   || wardMidnightCensusReport.ApprovalStatus == RefListApprovalStatuses.approved))
             {
-                //Calculate on the fly
-                var inputObj = new TodaysAdmissionInput()
-                {
-                    ReportDate = input.ReportDate,
-                    WardId = input.WardId,
-                };
-
-                var todaysAdmissions = await _sessionDataProvider.GetTodaysAdmission(inputObj);
-                var midnightCounts = await _sessionDataProvider.GetMidnightCount(inputObj);
-                var dayPatients = await _sessionDataProvider.GetDayPatients(inputObj);
-                int todaysAdmission = 0;
-                int midnightCount = 0;
-                int dayPatient = 0;
-
-
-                if (dayPatients.Any() && midnightCounts.Any() && todaysAdmissions.Any())
-                {
-                    todaysAdmission = (int)todaysAdmissions[0].TodaysAdmission;
-                    midnightCount = (int)midnightCounts[0].MidnightCount;
-                    dayPatient = (int)dayPatients[0].DayPatients;
-                }
-
-                var calculatedReport = await _sessionDataProvider.GetDailyStats(
-                    new WardCensusInput2()
-                    {
-                        ReportDate = input.ReportDate,
-                        WardId = input.WardId,
-                        dayPatient = dayPatient,
-                        midnightCount = midnightCount,
-                        todaysAdmission = todaysAdmission,
-                    });
-
-                if (!calculatedReport.Any())
-                {
-                    results = new WardMidnightCensusReport()
-                    {
-                        ReportDate = input.ReportDate,
-                        TotalBedAvailability = ward.NumberOfBeds,
-                        NumBedsInWard = ward.NumberOfBeds
-                    };
-                }
-                else
-                {
-                    var dailyStat = calculatedReport[0];
-
-                    results = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(null, async (item) =>
-                    {
-                        ObjectMapper.Map(dailyStat, item);
-                        item.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress;
-                        item.BedUtilisation = (double?)dailyStat.BedUtilisation;
-                        item.AverageLengthofStay = (float?)dailyStat.AverageLengthOfStay;
-                        item.ReportType = His.Domain.Domain.Enums.RefListReportType.Daily;
-                        item.ReportDate = input.ReportDate;
-                        item.Ward = ward;
-                        item.TodaysAdmission = dailyStat.TodaysAdmission;
-                    });
-                    return ObjectMapper.Map<WardMidnightCensusReportResponse>(results);
-                }
+                // Stats have previously been calculated and saved to DB
+                return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(wardMidnightCensusReport);
             }
 
-            if (results.ApprovalStatus != His.Domain.Domain.Enums.RefListApprovalStatuses.approved)
+            if (wardMidnightCensusReport == null)
             {
-                //Calculate on the fly
-                var inputObj = new TodaysAdmissionInput()
+                // Need to create the Daily Report as its has not been added to the DB yet.
+                wardMidnightCensusReport = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(null, async (item) =>
                 {
-                    ReportDate = input.ReportDate,
-                    WardId = input.WardId,
-                };
+                    item.ApprovalStatus = RefListApprovalStatuses.Inprogress;
+                    item.ReportType = RefListReportType.Daily;
+                    item.ReportDate = input.ReportDate;
+                    item.Ward = ward;
+                });
+            };
 
-                var todaysAdmissions = await _sessionDataProvider.GetTodaysAdmission(inputObj);
-                var midnightCounts = await _sessionDataProvider.GetMidnightCount(inputObj);
-                var dayPatients = await _sessionDataProvider.GetDayPatients(inputObj);
-                int todaysAdmission = 0;
-                int midnightCount = 0;
-                int dayPatient = 0;
+            
+            var dailyStats = await _wardMidnightCensusReportManager.GetDailyStats(input.WardId, input.ReportDate.Value.Date);
+            ObjectMapper.Map(dailyStats, wardMidnightCensusReport);
 
-
-                if (dayPatients.Any() && midnightCounts.Any() && todaysAdmissions.Any())
-                {
-                    todaysAdmission = (int)todaysAdmissions[0].TodaysAdmission;
-                    midnightCount = (int)midnightCounts[0].MidnightCount;
-                    dayPatient = (int)dayPatients[0].DayPatients;
-                }
-
-                var calculatedReport = await _sessionDataProvider.GetDailyStats(
-                    new WardCensusInput2()
-                    {
-                        ReportDate = input.ReportDate,
-                        WardId = input.WardId,
-                        dayPatient = dayPatient,
-                        midnightCount = midnightCount,
-                        todaysAdmission = todaysAdmission,
-                    });
-
-                if (!calculatedReport.Any())
-                {
-                    results = new WardMidnightCensusReport()
-                    {
-                        ReportDate = input.ReportDate,
-                        TotalBedAvailability = ward.NumberOfBeds,
-                        NumBedsInWard = ward.NumberOfBeds
-                    };
-                }
-                else
-                {
-                    var dailyStat = calculatedReport[0];
-
-                    results = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(entity.Id, async item =>
-                    {
-                        item.ReportDate = input.ReportDate;
-                        item.MidnightCount = dailyStat.MidnightCount;
-                        item.TotalAdmittedPatients = dailyStat.TotalAdmittedPatients;
-                        item.TotalSeparatedPatients = dailyStat.TotalSeparatedPatients;
-                        item.TotalBedAvailability = dailyStat.TotalBedAvailability;
-                        item.NumBedsInWard = dailyStat.TotalBedInWard;
-                        item.BedUtilisation = (double?)dailyStat.BedUtilisation;
-                        item.AverageLengthofStay = (float?)dailyStat.AverageLengthOfStay;
-                        item.AverageBedAvailability = (float?)dailyStat.AverageLengthOfStay;
-                        item.TodaysAdmission = dailyStat.TodaysAdmission;
-                        item.ApprovalStatus = entity.ApprovalStatus;
-                        item.ApprovalTime = entity.ApprovalTime;
-                        item.ApprovalTime2 = entity.ApprovalTime2;
-                        item.ApprovedBy = entity.ApprovedBy;
-                        item.ApprovedBy2 = entity.ApprovedBy2;
-                        item.RejectedBy = entity.RejectedBy;
-                        item.RejectionComments = entity.RejectionComments;
-                        item.ReportType = entity.ReportType;
-                        item.Ward = entity.Ward;
-                    });
-                }
-            }
-
-            return ObjectMapper.Map<WardMidnightCensusReportResponse>(results);
+            return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(wardMidnightCensusReport);
         }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet, Route("MonthlyReport")]
-        public async Task<WardMidnightCensusReportResponse> GetWardMonthlyReport(WardCensusInput input)
+        public async Task<DynamicDto<WardMidnightCensusReport, Guid>> GetWardMonthlyReport(WardCensusQueryInput input)
         {
+            var monthlyStat = await _wardMidnightCensusReportManager.GetMonthlyStats(
+                new WardCensusQueryInput() { ReportDate = input.ReportDate, WardId = input.WardId });
+
+            if (monthlyStat == null)            
+                return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(null);
+
             var ward = await GetEntityAsync<HisWard>(input.WardId);
-
-            var entity = await _wardMidnightCensusReport.
-                FirstOrDefaultAsync(
-                    r => r.Ward == ward && r.ReportDate.Value.Year == input.ReportDate.Value.Year && r.ReportDate.Value.Month == input.ReportDate.Value.Month && r.ReportType == His.Domain.Domain.Enums.RefListReportType.Monthly);
-
-            if (entity == null)
+            var wardMidnightCensus = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate.Value.Year == input.ReportDate.Value.Year 
+                                                                                            && r.ReportDate.Value.Month == input.ReportDate.Value.Month 
+                                                                                            && r.ReportType == RefListReportType.Monthly);
+                        
+            if(wardMidnightCensus == null)
             {
-                var inputObj = new TodaysAdmissionInput()
+                var wardMidnightCensusReport = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(null, async (item) =>
                 {
-                    ReportDate = input.ReportDate,
-                    WardId = input.WardId,
-                };
-                var totalAdmissions = await _sessionDataProvider.GetMonthlyTotalAdmissions(inputObj);
-                int TotalAdmissions = 0;
-
-                if (totalAdmissions.Any())
-                {
-                    TotalAdmissions = (int)totalAdmissions[0].TotalAdmissions;
-                }
-
-                var calculatedReport = await _sessionDataProvider.GetMonthlyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId, TotalMonthlyAdmissions = TotalAdmissions });
-                if (calculatedReport.Any())
-                {
-                    var monthlyStat = calculatedReport[0];
-
-                    entity = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(null, async (item) =>
-                    {
-                        item.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress;
-                        item.BedUtilisation = (double?)monthlyStat.BedUtilisation;
-                        item.AverageLengthofStay = (float?)monthlyStat.AverageLengthOfStay;
-                        item.ReportType = His.Domain.Domain.Enums.RefListReportType.Monthly;
-                        item.ReportDate = input.ReportDate;
-                        item.Ward = ward;
-                        item.AverageBedAvailability = (float?)monthlyStat.AverageBedAvailability;
-                        item.NumBedsInWard = monthlyStat.NumBedsInWard;
-                        item.TotalBedAvailability = monthlyStat.TotalBedAvailability;
-                        item.TotalAdmissions = (int?)monthlyStat.TotalAdmissions;
-                        item.TotalSeparations = (int?)monthlyStat.TotalSeparations;
-                    });
-                }
-                return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
+                    item.ApprovalStatus = RefListApprovalStatuses.Inprogress;
+                    item.ReportType = RefListReportType.Monthly;
+                    item.ReportDate = input.ReportDate;
+                    item.Ward = ward;
+                    ObjectMapper.Map(monthlyStat, item);
+                });
+                return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(wardMidnightCensusReport);
             }
             else
             {
-                var inputObj = new TodaysAdmissionInput()
-                {
-                    ReportDate = input.ReportDate,
-                    WardId = input.WardId,
-                };
-                var totalAdmissions = await _sessionDataProvider.GetMonthlyTotalAdmissions(inputObj);
-                int TotalAdmissions = 0;
 
-                if (totalAdmissions.Any())
+                var resultsEntity = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(wardMidnightCensus.Id, async (item) =>
                 {
-                    TotalAdmissions = (int)totalAdmissions[0].TotalAdmissions;
-                }
-
-                var calculatedReport = await _sessionDataProvider.GetMonthlyStats(new WardCensusInput() { ReportDate = input.ReportDate, WardId = input.WardId, TotalMonthlyAdmissions = TotalAdmissions });
-                if (calculatedReport.Any())
-                {
-                    var monthlyStat = calculatedReport[0];
-
-                    var resultsEntity = await SaveOrUpdateEntityAsync<WardMidnightCensusReport>(entity.Id, async (item) =>
-                    {
-                        item.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress;
-                        item.BedUtilisation = (double?)monthlyStat.BedUtilisation;
-                        item.AverageLengthofStay = (float?)monthlyStat.AverageLengthOfStay;
-                        item.ReportType = His.Domain.Domain.Enums.RefListReportType.Monthly;
-                        item.ReportDate = input.ReportDate;
-                        item.Ward = ward;
-                        item.AverageBedAvailability = (float?)monthlyStat.AverageBedAvailability;
-                        item.NumBedsInWard = ward.NumberOfBeds;
-                        item.TotalBedAvailability = monthlyStat.TotalBedAvailability;
-                        item.TotalAdmissions = (int?)monthlyStat.TotalAdmissions;
-                        item.TotalSeparations = (int?)monthlyStat.TotalSeparations;
-                    });
-                    return ObjectMapper.Map<WardMidnightCensusReportResponse>(resultsEntity);
-                }
-                return ObjectMapper.Map<WardMidnightCensusReportResponse>(null);
+                    ObjectMapper.Map(monthlyStat, item);
+                });
+                return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(resultsEntity);
             }
         }
+
         /// <summary>
         /// Used to reject the report
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost, Route("Reject")]
-        [AbpAuthorize(PermissionNames.DisapproveReport)]
-        public async Task<WardMidnightCensusReportResponse> Reject(RejectReportInput input)
+        public async Task<DynamicDto<WardMidnightCensusReport, Guid>> Reject(RejectReportInput input)
+        {
+            await validateUserAssignedToWard(input);
+
+            var ward = await GetEntityAsync<HisWard>(input.WardId);
+
+            var wardMidnightCensus = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
+
+            if (wardMidnightCensus.ApprovalStatus != RefListApprovalStatuses.awaitingApproval || wardMidnightCensus.ApprovalStatus != RefListApprovalStatuses.awaitingFinalApproval)
+                throw new UserFriendlyException("Cannot reject report since it is not awaiting approaval");
+
+                wardMidnightCensus.ApprovalStatus = RefListApprovalStatuses.Rejected;
+                wardMidnightCensus.RejectionComments = input.RejectionReason;
+                wardMidnightCensus.RejectedBy = await GetCurrentPersonAsync() as PersonFhirBase;
+                wardMidnightCensus = await _wardMidnightCensusReport.UpdateAsync(wardMidnightCensus);
+           
+            return await MapToDynamicDtoAsync<WardMidnightCensusReport, Guid>(wardMidnightCensus);
+        }
+
+        private async Task validateUserAssignedToWard(WardCensusQueryInput input)
         {
             var currentPerson = await GetCurrentPersonAsync();
             var isPersonAssignedToHospital = await _userAccessRightService.IsPersonAssignedToHospital(input.WardId, currentPerson);
@@ -534,65 +295,6 @@ namespace Boxfusion.Health.His.Admissions.Services.Reports
             {
                 throw new UserFriendlyException("The Current User is not assigned to this ward");
             }
-
-            var ward = await GetEntityAsync<HisWard>(input.WardId);
-
-            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward == ward && r.ReportDate == input.ReportDate);
-
-            if (entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingApproval || entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingFinalApproval)
-            {
-                entity.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.Rejected;
-                entity.RejectionComments = input.RejectionReason;
-                entity.RejectedBy = await GetCurrentPersonAsync() as PersonFhirBase;
-
-                await _wardMidnightCensusReport.UpdateAsync(entity);
-            }
-            else
-            {
-                throw new UserFriendlyException("Cannot reject report since it is not awaiting approaval");
-            }
-
-            return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        [HttpPost, Route("SubmitForApproval")]
-        [AbpAuthorize(PermissionNames.SubmitsReportsForApproval)]
-        public async Task<WardMidnightCensusReportResponse> SubmitForApproval(WardCensusInput input)
-        {
-            var currentPerson = await GetCurrentPersonAsync();
-            var isPersonAssignedToHospital = await _userAccessRightService.IsPersonAssignedToHospital(input.WardId, currentPerson);
-            if (!isPersonAssignedToHospital) throw new UserFriendlyException("The Current User is not assigned to this hospital");
-
-            var isPersonAssignedToWard = await _userAccessRightService.IsPersonAssignedToWard(input.WardId, currentPerson);
-            if (!isPersonAssignedToWard) throw new UserFriendlyException("The Current User is not assigned to this ward");
-
-            var entity = await _wardMidnightCensusReport.FirstOrDefaultAsync(r => r.Ward.Id == input.WardId && r.ReportDate == input.ReportDate);
-            //Check Midnight for the day.
-
-            if (entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.Inprogress || entity.ApprovalStatus == His.Domain.Domain.Enums.RefListApprovalStatuses.Rejected)
-            {
-                if (entity.Ward.MidnightCensusApprovalModel == His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.SingleApprover)
-                {
-                    entity.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingFinalApproval;
-                }
-
-                if (entity.Ward.MidnightCensusApprovalModel == His.Domain.Domain.Enums.RefListMidnightCensusApprovalModel.TwoApprover)
-                {
-                    entity.ApprovalStatus = His.Domain.Domain.Enums.RefListApprovalStatuses.awaitingApproval;
-                }
-
-                await _wardMidnightCensusReport.UpdateAsync(entity);
-            }
-            else
-            {
-                throw new UserFriendlyException("Cannot submit report for approaval since it is not in-prograss or previously rejected");
-            }
-
-            return ObjectMapper.Map<WardMidnightCensusReportResponse>(entity);
         }
     }
 }

@@ -8,13 +8,24 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Boxfusion.Health.His.Admissions.Hubs
+namespace Boxfusion.Health.His.Admissions.Application.Hubs
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class HisAdmisSignalRHub : Hub, ITransientDependency
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public IAbpSession AbpSession { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public ILogger Logger { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public HisAdmisSignalRHub()
         {
             AbpSession = NullAbpSession.Instance;

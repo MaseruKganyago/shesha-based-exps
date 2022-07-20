@@ -1,14 +1,14 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
-using Boxfusion.Health.His.Domain.Domain;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos;
 using Shesha.AutoMapper;
 using Shesha.AutoMapper.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Services.Reports.Dto
+namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto
 {
     /// <summary>
     /// 

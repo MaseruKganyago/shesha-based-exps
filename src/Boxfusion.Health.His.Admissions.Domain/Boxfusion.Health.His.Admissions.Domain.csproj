@@ -1,0 +1,69 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath></OutputPath>
+    <DocumentationFile>.\Boxfusion.Health.His.MidnightCensus.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>.\Boxfusion.Health.His.MidnightCensus.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Application\**" />
+    <Compile Remove="Authorization\**" />
+    <Compile Remove="Domain\Dtos\**" />
+    <Compile Remove="Jobs\**" />
+    <Compile Remove="Migrations\**" />
+    <Compile Remove="Notifications\**" />
+    <EmbeddedResource Remove="Application\**" />
+    <EmbeddedResource Remove="Authorization\**" />
+    <EmbeddedResource Remove="Domain\Dtos\**" />
+    <EmbeddedResource Remove="Jobs\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <EmbeddedResource Remove="Notifications\**" />
+    <None Remove="Application\**" />
+    <None Remove="Authorization\**" />
+    <None Remove="Domain\Dtos\**" />
+    <None Remove="Jobs\**" />
+    <None Remove="Migrations\**" />
+    <None Remove="Notifications\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domain\Admissions\Dtos\AdmissionMapProfile.cs" />
+    <Compile Remove="Domain\Admissions\Dtos\SeparationInput.cs" />
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <PackageReference Include="Abp" Version="5.0.0" />
+    <PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.1.20" />
+    <PackageReference Include="FluentMigrator" Version="3.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
+    <PackageReference Include="Shesha.Application" Version="0.3.73" />
+    <PackageReference Include="Shesha.Core" Version="0.3.73" />
+    <PackageReference Include="Shesha.Enterprise" Version="0.0.40" />
+    <PackageReference Include="Shesha.Framework" Version="0.3.73" />
+    <PackageReference Include="Shesha.NHibernate" Version="0.3.73" />
+    <PackageReference Include="Shesha.Scheduler" Version="0.3.73" />
+    <PackageReference Include="Shesha.Web.Controls" Version="0.3.73" />
+    <PackageReference Include="System.Collections" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

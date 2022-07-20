@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Boxfusion.Health.His.GpDoh.Customisation</name>
+    </assembly>
+    <members>
+        <member name="T:Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients.FacilityPatientEntityChangingEventHandler">
+            <summary>
+            Intercepts entity before create/updated and runs validation on the specific fields.
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients.FacilityPatientEntityChangingEventHandler.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients.FacilityPatientEntityChangingEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangingEventData{Boxfusion.Health.His.Common.Patients.FacilityPatient})">
+            <summary>
+            
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="T:Boxfusion.Health.His.GpDoh.Customisation.HisGpDohCustomisationsModule">
+            <summary>
+            Health.His Module
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.HisGpDohCustomisationsModule.Initialize">
+            <summary>
+            inheritedDoc
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.HisGpDohCustomisationsModule.PreInitialize">
+            <summary>
+            inheritedDoc
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.HisGpDohCustomisationsModule.PostInitialize">
+            <summary>
+            inheritedDoc
+            </summary>
+        </member>
+    </members>
+</doc>
