@@ -111,7 +111,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
         public async Task<DynamicDto<CdmAppointment, Guid>> BookAvailableSlotAsync(BookAppointmentInput input)
         {
             Validation.ValidateEntityWithDisplayNameDto(input?.Schedule, "Schedule");
-            Validation.ValidateEntityWithDisplayNameDto(input?.Practitioner, "Practitioner");
+            //Validation.ValidateEntityWithDisplayNameDto(input?.Practitioner, "Practitioner");
             Validation.ValidateNullableType(input?.Start, "Appointment Date");
             Validation.ValidateEntityWithDisplayNameDto(input?.Patient, "Patient");
 
