@@ -147,7 +147,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
         /// <returns></returns>
         public async Task ValidateIdentityNumber(string identityNumber, Guid currentWardId)
         {
-            if (!string.IsNullOrEmpty(identityNumber)) //TODO: Implement SA ID validation in Helper.Validation
+            if (string.IsNullOrEmpty(identityNumber)) //TODO: Implement SA ID validation in Helper.Validation
                 throw new UserFriendlyException("The specified identify number is not a valid South African ID number.");
 
             var wardAdmissions = await _wardAdmissionRepositiory.GetAllListAsync(x => x.Subject.IdentityNumber == identityNumber);
