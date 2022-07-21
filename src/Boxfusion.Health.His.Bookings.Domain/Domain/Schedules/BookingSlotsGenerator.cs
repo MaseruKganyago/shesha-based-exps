@@ -7,7 +7,6 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
-using Boxfusion.Health.HealthCommon.Core.Helpers.Validations;
 using Shesha.AutoMapper.Dto;
 using Shesha.Enterprise.PublicHolidays;
 using Shesha.Extensions;
@@ -36,6 +35,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
         /// <param name="schedulesRepo"></param>
         /// <param name="scheduleAvailabilityRepo"></param>
         /// <param name="slotsRepo"></param>
+        /// <param name="publicHolidayManager"></param>
         public BookingSlotsGenerator(IRepository<CdmSchedule, Guid> schedulesRepo,
             IRepository<ScheduleAvailabilityForTimeBooking, Guid> scheduleAvailabilityRepo,
             IRepository<CdmSlot, Guid> slotsRepo,

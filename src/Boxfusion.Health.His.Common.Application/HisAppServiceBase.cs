@@ -1,5 +1,5 @@
-﻿using Boxfusion.Health.HealthCommon.Core.Services;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
+using Shesha;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace Boxfusion.Health.His.Common
     /// <summary>
     /// To be used as the Base class for all AppServices
     /// </summary>
-    public class HisAppServiceBase : CdmAppServiceBase
+    public class HisAppServiceBase : SheshaAppServiceBase
     {
         private const string CONTEXT_FACILITY_ID_HEADER_NAME = "his-facilityId";
         private readonly IHttpContextAccessor _httpContextAccessor;

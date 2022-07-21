@@ -1,6 +1,6 @@
 ﻿using Abp.Dependency;
-using Boxfusion.Health.His.Admissions.Hubs;
-using Boxfusion.Health.His.Domain.Domain;
+using Boxfusion.Health.His.Admissions.Application.Hubs;
+using Boxfusion.Health.His.Common;
 using EasyNetQ;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Admissions.Helpers
+namespace Boxfusion.Health.His.Admissions.Application.Helpers
 {
     public static class ServiceBusHelper
     {

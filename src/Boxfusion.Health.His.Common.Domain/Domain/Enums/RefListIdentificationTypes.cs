@@ -10,7 +10,6 @@ namespace Boxfusion.Health.His.Common.Enums
     /// 
     /// </summary>
     [ReferenceList("His", "IdentificationTypes")]
-    [Obsolete]
     public enum RefListIdentificationTypes : long
     {
         /// <summary>

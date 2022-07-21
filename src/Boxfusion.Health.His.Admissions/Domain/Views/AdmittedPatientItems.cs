@@ -1,7 +1,8 @@
 ﻿using Abp.Domain.Entities;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
-using Boxfusion.Health.His.Domain.Domain.Enums;
+using Boxfusion.Health.His.Admissions.Domain.Domain.RefLists;
+using Boxfusion.Health.His.Common.Enums;
 using Shesha.Domain.Attributes;
 using Shesha.Domain.Enums;
 using System;
@@ -10,7 +11,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Domain.Views
+namespace Boxfusion.Health.His.Admissions.Application.Domain.Views
 {
 	/// <summary>
 	/// 

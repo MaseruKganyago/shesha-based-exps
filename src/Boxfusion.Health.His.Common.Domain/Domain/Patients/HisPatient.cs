@@ -30,5 +30,9 @@ namespace Boxfusion.Health.His.Common.Patients
         /// </summary>
         [ReferenceList("His", "Provinces")]
         public virtual long? PatientProvince { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual string HospitalPatientNumber { get; set; }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
-using Boxfusion.Health.His.Domain.Domain;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Reports;
+using Boxfusion.Health.His.Common;
 using Shesha.AutoMapper.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Boxfusion.Health.His.Admissions.Services.Reports.Dto
+namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto
 {
     /// <summary>
     /// 

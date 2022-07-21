@@ -7,13 +7,12 @@ using Boxfusion.Health.Cdm.Schedules;
 using Boxfusion.Health.Cdm.Slots;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
-using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
-using Boxfusion.Health.HealthCommon.Core.Services;
 using Boxfusion.Health.His.Bookings.Domain;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Authorization;
 using Boxfusion.Health.His.Common.Patients;
 using Microsoft.AspNetCore.Mvc;
+using Shesha;
 using Shesha.Domain;
 using System;
 using System.Collections.Generic;
@@ -29,7 +28,7 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
     [AbpAuthorize]
     [ApiVersion("2")]
     [Route("api/v{version:apiVersion}/His/[controller]")]
-    public class AppointmentBookingTestDataAppService : CdmAppServiceBase //, IBookingManagementsAppService
+    public class AppointmentBookingTestDataAppService : SheshaAppServiceBase //, IBookingManagementsAppService
     {
         protected IRepository<CdmSchedule, Guid> _scheduleRepository;
         protected IRepository<HisHealthFacility, Guid> _facilityRepository;

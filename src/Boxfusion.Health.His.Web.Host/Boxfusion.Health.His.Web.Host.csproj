@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>Boxfusion.Health.His.Web.Host</AssemblyName>
@@ -39,6 +39,7 @@
     <PackageReference Include="Abp.TestBase" Version="6.6.2" />
     <PackageReference Include="ElmahCore" Version="2.1.2" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="6.1.0" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.25" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Hangfire.SqlServer" Version="1.7.25" />
@@ -52,7 +53,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.2" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
-    <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Elmah\Shesha.Elmah.csproj" />
+    <PackageReference Include="Shesha.Elmah" Version="3.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +68,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Boxfusion.Health.His.Web.Core\Boxfusion.Health.His.Web.Core.csproj" />
   </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1maseru_1json__JsonSchema="https://docs.renovatebot.com/renovate-schema.json" /></VisualStudio></ProjectExtensions>
   <ItemGroup>
     <None Update="wwwroot\favicon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

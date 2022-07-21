@@ -6,7 +6,7 @@ using Boxfusion.Health.His.Bookings.Localization;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Domain;
 using Shesha;
-using Shesha.Enterprise.Reporting;
+using Shesha.Reporting;
 using Shesha.Startup;
 using System.Reflection;
 
