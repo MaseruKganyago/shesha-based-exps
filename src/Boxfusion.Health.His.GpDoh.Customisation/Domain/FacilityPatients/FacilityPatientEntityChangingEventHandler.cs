@@ -5,6 +5,7 @@ using Abp.Runtime.Validation;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
 using Boxfusion.Health.His.Domain.Helpers;
+using Boxfusion.Health.His.GpDoh.Domain.FacilityPatients;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,7 +18,7 @@ namespace Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients
 	/// <summary>
 	/// Intercepts entity before create/updated and runs validation on the specific fields.
 	/// </summary>
-	public class FacilityPatientEntityChangingEventHandler: IEventHandler<EntityChangingEventData<FacilityPatient>>, ITransientDependency
+	public class FacilityPatientEntityChangingEventHandler: IEventHandler<EntityChangingEventData<GpDohFacilityPatient>>, ITransientDependency
     {
 		/// <summary>
 		/// 
@@ -31,12 +32,12 @@ namespace Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients
         /// 
         /// </summary>
         /// <param name="eventData"></param>
-		public void HandleEvent(EntityChangingEventData<FacilityPatient> eventData)
+		public void HandleEvent(EntityChangingEventData<GpDohFacilityPatient> eventData)
 		{
 			ValidateFacilityPatiententity(eventData.Entity);
         }
 
-        private void ValidateFacilityPatiententity(FacilityPatient entity)
+        private void ValidateFacilityPatiententity(GpDohFacilityPatient entity)
         {
             var validationResults = new List<ValidationResult>();
 
@@ -70,7 +71,7 @@ namespace Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients
                 {
                     if (string.IsNullOrWhiteSpace(entity.IdentityNumber))
                         validationResults.Add(new ValidationResult("Identity Number is mandatory."));
-                    else if (!string.IsNullOrEmpty(entity.IdentityNumber)) //TODO: Implement SA ID validation in Helper.Validation
+                    else if (string.IsNullOrEmpty(entity.IdentityNumber)) //TODO: Implement SA ID validation in Helper.Validation
                         validationResults.Add(new ValidationResult("The specified identify number is not a valid South African ID number."));
                 }
             }
