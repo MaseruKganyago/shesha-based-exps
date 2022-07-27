@@ -14,7 +14,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients.FacilityPatientEntityChangingEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangingEventData{Boxfusion.Health.His.Common.Patients.FacilityPatient})">
+        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients.FacilityPatientEntityChangingEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangingEventData{Boxfusion.Health.His.GpDoh.Domain.FacilityPatients.GpDohFacilityPatient})">
             <summary>
             
             </summary>
@@ -38,6 +38,11 @@
         <member name="M:Boxfusion.Health.His.GpDoh.Customisation.HisGpDohCustomisationsModule.PostInitialize">
             <summary>
             inheritedDoc
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.GpDoh.Domain.FacilityPatients.GpDohFacilityPatient">
+            <summary>
+            
             </summary>
         </member>
     </members>
