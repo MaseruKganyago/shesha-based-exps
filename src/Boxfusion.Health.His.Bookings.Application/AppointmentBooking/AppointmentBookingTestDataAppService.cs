@@ -1,6 +1,5 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
-using Abp.UI;
 using Boxfusion.Health.Cdm.Appointments;
 using Boxfusion.Health.Cdm.Patients;
 using Boxfusion.Health.Cdm.Schedules;
@@ -9,15 +8,11 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.His.Bookings.Domain;
 using Boxfusion.Health.His.Common;
-using Boxfusion.Health.His.Common.Authorization;
 using Boxfusion.Health.His.Common.Patients;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 using Shesha.Domain;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Bookings.AppointmentBooking

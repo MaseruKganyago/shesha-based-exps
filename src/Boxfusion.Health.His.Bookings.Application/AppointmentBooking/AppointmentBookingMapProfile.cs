@@ -1,13 +1,9 @@
 ﻿using Boxfusion.Health.Cdm.Appointments;
 using Boxfusion.Health.Cdm.Patients;
 using Boxfusion.Health.Cdm.Practitioners;
-using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
 using Shesha.AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Boxfusion.Health.His.Bookings.AppointmentBooking
 {

@@ -8,7 +8,7 @@ using Shesha;
 using Shesha.Authorization;
 using Boxfusion.Health.HealthCommon.Core;
 using Shesha.Startup;
-using Shesha.Reporting;
+using Shesha.Enterprise.Reporting;
 
 namespace Boxfusion.Health.His.Common
 {

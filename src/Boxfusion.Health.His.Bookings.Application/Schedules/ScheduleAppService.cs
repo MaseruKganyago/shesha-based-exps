@@ -1,23 +1,14 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
-using Abp.UI;
 using Boxfusion.Health.Cdm.Schedules;
-using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
-using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
-using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Bookings.Authorization;
 using Boxfusion.Health.His.Bookings.Domain;
-using Boxfusion.Health.His.Bookings.Services.BookingAppointments.Dtos;
 using Boxfusion.Health.His.Common;
-using Boxfusion.Health.His.Common.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 using Shesha.DynamicEntities.Dtos;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Bookings.Schedules
