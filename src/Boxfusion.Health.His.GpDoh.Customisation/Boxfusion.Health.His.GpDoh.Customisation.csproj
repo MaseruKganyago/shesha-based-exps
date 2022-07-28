@@ -21,7 +21,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Abp" Version="6.6.2" />
-		<PackageReference Include="BoxHealth.HealthCommon.Cdm" Version="1.1.38" />
 		<PackageReference Include="FluentMigrator" Version="3.2.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
 		<PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
@@ -35,6 +34,7 @@
 		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise\Shesha.Enterprise.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise.Reporting\Shesha.Enterprise.Reporting.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Scheduler\Shesha.Scheduler.csproj" />
+		<ProjectReference Include="..\..\boxfusion-health-common\src\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
