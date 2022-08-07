@@ -17,8 +17,10 @@
 		<None Remove="Forms\**" />
 	</ItemGroup>
 	<ItemGroup>
-		<Content Remove="appsettings.Test.json" />
 		<Content Remove="wwwroot\swagger\ui\index.html" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="appsettings.Production-Slot" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="app.config" />
