@@ -9,7 +9,7 @@ using Shesha;
 using Shesha.Startup;
 using System.Reflection;
 
-namespace Boxfusion.Health.His.GpDoh.Customisation
+namespace Boxfusion.Health.His.GpDoh.Customisations
 {
     /// <summary>
     /// Health.His Module

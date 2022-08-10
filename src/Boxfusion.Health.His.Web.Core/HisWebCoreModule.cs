@@ -30,7 +30,7 @@ using Castle.MicroKernel.Registration;
 using Shesha.Authorization;
 using Boxfusion.Health.His.Common.Authorization;
 using Boxfusion.Health.His.Admissions.Application;
-using Boxfusion.Health.His.GpDoh.Customisation;
+using Boxfusion.Health.His.GpDoh.Customisations;
 
 namespace Boxfusion.Health.His
 {
