@@ -6,10 +6,9 @@ using Boxfusion.Health.His.Admissions;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Domain;
 using Shesha;
-using Shesha.Startup;
 using System.Reflection;
 
-namespace Boxfusion.Health.His.GpDoh.Customisation
+namespace Boxfusion.Health.His.GpDoh.Customisations
 {
     /// <summary>
     /// Health.His Module

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Boxfusion.Health.His.GpDoh.Customisation</name>
+        <name>Boxfusion.Health.His.GpDoh.Customisations</name>
     </assembly>
     <members>
         <member name="T:Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients.FacilityPatientEntityChangingEventHandler">
@@ -20,29 +20,29 @@
             </summary>
             <param name="eventData"></param>
         </member>
-        <member name="T:Boxfusion.Health.His.GpDoh.Customisation.HisGpDohCustomisationsModule">
+        <member name="T:Boxfusion.Health.His.GpDoh.Domain.FacilityPatients.GpDohFacilityPatient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.GpDoh.Customisations.HisGpDohCustomisationsModule">
             <summary>
             Health.His Module
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.HisGpDohCustomisationsModule.Initialize">
+        <member name="M:Boxfusion.Health.His.GpDoh.Customisations.HisGpDohCustomisationsModule.Initialize">
             <summary>
             inheritedDoc
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.HisGpDohCustomisationsModule.PreInitialize">
+        <member name="M:Boxfusion.Health.His.GpDoh.Customisations.HisGpDohCustomisationsModule.PreInitialize">
             <summary>
             inheritedDoc
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.HisGpDohCustomisationsModule.PostInitialize">
+        <member name="M:Boxfusion.Health.His.GpDoh.Customisations.HisGpDohCustomisationsModule.PostInitialize">
             <summary>
             inheritedDoc
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.GpDoh.Domain.FacilityPatients.GpDohFacilityPatient">
-            <summary>
-            
             </summary>
         </member>
     </members>
