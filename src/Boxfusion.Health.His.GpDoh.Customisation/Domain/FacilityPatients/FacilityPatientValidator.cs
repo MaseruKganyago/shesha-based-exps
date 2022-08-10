@@ -1,4 +1,5 @@
-﻿using Boxfusion.Health.His.Common.Enums;
+﻿using Abp.Dependency;
+using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
 using FluentValidation;
 using System;

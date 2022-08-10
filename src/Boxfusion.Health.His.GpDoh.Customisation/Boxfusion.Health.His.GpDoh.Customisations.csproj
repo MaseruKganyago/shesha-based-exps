@@ -26,6 +26,9 @@
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
 		<PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
 		<PackageReference Include="System.Collections" Version="4.3.0" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.2.1" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Core\Shesha.Core.csproj" />
