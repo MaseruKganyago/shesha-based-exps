@@ -481,6 +481,111 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.WardId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.HospitalId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.WardAdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.DateOfBirth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.AdmissionDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.SeparationDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.Status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.NumOfDaysAdmitted">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.AdmissionType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.Gender">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.IdentificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.IdentityNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.HospitalAdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.Classification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.PatientProvince">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.Nationality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.OtherCategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.Speciality">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.RefLists.RefListProvinces">
             <summary>
             
@@ -1034,6 +1139,21 @@
             
             </summary>
             <param name="localizationConfiguration"></param>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Migrations.M20220808002400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220808002400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220808002400.Down">
+            <summary>
+            
+            </summary>
         </member>
     </members>
 </doc>

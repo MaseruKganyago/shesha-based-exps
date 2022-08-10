@@ -4,23 +4,12 @@
         <name>Boxfusion.Health.His.GpDoh.Customisations</name>
     </assembly>
     <members>
-        <member name="T:Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients.FacilityPatientEntityChangingEventHandler">
-            <summary>
-            Intercepts entity before create/updated and runs validation on the specific fields.
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients.FacilityPatientEntityChangingEventHandler.#ctor">
+        <member name="T:Boxfusion.Health.His.GpDoh.Domain.FacilityPatients.FacilityPatientValidator">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.Domain.FacilityPatients.FacilityPatientEntityChangingEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangingEventData{Boxfusion.Health.His.GpDoh.Domain.FacilityPatients.GpDohFacilityPatient})">
-            <summary>
-            
-            </summary>
-            <param name="eventData"></param>
-        </member>
-        <member name="T:Boxfusion.Health.His.GpDoh.Domain.FacilityPatients.GpDohFacilityPatient">
+        <member name="M:Boxfusion.Health.His.GpDoh.Domain.FacilityPatients.FacilityPatientValidator.#ctor">
             <summary>
             
             </summary>

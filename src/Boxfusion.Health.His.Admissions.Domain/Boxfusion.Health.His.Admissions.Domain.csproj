@@ -23,19 +23,16 @@
 		<Compile Remove="Authorization\**" />
 		<Compile Remove="Domain\Dtos\**" />
 		<Compile Remove="Jobs\**" />
-		<Compile Remove="Migrations\**" />
 		<Compile Remove="Notifications\**" />
 		<EmbeddedResource Remove="Application\**" />
 		<EmbeddedResource Remove="Authorization\**" />
 		<EmbeddedResource Remove="Domain\Dtos\**" />
 		<EmbeddedResource Remove="Jobs\**" />
-		<EmbeddedResource Remove="Migrations\**" />
 		<EmbeddedResource Remove="Notifications\**" />
 		<None Remove="Application\**" />
 		<None Remove="Authorization\**" />
 		<None Remove="Domain\Dtos\**" />
 		<None Remove="Jobs\**" />
-		<None Remove="Migrations\**" />
 		<None Remove="Notifications\**" />
 	</ItemGroup>
 
