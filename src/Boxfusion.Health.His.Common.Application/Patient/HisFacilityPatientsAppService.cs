@@ -30,7 +30,7 @@ namespace Boxfusion.Health.His.Common.Patients
             table.AddProperty(e => e.IdentityNumber, u => u.Caption("ID/Passport No"));
             //table.AddProperty(e => e.)
             table.AddProperty(e => e.DateOfBirth, u => u.Caption("Date of Birth"));
-            table.AddProperty(e => e.MobileNumber, u => u.Caption("Cellphone"));
+            table.AddProperty(e => e.MobileNumber1, u => u.Caption("Cellphone"));
             table.AddProperty(e => e.Gender);
             
             return table;

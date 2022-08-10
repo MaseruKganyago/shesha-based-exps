@@ -100,12 +100,17 @@ by passing identity number validator</PackageReleaseNotes>
   </ItemGroup>
   <ItemGroup Condition="!(Exists('..\..\..\shesha-core-enterprise\shesha-core\src') And Exists('..\..\..\shesha-core-enterprise\src'))">
     <PackageReference Include="Shesha.Application" Version="0.3.113" />
-    <PackageReference Include="Shesha.Core" Version="0.3.113" />
     <PackageReference Include="Shesha.Framework" Version="0.3.113" />
     <PackageReference Include="Shesha.NHibernate" Version="0.3.113" />
-    <PackageReference Include="Shesha.RestSharp" Version="0.3.113" />
-    <PackageReference Include="Shesha.Scheduler" Version="0.3.113" />
-    <PackageReference Include="Shesha.Web.Controls" Version="0.3.113" />
     <PackageReference Include="Shesha.Enterprise.DocumentProcessing" Version="0.0.57" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Core\Shesha.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Framework\Shesha.Framework.csproj" />
+    <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.NHibernate\Shesha.NHibernate.csproj" />
+    <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.RestSharp\Shesha.RestSharp.csproj" />
+    <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Scheduler\Shesha.Scheduler.csproj" />
+    <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Web.Controls\Shesha.Web.Controls.csproj" />
   </ItemGroup>  
 </Project>

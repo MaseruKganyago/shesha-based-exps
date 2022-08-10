@@ -1,7 +1,6 @@
 ﻿using Boxfusion.Health.Cdm.Domain.Domain.Fhir;
 using Shesha.Domain;
 using Shesha.Domain.Attributes;
-using Shesha.Enterprise.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

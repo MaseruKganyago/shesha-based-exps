@@ -8,7 +8,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Shesha.AutoMapper.Dto;
-using Shesha.Enterprise.PublicHolidays;
+using Shesha.Enterprise.Domain;
 using Shesha.Extensions;
 using System;
 using System.Collections.Generic;

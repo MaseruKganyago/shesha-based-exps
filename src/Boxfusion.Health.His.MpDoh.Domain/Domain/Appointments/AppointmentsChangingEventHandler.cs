@@ -15,6 +15,7 @@ using NHibernate;
 using NHibernate.Linq;
 using Shesha.AutoMapper.Dto;
 using Shesha.Domain;
+using Shesha.Enterprise.Domain;
 using Shesha.Enterprise.Sequences;
 using Shesha.Services.ReferenceLists.Dto;
 

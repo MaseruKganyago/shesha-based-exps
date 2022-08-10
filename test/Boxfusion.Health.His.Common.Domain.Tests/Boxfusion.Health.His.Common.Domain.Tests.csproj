@@ -42,9 +42,8 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.2" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.NHibernate\Shesha.NHibernate.csproj" />
-		<ProjectReference Include="..\..\src\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.Application.csproj" />
+		<ProjectReference Include="..\..\src\Boxfusion.Health.His.Admissions.Application\Boxfusion.Health.His.Admissions.Application.csproj" />
 		<ProjectReference Include="..\..\src\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>

@@ -33,10 +33,8 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
-	  <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Core\Shesha.Core.csproj" />
-    <ProjectReference Include="..\..\src\Boxfusion.Health.His.Bookings.Application\Boxfusion.Health.His.Bookings.Application.csproj" />
 	  <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.NHibernate\Shesha.NHibernate.csproj" />
+	  <ProjectReference Include="..\..\src\Boxfusion.Health.His.Bookings.Application\Boxfusion.Health.His.Bookings.Application.csproj" />
     <ProjectReference Include="..\..\src\Boxfusion.Health.His.Bookings.Domain\Boxfusion.Health.His.Bookings.Domain.csproj" />
   </ItemGroup>
 

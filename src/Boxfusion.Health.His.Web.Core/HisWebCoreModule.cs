@@ -29,8 +29,8 @@ using Boxfusion.Health.His.Common;
 using Castle.MicroKernel.Registration;
 using Shesha.Authorization;
 using Boxfusion.Health.His.Common.Authorization;
-using Boxfusion.Health.His.Admissions.Application;
 using Boxfusion.Health.His.GpDoh.Customisations;
+using Boxfusion.Health.His.Admissions.Application;
 
 namespace Boxfusion.Health.His
 {
