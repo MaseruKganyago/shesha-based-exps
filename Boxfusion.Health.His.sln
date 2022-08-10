@@ -48,8 +48,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Framework", "shesha-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Web.FormsDesigner", "shesha-core-enterprise\shesha-core\src\Shesha.Web.FormsDesigner\Shesha.Web.FormsDesigner.csproj", "{2736BCBD-049D-417B-8E83-9BC460E19268}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.HealthCommon.Core", "boxfusion-health-common\src\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj", "{B117758A-F01E-4B7A-BAA6-FD880828D9F2}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.AzureAD", "shesha-core-enterprise\shesha-core\src\Shesha.AzureAD\Shesha.AzureAD.csproj", "{D77AE091-EA8D-42CA-9249-538B9EDA954A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Elmah", "shesha-core-enterprise\shesha-core\src\Shesha.Elmah\Shesha.Elmah.csproj", "{F35DE0F2-074B-48AB-B5E5-0DC9385910F1}"
@@ -85,6 +83,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.GraphQL", "shesha-core-enterprise\shesha-core\src\Shesha.GraphQL\Shesha.GraphQL.csproj", "{4C4497AC-CEEF-48F6-AB95-6135352D615B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.GpDoh.Customisations", "src\Boxfusion.Health.His.GpDoh.Customisation\Boxfusion.Health.His.GpDoh.Customisations.csproj", "{7CEE0F40-DF65-4004-A602-1B2F288B97E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.HealthCommon.Core", "src\Boxfusion.HealthCommon\src\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj", "{2A26FCCC-E6CE-45D8-B3CB-0CDC18E318E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -201,12 +201,6 @@ Global
 		{2736BCBD-049D-417B-8E83-9BC460E19268}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{2736BCBD-049D-417B-8E83-9BC460E19268}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2736BCBD-049D-417B-8E83-9BC460E19268}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B117758A-F01E-4B7A-BAA6-FD880828D9F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B117758A-F01E-4B7A-BAA6-FD880828D9F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B117758A-F01E-4B7A-BAA6-FD880828D9F2}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
-		{B117758A-F01E-4B7A-BAA6-FD880828D9F2}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
-		{B117758A-F01E-4B7A-BAA6-FD880828D9F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B117758A-F01E-4B7A-BAA6-FD880828D9F2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D77AE091-EA8D-42CA-9249-538B9EDA954A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D77AE091-EA8D-42CA-9249-538B9EDA954A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D77AE091-EA8D-42CA-9249-538B9EDA954A}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
@@ -315,6 +309,12 @@ Global
 		{7CEE0F40-DF65-4004-A602-1B2F288B97E5}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{7CEE0F40-DF65-4004-A602-1B2F288B97E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CEE0F40-DF65-4004-A602-1B2F288B97E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A26FCCC-E6CE-45D8-B3CB-0CDC18E318E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A26FCCC-E6CE-45D8-B3CB-0CDC18E318E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A26FCCC-E6CE-45D8-B3CB-0CDC18E318E2}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A26FCCC-E6CE-45D8-B3CB-0CDC18E318E2}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
+		{2A26FCCC-E6CE-45D8-B3CB-0CDC18E318E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A26FCCC-E6CE-45D8-B3CB-0CDC18E318E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
