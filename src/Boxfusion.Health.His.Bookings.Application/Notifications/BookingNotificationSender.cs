@@ -55,7 +55,7 @@ namespace Boxfusion.Health.His.Bookings.Notifications
 
             var mobileNo = !string.IsNullOrWhiteSpace(appointment.ContactCellphone)
                 ? appointment.ContactCellphone
-                : appointment.Patient.MobileNumber1;
+                : appointment.Patient.MobileNumber;
             if (string.IsNullOrWhiteSpace(mobileNo))
                 return;
 

@@ -15,7 +15,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
 	[Entity(TypeShortAlias = "His.FlatWardAdmission")]
 	[Table("vw_His_FlattenedWardAdmissions")]
 	[ImMutable]
-	public class FlattenedWardAdmission: Entity<Guid>
+	public class FlattenedWardAdmission : Entity<Guid>
 	{
 		/// <summary>
 		/// 

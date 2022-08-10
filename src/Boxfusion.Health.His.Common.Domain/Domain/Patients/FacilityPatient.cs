@@ -32,10 +32,5 @@ namespace Boxfusion.Health.His.Common.Patients
             } 
             set { _facilityPatientIdentifier = value;  }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public override string FullNameWithTitle => (string.IsNullOrEmpty(TitleName) ? "" : (TitleName + " ")) + FullName;
     }
 }

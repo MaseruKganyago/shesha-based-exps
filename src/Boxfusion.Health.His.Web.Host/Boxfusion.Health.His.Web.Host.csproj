@@ -17,10 +17,8 @@
 		<None Remove="Forms\**" />
 	</ItemGroup>
 	<ItemGroup>
+		<Content Remove="appsettings.Test.json" />
 		<Content Remove="wwwroot\swagger\ui\index.html" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="appsettings.Production-Slot" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="app.config" />
@@ -40,8 +38,6 @@
 		<PackageReference Include="Abp.Castle.Log4Net" Version="6.6.2" />
 		<PackageReference Include="Abp.TestBase" Version="6.6.2" />
 		<PackageReference Include="ElmahCore" Version="2.1.2" />
-		<PackageReference Include="FluentValidation.AspNetCore" Version="11.2.1" />
-		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.0" />
 		<PackageReference Include="GraphQL.Server.Ui.Playground" Version="6.1.0" />
 		<PackageReference Include="Hangfire.Core" Version="1.7.25" />
 	</ItemGroup>
@@ -54,7 +50,6 @@
 		</PackageReference>
 		<PackageReference Include="Castle.LoggingFacility.MsLogging" Version="3.1.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="2.2.1" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.2" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.2" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
