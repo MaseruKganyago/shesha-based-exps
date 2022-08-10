@@ -15,6 +15,8 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
     [Entity(TypeShortAlias = "HealthCommon.Core.RelatedPerson", GenerateApplicationService = false)]
     public class RelatedPerson : PersonFhirBase
     {
+
+
         /// <summary>
         /// 
         /// </summary>
