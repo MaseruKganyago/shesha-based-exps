@@ -59,6 +59,16 @@
             
             </summary>
         </member>
+        <member name="M:Boxfusion.Health.His.Common.Domain.Migrations.M20220811162300.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Domain.Migrations.M20220811162300.Down">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager">
             <summary>
             TODO: Code to be moved to CDM

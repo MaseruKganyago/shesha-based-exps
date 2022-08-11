@@ -58,6 +58,7 @@
 		<ProjectReference Include="..\Boxfusion.Health.His.Common.Application\Boxfusion.Health.His.Common.Application.csproj" />
 		<ProjectReference Include="..\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
 		<ProjectReference Include="..\Boxfusion.Health.His.GpDoh.Customisations\Boxfusion.Health.His.GpDoh.Customisations.csproj" />
+		<ProjectReference Include="..\Boxfusion.Health.His.Houghton.Customisations\Boxfusion.Health.His.Houghton.Customisations.csproj" />
 		<ProjectReference Include="..\Boxfusion.Health.His.MpDoh.Domain\Boxfusion.Health.His.MpDoh.Customisations.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise.Reporting\Shesha.Enterprise.Reporting.csproj" />
 	</ItemGroup>

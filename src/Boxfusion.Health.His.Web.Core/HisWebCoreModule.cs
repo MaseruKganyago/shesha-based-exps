@@ -31,6 +31,7 @@ using Shesha.Authorization;
 using Boxfusion.Health.His.Common.Authorization;
 using Boxfusion.Health.His.Admissions.Application;
 using Boxfusion.Health.His.GpDoh.Customisations;
+using Boxfusion.Health.His.Houghton.Customisations;
 
 namespace Boxfusion.Health.His
 {
@@ -41,8 +42,9 @@ namespace Boxfusion.Health.His
          // Adding all the His Modules
          //typeof(HisAdmissModule),
          //typeof(HisAdminisModule),
-         typeof(HisGpDohCustomisationsModule),
-         typeof(MpDoh.HisMpDohCustomisationsModule),
+         //typeof(HisGpDohCustomisationsModule),
+         // typeof(Houghton.HisMpDohCustomisationsModule),
+         typeof(HisHoughtonCustomisationsModule),
          typeof(HisCommonDomainModule),
          typeof(HisCommonApplicationModule),
          typeof(HisBookingsDomainModule),
