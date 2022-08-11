@@ -4,6 +4,61 @@
         <name>Boxfusion.Health.His.Common.Domain</name>
     </assembly>
     <members>
+        <member name="T:Boxfusion.Health.His.Common.Domain.Domain.CoCoverage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.CoCoverage.BankAccount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner">
+            <summary>
+            Flattened version of the Practitioner linked to all the facilities
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.MobileNumber1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.EmailAddress1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.UserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.IsActive">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.LastLoginDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.FacilityNames">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager">
             <summary>
             TODO: Code to be moved to CDM
@@ -102,51 +157,6 @@
             </summary>
             <param name="id"></param>
             <returns></returns>
-        </member>
-        <member name="T:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner">
-            <summary>
-            Flattened version of the Practitioner linked to all the facilities
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.FirstName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.LastName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.MobileNumber1">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.EmailAddress1">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.UserName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.IsActive">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.LastLoginDate">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner.FacilityNames">
-            <summary>
-            
-            </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses">
             <summary>
