@@ -27,6 +27,7 @@ namespace Boxfusion.Health.His.Bookings.Jobs
         {
             _bookingSlotsGenerator = bookingSlotsGenerator;
         }
+
         /// <summary>
         /// 
         /// </summary>
