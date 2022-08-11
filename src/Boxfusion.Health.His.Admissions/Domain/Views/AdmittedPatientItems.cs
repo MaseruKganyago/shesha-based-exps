@@ -82,7 +82,8 @@ namespace Boxfusion.Health.His.Admissions.Application.Domain.Views
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual RefListWardSpecialities Speciality { get; set; }
+		[MultiValueReferenceList("Fhir", "Speciality")]
+		public long? Speciality { get; set; }
 
 		/// <summary>
 		/// 

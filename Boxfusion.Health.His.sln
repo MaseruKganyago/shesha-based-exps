@@ -26,8 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Common
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Bookings.Domain.Tests", "test\Boxfusion.Health.His.Bookings.Domain.Tests\Boxfusion.Health.His.Bookings.Domain.Tests.csproj", "{CD807E5E-CD55-48C5-A41E-4CC0BA7886D2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.MpDoh.Customisations", "src\Boxfusion.Health.His.MpDoh.Domain\Boxfusion.Health.His.MpDoh.Customisations.csproj", "{B1F6252A-5959-42E5-9915-8CD570440884}"
-EndProject
+
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admissions.Application", "src\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.Application.csproj", "{86E577DD-0F87-4C6A-A181-576A3D1107C6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admissions.Domain", "src\Boxfusion.Health.His.Admissions.Domain\Boxfusion.Health.His.Admissions.Domain.csproj", "{96A9F3A6-EF57-4EB5-83A8-680DE956005E}"
@@ -86,8 +85,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Web.Core", "shesha-c
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Web.FormsDesigner", "shesha-core-enterprise\shesha-core\src\Shesha.Web.FormsDesigner\Shesha.Web.FormsDesigner.csproj", "{D6C3BB7F-E9F6-48BB-8DC3-4ED8507C8827}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.GpDoh.Customisations", "src\Boxfusion.Health.His.GpDoh.Customisations\Boxfusion.Health.His.GpDoh.Customisations.csproj", "{E23FB998-1121-42AC-B085-166040BA8DB2}"
-EndProject
+
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Houghton.Customisations", "src\Boxfusion.Health.His.Houghton.Customisations\Boxfusion.Health.His.Houghton.Customisations.csproj", "{8D52145D-69FB-454E-9469-C0D47DBAEEBF}"
 EndProject
 Global
