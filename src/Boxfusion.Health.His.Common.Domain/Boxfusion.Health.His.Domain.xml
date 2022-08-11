@@ -573,6 +573,21 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Common.HisHealthFacility.FacilityPracticeNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HisHealthFacility.District">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HisHealthFacility.Speciality">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Common.HisUser">
             <summary>
             
