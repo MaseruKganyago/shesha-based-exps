@@ -1,25 +1,25 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Boxfusion.Health.His.Houghton.Customisations</name>
+        <name>Boxfusion.Health.His.Houghton.Customisation</name>
     </assembly>
     <members>
-        <member name="T:Boxfusion.Health.His.Houghton.Customisations.HisHoughtonCustomisationsModule">
+        <member name="T:Boxfusion.Health.His.Houghton.Customisation.HisHoughtonCustomisationsModule">
             <summary>
             Health.His Module
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Houghton.Customisations.HisHoughtonCustomisationsModule.Initialize">
+        <member name="M:Boxfusion.Health.His.Houghton.Customisation.HisHoughtonCustomisationsModule.Initialize">
             <summary>
             inheritedDoc
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Houghton.Customisations.HisHoughtonCustomisationsModule.PreInitialize">
+        <member name="M:Boxfusion.Health.His.Houghton.Customisation.HisHoughtonCustomisationsModule.PreInitialize">
             <summary>
             inheritedDoc
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Houghton.Customisations.HisHoughtonCustomisationsModule.PostInitialize">
+        <member name="M:Boxfusion.Health.His.Houghton.Customisation.HisHoughtonCustomisationsModule.PostInitialize">
             <summary>
             inheritedDoc
             </summary>

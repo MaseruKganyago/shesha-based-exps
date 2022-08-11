@@ -8,7 +8,7 @@ using Boxfusion.Health.His.Domain;
 using Shesha;
 using System.Reflection;
 
-namespace Boxfusion.Health.His.Houghton.Customisations
+namespace Boxfusion.Health.His.Houghton.Customisation
 {
     /// <summary>
     /// Health.His Module

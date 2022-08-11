@@ -7,16 +7,16 @@
 		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
 		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-		<RootNamespace>Boxfusion.Health.His.GpDoh</RootNamespace>
+		<RootNamespace>Boxfusion.Health.His.Houghton.Customisation</RootNamespace>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<OutputPath></OutputPath>
-		<DocumentationFile>.\Boxfusion.Health.His.Admissions.xml</DocumentationFile>
+		<DocumentationFile>.\Boxfusion.Health.His.Houghton.Customisation.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DocumentationFile>.\Boxfusion.Health.His.Admissions.xml</DocumentationFile>
+		<DocumentationFile>.\Boxfusion.Health.His.Houghton.Customisation.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

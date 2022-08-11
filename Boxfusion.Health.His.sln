@@ -86,7 +86,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Web.FormsDesigner", "shesha-core-enterprise\shesha-core\src\Shesha.Web.FormsDesigner\Shesha.Web.FormsDesigner.csproj", "{D6C3BB7F-E9F6-48BB-8DC3-4ED8507C8827}"
 EndProject
 
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Houghton.Customisations", "src\Boxfusion.Health.His.Houghton.Customisations\Boxfusion.Health.His.Houghton.Customisations.csproj", "{8D52145D-69FB-454E-9469-C0D47DBAEEBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Houghton.Customisation", "src\Boxfusion.Health.His.Houghton.Customisation\Boxfusion.Health.His.Houghton.Customisation.csproj", "{8D52145D-69FB-454E-9469-C0D47DBAEEBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

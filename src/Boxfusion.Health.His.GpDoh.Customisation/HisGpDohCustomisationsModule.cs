@@ -8,7 +8,7 @@ using Boxfusion.Health.His.Domain;
 using Shesha;
 using System.Reflection;
 
-namespace Boxfusion.Health.His.GpDoh.Customisations
+namespace Boxfusion.Health.His.GpDoh.Customisation
 {
     /// <summary>
     /// Health.His Module

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Boxfusion.Health.His.GpDoh.Customisations</name>
+        <name>Boxfusion.Health.His.GpDoh.Customisation</name>
     </assembly>
     <members>
         <member name="T:Boxfusion.Health.His.GpDoh.Domain.FacilityPatients.FacilityPatientValidator">
@@ -14,22 +14,22 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.GpDoh.Customisations.HisGpDohCustomisationsModule">
+        <member name="T:Boxfusion.Health.His.GpDoh.Customisation.HisGpDohCustomisationsModule">
             <summary>
             Health.His Module
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.GpDoh.Customisations.HisGpDohCustomisationsModule.Initialize">
+        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.HisGpDohCustomisationsModule.Initialize">
             <summary>
             inheritedDoc
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.GpDoh.Customisations.HisGpDohCustomisationsModule.PreInitialize">
+        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.HisGpDohCustomisationsModule.PreInitialize">
             <summary>
             inheritedDoc
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.GpDoh.Customisations.HisGpDohCustomisationsModule.PostInitialize">
+        <member name="M:Boxfusion.Health.His.GpDoh.Customisation.HisGpDohCustomisationsModule.PostInitialize">
             <summary>
             inheritedDoc
             </summary>

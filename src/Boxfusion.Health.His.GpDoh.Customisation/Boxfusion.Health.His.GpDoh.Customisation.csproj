@@ -7,43 +7,17 @@
 		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
 		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-		<RootNamespace>Boxfusion.Health.His.MpDoh</RootNamespace>
+		<RootNamespace>Boxfusion.Health.His.GpDoh</RootNamespace>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<OutputPath></OutputPath>
-		<DocumentationFile>.\Boxfusion.Health.His.Bookings.xml</DocumentationFile>
+		<DocumentationFile>.\Boxfusion.Health.His.GpDoh.Customisation.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DocumentationFile>.\Boxfusion.Health.His.Bookings.xml</DocumentationFile>
+		<DocumentationFile>.\Boxfusion.Health.His.GpDoh.Customisation.xml</DocumentationFile>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<Compile Remove="Application\**" />
-		<Compile Remove="Authorization\**" />
-		<Compile Remove="Domain\Dtos\**" />
-		<Compile Remove="Helpers\**" />
-		<Compile Remove="Jobs\**" />
-		<Compile Remove="Services\FacilityPatients\**" />
-		<Compile Remove="Services\Wards\**" />
-		<EmbeddedResource Remove="Application\**" />
-		<EmbeddedResource Remove="Authorization\**" />
-		<EmbeddedResource Remove="Domain\Dtos\**" />
-		<EmbeddedResource Remove="Helpers\**" />
-		<EmbeddedResource Remove="Jobs\**" />
-		<EmbeddedResource Remove="Services\FacilityPatients\**" />
-		<EmbeddedResource Remove="Services\Wards\**" />
-		<None Remove="Application\**" />
-		<None Remove="Authorization\**" />
-		<None Remove="Domain\Dtos\**" />
-		<None Remove="Helpers\**" />
-		<None Remove="Jobs\**" />
-		<None Remove="Services\FacilityPatients\**" />
-		<None Remove="Services\Wards\**" />
-	</ItemGroup>
-
-
 
 	<ItemGroup>
 		<PackageReference Include="Abp" Version="6.6.2" />
@@ -54,21 +28,23 @@
 
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Core\Shesha.Core.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.NHibernate\Shesha.NHibernate.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Scheduler\Shesha.Scheduler.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Web.Controls\Shesha.Web.Controls.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Framework\Shesha.Framework.csproj" />
+		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.NHibernate\Shesha.NHibernate.csproj" />
+		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Web.Controls\Shesha.Web.Controls.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise\Shesha.Enterprise.csproj" />
+		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise.Reporting\Shesha.Enterprise.Reporting.csproj" />
+		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Scheduler\Shesha.Scheduler.csproj" />
+		<ProjectReference Include="..\..\boxfusion-health-common\src\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Boxfusion.Health.His.Bookings.Domain\Boxfusion.Health.His.Bookings.Domain.csproj" />
+		<ProjectReference Include="..\Boxfusion.Health.His.Admissions.Domain\Boxfusion.Health.His.Admissions.Domain.csproj" />
 		<ProjectReference Include="..\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Configuration\" />
 		<Folder Include="Migrations\" />
+		<Folder Include="Configuration\" />
 		<Folder Include="Notifications\Models\" />
 		<Folder Include="Services\" />
 	</ItemGroup>

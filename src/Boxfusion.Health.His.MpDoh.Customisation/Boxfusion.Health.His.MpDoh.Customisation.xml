@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Boxfusion.Health.His.MpDoh.Customisations</name>
+        <name>Boxfusion.Health.His.MpDoh.Customisation</name>
     </assembly>
     <members>
         <member name="T:Boxfusion.Health.His.MpDoh.Appointments.AppointmentsChangingEventHandler">
