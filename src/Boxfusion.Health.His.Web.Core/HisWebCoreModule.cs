@@ -39,18 +39,12 @@ namespace Boxfusion.Health.His
     /// </summary>
     [DependsOn(
          // Adding all the His Modules
-         //typeof(HisAdmissModule),
-         //typeof(HisAdminisModule),
-         //typeof(HisGpDohCustomisationsModule),
-         // typeof(Houghton.HisMpDohCustomisationsModule),
          typeof(HisHoughtonCustomisationsModule),
          typeof(HisCommonDomainModule),
          typeof(HisCommonApplicationModule),
          typeof(HisBookingsDomainModule),
          typeof(HisBookingsApplicationModule),
-
          typeof(HisAdmissionsApplicationModule),
-
          typeof(SheshaEnterpriseModule),
          typeof(SheshaApplicationModule),
          typeof(SheshaNHibernateModule),
