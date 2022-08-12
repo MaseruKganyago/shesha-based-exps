@@ -19,12 +19,7 @@ namespace Boxfusion.Health.His.Common.Patients
         /// </summary>
         public virtual string PatientMasterIndexNumber { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [ReferenceList("His", "IdentificationTypes")]
-        public virtual long? IdentificationType { get; set; }
-
+       
         /// <summary>
         /// 
         /// </summary>

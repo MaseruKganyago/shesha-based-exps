@@ -20,12 +20,12 @@ namespace Boxfusion.Health.His.Common.Domain.Migrations
                 .SetDescription("Updated Specility Reference")
                 .SetNoSelectionValue(1)
                 .AddItem(1, "Gynaecology", 0, "Gynaecology")
-                .AddItem(2, "Maternity", 2, "Maternity")
-                .AddItem(4, "Medicine", 3, "Medicine")
-                .AddItem(8, "Orthopaedic", 4, "Orthopaedic")
-                .AddItem(16, "Paediatric", 5, "Paediatric")
-                .AddItem(32, "Psychiatry", 6, "Psychiatry")
-                .AddItem(64, "Surgery", 7, "Surgery");
+                .AddItem(2, "Maternity", 0, "Maternity")
+                .AddItem(4, "Medicine", 0, "Medicine")
+                .AddItem(8, "Orthopaedic", 0, "Orthopaedic")
+                .AddItem(16, "Paediatric", 0, "Paediatric")
+                .AddItem(32, "Psychiatry", 0, "Psychiatry")
+                .AddItem(64, "Surgery", 0, "Surgery");
         }
 
         /// <summary>
