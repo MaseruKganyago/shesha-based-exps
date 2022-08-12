@@ -49,7 +49,7 @@ namespace Boxfusion.Health.His.Common.Patient
                     }
                     else
                     {
-                        patients.ForEach(patient => patientNames += patient.FullNameWithTitle + Environment.NewLine);
+                        patients.ForEach(patient => patientNames += patient.FullName + Environment.NewLine);
 
                         response.Code = "DUPLICATE";
                         response.Message = "That ID already belongs to  : " + Environment.NewLine + patientNames;

@@ -4,7 +4,6 @@ using Boxfusion.Health.His.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 using Shesha.DynamicEntities.Dtos;
-using Shesha.Web.DataTable;
 using System;
 using System.Linq;
 using NHibernate.Linq;
@@ -66,7 +65,7 @@ namespace Boxfusion.Health.His.Common.Practitioners
             var userManager = IocManager.Resolve<UserManager>();
             User user = await userManager.CreateUser(
                     input.UserName,
-                    input.TypeOfAccount?.ItemValue == (long)RefListTypeOfAccount.SQL,
+                    input.TypeOfAccount?.ItemValue == (long)RefListTypeOfAccount.Internal,
                     input.Password,
                     input.PasswordConfirmation,
                     input.FirstName,
