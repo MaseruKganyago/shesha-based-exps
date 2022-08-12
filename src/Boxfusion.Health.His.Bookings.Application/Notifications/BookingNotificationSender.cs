@@ -16,9 +16,9 @@ namespace Boxfusion.Health.His.Bookings.Notifications
     public class BookingNotificationSender : IBookingNotificationSender, ITransientDependency
     {
         private readonly INotificationAppService _notificationAppService;
-        private readonly IRepository<HealthFacility, Guid> _hospitalRepository;
+        private readonly IRepository<Hospital, Guid> _hospitalRepository;
 
-        public BookingNotificationSender(INotificationAppService notificationAppService, IRepository<HealthFacility, Guid> hospitalRepository)
+        public BookingNotificationSender(INotificationAppService notificationAppService, IRepository<Hospital, Guid> hospitalRepository)
         {
             _notificationAppService = notificationAppService;
             _hospitalRepository = hospitalRepository;
