@@ -37,20 +37,11 @@ namespace Boxfusion.Health.His
     /// ReSharper disable once InconsistentNaming
     /// </summary>
     [DependsOn(
-         // Adding all the His Modules
-         //typeof(HisAdmissModule),
-         //typeof(HisAdminisModule),
-         typeof(HisGpDohCustomisationsModule),
-         typeof(MpDoh.HisMpDohCustomisationsModule),
-         typeof(HisCommonDomainModule),
-         typeof(HisCommonApplicationModule),
-         typeof(HisBookingsDomainModule),
-         typeof(HisBookingsApplicationModule),
-
-         typeof(HisAdmissionsApplicationModule),
-
-         typeof(SheshaEnterpriseModule),
-         typeof(SheshaApplicationModule),
+          // Adding all the His Modules
+          //typeof(HisAdmissModule),
+          //typeof(HisAdminisModule),
+          typeof(SheshaApplicationModule),
+          typeof(SheshaEnterpriseModule),
          typeof(SheshaNHibernateModule),
          typeof(SheshaFormsDesignerModule),
          typeof(SheshaSchedulerModule),
@@ -59,11 +50,18 @@ namespace Boxfusion.Health.His
          typeof(SheshaAzureADModule),
          typeof(SheshaFirebaseModule),
          typeof(SheshaElmahModule),
-
          typeof(SheshaClickatellModule),
          typeof(SheshaBulkSmsModule),
          typeof(SheshaXml2SmsModule),
          typeof(SheshaSmsPortalModule),
+         typeof(HisGpDohCustomisationsModule),
+         typeof(MpDoh.HisMpDohCustomisationsModule),
+         typeof(HisCommonDomainModule),
+         typeof(HisCommonApplicationModule),
+         typeof(HisBookingsDomainModule),
+         typeof(HisBookingsApplicationModule),
+
+         typeof(HisAdmissionsApplicationModule),
 
          typeof(AbpAspNetCoreModule),
          typeof(AbpAspNetCoreSignalRModule),
