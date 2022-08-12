@@ -56,5 +56,11 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
         /// 
         /// </summary>
         public virtual bool IsSupervisor { get; set; }
-    }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [ReferenceList("His", "IdentificationTypes")]
+        public virtual long? IdentificationType { get; set; }
+	}
 }

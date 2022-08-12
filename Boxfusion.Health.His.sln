@@ -26,7 +26,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Common
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Bookings.Domain.Tests", "test\Boxfusion.Health.His.Bookings.Domain.Tests\Boxfusion.Health.His.Bookings.Domain.Tests.csproj", "{CD807E5E-CD55-48C5-A41E-4CC0BA7886D2}"
 EndProject
-
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admissions.Application", "src\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.Application.csproj", "{86E577DD-0F87-4C6A-A181-576A3D1107C6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admissions.Domain", "src\Boxfusion.Health.His.Admissions.Domain\Boxfusion.Health.His.Admissions.Domain.csproj", "{96A9F3A6-EF57-4EB5-83A8-680DE956005E}"
@@ -79,10 +78,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Web.Core", "shesha-c
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Web.FormsDesigner", "shesha-core-enterprise\shesha-core\src\Shesha.Web.FormsDesigner\Shesha.Web.FormsDesigner.csproj", "{D6C3BB7F-E9F6-48BB-8DC3-4ED8507C8827}"
 EndProject
-
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Houghton.Customisation", "src\Boxfusion.Health.His.Houghton.Customisation\Boxfusion.Health.His.Houghton.Customisation.csproj", "{8D52145D-69FB-454E-9469-C0D47DBAEEBF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.HealthCommon.Core", "src\Boxfusion.HealthCommon\src\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj", "{787D3872-3251-4CFE-A22F-9E904800628F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.GpDoh.Customisations", "src\Boxfusion.Health.His.GpDoh.Customisations\Boxfusion.Health.His.GpDoh.Customisations.csproj", "{73AABA2B-6251-4F51-A707-F5B5265D50BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.MpDoh.Customisations", "src\Boxfusion.Health.His.MpDoh.Domain\Boxfusion.Health.His.MpDoh.Customisations.csproj", "{63A74978-586C-46D8-B4A0-59E2C5B220F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -139,12 +141,6 @@ Global
 		{CD807E5E-CD55-48C5-A41E-4CC0BA7886D2}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{CD807E5E-CD55-48C5-A41E-4CC0BA7886D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD807E5E-CD55-48C5-A41E-4CC0BA7886D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B1F6252A-5959-42E5-9915-8CD570440884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1F6252A-5959-42E5-9915-8CD570440884}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1F6252A-5959-42E5-9915-8CD570440884}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1F6252A-5959-42E5-9915-8CD570440884}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
-		{B1F6252A-5959-42E5-9915-8CD570440884}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1F6252A-5959-42E5-9915-8CD570440884}.Release|Any CPU.Build.0 = Release|Any CPU
 		{86E577DD-0F87-4C6A-A181-576A3D1107C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{86E577DD-0F87-4C6A-A181-576A3D1107C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86E577DD-0F87-4C6A-A181-576A3D1107C6}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
@@ -295,18 +291,30 @@ Global
 		{D6C3BB7F-E9F6-48BB-8DC3-4ED8507C8827}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{D6C3BB7F-E9F6-48BB-8DC3-4ED8507C8827}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6C3BB7F-E9F6-48BB-8DC3-4ED8507C8827}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E23FB998-1121-42AC-B085-166040BA8DB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E23FB998-1121-42AC-B085-166040BA8DB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E23FB998-1121-42AC-B085-166040BA8DB2}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
-		{E23FB998-1121-42AC-B085-166040BA8DB2}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
-		{E23FB998-1121-42AC-B085-166040BA8DB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E23FB998-1121-42AC-B085-166040BA8DB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D52145D-69FB-454E-9469-C0D47DBAEEBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D52145D-69FB-454E-9469-C0D47DBAEEBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D52145D-69FB-454E-9469-C0D47DBAEEBF}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D52145D-69FB-454E-9469-C0D47DBAEEBF}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
+		{8D52145D-69FB-454E-9469-C0D47DBAEEBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D52145D-69FB-454E-9469-C0D47DBAEEBF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{787D3872-3251-4CFE-A22F-9E904800628F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{787D3872-3251-4CFE-A22F-9E904800628F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{787D3872-3251-4CFE-A22F-9E904800628F}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
 		{787D3872-3251-4CFE-A22F-9E904800628F}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{787D3872-3251-4CFE-A22F-9E904800628F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{787D3872-3251-4CFE-A22F-9E904800628F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73AABA2B-6251-4F51-A707-F5B5265D50BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73AABA2B-6251-4F51-A707-F5B5265D50BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73AABA2B-6251-4F51-A707-F5B5265D50BD}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
+		{73AABA2B-6251-4F51-A707-F5B5265D50BD}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
+		{73AABA2B-6251-4F51-A707-F5B5265D50BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73AABA2B-6251-4F51-A707-F5B5265D50BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63A74978-586C-46D8-B4A0-59E2C5B220F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63A74978-586C-46D8-B4A0-59E2C5B220F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63A74978-586C-46D8-B4A0-59E2C5B220F7}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
+		{63A74978-586C-46D8-B4A0-59E2C5B220F7}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
+		{63A74978-586C-46D8-B4A0-59E2C5B220F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63A74978-586C-46D8-B4A0-59E2C5B220F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
