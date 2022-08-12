@@ -34,10 +34,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admiss
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admissions.Domain.Tests", "Boxfusion.Health.His.Admissions.Domain.Tests\Boxfusion.Health.His.Admissions.Domain.Tests.csproj", "{57429F71-8D0C-4850-AE07-F6D8426DEE6B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "health-common", "health-common", "{9088FC36-C204-49C7-96E9-641779C8E119}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.HealthCommon.Core", "boxfusion-health-common\src\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj", "{610073F8-36D4-459D-B3BE-8C1A73CA8099}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shesha", "shesha", "{AB99B699-B4D8-42BD-BD22-001C2317430B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Enterprise", "shesha-core-enterprise\src\Shesha.Enterprise\Shesha.Enterprise.csproj", "{17629F45-95C1-4046-9FF9-D2E355E829B0}"
@@ -80,13 +76,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Sms.Xml2Sms", "shesh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Sms.SmsPortal", "shesha-core-enterprise\shesha-core\src\Shesha.Sms.SmsPortal\Shesha.Sms.SmsPortal.csproj", "{1BE3CB30-7A5D-481E-B280-8820634EDE27}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Web.Controls", "shesha-core-enterprise\shesha-core\src\Shesha.Web.Controls\Shesha.Web.Controls.csproj", "{AF25E8BC-11A8-41A9-93AD-122E697EE37D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Web.Core", "shesha-core-enterprise\shesha-core\src\Shesha.Web.Core\Shesha.Web.Core.csproj", "{1970BEFD-A91B-4402-A4BC-64C0886320D9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Web.FormsDesigner", "shesha-core-enterprise\shesha-core\src\Shesha.Web.FormsDesigner\Shesha.Web.FormsDesigner.csproj", "{D6C3BB7F-E9F6-48BB-8DC3-4ED8507C8827}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.GpDoh.Customisations", "src\Boxfusion.Health.His.GpDoh.Customisations\Boxfusion.Health.His.GpDoh.Customisations.csproj", "{E23FB998-1121-42AC-B085-166040BA8DB2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.HealthCommon.Core", "src\Boxfusion.HealthCommon\src\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj", "{787D3872-3251-4CFE-A22F-9E904800628F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -167,12 +163,6 @@ Global
 		{57429F71-8D0C-4850-AE07-F6D8426DEE6B}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{57429F71-8D0C-4850-AE07-F6D8426DEE6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57429F71-8D0C-4850-AE07-F6D8426DEE6B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{610073F8-36D4-459D-B3BE-8C1A73CA8099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{610073F8-36D4-459D-B3BE-8C1A73CA8099}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{610073F8-36D4-459D-B3BE-8C1A73CA8099}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
-		{610073F8-36D4-459D-B3BE-8C1A73CA8099}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
-		{610073F8-36D4-459D-B3BE-8C1A73CA8099}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{610073F8-36D4-459D-B3BE-8C1A73CA8099}.Release|Any CPU.Build.0 = Release|Any CPU
 		{17629F45-95C1-4046-9FF9-D2E355E829B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{17629F45-95C1-4046-9FF9-D2E355E829B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17629F45-95C1-4046-9FF9-D2E355E829B0}.DebugLocalShesha|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
@@ -293,12 +283,6 @@ Global
 		{1BE3CB30-7A5D-481E-B280-8820634EDE27}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{1BE3CB30-7A5D-481E-B280-8820634EDE27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BE3CB30-7A5D-481E-B280-8820634EDE27}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF25E8BC-11A8-41A9-93AD-122E697EE37D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF25E8BC-11A8-41A9-93AD-122E697EE37D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF25E8BC-11A8-41A9-93AD-122E697EE37D}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF25E8BC-11A8-41A9-93AD-122E697EE37D}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
-		{AF25E8BC-11A8-41A9-93AD-122E697EE37D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF25E8BC-11A8-41A9-93AD-122E697EE37D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1970BEFD-A91B-4402-A4BC-64C0886320D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1970BEFD-A91B-4402-A4BC-64C0886320D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1970BEFD-A91B-4402-A4BC-64C0886320D9}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
@@ -317,6 +301,12 @@ Global
 		{E23FB998-1121-42AC-B085-166040BA8DB2}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{E23FB998-1121-42AC-B085-166040BA8DB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E23FB998-1121-42AC-B085-166040BA8DB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{787D3872-3251-4CFE-A22F-9E904800628F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{787D3872-3251-4CFE-A22F-9E904800628F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{787D3872-3251-4CFE-A22F-9E904800628F}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
+		{787D3872-3251-4CFE-A22F-9E904800628F}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
+		{787D3872-3251-4CFE-A22F-9E904800628F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{787D3872-3251-4CFE-A22F-9E904800628F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -325,7 +315,6 @@ Global
 		{1E3B0FB7-94E8-48AD-83AC-17EABA2EA5D1} = {244B7A5A-6740-4EE8-BCA3-5484C9DDF56A}
 		{CD807E5E-CD55-48C5-A41E-4CC0BA7886D2} = {244B7A5A-6740-4EE8-BCA3-5484C9DDF56A}
 		{57429F71-8D0C-4850-AE07-F6D8426DEE6B} = {244B7A5A-6740-4EE8-BCA3-5484C9DDF56A}
-		{610073F8-36D4-459D-B3BE-8C1A73CA8099} = {9088FC36-C204-49C7-96E9-641779C8E119}
 		{17629F45-95C1-4046-9FF9-D2E355E829B0} = {AB99B699-B4D8-42BD-BD22-001C2317430B}
 		{EEF76E8C-9404-425D-96F6-646C35E62F64} = {AB99B699-B4D8-42BD-BD22-001C2317430B}
 		{20C3F731-E8C4-412E-9AAE-23324A13101F} = {AB99B699-B4D8-42BD-BD22-001C2317430B}
@@ -346,7 +335,6 @@ Global
 		{EDB6DE2D-834A-4AB3-879B-4136D4C82629} = {AB99B699-B4D8-42BD-BD22-001C2317430B}
 		{2EA1DED6-4C8E-4927-998B-27A5EBDF94C5} = {AB99B699-B4D8-42BD-BD22-001C2317430B}
 		{1BE3CB30-7A5D-481E-B280-8820634EDE27} = {AB99B699-B4D8-42BD-BD22-001C2317430B}
-		{AF25E8BC-11A8-41A9-93AD-122E697EE37D} = {AB99B699-B4D8-42BD-BD22-001C2317430B}
 		{1970BEFD-A91B-4402-A4BC-64C0886320D9} = {AB99B699-B4D8-42BD-BD22-001C2317430B}
 		{D6C3BB7F-E9F6-48BB-8DC3-4ED8507C8827} = {AB99B699-B4D8-42BD-BD22-001C2317430B}
 	EndGlobalSection

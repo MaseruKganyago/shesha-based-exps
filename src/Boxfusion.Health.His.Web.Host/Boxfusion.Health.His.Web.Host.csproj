@@ -35,6 +35,7 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
+		<PackageReference Include="Abp" Version="6.6.2" />
 		<PackageReference Include="Abp.Castle.Log4Net" Version="6.6.2" />
 		<PackageReference Include="Abp.TestBase" Version="6.6.2" />
 		<PackageReference Include="ElmahCore" Version="2.1.2" />

@@ -122,7 +122,7 @@ namespace Boxfusion.Health.His.Bookings.Domain
                     appointment.ContactName = appointment.Patient.FullName;
 
                 if (string.IsNullOrWhiteSpace(appointment.ContactCellphone))
-                    appointment.ContactCellphone = appointment.Patient.MobileNumber;
+                    appointment.ContactCellphone = appointment.Patient.MobileNumber1;
             }
             appointment.Start = slot.StartDateTime;
             appointment.End = slot.EndDateTime;

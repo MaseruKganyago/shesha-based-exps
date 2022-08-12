@@ -66,7 +66,7 @@ namespace Boxfusion.Health.His.Common.Practitioners
             var userManager = IocManager.Resolve<UserManager>();
             User user = await userManager.CreateUser(
                     input.UserName,
-                    input.TypeOfAccount?.ItemValue == (long)RefListTypeOfAccount.SQL,
+                    input.TypeOfAccount?.ItemValue == (long)RefListTypeOfAccount.Internal,
                     input.Password,
                     input.PasswordConfirmation,
                     input.FirstName,

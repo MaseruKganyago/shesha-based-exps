@@ -29,27 +29,22 @@
 		<PackageReference Include="Abp.HangFire.AspNetCore" Version="6.6.2" />
 		<PackageReference Include="Abp.ZeroCore" Version="6.6.2" />
 		<PackageReference Include="Hangfire.Core" Version="1.7.25" />
+		<PackageReference Include="Shesha.Application" Version="3.0.11" />
+		<PackageReference Include="Shesha.Framework" Version="3.0.11" />
+		<PackageReference Include="Shesha.GraphQL" Version="3.0.11" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.0.1" />
 		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
-
-
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.AzureAD\Shesha.AzureAD.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Core\Shesha.Core.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Elmah\Shesha.Elmah.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Firebase\Shesha.Firebase.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Import\Shesha.Import.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Ldap\Shesha.Ldap.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.NHibernate\Shesha.NHibernate.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Scheduler\Shesha.Scheduler.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Sms.BulkSms\Shesha.Sms.BulkSms.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Sms.Clickatell\Shesha.Sms.Clickatell.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Sms.SmsPortal\Shesha.Sms.SmsPortal.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Sms.Xml2Sms\Shesha.Sms.Xml2Sms.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Web.Controls\Shesha.Web.Controls.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Web.FormsDesigner\Shesha.Web.FormsDesigner.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.Application.csproj" />
