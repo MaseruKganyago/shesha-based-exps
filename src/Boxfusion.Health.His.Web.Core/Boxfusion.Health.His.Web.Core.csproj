@@ -36,15 +36,6 @@
 		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.AzureAD\Shesha.AzureAD.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Firebase\Shesha.Firebase.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Import\Shesha.Import.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Ldap\Shesha.Ldap.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Sms.BulkSms\Shesha.Sms.BulkSms.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Sms.Clickatell\Shesha.Sms.Clickatell.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Sms.SmsPortal\Shesha.Sms.SmsPortal.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Sms.Xml2Sms\Shesha.Sms.Xml2Sms.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.Application.csproj" />
@@ -54,6 +45,37 @@
 		<ProjectReference Include="..\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
 		<ProjectReference Include="..\Boxfusion.Health.His.GpDoh.Customisations\Boxfusion.Health.His.GpDoh.Customisations.csproj" />
 		<ProjectReference Include="..\Boxfusion.Health.His.MpDoh.Domain\Boxfusion.Health.His.MpDoh.Customisations.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise.Reporting\Shesha.Enterprise.Reporting.csproj" />
 	</ItemGroup>
+
+  <Choose>
+    <When Condition="'$(Configuration)' == 'DebugLocalShesha' Or '$(UseLocalShesha)' == 'true'">
+      <ItemGroup>
+        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
+        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.AzureAD\Shesha.AzureAD.csproj" />
+        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Firebase\Shesha.Firebase.csproj" />
+        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Import\Shesha.Import.csproj" />
+        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Ldap\Shesha.Ldap.csproj" />
+        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Sms.BulkSms\Shesha.Sms.BulkSms.csproj" />
+        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Sms.Clickatell\Shesha.Sms.Clickatell.csproj" />
+        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Sms.SmsPortal\Shesha.Sms.SmsPortal.csproj" />
+        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Sms.Xml2Sms\Shesha.Sms.Xml2Sms.csproj" />
+        <ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise.Reporting\Shesha.Enterprise.Reporting.csproj" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="Shesha.Application" Version="3.0.11" />
+        <PackageReference Include="Shesha.AzureAD" Version="3.0.11" />
+        <PackageReference Include="Shesha.Firebase" Version="3.0.11" />
+        <PackageReference Include="Shesha.Import" Version="3.0.11" />
+        <PackageReference Include="Shesha.Ldap" Version="3.0.11" />
+        <PackageReference Include="Shesha.Sms.BulkSms" Version="3.0.11" />
+        <PackageReference Include="Shesha.Sms.Clickatell" Version="3.0.11" />
+        <PackageReference Include="Shesha.Sms.SmsPortal" Version="3.0.11" />
+        <PackageReference Include="Shesha.Sms.Xml2Sms" Version="3.0.11" />
+
+        <PackageReference Include="Shesha.Enterprise.Reporting" Version="3.0.11" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
 </Project>
