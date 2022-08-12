@@ -11,22 +11,8 @@ namespace Boxfusion.Health.His.Common
     /// 
     /// </summary>
     [Entity(TypeShortAlias = "His.HisHealthFacility")]
-    public class HisHealthFacility : Hospital
+    public class HisHealthFacility : HealthFacility
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public string FacilityPracticeNumber { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Area District { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [MultiValueReferenceList("Fhir", "PracticeSettingCodeValueSets")]
-        public long? Speciality { get; set; }
     }
 }

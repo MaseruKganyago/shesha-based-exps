@@ -24,15 +24,5 @@
             inheritedDoc
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Houghton.Migrations.M20220811151100.Up">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Houghton.Migrations.M20220811151100.Down">
-            <summary>
-            
-            </summary>
-        </member>
     </members>
 </doc>

@@ -254,7 +254,7 @@ Dermatology 20*/
         }
 
 
-        protected async Task<Hospital> CreateTestData_HealthFacility(string name)
+        protected async Task<HealthFacility> CreateTestData_HealthFacility(string name)
         {
             // Checking if test data has previously been added
             var hostpital = await _facilityRepository.FirstOrDefaultAsync(e => e.Name == name);
