@@ -65,16 +65,6 @@ by passing identity number validator</PackageReleaseNotes>
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="C:\Users\User\.nuget\packages\agora_rtc_sdk\3.2.1.7\contentFiles\any\netcoreapp3.1\agora_rtc_sdk.dll" />
-    <Content Remove="C:\Users\User\.nuget\packages\agora_rtc_sdk\3.2.1.7\contentFiles\any\netcoreapp3.1\iris.dll" />
-    <Content Remove="C:\Users\User\.nuget\packages\agora_rtc_sdk\3.2.1.7\contentFiles\any\netcoreapp3.1\libagora-fdkaac.dll" />
-    <Content Remove="C:\Users\User\.nuget\packages\agora_rtc_sdk\3.2.1.7\contentFiles\any\netcoreapp3.1\libagora-ffmpeg.dll" />
-    <Content Remove="C:\Users\User\.nuget\packages\agora_rtc_sdk\3.2.1.7\contentFiles\any\netcoreapp3.1\libagora-mpg123.dll" />
-    <Content Remove="C:\Users\User\.nuget\packages\agora_rtc_sdk\3.2.1.7\contentFiles\any\netcoreapp3.1\libagora-soundtouch.dll" />
-    <Content Remove="C:\Users\User\.nuget\packages\agora_rtc_sdk\3.2.1.7\contentFiles\any\netcoreapp3.1\libhwcodec.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Abp" Version="6.6.2" />
     <PackageReference Include="Aspose.PDF" Version="21.7.0" />
     <PackageReference Include="Aspose.Words" Version="21.8.0" />
@@ -86,27 +76,6 @@ by passing identity number validator</PackageReleaseNotes>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
     <PackageReference Include="RestSharp" Version="106.11.7" />
-  </ItemGroup>
-
-  <ItemGroup Condition="Exists('..\..\..\shesha-core-enterprise\shesha-core\src') And Exists('..\..\..\shesha-core-enterprise\src')">
-    <ProjectReference Include="..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Core\Shesha.Core.csproj" />
-    <ProjectReference Include="..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Framework\Shesha.Framework.csproj" />
-    <ProjectReference Include="..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.NHibernate\Shesha.NHibernate.csproj" />
-    <ProjectReference Include="..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.RestSharp\Shesha.RestSharp.csproj" />
-    <ProjectReference Include="..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Scheduler\Shesha.Scheduler.csproj" />
-
-    <ProjectReference Include="..\..\..\shesha-core-enterprise\src\Shesha.Enterprise.DocumentProcessing\Shesha.Enterprise.DocumentProcessing.csproj" />
-    <ProjectReference Include="..\..\..\shesha-core-enterprise\src\Shesha.Enterprise\Shesha.Enterprise.csproj" />
-  </ItemGroup>
-  <ItemGroup Condition="!(Exists('..\..\..\shesha-core-enterprise\shesha-core\src') And Exists('..\..\..\shesha-core-enterprise\src'))">
-    <PackageReference Include="Shesha.Application" Version="3.0.11" />
-    <PackageReference Include="Shesha.Core" Version="3.0.11" />
-    <PackageReference Include="Shesha.Framework" Version="3.0.11" />
-    <PackageReference Include="Shesha.NHibernate" Version="3.0.11" />
-    <PackageReference Include="Shesha.RestSharp" Version="3.0.11" />
-    <PackageReference Include="Shesha.Scheduler" Version="3.0.11" />
-    <PackageReference Include="Shesha.Enterprise.DocumentProcessing" Version="3.0.10" />
-    <PackageReference Include="Shesha.Enterprise" Version="3.0.10" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />

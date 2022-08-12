@@ -565,12 +565,6 @@
             <param name="icdTenCodeRepository"></param>
             <param name="conditionIcdTenCodeManager"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.IndexTable">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.ValidateIdentityNumber(Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.ValidateIdDto)">
             <summary>
             

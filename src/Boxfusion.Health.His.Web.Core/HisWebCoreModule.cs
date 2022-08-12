@@ -1,16 +1,21 @@
-﻿using System;
-using System.Text;
-using Abp.AspNetCore;
+﻿using Abp.AspNetCore;
 using Abp.AspNetCore.SignalR;
 using Abp.AutoMapper;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using Abp.Zero.Configuration;
+using Boxfusion.Health.His.Admissions.Application;
+using Boxfusion.Health.His.Bookings;
+using Boxfusion.Health.His.Common;
+using Boxfusion.Health.His.Common.Authorization;
+using Boxfusion.Health.His.GpDoh.Customisations;
+using Castle.MicroKernel.Registration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Shesha;
 using Shesha.Authentication.JwtBearer;
+using Shesha.Authorization;
 using Shesha.AzureAD;
 using Shesha.Configuration;
 using Shesha.Elmah;
@@ -22,15 +27,9 @@ using Shesha.Sms.BulkSms;
 using Shesha.Sms.Clickatell;
 using Shesha.Sms.SmsPortal;
 using Shesha.Sms.Xml2Sms;
-using Shesha.Web;
 using Shesha.Web.FormsDesigner;
-using Boxfusion.Health.His.Bookings;
-using Boxfusion.Health.His.Common;
-using Castle.MicroKernel.Registration;
-using Shesha.Authorization;
-using Boxfusion.Health.His.Common.Authorization;
-using Boxfusion.Health.His.Admissions.Application;
-using Boxfusion.Health.His.GpDoh.Customisations;
+using System;
+using System.Text;
 
 namespace Boxfusion.Health.His
 {
@@ -56,7 +55,6 @@ namespace Boxfusion.Health.His
          typeof(SheshaFormsDesignerModule),
          typeof(SheshaSchedulerModule),
          typeof(SheshaImportModule),
-         typeof(SheshaWebControlsModule),
          typeof(SheshaLdapModule),
          typeof(SheshaAzureADModule),
          typeof(SheshaFirebaseModule),

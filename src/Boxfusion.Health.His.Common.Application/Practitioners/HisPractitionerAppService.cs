@@ -4,7 +4,6 @@ using Boxfusion.Health.His.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 using Shesha.DynamicEntities.Dtos;
-using Shesha.Web.DataTable;
 using System;
 using System.Linq;
 using NHibernate.Linq;
