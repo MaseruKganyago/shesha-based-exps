@@ -8,10 +8,20 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Common.Bed
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Entity(TypeShortAlias = "His.BedTypes")]
-    public class BedType: FullAuditedEntity<Guid>
+    public class BedType : FullAuditedEntity<Guid>
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string Description { get; set; }
     }
 }

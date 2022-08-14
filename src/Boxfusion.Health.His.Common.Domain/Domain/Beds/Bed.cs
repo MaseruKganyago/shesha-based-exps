@@ -8,13 +8,25 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Common.Bed
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Entity(TypeShortAlias = "His.Beds")]
     public class Bed : FhirLocation
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string BedName { get; set; }
-        public string BedDescription { get; set; }
-        public BedType BedType { get;set; }
-       
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string BedDescription { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public BedType BedType { get; set; }
     }
 }
