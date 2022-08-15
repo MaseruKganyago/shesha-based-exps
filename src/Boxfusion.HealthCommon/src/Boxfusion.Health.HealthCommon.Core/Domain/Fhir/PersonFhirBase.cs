@@ -60,7 +60,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
         /// <summary>
         /// 
         /// </summary>
-        [ReferenceList("His", "IdentificationTypes")]
+        [ReferenceList("Fhir", "IdentificationTypes")]
         public virtual long? IdentificationType { get; set; }
 	}
 }

@@ -9,13 +9,30 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Common.Domain.Domain.Room
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Entity(TypeShortAlias = "His.Rooms")]
     public class Room : FhirLocation
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string RoomName { get; set; }
-        public string RoomDescription { get; set; }
-        public RefListRoomTypes RoomType { get; set; }
-        public int? NumberOfBeds { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string RoomDescription { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public RefListRoomTypes RoomType { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int? NumberOfBeds { get; set; }
     }
 }

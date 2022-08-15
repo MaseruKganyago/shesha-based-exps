@@ -4,6 +4,41 @@
         <name>Boxfusion.Health.His.Common.Domain</name>
     </assembly>
     <members>
+        <member name="T:Boxfusion.Health.His.Common.Bed.Bed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Bed.Bed.BedName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Bed.Bed.BedDescription">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Bed.Bed.BedType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Bed.BedType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Bed.BedType.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Bed.BedType.Description">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Common.Domain.Domain.CoCoverage">
             <summary>
             
@@ -59,12 +94,27 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Common.Domain.Migrations.M20220811162300.Up">
+        <member name="T:Boxfusion.Health.His.Common.Domain.Domain.Room.Room">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Common.Domain.Migrations.M20220811162300.Down">
+        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Room.Room.RoomName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Room.Room.RoomDescription">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Room.Room.RoomType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.Room.Room.NumberOfBeds">
             <summary>
             
             </summary>
@@ -569,21 +619,6 @@
             </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Common.HisHealthFacility">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HisHealthFacility.FacilityPracticeNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HisHealthFacility.District">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HisHealthFacility.Speciality">
             <summary>
             
             </summary>
