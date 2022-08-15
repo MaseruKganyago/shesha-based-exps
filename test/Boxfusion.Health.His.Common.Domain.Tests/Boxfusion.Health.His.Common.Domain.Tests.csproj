@@ -53,12 +53,7 @@
         <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.NHibernate\Shesha.NHibernate.csproj" />
       </ItemGroup>
     </When>
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Include="Shesha.Application" Version="3.0.11" />
-        <PackageReference Include="Shesha.NHibernate" Version="3.0.11" />
-      </ItemGroup>
-    </Otherwise>
+    <Otherwise />
   </Choose>
   
   <ItemGroup>

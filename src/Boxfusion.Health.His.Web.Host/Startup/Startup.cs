@@ -283,7 +283,7 @@ namespace Boxfusion.Health.His.Web.Host.Startup
 
                 foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
                 {
-                    options.SwaggerEndpoint($"swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                    //options.SwaggerEndpoint($"swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
                 }
                 //options.RoutePrefix = "";
 

@@ -61,18 +61,12 @@
         <ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise\Shesha.Enterprise.csproj" />
       </ItemGroup>
     </When>
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Include="Shesha.Application" Version="3.0.11" />
-        <PackageReference Include="Shesha.Framework" Version="3.0.11" />
-        <PackageReference Include="Shesha.NHibernate" Version="3.0.11" />
-        <PackageReference Include="Shesha.Scheduler" Version="3.0.11" />
-        <PackageReference Include="Shesha.Enterprise" Version="3.0.11" />
-      </ItemGroup>
-    </Otherwise>
+    <Otherwise />
   </Choose>
 
   <ItemGroup>
+		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Core\Shesha.Core.csproj" />
+		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Framework\Shesha.Framework.csproj" />
 		<ProjectReference Include="..\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
 	</ItemGroup>
 

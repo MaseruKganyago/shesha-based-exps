@@ -27,6 +27,7 @@ using Shesha.Sms.BulkSms;
 using Shesha.Sms.Clickatell;
 using Shesha.Sms.SmsPortal;
 using Shesha.Sms.Xml2Sms;
+using Shesha.Web;
 using Shesha.Web.FormsDesigner;
 using System;
 using System.Text;
@@ -42,14 +43,15 @@ namespace Boxfusion.Health.His
           //typeof(HisAdminisModule),
           typeof(SheshaApplicationModule),
           typeof(SheshaEnterpriseModule),
-         typeof(SheshaNHibernateModule),
+         //typeof(SheshaNHibernateModule),
          typeof(SheshaFormsDesignerModule),
-         typeof(SheshaSchedulerModule),
-         typeof(SheshaImportModule),
+         //typeof(SheshaSchedulerModule),
+		typeof(SheshaWebCoreModule),
+		 typeof(SheshaImportModule),
          typeof(SheshaLdapModule),
          typeof(SheshaAzureADModule),
          typeof(SheshaFirebaseModule),
-         typeof(SheshaElmahModule),
+         //typeof(SheshaElmahModule),
          typeof(SheshaClickatellModule),
          typeof(SheshaBulkSmsModule),
          typeof(SheshaXml2SmsModule),
@@ -61,11 +63,11 @@ namespace Boxfusion.Health.His
          typeof(HisBookingsDomainModule),
          typeof(HisBookingsApplicationModule),
 
-         typeof(HisAdmissionsApplicationModule),
+         typeof(HisAdmissionsApplicationModule)
 
-         typeof(AbpAspNetCoreModule),
-         typeof(AbpAspNetCoreSignalRModule),
-         typeof(AbpAutoMapperModule)
+         //typeof(AbpAspNetCoreModule),
+         //typeof(AbpAspNetCoreSignalRModule),
+         //typeof(AbpAutoMapperModule)
      )]
     public class HisWebCoreModule : AbpModule
     {
@@ -92,11 +94,11 @@ namespace Boxfusion.Health.His
             );
 
             // Use database for language management
-            Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
+            //Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
             Configuration.Authorization.Providers.Add<HisAuthorizationProvider>();
 
-            ConfigureTokenAuth();
+            //ConfigureTokenAuth();
         }
 
         private void ConfigureTokenAuth()

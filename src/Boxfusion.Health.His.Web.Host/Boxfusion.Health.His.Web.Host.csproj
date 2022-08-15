@@ -65,6 +65,7 @@
 		<Folder Include="Plugins\" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Framework\Shesha.Framework.csproj" />
 		<ProjectReference Include="..\Boxfusion.Health.His.Web.Core\Boxfusion.Health.His.Web.Core.csproj" />
 	</ItemGroup>
 	<ProjectExtensions>
