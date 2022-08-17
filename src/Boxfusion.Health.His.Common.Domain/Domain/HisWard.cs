@@ -17,5 +17,11 @@ namespace Boxfusion.Health.His.Common
         /// 
         /// </summary>
         public virtual RefListMidnightCensusApprovalModel MidnightCensusApprovalModel { get; set; }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string WardLocation { get; set; }
     }
 }
