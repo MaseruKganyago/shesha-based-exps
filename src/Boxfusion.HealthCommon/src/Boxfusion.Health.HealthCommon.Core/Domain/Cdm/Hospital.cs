@@ -37,11 +37,11 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Cdm
         //public virtual long? District { get; set; }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [ReferenceList("Cdm", "HospitalTypes")]
-        public virtual long? FacilityType { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //[ReferenceList("Cdm", "HospitalTypes")]
+        //public virtual long? FacilityType { get; set; }
 
 
         /// <summary>
