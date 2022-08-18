@@ -12,7 +12,7 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Domain
 	/// <summary>
 	/// 
 	/// </summary>
-	[Entity(TypeShortAlias = "His.FlatFacilityAppointment")]
+	[Entity(TypeShortAlias = "His.FlatCaseManagementTracker")]
 	[Table("vw_His_FlattenedCaseManagementTracker")]
 	[ImMutable]
 	public class FlattenedCaseManagementTracker : Entity<Guid>
