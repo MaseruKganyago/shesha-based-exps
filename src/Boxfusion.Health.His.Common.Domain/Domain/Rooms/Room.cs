@@ -1,4 +1,5 @@
-﻿using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
+﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Common.Enums;
 using Shesha.Domain.Attributes;
 using System;
@@ -34,5 +35,10 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.Room
         /// 
         /// </summary>
         public int? NumberOfBeds { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Ward Ward { get; set; }
     }
 }

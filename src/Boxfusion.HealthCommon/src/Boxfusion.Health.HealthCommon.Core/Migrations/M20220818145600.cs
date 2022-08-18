@@ -2,24 +2,25 @@
 using Shesha.FluentMigrator;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Domain.Migrations
+namespace Boxfusion.Health.HealthCommon.Core.Migrations
 {
     /// <summary>
     /// 
     /// </summary>
-    [Migration(20220818141600)]
-    public class M20220818141600 : Migration
+    [Migration(20220818145600)]
+    public class M20220818145600 : Migration
     {
         /// <summary>
         /// 
         /// </summary>
         public override void Up()
-        {  
-            Alter.Table("Core_Facilities")
-                .AddColumn("His_Ward").AsString(30).Nullable()
-                .AddForeignKeyColumn("His_WardId", "Core_Facilities");
+        {
+            Alter.Table("Core_Organisations")
+                .AddColumn("Fhir_FacilityTypeLkp").AsInt64().Nullable();
         }
 
         /// <summary>
