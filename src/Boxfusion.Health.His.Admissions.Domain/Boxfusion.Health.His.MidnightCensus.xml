@@ -1155,5 +1155,65 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Migrations.M20220818104400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220818104400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220818104400.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Migrations.M20220818105600">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220818105600.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220818105600.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Migrations.M20220818105700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220818105700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220818105700.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Migrations.M20220818111900">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220818111900.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220818111900.Down">
+            <summary>
+            
+            </summary>
+        </member>
     </members>
 </doc>

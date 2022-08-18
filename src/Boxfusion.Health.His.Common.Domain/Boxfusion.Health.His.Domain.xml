@@ -1658,6 +1658,21 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220818111100">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220818111100.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220818111100.Down">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.HealthCommon.Core.Helpers.UtilityHelper">
             <summary>
             
