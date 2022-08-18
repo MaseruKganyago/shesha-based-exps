@@ -1,9 +1,10 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Shesha.Domain.Attributes;
+using Shesha.Enterprise.Products;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 {
@@ -11,17 +12,13 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 	/// 
 	/// </summary>
 	[Entity(TypeShortAlias = "HealthCommon.Core.Medication")]
-	public class Medication: FullAuditedEntity<Guid>
+	public class Medication: Product
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		[EntityDisplayName]
-		public virtual string Identifier { get; set; }
-		/// <summary>
-		/// 
-		/// </summary>
-		public virtual RefListMedicationCodes? Code { get; set; }
+		public virtual string Code { get; set; }
+
 		/// <summary>
 		/// 
 		/// </summary>

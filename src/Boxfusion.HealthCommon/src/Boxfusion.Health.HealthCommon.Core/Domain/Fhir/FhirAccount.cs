@@ -1,9 +1,10 @@
-﻿using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
+﻿using Boxfusion.Health.Cdm.Domain.Domain.Fhir;
+using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Shesha.Domain.Attributes;
 using Shesha.Enterprise.Accounts;
 using System;
 
-namespace Boxfusion.Health.Cdm.Domain.Domain.Fhir
+namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 {
 	/// <summary>
 	/// 
