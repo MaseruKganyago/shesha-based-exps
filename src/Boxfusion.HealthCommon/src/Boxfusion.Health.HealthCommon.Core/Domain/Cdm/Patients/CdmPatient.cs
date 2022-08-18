@@ -36,5 +36,27 @@ namespace Boxfusion.Health.Cdm.Patients
         /// 
         /// </summary>
         public virtual string MobilePin { get; set; }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual int NumberOfDependents { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual string Occupation { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual string NameOfEmployer { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual string WorkTelephone { get; set; }
+
     }
 }
