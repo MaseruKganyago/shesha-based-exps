@@ -9,17 +9,16 @@ namespace Boxfusion.Health.His.Domain.Migrations
     /// <summary>
     /// 
     /// </summary>
-    [Migration(20220818141600)]
-    public class M20220818141600 : Migration
+    [Migration(20220818220700)]
+    public class M20220818220700 : Migration
     {
         /// <summary>
         /// 
         /// </summary>
         public override void Up()
-        {  
-            Alter.Table("Core_Facilities")
-                .AddColumn("His_Ward").AsString(30).Nullable()
-                .AddForeignKeyColumn("His_WardId", "Core_Facilities");
+        {
+            Alter.Table("Core_Persons")
+                .AddColumn("His_PatientTypeLkp").AsInt64().Nullable();
         }
 
         /// <summary>

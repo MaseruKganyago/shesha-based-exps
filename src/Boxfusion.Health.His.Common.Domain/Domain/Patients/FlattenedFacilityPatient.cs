@@ -36,7 +36,7 @@ namespace Boxfusion.Health.His.Common.Patients
         public virtual DateTime? DateOfBirth { get; protected set; }
         public virtual string EmailAddress1 { get; protected set; }
         public virtual string EmailAddress2 { get; protected set; }
-        public virtual bool EmailAddressConfirmed { get; protected set; }
+        //public virtual bool EmailAddressConfirmed { get; protected set; }
         
         [ReferenceList("Shesha.Core", "Gender")]
         public virtual long? Gender { get; protected set; }
@@ -46,9 +46,9 @@ namespace Boxfusion.Health.His.Common.Patients
         [ReferenceList("Shesha.Core", "PreferredContactMethod")]
         public virtual long? PreferredContactMethod { get; protected set; }
         //public virtual long? TypeOfAccountLkp { get; protected set; }
-        public virtual bool DetailsValidated { get; protected set; }
-        public virtual Guid? PostalAddressId { get; protected set; }    //TODO: ???
-        public virtual Guid? ResidentialAddressId { get; protected set; }  //TODO: ???
+        //public virtual bool DetailsValidated { get; protected set; }
+        //public virtual Guid? PostalAddressId { get; protected set; }    //TODO: ???
+        //public virtual Guid? ResidentialAddressId { get; protected set; }  //TODO: ???
         public virtual long? UserId { get; protected set; }
         public virtual string FullName { get; protected set; }
         public virtual string FullName2 { get; protected set; }

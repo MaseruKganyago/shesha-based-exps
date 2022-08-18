@@ -9,8 +9,8 @@ namespace Boxfusion.Health.His.Domain.Migrations
     /// <summary>
     /// 
     /// </summary>
-    [Migration(20220818141600)]
-    public class M20220818141600 : Migration
+    [Migration(20220812123900)]
+    public class M20220812123900 : Migration
     {
         /// <summary>
         /// 
@@ -18,8 +18,9 @@ namespace Boxfusion.Health.His.Domain.Migrations
         public override void Up()
         {  
             Alter.Table("Core_Facilities")
-                .AddColumn("His_Ward").AsString(30).Nullable()
-                .AddForeignKeyColumn("His_WardId", "Core_Facilities");
+                .AddColumn("His_BedName").AsString(30).Nullable()
+                .AddColumn("His_BedDescription").AsString(30).Nullable()
+                .AddForeignKeyColumn("His_BedTypeId", "His_BedTypes");
         }
 
         /// <summary>

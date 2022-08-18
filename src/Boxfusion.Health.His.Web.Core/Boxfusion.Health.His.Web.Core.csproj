@@ -50,6 +50,7 @@
 		<ProjectReference Include="..\Boxfusion.Health.His.Common.Application\Boxfusion.Health.His.Common.Application.csproj" />
 		<ProjectReference Include="..\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
 		<ProjectReference Include="..\Boxfusion.Health.His.GpDoh.Customisations\Boxfusion.Health.His.GpDoh.Customisations.csproj" />
+		<ProjectReference Include="..\Boxfusion.Health.His.Houghton.Customisation\Boxfusion.Health.His.Houghton.Customisation.csproj" />
 		<ProjectReference Include="..\Boxfusion.Health.His.MpDoh.Domain\Boxfusion.Health.His.MpDoh.Customisations.csproj" />
 	</ItemGroup>
 	<ItemGroup>
