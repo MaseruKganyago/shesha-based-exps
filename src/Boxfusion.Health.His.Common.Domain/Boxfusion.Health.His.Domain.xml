@@ -29,25 +29,164 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Common.Bed.BedType.Name">
+        <member name="T:Boxfusion.Health.His.Common.BillingClassification">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Common.Bed.BedType.Description">
+        <member name="P:Boxfusion.Health.His.Common.BillingClassification.Name">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Common.Domain.Domain.CoCoverage">
+        <member name="P:Boxfusion.Health.His.Common.BillingClassification.Description">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Common.Domain.Domain.CoCoverage.BankAccount">
+        <member name="P:Boxfusion.Health.His.Common.BillingClassification.ClassificationType">
             <summary>
             
             </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.BillingClassification.DiscountPercent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.BillingClassification.DefaultPayor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.CoCoverage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.CoCoverage.BankAccount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager">
+            <summary>
+            TODO: Code to be moved to CDM
+            Implements generic methods of ConditionIcdTenCode
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager.#ctor(Shesha.Services.IDynamicRepository,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="dynamicRepository"></param>
+            <param name="icdTenCodeRepository"></param>
+            <param name="conditionRepository"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager.GetIcdTenCodes(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="inputCodes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager.AssignIcdTenCodeToCondition``1(System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode},Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="icdTenCodes"></param>
+            <param name="condition"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager.UpdateAssignedIcdTenCodes``1(System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode},Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="icdTenCodes"></param>
+            <param name="condition"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager.DeleteAssignment``1(Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager.ActionUpdate``1(System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode},``0)">
+            <summary>
+            Iterates through existing assigments and current codes and update the codes accordingly.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="codes"></param>
+            <param name="assignement"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Consumable">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Consumable.Procedure">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Consumable.Quantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Consumable.ConsumableProduct">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Diagnoses.DiagnosisManager">
+            <summary>
+            To Do: Code to be moved to CDM
+            Implements Generic methods constraint to Encounter(As diagnosis is backbone-element to Encounter) and Condition(As Diagnosis relates to condition)
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Diagnoses.DiagnosisManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Shesha.Services.IDynamicRepository)">
+            <summary>
+            
+            </summary>
+            <param name="diagnosisRepository"></param>
+            <param name="dynamicRepository"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Diagnoses.DiagnosisManager.AddNewDiagnosis``2(``0,System.Int32,System.Nullable{System.Int32},System.Func{``1,System.Threading.Tasks.Task})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <param name="encouter"></param>
+            <param name="use"></param>
+            <param name="rank"></param>
+            <param name="action">Accepts an awaitable method which actions on the condition of the diagnosis.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Diagnoses.DiagnosisManager.UpdateDiagnosis``1(Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="updatedEntity"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Diagnoses.DiagnosisManager.DeleteDiagnosis(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Common.Domain.Domain.Practioners.FlattenedPractitioner">
             <summary>
@@ -118,105 +257,6 @@
             <summary>
             
             </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager">
-            <summary>
-            TODO: Code to be moved to CDM
-            Implements generic methods of ConditionIcdTenCode
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager.#ctor(Shesha.Services.IDynamicRepository,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid})">
-            <summary>
-            
-            </summary>
-            <param name="dynamicRepository"></param>
-            <param name="icdTenCodeRepository"></param>
-            <param name="conditionRepository"></param>
-        </member>
-        <member name="M:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager.GetIcdTenCodes(System.Collections.Generic.List{System.Guid})">
-            <summary>
-            
-            </summary>
-            <param name="inputCodes"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager.AssignIcdTenCodeToCondition``1(System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode},Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Func{``0,System.Threading.Tasks.Task})">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="icdTenCodes"></param>
-            <param name="condition"></param>
-            <param name="action"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager.UpdateAssignedIcdTenCodes``1(System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode},Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Func{``0,System.Threading.Tasks.Task})">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="icdTenCodes"></param>
-            <param name="condition"></param>
-            <param name="action"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager.DeleteAssignment``1(Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition)">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="condition"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager.ActionUpdate``1(System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode},``0)">
-            <summary>
-            Iterates through existing assigments and current codes and update the codes accordingly.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="codes"></param>
-            <param name="assignement"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Boxfusion.Health.His.Common.Diagnoses.DiagnosisManager">
-            <summary>
-            To Do: Code to be moved to CDM
-            Implements Generic methods constraint to Encounter(As diagnosis is backbone-element to Encounter) and Condition(As Diagnosis relates to condition)
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Common.Diagnoses.DiagnosisManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Shesha.Services.IDynamicRepository)">
-            <summary>
-            
-            </summary>
-            <param name="diagnosisRepository"></param>
-            <param name="dynamicRepository"></param>
-        </member>
-        <member name="M:Boxfusion.Health.His.Common.Diagnoses.DiagnosisManager.AddNewDiagnosis``2(``0,System.Int32,System.Nullable{System.Int32},System.Func{``1,System.Threading.Tasks.Task})">
-            <summary>
-            
-            </summary>
-            <typeparam name="T1"></typeparam>
-            <typeparam name="T2"></typeparam>
-            <param name="encouter"></param>
-            <param name="use"></param>
-            <param name="rank"></param>
-            <param name="action">Accepts an awaitable method which actions on the condition of the diagnosis.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Common.Diagnoses.DiagnosisManager.UpdateDiagnosis``1(Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Func{``0,System.Threading.Tasks.Task})">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="updatedEntity"></param>
-            <param name="action"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Common.Diagnoses.DiagnosisManager.DeleteDiagnosis(System.Guid)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Common.Enums.RefListAdmissionStatuses">
             <summary>
@@ -578,6 +618,11 @@
             <param name="throwException"></param>
             <returns></returns>
         </member>
+        <member name="T:Boxfusion.Health.His.Common.HisAccount">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Common.HisAdmission">
             <summary>
             
@@ -608,6 +653,11 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Common.HisChargeItem">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Common.HisConditionIcdTenCode">
             <summary>
             
@@ -619,6 +669,16 @@
             </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Common.HisHealthFacility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.HisPriceList">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.HisPriceList.ClassificationType">
             <summary>
             
             </summary>
@@ -768,6 +828,31 @@
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Common.Practitioners.HisPractitioner">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Procedures.HisProcedure">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Procedures.HisProcedure.ProcedureService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.ProcedureService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Products.ConsumableProduct">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Products.HisProduct">
             <summary>
             
             </summary>
@@ -1554,6 +1639,36 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220817111000.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220817172700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220817172700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220817172700.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220818111100">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220818111100.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220818111100.Down">
             <summary>
             
             </summary>

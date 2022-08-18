@@ -1,5 +1,6 @@
 ﻿using Abp.AspNetCore.Configuration;
 using Abp.AutoMapper;
+using Abp.FluentValidation;
 using Abp.Modules;
 using Boxfusion.Health.HealthCommon.Core;
 using Boxfusion.Health.His.Admissions;
@@ -18,8 +19,9 @@ namespace Boxfusion.Health.His.GpDoh.Customisations
         typeof(HisCommonDomainModule),
         typeof(HealthCommonModule),
         typeof(SheshaApplicationModule),
-        typeof(SheshaCoreModule)
-    )]
+        typeof(SheshaCoreModule),
+		typeof(AbpFluentValidationModule)
+	)]
     public class HisGpDohCustomisationsModule: AbpModule
 	{
         /// <summary>

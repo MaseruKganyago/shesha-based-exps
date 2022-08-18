@@ -1,7 +1,5 @@
-﻿using Boxfusion.Health.Cdm.Domain.Domain.Fhir;
-using Shesha.Domain;
-using Shesha.Domain.Attributes;
-using Shesha.Enterprise.BankAccounts;
+﻿using Shesha.Domain.Attributes;
+using Shesha.Enterprise.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,12 +12,13 @@ namespace Boxfusion.Health.His.Common
 	/// <summary>
 	/// 
 	/// </summary>
-	[Entity(TypeShortAlias = "His.CoCoverage")]
-	public class CoCoverage : Coverage
+	[Entity(TypeShortAlias = "His.HisPriceList")]
+	public class HisPriceList: PriceList
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual BankAccount BankAccount { get; set; }
+		[ReferenceList("His", "BillingClassificationType")]
+		public virtual long? ClassificationType { get; set; }
 	}
 }

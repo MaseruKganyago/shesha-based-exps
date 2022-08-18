@@ -73,6 +73,11 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 
         public virtual string PerformerActorOwnerType { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual PersonFhirBase Performer { get; set; }
+
         public virtual FhirOrganisation PerformerOnBehalfOf { get; set; }
 
         public virtual FhirLocation Location { get; set; }
@@ -101,5 +106,10 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 
         [MultiValueReferenceList("Fhir", "ProcedureFollowUpCodes")]
         public virtual RefListProcedureFollowUp FollowUp { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual Medication ProcedureMedication { get; set; }
     }
 }

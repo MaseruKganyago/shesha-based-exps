@@ -1,4 +1,5 @@
 ﻿using Abp.Domain.Entities.Auditing;
+using Boxfusion.Health.His.Common.Products;
 using Shesha.Domain.Attributes;
 using System;
 using System.Collections.Generic;
@@ -12,16 +13,7 @@ namespace Boxfusion.Health.His.Common.Bed
     /// 
     /// </summary>
     [Entity(TypeShortAlias = "His.BedTypes")]
-    public class BedType : FullAuditedEntity<Guid>
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Description { get; set; }
+    public class BedType : HisProduct
+	{
     }
 }
