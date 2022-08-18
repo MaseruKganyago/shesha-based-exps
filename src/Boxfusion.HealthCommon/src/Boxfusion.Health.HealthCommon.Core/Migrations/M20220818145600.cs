@@ -19,8 +19,8 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
         /// </summary>
         public override void Up()
         {
-            Alter.Table("Core_Organisations")
-                .AddColumn("Fhir_FacilityTypeLkp").AsInt64().Nullable();
+            //Alter.Table("Core_Organisations")
+            //    .AddColumn("Fhir_FacilityTypeLkp").AsInt64().Nullable();
         }
 
         /// <summary>
