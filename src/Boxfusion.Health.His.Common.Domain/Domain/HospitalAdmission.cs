@@ -56,5 +56,10 @@ namespace Boxfusion.Health.His.Common
         /// 
         /// </summary>
         public virtual bool CapturedAfterApproval { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual BillingClassification BillingClassification { get; set; }
     }
 }
