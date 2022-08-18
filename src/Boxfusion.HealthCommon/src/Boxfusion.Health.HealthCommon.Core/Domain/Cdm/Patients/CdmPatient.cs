@@ -41,7 +41,7 @@ namespace Boxfusion.Health.Cdm.Patients
         /// <summary>
         /// 
         /// </summary>
-        public virtual int NumberOfDependents { get; set; }
+        public virtual int? NumberOfDependents { get; set; }
 
         /// <summary>
         /// 
@@ -58,5 +58,17 @@ namespace Boxfusion.Health.Cdm.Patients
         /// </summary>
         public virtual string WorkTelephone { get; set; }
 
+        /// <summary>
+		/// 
+		/// </summary>
+		[ReferenceList("Cdm", "Religion")]
+        public virtual long? Religion { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [ReferenceList("Cdm", "EducationLevel")]
+        public virtual long? EducationLevel { get; set; }
+       
     }
 }
