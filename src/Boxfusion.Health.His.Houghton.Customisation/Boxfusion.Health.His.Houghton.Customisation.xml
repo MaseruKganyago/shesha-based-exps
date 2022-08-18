@@ -4,6 +4,46 @@
         <name>Boxfusion.Health.His.Houghton.Customisation</name>
     </assembly>
     <members>
+        <member name="T:Boxfusion.Health.His.Houghton.Customisation.Domain.FlattenedCaseManagementTracker">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Houghton.Customisation.Domain.FlattenedCaseManagementTracker.AdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Houghton.Customisation.Domain.FlattenedCaseManagementTracker.FileNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Houghton.Customisation.Domain.FlattenedCaseManagementTracker.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Houghton.Customisation.Domain.FlattenedCaseManagementTracker.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Houghton.Customisation.Domain.FlattenedCaseManagementTracker.AdmissionDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Houghton.Customisation.Domain.FlattenedCaseManagementTracker.DischargeDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Houghton.Customisation.Domain.FlattenedCaseManagementTracker.Classification">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Houghton.Customisation.HisHoughtonCustomisationsModule">
             <summary>
             Health.His Module
@@ -30,6 +70,21 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Houghton.Migrations.M20220811151100.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Houghton.Migrations.M20220818152100">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Houghton.Migrations.M20220818152100.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Houghton.Migrations.M20220818152100.Down">
             <summary>
             
             </summary>

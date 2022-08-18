@@ -19,7 +19,7 @@ namespace Boxfusion.Health.His.Houghton.Migrations
         /// </summary>
         public override void Up()
         {
-            Execute.Sql(@"Create or Alter vw_His_FlattenedCaseManagementTracker
+            Execute.Sql(@"Create or Alter View vw_His_FlattenedCaseManagementTracker
                             As
                           Select adm.His_HospitalAdmissionNumber AdmissionNumber,
 		                        patient.His_HospitalPatientNumber FileNumber,

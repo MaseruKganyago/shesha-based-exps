@@ -9,6 +9,7 @@ using Boxfusion.Health.His.Bookings;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Authorization;
 using Boxfusion.Health.His.GpDoh.Customisations;
+using Boxfusion.Health.His.Houghton.Customisation;
 using Castle.MicroKernel.Registration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -64,6 +65,7 @@ namespace Boxfusion.Health.His
          typeof(HisBookingsApplicationModule),
 
          typeof(HisAdmissionsApplicationModule)
+        //typeof(HisHoughtonCustomisationsModule)
 
          //typeof(AbpAspNetCoreModule),
          //typeof(AbpAspNetCoreSignalRModule),
