@@ -64,8 +64,8 @@ namespace Boxfusion.Health.His
          typeof(HisBookingsDomainModule),
          typeof(HisBookingsApplicationModule),
 
-         typeof(HisAdmissionsApplicationModule)
-        //typeof(HisHoughtonCustomisationsModule)
+         typeof(HisAdmissionsApplicationModule),
+        typeof(HisHoughtonCustomisationsModule)
 
          //typeof(AbpAspNetCoreModule),
          //typeof(AbpAspNetCoreSignalRModule),

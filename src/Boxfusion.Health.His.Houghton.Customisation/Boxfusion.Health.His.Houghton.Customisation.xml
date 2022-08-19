@@ -44,6 +44,23 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Houghton.Customisation.Domain.Patients.FacilityPatientEntityChangingEventHandler">
+            <summary>
+            Intercepts a new facilityPatient before saving to generate and assign a file number based on the 
+            customer's Reference numbering conventions.
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Houghton.Customisation.Domain.Patients.FacilityPatientEntityChangingEventHandler.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Houghton.Customisation.Domain.Patients.FacilityPatientEntityChangingEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangingEventData{Boxfusion.Health.His.Common.Patients.FacilityPatient})">
+            <summary>
+            Assgin new generated number using {}
+            </summary>
+            <param name="eventData"></param>
+        </member>
         <member name="T:Boxfusion.Health.His.Houghton.Customisation.HisHoughtonCustomisationsModule">
             <summary>
             Health.His Module
