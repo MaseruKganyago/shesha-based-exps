@@ -1,4 +1,5 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
+using Boxfusion.Health.His.Common.Domain.Domain.Room;
 using Shesha.Domain.Attributes;
 using System;
 using System.Collections.Generic;
@@ -28,5 +29,10 @@ namespace Boxfusion.Health.His.Common.Bed
         /// 
         /// </summary>
         public BedType BedType { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Room Room { get; set; }
     }
 }
