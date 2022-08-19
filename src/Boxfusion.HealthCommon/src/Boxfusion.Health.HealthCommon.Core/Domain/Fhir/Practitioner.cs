@@ -1,4 +1,5 @@
-﻿using Shesha.Domain.Attributes;
+﻿using Shesha.Domain;
+using Shesha.Domain.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,9 +16,15 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
         /// 
         /// </summary>
         public virtual string PracticeSANCNumber { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public virtual string DispensaryNumber { get; set; }
-    }
+
+        /// <summary>
+        /// 
+        /// </summary>
+		public virtual StoredFile EmploymentDocument { get; set; }
+	}
 }
