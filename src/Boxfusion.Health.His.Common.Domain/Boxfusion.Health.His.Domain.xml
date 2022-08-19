@@ -967,15 +967,37 @@
             Used to like the serparations
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Common.WardRoleAppointedPerson">
+        <member name="T:Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPerson">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Common.WardRoleAppointedPerson.Ward">
+        <member name="P:Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPerson.Ward">
             <summary>
             
             </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPerson.HisHealthFacility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPersonManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPersonManager.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPersonManager.GetFacilityFromWard(Boxfusion.Health.His.Common.HisWard)">
+            <summary>
+            
+            </summary>
+            <param name="ward"></param>
+            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Common.HisCommonDomainModule">
             <summary>
@@ -1068,7 +1090,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Domain.Helpers.UserAccessRightService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HospitalRoleAppointedPerson,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Domain.Helpers.UserAccessRightService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HospitalRoleAppointedPerson,System.Guid})">
             <summary>
             
             </summary>
