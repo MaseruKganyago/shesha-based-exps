@@ -4,32 +4,43 @@
         <name>Boxfusion.Health.His.Common.Domain</name>
     </assembly>
     <members>
-        <member name="T:Boxfusion.Health.His.Common.Bed.Bed">
+        <member name="T:Boxfusion.Health.His.Common.Beds.Bed">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Common.Bed.Bed.BedName">
+        <member name="P:Boxfusion.Health.His.Common.Beds.Bed.BedName">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Common.Bed.Bed.BedDescription">
+        <member name="P:Boxfusion.Health.His.Common.Beds.Bed.BedDescription">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Common.Bed.Bed.BedType">
+        <member name="P:Boxfusion.Health.His.Common.Beds.Bed.BedType">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Common.Bed.Bed.Room">
+        <member name="P:Boxfusion.Health.His.Common.Beds.Bed.Room">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Common.Bed.BedType">
+        <member name="T:Boxfusion.Health.His.Common.Beds.BedEntityChangingEventHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Beds.BedEntityChangingEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangingEventData{Boxfusion.Health.His.Common.Beds.Bed})">
+            <summary>
+            
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Beds.BedType">
             <summary>
             
             </summary>

@@ -1,6 +1,7 @@
 ﻿using Abp.AspNetCore;
 using Abp.AspNetCore.SignalR;
 using Abp.AutoMapper;
+using Abp.FluentValidation;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using Abp.Zero.Configuration;
@@ -65,12 +66,13 @@ namespace Boxfusion.Health.His
          typeof(HisBookingsApplicationModule),
 
          typeof(HisAdmissionsApplicationModule),
-        typeof(HisHoughtonCustomisationsModule)
+        typeof(HisHoughtonCustomisationsModule),
+		typeof(AbpFluentValidationModule)
 
-         //typeof(AbpAspNetCoreModule),
-         //typeof(AbpAspNetCoreSignalRModule),
-         //typeof(AbpAutoMapperModule)
-     )]
+	 //typeof(AbpAspNetCoreModule),
+	 //typeof(AbpAspNetCoreSignalRModule),
+	 //typeof(AbpAutoMapperModule)
+	 )]
     public class HisWebCoreModule : AbpModule
     {
         private readonly IWebHostEnvironment _env;

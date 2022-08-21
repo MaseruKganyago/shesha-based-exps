@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Common.Bed
+namespace Boxfusion.Health.His.Common.Beds
 {
     /// <summary>
     /// 
