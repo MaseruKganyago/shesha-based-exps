@@ -404,6 +404,56 @@
             
             </summary>
         </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListDependentNumber.D01">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListDependentNumber.D02">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListDependentNumber.D03">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListDependentNumber.D04">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListDependentNumber.D05">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListDependentNumber.D06">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListDependentNumber.D07">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListDependentNumber.D08">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListDependentNumber.D09">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListDependentNumber.D010">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Common.Enums.RefListHospitalAdmissionStatuses">
             <summary>
             
@@ -849,9 +899,6 @@
             
             </summary>
         </member>
-<<<<<<< HEAD
-        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.MedicalAidOption">
-=======
         <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.ProofOfResidents">
             <summary>
             
@@ -888,7 +935,16 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.OtherDocuments">
->>>>>>> 3952e57f804b6f1486af134b7e20f7a81916ab77
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.MedicalAidOption">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.DependentNumber">
             <summary>
             
             </summary>
@@ -1850,27 +1906,16 @@
             
             </summary>
         </member>
-<<<<<<< HEAD
-        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220822103800">
-=======
         <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220819180100">
->>>>>>> 3952e57f804b6f1486af134b7e20f7a81916ab77
             <summary>
             
             </summary>
         </member>
-<<<<<<< HEAD
-        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822103800.Up">
-=======
         <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220819180100.Up">
->>>>>>> 3952e57f804b6f1486af134b7e20f7a81916ab77
             <summary>
             
             </summary>
         </member>
-<<<<<<< HEAD
-        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822103800.Down">
-=======
         <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220819180100.Down">
             <summary>
             
@@ -1902,7 +1947,36 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220821094100.Down">
->>>>>>> 3952e57f804b6f1486af134b7e20f7a81916ab77
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220822103800">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822103800.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822103800.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220822120600">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822120600.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822120600.Down">
             <summary>
             
             </summary>
