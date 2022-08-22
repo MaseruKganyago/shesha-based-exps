@@ -4,7 +4,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
 using Boxfusion.Health.His.Admissions.Tests;
 using Boxfusion.Health.His.Common;
-using Boxfusion.Health.His.Common.Domain.Domain.Admissions;
+using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
 using Shouldly;

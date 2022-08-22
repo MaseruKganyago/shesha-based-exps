@@ -21,7 +21,7 @@ using Abp.UI;
 using Boxfusion.Health.His.Admissions.Domain.Tests.Admissions;
 using Boxfusion.Health.His.Common.Diagnoses;
 using Boxfusion.Health.His.Common.ConditionIcdTenCodes;
-using Boxfusion.Health.His.Common.Domain.Domain.Admissions;
+using Boxfusion.Health.His.Common.Admissions;
 
 namespace Boxfusion.Health.His.Admissions.Tests
 {
