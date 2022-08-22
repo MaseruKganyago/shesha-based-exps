@@ -85,6 +85,7 @@ namespace Boxfusion.Health.His.Common.Patients
         /// <summary>
         /// 
         /// </summary>
-        public virtual string DependentNumber { get; set; }
+        [ReferenceList("His", "DependentNumber")]
+        public virtual long? DependentNumber { get; set; }
     }
 }
