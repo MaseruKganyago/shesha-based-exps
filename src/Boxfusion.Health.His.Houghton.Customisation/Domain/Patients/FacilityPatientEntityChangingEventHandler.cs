@@ -39,7 +39,7 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Domain.Patients
 			var sequenceManager = new SequenceManager();
 			var seqNumber = sequenceManager.GetNextSequenceNo("BoxHealth.Houghton.FacilityPatientIdentifier");
 
-			patient.HospitalPatientNumber = formatSeqNumber($"{seqNumber:0000000000}");
+			patient.PatientMasterIndexNumber = formatSeqNumber($"{seqNumber:0000000000}");
 		}
 
 		private string formatSeqNumber(string seqString)

@@ -25,11 +25,6 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
         /// <summary>
         /// 
         /// </summary>
-        public virtual string PersalNumber { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         [MultiValueReferenceList("Shesha.Core", "CommonLanguage")]
         public virtual int? CommunicationLanguage { get; set; }
         /// <summary>

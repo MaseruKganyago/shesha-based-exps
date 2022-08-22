@@ -14,22 +14,12 @@ namespace Boxfusion.Health.His.Common.Patients
     /// </summary>
     [Entity(TypeShortAlias = "His.HisPatient")]
     public class HisPatient : CdmPatient
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual string PatientMasterIndexNumber { get; set; }
-
-       
+    {       
         /// <summary>
         /// 
         /// </summary>
         [ReferenceList("His", "Provinces")]
         public virtual long? PatientProvince { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual string HospitalPatientNumber { get; set; }
 
         /// <summary>
         /// 
