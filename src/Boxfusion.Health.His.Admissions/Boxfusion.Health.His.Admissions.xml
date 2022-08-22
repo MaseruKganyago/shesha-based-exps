@@ -109,7 +109,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Application.Helpers.ServiceBusHelper.TransferAddmission(Boxfusion.Health.His.Common.WardAdmission)">
+        <member name="M:Boxfusion.Health.His.Admissions.Application.Helpers.ServiceBusHelper.TransferAddmission(Boxfusion.Health.His.Common.Admissions.WardAdmission)">
             <summary>
             I am using this as an example for sending a massage to a topic named ExampleTopic
             </summary>
@@ -551,7 +551,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport,System.Guid},Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisUser,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager)">
+        <member name="M:Boxfusion.Health.His.Admissions.Admissions.AdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Admissions.Domain.Domain.Reports.WardMidnightCensusReport,System.Guid},Boxfusion.Health.His.Domain.Helpers.IUserAccessRightService,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisUser,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode,System.Guid},Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager)">
             <summary>
             
             </summary>

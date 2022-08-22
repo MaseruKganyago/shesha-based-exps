@@ -26,6 +26,7 @@ using Shesha.Domain;
 using Boxfusion.Health.His.Common.Diagnoses;
 using Boxfusion.Health.His.Common.ConditionIcdTenCodes;
 using Boxfusion.Health.His.Domain.Helpers;
+using Boxfusion.Health.His.Common.Admissions;
 
 namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
 {

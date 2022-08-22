@@ -4,6 +4,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Boxfusion.Health.HealthCommon.Core.Helpers;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
 using Boxfusion.Health.His.Common;
+using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
 using Shesha.AutoMapper;
@@ -16,10 +17,10 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Admissions.Admissions
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class AdmissionsMapProfile: ShaProfile
+    /// <summary>
+    /// 
+    /// </summary>
+    public class AdmissionsMapProfile: ShaProfile
 	{
         /// <summary>
         /// 

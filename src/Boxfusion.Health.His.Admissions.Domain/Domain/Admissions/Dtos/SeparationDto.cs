@@ -1,16 +1,16 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
-using Boxfusion.Health.His.Common;
+using Boxfusion.Health.His.Common.Admissions;
 using Shesha.AutoMapper.Dto;
 using System;
 using System.Collections.Generic;
 
 namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	[AutoMapFrom(typeof(WardAdmission))]
+    /// <summary>
+    /// 
+    /// </summary>
+    [AutoMapFrom(typeof(WardAdmission))]
 	//[AutoMapTo(typeof(AdmissionResponse))]
 	public class SeparationDto : EntityDto<Guid>
 	{
