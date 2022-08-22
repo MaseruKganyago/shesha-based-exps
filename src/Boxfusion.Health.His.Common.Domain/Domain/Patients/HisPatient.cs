@@ -82,9 +82,10 @@ namespace Boxfusion.Health.His.Common.Patients
         /// </summary>
         public virtual string MedicalAidOption { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual string DependentNumber { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[ReferenceList("His", "DependentNumber")]
+		public virtual long? DependentNumber { get; set; }
     }
 }
