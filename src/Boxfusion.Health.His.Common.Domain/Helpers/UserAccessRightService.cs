@@ -1,6 +1,7 @@
 ﻿using Abp.Dependency;
 using Abp.Domain.Repositories;
 using Boxfusion.Health.His.Common;
+using Boxfusion.Health.His.Common.WardRoleAppointedPersons;
 using NHibernate.Linq;
 using Shesha.Domain;
 using System;

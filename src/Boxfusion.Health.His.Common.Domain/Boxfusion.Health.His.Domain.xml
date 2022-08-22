@@ -4,32 +4,43 @@
         <name>Boxfusion.Health.His.Common.Domain</name>
     </assembly>
     <members>
-        <member name="T:Boxfusion.Health.His.Common.Bed.Bed">
+        <member name="T:Boxfusion.Health.His.Common.Beds.Bed">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Common.Bed.Bed.BedName">
+        <member name="P:Boxfusion.Health.His.Common.Beds.Bed.BedName">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Common.Bed.Bed.BedDescription">
+        <member name="P:Boxfusion.Health.His.Common.Beds.Bed.BedDescription">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Common.Bed.Bed.BedType">
+        <member name="P:Boxfusion.Health.His.Common.Beds.Bed.BedType">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Common.Bed.Bed.Room">
+        <member name="P:Boxfusion.Health.His.Common.Beds.Bed.Room">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Common.Bed.BedType">
+        <member name="T:Boxfusion.Health.His.Common.Beds.BedEntityChangingEventHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.Beds.BedEntityChangingEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangingEventData{Boxfusion.Health.His.Common.Beds.Bed})">
+            <summary>
+            
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Beds.BedType">
             <summary>
             
             </summary>
@@ -838,7 +849,46 @@
             
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.MedicalAidOption">
+=======
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.ProofOfResidents">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.PaySlip">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.MedicalAidDocument">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.RefferalNote">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.MotivationLetter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.AffidavitUnemployed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.AffidavitLostDocuments">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.OtherDocuments">
+>>>>>>> 3952e57f804b6f1486af134b7e20f7a81916ab77
             <summary>
             
             </summary>
@@ -977,15 +1027,37 @@
             Used to like the serparations
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Common.WardRoleAppointedPerson">
+        <member name="T:Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPerson">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Common.WardRoleAppointedPerson.Ward">
+        <member name="P:Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPerson.Ward">
             <summary>
             
             </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPerson.HisHealthFacility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPersonManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPersonManager.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPersonManager.GetFacilityFromWard(Boxfusion.Health.His.Common.HisWard)">
+            <summary>
+            
+            </summary>
+            <param name="ward"></param>
+            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Common.HisCommonDomainModule">
             <summary>
@@ -1078,7 +1150,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Domain.Helpers.UserAccessRightService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HospitalRoleAppointedPerson,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Domain.Helpers.UserAccessRightService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPerson,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HospitalRoleAppointedPerson,System.Guid})">
             <summary>
             
             </summary>
@@ -1778,17 +1850,59 @@
             
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220822103800">
+=======
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220819180100">
+>>>>>>> 3952e57f804b6f1486af134b7e20f7a81916ab77
             <summary>
             
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822103800.Up">
+=======
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220819180100.Up">
+>>>>>>> 3952e57f804b6f1486af134b7e20f7a81916ab77
             <summary>
             
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822103800.Down">
+=======
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220819180100.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220820160500">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220820160500.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220820160500.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220821094100">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220821094100.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220821094100.Down">
+>>>>>>> 3952e57f804b6f1486af134b7e20f7a81916ab77
             <summary>
             
             </summary>
