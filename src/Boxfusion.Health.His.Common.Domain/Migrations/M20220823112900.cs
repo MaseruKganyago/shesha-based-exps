@@ -18,8 +18,8 @@ namespace Boxfusion.Health.His.Domain.Migrations
         public override void Up()
         {
             Alter.Table("Fhir_Encounters")
-                 .AddForeignKeyColumn("His_BedId", "His_Beds")
-                 .AddForeignKeyColumn("His_RoomId", "His_Rooms");
+                 .AddForeignKeyColumn("His_BedId", "Core_Facilities")
+                 .AddForeignKeyColumn("His_RoomId", "Core_Facilities");
 		}
 
         /// <summary>

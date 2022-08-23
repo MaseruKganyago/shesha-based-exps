@@ -875,43 +875,6 @@
             </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Common.Enums.RefListRegistrationType">
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListPatientType.adult">
-            <summary>
-            Updated
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListRegistrationType.Emergency">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListRegistrationType.OutPatient">
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListPatientType.minor">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListPatientType.newBorn">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListPatientType.vip">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListPatientType.paediatric">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Health.His.Common.Enums.RefListPatientType.Expired">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Common.Enums.RefListRegistrationType">
             <summary>
             
             </summary>
@@ -2229,36 +2192,6 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822202100.Down">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220823092900">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220823092900.Up">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220823092900.Down">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220823095100">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220823095100.Up">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220823095100.Down">
             <summary>
             
             </summary>
