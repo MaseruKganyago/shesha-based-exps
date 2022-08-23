@@ -61,5 +61,11 @@ namespace Boxfusion.Health.His.Common
         /// 
         /// </summary>
         public virtual BillingClassification BillingClassification { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [ReferenceList("His", "RegistrationType")]
+        public virtual long? RegistrationType { get; set; }
     }
 }
