@@ -15,19 +15,37 @@ namespace Boxfusion.Health.His.Common.Enums
         /// <summary>
         /// 
         /// </summary>
-        [Description("Emergency")]
-        emergency = 1,
+        [Description("Adult")]
+        adult = 1,
 
         /// <summary>
         /// 
         /// </summary>
-        [Description("In Patient")]
-        inPatient = 2,
+        [Description("Minor")]
+        minor = 2,
 
         /// <summary>
         /// 
         /// </summary>
-        [Description("Out Patient")]
-        outPatient = 3
+        [Description("New Born")]
+        newBorn = 3,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("V.I.P")]
+        vip = 3,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("Paediatric")]
+        paediatric = 3,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("Expired")]
+        Expired = 3
     }
 }
