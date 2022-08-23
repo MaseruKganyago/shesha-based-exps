@@ -81,9 +81,10 @@ namespace Boxfusion.Health.His.Common.Admissions
 		public virtual DateTime? EndDateTime { get; set; }
 
 		/// <summary>
-		/// To be reviewed
+		///
 		/// </summary>
-		//public virtual long? AdmissionType { get; set; }
+		[ReferenceList("Fhir", "EncounterClasses")]
+		public virtual long? Class { get; set; }
 		
 		/// <summary>
 		/// 
