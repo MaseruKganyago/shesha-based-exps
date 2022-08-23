@@ -74,5 +74,10 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Cdm
         /// </summary>
         [MultiValueReferenceList("Cdm", "EncounterHospitalisationDischargeDispositions")]
         public virtual int? DischargeDisposition { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual string AdmissionNotes { get; set; }
     }
 }
