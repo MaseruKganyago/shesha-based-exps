@@ -4,7 +4,7 @@ using Shesha.Domain.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Boxfusion.Health.His.Common
+namespace Boxfusion.Health.His.Common.Admissions
 {
     /// <summary>
     /// 

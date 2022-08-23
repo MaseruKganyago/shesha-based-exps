@@ -21,10 +21,11 @@ using Abp.UI;
 using Boxfusion.Health.His.Admissions.Domain.Tests.Admissions;
 using Boxfusion.Health.His.Common.Diagnoses;
 using Boxfusion.Health.His.Common.ConditionIcdTenCodes;
+using Boxfusion.Health.His.Common.Admissions;
 
 namespace Boxfusion.Health.His.Admissions.Tests
 {
-	public class AdmissionsTestBase: SheshaNhTestBase
+    public class AdmissionsTestBase: SheshaNhTestBase
 	{
         protected IRepository<HisHealthFacility, Guid> _facilityRepository;
         protected IRepository<HisPatient, Guid> _patientRepository;

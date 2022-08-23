@@ -1,6 +1,6 @@
 ﻿using Abp.Dependency;
 using Boxfusion.Health.His.Admissions.Application.Hubs;
-using Boxfusion.Health.His.Common;
+using Boxfusion.Health.His.Common.Admissions;
 using EasyNetQ;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;

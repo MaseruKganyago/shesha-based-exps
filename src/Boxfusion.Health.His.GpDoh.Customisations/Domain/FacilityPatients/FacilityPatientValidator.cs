@@ -37,7 +37,7 @@ namespace Boxfusion.Health.His.GpDoh.Domain.FacilityPatients
                     if (entity.DateOfBirth is null)
                         context.AddFailure("Date of birth is mandatory.");
 
-                    if (string.IsNullOrWhiteSpace(entity.HospitalPatientNumber))
+                    if (string.IsNullOrWhiteSpace(entity.FacilityPatientIdentifier))
                         context.AddFailure("Hospital Patient Number is mandatory.");
 
                     if (entity.PatientProvince is null)

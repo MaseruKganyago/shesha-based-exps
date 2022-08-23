@@ -9,7 +9,7 @@
              Domain Service for the Admission entity.
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Boxfusion.Health.His.Common.Diagnoses.DiagnosisManager,Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisWard,System.Guid},Boxfusion.Health.His.Common.Diagnoses.DiagnosisManager,Boxfusion.Health.His.Common.ConditionIcdTenCodes.ConditionIcdTenCodeManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid})">
             <summary>
             
             </summary>
@@ -20,7 +20,7 @@
             <param name="conditionIcdTenCodeManager"></param>
             <param name="diagnosisRepositiory"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.AcceptOrRejectTransfers(Boxfusion.Health.His.Common.Enums.RefListAcceptanceDecision,Boxfusion.Health.His.Common.WardAdmission,Boxfusion.Health.His.Common.Enums.RefListTransferRejectionReasons,System.String)">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.AcceptOrRejectTransfers(Boxfusion.Health.His.Common.Enums.RefListAcceptanceDecision,Boxfusion.Health.His.Common.Admissions.WardAdmission,Boxfusion.Health.His.Common.Enums.RefListTransferRejectionReasons,System.String)">
             <summary>
             
             </summary>
@@ -65,7 +65,7 @@
             <param name="wardId"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.AdmitPatientAsync(Boxfusion.Health.His.Common.WardAdmission,Boxfusion.Health.His.Common.HospitalAdmission,System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode})">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.AdmitPatientAsync(Boxfusion.Health.His.Common.Admissions.WardAdmission,Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode})">
             <summary>
             
             </summary>
@@ -74,7 +74,7 @@
             <param name="codes"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.UpdateAsync(Boxfusion.Health.His.Common.WardAdmission,Boxfusion.Health.His.Common.HospitalAdmission,System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode})">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.UpdateAsync(Boxfusion.Health.His.Common.Admissions.WardAdmission,Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode})">
             <summary>
             
             </summary>
@@ -83,7 +83,7 @@
             <param name="codes"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.SeparatePatientAsync(Boxfusion.Health.His.Common.WardAdmission,Boxfusion.Health.His.Common.HospitalAdmission,System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode})">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager.SeparatePatientAsync(Boxfusion.Health.His.Common.Admissions.WardAdmission,Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Collections.Generic.List{Boxfusion.Health.HealthCommon.Core.Domain.Cdm.IcdTenCode})">
             <summary>
             
             </summary>

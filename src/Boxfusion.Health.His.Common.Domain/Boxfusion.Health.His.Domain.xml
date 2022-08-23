@@ -4,6 +4,251 @@
         <name>Boxfusion.Health.His.Common.Domain</name>
     </assembly>
     <members>
+        <member name="T:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.IdentificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.IdentityNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.DateOfBirth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.MobileNumber1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.Nationality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.Gender">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.HospitalAdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.HospitalAdmissionId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.StartDateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.EndDateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.Classification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.WardAdmissionId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.WardName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.WardAdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.FlattenedHospitalAdmission.LOS">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Admissions.HisAdmissionAuditTrail">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.HisAdmissionAuditTrail.Admission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.HisAdmissionAuditTrail.AuditTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.HisAdmissionAuditTrail.Initiator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.HisAdmissionAuditTrail.AdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Admissions.HospitalAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.HospitalAdmission.HospitalAdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.HospitalAdmission.HospitalAdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.HospitalAdmission.Classification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.HospitalAdmission.OtherCategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.HospitalAdmission.TransferFroHospital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.HospitalAdmission.TransferToHospital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.HospitalAdmission.TransferToNonGautengHospital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.HospitalAdmission.IsGautengGovFacility">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.HospitalAdmission.CapturedAfterApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.HospitalAdmission.BillingClassification">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Admissions.WardAdmission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.Ward">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.WardAdmissionNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.AdmissionType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.AdmissionStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.TransferRejectionReason">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.TransferRejectionReasonComment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.SeparationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.SeparationDestinationWard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.SeparationChildHealth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.SeparationDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.SeparationComment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.CapturedAfterApproval">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.InternalTransferOriginalWard">
+            <summary>
+            Used to like the serparations
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.InternalTransferDestinationWard">
+            <summary>
+            Used to like the serparations
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Common.Beds.Bed">
             <summary>
             
@@ -719,31 +964,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Common.HisAdmissionAuditTrail">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HisAdmissionAuditTrail.Admission">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HisAdmissionAuditTrail.AuditTime">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HisAdmissionAuditTrail.Initiator">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HisAdmissionAuditTrail.AdmissionStatus">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Common.HisChargeItem">
             <summary>
             
@@ -794,61 +1014,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Common.HospitalAdmission">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.HospitalAdmissionNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.HospitalAdmissionStatus">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.Classification">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.OtherCategory">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.TransferFroHospital">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.TransferToHospital">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.TransferToNonGautengHospital">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.IsGautengGovFacility">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.CapturedAfterApproval">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.HospitalAdmission.BillingClassification">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Health.His.Common.HospitalRoleAppointedPerson">
             <summary>
             
@@ -879,17 +1044,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.PatientMasterIndexNumber">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.PatientProvince">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.Patients.HisPatient.HospitalPatientNumber">
             <summary>
             
             </summary>
@@ -1006,81 +1161,6 @@
         <member name="T:Boxfusion.Health.His.Common.Products.HisProduct">
             <summary>
             
-            </summary>
-        </member>
-        <member name="T:Boxfusion.Health.His.Common.WardAdmission">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.WardAdmission.Ward">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.WardAdmission.WardAdmissionNumber">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.WardAdmission.AdmissionType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.WardAdmission.AdmissionStatus">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.WardAdmission.TransferRejectionReason">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.WardAdmission.TransferRejectionReasonComment">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.WardAdmission.SeparationType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.WardAdmission.SeparationDestinationWard">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.WardAdmission.SeparationChildHealth">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.WardAdmission.SeparationDate">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.WardAdmission.SeparationComment">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.WardAdmission.CapturedAfterApproval">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.WardAdmission.InternalTransferOriginalWard">
-            <summary>
-            Used to like the serparations
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Common.WardAdmission.InternalTransferDestinationWard">
-            <summary>
-            Used to like the serparations
             </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Common.WardRoleAppointedPersons.WardRoleAppointedPerson">
@@ -1977,6 +2057,81 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822120600.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220822160900">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822160900.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822160900.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220822192300">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822192300.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822192300.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220822194400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822194400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822194400.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220822200100">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822200100.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822200100.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220822202100">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822202100.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220822202100.Down">
             <summary>
             
             </summary>

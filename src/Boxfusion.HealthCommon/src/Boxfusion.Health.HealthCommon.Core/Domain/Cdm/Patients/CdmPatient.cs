@@ -69,6 +69,17 @@ namespace Boxfusion.Health.Cdm.Patients
         /// </summary>
         [ReferenceList("Cdm", "EducationLevel")]
         public virtual long? EducationLevel { get; set; }
-       
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual string PatientMasterIndexNumber { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [ReferenceList("Cdm", "RegistraionTypes")]
+        public virtual long? RegistrationType { get; set; }
+
     }
 }

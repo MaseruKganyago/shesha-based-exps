@@ -4,6 +4,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
 using Boxfusion.Health.His.Admissions.Tests;
 using Boxfusion.Health.His.Common;
+using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
 using Shouldly;
@@ -14,7 +15,7 @@ using Xunit;
 
 namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 {
-	public class AdmissionsManager_Test: AdmissionsTestBase
+    public class AdmissionsManager_Test: AdmissionsTestBase
 	{
 		private readonly AdmissionsManager _admissionsManager;
 		private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepository;

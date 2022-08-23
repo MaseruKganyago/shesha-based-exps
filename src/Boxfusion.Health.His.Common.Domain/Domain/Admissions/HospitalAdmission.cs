@@ -3,7 +3,7 @@ using Boxfusion.Health.His.Common.Enums;
 using Shesha.Domain.Attributes;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Boxfusion.Health.His.Common
+namespace Boxfusion.Health.His.Common.Admissions
 {
     /// <summary>
     /// 

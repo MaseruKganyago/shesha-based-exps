@@ -4,6 +4,7 @@ using AutoMapper;
 using Boxfusion.Health.Cdm.Patients;
 using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
+using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Tests;
 using Shesha.Domain;
 using Shesha.DynamicEntities.Dtos;
