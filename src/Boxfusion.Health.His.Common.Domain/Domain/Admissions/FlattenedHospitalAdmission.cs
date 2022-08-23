@@ -111,5 +111,10 @@ namespace Boxfusion.Health.His.Common.Admissions
 		/// 
 		/// </summary>
 		public virtual int? LOS { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual string PatientMasterIndexNumber { get; set; }
 	}
 }
