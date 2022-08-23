@@ -34,18 +34,18 @@ namespace Boxfusion.Health.His.Common.Enums
         /// 
         /// </summary>
         [Description("V.I.P")]
-        vip = 3,
+        vip = 4,
 
         /// <summary>
         /// 
         /// </summary>
         [Description("Paediatric")]
-        paediatric = 3,
+        paediatric = 5,
 
         /// <summary>
         /// 
         /// </summary>
         [Description("Expired")]
-        Expired = 3
+        Expired = 6
     }
 }
