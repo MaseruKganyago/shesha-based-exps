@@ -1,4 +1,6 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Cdm;
+using Boxfusion.Health.His.Common.Beds;
+using Boxfusion.Health.His.Common.Domain.Domain.Room;
 using Boxfusion.Health.His.Common.Enums;
 using Shesha.Domain.Attributes;
 using System;
@@ -81,5 +83,15 @@ namespace Boxfusion.Health.His.Common.Admissions
         /// Used to like the serparations
         /// </summary>
         public virtual WardAdmission InternalTransferDestinationWard { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual Bed Bed { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual Room Room { get; set; }
     }
 }
