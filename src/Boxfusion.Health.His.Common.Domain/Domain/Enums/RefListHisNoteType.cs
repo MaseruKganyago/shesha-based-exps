@@ -19,6 +19,6 @@ namespace Boxfusion.Health.His.Common.Enums
        /// <summary>
        /// 
        /// </summary>
-       separation = 2
+       discharge = 2
     }
 }

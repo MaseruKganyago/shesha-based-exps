@@ -25,5 +25,7 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Services.Admissions
         public  List<Guid> Conditions { get; set; }
 
         public string AdmissionNotes { get; set; }
+
+        public Guid PartOf { get; set; }
     }
 }

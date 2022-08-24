@@ -2,6 +2,7 @@
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Beds;
 using Boxfusion.Health.His.Common.Domain.Domain.Room;
+using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
 using Shesha.AutoMapper;
 using System;
@@ -22,7 +23,14 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Services.Admissions
                 .ForMember(a => a.Room, b => b.MapFrom(c => GetEntity<Room>(c.Room.Id)))
                 .ForMember(a => a.Bed, b => b.MapFrom(c => GetEntity<Bed>(c.Bed.Id)))
                 .ForMember(a => a.StartDateTime, b => b.MapFrom(c => c.AdmissionDate))
+                .ForMember(a => a.AdmissionStatus, b => b.MapFrom(c=> RefListAdmissionStatuses.admitted))
+                .ForMember(a => a.PartOf, b => b.MapFrom(c=>GetEntity<HospitalAdmission>(c.PartOf)))
                 .MapReferenceListValuesFromDto();
+
+            CreateMap<WardDischargeDto, WardAdmission>()
+                .ForMember(a => a.EndDateTime, b => b.MapFrom(c => c.DischargeDate))
+                .ForMember(a => a.AdmissionStatus, b => b.MapFrom(c => RefListAdmissionStatuses.separated));
         }
+
     }
 }

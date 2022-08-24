@@ -38,6 +38,12 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Services.Admissions
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost, Route("[action]")]
         public async Task<DynamicDto<WardAdmission, Guid>> AdmitPatientAsync(WardAdmissionsDto input)
         {
             var wardAdmissionEntity = await _wardAdmissionRepositiory.InsertAsync(ObjectMapper.Map<WardAdmission>(input));
@@ -50,6 +56,24 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Services.Admissions
                 OwnerId = wardAdmissionEntity.Id.ToString(),
                 OwnerType = wardAdmissionEntity.GetTypeShortAlias(),
                 Category = (int)RefListHisNoteType.admission
+
+
+            };
+            await _noteRepository.InsertAsync(note);
+            return await MapToDynamicDtoAsync<WardAdmission, Guid>(wardAdmissionEntity);
+        }
+
+        [HttpPut, Route("[action]")]
+        public async Task<DynamicDto<WardAdmission, Guid>> DischargePatientAsync(WardDischargeDto input)
+        {
+            var wardAdmissionEntity = await _wardAdmissionRepositiory.UpdateAsync(ObjectMapper.Map<WardAdmission>(input));
+
+            var note = new Note()
+            {
+                NoteText = input.DischargeNotes,
+                OwnerId = wardAdmissionEntity.Id.ToString(),
+                OwnerType = wardAdmissionEntity.GetTypeShortAlias(),
+                Category = (int)RefListHisNoteType.discharge
 
 
             };

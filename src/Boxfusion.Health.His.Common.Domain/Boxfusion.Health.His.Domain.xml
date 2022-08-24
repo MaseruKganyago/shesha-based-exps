@@ -274,6 +274,11 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Common.Admissions.WardAdmission.Physician">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Common.Beds.Bed">
             <summary>
             
@@ -720,6 +725,21 @@
             </summary>
         </member>
         <member name="F:Boxfusion.Health.His.Common.Enums.RefListDependentNumber.D010">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Common.Enums.RefListHisNoteType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListHisNoteType.admission">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Health.His.Common.Enums.RefListHisNoteType.discharge">
             <summary>
             
             </summary>
@@ -2327,6 +2347,31 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220823152200.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Domain.Migrations.M20220824143500">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220824143500.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Domain.Migrations.M20220824143500.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Houghton.Migrations.M20220824180900.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Houghton.Migrations.M20220824180900.Down">
             <summary>
             
             </summary>
