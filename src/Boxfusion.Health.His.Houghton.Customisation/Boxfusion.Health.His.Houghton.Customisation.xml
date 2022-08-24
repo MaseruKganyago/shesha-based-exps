@@ -55,7 +55,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Houghton.Customisation.Domain.Patients.FacilityPatientEntityChangingEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangingEventData{Boxfusion.Health.His.Common.Patients.FacilityPatient})">
+        <member name="M:Boxfusion.Health.His.Houghton.Customisation.Domain.Patients.FacilityPatientEntityChangingEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangingEventData{Boxfusion.Health.His.Common.Patients.HisPatient})">
             <summary>
             Assgin new generated number using {}
             </summary>
