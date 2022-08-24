@@ -16,7 +16,7 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Domain.Patients
 	/// Intercepts a new facilityPatient before saving to generate and assign a file number based on the 
 	/// customer's Reference numbering conventions.
 	/// </summary>
-	public class FacilityPatientEntityChangingEventHandler: IEventHandler<EntityChangingEventData<FacilityPatient>>, ITransientDependency
+	public class FacilityPatientEntityChangingEventHandler: IEventHandler<EntityChangingEventData<HisPatient>>, ITransientDependency
 	{
 		/// <summary>
 		/// 
@@ -29,11 +29,11 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Domain.Patients
 		/// Assgin new generated number using {}
 		/// </summary>
 		/// <param name="eventData"></param>
-		public void HandleEvent(EntityChangingEventData<FacilityPatient> eventData)
+		public void HandleEvent(EntityChangingEventData<HisPatient> eventData)
 		{
 			var patient = eventData.Entity;
 
-			if (!string.IsNullOrEmpty(patient.FacilityPatientIdentifier))
+			if (!string.IsNullOrEmpty(patient.PatientMasterIndexNumber))
 				return;
 
 			var sequenceManager = new SequenceManager();

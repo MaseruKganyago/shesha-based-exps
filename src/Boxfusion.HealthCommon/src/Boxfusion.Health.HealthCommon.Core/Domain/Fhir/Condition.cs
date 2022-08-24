@@ -23,6 +23,11 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
         /// <summary>
         /// 
         /// </summary>
+        public virtual IcdTenCode Code { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual RefListConditionClinicalStatus? ClinicalStatus { get; set; }
         /// <summary>
         /// 
