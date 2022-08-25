@@ -80,6 +80,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.GpDoh.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.HealthCommon.Core", "src\Boxfusion.HealthCommon\src\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj", "{923EC8A1-6322-414F-BECC-C8AFEC9A7474}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Houghton.Customisation", "src\Boxfusion.Health.His.Houghton.Customisation\Boxfusion.Health.His.Houghton.Customisation.csproj", "{959F6B51-1053-4FE1-BED6-4DA928C13C93}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.MpDoh.Customisations", "src\Boxfusion.Health.His.MpDoh.Domain\Boxfusion.Health.His.MpDoh.Customisations.csproj", "{FC06D88F-BF06-4FF7-A28E-46E8B3E7D4ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,8 +139,8 @@ Global
 		{CD807E5E-CD55-48C5-A41E-4CC0BA7886D2}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{CD807E5E-CD55-48C5-A41E-4CC0BA7886D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD807E5E-CD55-48C5-A41E-4CC0BA7886D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{73D4ED02-A4F8-4066-8D76-A718825B56A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{73D4ED02-A4F8-4066-8D76-A718825B56A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73D4ED02-A4F8-4066-8D76-A718825B56A2}.Debug|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
+		{73D4ED02-A4F8-4066-8D76-A718825B56A2}.Debug|Any CPU.Build.0 = DebugLocalShesha|Any CPU
 		{73D4ED02-A4F8-4066-8D76-A718825B56A2}.DebugLocalShesha|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
 		{73D4ED02-A4F8-4066-8D76-A718825B56A2}.DebugLocalShesha|Any CPU.Build.0 = DebugLocalShesha|Any CPU
 		{73D4ED02-A4F8-4066-8D76-A718825B56A2}.Release|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
@@ -243,14 +247,8 @@ Global
 		{CC28FB01-2000-4E8F-A8A4-5E1863C2BDB7}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{CC28FB01-2000-4E8F-A8A4-5E1863C2BDB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC28FB01-2000-4E8F-A8A4-5E1863C2BDB7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51220A9F-B109-404F-B510-99D7539D40FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51220A9F-B109-404F-B510-99D7539D40FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51220A9F-B109-404F-B510-99D7539D40FF}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
-		{51220A9F-B109-404F-B510-99D7539D40FF}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
-		{51220A9F-B109-404F-B510-99D7539D40FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51220A9F-B109-404F-B510-99D7539D40FF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{46BDA482-4A01-4420-8FBF-FE07507A8091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46BDA482-4A01-4420-8FBF-FE07507A8091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46BDA482-4A01-4420-8FBF-FE07507A8091}.Debug|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
+		{46BDA482-4A01-4420-8FBF-FE07507A8091}.Debug|Any CPU.Build.0 = DebugLocalShesha|Any CPU
 		{46BDA482-4A01-4420-8FBF-FE07507A8091}.DebugLocalShesha|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
 		{46BDA482-4A01-4420-8FBF-FE07507A8091}.DebugLocalShesha|Any CPU.Build.0 = DebugLocalShesha|Any CPU
 		{46BDA482-4A01-4420-8FBF-FE07507A8091}.Release|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
@@ -261,12 +259,12 @@ Global
 		{197DF5D6-0B8C-4B52-B0F9-48383289DC59}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{197DF5D6-0B8C-4B52-B0F9-48383289DC59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{197DF5D6-0B8C-4B52-B0F9-48383289DC59}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4542A186-5CC5-4EA9-ABF4-ABB9A799EAFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4542A186-5CC5-4EA9-ABF4-ABB9A799EAFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4542A186-5CC5-4EA9-ABF4-ABB9A799EAFF}.Debug|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
+		{4542A186-5CC5-4EA9-ABF4-ABB9A799EAFF}.Debug|Any CPU.Build.0 = DebugLocalShesha|Any CPU
 		{4542A186-5CC5-4EA9-ABF4-ABB9A799EAFF}.DebugLocalShesha|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
 		{4542A186-5CC5-4EA9-ABF4-ABB9A799EAFF}.DebugLocalShesha|Any CPU.Build.0 = DebugLocalShesha|Any CPU
-		{4542A186-5CC5-4EA9-ABF4-ABB9A799EAFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4542A186-5CC5-4EA9-ABF4-ABB9A799EAFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4542A186-5CC5-4EA9-ABF4-ABB9A799EAFF}.Release|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
+		{4542A186-5CC5-4EA9-ABF4-ABB9A799EAFF}.Release|Any CPU.Build.0 = DebugLocalShesha|Any CPU
 		{09832191-C09D-4E52-89A8-282F6E9BDB4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{09832191-C09D-4E52-89A8-282F6E9BDB4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09832191-C09D-4E52-89A8-282F6E9BDB4A}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
@@ -291,6 +289,18 @@ Global
 		{923EC8A1-6322-414F-BECC-C8AFEC9A7474}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{923EC8A1-6322-414F-BECC-C8AFEC9A7474}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{923EC8A1-6322-414F-BECC-C8AFEC9A7474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{959F6B51-1053-4FE1-BED6-4DA928C13C93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{959F6B51-1053-4FE1-BED6-4DA928C13C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{959F6B51-1053-4FE1-BED6-4DA928C13C93}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
+		{959F6B51-1053-4FE1-BED6-4DA928C13C93}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
+		{959F6B51-1053-4FE1-BED6-4DA928C13C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{959F6B51-1053-4FE1-BED6-4DA928C13C93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC06D88F-BF06-4FF7-A28E-46E8B3E7D4ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC06D88F-BF06-4FF7-A28E-46E8B3E7D4ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC06D88F-BF06-4FF7-A28E-46E8B3E7D4ED}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC06D88F-BF06-4FF7-A28E-46E8B3E7D4ED}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
+		{FC06D88F-BF06-4FF7-A28E-46E8B3E7D4ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC06D88F-BF06-4FF7-A28E-46E8B3E7D4ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

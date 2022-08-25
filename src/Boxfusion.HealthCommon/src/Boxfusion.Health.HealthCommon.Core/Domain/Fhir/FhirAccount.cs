@@ -10,7 +10,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 	/// 
 	/// </summary>
 	[Entity(TypeShortAlias = "HealthCommon.Core.FhirAccount")]
-	public class FhirAccount: FinancialTransaction
+	public class FhirAccount: FinancialAccount
 	{
 		/// <summary>
 		/// 

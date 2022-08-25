@@ -22,28 +22,35 @@
 	<ItemGroup>
 		<Compile Remove="Application\**" />
 		<Compile Remove="Authorization\**" />
+		<Compile Remove="Configuration\**" />
 		<Compile Remove="Domain\Dtos\**" />
 		<Compile Remove="Helpers\**" />
 		<Compile Remove="Jobs\**" />
+		<Compile Remove="Migrations\**" />
+		<Compile Remove="Notifications\**" />
 		<Compile Remove="Services\FacilityPatients\**" />
 		<Compile Remove="Services\Wards\**" />
 		<EmbeddedResource Remove="Application\**" />
 		<EmbeddedResource Remove="Authorization\**" />
+		<EmbeddedResource Remove="Configuration\**" />
 		<EmbeddedResource Remove="Domain\Dtos\**" />
 		<EmbeddedResource Remove="Helpers\**" />
 		<EmbeddedResource Remove="Jobs\**" />
+		<EmbeddedResource Remove="Migrations\**" />
+		<EmbeddedResource Remove="Notifications\**" />
 		<EmbeddedResource Remove="Services\FacilityPatients\**" />
 		<EmbeddedResource Remove="Services\Wards\**" />
 		<None Remove="Application\**" />
 		<None Remove="Authorization\**" />
+		<None Remove="Configuration\**" />
 		<None Remove="Domain\Dtos\**" />
 		<None Remove="Helpers\**" />
 		<None Remove="Jobs\**" />
+		<None Remove="Migrations\**" />
+		<None Remove="Notifications\**" />
 		<None Remove="Services\FacilityPatients\**" />
 		<None Remove="Services\Wards\**" />
 	</ItemGroup>
-
-
 
 	<ItemGroup>
 		<PackageReference Include="Abp" Version="6.6.2" />
@@ -52,19 +59,6 @@
 		<PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
 		<PackageReference Include="System.Collections" Version="4.3.0" />
 	</ItemGroup>
-
-  <Choose>
-    <When Condition="'$(Configuration)' == 'DebugLocalShesha' Or '$(UseLocalShesha)' == 'true'">
-      <ItemGroup>
-        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
-        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Core\Shesha.Core.csproj" />
-        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.NHibernate\Shesha.NHibernate.csproj" />
-        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Scheduler\Shesha.Scheduler.csproj" />
-        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Framework\Shesha.Framework.csproj" />
-        <ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise\Shesha.Enterprise.csproj" />      </ItemGroup>
-    </When>
-    <Otherwise />
-  </Choose>  
   
 	<ItemGroup>
 		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise\Shesha.Enterprise.csproj" />
@@ -73,9 +67,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Configuration\" />
-		<Folder Include="Migrations\" />
-		<Folder Include="Notifications\Models\" />
 		<Folder Include="Services\" />
 	</ItemGroup>
 

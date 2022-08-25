@@ -84,19 +84,4 @@ by passing identity number validator</PackageReleaseNotes>
     <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.NHibernate\Shesha.NHibernate.csproj" />
     <ProjectReference Include="..\..\..\..\shesha-core-enterprise\src\Shesha.Enterprise\Shesha.Enterprise.csproj" />
   </ItemGroup>
-  <Choose>
-    <When Condition="'$(Configuration)' == 'DebugLocalShesha' Or '$(UseLocalShesha)' == 'true'">
-      <ItemGroup>
-        <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
-        <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Core\Shesha.Core.csproj" />
-        <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Framework\Shesha.Framework.csproj" />
-        <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.NHibernate\Shesha.NHibernate.csproj" />
-        <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.RestSharp\Shesha.RestSharp.csproj" />
-        <ProjectReference Include="..\..\..\..\shesha-core-enterprise\shesha-core\src\Shesha.Scheduler\Shesha.Scheduler.csproj" />
-        <ProjectReference Include="..\..\..\..\shesha-core-enterprise\src\Shesha.Enterprise.DocumentProcessing\Shesha.Enterprise.DocumentProcessing.csproj" />
-        <ProjectReference Include="..\..\..\..\shesha-core-enterprise\src\Shesha.Enterprise\Shesha.Enterprise.csproj" />
-      </ItemGroup>
-    </When>
-    <Otherwise />
-  </Choose>
 </Project>

@@ -46,16 +46,6 @@
 		<ProjectReference Include="..\..\src\Boxfusion.Health.His.Common.Domain\Boxfusion.Health.His.Common.Domain.csproj" />
 	</ItemGroup>
 
-  <Choose>
-    <When Condition="'$(Configuration)' == 'DebugLocalShesha' Or '$(UseLocalShesha)' == 'true'">
-      <ItemGroup>
-        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
-        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.NHibernate\Shesha.NHibernate.csproj" />
-      </ItemGroup>
-    </When>
-    <Otherwise />
-  </Choose>
-  
   <ItemGroup>
 		<None Update="appsettings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>

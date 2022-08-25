@@ -77,7 +77,7 @@ namespace Boxfusion.Health.Cdm.Domain.Domain.Fhir
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual Class Class { get; set; }
+		public virtual string Class { get; set; }
 
 		/// <summary>
 		/// 
