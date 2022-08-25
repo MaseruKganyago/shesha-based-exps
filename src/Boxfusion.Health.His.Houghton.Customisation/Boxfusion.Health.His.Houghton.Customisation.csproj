@@ -45,4 +45,9 @@
 		<ProjectReference Include="..\Boxfusion.HealthCommon\src\Boxfusion.Health.HealthCommon.Core\Boxfusion.Health.HealthCommon.Core.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Folder Include="Configuration\" />
+		<Folder Include="Notifications\Models\" />
+	</ItemGroup>
+
 </Project>

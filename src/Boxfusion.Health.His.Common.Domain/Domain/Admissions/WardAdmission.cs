@@ -93,5 +93,10 @@ namespace Boxfusion.Health.His.Common.Admissions
         /// 
         /// </summary>
         public virtual Room Room { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual string Physician { get; set; }
     }
 }

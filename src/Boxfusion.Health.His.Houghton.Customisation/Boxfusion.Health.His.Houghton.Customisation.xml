@@ -81,6 +81,13 @@
             inheritedDoc
             </summary>
         </member>
+        <member name="M:Boxfusion.Health.His.Houghton.Customisation.Services.Admissions.AdmissionsAppService.AdmitPatientAsync(Boxfusion.Health.His.Houghton.Customisation.Services.Admissions.WardAdmissionsDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Houghton.Migrations.M20220811151100.Up">
             <summary>
             
