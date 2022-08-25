@@ -1,10 +1,6 @@
-﻿using Abp.AspNetCore;
-using Abp.AspNetCore.SignalR;
-using Abp.AutoMapper;
-using Abp.FluentValidation;
+﻿using Abp.FluentValidation;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
-using Abp.Zero.Configuration;
 using Boxfusion.Health.His.Admissions.Application;
 using Boxfusion.Health.His.Bookings;
 using Boxfusion.Health.His.Common;
@@ -20,16 +16,12 @@ using Shesha.Authentication.JwtBearer;
 using Shesha.Authorization;
 using Shesha.AzureAD;
 using Shesha.Configuration;
-using Shesha.Elmah;
 using Shesha.Import;
 using Shesha.Ldap;
-using Shesha.NHibernate;
-using Shesha.Scheduler;
 using Shesha.Sms.BulkSms;
 using Shesha.Sms.Clickatell;
 using Shesha.Sms.SmsPortal;
 using Shesha.Sms.Xml2Sms;
-using Shesha.Web;
 using Shesha.Web.FormsDesigner;
 using System;
 using System.Text;
@@ -40,38 +32,27 @@ namespace Boxfusion.Health.His
     /// ReSharper disable once InconsistentNaming
     /// </summary>
     [DependsOn(
-          // Adding all the His Modules
-          //typeof(HisAdmissModule),
-          //typeof(HisAdminisModule),
-          typeof(SheshaApplicationModule),
-          typeof(SheshaEnterpriseModule),
-         //typeof(SheshaNHibernateModule),
-         typeof(SheshaFormsDesignerModule),
-         //typeof(SheshaSchedulerModule),
-		typeof(SheshaWebCoreModule),
-		 typeof(SheshaImportModule),
-         typeof(SheshaLdapModule),
-         typeof(SheshaAzureADModule),
-         typeof(SheshaFirebaseModule),
-         //typeof(SheshaElmahModule),
-         typeof(SheshaClickatellModule),
-         typeof(SheshaBulkSmsModule),
-         typeof(SheshaXml2SmsModule),
-         typeof(SheshaSmsPortalModule),
-         typeof(HisGpDohCustomisationsModule),
-         typeof(MpDoh.HisMpDohCustomisationsModule),
-         typeof(HisCommonDomainModule),
-         typeof(HisCommonApplicationModule),
-         typeof(HisBookingsDomainModule),
-         typeof(HisBookingsApplicationModule),
-
-         typeof(HisAdmissionsApplicationModule),
+        // Adding all the His Modules
+        typeof(SheshaApplicationModule),
+        typeof(SheshaEnterpriseModule),
+        typeof(SheshaFormsDesignerModule),
+        typeof(SheshaImportModule),
+        typeof(SheshaLdapModule),
+        typeof(SheshaAzureADModule),
+        typeof(SheshaFirebaseModule),
+        typeof(SheshaClickatellModule),
+        typeof(SheshaBulkSmsModule),
+        typeof(SheshaXml2SmsModule),
+        typeof(SheshaSmsPortalModule),
+        typeof(HisGpDohCustomisationsModule),
+        typeof(MpDoh.HisMpDohCustomisationsModule),
+        typeof(HisCommonDomainModule),
+        typeof(HisCommonApplicationModule),
+        typeof(HisBookingsDomainModule),
+        typeof(HisBookingsApplicationModule),
+        typeof(HisAdmissionsApplicationModule),
         typeof(HisHoughtonCustomisationsModule),
-		typeof(AbpFluentValidationModule)
-
-	 //typeof(AbpAspNetCoreModule),
-	 //typeof(AbpAspNetCoreSignalRModule),
-	 //typeof(AbpAutoMapperModule)
+        typeof(AbpFluentValidationModule)
 	 )]
     public class HisWebCoreModule : AbpModule
     {
@@ -102,7 +83,7 @@ namespace Boxfusion.Health.His
 
             Configuration.Authorization.Providers.Add<HisAuthorizationProvider>();
 
-            //ConfigureTokenAuth();
+            ConfigureTokenAuth();
         }
 
         private void ConfigureTokenAuth()

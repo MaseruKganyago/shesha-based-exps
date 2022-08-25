@@ -15,17 +15,6 @@
     <PackageReference Include="NHibernate" Version="5.3.12" />
   </ItemGroup>
 
-  <Choose>
-    <When Condition="'$(Configuration)' == 'DebugLocalShesha' Or '$(UseLocalShesha)' == 'true'">
-      <ItemGroup>
-        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
-        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Framework\Shesha.Framework.csproj" />
-        <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Web.FormsDesigner\Shesha.Web.FormsDesigner.csproj" />
-      </ItemGroup>
-    </When>
-    <Otherwise />
-  </Choose>
-
   <ItemGroup>
     <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
     <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Core\Shesha.Core.csproj" />
