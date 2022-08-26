@@ -68,7 +68,7 @@ namespace Boxfusion.Health.His.Common.Admissions
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual Guid HospitalAdmissionId { get; set; }
+		public virtual Guid PatientId { get; set; }
 
 		/// <summary>
 		/// 
@@ -111,11 +111,26 @@ namespace Boxfusion.Health.His.Common.Admissions
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual int? LOS { get; set; }
+		public virtual Single? LOS { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public virtual string PatientMasterIndexNumber { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual string BillingClassificationName { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual Guid BillingClassificationId { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual Single? NumberOfAccounts { get; set; }
 	}
 }

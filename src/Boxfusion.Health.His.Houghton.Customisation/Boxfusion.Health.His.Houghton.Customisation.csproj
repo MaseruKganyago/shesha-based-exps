@@ -22,13 +22,10 @@
 	<ItemGroup>
 	  <Compile Remove="Configuration\**" />
 	  <Compile Remove="Notifications\**" />
-	  <Compile Remove="Services\**" />
 	  <EmbeddedResource Remove="Configuration\**" />
 	  <EmbeddedResource Remove="Notifications\**" />
-	  <EmbeddedResource Remove="Services\**" />
 	  <None Remove="Configuration\**" />
 	  <None Remove="Notifications\**" />
-	  <None Remove="Services\**" />
 	</ItemGroup>
 
 	<ItemGroup>
