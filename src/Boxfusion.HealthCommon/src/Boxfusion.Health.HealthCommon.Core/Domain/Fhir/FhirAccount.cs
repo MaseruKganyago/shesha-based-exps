@@ -48,5 +48,15 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 		/// 
 		/// </summary>
 		public virtual FhirAccount PartOf { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual Encounter Encounter { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual Patient Subject { get; set; }
 	}
 }
