@@ -4,7 +4,6 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
-using Boxfusion.Health.His.Houghton.Customisation.Services.HoughtonRegisterPatients;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 using Shesha.Domain;
@@ -79,6 +78,10 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Services.HoughtonPatientRe
 			});
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		private string GetAdmissionNumber()
 		{
 			var date = DateTime.Now.ToString("yymmdd");
