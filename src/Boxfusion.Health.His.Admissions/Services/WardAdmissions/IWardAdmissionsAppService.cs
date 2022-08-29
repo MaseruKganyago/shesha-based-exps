@@ -1,6 +1,5 @@
 ﻿using Abp.Application.Services;
 using Boxfusion.Health.His.Common.Admissions;
-using Boxfusion.Health.His.Houghton.Customisation.Services.Admissions;
 using Shesha.DynamicEntities.Dtos;
 using System;
 using System.Collections.Generic;
@@ -8,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Houghton.Customisation.Services.HoughtonWardAdmissions
+namespace Boxfusion.Health.His.Admissions.WardAdmissions
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public interface IHoughtonWardAdmissionsAppService: IApplicationService
+	public interface IWardAdmissionsAppService: IApplicationService
 	{
 		/// <summary>
 		/// 

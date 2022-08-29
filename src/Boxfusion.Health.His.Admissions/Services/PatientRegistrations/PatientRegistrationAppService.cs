@@ -15,22 +15,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Houghton.Customisation.Services.HoughtonPatientRegistrations
+namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 {
 	/// <summary>
 	/// 
 	/// </summary>
 	[AbpAuthorize]
 	[ApiVersion("1")]
-	[Route("api/v{version:apiVersion}/Hough/[controller]")]
-	public class HoughtonPatientRegistrationAppService: SheshaAppServiceBase
+	[Route("api/v{version:apiVersion}/His/[controller]")]
+	public class PatientRegistrationAppService: SheshaAppServiceBase
 	{
 		private readonly IRepository<HisPatient, Guid> _patientRepository;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public HoughtonPatientRegistrationAppService(IRepository<HisPatient, Guid> patientRepository)
+		public PatientRegistrationAppService(IRepository<HisPatient, Guid> patientRepository)
 		{
 			_patientRepository = patientRepository;
 		}

@@ -45,6 +45,7 @@
 	<ItemGroup>
 		<Folder Include="Configuration\" />
 		<Folder Include="Notifications\Models\" />
+		<Folder Include="Services\" />
 	</ItemGroup>
 
 </Project>

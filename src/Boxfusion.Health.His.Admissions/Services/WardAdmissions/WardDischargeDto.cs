@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Houghton.Customisation.Services.Admissions
+namespace Boxfusion.Health.His.Admissions.WardAdmissions
 {
     [AutoMap(typeof(WardAdmission))]
     public class WardDischargeDto : EntityDto<Guid>

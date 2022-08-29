@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Houghton.Customisation.Services.Admissions
+namespace Boxfusion.Health.His.Admissions.WardAdmissions
 {
     public class WardAdmissionsDto : EntityDto<Guid>
     {
