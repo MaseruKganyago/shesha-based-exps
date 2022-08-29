@@ -33,6 +33,7 @@ namespace Boxfusion.Health.His.Domain.Migrations
 				.AddItem(3, "Road Accident Fund", 3, "Road Accident Fund")
 				.AddItem(4, "IOD", 4, "IOD");
 
+			if (Schema.Table("entpr_PriceLists").Exists())
 			Alter.Table("entpr_PriceLists")
 				.AddColumn("His_ClassificationTypeLkp").AsInt64().Nullable();
 
