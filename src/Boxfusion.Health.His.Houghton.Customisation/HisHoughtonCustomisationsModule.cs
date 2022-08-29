@@ -53,7 +53,18 @@ namespace Boxfusion.Health.His.Houghton.Customisation
         /// </summary>
         public override void PostInitialize()
         {
+            try
+            {
+				Configuration.Modules.AbpAspNetCore().CreateControllersForAppServices(
+					typeof(HisHoughtonCustomisationsModule).Assembly,
+					moduleName: "HoughCustom",
+					useConventionalHttpVerbs: true);
+			}
+            catch (System.Exception)
+            {
 
+                throw;
+            }
         }
     }
 }

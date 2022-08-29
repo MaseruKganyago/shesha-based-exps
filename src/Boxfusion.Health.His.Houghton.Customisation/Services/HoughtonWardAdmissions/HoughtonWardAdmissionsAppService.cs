@@ -6,6 +6,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Enums;
+using Boxfusion.Health.His.Houghton.Customisation.Services.HoughtonWardAdmissions;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 using Shesha.Domain;
@@ -19,17 +20,27 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Houghton.Customisation.Services.Admissions
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/Hough/[controller]")]
-    public class AdmissionsAppService : SheshaAppServiceBase
-    {
+    public class HoughtonWardAdmissionsAppService : SheshaAppServiceBase, IHoughtonWardAdmissionsAppService
+	{
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         private readonly IRepository<Condition, Guid> _conditionRepository;
         private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;
         private readonly IRepository<Note, Guid> _noteRepository;
 
-        public AdmissionsAppService(IRepository<WardAdmission, Guid> wardAdmissionRepositiory, IRepository<Condition, Guid> conditionRepository, IRepository<Diagnosis, Guid> diagnosisRepository, IRepository<Note, Guid> noteRepository)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="wardAdmissionRepositiory"></param>
+        /// <param name="conditionRepository"></param>
+        /// <param name="diagnosisRepository"></param>
+        /// <param name="noteRepository"></param>
+        public HoughtonWardAdmissionsAppService(IRepository<WardAdmission, Guid> wardAdmissionRepositiory, IRepository<Condition, Guid> conditionRepository, IRepository<Diagnosis, Guid> diagnosisRepository, IRepository<Note, Guid> noteRepository)
         {
             _wardAdmissionRepositiory = wardAdmissionRepositiory;
             _conditionRepository = conditionRepository;
@@ -43,7 +54,7 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Services.Admissions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [HttpPost, Route("[action]")]
+        [HttpPost, Route("AdmitPatient")]
         public async Task<DynamicDto<WardAdmission, Guid>> AdmitPatientAsync(WardAdmissionsDto input)
         {
             var wardAdmissionEntity = await _wardAdmissionRepositiory.InsertAsync(ObjectMapper.Map<WardAdmission>(input));
@@ -63,7 +74,12 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Services.Admissions
             return await MapToDynamicDtoAsync<WardAdmission, Guid>(wardAdmissionEntity);
         }
 
-        [HttpPut, Route("[action]")]
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPut, Route("DischargePatient")]
         public async Task<DynamicDto<WardAdmission, Guid>> DischargePatientAsync(WardDischargeDto input)
         {
             var wardAdmissionEntity = await _wardAdmissionRepositiory.UpdateAsync(ObjectMapper.Map<WardAdmission>(input));
