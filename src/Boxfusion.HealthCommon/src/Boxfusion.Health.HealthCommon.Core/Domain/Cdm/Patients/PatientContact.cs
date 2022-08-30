@@ -45,5 +45,10 @@ namespace Boxfusion.Health.Cdm.Patients
 		/// 
 		/// </summary>
 		public virtual Address Address { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual CdmPatient Patient { get; set; }
 	}
 }

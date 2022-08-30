@@ -34,7 +34,7 @@ namespace Boxfusion.Health.His.Common
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual decimal DiscountPercent { get; set; }
+		public virtual decimal? DiscountPercent { get; set; }
 
 		/// <summary>
 		/// 

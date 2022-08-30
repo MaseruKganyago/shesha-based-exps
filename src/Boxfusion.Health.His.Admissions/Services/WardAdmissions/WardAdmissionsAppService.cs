@@ -6,7 +6,6 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Enums;
-using Boxfusion.Health.His.Houghton.Customisation.Services.HoughtonWardAdmissions;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 using Shesha.Domain;
@@ -18,15 +17,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Houghton.Customisation.Services.Admissions
+namespace Boxfusion.Health.His.Admissions.WardAdmissions
 {
     /// <summary>
     /// 
     /// </summary>
     [AbpAuthorize]
     [ApiVersion("1")]
-    [Route("api/v{version:apiVersion}/Hough/[controller]")]
-    public class HoughtonWardAdmissionsAppService : SheshaAppServiceBase, IHoughtonWardAdmissionsAppService
+    [Route("api/v{version:apiVersion}/His/[controller]")]
+    public class WardAdmissionsAppService : SheshaAppServiceBase, IWardAdmissionsAppService
 	{
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         private readonly IRepository<Condition, Guid> _conditionRepository;
@@ -40,7 +39,7 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Services.Admissions
         /// <param name="conditionRepository"></param>
         /// <param name="diagnosisRepository"></param>
         /// <param name="noteRepository"></param>
-        public HoughtonWardAdmissionsAppService(IRepository<WardAdmission, Guid> wardAdmissionRepositiory, IRepository<Condition, Guid> conditionRepository, IRepository<Diagnosis, Guid> diagnosisRepository, IRepository<Note, Guid> noteRepository)
+        public WardAdmissionsAppService(IRepository<WardAdmission, Guid> wardAdmissionRepositiory, IRepository<Condition, Guid> conditionRepository, IRepository<Diagnosis, Guid> diagnosisRepository, IRepository<Note, Guid> noteRepository)
         {
             _wardAdmissionRepositiory = wardAdmissionRepositiory;
             _conditionRepository = conditionRepository;

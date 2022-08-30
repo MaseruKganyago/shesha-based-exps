@@ -37,6 +37,7 @@
   <ItemGroup>
     <ProjectReference Include="..\shesha-core-enterprise\shesha-core\src\Shesha.Framework\Shesha.Framework.csproj" />
     <ProjectReference Include="..\shesha-core-enterprise\shesha-core\src\Shesha.NHibernate\Shesha.NHibernate.csproj" />
+    <ProjectReference Include="..\src\Boxfusion.Health.His.Admissions\Boxfusion.Health.His.Admissions.Application.csproj" />
     <ProjectReference Include="..\src\Boxfusion.Health.His.Houghton.Customisation\Boxfusion.Health.His.Houghton.Customisation.csproj" />
   </ItemGroup>
 

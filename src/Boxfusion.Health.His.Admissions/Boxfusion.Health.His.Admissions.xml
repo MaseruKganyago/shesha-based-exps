@@ -617,6 +617,231 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisHealthFacility,System.Guid})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationAppService.RegisterPatient(Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationAppService.GetAdmissionNumber">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationMapProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationMapProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.RegistrationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.PatientType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.IdentificationType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.IdentityNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.LastName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.FirstName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.MiddleName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.DateOfBirth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Gender">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Race">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.HomeLangauge">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.MaritalStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.CellNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.AlternativeNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Province">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.ResidentialAddress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.SecondResidentialAddress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.EmailAddress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Nationality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Religion">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.NumberOfDependents">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.EducationLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.IsEmployed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Occupation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.NameOfEmployer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.WorkTelephoneNo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.WorkAddress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.SecondWorkAddress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.WardAdmissions.IWardAdmissionsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.IWardAdmissionsAppService.AdmitPatientAsync(Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.IWardAdmissionsAppService.DischargePatientAsync(Boxfusion.Health.His.Admissions.WardAdmissions.WardDischargeDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.Note,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="wardAdmissionRepositiory"></param>
+            <param name="conditionRepository"></param>
+            <param name="diagnosisRepository"></param>
+            <param name="noteRepository"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.AdmitPatientAsync(Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.DischargePatientAsync(Boxfusion.Health.His.Admissions.WardAdmissions.WardDischargeDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211108021400">
             <summary>
             

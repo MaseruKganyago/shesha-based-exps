@@ -15,6 +15,12 @@ namespace Boxfusion.Health.His.Common.Enums
         /// <summary>
         /// 
         /// </summary>
+        [Description("Draft")]
+        draft = 100,
+
+        /// <summary>
+        /// 
+        /// </summary>
         [Description("Admitted")]
         admitted = 1,
 
