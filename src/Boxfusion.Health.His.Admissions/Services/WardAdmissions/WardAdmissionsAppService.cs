@@ -58,7 +58,13 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
         {
             var wardAdmissionEntity = await _wardAdmissionRepositiory.InsertAsync(ObjectMapper.Map<WardAdmission>(input));
 
-            input.Conditions.ForEach(async condition => { await createDiagnosis(condition, wardAdmissionEntity); });
+            if (input.Conditions is not null && input.Conditions.Any())
+            {
+                var tasks = new List<Task>();
+				input.Conditions.ForEach(condition => tasks.Add(createDiagnosis(condition, wardAdmissionEntity)));
+
+                await Task.WhenAll(tasks);
+			}
 
             var note = new Note()
             {
