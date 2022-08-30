@@ -6,6 +6,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Enums;
+using Boxfusion.Health.His.Houghton.Customisation.Services.HoughtonWardAdmissions;
 using Microsoft.AspNetCore.Mvc;
 using Shesha;
 using Shesha.Domain;
@@ -25,8 +26,8 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Services.Admissions
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/Hough/[controller]")]
-    public class HoughtonWardAdmissionsAppService : SheshaAppServiceBase
-    {
+    public class HoughtonWardAdmissionsAppService : SheshaAppServiceBase, IHoughtonWardAdmissionsAppService
+	{
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         private readonly IRepository<Condition, Guid> _conditionRepository;
         private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;

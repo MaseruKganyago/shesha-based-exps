@@ -78,6 +78,10 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Services.HoughtonPatientRe
 			});
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		private string GetAdmissionNumber()
 		{
 			var date = DateTime.Now.ToString("yymmdd");
