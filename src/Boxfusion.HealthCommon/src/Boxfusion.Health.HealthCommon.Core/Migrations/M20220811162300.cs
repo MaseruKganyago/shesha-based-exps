@@ -17,13 +17,19 @@ namespace Boxfusion.Health.His.Common.Domain.Migrations
         public override void Up()
         {
             Execute.Sql(@"
-                DELETE FROM Frwk_ReferenceListItems WHERE ReferenceListId='56137B35-E365-416C-8E19-2E0015A771B6';
+
+                DECLARE @Id1 UNIQUEIDENTIFIER;
+                DECLARE @Id2 UNIQUEIDENTIFIER;
+                SELECT @Id1 = Id FROM [mpdoh-his-test].[dbo].[Frwk_ReferenceLists] where [Name] = 'PracticeSettingCodeValueSets';
+                SELECT @Id2 = Id FROM [mpdoh-his-test].[dbo].[Frwk_ReferenceLists] where [Name] = 'Speciality';
+
+                DELETE FROM Frwk_ReferenceListItems WHERE ReferenceListId=@Id1;
                
-                DELETE FROM Frwk_ReferenceLists WHERE Id = '56137B35-E365-416C-8E19-2E0015A771B6';
+                DELETE FROM Frwk_ReferenceLists WHERE Id =@Id1;
 
-                DELETE FROM Frwk_ReferenceListItems WHERE ReferenceListId='9AEBA6E9-01C6-43E8-A9FF-16B752603DE5';
+                DELETE FROM Frwk_ReferenceListItems WHERE ReferenceListId=@Id2;
 
-                DELETE FROM Frwk_ReferenceLists WHERE Id = '9AEBA6E9-01C6-43E8-A9FF-16B752603DE5';
+                DELETE FROM Frwk_ReferenceLists WHERE Id =@Id2;
             ");
 
             this.Shesha().ReferenceListCreate("Fhir", "PracticeSettingCodeValueSets")
