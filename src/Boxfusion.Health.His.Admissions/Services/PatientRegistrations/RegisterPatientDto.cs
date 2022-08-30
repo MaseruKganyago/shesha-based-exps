@@ -1,4 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
+using Boxfusion.Health.His.Common.Patients;
 using Shesha.AutoMapper.Dto;
 using System;
 using System.Collections.Generic;
@@ -11,32 +13,33 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 	/// <summary>
 	/// 
 	/// </summary>
+	[AutoMap(typeof(HisPatient))]
 	public class RegisterPatientDto: EntityDto<Guid>
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		public ReferenceListItemValueDto RegistrationType { get; set; }
+		public long? RegistrationType { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public ReferenceListItemValueDto PatientType { get; set; }
+		public long? PatientType { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public ReferenceListItemValueDto IdentificationType { get; set; }
+		public long? IdentificationType { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public string IdNumber { get; set; }
+		public string IdentityNumber { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public string Surname { get; set; }
+		public string LastName { get; set; }
 
 		/// <summary>
 		/// 
@@ -56,22 +59,22 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		/// <summary>
 		/// 
 		/// </summary>
-		public ReferenceListItemValueDto Gender { get; set; }
+		public long? Gender { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public ReferenceListItemValueDto Race { get; set; }
+		public long? Race { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public ReferenceListItemValueDto HomeLangauge { get; set; }
+		public long? HomeLangauge { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public ReferenceListItemValueDto MaritalStatus { get; set; }
+		public long? MaritalStatus { get; set; }
 
 		/// <summary>
 		/// 
@@ -86,7 +89,7 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		/// <summary>
 		/// 
 		/// </summary>
-		public ReferenceListItemValueDto Province { get; set; }
+		public long? Province { get; set; }
 
 		/// <summary>
 		/// 
@@ -106,22 +109,22 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		/// <summary>
 		/// 
 		/// </summary>
-		public ReferenceListItemValueDto Nationality { get; set; }
+		public long? Nationality { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public ReferenceListItemValueDto Religion { get; set; }
+		public long? Religion { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public string NumberOfDependents { get; set; }
+		public int? NumberOfDependents { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public ReferenceListItemValueDto EducationLevel { get; set; }
+		public long? EducationLevel { get; set; }
 
 		/// <summary>
 		/// 

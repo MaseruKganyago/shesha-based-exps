@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Health.His.Admissions.WardAdmissions
 {
-    public class AdmissionsMapProfile: ShaProfile
+    public class WardAdmissionsMapProfile: ShaProfile
     {
-        public AdmissionsMapProfile()
+        public WardAdmissionsMapProfile()
         {
             CreateMap<WardAdmissionsDto, WardAdmission>()
                 .ForMember(a => a.Subject, b => b.MapFrom(c => GetEntity<HisPatient>(c.Patient)))

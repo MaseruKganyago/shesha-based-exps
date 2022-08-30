@@ -1,6 +1,7 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
+using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
@@ -26,13 +27,15 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 	public class PatientRegistrationAppService: SheshaAppServiceBase
 	{
 		private readonly IRepository<HisPatient, Guid> _patientRepository;
+		private readonly IRepository<HisHealthFacility, Guid> _healthFacilityRepository;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public PatientRegistrationAppService(IRepository<HisPatient, Guid> patientRepository)
+		public PatientRegistrationAppService(IRepository<HisPatient, Guid> patientRepository, IRepository<HisHealthFacility, Guid> healthFacilityRepository)
 		{
 			_patientRepository = patientRepository;
+			_healthFacilityRepository = healthFacilityRepository;
 		}
 
 		/// <summary>
@@ -51,18 +54,23 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 
 			var patientEntity = await SaveOrUpdateEntityAsync<HisPatient>(nullabeId(input.Id), async item =>
 			{
-				item = ObjectMapper.Map<HisPatient>(input);
+				ObjectMapper.Map<RegisterPatientDto, HisPatient>(input, item);
 				item.Address = homeAddress;
 				item.WorkAddress = workAddress;
 			});
 
+			var facilityId = RequestContextHelper.FacilityId;
+			HisHealthFacility facility = null;
+			if (RequestContextHelper.HasFacilityId)
+				facility = await _healthFacilityRepository.GetAsync(facilityId);
+
 			await SaveOrUpdateEntityAsync<HospitalAdmission>(null, async item =>
 			{
-				item.RegistrationType = input.RegistrationType.ItemValue;
+				item.RegistrationType = input.RegistrationType;
 				item.Subject = patientEntity;
-				item.HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.admitted;
+				item.HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.draft;
 				item.HospitalAdmissionNumber = GetAdmissionNumber();
-				//Hardcode item.ServiceProvider - Hospital??
+				item.ServiceProvider = facility;
 			});
 
 			return await MapToDynamicDtoAsync<HisPatient, Guid>(patientEntity);

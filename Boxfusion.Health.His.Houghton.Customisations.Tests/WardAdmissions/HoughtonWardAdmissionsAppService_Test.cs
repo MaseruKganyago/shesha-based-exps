@@ -2,12 +2,10 @@
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
+using Boxfusion.Health.His.Admissions.WardAdmissions;
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
-using Boxfusion.Health.His.Houghton.Customisation.Services.Admissions;
-using Boxfusion.Health.His.Houghton.Customisation.Services.HoughtonPatientRegistrations;
-using Boxfusion.Health.His.Houghton.Customisation.Services.HoughtonWardAdmissions;
 using GraphQL;
 using Shesha.AutoMapper.Dto;
 using Shesha.DynamicEntities.Dtos;
@@ -24,14 +22,14 @@ namespace Boxfusion.Health.His.Hougton.Tests.WardAdmissions
 {
 	public class HoughtonWardAdmissionsAppService_Test: HougtonTestBase
 	{
-		private readonly IHoughtonWardAdmissionsAppService _wardAdmissionsAppService;
+		private readonly IWardAdmissionsAppService _wardAdmissionsAppService;
 		private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
 		private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepositiory;
 
 		public HoughtonWardAdmissionsAppService_Test(): base()
 		{
 			CreateTestData_HealthFacility_And_Ward("UnitTest Hospital", "UnitTest Ward", "UnitTest Room", "UnitTest Bed");
-			_wardAdmissionsAppService = Resolve<IHoughtonWardAdmissionsAppService>();
+			_wardAdmissionsAppService = Resolve<IWardAdmissionsAppService>();
 			_hospitalAdmissionRepositiory = Resolve<IRepository<HospitalAdmission, Guid>>();
 		}
 

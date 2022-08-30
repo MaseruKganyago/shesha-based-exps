@@ -622,7 +622,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Patients.HisPatient,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisHealthFacility,System.Guid})">
             <summary>
             
             </summary>
@@ -639,6 +639,16 @@
             
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationMapProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationMapProfile.#ctor">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto">
             <summary>
@@ -660,12 +670,12 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.IdNumber">
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.IdentityNumber">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Surname">
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.LastName">
             <summary>
             
             </summary>
