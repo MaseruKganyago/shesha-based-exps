@@ -1,4 +1,6 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
+using Boxfusion.Health.His.Common.BillingClassifications;
+using Boxfusion.Health.His.Common.Domain.Domain.BillingClassifications;
 using Boxfusion.Health.His.Common.Enums;
 using Shesha.Domain.Attributes;
 using System.ComponentModel.DataAnnotations.Schema;

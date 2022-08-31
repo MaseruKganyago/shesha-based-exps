@@ -4,6 +4,67 @@
         <name>Boxfusion.Health.His.Admissions.Domain</name>
     </assembly>
     <members>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.BillingClassifications.BillingClassification,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Accounts.HisAccount,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisHealthFacility,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Coverages.CashCoverage,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Domain.Domain.Fhir.Coverage,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Accounts.AccountCoverage,System.Guid})" -->
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.SetPayment(System.Guid,System.Guid,System.Guid,System.Guid,Shesha.Enterprise.BankAccounts.BankAccount,System.Int32,System.Guid,System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="hospitalAdmissionId"></param>
+            <param name="billClassificationId"></param>
+            <param name="selectedMedicalAid"></param>
+            <param name="selected3rdPartyCoverage"></param>
+            <param name="bankAccount"></param>
+            <param name="cashPayerType"></param>
+            <param name="medicalAidCoverageId"></param>
+            <param name="selected3rdPartyCoverageId"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.UpdateHospitalAdmissionBillingClassification(Boxfusion.Health.His.Common.Admissions.HospitalAdmission,Boxfusion.Health.His.Common.BillingClassifications.BillingClassification)">
+            <summary>
+            
+            </summary>
+            <param name="hospitalAdmission"></param>
+            <param name="billClassification"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateAccount(Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Patient,Boxfusion.Health.His.Common.BillingClassifications.BillingClassification)">
+            <summary>
+            
+            </summary>
+            <param name="patient"></param>
+            <param name="billClassification"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateCoverage(Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Patient,Boxfusion.Health.His.Common.BillingClassifications.BillingClassification,Shesha.Enterprise.BankAccounts.BankAccount,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="patient"></param>
+            <param name="billingClassification"></param>
+            <param name="bankAccount"></param>
+            <param name="cashPayerType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateAccountCoverage(Boxfusion.Health.His.Common.BillingClassifications.BillingClassification,Boxfusion.Health.His.Common.Accounts.HisAccount,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Patient,System.Int32,System.Guid,System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="billingClassification"></param>
+            <param name="account"></param>
+            <param name="patient"></param>
+            <param name="cashPayerType"></param>
+            <param name="medicalAidCoverageId"></param>
+            <param name="selected3rdPartyCoverageId"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager">
             <summary>
              Domain Service for the Admission entity.
