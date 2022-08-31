@@ -211,24 +211,18 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Accounts
             List<AccountCoverage> accountCoverages = new List<AccountCoverage>();
 
             if(billingClassification?.ClassificationType.Value == (long)ClassificationType.medicalAid)
-            {
                 await AccountMedicalAidCoverage(account, patient, medicalAidCoverageId, selected3rdPartyCoverageId, accountCoverages);
-            }
 
             if (billingClassification?.ClassificationType.Value == (long)ClassificationType.iod || billingClassification?.ClassificationType.Value == (long)ClassificationType.roadAccidentFund)
-            {
                 await AccountOrganisationCoverage(billingClassification, account, patient, accountCoverages);
-            }
+            
 
             if (billingClassification?.ClassificationType.Value == (long)ClassificationType.cash && cashPayerType == (int)CashPayerType.self)
-            {
                 await AccountCashSelfCoverage(account, patient, accountCoverages);
-            }
+
 
             if (billingClassification?.ClassificationType.Value == (long)ClassificationType.cash && cashPayerType == (int)CashPayerType.someoneElse)
-            {
                 await AccountCashSomeoneCoverage(account, patient, selected3rdPartyCoverageId, accountCoverages);
-            }
 
             return accountCoverages;
         }
