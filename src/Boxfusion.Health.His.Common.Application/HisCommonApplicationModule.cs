@@ -63,6 +63,12 @@ namespace Boxfusion.Health.His.Common
                      typeof(SheshaApplicationModule).GetAssembly()
                  );
 
+            Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(SheshaFormsDesignerModule).Assembly, "App");
+            Configuration.Modules.AbpAspNetCore()
+                 .CreateControllersForAppServices(
+                     typeof(SheshaFormsDesignerModule).GetAssembly()
+                 );
+
             Configuration.Modules.ShaApplication().CreateAppServicesForEntities(typeof(SheshaFrameworkModule).Assembly, "Shesha");
             Configuration.Modules.AbpAspNetCore()
                  .CreateControllersForAppServices(
