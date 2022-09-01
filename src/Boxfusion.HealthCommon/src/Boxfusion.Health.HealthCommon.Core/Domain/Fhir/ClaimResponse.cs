@@ -36,7 +36,7 @@ namespace Boxfusion.Health.Cdm.Domain.Domain.Fhir
 		/// <summary>
 		/// 
 		/// </summary>
-		[ReferenceList("Fhir", "ClaimUse")]
+		[ReferenceList("Fhir", "ClaimResponseUse")]
 		public virtual long? Use { get; set; }
 
 		/// <summary>

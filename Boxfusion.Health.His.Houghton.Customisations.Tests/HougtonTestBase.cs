@@ -35,6 +35,8 @@ namespace Boxfusion.Health.His.Hougton.Tests
             _wardRepository = Resolve<IRepository<HisWard, Guid>>();
             _diagnosisRepository = Resolve<IRepository<Diagnosis, Guid>>();
             _conditionRepository = Resolve<IRepository<Condition, Guid>>();
+            _roomRepository = Resolve<IRepository<Room, Guid>>();
+            _bedRepository = Resolve<IRepository<Bed, Guid>>();
             _uowManager = Resolve<IUnitOfWorkManager>();
             _sessionProvider = Resolve<ISessionProvider>();
 		}
@@ -93,7 +95,8 @@ namespace Boxfusion.Health.His.Hougton.Tests
                 var newRoom = new Room()
                 {
                     Name = name,
-                    Ward = ward
+                    Ward = ward,
+                    NumberOfBeds = 20
                 };
                 room = _roomRepository.Insert(newRoom);
             }
@@ -121,17 +124,25 @@ namespace Boxfusion.Health.His.Hougton.Tests
 		{
 			HisPatient patient;
 
-			using (var uow = _uowManager.Begin())
-			{
-				patient = new HisPatient()
+            try
+            {
+				using (var uow = _uowManager.Begin())
 				{
-					FirstName = name,
-					LastName = name
-				};
-				patient = await _patientRepository.InsertAsync(patient);
+					patient = new HisPatient()
+					{
+						FirstName = name,
+						LastName = name
+					};
+					patient = await _patientRepository.InsertAsync(patient);
 
-				uow.Complete();
+					uow.Complete();
+				}
 			}
+            catch (Exception)
+            {
+
+                throw;
+            }
 
 			return patient;
 		}
@@ -139,11 +150,26 @@ namespace Boxfusion.Health.His.Hougton.Tests
         protected async Task<List<Condition>> CreateTestData_Conditions(HisPatient patient)
         {
             var codes = await GetTestData_CodesList();
+            var conditions = new List<Condition>();
 
-            var tasks = new List<Task<Condition>>();
-            codes.ForEach(code => tasks.Add(_conditionRepository.InsertAsync(new Condition() { Code = code, Subject = patient })));
+            try
+            {
+                using (var uow = _uowManager.Begin())
+                {
+					var tasks = new List<Task<Condition>>();
+					codes.ForEach(code => tasks.Add(_conditionRepository.InsertAsync(new Condition() { Code = code, Subject = patient })));
 
-            return (await Task.WhenAll(tasks)).ToList();
+					conditions = (await Task.WhenAll(tasks)).ToList();
+
+                    await uow.CompleteAsync();
+				}
+			}
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return conditions;
 		}
 
 		protected async Task<HisHealthFacility> GetTestData_HealthFacility(string name)
@@ -199,8 +225,13 @@ namespace Boxfusion.Health.His.Hougton.Tests
         protected async Task<List<Diagnosis>> GetTestData_AdmissionDiagnosis(WardAdmission admission,
                                                                        RefListEncounterDiagnosisRoles encounterDiagnosisRoles)
         {
-            return await _diagnosisRepository.GetAllListAsync(a => a.OwnerId == admission.Id.ToString()
-                                                                  && a.Use == (int?)encounterDiagnosisRoles);
+            var result = new List<Diagnosis>();
+			using var uow = _uowManager.Begin();
+			result =  _diagnosisRepository.GetAllIncluding(a => a.Condition).Where(a => a.OwnerId == admission.Id.ToString()
+                                                                  && a.Use == (int?)encounterDiagnosisRoles).ToList();
+            await uow.CompleteAsync();
+
+            return result;
         }
 
         protected void CleanUpTestData_Patient(Guid patientId)

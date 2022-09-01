@@ -36,7 +36,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .WithForeignKeyColumn("PatientId", "Core_Persons").Nullable()
                 .WithColumn("BillablePeriodStart").AsDateTime().Nullable()
                 .WithColumn("BillablePeriodEnd").AsDateTime().Nullable()
-                .WithForeignKeyColumn("InsurerId", "Fhir_Organisations").Nullable()
+                .WithForeignKeyColumn("InsurerId", "Core_Organisations").Nullable()
                 .WithForeignKeyColumn("ProviderId", "Core_Persons").Nullable()
                 .WithColumn("PriorityLkp").AsInt64().Nullable()
                 .WithForeignKeyColumn("PayeeId", "Fhir_Payee")
@@ -70,7 +70,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
 
             this.Shesha().ReferenceListCreate("Fhir", "ClaimResponseType");
             this.Shesha().ReferenceListCreate("Fhir", "ClaimResponseSubType");
-            this.Shesha().ReferenceListCreate("Fhir", "ClaimUse");
+            this.Shesha().ReferenceListCreate("Fhir", "ClaimResponseUse");
             this.Shesha().ReferenceListCreate("Fhir", "ClaimResponsePayeeType");
 
             Create.Table("Fhir_ClaimInsurances")

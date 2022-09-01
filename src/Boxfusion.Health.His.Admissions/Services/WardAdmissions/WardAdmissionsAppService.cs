@@ -25,7 +25,7 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/His/[controller]")]
-    public class WardAdmissionsAppService : SheshaAppServiceBase, IWardAdmissionsAppService
+    public class WardAdmissionsAppService : SheshaAppServiceBase
 	{
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
         private readonly IRepository<Condition, Guid> _conditionRepository;

@@ -22,15 +22,16 @@ namespace Boxfusion.Health.His.Hougton.Tests.WardAdmissions
 {
 	public class HoughtonWardAdmissionsAppService_Test: HougtonTestBase
 	{
-		private readonly IWardAdmissionsAppService _wardAdmissionsAppService;
+		private readonly WardAdmissionsAppService _wardAdmissionsAppService;
 		private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
 		private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepositiory;
 
 		public HoughtonWardAdmissionsAppService_Test(): base()
 		{
 			CreateTestData_HealthFacility_And_Ward("UnitTest Hospital", "UnitTest Ward", "UnitTest Room", "UnitTest Bed");
-			_wardAdmissionsAppService = Resolve<IWardAdmissionsAppService>();
+			_wardAdmissionsAppService = Resolve<WardAdmissionsAppService>();
 			_hospitalAdmissionRepositiory = Resolve<IRepository<HospitalAdmission, Guid>>();
+			_wardAdmissionRepositiory = Resolve<IRepository<WardAdmission, Guid>>();
 		}
 
 		/// <summary>
@@ -55,12 +56,12 @@ namespace Boxfusion.Health.His.Hougton.Tests.WardAdmissions
 				var practitioner = await GetCurrentLoggedInPerson();
 
 				var conditions = await CreateTestData_Conditions(patient);
-				var partOf = await _hospitalAdmissionRepositiory.InsertAsync(new HospitalAdmission() 
+				var partOf = await _hospitalAdmissionRepositiory.InsertAsync(new HospitalAdmission()
 				{
 					RegistrationType = (long?)RefListRegistrationType.InPatient,
-				    Subject = patient,
-				    HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.admitted,
-				    HospitalAdmissionNumber = GetAdmissionNumber()
+					Subject = patient,
+					HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.admitted,
+					//HospitalAdmissionNumber = GetAdmissionNumber()
 				});
 
 				var admitPatientInput = new WardAdmissionsDto()
@@ -95,12 +96,16 @@ namespace Boxfusion.Health.His.Hougton.Tests.WardAdmissions
 
 				//Check if ConditionIcdTenCode assigments was made
 				var conditionList = diagnosis.Select(a => a.Condition).ToList();
-				conditionList.ForEach(condition => 
+				conditionList.ForEach(condition =>
 				{
 					var flag = conditions.Any(a => a.Id == condition.Id);
-					flag.ShouldNotBe(true);
+					flag.ShouldBe(true);
 				});
 				#endregion
+			}
+			catch (Exception ex)
+			{
+				throw;
 			}
 			finally
 			{

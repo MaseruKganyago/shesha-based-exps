@@ -795,25 +795,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.WardAdmissions.IWardAdmissionsAppService">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.IWardAdmissionsAppService.AdmitPatientAsync(Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsDto)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.IWardAdmissionsAppService.DischargePatientAsync(Boxfusion.Health.His.Admissions.WardAdmissions.WardDischargeDto)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService">
             <summary>
             

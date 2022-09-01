@@ -25,13 +25,17 @@ using Castle.Facilities.Logging;
 using Abp.AspNetCore.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using Boxfusion.Health.His.Houghton.Customisation;
 using NSubstitute;
+using Castle.Windsor.MsDependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using Shesha.Identity;
+using Boxfusion.Health.His.Admissions.Application;
 
 namespace Boxfusion.Health.His.Hougton.Tests
 {
     [DependsOn(
-        typeof(HisHoughtonCustomisationsModule),
+        //typeof(HisHoughtonCustomisationsModule),
+        typeof(HisAdmissionsApplicationModule),
         typeof(AbpKernelModule),
         typeof(AbpTestBaseModule),
         typeof(SheshaNHibernateModule),
@@ -63,6 +67,7 @@ namespace Boxfusion.Health.His.Hougton.Tests
 
             // mock IWebHostEnvironment
             IocManager.IocContainer.Register(Component.For<IWebHostEnvironment>().ImplementedBy<TestWebHostEnvironment>().LifestyleSingleton());
+
 
             //IocManager.IocContainer.Register(
             //    Component.For<IAbpAspNetCoreConfiguration>()
@@ -96,8 +101,12 @@ namespace Boxfusion.Health.His.Hougton.Tests
                     .LifestyleSingleton()
             );
 
-            // Use database for language management
-            Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
+			var services = new ServiceCollection();
+			IdentityRegistrar.Register(services);
+			WindsorRegistrationHelper.CreateServiceProvider(IocManager.IocContainer, services);
+
+			// Use database for language management
+			Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
             RegisterFakeService<SheshaDbMigrator>();
 
