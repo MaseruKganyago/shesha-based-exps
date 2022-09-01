@@ -47,17 +47,17 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Cdm
         /// <summary>
         /// 
         /// </summary>
-        public string FacilityPracticeNumber { get; set; }
+        public virtual string FacilityPracticeNumber { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public District District { get; set; }
+        public virtual District District { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [MultiValueReferenceList("Fhir", "PracticeSettingCodeValueSets")]
-        public long? Speciality { get; set; }
+        public virtual long? Speciality { get; set; }
     }
 }
