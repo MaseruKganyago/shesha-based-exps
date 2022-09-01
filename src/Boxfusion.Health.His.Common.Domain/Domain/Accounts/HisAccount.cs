@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Common
+namespace Boxfusion.Health.His.Common.Accounts
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	[Entity(TypeShortAlias = "His.HisAccount")]
-	public class HisAccount: FhirAccount
-	{
-	}
+    /// <summary>
+    /// 
+    /// </summary>
+    [Entity(TypeShortAlias = "His.HisAccount")]
+    public class HisAccount : FhirAccount
+    {
+    }
 }

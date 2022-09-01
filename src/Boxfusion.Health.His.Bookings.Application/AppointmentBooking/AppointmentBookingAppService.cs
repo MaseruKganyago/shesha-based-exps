@@ -165,8 +165,6 @@ namespace Boxfusion.Health.His.Bookings.AppointmentBooking
                 {
                     throw new UserFriendlyException("An unexepected error occured. Could not reschedule the booking. " + e.Message);
                 }
-
-
             }
         }
 
