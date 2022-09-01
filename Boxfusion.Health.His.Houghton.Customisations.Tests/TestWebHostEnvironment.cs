@@ -3,7 +3,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.FileProviders;
 
-namespace Boxfusion.Health.His.Hougton.Tests
+namespace Boxfusion.Health.His.Admissions.Application.Tests
 {
     public class TestWebHostEnvironment : IWebHostEnvironment
     {

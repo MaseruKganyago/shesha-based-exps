@@ -6,6 +6,7 @@ using Boxfusion.Health.His.Admissions.WardAdmissions;
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
+using Boxfusion.Health.His.Hougton.Tests;
 using GraphQL;
 using Shesha.AutoMapper.Dto;
 using Shesha.DynamicEntities.Dtos;
@@ -18,15 +19,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Boxfusion.Health.His.Hougton.Tests.WardAdmissions
+namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 {
-	public class HoughtonWardAdmissionsAppService_Test: HougtonTestBase
+	public class WardAdmissionsAppService_Test: HisAdmissionsApplicationTestBase
 	{
 		private readonly WardAdmissionsAppService _wardAdmissionsAppService;
 		private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
 		private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepositiory;
 
-		public HoughtonWardAdmissionsAppService_Test(): base()
+		public WardAdmissionsAppService_Test(): base()
 		{
 			CreateTestData_HealthFacility_And_Ward("UnitTest Hospital", "UnitTest Ward", "UnitTest Room", "UnitTest Bed");
 			_wardAdmissionsAppService = Resolve<WardAdmissionsAppService>();

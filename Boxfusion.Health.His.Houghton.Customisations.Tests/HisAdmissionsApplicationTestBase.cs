@@ -16,7 +16,7 @@ using Shesha.NHibernate;
 
 namespace Boxfusion.Health.His.Hougton.Tests
 {
-    public class HougtonTestBase: SheshaNhTestBase
+    public class HisAdmissionsApplicationTestBase: SheshaNhTestBase
 	{
         protected IRepository<HisHealthFacility, Guid> _facilityRepository;
         protected IRepository<HisPatient, Guid> _patientRepository;
@@ -28,7 +28,7 @@ namespace Boxfusion.Health.His.Hougton.Tests
         protected IUnitOfWorkManager _uowManager;
         protected ISessionProvider _sessionProvider;
 
-        public HougtonTestBase()
+        public HisAdmissionsApplicationTestBase()
 		{
             _facilityRepository = Resolve<IRepository<HisHealthFacility, Guid>>();
             _patientRepository = Resolve<IRepository<HisPatient, Guid>>();

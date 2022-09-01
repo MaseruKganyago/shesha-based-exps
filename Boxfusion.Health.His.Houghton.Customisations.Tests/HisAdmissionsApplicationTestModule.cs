@@ -30,6 +30,7 @@ using Castle.Windsor.MsDependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Shesha.Identity;
 using Boxfusion.Health.His.Admissions.Application;
+using Boxfusion.Health.His.Admissions.Application.Tests;
 
 namespace Boxfusion.Health.His.Hougton.Tests
 {
@@ -41,12 +42,12 @@ namespace Boxfusion.Health.His.Hougton.Tests
         typeof(SheshaNHibernateModule),
         typeof(SheshaFrameworkModule)
         )]
-    public class HisHoughtonTestModule : AbpModule
+    public class HisAdmissionsApplicationTestModule : AbpModule
     {
         //private const string ConnectionString = @"Data Source=sql-shared-nonprod.database.windows.net;Initial Catalog=boxhealthhis-test;User=boxdbadmin;Password=n0-hack.2020;MultipleActiveResultSets=True;TrustServerCertificate=True";
         private string ConnectionString;
 
-        public HisHoughtonTestModule(SheshaNHibernateModule nhModule)
+        public HisAdmissionsApplicationTestModule(SheshaNHibernateModule nhModule)
         {
             var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             ConnectionString = config.GetConnectionString("TestDB");

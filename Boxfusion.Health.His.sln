@@ -86,7 +86,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.GpDoh.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.MpDoh.Customisations", "src\Boxfusion.Health.His.MpDoh.Domain\Boxfusion.Health.His.MpDoh.Customisations.csproj", "{63A74978-586C-46D8-B4A0-59E2C5B220F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boxfusion.Health.His.Houghton.Customisations.Tests", "Boxfusion.Health.His.Houghton.Customisations.Tests\Boxfusion.Health.His.Houghton.Customisations.Tests.csproj", "{96A996E8-9319-4435-BBA5-9B85184F86CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Admissions.Application.Tests", "Boxfusion.Health.His.Houghton.Customisations.Tests\Boxfusion.Health.His.Admissions.Application.Tests.csproj", "{96A996E8-9319-4435-BBA5-9B85184F86CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
