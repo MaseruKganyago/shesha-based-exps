@@ -28,6 +28,7 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
     public class WardAdmissionsAppService : SheshaAppServiceBase
 	{
         private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
+        private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepository;
         private readonly IRepository<Condition, Guid> _conditionRepository;
         private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;
         private readonly IRepository<Note, Guid> _noteRepository;
@@ -39,14 +40,21 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
         /// <param name="conditionRepository"></param>
         /// <param name="diagnosisRepository"></param>
         /// <param name="noteRepository"></param>
-        public WardAdmissionsAppService(IRepository<WardAdmission, Guid> wardAdmissionRepositiory, IRepository<Condition, Guid> conditionRepository, IRepository<Diagnosis, Guid> diagnosisRepository, IRepository<Note, Guid> noteRepository)
+        /// <param name="hospitalAdmissionRepository"></param>
+        public WardAdmissionsAppService(IRepository<WardAdmission, Guid> wardAdmissionRepositiory, 
+            IRepository<Condition, Guid> conditionRepository, 
+            IRepository<Diagnosis, Guid> diagnosisRepository, 
+            IRepository<Note, Guid> noteRepository,
+			IRepository<HospitalAdmission, Guid> hospitalAdmissionRepository)
         {
             _wardAdmissionRepositiory = wardAdmissionRepositiory;
             _conditionRepository = conditionRepository;
             _diagnosisRepository = diagnosisRepository;
             _noteRepository = noteRepository;
+            _hospitalAdmissionRepository = hospitalAdmissionRepository;
 
-        }
+
+		}
 
         /// <summary>
         /// 
@@ -72,8 +80,6 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
                 OwnerId = wardAdmissionEntity.Id.ToString(),
                 OwnerType = wardAdmissionEntity.GetTypeShortAlias(),
                 Category = (int)RefListHisNoteType.admission
-
-
             };
             await _noteRepository.InsertAsync(note);
             return await MapToDynamicDtoAsync<WardAdmission, Guid>(wardAdmissionEntity);
@@ -87,16 +93,24 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
         [HttpPut, Route("DischargePatient")]
         public async Task<DynamicDto<WardAdmission, Guid>> DischargePatientAsync(WardDischargeDto input)
         {
-            var wardAdmissionEntity = await _wardAdmissionRepositiory.UpdateAsync(ObjectMapper.Map<WardAdmission>(input));
+            //Discharge patient from ward
+            var wardAdmissionEntity = await SaveOrUpdateEntityAsync<WardAdmission>(input.Id, async item => 
+            {
+                ObjectMapper.Map(input, item);
+			});
 
-            var note = new Note()
+            //Discharge patient from hospital
+            var hospitalAdmission = await SaveOrUpdateEntityAsync<HospitalAdmission>(wardAdmissionEntity.PartOf.Id, async item => 
+            {
+                ObjectMapper.Map(input, item);
+            });
+
+			var note = new Note()
             {
                 NoteText = input.DischargeNotes,
                 OwnerId = wardAdmissionEntity.Id.ToString(),
                 OwnerType = wardAdmissionEntity.GetTypeShortAlias(),
                 Category = (int)RefListHisNoteType.discharge
-
-
             };
             await _noteRepository.InsertAsync(note);
             return await MapToDynamicDtoAsync<WardAdmission, Guid>(wardAdmissionEntity);

@@ -132,7 +132,7 @@ namespace Boxfusion.Health.His.Admissions.Tests
                 {
                     using var session = OpenSession();
 
-                    var result = (await session.CreateSQLQuery($"exec His_AddAdmissionTestData @ServiceProviderId = :facilityId, @WardId = :wardId")
+                    var result = (await session.CreateSQLQuery($"exec Sp_His_AddAdmissionTestData @ServiceProviderId = :facilityId, @WardId = :wardId")
                                             .SetParameter("facilityId", facilityId)
                                             .SetParameter("wardId", wardId)
                                             .SetResultTransformer(Transformers.AliasToBean<AdmissionDataQueryModel>())
@@ -247,7 +247,7 @@ namespace Boxfusion.Health.His.Admissions.Tests
             session.Flush();
         }
 
-        protected async Task CleanUpTestData_PatientAdmission(WardAdmission admission, Diagnosis diagnosis, bool includePartOf = true)
+        protected async Task CleanUpTestData_PatientAdmission(WardAdmission admission, Diagnosis diagnosis = null, bool includePartOf = true)
         {
             var diagnosisList = await _diagnosisRepository.GetAllListAsync(a => a.OwnerId == admission.Id.ToString());
 
@@ -272,7 +272,7 @@ namespace Boxfusion.Health.His.Admissions.Tests
             }
             else
             {
-                DeleteDiagnosisCombo(diagnosis);
+                if (diagnosis is not null) DeleteDiagnosisCombo(diagnosis);
             }
 
             session.Flush();
@@ -293,6 +293,4 @@ namespace Boxfusion.Health.His.Admissions.Tests
             session.Flush();
         }
 	}
-
-
 }

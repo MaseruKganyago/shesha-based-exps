@@ -29,7 +29,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 
 		public WardAdmissionsAppService_Test(): base()
 		{
-			CreateTestData_HealthFacility_And_Ward("UnitTest Hospital", "UnitTest Ward", "UnitTest Room", "UnitTest Bed");
+			CreateTestData_HealthFacility_And_Ward_With_RoomBed("UnitTest Hospital", "UnitTest Ward", "UnitTest Room", "UnitTest Bed");
 			_wardAdmissionsAppService = Resolve<WardAdmissionsAppService>();
 			_hospitalAdmissionRepositiory = Resolve<IRepository<HospitalAdmission, Guid>>();
 			_wardAdmissionRepositiory = Resolve<IRepository<WardAdmission, Guid>>();
@@ -92,7 +92,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				admission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.admitted);
 
 				//Check if diagnosis was made for admission
-				diagnosis = await GetTestData_AdmissionDiagnosis(admission, RefListEncounterDiagnosisRoles.AD);
+				diagnosis = await GetTestData_AdmissionDiagnosisList(admission, RefListEncounterDiagnosisRoles.AD);
 				diagnosis.ShouldNotBe(null);
 
 				//Check if ConditionIcdTenCode assigments was made
@@ -102,6 +102,10 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 					var flag = conditions.Any(a => a.Id == condition.Id);
 					flag.ShouldBe(true);
 				});
+
+				//Check if admission note was created
+				var note = await GetTestData_Note(admission.Id.ToString());
+				note.NoteText.ShouldBe(admitPatientInput.AdmissionNotes);
 				#endregion
 			}
 			catch (Exception ex)
@@ -110,18 +114,69 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 			}
 			finally
 			{
-				await CleanUpTestData_PatientAdmission(admission, diagnosis);
-				CleanUpTestData_Patient(patient.Id);
+				await CleanUpTestData_PatientAdmission(admission);
+				if (patient is not null) CleanUpTestData_Patient(patient.Id);
 			}
 		}
 
-		private string GetAdmissionNumber()
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		[Fact]
+		public async Task Should_Discharge_Patient_from_Ward_and_Hospital()
 		{
-			var date = DateTime.Now.ToString("yymmdd");
-			var sequenceManager = new SequenceManager();
-			var seqNumber = sequenceManager.GetNextSequenceNo("BoxHealth.Houghton.HospitalAdmission", date);
+			HisPatient patient = null;
+			WardAdmission admission = null;
+			try
+			{
+				#region Prepare data for test-discharge
+				var hospital = await GetTestData_HealthFacility("UnitTest Hospital");
+				var ward = await GetTestData_Ward("UnitTest Ward");
+				patient = await CreateTestData_NewPatient("John Smith" + " :Test2");
 
-			return $"{date}/{seqNumber:0000}";
+				var admissionData = await CreateTestData_NewAdmission(hospital.Id, ward.Id);
+				admissionData.ShouldNotBeNull();
+
+				var dischargeInput = new WardDischargeDto()
+				{
+					Id = admissionData.Id,
+					DischargeDate = DateTime.Now,
+					DischargeNotes = "UnitTest Note",
+					Physician = "Dave Kate" + " :Test2"
+				};
+				#endregion
+
+				//Act: Discharge patient
+				using var uwo = _uowManager.Begin();
+				var admissionDto = await _wardAdmissionsAppService.DischargePatientAsync(dischargeInput);
+				await uwo.CompleteAsync();
+
+				#region Assert: Check if was discharged
+				admission = await _wardAdmissionRepositiory.GetAsync(admissionDto.Id);
+				admission.ShouldNotBeNull();
+
+				//Verify wardAdmission was discharged
+				admission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.separated);
+				admission.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.ToString("MM/dd/yyyy HH:mm"));
+
+				//Verify discharge note was created
+				var note = await _noteRepository.FirstOrDefaultAsync(a => a.OwnerId == admission.Id.ToString());
+				note.ShouldNotBeNull();
+				note.NoteText.ShouldBe(dischargeInput.DischargeNotes);
+				#endregion
+			}
+			catch (Exception ex)
+			{
+				if (admission is not null) await CleanUpTestData_PatientAdmission(admission);
+				if (patient is not null) CleanUpTestData_Patient(patient.Id);
+			}
+			finally
+			{
+				await CleanUpTestData_PatientAdmission(admission);
+				if (patient is not null) CleanUpTestData_Patient(patient.Id);
+			}
 		}
+
 	}
 }

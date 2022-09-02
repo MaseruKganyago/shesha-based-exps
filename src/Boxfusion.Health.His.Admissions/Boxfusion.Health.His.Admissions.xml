@@ -800,7 +800,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.Note,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.Note,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid})">
             <summary>
             
             </summary>
@@ -808,6 +808,7 @@
             <param name="conditionRepository"></param>
             <param name="diagnosisRepository"></param>
             <param name="noteRepository"></param>
+            <param name="hospitalAdmissionRepository"></param>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.AdmitPatientAsync(Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsDto)">
             <summary>
