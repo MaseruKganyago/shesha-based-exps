@@ -12,7 +12,7 @@ namespace Boxfusion.Health.His.Common
     /// <summary>
     /// 
     /// </summary>
-    [Entity(TypeShortAlias = "His.ProcedureService")]
+    [Entity(TypeShortAlias = "His.HisProcedureService")]
     public class ProcedureService : HisProduct
     {
     }
