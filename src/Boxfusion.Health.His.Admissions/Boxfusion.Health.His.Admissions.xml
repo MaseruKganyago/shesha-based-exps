@@ -4,6 +4,98 @@
         <name>Boxfusion.Health.His.Admissions.Application</name>
     </assembly>
     <members>
+        <member name="T:Boxfusion.Health.His.Admissions.Accounts.AccountMapProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Accounts.AccountMapProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Accounts.AccountPaymentAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Accounts.AccountPaymentAppService.#ctor(Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Accounts.AccountPaymentAppService.SetPaymentAsync(Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput)">
+            <summary>
+            Creates a new Appointment to book the first available Slot for the specified schedule and requestedTime.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Accounts.Enum.BankAccountType.CurrentAccount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput.Bank">
+            <summary>
+            The Bank Name
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput.AccountType">
+            <summary>
+            The Bank Name
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput.AccountNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput.BranchCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput.BillingClassificationId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput.SelectedMedicalAidId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput.HospitalAdmissionId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput.CashPayerType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput.SelfCoverage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput.Selected3rdPartyCoverageId">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Application.Domain.Views.AdmittedPatientItems">
             <summary>
             

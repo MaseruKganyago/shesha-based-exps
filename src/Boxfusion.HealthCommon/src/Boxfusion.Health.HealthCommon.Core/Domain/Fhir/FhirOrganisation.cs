@@ -15,11 +15,11 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
     [Entity(TypeShortAlias = "HealthCommon.Core.FhirOrganisation")]
     public class FhirOrganisation : Organisation
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        [ReferenceList("Fhir", "OrganisationTypes")]
-        public virtual int? Type { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //[ReferenceList("Fhir", "OrganisationTypes")]
+        //public virtual int? Type { get; set; }
 
         /// <summary>
         /// 

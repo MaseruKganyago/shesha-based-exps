@@ -2,6 +2,7 @@
 using Abp.Domain.Repositories;
 using Abp.Domain.Services;
 using Abp.Runtime.Session;
+using Abp.UI;
 using Aspose.Pdf.Annotations;
 using Boxfusion.Health.Cdm.Domain.Domain.Fhir;
 using Boxfusion.Health.Cdm.Schedules;
@@ -19,6 +20,7 @@ using Boxfusion.Health.His.Common.Domain.Domain.BillingClassifications.Enum;
 using Boxfusion.Health.His.Common.Patients;
 using DocumentFormat.OpenXml.Wordprocessing;
 using NHibernate.Engine;
+using Shesha.AutoMapper.Dto;
 using Shesha.Domain;
 using Shesha.Enterprise.Accounts;
 using Shesha.Enterprise.BankAccounts;
@@ -42,6 +44,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Accounts
         private readonly IRepository<CashCoverage, Guid> _cashCoverageRepo;
         private readonly IRepository<Coverage, Guid> _coverageRepo;
         private readonly IRepository<AccountCoverage, Guid> _accountCoverageRepo;
+        private readonly IRepository<BankAccount, Guid> _bankAccountRepo;
 
         /// 
         /// </summary>
@@ -53,7 +56,8 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Accounts
                     IRepository<HisHealthFacility, Guid> hisHealthFacilityRepo,
                     IRepository<CashCoverage, Guid> cashCoverageRepo,
                     IRepository<Coverage, Guid> coverageRepo,
-                    IRepository<AccountCoverage, Guid> accountCoverageRepo)
+                    IRepository<AccountCoverage, Guid> accountCoverageRepo,
+                    IRepository<BankAccount, Guid> bankAccountRepo)
         {
             _billingClassificationRepo = billingClassificationRepo;
             _accountRepo = accountRepo;
@@ -62,6 +66,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Accounts
             _cashCoverageRepo = cashCoverageRepo;
             _coverageRepo = coverageRepo;
             _accountCoverageRepo = accountCoverageRepo;
+            _bankAccountRepo = bankAccountRepo;
         }
 
         /// <summary>
@@ -69,37 +74,26 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Accounts
         /// </summary>
         /// <param name="hospitalAdmissionId"></param>
         /// <param name="billClassificationId"></param>
-        /// <param name="selectedMedicalAid"></param>
-        /// <param name="selected3rdPartyCoverage"></param>
+        /// <param name="selectedMedicalAidId"></param>
         /// <param name="bankAccount"></param>
         /// <param name="cashPayerType"></param>
-        /// <param name="medicalAidCoverageId"></param>
         /// <param name="selected3rdPartyCoverageId"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
-        public async Task<Guid> SetPayment(Guid hospitalAdmissionId, Guid billClassificationId, 
-            Guid selectedMedicalAid, Guid selected3rdPartyCoverage, BankAccount bankAccount, int cashPayerType, 
-            Guid medicalAidCoverageId, Guid selected3rdPartyCoverageId)
+        public async Task<HisAccount> SetPayment(Guid hospitalAdmissionId, Guid billClassificationId,
+            Guid? selectedMedicalAidId, BankAccount bankAccount, int cashPayerType, Guid? selected3rdPartyCoverageId)
         {
             var hospitalAdmission = await _hospitaAdmissionRepo.GetAsync(hospitalAdmissionId);
-            if (hospitalAdmission is null)
-                throw new ArgumentException("patientId is not recognised.", "patientId");
-
             var billingClassification = await _billingClassificationRepo.GetAsync(billClassificationId);
-            if (billingClassification is null)
-                throw new ArgumentException("billClassificationId is not recognised.", "billClassificationId");
 
             //Step 1 Update HospitalAdmission.BillingClassification from form
             var updatedHospitalAdmission = await UpdateHospitalAdmissionBillingClassification(hospitalAdmission, billingClassification);
             //Step 2 Create Account
             var account = await CreateAccount(updatedHospitalAdmission.Subject, billingClassification);
-            //Step 3 Create missing Coverages:
-            var coverages = await CreateCoverage(updatedHospitalAdmission.Subject, billingClassification, bankAccount, cashPayerType);
-            //Step 4 Create AccountCoverage links
-            var accountCoverages = CreateAccountCoverage(billingClassification, account, updatedHospitalAdmission.Subject, cashPayerType,
-                medicalAidCoverageId, selected3rdPartyCoverageId);
+            //Step 3 Create missing Coverages and links:
+            await CreateCoverage(updatedHospitalAdmission.Subject, billingClassification, account, 
+                bankAccount, cashPayerType, selectedMedicalAidId, selected3rdPartyCoverageId);
 
-            return account.Id;
+            return account;
         }
 
         /// <summary>
@@ -125,12 +119,10 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Accounts
         /// <exception cref="ArgumentException"></exception>
         public async Task<HisAccount> CreateAccount(Patient patient, BillingClassification billClassification)
         {
-            if (!RequestContextHelper.HasFacilityId) return null;
+            if (!RequestContextHelper.HasFacilityId) throw new ArgumentNullException("facilityId header should be provided", "facilityId");
 
             var facilityId = RequestContextHelper.FacilityId;
             var healthFacility = await _hisHealthFacilityRepo.GetAsync(facilityId);
-            if (healthFacility is null)
-                throw new ArgumentException("facilityId is not recognised.", "facilityId");
 
             //Define the account name 
             //TODO: Fix when DefaultPayor.Name is empty
@@ -139,8 +131,8 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Accounts
             //Save the account
             return await _accountRepo.InsertAsync(new HisAccount()
             {
-                AccountStatus = (long) AccountStatus.active,
-                AccountType = (long) AccountType.patient,
+                AccountStatus = (long)AccountStatus.active,
+                AccountType = (long)AccountType.patient,
                 Name = name,
                 Subject = patient,
                 ServiceStartDate = DateTime.Now,
@@ -153,139 +145,113 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Accounts
         /// </summary>
         /// <param name="patient"></param>
         /// <param name="billingClassification"></param>
+        /// <param name="account"></param>
         /// <param name="bankAccount"></param>
         /// <param name="cashPayerType"></param>
+        /// <param name="selectedMedicalAidId"></param>
+        /// <param name="selected3rdPartyCoverageId"></param>
         /// <returns></returns>
-        public async Task<Coverage> CreateCoverage(Patient patient, BillingClassification billingClassification, BankAccount bankAccount, int cashPayerType)
+        /// <exception cref="ArgumentException"></exception>
+        public async Task CreateCoverage(Patient patient, BillingClassification billingClassification, HisAccount account,
+            BankAccount bankAccount, int cashPayerType, Guid? selectedMedicalAidId, Guid? selected3rdPartyCoverageId)
         {
-            if (billingClassification?.ClassificationType.Value == (long)ClassificationType.medicalAid || billingClassification?.ClassificationType.Value == (long)ClassificationType.cash)
+            Coverage medicalAidCoverage = null;
+            Coverage existingSomeoneCoverage = null;
+
+            //Get medical covergae using the selected medical aid Id
+            if (!(selectedMedicalAidId is Guid guidMedicalAidId && guidMedicalAidId == Guid.Empty))
+                medicalAidCoverage = await _coverageRepo.FirstOrDefaultAsync(x => x.PayorOrganisation.Id == selectedMedicalAidId);
+            //Get existing self coverage
+            var existingSelfCashCoverage = await _cashCoverageRepo.FirstOrDefaultAsync(x => x.PayorPerson == patient);
+            //Get existing someone else coverage
+            if (!(selected3rdPartyCoverageId is Guid guid3rdPartyCoverageId && guid3rdPartyCoverageId == Guid.Empty))
+                existingSomeoneCoverage = await _coverageRepo.GetAsync(selected3rdPartyCoverageId.Value);
+
+            //Create account coverage link medical aid
+            if (billingClassification?.ClassificationType.Value == (long)ClassificationType.medicalAid)
             {
+                var insertedOrUpdatedBankAccount = await InsertUpdateBankAccount(bankAccount);
+
+                CashCoverage insertedOrUpdatedSelfCoverage = null;
+                await CreateAccountCoverage(account, medicalAidCoverage);
                 if (cashPayerType == (int)CashPayerType.self)
                 {
-                    var coverage = await _cashCoverageRepo.FirstOrDefaultAsync(x => x.PayorPerson == patient);
-                    if (coverage is null)
-                    {
-                        //TODO: Identify which variables to populate
-                        return await _cashCoverageRepo.InsertAsync(new CashCoverage
-                        {
-                            Beneficiary = patient,
-                            PayorPerson = patient,
-                            BankAccount = bankAccount,
-                        });
-                    }
-                    coverage.BankAccount = bankAccount;
-                    return await _cashCoverageRepo.UpdateAsync(coverage);
+                    insertedOrUpdatedSelfCoverage = await InsertUpdateSelfCoverage(existingSelfCashCoverage, cashPayerType, patient, bankAccount);
+                    await CreateAccountCoverage(account, insertedOrUpdatedSelfCoverage);
                 }
-
-                return null;
+                else if (cashPayerType == (int)CashPayerType.someoneElse)
+                {
+                    await CreateAccountCoverage(account, medicalAidCoverage);
+                    await CreateAccountCoverage(account, existingSomeoneCoverage);
+                }
             }
-            else 
+
+            //Create coverage and account coverage link for RAF or IOD
+            if (billingClassification?.ClassificationType.Value == (long)ClassificationType.roadAccidentFund || billingClassification?.ClassificationType.Value == (long)ClassificationType.iod)
             {
                 var coverage = await _coverageRepo.FirstOrDefaultAsync(x => x.PayorOrganisation == billingClassification.DefaultPayor && x.Beneficiary == patient);
                 if (coverage is not null)
-                    return coverage;
+                    throw new UserFriendlyException("Organisation coverage does not exist.");
 
                 //TODO: Identify which variables to populate
-                return await _coverageRepo.InsertAsync(new Coverage
+                var dbCoverage = await _coverageRepo.InsertAsync(new Coverage
                 {
                     Beneficiary = patient,
                     PayorOrganisation = billingClassification.DefaultPayor,
                 });
+
+                await CreateAccountCoverage(account, coverage ?? dbCoverage);
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="billingClassification"></param>
-        /// <param name="account"></param>
-        /// <param name="patient"></param>
-        /// <param name="cashPayerType"></param>
-        /// <param name="medicalAidCoverageId"></param>
-        /// <param name="selected3rdPartyCoverageId"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
-        public async Task<List<AccountCoverage>> CreateAccountCoverage(BillingClassification billingClassification, HisAccount account, Patient patient,
-            int cashPayerType, Guid medicalAidCoverageId, Guid selected3rdPartyCoverageId)
+        private async Task<CashCoverage> InsertUpdateSelfCoverage(CashCoverage existingSelfCashCoverage, int cashPayerType,
+            Patient patient, BankAccount bankAccount)
         {
-            List<AccountCoverage> accountCoverages = new List<AccountCoverage>();
-
-            if(billingClassification?.ClassificationType.Value == (long)ClassificationType.medicalAid)
-                await AccountMedicalAidCoverage(account, patient, medicalAidCoverageId, selected3rdPartyCoverageId, accountCoverages);
-
-            if (billingClassification?.ClassificationType.Value == (long)ClassificationType.iod || billingClassification?.ClassificationType.Value == (long)ClassificationType.roadAccidentFund)
-                await AccountOrganisationCoverage(billingClassification, account, patient, accountCoverages);
-            
-
-            if (billingClassification?.ClassificationType.Value == (long)ClassificationType.cash && cashPayerType == (int)CashPayerType.self)
-                await AccountCashSelfCoverage(account, patient, accountCoverages);
-
-
-            if (billingClassification?.ClassificationType.Value == (long)ClassificationType.cash && cashPayerType == (int)CashPayerType.someoneElse)
-                await AccountCashSomeoneCoverage(account, patient, selected3rdPartyCoverageId, accountCoverages);
-
-            return accountCoverages;
+            var insertUpdateBankAccount = await InsertUpdateBankAccount(bankAccount);
+            if (existingSelfCashCoverage is null)
+            {
+                //TODO: Identify which variables to populate
+                return await _cashCoverageRepo.InsertAsync(new CashCoverage
+                {
+                    Beneficiary = patient,
+                    PayorPerson = patient,
+                    BankAccount = insertUpdateBankAccount,
+                });
+            }
+            else
+            {
+                existingSelfCashCoverage.BankAccount = bankAccount;
+                return await _cashCoverageRepo.UpdateAsync(existingSelfCashCoverage);
+            }
         }
 
-        private async Task AccountCashSomeoneCoverage(HisAccount account, Patient patient, Guid selected3rdPartyCoverageId, List<AccountCoverage> accountCoverages)
+        private async Task<BankAccount> InsertUpdateBankAccount(BankAccount bankAccount)
         {
-            var coverage = await _cashCoverageRepo.FirstOrDefaultAsync(x => x.PayorPerson == patient) ?? await _cashCoverageRepo.GetAsync(selected3rdPartyCoverageId);
-            if (coverage is null)
-                throw new ArgumentException("Selected3rdPartyCoverageId is not recognised.", "Selected3rdPartyCoverageId");
+            if (bankAccount is null)
+                return null;
 
+            //Updating bank details
+            if (bankAccount?.Id is Guid guid && guid == Guid.Empty)
+                return await _bankAccountRepo.InsertAsync(bankAccount);
+            else
+            {
+                var dbBankAccount = await _bankAccountRepo.GetAsync(bankAccount.Id);
+                dbBankAccount.Bank = bankAccount.Bank;
+                dbBankAccount.AccountType = bankAccount.AccountType;
+                dbBankAccount.AccountNumber = bankAccount.AccountNumber;
+                dbBankAccount.BranchCode = bankAccount.BranchCode;
+                return await _bankAccountRepo.UpdateAsync(dbBankAccount);
+            }
+        }
+
+        private async Task CreateAccountCoverage(HisAccount account, Coverage coverage)
+        {
             var accountCoverage = await _accountCoverageRepo.InsertAsync(new AccountCoverage
             {
                 Account = account,
                 Coverage = coverage,
             });
-            accountCoverages.Add(accountCoverage);
-        }
-
-        private async Task AccountCashSelfCoverage(HisAccount account, Patient patient, List<AccountCoverage> accountCoverages)
-        {
-            var cashCoverage = await _cashCoverageRepo.FirstOrDefaultAsync(x => x.PayorPerson == patient);
-            var accountCoverage = await _accountCoverageRepo.InsertAsync(new AccountCoverage
-            {
-                Account = account,
-                Coverage = cashCoverage,
-            });
-            accountCoverages.Add(accountCoverage);
-        }
-
-        private async Task AccountOrganisationCoverage(BillingClassification billingClassification, HisAccount account, Patient patient, List<AccountCoverage> accountCoverages)
-        {
-            var organisationCoverage = await _coverageRepo.FirstOrDefaultAsync(x => x.PayorOrganisation == billingClassification.DefaultPayor && x.Beneficiary == patient);
-            var accountCoverage = await _accountCoverageRepo.InsertAsync(new AccountCoverage
-            {
-                Account = account,
-                Coverage = organisationCoverage,
-            });
-            accountCoverages.Add(accountCoverage);
-        }
-
-        private async Task AccountMedicalAidCoverage(HisAccount account, Patient patient, Guid medicalAidCoverageId, Guid selected3rdPartyCoverageId, List<AccountCoverage> accountCoverages)
-        {
-            var medicalAidCoverage = await _coverageRepo.GetAsync(medicalAidCoverageId);
-            if (medicalAidCoverage is null)
-                throw new ArgumentException("medicalAidOrganisationId is not recognised.", "medicalAidOrganisationId");
-
-            var accountMedicalAidCoverage = await _accountCoverageRepo.InsertAsync(new AccountCoverage
-            {
-                Account = account,
-                Coverage = medicalAidCoverage,
-            });
-            accountCoverages.Add(accountMedicalAidCoverage);
-
-            var coverage = await _cashCoverageRepo.FirstOrDefaultAsync(x => x.PayorPerson == patient) ?? await _cashCoverageRepo.GetAsync(selected3rdPartyCoverageId);
-            if (coverage is not null)
-            {
-                var accountCoverage = await _accountCoverageRepo.InsertAsync(new AccountCoverage
-                {
-                    Account = account,
-                    Coverage = coverage,
-                });
-                accountCoverages.Add(accountCoverage);
-            }
-        }
+        }      
     }
 }
+

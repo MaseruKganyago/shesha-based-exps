@@ -15,6 +15,7 @@ namespace Boxfusion.Health.His.Common.Coverages
     /// 
     /// </summary>
     [Entity(TypeShortAlias = "His.CashCoverage")]
+    
     public class CashCoverage : Coverage
     {
         /// <summary>
