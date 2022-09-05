@@ -9,7 +9,19 @@
             
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.BillingClassifications.BillingClassification,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Accounts.HisAccount,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisHealthFacility,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Coverages.CashCoverage,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Domain.Domain.Fhir.Coverage,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Accounts.AccountCoverage,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Enterprise.BankAccounts.BankAccount,System.Guid})" -->
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.BillingClassifications.BillingClassification,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Accounts.HisAccount,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisHealthFacility,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Coverages.CashCoverage,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Domain.Domain.Fhir.Coverage,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Accounts.AccountCoverage,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Enterprise.BankAccounts.BankAccount,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="billingClassificationRepo"></param>
+            <param name="accountRepo"></param>
+            <param name="hospitaAdmissionRepo"></param>
+            <param name="hisHealthFacilityRepo"></param>
+            <param name="cashCoverageRepo"></param>
+            <param name="coverageRepo"></param>
+            <param name="accountCoverageRepo"></param>
+            <param name="bankAccountRepo"></param>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.SetPayment(System.Guid,System.Guid,System.Nullable{System.Guid},Shesha.Enterprise.BankAccounts.BankAccount,System.Int32,System.Nullable{System.Guid})">
             <summary>
             
