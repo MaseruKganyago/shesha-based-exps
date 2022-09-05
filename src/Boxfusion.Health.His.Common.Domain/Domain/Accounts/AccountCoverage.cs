@@ -15,7 +15,14 @@ namespace Boxfusion.Health.His.Common.Accounts
     [Entity(TypeShortAlias = "His.AccountCoverage")]
     public class AccountCoverage : FullAuditedEntity<Guid>
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public HisAccount Account { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Coverage Coverage { get; set; }
 
     }

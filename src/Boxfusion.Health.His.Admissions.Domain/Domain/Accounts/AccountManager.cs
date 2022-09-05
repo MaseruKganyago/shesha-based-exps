@@ -46,9 +46,17 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Accounts
         private readonly IRepository<AccountCoverage, Guid> _accountCoverageRepo;
         private readonly IRepository<BankAccount, Guid> _bankAccountRepo;
 
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="billingClassificationRepo"></param>
+        /// <param name="accountRepo"></param>
+        /// <param name="hospitaAdmissionRepo"></param>
+        /// <param name="hisHealthFacilityRepo"></param>
+        /// <param name="cashCoverageRepo"></param>
+        /// <param name="coverageRepo"></param>
+        /// <param name="accountCoverageRepo"></param>
+        /// <param name="bankAccountRepo"></param>
         public AccountManager(
                     IRepository<BillingClassification, Guid> billingClassificationRepo,
                     IRepository<HisAccount, Guid> accountRepo,

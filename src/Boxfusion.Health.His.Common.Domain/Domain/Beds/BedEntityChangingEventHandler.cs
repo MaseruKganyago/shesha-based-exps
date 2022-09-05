@@ -19,8 +19,12 @@ namespace Boxfusion.Health.His.Common.Beds
 	/// </summary>
 	public class BedEntityChangingEventHandler: IEventHandler<EntityChangingEventData<Bed>>, ITransientDependency
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public BedEntityChangingEventHandler()
 		{
+
 		}
 
 		/// <summary>
