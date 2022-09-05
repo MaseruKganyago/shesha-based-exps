@@ -1,5 +1,6 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Admissions;
@@ -79,7 +80,7 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 			}
 			catch (Exception ex)
 			{
-				throw;
+				throw new UserFriendlyException("An error occured.");
 			}
 		}
 
