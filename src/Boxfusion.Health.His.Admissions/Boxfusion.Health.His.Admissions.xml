@@ -887,31 +887,12 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.WardAdmissions.IWardAdmissionsAppService">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.IWardAdmissionsAppService.AdmitPatientAsync(Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsDto)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.IWardAdmissionsAppService.DischargePatientAsync(Boxfusion.Health.His.Admissions.WardAdmissions.WardDischargeDto)">
-            <summary>
-            
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.Note,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.Note,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid})">
             <summary>
             
             </summary>
@@ -919,6 +900,7 @@
             <param name="conditionRepository"></param>
             <param name="diagnosisRepository"></param>
             <param name="noteRepository"></param>
+            <param name="hospitalAdmissionRepository"></param>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.AdmitPatientAsync(Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsDto)">
             <summary>

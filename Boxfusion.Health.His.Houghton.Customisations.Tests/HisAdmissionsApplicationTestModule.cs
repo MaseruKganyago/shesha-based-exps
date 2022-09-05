@@ -25,24 +25,29 @@ using Castle.Facilities.Logging;
 using Abp.AspNetCore.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using Boxfusion.Health.His.Houghton.Customisation;
 using NSubstitute;
+using Castle.Windsor.MsDependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using Shesha.Identity;
+using Boxfusion.Health.His.Admissions.Application;
+using Boxfusion.Health.His.Admissions.Application.Tests;
 
 namespace Boxfusion.Health.His.Hougton.Tests
 {
     [DependsOn(
-        typeof(HisHoughtonCustomisationsModule),
+        //typeof(HisHoughtonCustomisationsModule),
+        typeof(HisAdmissionsApplicationModule),
         typeof(AbpKernelModule),
         typeof(AbpTestBaseModule),
         typeof(SheshaNHibernateModule),
         typeof(SheshaFrameworkModule)
         )]
-    public class HisHoughtonTestModule : AbpModule
+    public class HisAdmissionsApplicationTestModule : AbpModule
     {
         //private const string ConnectionString = @"Data Source=sql-shared-nonprod.database.windows.net;Initial Catalog=boxhealthhis-test;User=boxdbadmin;Password=n0-hack.2020;MultipleActiveResultSets=True;TrustServerCertificate=True";
         private string ConnectionString;
 
-        public HisHoughtonTestModule(SheshaNHibernateModule nhModule)
+        public HisAdmissionsApplicationTestModule(SheshaNHibernateModule nhModule)
         {
             var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             ConnectionString = config.GetConnectionString("TestDB");
@@ -63,6 +68,7 @@ namespace Boxfusion.Health.His.Hougton.Tests
 
             // mock IWebHostEnvironment
             IocManager.IocContainer.Register(Component.For<IWebHostEnvironment>().ImplementedBy<TestWebHostEnvironment>().LifestyleSingleton());
+
 
             //IocManager.IocContainer.Register(
             //    Component.For<IAbpAspNetCoreConfiguration>()
@@ -96,8 +102,12 @@ namespace Boxfusion.Health.His.Hougton.Tests
                     .LifestyleSingleton()
             );
 
-            // Use database for language management
-            Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
+			var services = new ServiceCollection();
+			IdentityRegistrar.Register(services);
+			WindsorRegistrationHelper.CreateServiceProvider(IocManager.IocContainer, services);
+
+			// Use database for language management
+			Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
             RegisterFakeService<SheshaDbMigrator>();
 
