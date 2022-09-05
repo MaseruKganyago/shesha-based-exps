@@ -4,6 +4,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Shesha.Domain.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,9 @@ namespace Boxfusion.Health.Cdm.Domain.Domain.Fhir
 	/// 
 	/// </summary>
 	[Entity(TypeShortAlias = "HealthCommon.Core.Coverage")]
-	public class Coverage : FullAuditedEntity<Guid>
+    [Table("Fhir_Coverages")]
+    [Discriminator]
+    public class Coverage : FullAuditedEntity<Guid>
 	{
 		/// <summary>
 		/// 
