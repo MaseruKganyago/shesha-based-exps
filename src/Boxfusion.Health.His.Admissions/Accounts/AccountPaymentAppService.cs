@@ -49,11 +49,10 @@ namespace Boxfusion.Health.His.Admissions.Accounts
         /// <returns></returns>
         [HttpPost, Route("RegisterPatient/SetPayment")]
         [AbpAuthorize()]
-        public async Task<DynamicDto<HisAccount, Guid>> SetPaymentAsync(SetPaymentInput input)
+        public async Task<Guid> SetPaymentAsync(SetPaymentInput input)
         {
             Validation.ValidateIdWithException(input?.BillingClassificationId, "BillingClassificationId");
             Validation.ValidateIdWithException(input?.HospitalAdmissionId, "HospitalAdmissionId");
-
 
             var mapper = IocManager.Resolve<IMapper>();
             var bankAccount = mapper.Map<BankAccount>(input?.SelfCoverage);
@@ -66,7 +65,7 @@ namespace Boxfusion.Health.His.Admissions.Accounts
                 input.CashPayerType,
             input.Selected3rdPartyCoverageId);
 
-            return await this.MapToDynamicDtoAsync<HisAccount, Guid>(newAccount);
+            return newAccount.Id;
         }
     }
 }

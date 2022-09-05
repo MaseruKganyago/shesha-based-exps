@@ -167,7 +167,6 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Accounts
             if (!(selected3rdPartyCoverageId is Guid guid3rdPartyCoverageId && guid3rdPartyCoverageId == Guid.Empty))
                 existingSomeoneCoverage = await _coverageRepo.GetAsync(selected3rdPartyCoverageId.Value);
 
-
             //Create account coverage link medical aid
             if (billingClassification?.ClassificationType.Value == (long)ClassificationType.medicalAid)
             {
