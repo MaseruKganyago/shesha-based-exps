@@ -9,6 +9,7 @@ using System.Text;
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 {
     [Entity(TypeShortAlias = "HealthCommon.Core.Procedure", GenerateApplicationService = false)]
+    [Discriminator]
     public class Procedure : FullAuditedEntity<Guid>
     {
         public virtual string Identifier { get; set; }
