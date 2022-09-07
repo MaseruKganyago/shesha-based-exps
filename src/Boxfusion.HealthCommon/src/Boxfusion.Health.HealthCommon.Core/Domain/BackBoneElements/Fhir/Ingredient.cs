@@ -21,12 +21,12 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual string ItemOwnerReferenceId { get; set; }
+		public virtual string ItemReferenceOwnerId { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual string ItemOwnerReferenceType { get; set; }
+		public virtual string ItemReferenceOwnerType { get; set; }
 
 		/// <summary>
 		/// 
