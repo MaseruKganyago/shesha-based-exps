@@ -75,12 +75,12 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual decimal FactorOverride { get; set; }
+		public virtual decimal? FactorOverride { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual decimal PriceOverride { get; set; }
+		public virtual decimal? PriceOverride { get; set; }
 
 		/// <summary>
 		/// 

@@ -33,7 +33,7 @@ namespace Boxfusion.Health.Cdm.Domain.Domain.BackBoneElements.Fhir
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual DateTime BenefitPeriodEnd { get; set; }
+		public virtual DateTime? BenefitPeriodEnd { get; set; }
 
 		/// <summary>
 		/// 

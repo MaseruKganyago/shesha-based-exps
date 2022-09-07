@@ -46,8 +46,6 @@ namespace Boxfusion.Health.His.Common
             {
                 var stringContextFacilityId = HttpContext.Request.Headers[CONTEXT_FACILITY_ID_HEADER_NAME];
 
-                if (stringContextFacilityId.ToString() is null) return Guid.Empty;
-
                 return Guid.Parse(stringContextFacilityId);
             }
         }

@@ -76,6 +76,7 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 					item.HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.draft;
 					item.HospitalAdmissionNumber = GetAdmissionNumber();
 					item.ServiceProvider = facility;
+					item.StartDateTime = DateTime.UtcNow.AddHours(2);
 				});
 
 				return await MapToDynamicDtoAsync<HisPatient, Guid>(patientEntity);

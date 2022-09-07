@@ -1,5 +1,6 @@
 ﻿using Abp.Domain.Repositories;
 using Abp.Domain.Services;
+using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Common.Accounts;
 using System;
 using System.Collections.Generic;
@@ -35,10 +36,18 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		/// <returns></returns>
 		public async Task<HisChargeItem> CreateChargeItem(HisChargeItem hisChargeItem)
 		{
-			if (hisChargeItem.Subject is not null && hisChargeItem.ContextEncounter is not null)
-			hisChargeItem.Account = await GetPatientAccount(hisChargeItem.Subject.Id, hisChargeItem.ContextEncounter.Id);
+			var result = new HisChargeItem();
+			using (var uow = UnitOfWorkManager.Begin())
+			{
+				if (hisChargeItem.Subject is not null && hisChargeItem.ContextEncounter is not null)
+					hisChargeItem.Account = await GetPatientAccount(hisChargeItem.Subject.Id, hisChargeItem.ContextEncounter.Id);
 
-			return await _chargeItemRepository.InsertAsync(hisChargeItem);
+				result = await _chargeItemRepository.InsertAsync(hisChargeItem);
+
+				await uow.CompleteAsync();
+			}
+
+			return result;
 		}
 
 		private async Task<HisAccount> GetPatientAccount(Guid patientId, Guid encounterId)

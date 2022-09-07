@@ -3,6 +3,7 @@ using Abp.Domain.Repositories;
 using Abp.Events.Bus.Entities;
 using Abp.Events.Bus.Handlers;
 using Boxfusion.Health.His.Common.ChargeItems;
+using Boxfusion.Health.His.Common.Domain.Domain.Products;
 using Boxfusion.Health.His.Common.Patients;
 using Boxfusion.Health.His.Common.Procedures;
 using Shesha.Extensions;
@@ -33,17 +34,23 @@ namespace Boxfusion.Health.His.Common.Procedures
 		/// 
 		/// </summary>
 		/// <param name="eventData"></param>
-		public void HandleEvent(EntityChangedEventData<HisProcedure> eventData)
+		public async void HandleEvent(EntityChangedEventData<HisProcedure> eventData)
 		{
 			var entity = eventData.Entity;
+
+			var productCode = await ProductsHelper.GetProductCode(entity.ProcedureService.Id);
 
 			var chargeItem = new HisChargeItem()
 			{
 				Subject = entity.Subject,
 				ContextEncounter = entity.Encounter,
 				ServiceId = entity.Id,
-				ServiceType = entity.GetTypeShortAlias()
+				ServiceType = entity.GetTypeShortAlias(),
+				QuantityValue = 1,
+				Code = productCode,
 			};
+
+			await _hisChargeItemManager.CreateChargeItem(chargeItem);
 		}
 	}
 }
