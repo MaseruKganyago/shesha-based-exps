@@ -2,6 +2,7 @@
 using Abp.Domain.Services;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Common.Accounts;
+using Boxfusion.Health.His.Common.Domain.Domain.ChargeItems.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,17 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		private async Task<HisAccount> GetPatientAccount(Guid patientId, Guid encounterId)
 		{
 			return await _accountRepository.FirstOrDefaultAsync(a => a.Subject.Id == patientId && a.Encounter.Id == encounterId);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="serviceId"></param>
+		/// <returns></returns>
+		public async Task<HisChargeItem> GetInProgressChargeItem(Guid serviceId)
+		{
+			return await _chargeItemRepository.FirstOrDefaultAsync(a => a.ServiceId == serviceId 
+																	&& a.Status == (long?)RefListChargeItemStatus.inProgress);
 		}
 	}
 }
