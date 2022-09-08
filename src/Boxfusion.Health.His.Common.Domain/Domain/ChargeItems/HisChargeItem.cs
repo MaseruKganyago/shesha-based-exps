@@ -15,5 +15,10 @@ namespace Boxfusion.Health.His.Common.ChargeItems
     [Entity(TypeShortAlias = "His.HisChargeItem")]
     public class HisChargeItem : ChargeItem
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        [ReferenceList("His", "ChargeItemStatus")]
+        public virtual long? Status { get; set; }
     }
 }

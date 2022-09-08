@@ -52,8 +52,6 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
             _diagnosisRepository = diagnosisRepository;
             _noteRepository = noteRepository;
             _hospitalAdmissionRepository = hospitalAdmissionRepository;
-
-
 		}
 
         /// <summary>
