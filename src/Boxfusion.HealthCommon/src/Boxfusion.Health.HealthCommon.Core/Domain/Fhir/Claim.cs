@@ -15,6 +15,7 @@ namespace Boxfusion.Health.Cdm.Domain.Domain.Fhir
     /// 
     /// </summary>
     [Entity(TypeShortAlias = "HealthCommon.Core.Claim")]
+    [Discriminator]
     public class Claim: FullAuditedEntity<Guid>
     {
         /// <summary>
