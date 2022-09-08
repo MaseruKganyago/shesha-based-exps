@@ -62,10 +62,12 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 					item.WorkAddress = workAddress;
 				});
 
-				var facilityId = RequestContextHelper.FacilityId;
 				HisHealthFacility facility = null;
 				if (RequestContextHelper.HasFacilityId)
+				{
+					var facilityId = RequestContextHelper.FacilityId;
 					facility = await _healthFacilityRepository.GetAsync(facilityId);
+				}
 
 				await SaveOrUpdateEntityAsync<HospitalAdmission>(null, async item =>
 				{
@@ -74,6 +76,7 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 					item.HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.draft;
 					item.HospitalAdmissionNumber = GetAdmissionNumber();
 					item.ServiceProvider = facility;
+					item.StartDateTime = DateTime.UtcNow.AddHours(2);
 				});
 
 				return await MapToDynamicDtoAsync<HisPatient, Guid>(patientEntity);

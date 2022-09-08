@@ -15,6 +15,7 @@ namespace Boxfusion.Health.His.Houghton.Customisation.Domain
 	[Entity(TypeShortAlias = "His.FlatCaseManagementTracker")]
 	[Table("vw_His_FlattenedCaseManagementTracker")]
 	[ImMutable]
+	[NotMapped]
 	public class FlattenedCaseManagementTracker : Entity<Guid>
 	{
 		/// <summary>

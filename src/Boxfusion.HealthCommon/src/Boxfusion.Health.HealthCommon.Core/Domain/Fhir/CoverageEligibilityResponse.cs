@@ -4,6 +4,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Shesha.Domain.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,11 +58,77 @@ namespace Boxfusion.Health.Cdm.Domain.Domain.Fhir
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual Insurance Insurance { get; set; }
+		public virtual Coverage InsuranceCoverage { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual bool InsuranceInforce { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual DateTime? InsuranceBenefitPeriodStart { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual DateTime? InsuranceBenefitPeriodEnd { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		[ReferenceList("Fhir", "ItemCategory")]
+		public virtual long? ItemCategory { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		[ReferenceList("Fhir", "ItemProductOrService")]
+		public virtual long? ItemProductOrService { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual bool ItemExcluded { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual string ItemName { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		[StringLength(510)]
+		public virtual string ItemDescription { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		[ReferenceList("Fhir", "ItemUnit")]
+		public virtual long? ItemUnit { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		[ReferenceList("Fhir", "ItemTerm")]
+		public virtual long? ItemTerm { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public virtual string PreAuthRef { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		[ReferenceList("Fhir", "BenefitType")]
+		public virtual long? BenefitType { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual decimal BenefitAllowedMoney { get; set; }
 	}
 }

@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Common
+namespace Boxfusion.Health.His.Common.ChargeItems
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	[Entity(TypeShortAlias = "His.HisChargeItem")]
-	public class HisChargeItem: ChargeItem
-	{
-	}
+    /// <summary>
+    /// 
+    /// </summary>
+    [Entity(TypeShortAlias = "His.HisChargeItem")]
+    public class HisChargeItem : ChargeItem
+    {
+    }
 }

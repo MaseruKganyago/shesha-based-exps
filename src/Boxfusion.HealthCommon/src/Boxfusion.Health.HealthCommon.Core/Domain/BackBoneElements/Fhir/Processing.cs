@@ -27,7 +27,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir
         /// <summary>
         /// 
         /// </summary>
-        public virtual Substance Addditive { get; set; }
+        public virtual Substance Additive { get; set; }
 
         /// <summary>
         /// 
