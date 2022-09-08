@@ -5,8 +5,13 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
 using Boxfusion.Health.His.Common.Admissions;
+using Boxfusion.Health.His.Common.Beds;
+using Boxfusion.Health.His.Common.ChargeItems;
+using Boxfusion.Health.His.Common.Domain.Domain.ChargeItems.Enums;
+using Boxfusion.Health.His.Common.Domain.Domain.Products;
 using Boxfusion.Health.His.Common.Enums;
 using Microsoft.AspNetCore.Mvc;
+using NHibernate.Linq;
 using Shesha;
 using Shesha.Domain;
 using Shesha.DynamicEntities.Dtos;
@@ -32,6 +37,8 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
         private readonly IRepository<Condition, Guid> _conditionRepository;
         private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;
         private readonly IRepository<Note, Guid> _noteRepository;
+        private readonly HisChargeItemManager _hisChargeItemManager;
+        private readonly IRepository<Bed, Guid> _bedRepository;
 
         /// <summary>
         /// 
@@ -41,19 +48,23 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
         /// <param name="diagnosisRepository"></param>
         /// <param name="noteRepository"></param>
         /// <param name="hospitalAdmissionRepository"></param>
+        /// <param name="hisChargeItemManager"></param>
+        /// <param name="bedRepository"></param>
         public WardAdmissionsAppService(IRepository<WardAdmission, Guid> wardAdmissionRepositiory, 
             IRepository<Condition, Guid> conditionRepository, 
             IRepository<Diagnosis, Guid> diagnosisRepository, 
             IRepository<Note, Guid> noteRepository,
-			IRepository<HospitalAdmission, Guid> hospitalAdmissionRepository)
+			IRepository<HospitalAdmission, Guid> hospitalAdmissionRepository,
+			HisChargeItemManager hisChargeItemManager,
+			IRepository<Bed, Guid> bedRepository)
         {
             _wardAdmissionRepositiory = wardAdmissionRepositiory;
             _conditionRepository = conditionRepository;
             _diagnosisRepository = diagnosisRepository;
             _noteRepository = noteRepository;
             _hospitalAdmissionRepository = hospitalAdmissionRepository;
-
-
+            _hisChargeItemManager = hisChargeItemManager;
+            _bedRepository = bedRepository;
 		}
 
         /// <summary>
@@ -65,6 +76,8 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
         public async Task<DynamicDto<WardAdmission, Guid>> AdmitPatientAsync(WardAdmissionsDto input)
         {
             var wardAdmissionEntity = await _wardAdmissionRepositiory.InsertAsync(ObjectMapper.Map<WardAdmission>(input));
+
+            await CreateWardAdmissionChargeItem(wardAdmissionEntity);
 
             if (input.Conditions is not null && input.Conditions.Any())
             {
@@ -83,6 +96,25 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
             };
             await _noteRepository.InsertAsync(note);
             return await MapToDynamicDtoAsync<WardAdmission, Guid>(wardAdmissionEntity);
+        }
+
+        private async Task CreateWardAdmissionChargeItem(WardAdmission wardAdmissionEntity)
+        {
+            var bedList = await _bedRepository.GetAllIncluding(a => a.BedType).Where(a => a.Id == wardAdmissionEntity.Bed.Id).ToListAsync();
+            var bed = bedList.FirstOrDefault();
+
+            var productCode = await ProductsHelper.GetProductCode(bed.BedType.Id);
+
+            var chargeItem = new HisChargeItem()
+            {
+                Status = (long?)RefListChargeItemStatus.inProgress,
+                Subject = wardAdmissionEntity.Subject,
+                ContextEncounter = wardAdmissionEntity.PartOf,
+                ServiceId = wardAdmissionEntity.Id,
+                ServiceType = wardAdmissionEntity.GetTypeShortAlias(),
+                Code = productCode
+            };
+            await _hisChargeItemManager.CreateChargeItem(chargeItem);
         }
 
         /// <summary>

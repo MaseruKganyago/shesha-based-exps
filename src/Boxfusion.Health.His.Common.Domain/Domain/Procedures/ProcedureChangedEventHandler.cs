@@ -43,7 +43,7 @@ namespace Boxfusion.Health.His.Common.Procedures
 			var chargeItem = new HisChargeItem()
 			{
 				Subject = entity.Subject,
-				ContextEncounter = entity.Encounter,
+				ContextEncounter = entity.Encounter.PartOf ?? entity.Encounter,
 				ServiceId = entity.Id,
 				ServiceType = entity.GetTypeShortAlias(),
 				QuantityValue = 1,
