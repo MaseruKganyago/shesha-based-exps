@@ -1,5 +1,6 @@
 ﻿using Abp.Dependency;
 using Abp.Domain.Repositories;
+using Abp.Domain.Uow;
 using Abp.Events.Bus.Entities;
 using Abp.Events.Bus.Handlers;
 using Boxfusion.Health.His.Common.ChargeItems;
@@ -21,13 +22,15 @@ namespace Boxfusion.Health.His.Common.Procedures
     public class ProcedureChangedEventHandler: IEventHandler<EntityChangedEventData<HisProcedure>>, ITransientDependency
 	{
 		private readonly HisChargeItemManager _hisChargeItemManager;
+		private readonly IUnitOfWorkManager _unitOfWork;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public ProcedureChangedEventHandler(HisChargeItemManager hisChargeItemManager)
+		public ProcedureChangedEventHandler(HisChargeItemManager hisChargeItemManager, IUnitOfWorkManager unitOfWork)
 		{
 			_hisChargeItemManager = hisChargeItemManager;
+			_unitOfWork = unitOfWork;
 		}
 
 		/// <summary>
@@ -50,7 +53,9 @@ namespace Boxfusion.Health.His.Common.Procedures
 				Code = productCode,
 			};
 
+			var uow = _unitOfWork.Begin();
 			await _hisChargeItemManager.CreateChargeItem(chargeItem);
+			await uow.CompleteAsync();
 		}
 	}
 }
