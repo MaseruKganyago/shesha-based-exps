@@ -51,6 +51,24 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 			return result;
 		}
 
+		public async Task<HisChargeItem> UpdateChargeItem(HisChargeItem hisChargeItem)
+		{
+			var result = new HisChargeItem();
+			
+				if (hisChargeItem.Account is null)
+				{
+					if (hisChargeItem.Subject is not null && hisChargeItem.ContextEncounter is not null)
+						hisChargeItem.Account = await GetPatientAccount(hisChargeItem.Subject.Id, hisChargeItem.ContextEncounter.Id);
+				}
+
+				result = await _chargeItemRepository.UpdateAsync(hisChargeItem);
+
+				 
+			
+			 
+			return result;
+		}
+
 		private async Task<HisAccount> GetPatientAccount(Guid patientId, Guid encounterId)
 		{
 			return await _accountRepository.FirstOrDefaultAsync(a => a.Subject.Id == patientId && a.Encounter.Id == encounterId);

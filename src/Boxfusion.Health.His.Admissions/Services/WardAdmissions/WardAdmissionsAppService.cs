@@ -116,7 +116,23 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
             };
             await _hisChargeItemManager.CreateChargeItem(chargeItem);
         }
+        private async Task UpdateWardAdmissionChargeItem(WardAdmission wardAdmissionEntity)
+        {
+            var bedList = await _bedRepository.GetAllIncluding(a => a.BedType).Where(a => a.Id == wardAdmissionEntity.Bed.Id).ToListAsync();
+            var bed = bedList.FirstOrDefault();
 
+            var productCode = await ProductsHelper.GetProductCode(bed.BedType.Id);
+
+            var chargeItem = await _hisChargeItemManager.GetInProgressChargeItem(wardAdmissionEntity.Id);
+
+            if (chargeItem != null)
+            {
+                chargeItem.Status = (long?)RefListChargeItemStatus.finalized;
+
+                chargeItem.QuantityValue = DateTime.Now.Subtract(wardAdmissionEntity.StartDateTime.Value).Days;
+            }
+            await _hisChargeItemManager.UpdateChargeItem(chargeItem);
+        }
         /// <summary>
         /// 
         /// </summary>
