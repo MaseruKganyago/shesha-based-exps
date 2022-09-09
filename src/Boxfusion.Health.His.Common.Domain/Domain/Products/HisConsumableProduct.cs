@@ -11,7 +11,7 @@ namespace Boxfusion.Health.His.Common.Products
 	/// 
 	/// </summary>
 	[Entity(TypeShortAlias = "His.ConsumableProduct")]
-	public class ConsumableProduct: HisProduct
+	public class HisConsumableProduct: HisProduct
 	{
 	}
 }
