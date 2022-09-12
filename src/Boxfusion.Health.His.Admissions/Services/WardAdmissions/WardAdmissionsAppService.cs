@@ -37,7 +37,7 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
         private readonly IRepository<Condition, Guid> _conditionRepository;
         private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;
         private readonly IRepository<Note, Guid> _noteRepository;
-        private readonly HisChargeItemManager _hisChargeItemManager;
+        private readonly HisChargeItemsManager _hisChargeItemManager;
         private readonly IRepository<Bed, Guid> _bedRepository;
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
             IRepository<Diagnosis, Guid> diagnosisRepository, 
             IRepository<Note, Guid> noteRepository,
 			IRepository<HospitalAdmission, Guid> hospitalAdmissionRepository,
-			HisChargeItemManager hisChargeItemManager,
+			HisChargeItemsManager hisChargeItemManager,
 			IRepository<Bed, Guid> bedRepository)
         {
             _wardAdmissionRepositiory = wardAdmissionRepositiory;

@@ -21,13 +21,13 @@ namespace Boxfusion.Health.His.Common.Procedures
     /// </summary>
     public class ProcedureChangedEventHandler: IEventHandler<EntityChangedEventData<HisProcedure>>, ITransientDependency
 	{
-		private readonly HisChargeItemManager _hisChargeItemManager;
+		private readonly HisChargeItemsManager _hisChargeItemManager;
 		private readonly IUnitOfWorkManager _unitOfWork;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public ProcedureChangedEventHandler(HisChargeItemManager hisChargeItemManager, IUnitOfWorkManager unitOfWork)
+		public ProcedureChangedEventHandler(HisChargeItemsManager hisChargeItemManager, IUnitOfWorkManager unitOfWork)
 		{
 			_hisChargeItemManager = hisChargeItemManager;
 			_unitOfWork = unitOfWork;

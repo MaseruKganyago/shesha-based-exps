@@ -18,7 +18,7 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 	/// <summary>
 	/// 
 	/// </summary>
-	public class HisChargeItemManager: DomainService
+	public class HisChargeItemsManager: DomainService
 	{
 		private readonly IRepository<HisChargeItem, Guid> _chargeItemRepository;
 		private readonly IRepository<HisAccount, Guid> _accountRepository;
@@ -30,7 +30,7 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		/// <param name="chargeItemRepository"></param>
 		/// <param name="accountRepository"></param>
 		/// <param name="wardAdmissionRepository"></param>
-		public HisChargeItemManager(IRepository<HisChargeItem, Guid> chargeItemRepository,
+		public HisChargeItemsManager(IRepository<HisChargeItem, Guid> chargeItemRepository,
 			IRepository<HisAccount, Guid> accountRepository,
 			IRepository<WardAdmission, Guid> wardAdmissionRepository)
 		{
@@ -52,6 +52,11 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 			return await _chargeItemRepository.InsertAsync(hisChargeItem);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="hisChargeItem"></param>
+		/// <returns></returns>
 		public async Task<HisChargeItem> UpdateChargeItem(HisChargeItem hisChargeItem)
 		{
 			var result = new HisChargeItem();
@@ -63,10 +68,7 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 				}
 
 				result = await _chargeItemRepository.UpdateAsync(hisChargeItem);
-
-				 
 			
-			 
 			return result;
 		}
 
@@ -96,21 +98,32 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 			var patientChargeItems = await _chargeItemRepository.GetAllListAsync(a => a.Subject.Id == patientId
 																				&& a.Status == (long?)RefListChargeItemStatus.inProgress);
 
-			patientChargeItems.ForEach(async charge => await FinalizaChargeItem(charge));
+			var finalizeChargeItemsTasks = new List<Task>();
+			patientChargeItems.ForEach(charge => finalizeChargeItemsTasks.Add(FinalizaChargeItem(charge)));
 
-			patientChargeItems.ForEach(async charge =>
+			var newPatientChargeItemsTasks = new List<Task>();
+			patientChargeItems.ForEach(charge =>
 			{
-				var newChargeItem = new HisChargeItem()
-				{
-					Subject = charge.Subject,
-					ContextEncounter = charge.ContextEncounter,
-					ServiceId = charge.ServiceId,
-					ServiceType = charge.ServiceType,
-					QuantityValue = charge.QuantityValue,
-					Code = charge.Code,
-				};
-				await CreateChargeItem(newChargeItem);
+				newPatientChargeItemsTasks.Add(CreateNewPatientChargeItem(charge));
 			});
+
+			await Task.WhenAll(finalizeChargeItemsTasks);
+			await Task.WhenAll(newPatientChargeItemsTasks);
+		}
+
+		private async Task CreateNewPatientChargeItem(HisChargeItem charge)
+		{
+			var newChargeItem = new HisChargeItem()
+			{
+				Subject = charge.Subject,
+				ContextEncounter = charge.ContextEncounter,
+				ServiceId = charge.ServiceId,
+				ServiceType = charge.ServiceType,
+				QuantityValue = charge.QuantityValue,
+				Code = charge.Code,
+			};
+
+			await CreateChargeItem(newChargeItem);
 		}
 
 		private async Task FinalizaChargeItem(HisChargeItem charge)
