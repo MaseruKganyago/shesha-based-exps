@@ -102,7 +102,7 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
         {
             var bedList = await _bedRepository.GetAllIncluding(a => a.BedType).Where(a => a.Id == wardAdmissionEntity.Bed.Id).ToListAsync();
             var bed = bedList.FirstOrDefault();
-
+                
             var productCode = await ProductsHelper.GetProductCode(bed.BedType.Id);
 
             var chargeItem = new HisChargeItem()
@@ -116,23 +116,7 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
             };
             await _hisChargeItemManager.CreateChargeItem(chargeItem);
         }
-        private async Task UpdateWardAdmissionChargeItem(WardAdmission wardAdmissionEntity)
-        {
-            var bedList = await _bedRepository.GetAllIncluding(a => a.BedType).Where(a => a.Id == wardAdmissionEntity.Bed.Id).ToListAsync();
-            var bed = bedList.FirstOrDefault();
-
-            var productCode = await ProductsHelper.GetProductCode(bed.BedType.Id);
-
-            var chargeItem = await _hisChargeItemManager.GetInProgressChargeItem(wardAdmissionEntity.Id);
-
-            if (chargeItem != null)
-            {
-                chargeItem.Status = (long?)RefListChargeItemStatus.finalized;
-
-                chargeItem.QuantityValue = DateTime.Now.Subtract(wardAdmissionEntity.StartDateTime.Value).Days;
-            }
-            await _hisChargeItemManager.UpdateChargeItem(chargeItem);
-        }
+      
         /// <summary>
         /// 
         /// </summary>
@@ -147,6 +131,7 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
                 ObjectMapper.Map(input, item);
 			});
 
+            
             //Discharge patient from hospital
             var hospitalAdmission = await SaveOrUpdateEntityAsync<HospitalAdmission>(wardAdmissionEntity.PartOf.Id, async item => 
             {
@@ -161,7 +146,31 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
                 Category = (int)RefListHisNoteType.discharge
             };
             await _noteRepository.InsertAsync(note);
+
+            await UpdateWardAdmissionChargeItem(wardAdmissionEntity);
+
             return await MapToDynamicDtoAsync<WardAdmission, Guid>(wardAdmissionEntity);
+        }
+        private async Task UpdateWardAdmissionChargeItem(WardAdmission wardAdmissionEntity)
+        {
+            string productCode = null;
+            if (wardAdmissionEntity.Bed is not null)
+            {
+                var bedList = await _bedRepository.GetAllIncluding(a => a.BedType).Where(a => a.Id == wardAdmissionEntity.Bed.Id).ToListAsync();
+                var bed = bedList.FirstOrDefault();
+
+                productCode = await ProductsHelper.GetProductCode(bed.BedType.Id);
+            }
+
+            var chargeItem = await _hisChargeItemManager.GetInProgressChargeItem(wardAdmissionEntity.Id);
+
+            if (chargeItem != null)
+            {
+                chargeItem.Status = (long?)RefListChargeItemStatus.finalized;
+
+                chargeItem.QuantityValue = DateTime.Now.Subtract(wardAdmissionEntity.StartDateTime.Value).Days;
+            }
+            await _hisChargeItemManager.UpdateChargeItem(chargeItem);
         }
 
         private async Task createDiagnosis(Guid conditionId, WardAdmission wardAdmissionEntity)
