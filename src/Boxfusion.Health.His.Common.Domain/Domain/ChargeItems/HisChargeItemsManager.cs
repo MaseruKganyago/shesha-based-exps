@@ -43,38 +43,64 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		/// 
 		/// </summary>
 		/// <param name="hisChargeItem"></param>
+		/// <param name="status"></param>
 		/// <returns></returns>
-		public async Task<HisChargeItem> CreateChargeItem(HisChargeItem hisChargeItem)
+		public async Task<HisChargeItem> CreateChargeItemAsync(HisChargeItem hisChargeItem, RefListChargeItemStatus status = RefListChargeItemStatus.open)
 		{
 			if (hisChargeItem.Subject is not null && hisChargeItem.ContextEncounter is not null)
+				//ContextEncouter is likely to be the HospitalAdmission
 				hisChargeItem.Account = await GetPatientAccount(hisChargeItem.Subject.Id, hisChargeItem.ContextEncounter.Id);
 
+			hisChargeItem.Status = (long?)status;
 			return await _chargeItemRepository.InsertAsync(hisChargeItem);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="hisChargeItem"></param>
+		/// <param name="currentChargeItemId"></param>
 		/// <returns></returns>
-		public async Task<HisChargeItem> UpdateChargeItem(HisChargeItem hisChargeItem)
+		public async Task<HisChargeItem> ClosedAndOpenNewChargeItem(Guid currentChargeItemId)
 		{
-			var result = new HisChargeItem();
-			
-				if (hisChargeItem.Account is null)
-				{
-					if (hisChargeItem.Subject is not null && hisChargeItem.ContextEncounter is not null)
-						hisChargeItem.Account = await GetPatientAccount(hisChargeItem.Subject.Id, hisChargeItem.ContextEncounter.Id);
-				}
+			var closedChargeItem = await CloseChargeItemAsync(currentChargeItemId);
 
-				result = await _chargeItemRepository.UpdateAsync(hisChargeItem);
-			
-			return result;
+			var newChargeItem = new HisChargeItem()
+			{
+				Subject = closedChargeItem.Subject,
+				ContextEncounter = closedChargeItem.ContextEncounter,
+				ServiceId = closedChargeItem.ServiceId,
+				ServiceType = closedChargeItem.ServiceType,
+				Code = closedChargeItem.Code,
+				QuantityValue = closedChargeItem.ServiceType == (new WardAdmission()).GetTypeShortAlias() ? 
+								null : closedChargeItem.QuantityValue,
+			};
+
+			return await CreateChargeItemAsync(newChargeItem);
 		}
 
-		private async Task<HisAccount> GetPatientAccount(Guid patientId, Guid encounterId)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="currentChargeItemId"></param>
+		/// <returns></returns>
+		/// <exception cref="UserFriendlyException"></exception>
+		public async Task<HisChargeItem> CloseChargeItemAsync(Guid currentChargeItemId)
 		{
-			return await _accountRepository.FirstOrDefaultAsync(a => a.Subject.Id == patientId && a.Encounter.Id == encounterId);
+			var chargeItem = await _chargeItemRepository.GetAsync(currentChargeItemId);
+
+			chargeItem.Status = (long?)RefListChargeItemStatus.closed;
+
+			if (chargeItem.ServiceType == (new WardAdmission()).GetTypeShortAlias())
+			{
+				var admission = await _wardAdmissionRepository.GetAsync(chargeItem.ServiceId);
+
+				if (admission.StartDateTime == null) throw new UserFriendlyException($"Curremt WardAdmission does not have AdmissionDate.");
+
+				var days = DateTime.Now.Subtract(admission.StartDateTime.Value).Days;
+				chargeItem.QuantityValue = days;
+			}
+
+			return await _chargeItemRepository.UpdateAsync(chargeItem);
 		}
 
 		/// <summary>
@@ -82,70 +108,15 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		/// </summary>
 		/// <param name="serviceId"></param>
 		/// <returns></returns>
-		public async Task<HisChargeItem> GetInProgressChargeItem(Guid serviceId)
+		public async Task<HisChargeItem> GetOpenChargeItemByServiceIdAsync(Guid serviceId)
 		{
-			return await _chargeItemRepository.FirstOrDefaultAsync(a => a.ServiceId == serviceId 
-																	&& a.Status == (long?)RefListChargeItemStatus.inProgress);
+			return await _chargeItemRepository.FirstOrDefaultAsync(a => a.ServiceId == serviceId
+																	&& a.Status == (long?)RefListChargeItemStatus.open);
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="patientId"></param>
-		/// <returns></returns>
-		public async Task SplitPatientBill(Guid patientId)
+		private async Task<HisAccount> GetPatientAccount(Guid patientId, Guid encounterId)
 		{
-			var patientChargeItems = await _chargeItemRepository.GetAllListAsync(a => a.Subject.Id == patientId
-																				&& a.Status == (long?)RefListChargeItemStatus.inProgress);
-
-			var finalizeChargeItemsTasks = new List<Task>();
-			patientChargeItems.ForEach(charge => finalizeChargeItemsTasks.Add(FinalizaChargeItem(charge)));
-
-			var newPatientChargeItemsTasks = new List<Task>();
-			patientChargeItems.ForEach(charge =>
-			{
-				newPatientChargeItemsTasks.Add(CreateNewPatientChargeItem(charge));
-			});
-
-			await Task.WhenAll(finalizeChargeItemsTasks);
-			await Task.WhenAll(newPatientChargeItemsTasks);
-		}
-
-		private async Task CreateNewPatientChargeItem(HisChargeItem charge)
-		{
-			var newChargeItem = new HisChargeItem()
-			{
-				Subject = charge.Subject,
-				ContextEncounter = charge.ContextEncounter,
-				ServiceId = charge.ServiceId,
-				ServiceType = charge.ServiceType,
-				QuantityValue = charge.QuantityValue,
-				Code = charge.Code,
-			};
-
-			await CreateChargeItem(newChargeItem);
-		}
-
-		private async Task FinalizaChargeItem(HisChargeItem charge)
-		{
-			using (var uow = UnitOfWorkManager.Begin())
-			{
-				charge.Status = (long?)RefListChargeItemStatus.finalized;
-
-				if (charge.ServiceType == (new WardAdmission()).GetTypeShortAlias())
-				{
-					var admission = await _wardAdmissionRepository.GetAsync(charge.ServiceId);
-
-					if (admission.StartDateTime == null) throw new UserFriendlyException($"Curremt WardAdmission does not have AdmissionDate.");
-
-					var days = DateTime.Now.Subtract(admission.StartDateTime.Value).Days;
-					charge.QuantityValue = days;
-				}
-
-				await _chargeItemRepository.UpdateAsync(charge);
-
-				await uow.CompleteAsync();
-			}
+			return await _accountRepository.FirstOrDefaultAsync(a => a.Subject.Id == patientId && a.Encounter.Id == encounterId);
 		}
 	}
 }

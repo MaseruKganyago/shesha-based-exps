@@ -107,14 +107,13 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
 
             var chargeItem = new HisChargeItem()
             {
-                Status = (long?)RefListChargeItemStatus.inProgress,
                 Subject = wardAdmissionEntity.Subject,
                 ContextEncounter = wardAdmissionEntity.PartOf,
                 ServiceId = wardAdmissionEntity.Id,
                 ServiceType = wardAdmissionEntity.GetTypeShortAlias(),
                 Code = productCode
             };
-            await _hisChargeItemManager.CreateChargeItem(chargeItem);
+            await _hisChargeItemManager.CreateChargeItemAsync(chargeItem);
         }
         private async Task UpdateWardAdmissionChargeItem(WardAdmission wardAdmissionEntity)
         {
@@ -123,15 +122,15 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
 
             var productCode = await ProductsHelper.GetProductCode(bed.BedType.Id);
 
-            var chargeItem = await _hisChargeItemManager.GetInProgressChargeItem(wardAdmissionEntity.Id);
+            var chargeItem = await _hisChargeItemManager.GetOpenChargeItemByServiceIdAsync(wardAdmissionEntity.Id);
 
             if (chargeItem != null)
             {
-                chargeItem.Status = (long?)RefListChargeItemStatus.finalized;
+                //chargeItem.Status = (long?)RefListChargeItemStatus.finalized;
 
                 chargeItem.QuantityValue = DateTime.Now.Subtract(wardAdmissionEntity.StartDateTime.Value).Days;
             }
-            await _hisChargeItemManager.UpdateChargeItem(chargeItem);
+            //await _hisChargeItemManager.UpdateChargeItem(chargeItem);
         }
         /// <summary>
         /// 

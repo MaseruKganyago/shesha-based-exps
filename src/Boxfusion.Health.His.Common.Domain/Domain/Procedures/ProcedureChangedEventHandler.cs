@@ -54,7 +54,7 @@ namespace Boxfusion.Health.His.Common.Procedures
 			};
 
 			var uow = _unitOfWork.Begin();
-			await _hisChargeItemManager.CreateChargeItem(chargeItem);
+			await _hisChargeItemManager.CreateChargeItemAsync(chargeItem);
 			await uow.CompleteAsync();
 		}
 	}

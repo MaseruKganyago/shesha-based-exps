@@ -50,7 +50,7 @@ namespace Boxfusion.Health.His.Common.Tests.ChargeItems
 				ServiceId = Guid.NewGuid(),
 				ServiceType = (new HisProcedure()).GetTypeShortAlias(),
 				QuantityValue = 1,
-				Status = (long?)RefListChargeItemStatus.inProgress,
+				//Status = (long?)RefListChargeItemStatus.inProgress,
 			};
 
 			await _chargeItemRepository.InsertAsync(chargeItem1);

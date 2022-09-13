@@ -17,13 +17,13 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.ChargeItems.Enums
 		/// <summary>
 		/// 
 		/// </summary>
-		[Description("In-Progress ChargeItem")]
-		inProgress = 1,
+		[Description("Open")]
+		open = 1,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		[Description("Finalized ChargeItem")]
-		finalized = 2
+		[Description("Closed")]
+		closed = 2
 	}
 }

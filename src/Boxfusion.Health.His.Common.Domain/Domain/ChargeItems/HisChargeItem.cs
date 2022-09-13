@@ -20,5 +20,10 @@ namespace Boxfusion.Health.His.Common.ChargeItems
         /// </summary>
         [ReferenceList("His", "ChargeItemStatus")]
         public virtual long? Status { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual DateTime? LastBilledDate { get; set; }
     }
 }

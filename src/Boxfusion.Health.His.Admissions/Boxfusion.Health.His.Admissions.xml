@@ -892,7 +892,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.Note,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Boxfusion.Health.His.Common.ChargeItems.HisChargeItemManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Beds.Bed,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.Note,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Boxfusion.Health.His.Common.ChargeItems.HisChargeItemsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Beds.Bed,System.Guid})">
             <summary>
             
             </summary>
