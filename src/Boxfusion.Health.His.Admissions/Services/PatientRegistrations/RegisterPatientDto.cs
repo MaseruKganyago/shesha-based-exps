@@ -54,7 +54,7 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime DateOfBirth { get; set; }
+		public DateTime? DateOfBirth { get; set; }
 
 		/// <summary>
 		/// 
