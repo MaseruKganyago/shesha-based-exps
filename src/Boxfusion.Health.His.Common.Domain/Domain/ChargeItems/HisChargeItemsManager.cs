@@ -10,6 +10,7 @@ using Shesha.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -130,13 +131,9 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		/// </summary>
 		/// <param name="billedDate"></param>
 		/// <param name="chargeItem"></param>
-		/// <param name="chargeItemId"></param>
 		/// <returns></returns>
-		public async Task UpdateChargeItemBilledDate(DateTime billedDate, HisChargeItem chargeItem = null,Guid chargeItemId = Guid.Empty)
+		public async Task UpdateChargeItemBilledDate(DateTime billedDate, HisChargeItem chargeItem)
 		{
-			if (chargeItem is null)
-				chargeItem = await _chargeItemRepository.GetAsync(chargeItemId);
-
 			chargeItem.LastBilledDate = billedDate;
 			await _chargeItemRepository.UpdateAsync(chargeItem);
 		}
