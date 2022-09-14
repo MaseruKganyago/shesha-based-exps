@@ -87,6 +87,30 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="input"></param>
+		/// <returns></returns>
+		[HttpPut, Route("[action]")]
+		public async Task<DynamicDto<HisPatient, Guid>> UpdateRegisteredPatient(RegisterPatientDto input)
+		{
+			var homeAddress = await CreatePatientAddress(input.ResidentialAddress, input.SecondResidentialAddress);
+
+			Address workAddress = null;
+			if (input.IsEmployed)
+				workAddress = await CreatePatientAddress(input.WorkAddress, input.SecondWorkAddress);
+
+			var patientEntity = await SaveOrUpdateEntityAsync<HisPatient>(nullabeId(input.Id), async item =>
+			{
+				ObjectMapper.Map<RegisterPatientDto, HisPatient>(input, item);
+				item.Address = homeAddress;
+				item.WorkAddress = workAddress;
+			});
+
+			return await MapToDynamicDtoAsync<HisPatient, Guid>(patientEntity);
+		}
+
 		private async Task<Address> CreatePatientAddress(string address, string secondAddress)
 		{
 			return await SaveOrUpdateEntityAsync<Address>(null, async item =>
