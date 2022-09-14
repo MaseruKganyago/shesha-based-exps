@@ -114,6 +114,33 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 																	&& a.Status == (long?)RefListChargeItemStatus.open);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="patientId"></param>
+		/// <returns></returns>
+		public async Task<List<HisChargeItem>> GetPatientOpenChargeItems(Guid patientId)
+		{
+			return await _chargeItemRepository.GetAllListAsync(a => a.Subject.Id == patientId
+																&& a.Status == (long?)RefListChargeItemStatus.open);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="billedDate"></param>
+		/// <param name="chargeItem"></param>
+		/// <param name="chargeItemId"></param>
+		/// <returns></returns>
+		public async Task UpdateChargeItemBilledDate(DateTime billedDate, HisChargeItem chargeItem = null,Guid chargeItemId = Guid.Empty)
+		{
+			if (chargeItem is null)
+				chargeItem = await _chargeItemRepository.GetAsync(chargeItemId);
+
+			chargeItem.LastBilledDate = billedDate;
+			await _chargeItemRepository.UpdateAsync(chargeItem);
+		}
+
 		private async Task<HisAccount> GetPatientAccount(Guid patientId, Guid encounterId)
 		{
 			return await _accountRepository.FirstOrDefaultAsync(a => a.Subject.Id == patientId && a.Encounter.Id == encounterId);
