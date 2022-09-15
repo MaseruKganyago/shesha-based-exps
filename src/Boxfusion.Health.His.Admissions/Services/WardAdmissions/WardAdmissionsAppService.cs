@@ -37,8 +37,6 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
         private readonly IRepository<Condition, Guid> _conditionRepository;
         private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;
         private readonly IRepository<Note, Guid> _noteRepository;
-        private readonly HisChargeItemsManager _hisChargeItemManager;
-        private readonly IRepository<Bed, Guid> _bedRepository;
 
         /// <summary>
         /// 
@@ -63,8 +61,6 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
             _diagnosisRepository = diagnosisRepository;
             _noteRepository = noteRepository;
             _hospitalAdmissionRepository = hospitalAdmissionRepository;
-            _hisChargeItemManager = hisChargeItemManager;
-            _bedRepository = bedRepository;
 		}
 
         /// <summary>
@@ -76,8 +72,6 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
         public async Task<DynamicDto<WardAdmission, Guid>> AdmitPatientAsync(WardAdmissionsDto input)
         {
             var wardAdmissionEntity = await _wardAdmissionRepositiory.InsertAsync(ObjectMapper.Map<WardAdmission>(input));
-
-            await CreateWardAdmissionChargeItem(wardAdmissionEntity);
 
             if (input.Conditions is not null && input.Conditions.Any())
             {
@@ -98,40 +92,6 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
             return await MapToDynamicDtoAsync<WardAdmission, Guid>(wardAdmissionEntity);
         }
 
-        private async Task CreateWardAdmissionChargeItem(WardAdmission wardAdmissionEntity)
-        {
-            var bedList = await _bedRepository.GetAllIncluding(a => a.BedType).Where(a => a.Id == wardAdmissionEntity.Bed.Id).ToListAsync();
-            var bed = bedList.FirstOrDefault();
-
-            var productCode = await ProductsHelper.GetProductCode(bed.BedType.Id);
-
-            var chargeItem = new HisChargeItem()
-            {
-                Subject = wardAdmissionEntity.Subject,
-                ContextEncounter = wardAdmissionEntity.PartOf,
-                ServiceId = wardAdmissionEntity.Id,
-                ServiceType = wardAdmissionEntity.GetTypeShortAlias(),
-                Code = productCode
-            };
-            await _hisChargeItemManager.CreateChargeItemAsync(chargeItem);
-        }
-        private async Task UpdateWardAdmissionChargeItem(WardAdmission wardAdmissionEntity)
-        {
-            var bedList = await _bedRepository.GetAllIncluding(a => a.BedType).Where(a => a.Id == wardAdmissionEntity.Bed.Id).ToListAsync();
-            var bed = bedList.FirstOrDefault();
-
-            var productCode = await ProductsHelper.GetProductCode(bed.BedType.Id);
-
-            var chargeItem = await _hisChargeItemManager.GetOpenChargeItemByServiceIdAsync(wardAdmissionEntity.Id);
-
-            if (chargeItem != null)
-            {
-                //chargeItem.Status = (long?)RefListChargeItemStatus.finalized;
-
-                chargeItem.QuantityValue = DateTime.Now.Subtract(wardAdmissionEntity.StartDateTime.Value).Days;
-            }
-            //await _hisChargeItemManager.UpdateChargeItem(chargeItem);
-        }
         /// <summary>
         /// 
         /// </summary>

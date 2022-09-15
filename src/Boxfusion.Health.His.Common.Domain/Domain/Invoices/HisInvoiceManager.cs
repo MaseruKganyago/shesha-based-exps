@@ -6,6 +6,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Common.Accounts;
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.ChargeItems;
+using Boxfusion.Health.His.Common.Domain.Domain.ChargeItems.Enums;
 using Boxfusion.Health.His.Common.Invoices;
 using Boxfusion.Health.His.Common.Patients;
 using Boxfusion.Health.His.Common.Products;
@@ -73,7 +74,9 @@ namespace Boxfusion.Health.His.Common.Invoices
 			};
 			var invoice = await _hisInvoiceRepository.InsertAsync(newInvoice);
 
-			var patientChargeItems = await _hisChargeItemManager.GetPatientOpenChargeItems(account.Subject.Id);
+			var patientId = account.Subject.Id;
+			var patientChargeItems = await _hisChargeItemManager.repository().GetAllListAsync(a => a.Subject.Id == patientId
+																&& a.Status == (long?)RefListChargeItemStatus.open);
 
 			var billedItemTask = new List<Task>();
 			patientChargeItems.ForEach(charge => billedItemTask.Add(CreateBilledItem(charge, occurenceDate, invoice)));

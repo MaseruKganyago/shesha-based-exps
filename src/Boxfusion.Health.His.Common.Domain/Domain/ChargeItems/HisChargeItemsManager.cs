@@ -43,6 +43,15 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <returns></returns>
+		public IRepository<HisChargeItem, Guid> repository()
+		{
+			return _chargeItemRepository;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="hisChargeItem"></param>
 		/// <param name="status"></param>
 		/// <returns></returns>
@@ -59,11 +68,11 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="currentChargeItemId"></param>
+		/// <param name="currentChargeItem"></param>
 		/// <returns></returns>
-		public async Task<HisChargeItem> ClosedAndOpenNewChargeItem(Guid currentChargeItemId)
+		public async Task<HisChargeItem> ClosedAndOpenNewChargeItem(HisChargeItem currentChargeItem)
 		{
-			var closedChargeItem = await CloseChargeItemAsync(currentChargeItemId);
+			var closedChargeItem = await CloseChargeItemAsync(currentChargeItem);
 
 			var newChargeItem = new HisChargeItem()
 			{
@@ -82,26 +91,24 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="currentChargeItemId"></param>
+		/// <param name="currentChargeItem"></param>
 		/// <returns></returns>
 		/// <exception cref="UserFriendlyException"></exception>
-		public async Task<HisChargeItem> CloseChargeItemAsync(Guid currentChargeItemId)
+		public async Task<HisChargeItem> CloseChargeItemAsync(HisChargeItem currentChargeItem)
 		{
-			var chargeItem = await _chargeItemRepository.GetAsync(currentChargeItemId);
+			currentChargeItem.Status = (long?)RefListChargeItemStatus.closed;
 
-			chargeItem.Status = (long?)RefListChargeItemStatus.closed;
-
-			if (chargeItem.ServiceType == (new WardAdmission()).GetTypeShortAlias())
+			if (currentChargeItem.ServiceType == (new WardAdmission()).GetTypeShortAlias())
 			{
-				var admission = await _wardAdmissionRepository.GetAsync(chargeItem.ServiceId);
+				var admission = await _wardAdmissionRepository.GetAsync(currentChargeItem.ServiceId);
 
 				if (admission.StartDateTime == null) throw new UserFriendlyException($"Curremt WardAdmission does not have AdmissionDate.");
 
 				var days = DateTime.Now.Subtract(admission.StartDateTime.Value).Days;
-				chargeItem.QuantityValue = days;
+				currentChargeItem.QuantityValue = days;
 			}
 
-			return await _chargeItemRepository.UpdateAsync(chargeItem);
+			return await _chargeItemRepository.UpdateAsync(currentChargeItem);
 		}
 
 		/// <summary>
@@ -113,17 +120,6 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		{
 			return await _chargeItemRepository.FirstOrDefaultAsync(a => a.ServiceId == serviceId
 																	&& a.Status == (long?)RefListChargeItemStatus.open);
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="patientId"></param>
-		/// <returns></returns>
-		public async Task<List<HisChargeItem>> GetPatientOpenChargeItems(Guid patientId)
-		{
-			return await _chargeItemRepository.GetAllListAsync(a => a.Subject.Id == patientId
-																&& a.Status == (long?)RefListChargeItemStatus.open);
 		}
 
 		/// <summary>

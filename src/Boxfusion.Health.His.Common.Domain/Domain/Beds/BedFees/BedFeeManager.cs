@@ -29,6 +29,15 @@ namespace Boxfusion.Health.His.Common.Beds.BedFees
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <returns></returns>
+		public IRepository<BedFee, Guid> repository()
+		{
+			return _bedFeeRepository;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="bedFee"></param>
 		/// <param name="status"></param>
 		/// <returns></returns>
@@ -41,12 +50,12 @@ namespace Boxfusion.Health.His.Common.Beds.BedFees
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="currentBedFeeId"></param>
+		/// <param name="currentBedFee"></param>
 		/// <param name="newChargeItem"></param>
 		/// <returns></returns>
-		public async Task<BedFee> CloseAndOpenNewBedFeeAsync(Guid currentBedFeeId, HisChargeItem newChargeItem)
+		public async Task<BedFee> CloseAndOpenNewBedFeeAsync(BedFee currentBedFee, HisChargeItem newChargeItem)
 		{
-			var closedBedFee = await CloseBedFeeAsync(currentBedFeeId);
+			var closedBedFee = await CloseBedFeeAsync(currentBedFee);
 
 			var newBedFee = new BedFee()
 			{
@@ -61,12 +70,10 @@ namespace Boxfusion.Health.His.Common.Beds.BedFees
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="bedFeeId"></param>
+		/// <param name="bedFee"></param>
 		/// <returns></returns>
-		public async Task<BedFee> CloseBedFeeAsync(Guid bedFeeId)
+		public async Task<BedFee> CloseBedFeeAsync(BedFee bedFee)
 		{
-			var bedFee = await _bedFeeRepository.GetAsync(bedFeeId);
-
 			bedFee.Status = (long?)RefListBedFeeStatus.closed;
 			bedFee.EndDate = DateTime.Now;
 

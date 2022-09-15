@@ -726,6 +726,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationAppService.UpdateRegisteredPatient(Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationAppService.GetAdmissionNumber">
             <summary>
             
