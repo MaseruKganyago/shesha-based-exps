@@ -894,6 +894,21 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientResultDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientResultDto.Patient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientResultDto.HospitalAdmissionId">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService">
             <summary>
             

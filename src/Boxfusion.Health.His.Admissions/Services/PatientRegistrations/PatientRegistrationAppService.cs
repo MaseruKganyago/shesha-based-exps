@@ -45,7 +45,7 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		/// <param name="input"></param>
 		/// <returns></returns>
 		[HttpPost, Route("[action]")]
-		public async Task<DynamicDto<HisPatient, Guid>> RegisterPatient(RegisterPatientDto input)
+		public async Task<RegisterPatientResultDto> RegisterPatient(RegisterPatientDto input)
 		{
 			try
 			{
@@ -69,7 +69,7 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 					facility = await _healthFacilityRepository.GetAsync(facilityId);
 				}
 
-				await SaveOrUpdateEntityAsync<HospitalAdmission>(null, async item =>
+				var hospitalAdmissionEntity = await SaveOrUpdateEntityAsync<HospitalAdmission>(null, async item =>
 				{
 					item.RegistrationType = input.RegistrationType;
 					item.Subject = patientEntity;
@@ -79,7 +79,15 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 					item.StartDateTime = DateTime.UtcNow.AddHours(2);
 				});
 
-				return await MapToDynamicDtoAsync<HisPatient, Guid>(patientEntity);
+				var patientDto = await MapToDynamicDtoAsync<HisPatient, Guid>(patientEntity);
+				var result = new RegisterPatientResultDto()
+				{
+					Patient = patientDto,
+					HospitalAdmissionId = hospitalAdmissionEntity.Id,
+					Id = patientEntity.Id
+				};
+
+				return result;
 			}
 			catch (Exception ex)
 			{
