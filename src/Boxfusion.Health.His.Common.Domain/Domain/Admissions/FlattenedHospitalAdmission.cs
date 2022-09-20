@@ -68,6 +68,13 @@ namespace Boxfusion.Health.His.Common.Admissions
 		/// <summary>
 		/// 
 		/// </summary>
+
+		[ReferenceList("His", "HospitalAdmissionStatuses")]
+		public virtual long? HospitalAdmissionStatus { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual Guid PatientId { get; set; }
 
 		/// <summary>
