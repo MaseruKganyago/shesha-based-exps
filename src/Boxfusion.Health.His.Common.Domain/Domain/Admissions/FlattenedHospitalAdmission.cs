@@ -132,5 +132,22 @@ namespace Boxfusion.Health.His.Common.Admissions
 		/// 
 		/// </summary>
 		public virtual Single? NumberOfAccounts { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		[ReferenceList("Fhir", "CoverageType")]
+		public virtual long? Type { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+        public virtual string Dependent { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual string MedicalAidName { get; set; }
+
 	}
 }
