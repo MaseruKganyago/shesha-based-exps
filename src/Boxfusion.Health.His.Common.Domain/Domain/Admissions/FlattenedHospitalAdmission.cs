@@ -156,5 +156,10 @@ namespace Boxfusion.Health.His.Common.Admissions
 		/// </summary>
 		public virtual string MedicalAidName { get; set; }
 
-	}
+		/// <summary>
+		/// 
+		/// </summary>
+        public virtual DateTime? LastInvoiceDate { get; set; }
+
+    }
 }
