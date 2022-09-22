@@ -19,6 +19,16 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		/// <summary>
 		/// 
 		/// </summary>
+		public int? Title { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string PassportNumber { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public long? RegistrationType { get; set; }
 
 		/// <summary>

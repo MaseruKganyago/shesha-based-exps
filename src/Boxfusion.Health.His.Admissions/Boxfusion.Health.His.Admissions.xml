@@ -754,6 +754,16 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.PassportNumber">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.RegistrationType">
             <summary>
             

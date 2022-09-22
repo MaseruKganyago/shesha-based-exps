@@ -47,8 +47,6 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		[HttpPost, Route("[action]")]
 		public async Task<RegisterPatientResultDto> RegisterPatient(RegisterPatientDto input)
 		{
-			try
-			{
 				var homeAddress = await CreatePatientAddress(input.ResidentialAddress, input.SecondResidentialAddress);
 
 				Address workAddress = null;
@@ -88,11 +86,6 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 				};
 
 				return result;
-			}
-			catch (Exception ex)
-			{
-				throw new UserFriendlyException("An error occured.");
-			}
 		}
 
 		/// <summary>
