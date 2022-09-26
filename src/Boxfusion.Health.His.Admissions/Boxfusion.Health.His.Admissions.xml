@@ -814,7 +814,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.HomeLangauge">
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.CommunicationLanguage">
             <summary>
             
             </summary>

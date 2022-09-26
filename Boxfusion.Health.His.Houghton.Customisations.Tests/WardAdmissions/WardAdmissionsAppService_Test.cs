@@ -32,7 +32,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 		private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
 		private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepositiory;
 		private readonly IRepository<HisChargeItem, Guid> _hisChargeItemRepositiory;
-		private readonly HisChargeItemManager _hisChargeItemManagerRepositiory;
+		private readonly HisChargeItemsManager _hisChargeItemManagerRepositiory;
 
 		public WardAdmissionsAppService_Test(): base()
 		{
@@ -41,7 +41,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 			_hospitalAdmissionRepositiory = Resolve<IRepository<HospitalAdmission, Guid>>();
 			_wardAdmissionRepositiory = Resolve<IRepository<WardAdmission, Guid>>();
 			_hisChargeItemRepositiory = Resolve<IRepository<HisChargeItem, Guid>>();
-			_hisChargeItemManagerRepositiory = Resolve<HisChargeItemManager>();
+			_hisChargeItemManagerRepositiory = Resolve<HisChargeItemsManager>();
 		}
 
 		/// <summary>
@@ -170,12 +170,12 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				admission.ShouldNotBeNull();
 
 				//Verify wardAdmission was discharged
-				admission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.separated);
+				admission.WardAdmissionStatus.ShouldBe(RefListWardAdmissionStatuses.separated);
 				admission.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.Value.ToString("MM/dd/yyyy HH:mm"));
 
 				//Verify hospitalAdmission was dischaarged
 				hospitalAdmission.HospitalAdmissionStatus.ShouldBe(RefListHospitalAdmissionStatuses.separated);
-				hospitalAdmission.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.ToString("MM/dd/yyyy HH:mm"));
+				hospitalAdmission.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.Value.ToString("MM/dd/yyyy HH:mm"));
 
 				//Verify discharge note was created
 				var note = await _noteRepository.FirstOrDefaultAsync(a => a.OwnerId == admission.Id.ToString());
@@ -221,7 +221,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 
 			var chargeItem = new HisChargeItem()
 			{
-				Status = (long?)RefListChargeItemStatus.inProgress,
+				Status = (long?)RefListChargeItemStatus.open,
 				Subject = wardAdmissionEntity.Subject,
 				ContextEncounter = wardAdmissionEntity.PartOf,
 				ServiceId = wardAdmissionEntity.Id,
@@ -229,7 +229,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				Code = productCode
 
 			};
-			await _hisChargeItemManagerRepositiory.CreateChargeItem(chargeItem);
+			await _hisChargeItemManagerRepositiory.CreateChargeItemAsync(chargeItem);
 		}
 
 	}
