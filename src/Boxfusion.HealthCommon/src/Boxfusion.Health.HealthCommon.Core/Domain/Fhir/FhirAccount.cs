@@ -37,11 +37,6 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual Coverage Coverage { get; set; }
-
-		/// <summary>
-		/// 
-		/// </summary>
 		public virtual FhirOrganisation Owner { get; set; }
 
 		/// <summary>
