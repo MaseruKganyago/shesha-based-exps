@@ -13,8 +13,8 @@ namespace Boxfusion.Health.His.Common
 	/// <summary>
 	/// 
 	/// </summary>
-	[Entity(TypeShortAlias = "His.Consumable")]
-	public class Consumable: FullAuditedEntity<Guid>
+	[Entity(TypeShortAlias = "His.HisConsumable")]
+	public class HisConsumable: FullAuditedEntity<Guid>
 	{
 		/// <summary>
 		/// 
@@ -29,6 +29,6 @@ namespace Boxfusion.Health.His.Common
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual ConsumableProduct ConsumableProduct { get; set; }
+		public virtual HisConsumableProduct ConsumableProduct { get; set; }
 	}
 }

@@ -52,7 +52,8 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
         /// <summary>
         /// Changed from being a MultiValueReferenceList because it contains a lot of items.
         /// </summary>
-        public virtual RefListPracticeSettingCodeValueSets? Speciality { get; set; }
+        [ReferenceList("Fhir", "PracticeSettingCodeValueSets")]
+        public virtual long? Speciality { get; set; }
 
         /// <summary>
         /// 

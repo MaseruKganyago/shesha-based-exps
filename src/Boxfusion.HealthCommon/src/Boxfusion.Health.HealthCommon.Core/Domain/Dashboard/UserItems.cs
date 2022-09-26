@@ -32,7 +32,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Dashboard
         /// <summary>
         /// 
         /// </summary>
-		public virtual string Supervisor { get; set; }
+		//public virtual string Supervisor { get; set; }
         /// <summary>
         /// 
         /// </summary>

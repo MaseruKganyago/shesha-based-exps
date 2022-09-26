@@ -5,9 +5,15 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
 using Boxfusion.Health.His.Common.Admissions;
+using Boxfusion.Health.His.Common.Beds;
+using Boxfusion.Health.His.Common.ChargeItems;
+using Boxfusion.Health.His.Common.Domain.Domain.ChargeItems.Enums;
+using Boxfusion.Health.His.Common.Domain.Domain.Products;
 using Boxfusion.Health.His.Common.Enums;
 using Microsoft.AspNetCore.Mvc;
+using NHibernate.Linq;
 using Shesha;
+using Shesha.AutoMapper.Dto;
 using Shesha.Domain;
 using Shesha.DynamicEntities.Dtos;
 using Shesha.Extensions;
@@ -41,19 +47,21 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
         /// <param name="diagnosisRepository"></param>
         /// <param name="noteRepository"></param>
         /// <param name="hospitalAdmissionRepository"></param>
+        /// <param name="hisChargeItemManager"></param>
+        /// <param name="bedRepository"></param>
         public WardAdmissionsAppService(IRepository<WardAdmission, Guid> wardAdmissionRepositiory, 
             IRepository<Condition, Guid> conditionRepository, 
             IRepository<Diagnosis, Guid> diagnosisRepository, 
             IRepository<Note, Guid> noteRepository,
-			IRepository<HospitalAdmission, Guid> hospitalAdmissionRepository)
+			IRepository<HospitalAdmission, Guid> hospitalAdmissionRepository,
+			HisChargeItemsManager hisChargeItemManager,
+			IRepository<Bed, Guid> bedRepository)
         {
             _wardAdmissionRepositiory = wardAdmissionRepositiory;
             _conditionRepository = conditionRepository;
             _diagnosisRepository = diagnosisRepository;
             _noteRepository = noteRepository;
             _hospitalAdmissionRepository = hospitalAdmissionRepository;
-
-
 		}
 
         /// <summary>
@@ -115,6 +123,34 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
             await _noteRepository.InsertAsync(note);
             return await MapToDynamicDtoAsync<WardAdmission, Guid>(wardAdmissionEntity);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hospitalAdmissionId"></param>
+        /// <returns></returns>
+        [HttpGet, Route("[action]")]
+        public async Task<WardDischargeDto> GetDischargeDetails(Guid hospitalAdmissionId)
+        {
+            var wardAdmissions = await _wardAdmissionRepositiory.GetAllListAsync(a => a.PartOf.Id == hospitalAdmissionId);
+            wardAdmissions.OrderByDescending(a => a.EndDateTime);
+
+            var admission = wardAdmissions.FirstOrDefault();
+
+            var note = await _noteRepository.FirstOrDefaultAsync(a => a.OwnerId == admission.Id.ToString()
+                                            && a.Category == (int)RefListHisNoteType.discharge);
+
+
+            var result = new WardDischargeDto()
+            {
+                DischargeDate = admission.EndDateTime,
+                DischargeNotes = note.NoteText,
+                Physician = new EntityWithDisplayNameDto<Guid?>(admission.Performer?.Id, admission.Performer?.FullName),
+				SeparationType = (long?)admission.SeparationType,
+			};
+
+            return result;
+		}
 
         private async Task createDiagnosis(Guid conditionId, WardAdmission wardAdmissionEntity)
         {

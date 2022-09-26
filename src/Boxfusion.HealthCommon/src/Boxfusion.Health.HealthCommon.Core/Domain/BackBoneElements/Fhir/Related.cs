@@ -28,6 +28,6 @@ namespace Boxfusion.Health.Cdm.Domain.Domain.BackBoneElements.Fhir
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual Guid Reference { get; set; }
+		public virtual Guid? Reference { get; set; }
 	}
 }

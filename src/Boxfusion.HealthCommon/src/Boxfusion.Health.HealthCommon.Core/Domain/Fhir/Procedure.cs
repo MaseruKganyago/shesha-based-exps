@@ -8,7 +8,8 @@ using System.Text;
 
 namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 {
-    [Entity(TypeShortAlias = "HealthCommon.Core.Procedure", GenerateApplicationService = false)]
+    [Entity(TypeShortAlias = "HealthCommon.Core.Procedure")]
+    [Discriminator]
     public class Procedure : FullAuditedEntity<Guid>
     {
         public virtual string Identifier { get; set; }
@@ -50,9 +51,9 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 
         public virtual int? PerformedAge { get; set; }
 
-        public virtual Decimal? PerformedRangeLow { get; set; }
+        public virtual decimal? PerformedRangeLow { get; set; }
 
-        public virtual Decimal? PerformedRangeHigh { get; set; }
+        public virtual decimal? PerformedRangeHigh { get; set; }
 
 		public virtual PersonFhirBase Recorder { get; set; }
 

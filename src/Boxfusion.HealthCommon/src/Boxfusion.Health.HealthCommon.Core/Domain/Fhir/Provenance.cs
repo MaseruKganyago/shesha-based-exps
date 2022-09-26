@@ -21,7 +21,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
         /// <summary>
         /// /
         /// </summary>
-        public virtual string TargetOnwerType { get; set; }
+        public virtual string TargetOwnerType { get; set; }
 
         /// <summary>
         /// 
