@@ -89,7 +89,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 
 				//Check if admitted into ward
 				admission.Id.ShouldNotBe(Guid.Empty);
-				admission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.admitted);
+				admission.WardAdmissionStatus.ShouldBe(RefListWardAdmissionStatuses.admitted);
 
 				//Check if diagnosis was made for admission
 				diagnosis = await GetTestData_AdmissionDiagnosisList(admission, RefListEncounterDiagnosisRoles.AD);
@@ -157,7 +157,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				admission.ShouldNotBeNull();
 
 				//Verify wardAdmission was discharged
-				admission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.separated);
+				admission.WardAdmissionStatus.ShouldBe(RefListWardAdmissionStatuses.separated);
 				admission.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.ToString("MM/dd/yyyy HH:mm"));
 
 				//Verify discharge note was created

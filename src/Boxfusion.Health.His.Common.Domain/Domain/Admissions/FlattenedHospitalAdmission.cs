@@ -112,7 +112,7 @@ namespace Boxfusion.Health.His.Common.Admissions
 		/// <summary>
 		/// 
 		/// </summary>
-		[ReferenceList("His", "AdmissionStatuses")]
+		[ReferenceList("His", "WardAdmissionStatuses")]
 		public virtual long? WardAdmissionStatus { get; set; }
 
 		/// <summary>
@@ -160,6 +160,5 @@ namespace Boxfusion.Health.His.Common.Admissions
 		/// 
 		/// </summary>
         public virtual DateTime? LastInvoiceDate { get; set; }
-
     }
 }

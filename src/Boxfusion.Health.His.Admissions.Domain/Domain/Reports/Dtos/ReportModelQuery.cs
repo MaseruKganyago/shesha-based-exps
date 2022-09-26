@@ -92,7 +92,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos
         /// <summary>
         /// 
         /// </summary>
-        public long? AdmissionStatus { get; set; }
+        public long? WardAdmissionStatus { get; set; }
 
         /// <summary>
         /// 

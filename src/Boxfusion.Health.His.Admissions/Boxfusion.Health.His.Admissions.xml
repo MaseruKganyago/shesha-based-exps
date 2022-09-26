@@ -181,7 +181,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Domain.Views.AdmittedPatientItems.AdmissionStatus">
+        <member name="P:Boxfusion.Health.His.Admissions.Application.Domain.Views.AdmittedPatientItems.WardAdmissionStatus">
             <summary>
             
             </summary>
@@ -412,7 +412,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.ReportModelQuery.AdmissionStatus">
+        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.ReportModelQuery.WardAdmissionStatus">
             <summary>
             
             </summary>

@@ -9,8 +9,8 @@ namespace Boxfusion.Health.His.Common.Enums
     /// <summary>
     /// 
     /// </summary>
-    [ReferenceList("His", "AdmissionStatuses")]
-    public enum RefListAdmissionStatuses : long
+    [ReferenceList("His", "WardAdmissionStatuses")]
+    public enum RefListWardAdmissionStatuses : long
     {
         /// <summary>
         /// 
@@ -34,6 +34,18 @@ namespace Boxfusion.Health.His.Common.Enums
         /// 
         /// </summary>
         [Description("Rejected")]
-        rejected = 4
+        rejected = 4,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("Discharge - Initiated")]
+        dischargeInitiated = 5,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("Discharge - Processed")]
+        dischargeProcessed = 6
     }
 }

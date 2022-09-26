@@ -23,18 +23,18 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
                 .ForMember(a => a.Room, b => b.MapFrom(c => GetEntity<Room>(c.Room.Id)))
                 .ForMember(a => a.Bed, b => b.MapFrom(c => GetEntity<Bed>(c.Bed.Id)))
                 .ForMember(a => a.StartDateTime, b => b.MapFrom(c => c.AdmissionDate))
-                .ForMember(a => a.AdmissionStatus, b => b.MapFrom(c=> RefListAdmissionStatuses.admitted))
+                .ForMember(a => a.WardAdmissionStatus, b => b.MapFrom(c=> RefListWardAdmissionStatuses.admitted))
                 .ForMember(a => a.PartOf, b => b.MapFrom(c=>GetEntity<HospitalAdmission>(c.PartOf)))
                 .MapReferenceListValuesFromDto();
 
             CreateMap<WardDischargeDto, WardAdmission>()
                 .ForMember(a => a.EndDateTime, b => b.MapFrom(c => c.DischargeDate))
-                .ForMember(a => a.AdmissionStatus, b => b.MapFrom(c => RefListAdmissionStatuses.separated));
+                .ForMember(a => a.WardAdmissionStatus, b => b.MapFrom(c => RefListWardAdmissionStatuses.separated));
 
             CreateMap<WardDischargeDto, HospitalAdmission>()
                 .ForMember(a => a.Id, b => b.Ignore())
                 .ForMember(a => a.EndDateTime, b => b.MapFrom(c => c.DischargeDate))
-                .ForMember(a => a.Status, b => b.MapFrom(c => RefListAdmissionStatuses.separated));
+                .ForMember(a => a.Status, b => b.MapFrom(c => RefListWardAdmissionStatuses.separated));
         }
 
     }

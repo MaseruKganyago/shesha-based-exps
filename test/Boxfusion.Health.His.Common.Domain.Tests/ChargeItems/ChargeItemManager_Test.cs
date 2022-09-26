@@ -58,7 +58,7 @@ namespace Boxfusion.Health.His.Common.Tests.ChargeItems
 			var admission = await _wardAdmissionRepository.InsertAsync(new WardAdmission() 
 			{
 				Subject = patient,
-				AdmissionStatus = RefListAdmissionStatuses.admitted,
+				WardAdmissionStatus = RefListWardAdmissionStatuses.admitted,
 				StartDateTime = DateTime.Now.AddDays(-2), //Back track date for chargeItem quantityValue
 			});
 

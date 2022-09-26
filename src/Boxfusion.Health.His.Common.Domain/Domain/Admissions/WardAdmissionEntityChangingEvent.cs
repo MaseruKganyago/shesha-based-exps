@@ -64,14 +64,14 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.Admissions
 														&& a.Status == (long?)RefListChargeItemStatus.open);
 
 				//Handles bedFees-chargedItem upon change of bed in wardAdmission
-				if (dbAdmission.Bed.Id != entity.Bed.Id && entity.AdmissionStatus == RefListAdmissionStatuses.admitted)
+				if (dbAdmission.Bed.Id != entity.Bed.Id && entity.WardAdmissionStatus == RefListWardAdmissionStatuses.admitted)
 				{
 					await _bedFeeManager.CloseAndOpenNewBedFeeAsync(currentBedFee, chargeItem);
 				}
 				else
 				{
 					//Closes bedFees-chargedItem upon discharge
-					if (entity.AdmissionStatus == RefListAdmissionStatuses.separated)
+					if (entity.WardAdmissionStatus == RefListWardAdmissionStatuses.separated)
 					{
 						await _bedFeeManager.CloseBedFeeAsync(currentBedFee);
 						await _chargeItemManager.CloseChargeItemAsync(chargeItem);

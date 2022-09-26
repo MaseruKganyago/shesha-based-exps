@@ -108,7 +108,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Domain.Views
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual RefListAdmissionStatuses AdmissionStatus { get; set; }
+		public virtual RefListWardAdmissionStatuses WardAdmissionStatus { get; set; }
 
 		/// <summary>
 		/// 

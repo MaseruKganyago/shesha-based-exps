@@ -140,7 +140,7 @@ namespace Boxfusion.Health.His.Admissions.Tests
 
 					MapToAdmissionEntity(admission, result);
                     var codes = await GetTestData_CodesList();
-                    await MakeADiagnosis(admission, codes, RefListEncounterDiagnosisRoles.AD, RefListAdmissionStatuses.admitted);
+                    await MakeADiagnosis(admission, codes, RefListEncounterDiagnosisRoles.AD, RefListWardAdmissionStatuses.admitted);
 
                     session.Flush();
                     await uow.CompleteAsync();
@@ -159,7 +159,7 @@ namespace Boxfusion.Health.His.Admissions.Tests
 		{
             admission.Id = result.Id;
             admission.WardAdmissionNumber = result.WardAdmissionNumber;
-            admission.AdmissionStatus = (RefListAdmissionStatuses?)result.AdmissionStatus;
+            admission.WardAdmissionStatus = (RefListWardAdmissionStatuses?)result.WardAdmissionStatus;
             admission.AdmissionType = (RefListAdmissionTypes?)result.AdmissionType;
 			admission.PartOf = new HospitalAdmission
 			{
@@ -167,7 +167,7 @@ namespace Boxfusion.Health.His.Admissions.Tests
 			};
 		}
 
-		private async Task MakeADiagnosis(WardAdmission wardAdmissionEntity, List<IcdTenCode> codes, RefListEncounterDiagnosisRoles use, RefListAdmissionStatuses status)
+		private async Task MakeADiagnosis(WardAdmission wardAdmissionEntity, List<IcdTenCode> codes, RefListEncounterDiagnosisRoles use, RefListWardAdmissionStatuses status)
         {
             var diagnosisEntity = await _diagnosisManager.AddNewDiagnosis<WardAdmission, Condition>(wardAdmissionEntity,
                                           (int)use, null,
@@ -185,7 +185,7 @@ namespace Boxfusion.Health.His.Admissions.Tests
                                                                         //(Optional) extra values required in ConditionIcdTenCode sub-entities
                                                                         async item =>
                                                                         {
-                                                                            item.AdmissionStatus = status;
+                                                                            item.WardAdmissionStatus = status;
                                                                         });
         }
 

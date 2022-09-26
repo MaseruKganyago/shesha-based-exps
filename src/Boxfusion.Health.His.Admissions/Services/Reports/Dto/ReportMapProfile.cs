@@ -24,7 +24,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto
                 .ForMember(c => c.Nationality, options => options.MapFrom(c => GetRefListItemValueDto("Cdm", "Countries", (int?)c.Nationality)))
                 .ForMember(c => c.PatientProvince, options => options.MapFrom(c => GetRefListItemValueDto("His", "Provinces", (int?)c.PatientProvince)))
                 .ForMember(c => c.IdentificationType, options => options.MapFrom(c => GetRefListItemValueDto("His", "IdentificationTypes", (int?)c.IdentificationType)))
-                .ForMember(c => c.AdmissionStatus, options => options.MapFrom(c => GetRefListItemValueDto("His", "AdmissionStatuses", (int?)c.AdmissionStatus)))
+                .ForMember(c => c.WardAdmissionStatus, options => options.MapFrom(c => GetRefListItemValueDto("His", "WardAdmissionStatuses", (int?)c.WardAdmissionStatus)))
                 .ForMember(c => c.AdmissionType, options => options.MapFrom(c => GetRefListItemValueDto("His", "AdmissionTypes", (int?)c.AdmissionType)))
                 .ForMember(c => c.Speciality, options => options.MapFrom(c => GetRefListItemValueDto("Fhir", "WardSpecialities", (int?)c.Speciality)))
                 .ForMember(c => c.Classification, options => options.MapFrom(c => GetRefListItemValueDto("His", "Classifications", (int?)c.Classification)))

@@ -406,7 +406,7 @@
             
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto.AdmissionStatus" -->
+        <!-- Badly formed XML comment ignored for member "P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto.WardAdmissionStatus" -->
         <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos.HisAdmissionAuditTrailDto.UserId">
             <summary>
             
@@ -847,7 +847,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.AdmissionStatus">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportModelQuery.WardAdmissionStatus">
             <summary>
             
             </summary>
@@ -952,7 +952,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.AdmissionStatus">
+        <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos.ReportResponseDto.WardAdmissionStatus">
             <summary>
             
             </summary>
