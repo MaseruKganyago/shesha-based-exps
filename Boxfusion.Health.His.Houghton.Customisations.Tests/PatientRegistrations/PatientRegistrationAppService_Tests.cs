@@ -7,7 +7,9 @@ using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
 using Boxfusion.Health.His.Hougton.Tests;
+using Shesha.AutoMapper.Dto;
 using Shesha.Domain.Enums;
+using Shesha.Services.ReferenceLists.Dto;
 using Shouldly;
 using System;
 using System.Collections.Generic;
@@ -48,7 +50,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.PatientRegistrations
 				DateOfBirth = DateTime.Today,
 				Gender = (long?)RefListGender.Male,
 				Ethnicity = 1,
-				CommunicationLanguage = new List<long>() { 1 },
+				CommunicationLanguage = new List<ReferenceListItemValueDto>() { new ReferenceListItemValueDto() { ItemValue = 1 } },
 				MaritalStatus = (long?)RefListMaritalStatus.A,
 				CellNumber = "012345679",
 				AlternativeNumber = "9876543210",

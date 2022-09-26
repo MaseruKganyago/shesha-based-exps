@@ -66,8 +66,9 @@ namespace Boxfusion.Health.His.Common.Invoices
 		/// </summary>
 		/// <param name="patientAccountId"></param>
 		/// <param name="occurenceDate"></param>
+		/// <param name="hisChargeItems"></param>
 		/// <returns></returns>
-		public async Task<HisInvoice> SplitPatientBill(Guid patientAccountId, DateTime occurenceDate)
+		public async Task<HisInvoice> SplitPatientBill(Guid patientAccountId, DateTime occurenceDate, List<HisChargeItem> hisChargeItems)
 		{
 			var account = await _hisAccountRepository.GetAllIncluding(a => a.Subject)
 													.Where(a => a.Id == patientAccountId).FirstOrDefaultAsync();
@@ -81,12 +82,8 @@ namespace Boxfusion.Health.His.Common.Invoices
 			};
 			var invoice = await _hisInvoiceRepository.InsertAsync(newInvoice);
 
-			var patientId = account.Subject.Id;
-			var patientChargeItems = await _hisChargeItemManager.repository().GetAllListAsync(a => a.Subject.Id == patientId
-																&& a.Status == (long?)RefListChargeItemStatus.open);
-
 			var billedItemTask = new List<Task>();
-			patientChargeItems.ForEach(charge => billedItemTask.Add(CreateBilledItem(charge, occurenceDate, invoice)));
+			hisChargeItems.ForEach(charge => billedItemTask.Add(CreateBilledItem(charge, occurenceDate, invoice)));
 			await Task.WhenAll(billedItemTask);
 
 			return invoice;
