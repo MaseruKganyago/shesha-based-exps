@@ -26,7 +26,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
         /// 
         /// </summary>
         [MultiValueReferenceList("Shesha.Core", "CommonLanguage")]
-        public virtual int? CommunicationLanguage { get; set; }
+        public virtual long? CommunicationLanguage { get; set; }
         /// <summary>
         /// 
         /// </summary>
