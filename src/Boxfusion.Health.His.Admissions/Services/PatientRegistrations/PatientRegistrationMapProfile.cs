@@ -21,6 +21,8 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 			CreateMap<RegisterPatientDto, HisPatient>()
 				.ForMember(a => a.MobileNumber1, opt => opt.MapFrom(b => b.CellNumber))
 				.ForMember(a => a.MobileNumber2, opt => opt.MapFrom(b => b.AlternativeNumber))
+				.ForMember(a => a.EmailAddress1, opt => opt.MapFrom(b => b.EmailAddress))
+				.ForMember(a => a.WorkTelephone, opt => opt.MapFrom(b => b.WorkTelephoneNo))
 				.ForMember(a => a.WorkAddress, opt => opt.Ignore())
 				.MapReferenceListValuesFromDto();
 		}

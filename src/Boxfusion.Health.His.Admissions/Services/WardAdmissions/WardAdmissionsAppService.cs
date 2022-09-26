@@ -107,6 +107,7 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
                 ObjectMapper.Map(input, item);
 			});
 
+            
             //Discharge patient from hospital
             var hospitalAdmission = await SaveOrUpdateEntityAsync<HospitalAdmission>(wardAdmissionEntity.PartOf.Id, async item => 
             {
@@ -121,6 +122,7 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
                 Category = (int)RefListHisNoteType.discharge
             };
             await _noteRepository.InsertAsync(note);
+
             return await MapToDynamicDtoAsync<WardAdmission, Guid>(wardAdmissionEntity);
         }
 

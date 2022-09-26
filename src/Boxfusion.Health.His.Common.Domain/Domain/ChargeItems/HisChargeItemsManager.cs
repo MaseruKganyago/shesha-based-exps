@@ -98,17 +98,28 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		{
 			currentChargeItem.Status = (long?)RefListChargeItemStatus.closed;
 
-			if (currentChargeItem.ServiceType == (new WardAdmission()).GetTypeShortAlias())
+			currentChargeItem.QuantityValue = await GetQuantityFromCharge(currentChargeItem);
+
+			return await _chargeItemRepository.UpdateAsync(currentChargeItem);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="charge"></param>
+		/// <returns></returns>
+		/// <exception cref="UserFriendlyException"></exception>
+		public async Task<long> GetQuantityFromCharge(HisChargeItem charge)
+		{
+			if (charge.ServiceType == (new WardAdmission()).GetTypeShortAlias())
 			{
-				var admission = await _wardAdmissionRepository.GetAsync(currentChargeItem.ServiceId);
+				var admission = await _wardAdmissionRepository.GetAsync(charge.ServiceId);
 
 				if (admission.StartDateTime == null) throw new UserFriendlyException($"Curremt WardAdmission does not have AdmissionDate.");
 
-				var days = DateTime.Now.Subtract(admission.StartDateTime.Value).Days;
-				currentChargeItem.QuantityValue = days;
+				return DateTime.Now.Subtract(admission.StartDateTime.Value).Days;
 			}
-
-			return await _chargeItemRepository.UpdateAsync(currentChargeItem);
+			else return (long)charge.QuantityValue;
 		}
 
 		/// <summary>

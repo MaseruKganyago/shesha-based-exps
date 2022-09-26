@@ -37,6 +37,13 @@ namespace Boxfusion.Health.His.Common.Invoices
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="hisChargeItemManager"></param>
+		/// <param name="hisInvoiceLineItemRepository"></param>
+		/// <param name="hisHealthFacility"></param>
+		/// <param name="hisAccountRepository"></param>
+		/// <param name="hisProductRepository"></param>
+		/// <param name="wardAdmissionRepository"></param>
+		/// <param name="unitOfWorkManager"></param>
 		public HisInvoiceManager(HisChargeItemsManager hisChargeItemManager,
 			IRepository<HisInvoiceLineItem, Guid> hisInvoiceLineItemRepository,
 			IRepository<HisHealthFacility, Guid> hisHealthFacility,
@@ -97,25 +104,12 @@ namespace Boxfusion.Health.His.Common.Invoices
 				{
 					Invoice = invoice,
 					Product = product,
-					Quantity = (int?)await GetQuantityFromCharge(charge)
+					Quantity = (int?)await _hisChargeItemManager.GetQuantityFromCharge(charge)
 				};
 
 				await _hisInvoiceLineItemRepository.InsertAsync(newInvoiceLineItem);
 				await uow.CompleteAsync();
 			}
-		}
-
-		private async Task<long> GetQuantityFromCharge(HisChargeItem charge)
-		{
-			if (charge.ServiceType == (new WardAdmission()).GetTypeShortAlias())
-			{
-				var admission = await _wardAdmissionRepository.GetAsync(charge.ServiceId);
-
-				if (admission.StartDateTime == null) throw new UserFriendlyException($"Curremt WardAdmission does not have AdmissionDate.");
-
-				return DateTime.Now.Subtract(admission.StartDateTime.Value).Days;
-			}
-			else return (long)charge.QuantityValue;
 		}
 
 		private async Task<HisHealthFacility> GetCurentFacility()
