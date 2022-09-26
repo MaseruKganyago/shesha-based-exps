@@ -14,10 +14,12 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
     public class WardDischargeDto : EntityDto<Guid>
     {
 
-        public DateTime DischargeDate { get; set; }
+        public DateTime? DischargeDate { get; set; }
 
         public string DischargeNotes { get; set; }
 
-        public string Physician { get; set; }
+        public EntityWithDisplayNameDto<Guid?> Physician { get; set; }
+
+        public long? SeparationType { get; set; }
     }
 }

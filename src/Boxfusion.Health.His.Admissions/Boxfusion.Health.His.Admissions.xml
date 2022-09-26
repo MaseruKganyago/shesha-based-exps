@@ -754,6 +754,16 @@
             
             </summary>
         </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.PassportNumber">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.RegistrationType">
             <summary>
             
@@ -799,7 +809,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Race">
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Ethnicity">
             <summary>
             
             </summary>
@@ -824,7 +834,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Province">
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.PatientProvince">
             <summary>
             
             </summary>
@@ -938,6 +948,13 @@
             
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.GetDischargeDetails(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="hospitalAdmissionId"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211108021400">

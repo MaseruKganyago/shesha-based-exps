@@ -47,8 +47,6 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		[HttpPost, Route("[action]")]
 		public async Task<RegisterPatientResultDto> RegisterPatient(RegisterPatientDto input)
 		{
-			try
-			{
 				var homeAddress = await CreatePatientAddress(input.ResidentialAddress, input.SecondResidentialAddress);
 
 				Address workAddress = null;
@@ -60,6 +58,7 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 					ObjectMapper.Map<RegisterPatientDto, HisPatient>(input, item);
 					item.Address = homeAddress;
 					item.WorkAddress = workAddress;
+					item.PatientMasterIndexNumber = GetPatientFileNumber();
 				});
 
 				HisHealthFacility facility = null;
@@ -88,11 +87,6 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 				};
 
 				return result;
-			}
-			catch (Exception ex)
-			{
-				throw new UserFriendlyException("An error occured.");
-			}
 		}
 
 		/// <summary>
@@ -127,6 +121,14 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 				item.AddressLine2 = secondAddress;
 				item.AddressType = (int?)RefListAddressType.physical;
 			});
+		}
+
+		private string GetPatientFileNumber()
+		{
+			var sequenceManager = new SequenceManager();
+			var seqNumber = sequenceManager.GetNextSequenceNo("BoxHealth.Houghton.FacilityPatientIdentifier");
+
+			return $"{seqNumber:0000000000}".Insert(3, "/").Insert(7, "/");
 		}
 
 		/// <summary>

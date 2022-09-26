@@ -4,13 +4,18 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
 using Boxfusion.Health.His.Admissions.WardAdmissions;
 using Boxfusion.Health.His.Common.Admissions;
+using Boxfusion.Health.His.Common.ChargeItems;
+using Boxfusion.Health.His.Common.Domain.Domain.ChargeItems.Enums;
+using Boxfusion.Health.His.Common.Domain.Domain.Products;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
 using Boxfusion.Health.His.Hougton.Tests;
 using GraphQL;
+using NHibernate.Linq;
 using Shesha.AutoMapper.Dto;
 using Shesha.DynamicEntities.Dtos;
 using Shesha.Enterprise.Sequences;
+using Shesha.Extensions;
 using Shouldly;
 using System;
 using System.Collections.Generic;
@@ -26,6 +31,8 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 		private readonly WardAdmissionsAppService _wardAdmissionsAppService;
 		private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
 		private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepositiory;
+		private readonly IRepository<HisChargeItem, Guid> _hisChargeItemRepositiory;
+		private readonly HisChargeItemManager _hisChargeItemManagerRepositiory;
 
 		public WardAdmissionsAppService_Test(): base()
 		{
@@ -33,6 +40,8 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 			_wardAdmissionsAppService = Resolve<WardAdmissionsAppService>();
 			_hospitalAdmissionRepositiory = Resolve<IRepository<HospitalAdmission, Guid>>();
 			_wardAdmissionRepositiory = Resolve<IRepository<WardAdmission, Guid>>();
+			_hisChargeItemRepositiory = Resolve<IRepository<HisChargeItem, Guid>>();
+			_hisChargeItemManagerRepositiory = Resolve<HisChargeItemManager>();
 		}
 
 		/// <summary>
@@ -120,14 +129,15 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 		}
 
 		/// <summary>
-		/// 
-		/// </summary>
+		/// 2H
 		/// <returns></returns>
 		[Fact]
 		public async Task Should_Discharge_Patient_from_Ward_and_Hospital()
 		{
 			HisPatient patient = null;
 			WardAdmission admission = null;
+			HospitalAdmission hospitalAdmission = null;
+			HisChargeItem chargeItem = null;
 			try
 			{
 				#region Prepare data for test-discharge
@@ -138,13 +148,16 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				var admissionData = await CreateTestData_NewAdmission(hospital.Id, ward.Id);
 				admissionData.ShouldNotBeNull();
 
+				await CreateWardAdmissionChargeItem(admissionData);
+
 				var dischargeInput = new WardDischargeDto()
 				{
 					Id = admissionData.Id,
 					DischargeDate = DateTime.Now,
 					DischargeNotes = "UnitTest Note",
-					Physician = "Dave Kate" + " :Test2"
+					//Physician = new 
 				};
+				
 				#endregion
 
 				//Act: Discharge patient
@@ -157,14 +170,31 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				admission.ShouldNotBeNull();
 
 				//Verify wardAdmission was discharged
-				admission.WardAdmissionStatus.ShouldBe(RefListWardAdmissionStatuses.separated);
-				admission.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.ToString("MM/dd/yyyy HH:mm"));
+				admission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.separated);
+				admission.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.Value.ToString("MM/dd/yyyy HH:mm"));
+
+				//Verify hospitalAdmission was dischaarged
+				hospitalAdmission.HospitalAdmissionStatus.ShouldBe(RefListHospitalAdmissionStatuses.separated);
+				hospitalAdmission.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.ToString("MM/dd/yyyy HH:mm"));
 
 				//Verify discharge note was created
 				var note = await _noteRepository.FirstOrDefaultAsync(a => a.OwnerId == admission.Id.ToString());
 				note.ShouldNotBeNull();
 				note.NoteText.ShouldBe(dischargeInput.DischargeNotes);
 				#endregion
+
+				chargeItem = await _hisChargeItemRepositiory.FirstOrDefaultAsync(a => a.ServiceId == admission.Id);
+				chargeItem.ShouldNotBeNull();
+
+				var numOfDays = admission.EndDateTime.Value.Subtract(admission.StartDateTime.Value);
+
+
+                chargeItem.QuantityValue.ToString().ShouldBe(numOfDays.ToString());
+
+				
+
+
+
 			}
 			catch (Exception ex)
 			{
@@ -176,6 +206,30 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				await CleanUpTestData_PatientAdmission(admission);
 				if (patient is not null) CleanUpTestData_Patient(patient.Id);
 			}
+		}
+
+		private async Task CreateWardAdmissionChargeItem(WardAdmission wardAdmissionEntity)
+		{
+			string productCode = null;
+			if (wardAdmissionEntity.Bed is not null)
+			{
+				var bedList = await _bedRepository.GetAllIncluding(a => a.BedType).Where(a => a.Id == wardAdmissionEntity.Bed.Id).ToListAsync();
+				var bed = bedList.FirstOrDefault();
+
+				productCode = await ProductsHelper.GetProductCode(bed.BedType.Id);
+			}
+
+			var chargeItem = new HisChargeItem()
+			{
+				Status = (long?)RefListChargeItemStatus.inProgress,
+				Subject = wardAdmissionEntity.Subject,
+				ContextEncounter = wardAdmissionEntity.PartOf,
+				ServiceId = wardAdmissionEntity.Id,
+				ServiceType = wardAdmissionEntity.GetTypeShortAlias(),
+				Code = productCode
+
+			};
+			await _hisChargeItemManagerRepositiory.CreateChargeItem(chargeItem);
 		}
 
 	}

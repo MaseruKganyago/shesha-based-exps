@@ -1,5 +1,6 @@
 ﻿using Abp.Dependency;
 using Abp.Domain.Repositories;
+using Abp.Domain.Uow;
 using Abp.Events.Bus.Entities;
 using Abp.Events.Bus.Handlers;
 using Boxfusion.Health.His.Common.Admissions;
@@ -29,17 +30,20 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.Admissions
 		private readonly BedFeeManager _bedFeeManager;
 		private readonly HisChargeItemsManager _chargeItemManager;
 		private readonly IRepository<Bed, Guid> _bedRepository;
+		private readonly IUnitOfWorkManager _unitOfWorkManager;
 
 		/// <summary>
 		/// 
 		/// </summary>
 		public WardAdmissionEntityChangingEvent(IRepository<WardAdmission, Guid> wardAdmissionRepository, 
-			BedFeeManager bedFeeManager, HisChargeItemsManager chargeItemManager, IRepository<Bed, Guid> bedRepository)
+			BedFeeManager bedFeeManager, HisChargeItemsManager chargeItemManager, IRepository<Bed, Guid> bedRepository,
+			IUnitOfWorkManager unitOfWorkManager)
 		{
 			_wardAdmissionRepository = wardAdmissionRepository;
 			_bedFeeManager = bedFeeManager;
 			_chargeItemManager = chargeItemManager;
 			_bedRepository = bedRepository;
+			_unitOfWorkManager = unitOfWorkManager;
 		}
 
 		/// <summary>
@@ -112,7 +116,11 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.Admissions
 				Code = productCode
 			};
 
-			return await _chargeItemManager.CreateChargeItemAsync(chargeItem);
+			using var uow = _unitOfWorkManager.Begin();
+			var charge = await _chargeItemManager.CreateChargeItemAsync(chargeItem);
+			await uow.CompleteAsync();
+
+			return charge;
 		}
 	}
 }

@@ -5,6 +5,7 @@ using Boxfusion.Health.His.Common.Domain.Domain.Room;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
 using Shesha.AutoMapper;
+using Shesha.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,12 +30,14 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
 
             CreateMap<WardDischargeDto, WardAdmission>()
                 .ForMember(a => a.EndDateTime, b => b.MapFrom(c => c.DischargeDate))
-                .ForMember(a => a.WardAdmissionStatus, b => b.MapFrom(c => RefListWardAdmissionStatuses.separated));
+                .ForMember(a => a.AdmissionStatus, b => b.MapFrom(c => RefListAdmissionStatuses.separated))
+                .ForMember(a => a.Performer, b => b.MapFrom(c => GetEntity<Person>(c.Id)))
+				.MapReferenceListValuesFromDto();
 
             CreateMap<WardDischargeDto, HospitalAdmission>()
                 .ForMember(a => a.Id, b => b.Ignore())
                 .ForMember(a => a.EndDateTime, b => b.MapFrom(c => c.DischargeDate))
-                .ForMember(a => a.Status, b => b.MapFrom(c => RefListWardAdmissionStatuses.separated));
+                .ForMember(a => a.HospitalAdmissionStatus, b => b.MapFrom(c => RefListAdmissionStatuses.separated));
         }
 
     }

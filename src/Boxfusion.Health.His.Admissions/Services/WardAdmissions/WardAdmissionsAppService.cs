@@ -13,6 +13,7 @@ using Boxfusion.Health.His.Common.Enums;
 using Microsoft.AspNetCore.Mvc;
 using NHibernate.Linq;
 using Shesha;
+using Shesha.AutoMapper.Dto;
 using Shesha.Domain;
 using Shesha.DynamicEntities.Dtos;
 using Shesha.Extensions;
@@ -106,6 +107,7 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
                 ObjectMapper.Map(input, item);
 			});
 
+            
             //Discharge patient from hospital
             var hospitalAdmission = await SaveOrUpdateEntityAsync<HospitalAdmission>(wardAdmissionEntity.PartOf.Id, async item => 
             {
@@ -120,8 +122,37 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
                 Category = (int)RefListHisNoteType.discharge
             };
             await _noteRepository.InsertAsync(note);
+
             return await MapToDynamicDtoAsync<WardAdmission, Guid>(wardAdmissionEntity);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hospitalAdmissionId"></param>
+        /// <returns></returns>
+        [HttpGet, Route("[action]")]
+        public async Task<WardDischargeDto> GetDischargeDetails(Guid hospitalAdmissionId)
+        {
+            var wardAdmissions = await _wardAdmissionRepositiory.GetAllListAsync(a => a.PartOf.Id == hospitalAdmissionId);
+            wardAdmissions.OrderByDescending(a => a.EndDateTime);
+
+            var admission = wardAdmissions.FirstOrDefault();
+
+            var note = await _noteRepository.FirstOrDefaultAsync(a => a.OwnerId == admission.Id.ToString()
+                                            && a.Category == (int)RefListHisNoteType.discharge);
+
+
+            var result = new WardDischargeDto()
+            {
+                DischargeDate = admission.EndDateTime,
+                DischargeNotes = note.NoteText,
+                Physician = new EntityWithDisplayNameDto<Guid?>(admission.Performer?.Id, admission.Performer?.FullName),
+				SeparationType = (long?)admission.SeparationType,
+			};
+
+            return result;
+		}
 
         private async Task createDiagnosis(Guid conditionId, WardAdmission wardAdmissionEntity)
         {
