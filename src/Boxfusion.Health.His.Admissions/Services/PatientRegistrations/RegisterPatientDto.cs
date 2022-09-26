@@ -74,7 +74,7 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		/// <summary>
 		/// 
 		/// </summary>
-		public long? Race { get; set; }
+		public long? Ethnicity { get; set; }
 
 		/// <summary>
 		/// 
@@ -99,7 +99,7 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		/// <summary>
 		/// 
 		/// </summary>
-		public long? Province { get; set; }
+		public long? PatientProvince { get; set; }
 
 		/// <summary>
 		/// 
