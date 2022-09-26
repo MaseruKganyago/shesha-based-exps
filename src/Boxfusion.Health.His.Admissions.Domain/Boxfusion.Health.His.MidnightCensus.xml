@@ -42,14 +42,15 @@
             <param name="billClassification"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateAccount(Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Patient,Boxfusion.Health.His.Common.BillingClassifications.BillingClassification)">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateAccount(Boxfusion.Health.His.Common.Admissions.HospitalAdmission,Boxfusion.Health.His.Common.BillingClassifications.BillingClassification)">
             <summary>
             
             </summary>
             <param name="patient"></param>
             <param name="billClassification"></param>
+            <param name="hospitalAdmission"></param>
             <returns></returns>
-            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateCoverage(Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Patient,Boxfusion.Health.His.Common.BillingClassifications.BillingClassification,Boxfusion.Health.His.Common.Accounts.HisAccount,Shesha.Enterprise.BankAccounts.BankAccount,System.Int32,System.Nullable{System.Guid},System.Nullable{System.Guid})">
             <summary>
