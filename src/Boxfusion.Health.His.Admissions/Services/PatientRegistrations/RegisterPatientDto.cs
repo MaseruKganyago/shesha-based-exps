@@ -79,7 +79,7 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		/// <summary>
 		/// 
 		/// </summary>
-		public long? HomeLangauge { get; set; }
+		public List<long>? HomeLangauge { get; set; }
 
 		/// <summary>
 		/// 
