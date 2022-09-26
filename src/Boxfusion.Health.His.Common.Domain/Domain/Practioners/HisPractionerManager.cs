@@ -6,6 +6,7 @@ using Boxfusion.Health.HealthCommon.Core.Domain.Cdm.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Enum;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Authorization;
+using NHibernate.Linq;
 using Shesha.AutoMapper.Dto;
 using Shesha.Domain;
 using System;
@@ -37,13 +38,14 @@ namespace Boxfusion.Health.His.Common.Practitioners
         {
             var facilityRoleAppointedPersonRepo = Abp.Dependency.IocManager.Instance.Resolve<IRepository<HospitalRoleAppointedPerson, Guid>>();
 
-            var appointedFacilities = await facilityRoleAppointedPersonRepo.GetAllListAsync(e => e.Person.Id == personId && e.Role.Name == CommonRoles.FacilityPractitioner);
+            var appointedFacilities = await facilityRoleAppointedPersonRepo.GetAllIncluding()
+                  .Where(e => e.Person.Id == personId && e.Role.Name == CommonRoles.FacilityPractitioner).ToListAsync();
 
             var facilities = new List<HisHealthFacility>();
 
             foreach (var appointedFacility in appointedFacilities)
             {
-                if (!facilities.Exists(e => e.Id == appointedFacility.Hospital.Id))
+                if (!facilities.Exists(e => e.Id == appointedFacility.Hospital.Id) && !appointedFacility.Hospital.IsDeleted )
                 {
                     facilities.Add(appointedFacility.Hospital);
                 }

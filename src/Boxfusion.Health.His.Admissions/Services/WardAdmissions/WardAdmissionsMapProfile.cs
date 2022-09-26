@@ -37,7 +37,7 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
             CreateMap<WardDischargeDto, HospitalAdmission>()
                 .ForMember(a => a.Id, b => b.Ignore())
                 .ForMember(a => a.EndDateTime, b => b.MapFrom(c => c.DischargeDate))
-                .ForMember(a => a.Status, b => b.MapFrom(c => RefListAdmissionStatuses.separated));
+                .ForMember(a => a.HospitalAdmissionStatus, b => b.MapFrom(c => RefListAdmissionStatuses.separated));
         }
 
     }

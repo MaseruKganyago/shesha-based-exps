@@ -59,8 +59,10 @@ namespace Boxfusion.Health.His.Common.Users
 
             foreach (var facility in facilities)
             {
-                var facilityDto = await this.MapToDynamicDtoAsync<HisHealthFacility, Guid>(facility);
-                list.Add(facilityDto);
+              
+               var facilityDto = await this.MapToDynamicDtoAsync<HisHealthFacility, Guid>(facility);
+               list.Add(facilityDto);
+                
             }
 
             return list;
