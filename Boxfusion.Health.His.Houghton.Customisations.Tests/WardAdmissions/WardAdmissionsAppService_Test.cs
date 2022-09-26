@@ -155,7 +155,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 					Id = admissionData.Id,
 					DischargeDate = DateTime.Now,
 					DischargeNotes = "UnitTest Note",
-					Physician = "Dave Kate" + " :Test2"
+					//Physician = new 
 				};
 				
 				#endregion
@@ -171,7 +171,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 
 				//Verify wardAdmission was discharged
 				admission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.separated);
-				admission.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.ToString("MM/dd/yyyy HH:mm"));
+				admission.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.Value.ToString("MM/dd/yyyy HH:mm"));
 
 				//Verify hospitalAdmission was dischaarged
 				hospitalAdmission.HospitalAdmissionStatus.ShouldBe(RefListHospitalAdmissionStatuses.separated);

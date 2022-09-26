@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Common.Domain.Domain.ChargeItems.Enums
+namespace Boxfusion.Health.His.Common.Beds.BedFees.Enums
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	[ReferenceList("His", "ChargeItemStatus")]
-	public enum RefListChargeItemStatus: long
+	[ReferenceList("His", "BedFeeStatus")]
+	public enum RefListBedFeeStatus: long
 	{
 		/// <summary>
 		/// 
