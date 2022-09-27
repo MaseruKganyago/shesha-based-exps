@@ -709,6 +709,45 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Invoices.HisInvoicesAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Invoices.HisInvoicesAppService.#ctor(Boxfusion.Health.His.Common.Invoices.HisInvoiceManager,Boxfusion.Health.His.Common.ChargeItems.HisChargeItemsManager)">
+            <summary>
+            
+            </summary>
+            <param name="invoiceManager"></param>
+            <param name="chargeItemsManager"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Invoices.HisInvoicesAppService.GenerateSplitBillInvoice(Boxfusion.Health.His.Admissions.Services.Invoices.SplitBillInvoiceDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Invoices.SplitBillInvoiceDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Invoices.SplitBillInvoiceDto.PatientAccountId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Invoices.SplitBillInvoiceDto.OccurenceDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Invoices.SplitBillInvoiceDto.ChargeItemIds">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationAppService">
             <summary>
             

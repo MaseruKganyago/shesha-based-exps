@@ -39,7 +39,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Invoices
 		/// </summary>
 		/// <param name="input"></param>
 		/// <returns></returns>
-		[HttpPost, Route("action")]
+		[HttpPost, Route("[action]")]
 		public async Task<DynamicDto<HisInvoice, Guid>> GenerateSplitBillInvoice(SplitBillInvoiceDto input)
 		{
 			var chargeItems = new List<HisChargeItem>();
