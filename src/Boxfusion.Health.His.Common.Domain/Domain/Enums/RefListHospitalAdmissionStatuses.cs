@@ -34,6 +34,18 @@ namespace Boxfusion.Health.His.Common.Enums
         /// 
         /// </summary>
         [Description("In-Transit")]
-        inTransit = 3
+        inTransit = 3,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("Registered")]
+        registered = 4,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("Discharge - Initiated")]
+        dischargeInitiated = 5
     }
 }

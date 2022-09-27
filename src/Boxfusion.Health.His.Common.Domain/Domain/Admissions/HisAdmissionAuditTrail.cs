@@ -29,6 +29,6 @@ namespace Boxfusion.Health.His.Common.Admissions
         /// <summary>
         /// 
         /// </summary>
-        public virtual RefListAdmissionStatuses? AdmissionStatus { get; set; }
+        public virtual RefListWardAdmissionStatuses? WardAdmissionStatus { get; set; }
     }
 }

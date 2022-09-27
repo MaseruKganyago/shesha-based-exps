@@ -80,10 +80,10 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
         {
             if (acceptanceDecision == RefListAcceptanceDecision.Accept)
             {
-                if (wardAdmission.AdmissionStatus != RefListAdmissionStatuses.inTransit)
+                if (wardAdmission.WardAdmissionStatus != RefListWardAdmissionStatuses.inTransit)
                     throw new UserFriendlyException("The Patient was not transfered from any ward.");
 
-                wardAdmission.AdmissionStatus = RefListAdmissionStatuses.admitted;
+                wardAdmission.WardAdmissionStatus = RefListWardAdmissionStatuses.admitted;
                 wardAdmission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
                 wardAdmission.StartDateTime = DateTime.Now;
             }
@@ -94,10 +94,10 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
 
                 wardAdmission.TransferRejectionReason = transferRejectionReason;
                 wardAdmission.TransferRejectionReasonComment = transferRejectionReasonComment;
-                wardAdmission.AdmissionStatus = RefListAdmissionStatuses.rejected;
+                wardAdmission.WardAdmissionStatus = RefListWardAdmissionStatuses.rejected;
 
                 var originalWard = await _wardAdmissionRepositiory.GetAsync(wardAdmission.InternalTransferOriginalWard.Id);
-                originalWard.AdmissionStatus = RefListAdmissionStatuses.admitted;
+                originalWard.WardAdmissionStatus = RefListWardAdmissionStatuses.admitted;
 
                 await _wardAdmissionRepositiory.UpdateAsync(originalWard);
             }
@@ -154,15 +154,15 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             var wardAdmissions = await _wardAdmissionRepositiory.GetAllListAsync(x => x.Subject.IdentityNumber == identityNumber);
             if (wardAdmissions.Any())
             {
-                if (!wardAdmissions.Where(x => x.AdmissionStatus == RefListAdmissionStatuses.admitted).Any())
+                if (!wardAdmissions.Where(x => x.WardAdmissionStatus == RefListWardAdmissionStatuses.admitted).Any())
                     throw new UserFriendlyException($"This I.D. number belongs to a returning patient {wardAdmissions[0].Subject.FullName}, {identityNumber}");
 
-                if (wardAdmissions.Where(x => x.Ward.Id == currentWardId && x.AdmissionStatus == RefListAdmissionStatuses.admitted).Any())
+                if (wardAdmissions.Where(x => x.Ward.Id == currentWardId && x.WardAdmissionStatus == RefListWardAdmissionStatuses.admitted).Any())
                     throw new UserFriendlyException($"The patient with the entered ID number ({identityNumber}) has already been admitted in this ward");
 
-                if (wardAdmissions.Where(x => x.Ward.Id != currentWardId && x.AdmissionStatus == RefListAdmissionStatuses.admitted).Any())
+                if (wardAdmissions.Where(x => x.Ward.Id != currentWardId && x.WardAdmissionStatus == RefListWardAdmissionStatuses.admitted).Any())
                 {
-                    var wardAdmission = wardAdmissions.Where(x => x.Ward.Id != currentWardId && x.AdmissionStatus == RefListAdmissionStatuses.admitted).FirstOrDefault();
+                    var wardAdmission = wardAdmissions.Where(x => x.Ward.Id != currentWardId && x.WardAdmissionStatus == RefListWardAdmissionStatuses.admitted).FirstOrDefault();
                     throw new UserFriendlyException($"The patient with the entered ID number ({identityNumber}) has already been admitted in {wardAdmission.Ward.Name} ward. Please separate the patient from the other ward, before admitting them to this ward.");
                 }
             }
@@ -181,7 +181,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             using (var uow = UnitOfWorkManager.Begin())
 			{
                 wardAdmissionCount = await _wardAdmissionRepositiory.GetAll()
-                                                                    .Where(x => x.AdmissionStatus == RefListAdmissionStatuses.admitted &&
+                                                                    .Where(x => x.WardAdmissionStatus == RefListWardAdmissionStatuses.admitted &&
                                                                      x.IsDeleted == false && x.Ward.Id == wardId).ToListAsync();
                 ward = await _wardRepositiory.GetAsync(wardId);
 
@@ -204,13 +204,13 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
 
             //Create ward admission record
             wardAdmission.PartOf = hospitalAdmissionEntity;
-            wardAdmission.AdmissionStatus = RefListAdmissionStatuses.admitted;
+            wardAdmission.WardAdmissionStatus = RefListWardAdmissionStatuses.admitted;
             var wardAdmissionEntity = await _wardAdmissionRepositiory.InsertAsync(wardAdmission);
 
             #region Make a diagnosis for the admission
             //If there's existing codes create a diagnosis
             if (codes.Any())
-                await MakeADiagnosis(wardAdmissionEntity, codes, RefListEncounterDiagnosisRoles.AD, RefListAdmissionStatuses.admitted);
+                await MakeADiagnosis(wardAdmissionEntity, codes, RefListEncounterDiagnosisRoles.AD, RefListWardAdmissionStatuses.admitted);
             #endregion
 
             return wardAdmissionEntity;
@@ -237,7 +237,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             if (diagnosis is not null)
                 await UpdateDiagnosis(diagnosis, updatedWardAdmission, codes);
             else
-                if (codes.Any()) await MakeADiagnosis(updatedWardAdmission, codes, RefListEncounterDiagnosisRoles.AD, RefListAdmissionStatuses.admitted);
+                if (codes.Any()) await MakeADiagnosis(updatedWardAdmission, codes, RefListEncounterDiagnosisRoles.AD, RefListWardAdmissionStatuses.admitted);
             #endregion
 
             return updatedWardAdmission;
@@ -252,7 +252,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
         /// <returns></returns>
 		public async Task<WardAdmission> SeparatePatientAsync(WardAdmission wardAdmission, HospitalAdmission hospitalAdmission, List<IcdTenCode> codes)
         {
-            wardAdmission.AdmissionStatus = RefListAdmissionStatuses.separated;
+            wardAdmission.WardAdmissionStatus = RefListWardAdmissionStatuses.separated;
             var separatedAdmission = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
 
             #region Make a diagnosis for separation
@@ -263,7 +263,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             if (diagnosis is not null)
                 await UpdateDiagnosis(diagnosis, separatedAdmission, codes);
             else if (codes.Any())
-                await MakeADiagnosis(separatedAdmission, codes, RefListEncounterDiagnosisRoles.DD, RefListAdmissionStatuses.separated);
+                await MakeADiagnosis(separatedAdmission, codes, RefListEncounterDiagnosisRoles.DD, RefListWardAdmissionStatuses.separated);
             #endregion
 
             if (wardAdmission?.SeparationType == RefListSeparationTypes.internalTransfer)
@@ -292,7 +292,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             var hospitalAdmission = await _hospitalAdmissionRepositiory.GetAsync(wardAdmission.PartOf.Id);
 
 
-            wardAdmission.AdmissionStatus = RefListAdmissionStatuses.admitted;
+            wardAdmission.WardAdmissionStatus = RefListWardAdmissionStatuses.admitted;
             wardAdmission.Performer = person;
             var reAdmissionEntity = await _wardAdmissionRepositiory.UpdateAsync(wardAdmission);
 
@@ -314,7 +314,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             var newAdmission = new WardAdmission()
             {
                 PartOf = hospitalAdmission,
-                AdmissionStatus = RefListAdmissionStatuses.inTransit,
+                WardAdmissionStatus = RefListWardAdmissionStatuses.inTransit,
                 InternalTransferOriginalWard = separatedAdmission,
                 Ward = separatedAdmission.SeparationDestinationWard,
                 StartDateTime = DateTime.UtcNow.AddHours(2),
@@ -325,14 +325,14 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             #region Make a diagnosis for the internal new admission
             //If there's existing codes create a diagnosis
             if (codes.Any())
-                await MakeADiagnosis(newAdmission, codes, RefListEncounterDiagnosisRoles.AD, RefListAdmissionStatuses.admitted);
+                await MakeADiagnosis(newAdmission, codes, RefListEncounterDiagnosisRoles.AD, RefListWardAdmissionStatuses.admitted);
             #endregion
         }
 
         private async Task UndoWardInternalTransfer(WardAdmission wardAdmission)
 		{
             var transferedAdmission = await _wardAdmissionRepositiory.GetAsync(wardAdmission.InternalTransferDestinationWard.Id);
-            if (transferedAdmission.AdmissionStatus == RefListAdmissionStatuses.separated)
+            if (transferedAdmission.WardAdmissionStatus == RefListWardAdmissionStatuses.separated)
                 throw new UserFriendlyException($"Can't undo-separation, because patient already separated from transfered ward: {transferedAdmission.Ward.Name}");
 
             if (Validation.IsValidateId(wardAdmission?.InternalTransferDestinationWard?.Id))
@@ -346,7 +346,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
             }
         }
 
-		private async Task MakeADiagnosis(WardAdmission wardAdmissionEntity, List<IcdTenCode> codes, RefListEncounterDiagnosisRoles use, RefListAdmissionStatuses status)
+		private async Task MakeADiagnosis(WardAdmission wardAdmissionEntity, List<IcdTenCode> codes, RefListEncounterDiagnosisRoles use, RefListWardAdmissionStatuses status)
         {
             var diagnosisEntity = await _diagnosisManager.AddNewDiagnosis<WardAdmission, Condition>(wardAdmissionEntity,
                                           (int)use, null,
@@ -364,7 +364,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
                                                                         //(Optional) extra values required in ConditionIcdTenCode sub-entities
                                                                         async item =>
                                                                         {
-                                                                            item.AdmissionStatus = status;
+                                                                            item.WardAdmissionStatus = status;
                                                                         });
         }
 

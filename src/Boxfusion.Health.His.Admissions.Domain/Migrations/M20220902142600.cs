@@ -40,7 +40,7 @@ BEGIN
   select Id,
   His_WardAdmissionNumber WardAdmissionNumber,
   His_AdmissionTypeLkp AdmissionType,
-  His_AdmissionStatusLkp AdmissionStatus,
+  His_AdmissionStatusLkp WardAdmissionStatus,
   StartDateTime,
   PartOfId from Fhir_Encounters
   where His_WardAdmissionNumber = 'UnitTestData: 12345' and Frwk_Discriminator = 'His.WardAdmission'
