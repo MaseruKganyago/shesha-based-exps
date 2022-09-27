@@ -33,28 +33,51 @@ namespace Boxfusion.Health.His.Common.Tests.ChargeItems
 
 		}
 
-		public async Task Should_Test_ChargeItems()
+		[Fact]
+		public async Task Should_Create_Charge_Item()
 		{
 			//testdata
-			var chargeItem = new HisChargeItem()
-			{
-				Subject = await CreateTestData_NewPatient("John Dave: Unit Test"),
-			    ServiceId = Guid.NewGuid(),
-				ServiceType = (new HisProcedure()).GetTypeShortAlias(),
-				Status = (long?)RefListChargeItemStatus.open,
-			};
-
-			//act
-			using var uwo = _unitOfWorkManager.Begin();
-			await _chargeItemRepository.InsertAsync(chargeItem);
-			await uwo.CompleteAsync();
-
-			//assert
-
-			var chargeItem1 = await _chargeItemRepository.FirstOrDefaultAsync(a => a.Id == chargeItem.Id);
-			chargeItem1.ShouldNotBeNull();
+			HisPatient patient = await CreateTestData_NewPatient("John Dave: Unit Test");
+			HisChargeItem chargeItem = null;
+			try {
 
 
+				var newChargeItem = new HisChargeItem()
+				{
+					Subject = patient,
+					ServiceId = Guid.NewGuid(),
+					ServiceType = (new HisProcedure()).GetTypeShortAlias(),
+					Status = (long?)RefListChargeItemStatus.open,
+				};
+
+				//act
+				using var uwo = _unitOfWorkManager.Begin();
+				var createChargeItem = await _chargeItemsManager.CreateChargeItemAsync(newChargeItem);
+				await uwo.CompleteAsync();
+
+				//assert
+
+				chargeItem = await _chargeItemsManager.repository().GetAsync(createChargeItem.Id);
+				chargeItem.ShouldNotBeNull();
+				chargeItem.Status.ShouldBe((long?)RefListChargeItemStatus.open);
+
+			}
+			finally {
+
+		        CleanUpTestData_ChargeItem(chargeItem.Id);
+				CleanUpTestData_Patient(chargeItem.Subject.Id);
+			
+			}
+
+
+		}
+		private void CleanUpTestData_ChargeItem(Guid chargeItemId)
+		{
+			using var session = OpenSession();
+			var query = session.CreateSQLQuery("DELETE FROM Fhir_ChargeItems WHERE Id = '" + chargeItemId.ToString() + "'");
+			query.ExecuteUpdate();
+
+			session.Flush();
 		}
 	}
 }

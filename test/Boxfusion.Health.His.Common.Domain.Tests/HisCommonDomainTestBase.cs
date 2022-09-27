@@ -38,5 +38,15 @@ namespace Boxfusion.Health.His.Common.Tests
 
 			return patient;
 		}
+		protected void CleanUpTestData_Patient(Guid patientId)
+		{
+			using var session = OpenSession();
+			var query = session.CreateSQLQuery("DELETE FROM Core_Persons WHERE Id = '" + patientId.ToString() + "'");
+			query.ExecuteUpdate();
+
+			session.Flush();
+		}
+
 	}
+
 }
