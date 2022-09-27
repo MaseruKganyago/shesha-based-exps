@@ -12,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Shouldly;
+using Abp.Domain.Uow;
 
 namespace Boxfusion.Health.His.Common.Tests.ChargeItems
 {
@@ -20,57 +22,39 @@ namespace Boxfusion.Health.His.Common.Tests.ChargeItems
 		private readonly HisChargeItemsManager _chargeItemsManager;
 		private readonly IRepository<HisChargeItem, Guid> _chargeItemRepository;
 		private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepository;
+		private readonly IUnitOfWorkManager _unitOfWorkManager;
 
 		public ChargeItemManager_Test(): base()
 		{
 			_chargeItemsManager = Resolve<HisChargeItemsManager>();
 			_chargeItemRepository = Resolve<IRepository<HisChargeItem, Guid>>();
 			_wardAdmissionRepository = Resolve<IRepository<WardAdmission, Guid>>();
+			_unitOfWorkManager = Resolve<IUnitOfWorkManager>();
+
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		[Fact]
-		public async Task Should_Split_Patient_Bill_Finalize_current_ChargeItems_then_add_new_ChargeItems()
+		public async Task Should_Test_ChargeItems()
 		{
-			#region Prepare data for patient Split-Billing
-			var patient = await CreateTestData_NewPatient("John Dave: Unit Test");
-
-			await CreateTestsData_NewPatientChargeItems(patient);
-			#endregion
-		}
-
-		private async Task CreateTestsData_NewPatientChargeItems(HisPatient patient)
-		{
-			var chargeItem1 = new HisChargeItem()
+			//testdata
+			var chargeItem = new HisChargeItem()
 			{
-				Subject = patient,
-				ServiceId = Guid.NewGuid(),
+				Subject = await CreateTestData_NewPatient("John Dave: Unit Test"),
+			    ServiceId = Guid.NewGuid(),
 				ServiceType = (new HisProcedure()).GetTypeShortAlias(),
-				QuantityValue = 1,
-				//Status = (long?)RefListChargeItemStatus.inProgress,
+				Status = (long?)RefListChargeItemStatus.open,
 			};
 
-			await _chargeItemRepository.InsertAsync(chargeItem1);
+			//act
+			using var uwo = _unitOfWorkManager.Begin();
+			await _chargeItemRepository.InsertAsync(chargeItem);
+			await uwo.CompleteAsync();
 
-			var admission = await _wardAdmissionRepository.InsertAsync(new WardAdmission() 
-			{
-				Subject = patient,
-				AdmissionStatus = RefListAdmissionStatuses.admitted,
-				StartDateTime = DateTime.Now.AddDays(-2), //Back track date for chargeItem quantityValue
-			});
+			//assert
 
-			var chargeItem2 = new HisChargeItem()
-			{
-				Subject = patient,
-				ContextEncounter = admission,
-				ServiceId = admission.Id,
-				ServiceType = admission.GetTypeShortAlias(),
-			};
+			var chargeItem1 = await _chargeItemRepository.FirstOrDefaultAsync(a => a.Id == chargeItem.Id);
+			chargeItem1.ShouldNotBeNull();
 
-			await _chargeItemRepository.InsertAsync(chargeItem2);
+
 		}
 	}
 }
