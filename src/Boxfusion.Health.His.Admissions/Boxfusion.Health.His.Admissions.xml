@@ -709,19 +709,19 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Services.Invoices.InvoiceAppService">
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Invoices.HisInvoicesAppService">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Invoices.InvoiceAppService.#ctor(Boxfusion.Health.His.Common.Invoices.HisInvoiceManager,Boxfusion.Health.His.Common.ChargeItems.HisChargeItemsManager)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Invoices.HisInvoicesAppService.#ctor(Boxfusion.Health.His.Common.Invoices.HisInvoiceManager,Boxfusion.Health.His.Common.ChargeItems.HisChargeItemsManager)">
             <summary>
             
             </summary>
             <param name="invoiceManager"></param>
             <param name="chargeItemsManager"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Services.Invoices.InvoiceAppService.GenerateSplitBillInvoice(Boxfusion.Health.His.Admissions.Services.Invoices.SplitBillInvoiceDto)">
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Invoices.HisInvoicesAppService.GenerateSplitBillInvoice(Boxfusion.Health.His.Admissions.Services.Invoices.SplitBillInvoiceDto)">
             <summary>
             
             </summary>
