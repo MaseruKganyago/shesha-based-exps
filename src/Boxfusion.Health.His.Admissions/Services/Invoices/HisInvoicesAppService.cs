@@ -18,7 +18,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Invoices
 	[AbpAuthorize]
 	[ApiVersion("1")]
 	[Route("api/v{version:apiVersion}/His/[controller]")]
-	public class InvoiceAppService: SheshaAppServiceBase
+	public class HisInvoicesAppService: SheshaAppServiceBase
 	{
 		private readonly HisInvoiceManager _invoiceManager;
 		private readonly HisChargeItemsManager _chargeItemsManager;
@@ -28,7 +28,7 @@ namespace Boxfusion.Health.His.Admissions.Services.Invoices
 		/// </summary>
 		/// <param name="invoiceManager"></param>
 		/// <param name="chargeItemsManager"></param>
-		public InvoiceAppService(HisInvoiceManager invoiceManager, HisChargeItemsManager chargeItemsManager)
+		public HisInvoicesAppService(HisInvoiceManager invoiceManager, HisChargeItemsManager chargeItemsManager)
 		{
 			_invoiceManager = invoiceManager;
 			_chargeItemsManager = chargeItemsManager;
