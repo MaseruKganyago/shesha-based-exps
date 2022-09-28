@@ -4,6 +4,7 @@ using Abp.Runtime.Session;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using NHibernate;
 using Shesha.Domain;
+using Shesha.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,11 +26,11 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.Products
 		public static async Task<string> GetProductCode(Guid productId)
 		{
 			string code;
-			var unitOfWork = IocManager.Instance.Resolve<IUnitOfWorkManager>();
+			var unitOfWork = StaticContext.IocManager.Resolve<IUnitOfWorkManager>();
 
 			using (var uow = unitOfWork.Begin())
 			{
-				using (var session = IocManager.Instance.Resolve<ISessionFactory>().OpenSession())
+				using (var session = StaticContext.IocManager.Resolve<ISessionFactory>().OpenSession())
 				{
 					var query = session
 					  .CreateSQLQuery(@"SELECT dbo.fn_His_GetProductCode(:productId)")
