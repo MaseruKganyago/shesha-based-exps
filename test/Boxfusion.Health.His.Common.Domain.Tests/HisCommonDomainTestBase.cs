@@ -266,5 +266,15 @@ namespace Boxfusion.Health.His.Common.Tests
 		{
 			return await _bedRepository.FirstOrDefaultAsync(a => a.Name == name);
 		}
+		protected void CleanUpTestData_Patient(Guid patientId)
+		{
+			using var session = OpenSession();
+			var query = session.CreateSQLQuery("DELETE FROM Core_Persons WHERE Id = '" + patientId.ToString() + "'");
+			query.ExecuteUpdate();
+
+			session.Flush();
+		}
+
 	}
+
 }

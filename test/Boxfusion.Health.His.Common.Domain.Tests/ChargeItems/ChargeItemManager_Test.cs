@@ -12,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Shouldly;
+using Abp.Domain.Uow;
 
 namespace Boxfusion.Health.His.Common.Tests.ChargeItems
 {
@@ -20,57 +22,62 @@ namespace Boxfusion.Health.His.Common.Tests.ChargeItems
 		private readonly HisChargeItemsManager _chargeItemsManager;
 		private readonly IRepository<HisChargeItem, Guid> _chargeItemRepository;
 		private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepository;
+		private readonly IUnitOfWorkManager _unitOfWorkManager;
 
 		public ChargeItemManager_Test(): base()
 		{
 			_chargeItemsManager = Resolve<HisChargeItemsManager>();
 			_chargeItemRepository = Resolve<IRepository<HisChargeItem, Guid>>();
 			_wardAdmissionRepository = Resolve<IRepository<WardAdmission, Guid>>();
+			_unitOfWorkManager = Resolve<IUnitOfWorkManager>();
+
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
 		[Fact]
-		public async Task Should_Split_Patient_Bill_Finalize_current_ChargeItems_then_add_new_ChargeItems()
+		public async Task Should_Create_Charge_Item()
 		{
-			#region Prepare data for patient Split-Billing
-			var patient = await CreateTestData_NewPatient("John Dave: Unit Test");
+			//testdata
+			HisPatient patient = await CreateTestData_NewPatient("John Dave: Unit Test");
+			HisChargeItem chargeItem = null;
+			try {
 
-			await CreateTestsData_NewPatientChargeItems(patient);
-			#endregion
+
+				var newChargeItem = new HisChargeItem()
+				{
+					Subject = patient,
+					ServiceId = Guid.NewGuid(),
+					ServiceType = (new HisProcedure()).GetTypeShortAlias(),
+					Status = (long?)RefListChargeItemStatus.open,
+				};
+
+				//act
+				using var uwo = _unitOfWorkManager.Begin();
+				var createChargeItem = await _chargeItemsManager.CreateChargeItemAsync(newChargeItem);
+				await uwo.CompleteAsync();
+
+				//assert
+
+				chargeItem = await _chargeItemsManager.repository().GetAsync(createChargeItem.Id);
+				chargeItem.ShouldNotBeNull();
+				chargeItem.Status.ShouldBe((long?)RefListChargeItemStatus.open);
+
+			}
+			finally {
+
+		        CleanUpTestData_ChargeItem(chargeItem.Id);
+				CleanUpTestData_Patient(chargeItem.Subject.Id);
+			
+			}
+
+
 		}
-
-		private async Task CreateTestsData_NewPatientChargeItems(HisPatient patient)
+		private void CleanUpTestData_ChargeItem(Guid chargeItemId)
 		{
-			var chargeItem1 = new HisChargeItem()
-			{
-				Subject = patient,
-				ServiceId = Guid.NewGuid(),
-				ServiceType = (new HisProcedure()).GetTypeShortAlias(),
-				QuantityValue = 1,
-				//Status = (long?)RefListChargeItemStatus.inProgress,
-			};
+			using var session = OpenSession();
+			var query = session.CreateSQLQuery("DELETE FROM Fhir_ChargeItems WHERE Id = '" + chargeItemId.ToString() + "'");
+			query.ExecuteUpdate();
 
-			await _chargeItemRepository.InsertAsync(chargeItem1);
-
-			var admission = await _wardAdmissionRepository.InsertAsync(new WardAdmission() 
-			{
-				Subject = patient,
-				WardAdmissionStatus = RefListWardAdmissionStatuses.admitted,
-				StartDateTime = DateTime.Now.AddDays(-2), //Back track date for chargeItem quantityValue
-			});
-
-			var chargeItem2 = new HisChargeItem()
-			{
-				Subject = patient,
-				ContextEncounter = admission,
-				ServiceId = admission.Id,
-				ServiceType = admission.GetTypeShortAlias(),
-			};
-
-			await _chargeItemRepository.InsertAsync(chargeItem2);
+			session.Flush();
 		}
 	}
 }
