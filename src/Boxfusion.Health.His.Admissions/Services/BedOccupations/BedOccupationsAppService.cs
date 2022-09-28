@@ -52,6 +52,7 @@ namespace Boxfusion.Health.His.Admissions.Services.BedOccupations
 		/// <param name="wardAdmissionId"></param>
 		/// <param name="bedId"></param>
 		/// <returns></returns>
+		[HttpPut, Route("[action]")]
 		public async Task<DynamicDto<BedOccupation, Guid>> ChangeBedOccupation(Guid wardAdmissionId, Guid bedId)
 		{
 			var admission = await _wardAdmissionRepository.GetAsync(wardAdmissionId);
