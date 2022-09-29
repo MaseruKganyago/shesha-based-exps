@@ -129,11 +129,10 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
         public async Task<DynamicDto<WardAdmission, Guid>> DischargePatientAsync(WardDischargeDto input)
         {
             //Discharge patient from ward
-            var wardAdmissionEntity = await SaveOrUpdateEntityAsync<WardAdmission>(input.Id, async item => 
-            {
-                ObjectMapper.Map(input, item);
-			});
+            var currentAdmission = await _wardAdmissionRepositiory.GetAsync(input.Id);
+			ObjectMapper.Map(input, currentAdmission);
 
+            var wardAdmissionEntity = await _wardAdmissionRepositiory.UpdateAsync(currentAdmission);
             
             //Discharge patient from hospital
             var hospitalAdmission = await SaveOrUpdateEntityAsync<HospitalAdmission>(wardAdmissionEntity.PartOf.Id, async item => 
@@ -153,7 +152,7 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
             //Close bedOccupation on patient discharge
             var bedOccupation = await _bedOccupationManager.repository()
                                            .FirstOrDefaultAsync(a => a.WardAdmission.Id == wardAdmissionEntity.Id &&
-                                            a.Status == (long?)RefListBedOccupationStatus.open);
+                                            a.Status == RefListBedOccupationStatus.open);
 
             await _bedOccupationManager.CloseBedOccupationAsync(bedOccupation);
 

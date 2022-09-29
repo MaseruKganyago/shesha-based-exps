@@ -25,13 +25,13 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
                 .ForMember(a => a.Bed, b => b.MapFrom(c => GetEntity<Bed>(c.Bed.Id)))
                 .ForMember(a => a.StartDateTime, b => b.MapFrom(c => c.AdmissionDate))
                 .ForMember(a => a.WardAdmissionStatus, b => b.MapFrom(c=> RefListWardAdmissionStatuses.admitted))
-                .ForMember(a => a.PartOf, b => b.MapFrom(c=>GetEntity<HospitalAdmission>(c.PartOf)))
+                .ForMember(a => a.PartOf, b => b.MapFrom(c => GetEntity<HospitalAdmission>(c.PartOf)))
                 .MapReferenceListValuesFromDto();
 
             CreateMap<WardDischargeDto, WardAdmission>()
                 .ForMember(a => a.EndDateTime, b => b.MapFrom(c => c.DischargeDate))
                 .ForMember(a => a.WardAdmissionStatus, b => b.MapFrom(c => RefListWardAdmissionStatuses.separated))
-                .ForMember(a => a.Performer, b => b.MapFrom(c => GetEntity<Person>(c.Id)))
+                .ForMember(a => a.Performer, b => b.MapFrom(c => c.Physician != null ? GetEntity<Person>(c.Physician.Id) : null))
 				.MapReferenceListValuesFromDto();
 
             CreateMap<WardDischargeDto, HospitalAdmission>()

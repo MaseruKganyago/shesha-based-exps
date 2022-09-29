@@ -1,6 +1,7 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Beds;
+using Boxfusion.Health.His.Common.Beds.BedFees.Enums;
 using Boxfusion.Health.His.Common.ChargeItems;
 using Shesha.Domain.Attributes;
 using System;
@@ -40,7 +41,7 @@ namespace Boxfusion.Health.His.Common.Beds.BedOccupations
         /// 
         /// </summary>
         [ReferenceList("His", "BedOccupationStatus")]
-        public virtual long? Status { get; set; }
+        public virtual RefListBedOccupationStatus? Status { get; set; }
 
         /// <summary>
         /// 

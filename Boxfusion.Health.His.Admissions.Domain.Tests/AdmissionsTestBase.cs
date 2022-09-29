@@ -241,7 +241,8 @@ namespace Boxfusion.Health.His.Admissions.Tests
         protected void CleanUpTestData_Patient(Guid patientId)
         {
             using var session = OpenSession();
-            var query = session.CreateSQLQuery("DELETE FROM Core_Persons WHERE Id = '" + patientId.ToString() + "'");
+            var query = session.CreateSQLQuery($"Update Fhir_ChargeItems set SubjectId = null where SubjectId = '{patientId}'" +
+                "DELETE FROM Core_Persons WHERE Id = '" + patientId.ToString() + "'");
             query.ExecuteUpdate();
 
             session.Flush();
@@ -253,12 +254,14 @@ namespace Boxfusion.Health.His.Admissions.Tests
 
             using var session = OpenSession();
             var query = session.CreateSQLQuery($"Update Fhir_Conditions set FhirEncounterId = null where FhirEncounterId = '{admission.Id}'" +
+                 $"Update His_BedOccupations set WardAdmissionId = null where WardAdmissionId = '{admission.Id}'" +
                 $"DELETE FROM Fhir_Encounters WHERE Id = '{admission.Id}'");
             query.ExecuteUpdate();
 
             if (includePartOf)
             {
                 query = session.CreateSQLQuery($"Update Fhir_Conditions set HospitalisationEncounterId = null where HospitalisationEncounterId = '{admission.PartOf.Id}'" +
+                    $"Update Fhir_ChargeItems set ContextEncounterId = null where ContextEncounterId = '{admission.PartOf.Id}'" +
                 $"DELETE FROM Fhir_Encounters WHERE Id = '{admission.PartOf.Id}'");
                 query.ExecuteUpdate();
             }
@@ -267,7 +270,7 @@ namespace Boxfusion.Health.His.Admissions.Tests
             {
                 diagnosisList.ForEach(diagnosis =>
                 {
-                    DeleteDiagnosisCombo(diagnosis);
+                    DeleteDiagnosisCombo(diagnosis, false);
                 });
             }
             else

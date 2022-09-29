@@ -68,8 +68,8 @@ namespace Boxfusion.Health.His.Common.Domain.Tests.BedOccupations
 			var bedFeeList = await _bedFeeManager.repository().GetAllListAsync(a => a.WardAdmission.Id == admissionEntity.Id);
 
 			//Should have two bedFees of the wardAdmission  where one is closed and the other is open
-			bedFeeList.Any(a => a.Status == (long?)RefListBedOccupationStatus.closed).ShouldBe(true);
-			bedFeeList.Any(a => a.Status == (long?)RefListBedOccupationStatus.open).ShouldBe(true);
+			bedFeeList.Any(a => a.Status == RefListBedOccupationStatus.closed).ShouldBe(true);
+			bedFeeList.Any(a => a.Status == RefListBedOccupationStatus.open).ShouldBe(true);
 			#endregion
 		}
 	}

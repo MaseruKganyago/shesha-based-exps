@@ -43,7 +43,7 @@ namespace Boxfusion.Health.His.Common.Beds.BedOccupations
 		/// <returns></returns>
 		public async Task<BedOccupation> CreateBedOccupationAsync(BedOccupation bedOccupation, RefListBedOccupationStatus status = RefListBedOccupationStatus.open)
 		{
-			bedOccupation.Status = (long?)status;
+			bedOccupation.Status = status;
 			return await _bedOccupationRepository.InsertAsync(bedOccupation);
 		}
 
@@ -74,7 +74,7 @@ namespace Boxfusion.Health.His.Common.Beds.BedOccupations
 		/// <returns></returns>
 		public async Task<BedOccupation> CloseBedOccupationAsync(BedOccupation bedOccupation)
 		{
-			bedOccupation.Status = (long?)RefListBedOccupationStatus.closed;
+			bedOccupation.Status = RefListBedOccupationStatus.closed;
 			bedOccupation.EndDate = DateTime.Now;
 
 			return await _bedOccupationRepository.UpdateAsync(bedOccupation);
@@ -88,7 +88,7 @@ namespace Boxfusion.Health.His.Common.Beds.BedOccupations
 		public async Task<BedOccupation> GetOpenBedOccupationByWardAdmissionIdAsync(Guid wardAdmissionId)
 		{
 			return await _bedOccupationRepository.FirstOrDefaultAsync(a => a.WardAdmission.Id == wardAdmissionId &&
-												a.Status == (long?)RefListBedOccupationStatus.open);
+												a.Status == RefListBedOccupationStatus.open);
 		}
 	}
 }

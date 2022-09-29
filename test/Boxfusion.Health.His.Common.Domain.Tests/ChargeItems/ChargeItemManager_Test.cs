@@ -47,7 +47,7 @@ namespace Boxfusion.Health.His.Common.Tests.ChargeItems
 					Subject = patient,
 					ServiceId = Guid.NewGuid(),
 					ServiceType = (new HisProcedure()).GetTypeShortAlias(),
-					Status = (long?)RefListChargeItemStatus.open,
+					Status = RefListChargeItemStatus.open,
 				};
 
 				//act
@@ -59,7 +59,7 @@ namespace Boxfusion.Health.His.Common.Tests.ChargeItems
 
 				chargeItem = await _chargeItemsManager.repository().GetAsync(createChargeItem.Id);
 				chargeItem.ShouldNotBeNull();
-				chargeItem.Status.ShouldBe((long?)RefListChargeItemStatus.open);
+				chargeItem.Status.ShouldBe(RefListChargeItemStatus.open);
 
 			}
 			finally {

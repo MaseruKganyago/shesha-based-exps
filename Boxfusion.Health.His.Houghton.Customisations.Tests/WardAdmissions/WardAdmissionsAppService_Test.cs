@@ -121,14 +121,19 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				note.NoteText.ShouldBe(admitPatientInput.AdmissionNotes);
 
 				//Check for open bedOccupation for the wardAdmission
+				using var uowB = _uowManager.Begin();
 				var bedOccupation = (await _bedOccupationManager.repository().GetAllIncluding(a => a.ChargeItem)
 										.Where(a => a.WardAdmission.Id == admission.Id).ToListAsync()).FirstOrDefault();
+				await uowB.CompleteAsync();
 				bedOccupation.ShouldNotBeNull();
-				bedOccupation?.Status.ToString().ShouldBe(RefListBedOccupationStatus.open.ToString());
+
+				//((RefListBedOccupationStatus)bedOccupation).Status.ShouldBe(RefListBedOccupationStatus.open);
+
+				bedOccupation.Status.Value.ShouldBe(RefListBedOccupationStatus.open);
 
 				//Check for open ChargeItem for the bedOccupation
-				bedOccupation?.ChargeItem.ShouldBeNull();
-				bedOccupation?.ChargeItem.Status.ToString().ShouldBe(RefListChargeItemStatus.open.ToString());
+				bedOccupation?.ChargeItem.ShouldNotBeNull();
+				bedOccupation.ChargeItem.Status.Value.ShouldBe(RefListChargeItemStatus.open);
 				#endregion
 			}
 			catch (Exception ex)
@@ -160,6 +165,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				#region Prepare data for test-discharge
 				var hospital = await GetTestData_HealthFacility("UnitTest Hospital");
 				var ward = await GetTestData_Ward("UnitTest Ward");
+				var bed = await GetTestData_Bed("UnitTest Bed");
 				patient = await CreateTestData_NewPatient("John Smith" + " :Test2");
 
 				var admissionData = await CreateTestData_NewAdmission(hospital.Id, ward.Id);
@@ -167,14 +173,23 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 
 				await CreateWardAdmissionChargeItem(admissionData);
 
+				var newBedFee = new BedOccupation()
+				{
+					StartDate = admissionData.StartDateTime,
+					WardAdmission = admissionData,
+					Bed = bed,
+					ChargeItem = chargeItem
+				};
+				await _bedOccupationManager.CreateBedOccupationAsync(newBedFee);
+
 				var dischargeInput = new WardDischargeDto()
 				{
 					Id = admissionData.Id,
 					DischargeDate = DateTime.Now,
 					DischargeNotes = "UnitTest Note",
+					SeparationType = (long?)RefListSeparationTypes.dischargeNormal
 					//Physician = new 
 				};
-				
 				#endregion
 
 				//Act: Discharge patient
@@ -204,7 +219,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				bedOccupation.ShouldNotBeNull();
 				bedOccupation.ForEach(a =>
 				{
-					a.Status.ToString().ShouldBe(RefListBedOccupationStatus.closed.ToString());
+					a.Status.Value.ShouldBe(RefListBedOccupationStatus.closed);
 				});
 				#endregion
 			}
@@ -233,7 +248,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 
 			var chargeItem = new HisChargeItem()
 			{
-				Status = (long?)RefListChargeItemStatus.open,
+				Status = RefListChargeItemStatus.open,
 				Subject = wardAdmissionEntity.Subject,
 				ContextEncounter = wardAdmissionEntity.PartOf,
 				ServiceId = wardAdmissionEntity.Id,
