@@ -18,7 +18,8 @@ namespace Boxfusion.Health.His.Domain.Migrations
         /// </summary>
         public override void Up()
         {
-            Alter.Table("entpr_Accounts")
+            if (!Schema.Table("entpr_Accounts").Column("His_BillingClassificationId").Exists())
+                Alter.Table("entpr_Accounts")
                .AddForeignKeyColumn("His_BillingClassificationId", "His_BillingClassifications").Nullable();
         }
 
