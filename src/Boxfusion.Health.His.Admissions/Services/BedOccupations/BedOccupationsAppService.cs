@@ -44,6 +44,7 @@ namespace Boxfusion.Health.His.Admissions.Services.BedOccupations
 			_bedOccupationManager = bedOccupationManager;
 			_wardAdmissionRepository = wardAdmissionRepository;
 			_chargeItemManager = chargeItemManager;
+			_bedRepository = bedRepository;
 		}
 
 		/// <summary>
@@ -64,7 +65,7 @@ namespace Boxfusion.Health.His.Admissions.Services.BedOccupations
 			var chargeItem = await _chargeItemManager.GetOpenChargeItemByServiceIdAsync(wardAdmissionId);
 			var currentBedFee = await _bedOccupationManager.GetOpenBedOccupationByWardAdmissionIdAsync(wardAdmissionId);
 
-			var newBedOccupation = await _bedOccupationManager.CloseAndOpenNewBedFeeAsync(currentBedFee, chargeItem);
+			var newBedOccupation = await _bedOccupationManager.CloseAndOpenNewBedOccupationAsync(currentBedFee, chargeItem);
 
 			return await MapToDynamicDtoAsync<BedOccupation, Guid>(newBedOccupation);
 		}

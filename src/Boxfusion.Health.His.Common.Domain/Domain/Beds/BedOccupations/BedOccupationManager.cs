@@ -38,46 +38,46 @@ namespace Boxfusion.Health.His.Common.Beds.BedOccupations
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="bedFee"></param>
+		/// <param name="bedOccupation"></param>
 		/// <param name="status"></param>
 		/// <returns></returns>
-		public async Task<BedOccupation> CreateBedFeeAsync(BedOccupation bedFee, RefListBedOccupationStatus status = RefListBedOccupationStatus.open)
+		public async Task<BedOccupation> CreateBedOccupationAsync(BedOccupation bedOccupation, RefListBedOccupationStatus status = RefListBedOccupationStatus.open)
 		{
-			bedFee.Status = (long?)status;
-			return await _bedOccupationRepository.InsertAsync(bedFee);
+			bedOccupation.Status = (long?)status;
+			return await _bedOccupationRepository.InsertAsync(bedOccupation);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="currentBedFee"></param>
-		/// <param name="newChargeItem"></param>
+		/// <param name="currentBedOccupation"></param>
+		/// <param name="chargeItem"></param>
 		/// <returns></returns>
-		public async Task<BedOccupation> CloseAndOpenNewBedFeeAsync(BedOccupation currentBedFee, HisChargeItem newChargeItem)
+		public async Task<BedOccupation> CloseAndOpenNewBedOccupationAsync(BedOccupation currentBedOccupation, HisChargeItem chargeItem)
 		{
-			var closedBedFee = await CloseBedFeeAsync(currentBedFee);
+			var closedBedOccupation = await CloseBedOccupationAsync(currentBedOccupation);
 
-			var newBedFee = new BedOccupation()
+			var newBedOccupation = new BedOccupation()
 			{
 				StartDate = DateTime.Now,
-				WardAdmission = closedBedFee.WardAdmission,
-				Bed = closedBedFee.Bed,
-				ChargeItem = newChargeItem
+				WardAdmission = closedBedOccupation.WardAdmission,
+				Bed = closedBedOccupation.Bed,
+				ChargeItem = chargeItem
 			};
-			return await CreateBedFeeAsync(newBedFee);
+			return await CreateBedOccupationAsync(newBedOccupation);
 		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="bedFee"></param>
+		/// <param name="bedOccupation"></param>
 		/// <returns></returns>
-		public async Task<BedOccupation> CloseBedFeeAsync(BedOccupation bedFee)
+		public async Task<BedOccupation> CloseBedOccupationAsync(BedOccupation bedOccupation)
 		{
-			bedFee.Status = (long?)RefListBedOccupationStatus.closed;
-			bedFee.EndDate = DateTime.Now;
+			bedOccupation.Status = (long?)RefListBedOccupationStatus.closed;
+			bedOccupation.EndDate = DateTime.Now;
 
-			return await _bedOccupationRepository.UpdateAsync(bedFee);
+			return await _bedOccupationRepository.UpdateAsync(bedOccupation);
 		}
 
 		/// <summary>
