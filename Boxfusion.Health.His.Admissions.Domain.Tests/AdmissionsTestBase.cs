@@ -278,14 +278,17 @@ namespace Boxfusion.Health.His.Admissions.Tests
             session.Flush();
         }
 
-		private void DeleteDiagnosisCombo(Diagnosis diagnosis)
+		protected void DeleteDiagnosisCombo(Diagnosis diagnosis, bool hasIcdTen = true)
 		{
             using var session = OpenSession();
             var query = session.CreateSQLQuery($"DELETE FROM Fhir_Diagnoses WHERE Id = '{diagnosis.Id}'");
             query.ExecuteUpdate();
 
-            query = session.CreateSQLQuery($"DELETE FROM Fhir_ConditionIcdTenCodes WHERE ConditionId = '{diagnosis.Condition.Id}'");
-            query.ExecuteUpdate();
+            if (hasIcdTen)
+            {
+                query = session.CreateSQLQuery($"DELETE FROM Fhir_ConditionIcdTenCodes WHERE ConditionId = '{diagnosis.Condition.Id}'");
+                query.ExecuteUpdate();
+            }
 
             query = session.CreateSQLQuery($"DELETE FROM Fhir_Conditions WHERE Id = '{diagnosis.Condition.Id}'");
             query.ExecuteUpdate();

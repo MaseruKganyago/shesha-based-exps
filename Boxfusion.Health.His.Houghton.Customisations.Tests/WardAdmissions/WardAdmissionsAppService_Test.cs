@@ -4,6 +4,8 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
 using Boxfusion.Health.His.Admissions.WardAdmissions;
 using Boxfusion.Health.His.Common.Admissions;
+using Boxfusion.Health.His.Common.Beds.BedFees.Enums;
+using Boxfusion.Health.His.Common.Beds.BedOccupations;
 using Boxfusion.Health.His.Common.ChargeItems;
 using Boxfusion.Health.His.Common.Domain.Domain.ChargeItems.Enums;
 using Boxfusion.Health.His.Common.Domain.Domain.Products;
@@ -33,6 +35,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 		private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepositiory;
 		private readonly IRepository<HisChargeItem, Guid> _hisChargeItemRepositiory;
 		private readonly HisChargeItemsManager _hisChargeItemManagerRepositiory;
+		private readonly BedOccupationManager _bedOccupationManager;
 
 		public WardAdmissionsAppService_Test(): base()
 		{
@@ -42,6 +45,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 			_wardAdmissionRepositiory = Resolve<IRepository<WardAdmission, Guid>>();
 			_hisChargeItemRepositiory = Resolve<IRepository<HisChargeItem, Guid>>();
 			_hisChargeItemManagerRepositiory = Resolve<HisChargeItemsManager>();
+			_bedOccupationManager = Resolve<BedOccupationManager>();
 		}
 
 		/// <summary>
@@ -49,7 +53,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 		/// </summary>
 		/// <returns></returns>
 		[Fact]
-		public async Task Should_AdmitPatient_inWard_and_CreateDiagnosis_and_Notes()
+		public async Task Should_AdmitPatient_inWard_and_CreateDiagnosis_and_Notes_then_CreateBedOccupation_and_ChargeItem()
 		{
 			HisPatient patient = null;
 			WardAdmission admission = null;
@@ -115,6 +119,16 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				//Check if admission note was created
 				var note = await GetTestData_Note(admission.Id.ToString());
 				note.NoteText.ShouldBe(admitPatientInput.AdmissionNotes);
+
+				//Check for open bedOccupation for the wardAdmission
+				var bedOccupation = (await _bedOccupationManager.repository().GetAllIncluding(a => a.ChargeItem)
+										.Where(a => a.WardAdmission.Id == admission.Id).ToListAsync()).FirstOrDefault();
+				bedOccupation.ShouldNotBeNull();
+				bedOccupation?.Status.ToString().ShouldBe(RefListBedOccupationStatus.open.ToString());
+
+				//Check for open ChargeItem for the bedOccupation
+				bedOccupation?.ChargeItem.ShouldBeNull();
+				bedOccupation?.ChargeItem.Status.ToString().ShouldBe(RefListChargeItemStatus.open.ToString());
 				#endregion
 			}
 			catch (Exception ex)
@@ -124,15 +138,18 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 			finally
 			{
 				await CleanUpTestData_PatientAdmission(admission);
+				if (diagnosis is not null &&
+					diagnosis.Any()) diagnosis.ForEach(a => DeleteDiagnosisCombo(a));
 				if (patient is not null) CleanUpTestData_Patient(patient.Id);
 			}
 		}
 
 		/// <summary>
-		/// 2H
+		/// 
+		/// </summary>
 		/// <returns></returns>
 		[Fact]
-		public async Task Should_Discharge_Patient_from_Ward_and_Hospital()
+		public async Task Should_Discharge_Patient_from_Ward_and_Hospital_add_DischargeNote_and_CloseBedOccupation()
 		{
 			HisPatient patient = null;
 			WardAdmission admission = null;
@@ -174,27 +191,22 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				admission.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.Value.ToString("MM/dd/yyyy HH:mm"));
 
 				//Verify hospitalAdmission was dischaarged
-				hospitalAdmission.HospitalAdmissionStatus.ShouldBe(RefListHospitalAdmissionStatuses.separated);
-				hospitalAdmission.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.Value.ToString("MM/dd/yyyy HH:mm"));
+				hospitalAdmission?.HospitalAdmissionStatus.ShouldBe(RefListHospitalAdmissionStatuses.separated);
+				hospitalAdmission?.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.Value.ToString("MM/dd/yyyy HH:mm"));
 
 				//Verify discharge note was created
 				var note = await _noteRepository.FirstOrDefaultAsync(a => a.OwnerId == admission.Id.ToString());
 				note.ShouldNotBeNull();
 				note.NoteText.ShouldBe(dischargeInput.DischargeNotes);
+
+				//Verify that bedOccupation is closed
+				var bedOccupation = await _bedOccupationManager.repository().GetAllListAsync();
+				bedOccupation.ShouldNotBeNull();
+				bedOccupation.ForEach(a =>
+				{
+					a.Status.ToString().ShouldBe(RefListBedOccupationStatus.closed.ToString());
+				});
 				#endregion
-
-				chargeItem = await _hisChargeItemRepositiory.FirstOrDefaultAsync(a => a.ServiceId == admission.Id);
-				chargeItem.ShouldNotBeNull();
-
-				var numOfDays = admission.EndDateTime.Value.Subtract(admission.StartDateTime.Value);
-
-
-                chargeItem.QuantityValue.ToString().ShouldBe(numOfDays.ToString());
-
-				
-
-
-
 			}
 			catch (Exception ex)
 			{
