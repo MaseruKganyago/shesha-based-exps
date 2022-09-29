@@ -9,12 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Common.Beds.BedFees
+namespace Boxfusion.Health.His.Common.Beds.BedOccupations
 {
     /// <summary>
     /// 
     /// </summary>
-    public class BedFee : FullAuditedEntity<Guid>
+    public class BedOccupation : FullAuditedEntity<Guid>
     {
         /// <summary>
         /// 
@@ -39,7 +39,7 @@ namespace Boxfusion.Health.His.Common.Beds.BedFees
         /// <summary>
         /// 
         /// </summary>
-        [ReferenceList("His", "BedFeeStatus")]
+        [ReferenceList("His", "BedOccupationStatus")]
         public virtual long? Status { get; set; }
 
         /// <summary>

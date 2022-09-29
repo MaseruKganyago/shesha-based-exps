@@ -1,11 +1,15 @@
 ﻿using Abp.Authorization;
+using Abp.Domain.Entities;
 using Abp.Domain.Repositories;
+using Abp.Domain.Uow;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos;
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Beds;
+using Boxfusion.Health.His.Common.Beds.BedFees.Enums;
+using Boxfusion.Health.His.Common.Beds.BedOccupations;
 using Boxfusion.Health.His.Common.ChargeItems;
 using Boxfusion.Health.His.Common.Domain.Domain.ChargeItems.Enums;
 using Boxfusion.Health.His.Common.Domain.Domain.Products;
@@ -38,30 +42,39 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
         private readonly IRepository<Condition, Guid> _conditionRepository;
         private readonly IRepository<Diagnosis, Guid> _diagnosisRepository;
         private readonly IRepository<Note, Guid> _noteRepository;
+        private readonly BedOccupationManager _bedOccupationManager;
+		private readonly HisChargeItemsManager _chargeItemManager;
+		private readonly IRepository<Bed, Guid> _bedRepository;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="wardAdmissionRepositiory"></param>
-        /// <param name="conditionRepository"></param>
-        /// <param name="diagnosisRepository"></param>
-        /// <param name="noteRepository"></param>
-        /// <param name="hospitalAdmissionRepository"></param>
-        /// <param name="hisChargeItemManager"></param>
-        /// <param name="bedRepository"></param>
-        public WardAdmissionsAppService(IRepository<WardAdmission, Guid> wardAdmissionRepositiory, 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="wardAdmissionRepositiory"></param>
+		/// <param name="conditionRepository"></param>
+		/// <param name="diagnosisRepository"></param>
+		/// <param name="noteRepository"></param>
+		/// <param name="hospitalAdmissionRepository"></param>
+		/// <param name="hisChargeItemManager"></param>
+		/// <param name="bedRepository"></param>
+		/// <param name="bedOccupationManager"></param>
+		/// <param name="chargeItemManager"></param>
+		public WardAdmissionsAppService(IRepository<WardAdmission, Guid> wardAdmissionRepositiory, 
             IRepository<Condition, Guid> conditionRepository, 
             IRepository<Diagnosis, Guid> diagnosisRepository, 
             IRepository<Note, Guid> noteRepository,
 			IRepository<HospitalAdmission, Guid> hospitalAdmissionRepository,
 			HisChargeItemsManager hisChargeItemManager,
-			IRepository<Bed, Guid> bedRepository)
+			IRepository<Bed, Guid> bedRepository,
+			BedOccupationManager bedOccupationManager,
+			HisChargeItemsManager chargeItemManager)
         {
             _wardAdmissionRepositiory = wardAdmissionRepositiory;
             _conditionRepository = conditionRepository;
             _diagnosisRepository = diagnosisRepository;
             _noteRepository = noteRepository;
             _hospitalAdmissionRepository = hospitalAdmissionRepository;
+            _bedOccupationManager = bedOccupationManager;
+            _chargeItemManager = chargeItemManager;
 		}
 
         /// <summary>
@@ -90,7 +103,20 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
                 Category = (int)RefListHisNoteType.admission
             };
             await _noteRepository.InsertAsync(note);
-            return await MapToDynamicDtoAsync<WardAdmission, Guid>(wardAdmissionEntity);
+
+			//Create new chargedItem and bedOccupation for admission into ward
+			var chargeItem = await CreateWardAdmissionChargeItem(wardAdmissionEntity);
+
+			var newBedFee = new BedOccupation()
+			{
+				StartDate = wardAdmissionEntity.StartDateTime,
+				WardAdmission = wardAdmissionEntity,
+				Bed = wardAdmissionEntity.Bed,
+				ChargeItem = chargeItem
+			};
+			await _bedOccupationManager.CreateBedFeeAsync(newBedFee);
+
+			return await MapToDynamicDtoAsync<WardAdmission, Guid>(wardAdmissionEntity);
         }
 
         /// <summary>
@@ -123,7 +149,14 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
             };
             await _noteRepository.InsertAsync(note);
 
-            return await MapToDynamicDtoAsync<WardAdmission, Guid>(wardAdmissionEntity);
+            //Close bedOccupation on patient discharge
+            var bedOccupation = await _bedOccupationManager.repository()
+                                           .FirstOrDefaultAsync(a => a.WardAdmission.Id == wardAdmissionEntity.Id &&
+                                            a.Status == (long?)RefListBedOccupationStatus.open);
+
+            await _bedOccupationManager.CloseBedFeeAsync(bedOccupation);
+
+			return await MapToDynamicDtoAsync<WardAdmission, Guid>(wardAdmissionEntity);
         }
 
         /// <summary>
@@ -154,7 +187,29 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
             return result;
 		}
 
-        private async Task createDiagnosis(Guid conditionId, WardAdmission wardAdmissionEntity)
+		private async Task<HisChargeItem> CreateWardAdmissionChargeItem(WardAdmission wardAdmissionEntity)
+		{
+			var bedList = await _bedRepository.GetAllIncluding(a => a.BedType)
+											  .Where(a => a.Id == wardAdmissionEntity.Bed.Id).ToListAsync();
+			var bed = bedList.FirstOrDefault();
+
+			var productCode = await ProductsHelper.GetProductCode(bed.BedType.Id);
+
+			var chargeItem = new HisChargeItem()
+			{
+				Subject = wardAdmissionEntity.Subject,
+				ContextEncounter = wardAdmissionEntity.PartOf,
+				ServiceId = wardAdmissionEntity.Id,
+				ServiceType = wardAdmissionEntity.GetTypeShortAlias(),
+				Code = productCode
+            };
+
+			var charge = await _chargeItemManager.CreateChargeItemAsync(chargeItem);
+
+			return charge;
+		}
+
+		private async Task createDiagnosis(Guid conditionId, WardAdmission wardAdmissionEntity)
         {
             var condition = _conditionRepository.Get(conditionId);
 
