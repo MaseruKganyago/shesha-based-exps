@@ -1275,6 +1275,21 @@
             </summary>
             <param name="localizationConfiguration"></param>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Migrations.M20220929180400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Migrations.M20220929180400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Migrations.M20220929180400.Down">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Bookings.Migrations.M20220808002400">
             <summary>
             

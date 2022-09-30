@@ -91,18 +91,18 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Coverages.CoverageAppService">
+        <member name="T:Boxfusion.Health.His.Admissions.Coverages.SelfCoverageAppService">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Coverages.CoverageAppService.#ctor(Boxfusion.Health.His.Admissions.Domain.Domain.Coverages.CoverageManager)">
+        <member name="M:Boxfusion.Health.His.Admissions.Coverages.SelfCoverageAppService.#ctor(Boxfusion.Health.His.Admissions.Domain.Domain.Coverages.CoverageManager)">
             <summary>
             
             </summary>
             <param name="coverageManager"></param>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Coverages.CoverageAppService.GetSelfCashCoverage(System.Guid)">
+        <member name="M:Boxfusion.Health.His.Admissions.Coverages.SelfCoverageAppService.GetSelfCashCoverage(System.Guid)">
             <summary>
             Get coverage Id and it's flattened bank account
             </summary>
