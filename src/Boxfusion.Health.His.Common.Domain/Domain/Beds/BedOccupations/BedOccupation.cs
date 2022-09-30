@@ -1,6 +1,7 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Beds;
+using Boxfusion.Health.His.Common.Beds.BedFees.Enums;
 using Boxfusion.Health.His.Common.ChargeItems;
 using Shesha.Domain.Attributes;
 using System;
@@ -9,12 +10,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Common.Beds.BedFees
+namespace Boxfusion.Health.His.Common.Beds.BedOccupations
 {
     /// <summary>
     /// 
     /// </summary>
-    public class BedFee : FullAuditedEntity<Guid>
+    public class BedOccupation : FullAuditedEntity<Guid>
     {
         /// <summary>
         /// 
@@ -39,8 +40,8 @@ namespace Boxfusion.Health.His.Common.Beds.BedFees
         /// <summary>
         /// 
         /// </summary>
-        [ReferenceList("His", "BedFeeStatus")]
-        public virtual long? Status { get; set; }
+        [ReferenceList("His", "BedOccupationStatus")]
+        public virtual RefListBedOccupationStatus? Status { get; set; }
 
         /// <summary>
         /// 

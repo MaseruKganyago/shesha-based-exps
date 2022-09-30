@@ -722,6 +722,28 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.BedOccupations.BedOccupationsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.BedOccupations.BedOccupationsAppService.#ctor(Boxfusion.Health.His.Common.Beds.BedOccupations.BedOccupationManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Beds.Bed,System.Guid},Boxfusion.Health.His.Common.ChargeItems.HisChargeItemsManager)">
+            <summary>
+            
+            </summary>
+            <param name="bedOccupationManager"></param>
+            <param name="wardAdmissionRepository"></param>
+            <param name="bedRepository"></param>
+            <param name="chargeItemManager"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.BedOccupations.BedOccupationsAppService.ChangeBedOccupation(System.Guid,System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="wardAdmissionId"></param>
+            <param name="bedId"></param>
+            <returns></returns>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.Services.Invoices.HisInvoicesAppService">
             <summary>
             
@@ -976,7 +998,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.Note,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Boxfusion.Health.His.Common.ChargeItems.HisChargeItemsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Beds.Bed,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.Note,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Boxfusion.Health.His.Common.ChargeItems.HisChargeItemsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Beds.Bed,System.Guid},Boxfusion.Health.His.Common.Beds.BedOccupations.BedOccupationManager,Boxfusion.Health.His.Common.ChargeItems.HisChargeItemsManager)">
             <summary>
             
             </summary>
@@ -987,6 +1009,8 @@
             <param name="hospitalAdmissionRepository"></param>
             <param name="hisChargeItemManager"></param>
             <param name="bedRepository"></param>
+            <param name="bedOccupationManager"></param>
+            <param name="chargeItemManager"></param>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.AdmitPatientAsync(Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsDto)">
             <summary>

@@ -1440,5 +1440,35 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Migrations.M20220927165400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220927165400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220927165400.Down">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Bookings.Migrations.M20220927174400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220927174400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Bookings.Migrations.M20220927174400.Down">
+            <summary>
+            
+            </summary>
+        </member>
     </members>
 </doc>

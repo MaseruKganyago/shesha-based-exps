@@ -1,6 +1,7 @@
 ﻿using Abp.Domain.Repositories;
+using Abp.Domain.Uow;
 using Boxfusion.Health.His.Common.Admissions;
-using Boxfusion.Health.His.Common.Beds.BedFees;
+using Boxfusion.Health.His.Common.Beds.BedOccupations;
 using Boxfusion.Health.His.Common.Beds.BedFees.Enums;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Tests;
@@ -12,18 +13,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Boxfusion.Health.His.Common.Domain.Tests.BedFees
+namespace Boxfusion.Health.His.Common.Domain.Tests.BedOccupations
 {
 	public class BedFeeManager_Test: HisCommonDomainTestBase
 	{
-		private readonly BedFeeManager _bedFeeManager;
+		private readonly BedOccupationManager _bedFeeManager;
 		private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepository;
+		private readonly IUnitOfWorkManager _unitOfWorkManager;
 
 		public BedFeeManager_Test(): base()
 		{
 			CreateTestData_HealthFacility_And_Ward_With_RoomBed("UnitTest Hospital", "UnitTest Ward", "UnitTest Room", "UnitTest Bed");
-			_bedFeeManager = Resolve<BedFeeManager>();
+			_bedFeeManager = Resolve<BedOccupationManager>();
 			_wardAdmissionRepository = Resolve<IRepository<WardAdmission, Guid>>();
+			_unitOfWorkManager = Resolve<IUnitOfWorkManager>();
 		}
 
 		[Fact]
@@ -57,14 +60,16 @@ namespace Boxfusion.Health.His.Common.Domain.Tests.BedFees
 
 			//Act update wardAdmission and change bed
 			admissionEntity.Bed = bed2;
+			using var uow = _unitOfWorkManager.Begin();
 			await _wardAdmissionRepository.UpdateAsync(admissionEntity);
+			await uow.CompleteAsync();
 
 			#region Assert: Verify close and open of new bedFee
 			var bedFeeList = await _bedFeeManager.repository().GetAllListAsync(a => a.WardAdmission.Id == admissionEntity.Id);
 
 			//Should have two bedFees of the wardAdmission  where one is closed and the other is open
-			bedFeeList.Any(a => a.Status == (long?)RefListBedFeeStatus.closed).ShouldBe(true);
-			bedFeeList.Any(a => a.Status == (long?)RefListBedFeeStatus.open).ShouldBe(true);
+			bedFeeList.Any(a => a.Status == RefListBedOccupationStatus.closed).ShouldBe(true);
+			bedFeeList.Any(a => a.Status == RefListBedOccupationStatus.open).ShouldBe(true);
 			#endregion
 		}
 	}

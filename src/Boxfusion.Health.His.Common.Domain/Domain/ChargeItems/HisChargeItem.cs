@@ -1,4 +1,5 @@
 ﻿using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
+using Boxfusion.Health.His.Common.Domain.Domain.ChargeItems.Enums;
 using Shesha.Domain.Attributes;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Boxfusion.Health.His.Common.ChargeItems
         /// 
         /// </summary>
         [ReferenceList("His", "ChargeItemStatus")]
-        public virtual long? Status { get; set; }
+        public virtual RefListChargeItemStatus? Status { get; set; }
 
         /// <summary>
         /// 

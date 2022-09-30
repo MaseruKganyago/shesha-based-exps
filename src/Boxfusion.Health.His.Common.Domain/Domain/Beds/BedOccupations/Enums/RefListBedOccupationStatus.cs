@@ -11,8 +11,8 @@ namespace Boxfusion.Health.His.Common.Beds.BedFees.Enums
 	/// <summary>
 	/// 
 	/// </summary>
-	[ReferenceList("His", "BedFeeStatus")]
-	public enum RefListBedFeeStatus: long
+	[ReferenceList("His", "BedOccupationStatus")]
+	public enum RefListBedOccupationStatus: long
 	{
 		/// <summary>
 		/// 

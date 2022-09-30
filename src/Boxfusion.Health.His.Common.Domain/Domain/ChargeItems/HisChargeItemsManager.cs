@@ -61,7 +61,7 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 				//ContextEncouter is likely to be the HospitalAdmission
 				hisChargeItem.Account = await GetPatientAccount(hisChargeItem.Subject.Id, hisChargeItem.ContextEncounter.Id);
 
-			hisChargeItem.Status = (long?)status;
+			hisChargeItem.Status = status;
 			return await _chargeItemRepository.InsertAsync(hisChargeItem);
 		}
 
@@ -96,7 +96,7 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		/// <exception cref="UserFriendlyException"></exception>
 		public async Task<HisChargeItem> CloseChargeItemAsync(HisChargeItem currentChargeItem)
 		{
-			currentChargeItem.Status = (long?)RefListChargeItemStatus.closed;
+			currentChargeItem.Status = RefListChargeItemStatus.closed;
 
 			currentChargeItem.QuantityValue = await GetQuantityFromCharge(currentChargeItem);
 
@@ -130,7 +130,7 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		public async Task<HisChargeItem> GetOpenChargeItemByServiceIdAsync(Guid serviceId)
 		{
 			return await _chargeItemRepository.FirstOrDefaultAsync(a => a.ServiceId == serviceId
-																	&& a.Status == (long?)RefListChargeItemStatus.open);
+																	&& a.Status == RefListChargeItemStatus.open);
 		}
 
 		/// <summary>
