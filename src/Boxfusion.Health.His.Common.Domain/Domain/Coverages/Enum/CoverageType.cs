@@ -8,6 +8,11 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.Coverages.Enum
 {
     public enum CoverageType
     {
-        pay = 1
+        CashSelf = 1,
+        CashSomeoneElse = 2,
+        MedicalAid = 3,
+        RoadAccidentFund = 10,
+        WorkmansCompensation = 20,
+
     }
 }

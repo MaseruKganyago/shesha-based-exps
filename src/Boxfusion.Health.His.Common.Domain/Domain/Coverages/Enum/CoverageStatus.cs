@@ -8,9 +8,9 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.Coverages.Enum
 {
     public enum CoverageStatus
     {
-        active = 1,
-        cancelled = 2,
-        draft = 3,
-        enter_in_error = 4
+        Active = 1,
+        Cancelled = 2,
+        Draft = 3,
+        Enter_in_error = 4
     }
 }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Health.His.Houghton.Migrations
+namespace Boxfusion.Health.HealthCommon.Core.Migrations
 {
     
     [Migration(20220830131000)]

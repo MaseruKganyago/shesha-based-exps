@@ -1,4 +1,5 @@
 ﻿using FluentMigrator;
+using Shesha.Domain;
 using Shesha.FluentMigrator;
 using System;
 using System.Collections.Generic;
@@ -9,17 +10,17 @@ namespace Boxfusion.Health.His.Domain.Migrations
     /// <summary>
     /// 
     /// </summary>
-    [Migration(20220901121300)]
-    public class M20220901121300 : Migration
+    [Migration(20220928012600)]
+    public class M20220928012600 : Migration
     {
         /// <summary>
         /// 
         /// </summary>
         public override void Up()
         {
-            Alter.Table("Fhir_Coverages")
-                .AddColumn("Frwk_Discriminator").AsString(150); 
-        }
+            Alter.Table("His_BillingClassifications")
+                .AddColumn("DefaultCoverageTypeLkp").AsInt64().Nullable();
+		}
 
         /// <summary>
         /// 

@@ -9,11 +9,10 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.BillingClassifications.BillingClassification,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Accounts.HisAccount,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisHealthFacility,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Coverages.CashCoverage,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Domain.Domain.Fhir.Coverage,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Accounts.AccountCoverage,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Enterprise.BankAccounts.BankAccount,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Accounts.HisAccount,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.HisHealthFacility,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Coverages.CashCoverage,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.Cdm.Domain.Domain.Fhir.Coverage,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Accounts.AccountCoverage,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Enterprise.BankAccounts.BankAccount,System.Guid})">
             <summary>
             
             </summary>
-            <param name="billingClassificationRepo"></param>
             <param name="accountRepo"></param>
             <param name="hospitaAdmissionRepo"></param>
             <param name="hisHealthFacilityRepo"></param>
@@ -21,18 +20,6 @@
             <param name="coverageRepo"></param>
             <param name="accountCoverageRepo"></param>
             <param name="bankAccountRepo"></param>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.SetPayment(System.Guid,System.Guid,System.Nullable{System.Guid},Shesha.Enterprise.BankAccounts.BankAccount,System.Int32,System.Nullable{System.Guid})">
-            <summary>
-            
-            </summary>
-            <param name="hospitalAdmissionId"></param>
-            <param name="billClassificationId"></param>
-            <param name="selectedMedicalAidId"></param>
-            <param name="bankAccount"></param>
-            <param name="cashPayerType"></param>
-            <param name="selected3rdPartyCoverageId"></param>
-            <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.UpdateHospitalAdmissionBillingClassification(Boxfusion.Health.His.Common.Admissions.HospitalAdmission,Boxfusion.Health.His.Common.BillingClassifications.BillingClassification)">
             <summary>
@@ -42,15 +29,14 @@
             <param name="billClassification"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateAccount(Boxfusion.Health.His.Common.Admissions.HospitalAdmission,Boxfusion.Health.His.Common.BillingClassifications.BillingClassification)">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateAccount(System.Guid,Boxfusion.Health.His.Common.Admissions.HospitalAdmission,Boxfusion.Health.His.Common.BillingClassifications.BillingClassification)">
             <summary>
             
             </summary>
-            <param name="patient"></param>
-            <param name="billClassification"></param>
+            <param name="facilityId"></param>
             <param name="hospitalAdmission"></param>
+            <param name="billClassification"></param>
             <returns></returns>
-            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateCoverage(Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Patient,Boxfusion.Health.His.Common.BillingClassifications.BillingClassification,Boxfusion.Health.His.Common.Accounts.HisAccount,Shesha.Enterprise.BankAccounts.BankAccount,System.Int32,System.Nullable{System.Guid},System.Nullable{System.Guid})">
             <summary>
@@ -61,10 +47,74 @@
             <param name="account"></param>
             <param name="bankAccount"></param>
             <param name="cashPayerType"></param>
-            <param name="selectedMedicalAidId"></param>
+            <param name="selectedMedicalAidCoverageId"></param>
             <param name="selected3rdPartyCoverageId"></param>
             <returns></returns>
-            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateOrganisationCoverageAndAccountCoverageLink(Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Patient,Boxfusion.Health.His.Common.BillingClassifications.BillingClassification,Boxfusion.Health.His.Common.Accounts.HisAccount)">
+            <summary>
+            
+            </summary>
+            <param name="patient"></param>
+            <param name="billingClassification"></param>
+            <param name="account"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateSomeoneElseAccountCoverageLink(Boxfusion.Health.His.Common.Accounts.HisAccount,System.Nullable{System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="account"></param>
+            <param name="selected3rdPartyCoverageId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateSelfCoverageAndAccountCoverageLink(Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Patient,Boxfusion.Health.His.Common.Accounts.HisAccount,Shesha.Enterprise.BankAccounts.BankAccount)">
+            <summary>
+            
+            </summary>
+            <param name="patient"></param>
+            <param name="account"></param>
+            <param name="bankAccount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateMedicalAidAccountCoverageLink(Boxfusion.Health.His.Common.Accounts.HisAccount,System.Nullable{System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="account"></param>
+            <param name="selectedMedicalAidCoverageId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.InsertUpdateSelfCoverage(Boxfusion.Health.His.Common.Coverages.CashCoverage,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Patient,Shesha.Enterprise.BankAccounts.BankAccount)">
+            <summary>
+            
+            </summary>
+            <param name="existingSelfCashCoverage"></param>
+            <param name="patient"></param>
+            <param name="bankAccount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.InsertBankAccount(Shesha.Enterprise.BankAccounts.BankAccount)">
+            <summary>
+            
+            </summary>
+            <param name="bankAccount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.UpdateBankAccount(Shesha.Enterprise.BankAccounts.BankAccount)">
+            <summary>
+            
+            </summary>
+            <param name="bankAccount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateAccountCoverage(Boxfusion.Health.His.Common.Accounts.HisAccount,Boxfusion.Health.Cdm.Domain.Domain.Fhir.Coverage)">
+            <summary>
+            
+            </summary>
+            <param name="account"></param>
+            <param name="coverage"></param>
+            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.AdmissionsManager">
             <summary>
@@ -644,6 +694,29 @@
             </summary>
         </member>
         <member name="P:Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.FlattenedWardAdmission.Speciality">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Domain.Domain.Coverages.CoverageManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Coverages.CoverageManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Domain.Domain.Coverages.FlattenedCoverage,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="flattenedCoverageRepo"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Coverages.CoverageManager.GetSelfCashCoverage(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="patientId"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Boxfusion.Health.His.Admissions.Domain.Domain.Coverages.Util.GetFlattenedCoverage">
             <summary>
             
             </summary>

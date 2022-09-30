@@ -19,7 +19,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
         /// </summary>
         public override void Up()
         {
-            //Reference list items for AccountType
+            //Reference list items for AccountStatus
             this.Shesha().ReferenceListCreate("Fhir", "CoverageStatus")
                 .SetDescription("The status of the coverage instance")
                 .SetNoSelectionValue(1)
@@ -28,7 +28,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Migrations
                 .AddItem(3, "draft", 0, "Draft")
                 .AddItem(4, "entered-in-error", 0, "Entered-in-error");
 
-            //Reference list items for AccountStatus
+            //Reference list items for AccountType
             this.Shesha().ReferenceListCreate("Fhir", "CoverageType")
                 .SetDescription("The type of coverage: social program, medical plan, accident coverage (workers compensation, auto), group health or payment by an individual or organization")
                 .SetNoSelectionValue(1)

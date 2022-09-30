@@ -15,7 +15,7 @@ namespace Boxfusion.Health.His.Admissions.Accounts
     /// 
     /// </summary>
     [AutoMap(typeof(BankAccount))]
-    public class SelfCoverageInput : EntityDto<Guid>
+    public class BankAccountInput : EntityDto<Guid>
     {
         /// <summary>
         /// The Bank Name

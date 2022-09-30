@@ -11,7 +11,7 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.BillingClassifications.Enum
     /// </summary>
     public enum CashPayerType
     {
-        self = 1,
-        someoneElse = 2
+        Self = 1,
+        SomeoneElse = 2
     }
 }

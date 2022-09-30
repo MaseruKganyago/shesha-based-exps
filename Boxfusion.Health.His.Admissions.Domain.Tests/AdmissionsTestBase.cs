@@ -22,6 +22,7 @@ using Boxfusion.Health.His.Admissions.Domain.Tests.Admissions;
 using Boxfusion.Health.His.Common.Diagnoses;
 using Boxfusion.Health.His.Common.ConditionIcdTenCodes;
 using Boxfusion.Health.His.Common.Admissions;
+using Boxfusion.Health.His.Common.BillingClassifications;
 
 namespace Boxfusion.Health.His.Admissions.Tests
 {
@@ -32,8 +33,12 @@ namespace Boxfusion.Health.His.Admissions.Tests
         protected IRepository<HisWard, Guid> _wardRepository;
         protected IRepository<Diagnosis, Guid> _diagnosisRepository;
         protected IRepository<HisConditionIcdTenCode, Guid> _conditionIcdTenCodeRepo;
+        protected IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepository;
+        protected IRepository<BillingClassification, Guid> _billingClassificationRepository;
+        protected IRepository<HisHealthFacility, Guid> _hisHealthFacilityRepo;
         protected readonly DiagnosisManager _diagnosisManager;
         protected readonly ConditionIcdTenCodeManager _conditionIcdTenCodeManager;
+
         protected IUnitOfWorkManager _uowManager;
         protected ISessionProvider _sessionProvider;
 
@@ -44,6 +49,9 @@ namespace Boxfusion.Health.His.Admissions.Tests
             _wardRepository = Resolve<IRepository<HisWard, Guid>>();
             _diagnosisRepository = Resolve<IRepository<Diagnosis, Guid>>();
             _conditionIcdTenCodeRepo = Resolve<IRepository<HisConditionIcdTenCode, Guid>>();
+            _hospitalAdmissionRepository = Resolve<IRepository<HospitalAdmission, Guid>>();
+            _billingClassificationRepository = Resolve<IRepository<BillingClassification, Guid>>();
+            _hisHealthFacilityRepo = Resolve<IRepository<HisHealthFacility, Guid>>();
             _diagnosisManager = Resolve<DiagnosisManager>();
             _conditionIcdTenCodeManager = Resolve<ConditionIcdTenCodeManager>();
             _uowManager = Resolve<IUnitOfWorkManager>();
@@ -102,6 +110,21 @@ namespace Boxfusion.Health.His.Admissions.Tests
         protected async Task<HisWard> GetTestData_Ward(string name)
         {
             return await _wardRepository.FirstOrDefaultAsync(a => a.Name == name);
+        }
+
+        protected async Task<HospitalAdmission> GetTestData_HospitalAdmissionAsync(Guid id)
+        {
+            return await _hospitalAdmissionRepository.GetAsync(id);
+        }
+
+        protected async Task<BillingClassification> GetTestData_BillingClassificationAsync(Guid id)
+        {
+            return await _billingClassificationRepository.GetAsync(id);
+        }
+
+        protected async Task<HisHealthFacility> GetTestData_HisHealthFacilityAsync(Guid id)
+        {
+            return await _hisHealthFacilityRepo.GetAsync(id);
         }
 
         protected async Task<HisPatient> CreateTestData_NewPatient(string name)

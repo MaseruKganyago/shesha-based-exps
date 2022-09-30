@@ -19,44 +19,39 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Accounts.AccountPaymentAppService.#ctor(Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager)">
+        <member name="M:Boxfusion.Health.His.Admissions.Accounts.AccountPaymentAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.BillingClassifications.BillingClassification,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager)">
             <summary>
             
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Accounts.AccountPaymentAppService.SetPaymentAsync(Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput)">
             <summary>
-            Creates a new Appointment to book the first available Slot for the specified schedule and requestedTime.
+            Creates a new account for every visit. Also create Self Coverage. Link the Coverages to the newly created account
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="F:Boxfusion.Health.His.Admissions.Accounts.Enum.BankAccountType.CurrentAccount">
+        <member name="T:Boxfusion.Health.His.Admissions.Accounts.BankAccountInput">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput.Bank">
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.BankAccountInput.Bank">
             <summary>
             The Bank Name
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput.AccountType">
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.BankAccountInput.AccountType">
             <summary>
             The Bank Name
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput.AccountNumber">
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.BankAccountInput.AccountNumber">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput.BranchCode">
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.BankAccountInput.BranchCode">
             <summary>
             
             </summary>
@@ -71,7 +66,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput.SelectedMedicalAidId">
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput.SelectedMedicalAidCoverageId">
             <summary>
             
             </summary>
@@ -86,7 +81,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput.SelfCoverage">
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput.BankAccount">
             <summary>
             
             </summary>
@@ -95,6 +90,24 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Coverages.CoverageAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Coverages.CoverageAppService.#ctor(Boxfusion.Health.His.Admissions.Domain.Domain.Coverages.CoverageManager)">
+            <summary>
+            
+            </summary>
+            <param name="coverageManager"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Coverages.CoverageAppService.GetSelfCashCoverage(System.Guid)">
+            <summary>
+            Get coverage Id and it's flattened bank account
+            </summary>
+            <param name="patientId"></param>
+            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Application.Domain.Views.AdmittedPatientItems">
             <summary>

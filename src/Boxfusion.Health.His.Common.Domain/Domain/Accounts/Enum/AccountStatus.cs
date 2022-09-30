@@ -8,10 +8,10 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.Accounts.Enum
 {
     public enum AccountStatus
     {
-        active = 1,
-        inactive = 2,
-        enter_in_error = 3,
-        on_hold = 4,
-        unknown = 5
+        Active = 1,
+        Inactive = 2,
+        Enter_in_error = 3,
+        On_hold = 4,
+        Unknown = 5
     }
 }

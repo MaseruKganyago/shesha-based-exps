@@ -1,32 +1,35 @@
 ﻿using Abp.Domain.Repositories;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Accounts;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
 using Boxfusion.Health.His.Admissions.Tests;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
+//using DevExpress.Web;
 using Shouldly;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using AccountManager = Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager;
 
 namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 {
     public class AdmissionsManager_Test: AdmissionsTestBase
 	{
 		private readonly AdmissionsManager _admissionsManager;
-		private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepository;
-		private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepository;
+        private readonly AccountManager _accountManager;
+        private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepository;
 
 		public AdmissionsManager_Test(): base()
 		{
 			CreateTestData_HealthFacility_And_Ward("UnitTest Hospital", "UnitTest Ward");
 			_admissionsManager = Resolve<AdmissionsManager>();
-			_hospitalAdmissionRepository = Resolve<IRepository<HospitalAdmission, Guid>>();
-			_wardAdmissionRepository = Resolve<IRepository<WardAdmission, Guid>>();
+            _accountManager =	Resolve<AccountManager>();
+            _wardAdmissionRepository = Resolve<IRepository<WardAdmission, Guid>>();
 		}
 
 		[Fact]
@@ -107,7 +110,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 			}
 		}
 
-		[Fact]
+        [Fact]
 		public async Task Should_be_able_to_update_an_admissions_details()
 		{
 			HisPatient patient = null;
