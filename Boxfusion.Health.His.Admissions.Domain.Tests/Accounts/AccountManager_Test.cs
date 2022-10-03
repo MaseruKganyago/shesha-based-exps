@@ -103,94 +103,94 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Accounts
             }
         }
 
-        //[Fact]
-        //public async Task Should_be_able_to_create_coverage_and_linkages()
-        //{
-        //    using (var uow = _uowManager.Begin())
-        //    {
-        //        try
-        //        {
-        //            //Arrange
-        //            var bankAccount = new BankAccount()
-        //            {
-        //                Id = Guid.NewGuid(),
-        //                Bank = RefListBank.ABSA,
-        //                AccountType = RefListBankAccountType.CurrentAccount,
-        //                AccountNumber = "123456789",
-        //                BranchCode = "051001"
-        //            };
+        [Fact]
+        public async Task Should_be_able_to_create_coverage_and_linkages()
+        {
+            using (var uow = _uowManager.Begin())
+            {
+                try
+                {
+                    //Arrange
+                    var bankAccount = new BankAccount()
+                    {
+                        Id = Guid.NewGuid(),
+                        Bank = RefListBank.ABSA,
+                        AccountType = RefListBankAccountType.CurrentAccount,
+                        AccountNumber = "123456789",
+                        BranchCode = "051001"
+                    };
 
-        //            var facilityId = Guid.Parse("9809088E-EE28-4DF7-A8CF-074F130F9B72");
-        //            var hospitalAdmission = await GetTestData_HospitalAdmissionAsync(Guid.Parse("BCBDE18A-225F-42A4-AF33-79DF79FBD4D0"));
-        //            var billingClassification = await GetTestData_BillingClassificationAsync(Guid.Parse("041754b8-230c-4434-adc2-76a4c9f9f849"));
-        //            var newAccount = await _accountManager.CreateAccount(facilityId, hospitalAdmission, billingClassification);
+                    var facilityId = Guid.Parse("9809088E-EE28-4DF7-A8CF-074F130F9B72");
+                    var hospitalAdmission = await GetTestData_HospitalAdmissionAsync(Guid.Parse("BCBDE18A-225F-42A4-AF33-79DF79FBD4D0"));
+                    var billingClassification = await GetTestData_BillingClassificationAsync(Guid.Parse("041754b8-230c-4434-adc2-76a4c9f9f849"));
+                    var newAccount = await _accountManager.CreateAccount(facilityId, hospitalAdmission, billingClassification);
 
 
-        //            //Act
-        //            await _accountManager.CreateCoverage(hospitalAdmission.Subject, billingClassification, newAccount,
-        //                bankAccount, 1, null, null);
+                    //Act
+                    await _accountManager.CreateCoverage(hospitalAdmission.Subject, billingClassification, newAccount,
+                        bankAccount, 1, null, null);
 
-        //            //Assert
-        //            Assert.True(true);
-        //        }
-        //        catch
-        //        {
-        //            //Assert
-        //            Assert.True(false);
-        //        }
+                    //Assert
+                    Assert.True(true);
+                }
+                catch
+                {
+                    //Assert
+                    Assert.True(false);
+                }
 
-        //    }
-        // }
+            }
+        }
 
-       
 
-        //public static IEnumerable<TestCaseData> CountEqualsZeroAndHouseGrossIsGreaterTestCases
-        //{   
-        //    get
-        //    {
-        //        var input = new SetPaymentInput()
-        //        {
-        //            BillingClassificationId = Guid.Parse("AB0626EC-15E6-42CC-8099-01D5C37A6CC9"),
-        //            SelectedMedicalAidCoverageId = Guid.Parse("09FF141D-A2A3-4DA0-B223-17B945D04FC4"),
-        //            HospitalAdmissionId = Guid.Parse("432A2FC2-9A27-46BF-B397-00AEF30559DD"),
-        //            CashPayerType = 2,
-        //            BankAccount = new BankAccountInput
-        //            {
-        //                Bank = new ReferenceListItemValueDto() { ItemValue = 1 },
-        //                AccountType = new ReferenceListItemValueDto() { ItemValue = 1 },
-        //                AccountNumber = "62123243363",
-        //            },
-        //            Selected3rdPartyCoverageId = Guid.Parse("3950FE32-2B83-47E7-9EC0-1E93644656EF"),
-        //        };
-        //        yield return new TestCaseData(input);
-        //        yield return new TestCaseData(new SetPaymentInput(), report.Merchants[4268435971532164].LineItem["EBTPerItem"], 4268435971532164, "EBTPerItem").SetName("ReportMerchantsLineItem");
-        //        yield return new TestCaseData(report, report.Merchants[5461324658456716].AggregateTotals, 5461324658456716, "WirelessPerItem").SetName("ReportMerchantsAggregateTotals");
-        //        yield return new TestCaseData(report, report.AggregateTotals, null, "AggregateTotals").SetName("ReportAggregateTotals");
-        //        yield return new TestCaseData(report, report.AggregateTotals.LineItem["WirelessPerItem"], null, "WirelessPerItem").SetName("ReportAggregateTotalsLineItem");
-        //    }
-        //}
 
-        //[Fact]
-        //public async Task<Guid> Should_be_able_to_setpayment(SetPaymentInput input)
-        //{
-        //    //CreateCoverage(Patient patient, BillingClassification billingClassification, HisAccount account,
-        //    //BankAccount bankAccount, int cashPayerType, Guid ? selectedMedicalAidCoverageId, Guid ? selected3rdPartyCoverageId);
+        public static IEnumerable<TestCaseData> CountEqualsZeroAndHouseGrossIsGreaterTestCases
+        {
+            get
+            {
+                var input = new SetPaymentInput()
+                {
+                    BillingClassificationId = Guid.Parse("AB0626EC-15E6-42CC-8099-01D5C37A6CC9"),
+                    SelectedMedicalAidCoverageId = Guid.Parse("09FF141D-A2A3-4DA0-B223-17B945D04FC4"),
+                    HospitalAdmissionId = Guid.Parse("432A2FC2-9A27-46BF-B397-00AEF30559DD"),
+                    CashPayerType = 2,
+                    BankAccount = new BankAccountInput
+                    {
+                        Bank = new ReferenceListItemValueDto() { ItemValue = 1 },
+                        AccountType = new ReferenceListItemValueDto() { ItemValue = 1 },
+                        AccountNumber = "62123243363",
+                    },
+                    Selected3rdPartyCoverageId = Guid.Parse("3950FE32-2B83-47E7-9EC0-1E93644656EF"),
+                };
+                yield return new TestCaseData(input);
+                yield return new TestCaseData(new SetPaymentInput(), report.Merchants[4268435971532164].LineItem["EBTPerItem"], 4268435971532164, "EBTPerItem").SetName("ReportMerchantsLineItem");
+                yield return new TestCaseData(report, report.Merchants[5461324658456716].AggregateTotals, 5461324658456716, "WirelessPerItem").SetName("ReportMerchantsAggregateTotals");
+                yield return new TestCaseData(report, report.AggregateTotals, null, "AggregateTotals").SetName("ReportAggregateTotals");
+                yield return new TestCaseData(report, report.AggregateTotals.LineItem["WirelessPerItem"], null, "WirelessPerItem").SetName("ReportAggregateTotalsLineItem");
+            }
+        }
 
-        //    input = new SetPaymentInput()
-        //    {
-        //        BillingClassificationId = Guid.Parse("AB0626EC-15E6-42CC-8099-01D5C37A6CC9"),
-        //        SelectedMedicalAidCoverageId = Guid.Parse("09FF141D-A2A3-4DA0-B223-17B945D04FC4"),
-        //        HospitalAdmissionId = Guid.Parse("432A2FC2-9A27-46BF-B397-00AEF30559DD"),
-        //        CashPayerType = 2,
-        //        BankAccount = new BankAccountInput
-        //        {
-        //            Bank = new ReferenceListItemValueDto() { ItemValue = 1},
-        //            AccountType = new ReferenceListItemValueDto() { ItemValue = 1 },
-        //            AccountNumber = "62123243363",
-        //        },
-        //        Selected3rdPartyCoverageId = Guid.Parse("3950FE32-2B83-47E7-9EC0-1E93644656EF"),
-        //    };
-        //}
+        [Fact]
+        public async Task<Guid> Should_be_able_to_setpayment(SetPaymentInput input)
+        {
+            //CreateCoverage(Patient patient, BillingClassification billingClassification, HisAccount account,
+            //BankAccount bankAccount, int cashPayerType, Guid ? selectedMedicalAidCoverageId, Guid ? selected3rdPartyCoverageId);
+
+            input = new SetPaymentInput()
+            {
+                BillingClassificationId = Guid.Parse("AB0626EC-15E6-42CC-8099-01D5C37A6CC9"),
+                SelectedMedicalAidCoverageId = Guid.Parse("09FF141D-A2A3-4DA0-B223-17B945D04FC4"),
+                HospitalAdmissionId = Guid.Parse("432A2FC2-9A27-46BF-B397-00AEF30559DD"),
+                CashPayerType = 2,
+                BankAccount = new BankAccountInput
+                {
+                    Bank = new ReferenceListItemValueDto() { ItemValue = 1 },
+                    AccountType = new ReferenceListItemValueDto() { ItemValue = 1 },
+                    AccountNumber = "62123243363",
+                },
+                Selected3rdPartyCoverageId = Guid.Parse("3950FE32-2B83-47E7-9EC0-1E93644656EF"),
+            };
+        }
     }
 
     public static class SetPaymentTestCases

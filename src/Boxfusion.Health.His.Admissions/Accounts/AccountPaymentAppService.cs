@@ -70,6 +70,15 @@ namespace Boxfusion.Health.His.Admissions.Accounts
             var hospitalAdmission = await _hospitaAdmissionRepo.GetAsync(input.HospitalAdmissionId);
             var billingClassification = await _billingClassificationRepo.GetAsync(input.BillingClassificationId);
 
+            if ((billingClassification?.ClassificationType.Value == (long)ClassificationType.MedicalAid))
+            {
+                Validation.ValidateIdWithException(input?.SelectedMedicalAidCoverageId, "SelectedMedicalAidCoverageId");
+                if (input.CashPayerType != (int)CashPayerType.Self && input.CashPayerType != (int)CashPayerType.SomeoneElse)
+                {
+                    throw new ArgumentException("Should select either Self or SomeoneElse", "CashPayerType");
+                }
+            }
+
             if ((billingClassification?.ClassificationType.Value == (long)ClassificationType.Cash
                     || billingClassification?.ClassificationType.Value == (long)ClassificationType.MedicalAid) && input.CashPayerType == (int)CashPayerType.Self)
             {
@@ -80,11 +89,6 @@ namespace Boxfusion.Health.His.Admissions.Accounts
                     || billingClassification?.ClassificationType.Value == (long)ClassificationType.MedicalAid) && input.CashPayerType == (int)CashPayerType.SomeoneElse)
             {
                 Validation.ValidateIdWithException(input?.Selected3rdPartyCoverageId, "Selected3rdPartyCoverageId");
-            }
-
-            if ((billingClassification?.ClassificationType.Value == (long)ClassificationType.MedicalAid))
-            {
-                Validation.ValidateIdWithException(input?.SelectedMedicalAidCoverageId, "SelectedMedicalAidCoverageId");
             }
 
             //Map bank account details
@@ -99,8 +103,6 @@ namespace Boxfusion.Health.His.Admissions.Accounts
             {
                 throw new NullReferenceException("Patient reference in hospital admission cannot be empty");
             }
-
-            bankAccount.OwnerPerson = updatedHospitalAdmission.Subject;
 
             //Step 2 Create Account
             var facilityId = RequestContextHelper.FacilityId; //access facilityId from the the header
