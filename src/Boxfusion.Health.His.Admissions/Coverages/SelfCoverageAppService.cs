@@ -21,7 +21,7 @@ namespace Boxfusion.Health.His.Admissions.Coverages
     [AbpAuthorize]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/His/[controller]")]
-    public class CoverageAppService : HisAppServiceBase
+    public class SelfCoverageAppService : HisAppServiceBase
     {
         private readonly CoverageManager _coverageManager;
 
@@ -29,7 +29,7 @@ namespace Boxfusion.Health.His.Admissions.Coverages
         /// 
         /// </summary>
         /// <param name="coverageManager"></param>
-        public CoverageAppService(CoverageManager coverageManager)
+        public SelfCoverageAppService(CoverageManager coverageManager)
         {
             _coverageManager = coverageManager;
         }
