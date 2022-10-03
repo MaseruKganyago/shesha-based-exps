@@ -95,10 +95,15 @@ namespace Boxfusion.Health.His.Admissions.Accounts
             var updatedHospitalAdmission = await _accountManager.UpdateHospitalAdmissionBillingClassification(hospitalAdmission, billingClassification);
             
             //Set bank account owner to the current patient
+            if(updatedHospitalAdmission?.Subject != null)
+            {
+                throw new NullReferenceException("Patient reference in hospital admission cannot be empty");
+            }
+
             bankAccount.OwnerPerson = updatedHospitalAdmission.Subject;
 
             //Step 2 Create Account
-            var facilityId = RequestContextHelper.FacilityId;
+            var facilityId = RequestContextHelper.FacilityId; //access facilityId from the the header
             var newAccount = await _accountManager.CreateAccount(facilityId, updatedHospitalAdmission, billingClassification);
 
             //Step 3 Create missing Coverages and links:

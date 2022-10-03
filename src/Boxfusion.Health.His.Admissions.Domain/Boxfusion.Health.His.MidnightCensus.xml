@@ -60,13 +60,14 @@
             <param name="account"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateSomeoneElseAccountCoverageLink(Boxfusion.Health.His.Common.Accounts.HisAccount,System.Nullable{System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateAccountCoverageLink(Boxfusion.Health.His.Common.Accounts.HisAccount,System.Nullable{System.Guid})">
             <summary>
             
             </summary>
             <param name="account"></param>
-            <param name="selected3rdPartyCoverageId"></param>
+            <param name="id"></param>
             <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateSelfCoverageAndAccountCoverageLink(Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Patient,Boxfusion.Health.His.Common.Accounts.HisAccount,Shesha.Enterprise.BankAccounts.BankAccount)">
             <summary>
@@ -75,14 +76,6 @@
             <param name="patient"></param>
             <param name="account"></param>
             <param name="bankAccount"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.CreateMedicalAidAccountCoverageLink(Boxfusion.Health.His.Common.Accounts.HisAccount,System.Nullable{System.Guid})">
-            <summary>
-            
-            </summary>
-            <param name="account"></param>
-            <param name="selectedMedicalAidCoverageId"></param>
             <returns></returns>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager.InsertUpdateSelfCoverage(Boxfusion.Health.His.Common.Coverages.CashCoverage,Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Patient,Shesha.Enterprise.BankAccounts.BankAccount)">
@@ -1274,6 +1267,21 @@
             
             </summary>
             <param name="localizationConfiguration"></param>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Migrations.M20220929180400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Migrations.M20220929180400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Migrations.M20220929180400.Down">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Bookings.Migrations.M20220808002400">
             <summary>

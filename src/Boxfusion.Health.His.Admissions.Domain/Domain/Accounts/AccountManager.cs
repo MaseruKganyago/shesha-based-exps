@@ -132,7 +132,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Accounts
             //Create account coverage link medical aid
             if (billingClassification?.ClassificationType.Value == (long)ClassificationType.MedicalAid)
             {
-                await CreateMedicalAidAccountCoverageLink(account, selectedMedicalAidCoverageId);
+                await CreateAccountCoverageLink(account, selectedMedicalAidCoverageId);
             }
 
             // Need to ensure cash coverage is available and added to the account
@@ -145,7 +145,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Accounts
                 }
                 else if (cashPayerType == (int)CashPayerType.SomeoneElse)
                 {
-                    await CreateSomeoneElseAccountCoverageLink(account, selected3rdPartyCoverageId);
+                    await CreateAccountCoverageLink(account, selected3rdPartyCoverageId);
                 }
             }
 
@@ -186,18 +186,23 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Accounts
         /// 
         /// </summary>
         /// <param name="account"></param>
-        /// <param name="selected3rdPartyCoverageId"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        private async Task CreateSomeoneElseAccountCoverageLink(HisAccount account, Guid? selected3rdPartyCoverageId)
+        /// <exception cref="ArgumentNullException"></exception>
+        private async Task CreateAccountCoverageLink(HisAccount account, Guid? id)
         {
-            Coverage existingSomeoneCoverage = null;
-            //Get existing someone else coverage
-            if (!(selected3rdPartyCoverageId == null || selected3rdPartyCoverageId == Guid.Empty))
+            if (id == null || id == Guid.Empty)
             {
-                existingSomeoneCoverage = await _coverageRepo.GetAsync(selected3rdPartyCoverageId.Value);
+                throw new ArgumentNullException("The id cannot be empty", "id");
             }
 
-            await CreateAccountCoverage(account, existingSomeoneCoverage);
+            Coverage coverage = null;
+            //Get medical or existingSomeoneCoverage coverage using the selected medical aid coverage Id
+            if (!(id == null || id == Guid.Empty))
+            {
+                coverage = await _coverageRepo.GetAsync(id.Value);
+            }
+            await CreateAccountCoverage(account, coverage);
         }
 
         /// <summary>
@@ -211,31 +216,9 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Accounts
         {
             //Get existing self coverage
             var existingSelfCashCoverage = await _cashCoverageRepo.FirstOrDefaultAsync(x => x.PayorPerson == patient && x.Beneficiary == patient);
-
             var insertedOrUpdatedSelfCoverage = await InsertUpdateSelfCoverage(existingSelfCashCoverage, patient, bankAccount);
+
             await CreateAccountCoverage(account, insertedOrUpdatedSelfCoverage);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="account"></param>
-        /// <param name="selectedMedicalAidCoverageId"></param>
-        /// <returns></returns>
-        private async Task CreateMedicalAidAccountCoverageLink(HisAccount account, Guid? selectedMedicalAidCoverageId)
-        {
-            if (selectedMedicalAidCoverageId == null || selectedMedicalAidCoverageId == Guid.Empty)
-            {
-                throw new ArgumentNullException(nameof(selectedMedicalAidCoverageId));
-            }
-
-            Coverage medicalAidCoverage = null;
-            //Get medical coverage using the selected medical aid coverage Id
-            if (!(selectedMedicalAidCoverageId == null || selectedMedicalAidCoverageId == Guid.Empty))
-            {
-                medicalAidCoverage = await _coverageRepo.GetAsync(selectedMedicalAidCoverageId.Value);
-            }
-            await CreateAccountCoverage(account, medicalAidCoverage);
         }
 
         /// <summary>
