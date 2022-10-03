@@ -95,7 +95,7 @@ namespace Boxfusion.Health.His.Admissions.Accounts
             var updatedHospitalAdmission = await _accountManager.UpdateHospitalAdmissionBillingClassification(hospitalAdmission, billingClassification);
             
             //Set bank account owner to the current patient
-            if(updatedHospitalAdmission?.Subject != null)
+            if(updatedHospitalAdmission?.Subject == null)
             {
                 throw new NullReferenceException("Patient reference in hospital admission cannot be empty");
             }
