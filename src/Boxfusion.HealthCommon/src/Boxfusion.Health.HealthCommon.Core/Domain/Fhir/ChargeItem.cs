@@ -1,6 +1,7 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Shesha.Domain.Attributes;
+using Shesha.Enterprise.Products;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -65,7 +66,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual long? QuantityValue { get; set; }
+		public virtual decimal? QuantityValue { get; set; }
 
 		/// <summary>
 		/// 
@@ -111,11 +112,11 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual Medication ProductMedication { get; set; }
+		public virtual FhirAccount Account { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual FhirAccount Account { get; set; }
+		public virtual Product ChargeableProduct { get; set; }
 	}
 }
