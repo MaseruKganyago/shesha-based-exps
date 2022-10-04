@@ -9,6 +9,7 @@ using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Accounts;
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.BillingClassifications;
+using Boxfusion.Health.His.Common.Coverages;
 using Boxfusion.Health.His.Common.Domain.Domain.BillingClassifications.Enum;
 using Boxfusion.Health.His.Common.Practitioners;
 using Boxfusion.Health.His.Domain.Helpers;
@@ -36,6 +37,7 @@ namespace Boxfusion.Health.His.Admissions.Accounts
     {
         private readonly IRepository<HospitalAdmission, Guid> _hospitaAdmissionRepo;
         private readonly IRepository<BillingClassification, Guid> _billingClassificationRepo;
+        private readonly IRepository<CashCoverage, Guid> _cashCoverageRepo;
         private readonly AccountManager _accountManager;
 
         /// <summary>
@@ -44,11 +46,13 @@ namespace Boxfusion.Health.His.Admissions.Accounts
         public AccountPaymentAppService(
             IRepository<HospitalAdmission, Guid> hospitaAdmissionRepo,
             IRepository<BillingClassification, Guid> billingClassificationRepo,
+            IRepository<CashCoverage, Guid> cashCoverageRepo,
             AccountManager accountManager
             )
         {
             _hospitaAdmissionRepo = hospitaAdmissionRepo;
             _billingClassificationRepo = billingClassificationRepo;
+            _cashCoverageRepo = cashCoverageRepo;
             _accountManager = accountManager;
         }
 
@@ -69,6 +73,7 @@ namespace Boxfusion.Health.His.Admissions.Accounts
             Validation.ValidateIdWithException(input?.HospitalAdmissionId, "HospitalAdmissionId");
             var hospitalAdmission = await _hospitaAdmissionRepo.GetAsync(input.HospitalAdmissionId);
             var billingClassification = await _billingClassificationRepo.GetAsync(input.BillingClassificationId);
+            BankAccount bankAccount = null;
 
             if ((billingClassification?.ClassificationType.Value == (long)ClassificationType.MedicalAid))
             {
@@ -83,6 +88,27 @@ namespace Boxfusion.Health.His.Admissions.Accounts
                     || billingClassification?.ClassificationType.Value == (long)ClassificationType.MedicalAid) && input.CashPayerType == (int)CashPayerType.Self)
             {
                 Validation.ValidateNullableType(input?.BankAccount, "BankAccount");
+
+                if (hospitalAdmission?.Subject == null)
+                {
+                    throw new NullReferenceException("Patient reference in hospital admission cannot be empty");
+                }
+
+                var existingSelfCashCoverage = await _cashCoverageRepo.FirstOrDefaultAsync(x => x.PayorPerson == hospitalAdmission.Subject && x.Beneficiary == hospitalAdmission.Subject);
+                if(existingSelfCashCoverage != null && (input?.BankAccount?.Id == null || input?.BankAccount?.Id == Guid.Empty))
+                {
+                    throw new ArgumentNullException("When self cash coverage exist, the bank account Id cannot be empty", "BankAccountId");
+                }
+
+                if (existingSelfCashCoverage == null && !(input?.BankAccount?.Id == null || input?.BankAccount?.Id == Guid.Empty))
+                {
+                    throw new ArgumentNullException("When self cash coverage does not exist, the bank account Id should not be empty", "BankAccountId");
+                }
+
+                //Map bank account details
+                var mapper = IocManager.Resolve<IMapper>();
+                bankAccount = mapper.Map<BankAccount>(input?.BankAccount);
+                bankAccount.OwnerPerson = hospitalAdmission.Subject; //Set bank account owner to the current patient
             }
 
             if ((billingClassification?.ClassificationType.Value == (long)ClassificationType.Cash
@@ -91,18 +117,12 @@ namespace Boxfusion.Health.His.Admissions.Accounts
                 Validation.ValidateIdWithException(input?.Selected3rdPartyCoverageId, "Selected3rdPartyCoverageId");
             }
 
-            //Map bank account details
-            var mapper = IocManager.Resolve<IMapper>();
-            var bankAccount = mapper.Map<BankAccount>(input?.BankAccount);
+
 
             //Step 1 Update HospitalAdmission.BillingClassification with selected BillingClassification from form
             var updatedHospitalAdmission = await _accountManager.UpdateHospitalAdmissionBillingClassification(hospitalAdmission, billingClassification);
             
-            //Set bank account owner to the current patient
-            if(updatedHospitalAdmission?.Subject == null)
-            {
-                throw new NullReferenceException("Patient reference in hospital admission cannot be empty");
-            }
+
 
             //Step 2 Create Account
             var facilityId = RequestContextHelper.FacilityId; //access facilityId from the the header

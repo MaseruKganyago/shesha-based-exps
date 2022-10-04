@@ -33,7 +33,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Coverages
                         LEFT JOIN Core_Persons per ON per.Id = bc.OwnerPersonId
                         LEFT JOIN Core_Organisations org ON org.Id = bc.OwnerOrganisationId
                         LEFT JOIN entpr_Currencies cur ON cur.Id = bc.CurrencyId
-                        WHERE cov.BeneficiaryId = :patientId
+                        WHERE cov.BeneficiaryId = :patientId AND cov.PayorPersonId = :patientId
                         AND cov.IsDeleted = 0
 						ORDER BY cov.CreationTime DESC;";
     }
