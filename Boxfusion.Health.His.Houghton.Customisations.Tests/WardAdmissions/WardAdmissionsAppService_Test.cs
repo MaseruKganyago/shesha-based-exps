@@ -129,7 +129,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 
 				//((RefListBedOccupationStatus)bedOccupation).Status.ShouldBe(RefListBedOccupationStatus.open);
 
-				bedOccupation.Status.Value.ShouldBe(RefListBedOccupationStatus.open);
+				bedOccupation.Status.Value.ShouldBe(RefListBedOccupationStatus.Open);
 
 				//Check for open ChargeItem for the bedOccupation
 				bedOccupation?.ChargeItem.ShouldNotBeNull();
@@ -219,7 +219,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				bedOccupation.ShouldNotBeNull();
 				bedOccupation.ForEach(a =>
 				{
-					a.Status.Value.ShouldBe(RefListBedOccupationStatus.closed);
+					a.Status.Value.ShouldBe(RefListBedOccupationStatus.Closed);
 				});
 				#endregion
 			}

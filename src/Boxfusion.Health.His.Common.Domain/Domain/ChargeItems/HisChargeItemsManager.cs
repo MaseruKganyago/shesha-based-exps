@@ -5,6 +5,7 @@ using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Common.Accounts;
 using Boxfusion.Health.His.Common.Admissions;
+using Boxfusion.Health.His.Common.Beds.BedOccupations;
 using Boxfusion.Health.His.Common.Domain.Domain.ChargeItems.Enums;
 using Shesha.Extensions;
 using System;
@@ -24,6 +25,7 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		private readonly IRepository<HisChargeItem, Guid> _chargeItemRepository;
 		private readonly IRepository<HisAccount, Guid> _accountRepository;
 		private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepository;
+		private readonly BedOccupationManager _bedOccupationManager;
 
 		/// <summary>
 		/// 
@@ -31,13 +33,16 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		/// <param name="chargeItemRepository"></param>
 		/// <param name="accountRepository"></param>
 		/// <param name="wardAdmissionRepository"></param>
+		/// <param name="bedOccupationManager"></param>
 		public HisChargeItemsManager(IRepository<HisChargeItem, Guid> chargeItemRepository,
 			IRepository<HisAccount, Guid> accountRepository,
-			IRepository<WardAdmission, Guid> wardAdmissionRepository)
+			IRepository<WardAdmission, Guid> wardAdmissionRepository,
+			BedOccupationManager bedOccupationManager)
 		{
 			_chargeItemRepository = chargeItemRepository;
 			_accountRepository = accountRepository;
 			_wardAdmissionRepository = wardAdmissionRepository;
+			_bedOccupationManager = bedOccupationManager;
 		}
 
 		/// <summary>
@@ -70,7 +75,7 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		/// </summary>
 		/// <param name="currentChargeItem"></param>
 		/// <returns></returns>
-		public async Task<HisChargeItem> ClosedAndOpenNewChargeItem(HisChargeItem currentChargeItem)
+		public async Task<HisChargeItem> ClosedAndOpenNewChargeItemAsync(HisChargeItem currentChargeItem)
 		{
 			var closedChargeItem = await CloseChargeItemAsync(currentChargeItem);
 
@@ -98,28 +103,10 @@ namespace Boxfusion.Health.His.Common.ChargeItems
 		{
 			currentChargeItem.Status = RefListChargeItemStatus.closed;
 
-			currentChargeItem.QuantityValue = await GetQuantityFromCharge(currentChargeItem);
+			if (currentChargeItem.ServiceType == (new WardAdmission()).GetTypeShortAlias())
+				currentChargeItem.QuantityValue = await _bedOccupationManager.GetQuantityFromBedOccupationAsync(currentChargeItem);
 
 			return await _chargeItemRepository.UpdateAsync(currentChargeItem);
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="charge"></param>
-		/// <returns></returns>
-		/// <exception cref="UserFriendlyException"></exception>
-		public async Task<long> GetQuantityFromCharge(HisChargeItem charge)
-		{
-			if (charge.ServiceType == (new WardAdmission()).GetTypeShortAlias())
-			{
-				var admission = await _wardAdmissionRepository.GetAsync(charge.ServiceId);
-
-				if (admission.StartDateTime == null) throw new UserFriendlyException($"Curremt WardAdmission does not have AdmissionDate.");
-
-				return DateTime.Now.Subtract(admission.StartDateTime.Value).Days;
-			}
-			else return (long)charge.QuantityValue;
 		}
 
 		/// <summary>

@@ -5,6 +5,7 @@ using Abp.UI;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Boxfusion.Health.His.Common.Accounts;
 using Boxfusion.Health.His.Common.Admissions;
+using Boxfusion.Health.His.Common.Beds.BedOccupations;
 using Boxfusion.Health.His.Common.ChargeItems;
 using Boxfusion.Health.His.Common.Domain.Domain.ChargeItems.Enums;
 using Boxfusion.Health.His.Common.Invoices;
@@ -26,6 +27,7 @@ namespace Boxfusion.Health.His.Common.Invoices
 	public class HisInvoiceManager: DomainService
 	{
 		private readonly HisChargeItemsManager _hisChargeItemManager;
+		private readonly BedOccupationManager _bedOccupationManager;
 		private readonly IRepository<HisInvoiceLineItem, Guid> _hisInvoiceLineItemRepository;
 		private readonly IRepository<HisInvoice, Guid> _hisInvoiceRepository;
 		private readonly IRepository<HisAccount, Guid> _hisAccountRepository;
@@ -38,26 +40,32 @@ namespace Boxfusion.Health.His.Common.Invoices
 		/// 
 		/// </summary>
 		/// <param name="hisChargeItemManager"></param>
+		/// <param name="bedOccupationManager"></param>
 		/// <param name="hisInvoiceLineItemRepository"></param>
 		/// <param name="hisHealthFacility"></param>
 		/// <param name="hisAccountRepository"></param>
 		/// <param name="hisProductRepository"></param>
 		/// <param name="wardAdmissionRepository"></param>
+		/// <param name="hisInvoiceRepository"></param>
 		/// <param name="unitOfWorkManager"></param>
 		public HisInvoiceManager(HisChargeItemsManager hisChargeItemManager,
+			BedOccupationManager bedOccupationManager,
 			IRepository<HisInvoiceLineItem, Guid> hisInvoiceLineItemRepository,
 			IRepository<HisHealthFacility, Guid> hisHealthFacility,
 			IRepository<HisAccount, Guid> hisAccountRepository,
 			IRepository<HisProduct, Guid> hisProductRepository,
 			IRepository<WardAdmission, Guid> wardAdmissionRepository,
+			IRepository<HisInvoice, Guid> hisInvoiceRepository,
 			IUnitOfWorkManager unitOfWorkManager)
 		{
 			_hisChargeItemManager = hisChargeItemManager;
+			_bedOccupationManager = bedOccupationManager;
 			_hisInvoiceLineItemRepository = hisInvoiceLineItemRepository;
 			_hisHealthFacility = hisHealthFacility;
 			_hisAccountRepository = hisAccountRepository;
 			_hisProductRepository = hisProductRepository;
 			_wardAdmissionRepository = wardAdmissionRepository;
+			_hisInvoiceRepository = hisInvoiceRepository;
 			_unitOfWorkManager = unitOfWorkManager;
 		}
 
@@ -97,11 +105,16 @@ namespace Boxfusion.Health.His.Common.Invoices
 				
 				var product = await _hisProductRepository.FirstOrDefaultAsync(a => a.ProductCode == charge.Code);
 
+				int localQuantity;
+				if (charge.ServiceType == (new WardAdmission()).GetTypeShortAlias())
+					localQuantity = (int)await _bedOccupationManager.GetQuantityFromBedOccupationAsync(charge);
+				else localQuantity = (int)charge.QuantityValue;
+
 				var newInvoiceLineItem = new HisInvoiceLineItem()
 				{
 					Invoice = invoice,
 					Product = product,
-					Quantity = (int?)await _hisChargeItemManager.GetQuantityFromCharge(charge)
+					Quantity = localQuantity
 				};
 
 				await _hisInvoiceLineItemRepository.InsertAsync(newInvoiceLineItem);

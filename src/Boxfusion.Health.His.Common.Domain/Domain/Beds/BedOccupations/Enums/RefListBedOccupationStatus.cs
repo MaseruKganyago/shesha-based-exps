@@ -18,12 +18,12 @@ namespace Boxfusion.Health.His.Common.Beds.BedFees.Enums
 		/// 
 		/// </summary>
 		[Description("Open")]
-		open = 1,
+		Open = 1,
 
 		/// <summary>
 		/// 
 		/// </summary>
 		[Description("Closed")]
-		closed = 2
+		Closed = 2
 	}
 }

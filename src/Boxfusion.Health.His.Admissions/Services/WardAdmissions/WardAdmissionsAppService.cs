@@ -152,7 +152,7 @@ namespace Boxfusion.Health.His.Admissions.WardAdmissions
             //Close bedOccupation on patient discharge
             var bedOccupation = await _bedOccupationManager.repository()
                                            .FirstOrDefaultAsync(a => a.WardAdmission.Id == wardAdmissionEntity.Id &&
-                                            a.Status == RefListBedOccupationStatus.open);
+                                            a.Status == RefListBedOccupationStatus.Open);
 
             await _bedOccupationManager.CloseBedOccupationAsync(bedOccupation);
 

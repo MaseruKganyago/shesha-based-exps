@@ -63,9 +63,10 @@ namespace Boxfusion.Health.His.Admissions.Services.BedOccupations
 			await _wardAdmissionRepository.UpdateAsync(admission);
 
 			var chargeItem = await _chargeItemManager.GetOpenChargeItemByServiceIdAsync(wardAdmissionId);
-			var currentBedFee = await _bedOccupationManager.GetOpenBedOccupationByWardAdmissionIdAsync(wardAdmissionId);
+			var newChargeItem = await _chargeItemManager.ClosedAndOpenNewChargeItemAsync(chargeItem);
 
-			var newBedOccupation = await _bedOccupationManager.CloseAndOpenNewBedOccupationAsync(currentBedFee, chargeItem);
+			var currentBedOccupation = await _bedOccupationManager.GetOpenBedOccupationByWardAdmissionIdAsync(wardAdmissionId);
+			var newBedOccupation = await _bedOccupationManager.CloseAndOpenNewBedOccupationAsync(currentBedOccupation, newChargeItem);
 
 			return await MapToDynamicDtoAsync<BedOccupation, Guid>(newBedOccupation);
 		}
