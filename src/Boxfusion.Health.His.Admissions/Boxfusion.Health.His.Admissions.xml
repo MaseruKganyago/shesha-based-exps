@@ -19,7 +19,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Accounts.AccountPaymentAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.BillingClassifications.BillingClassification,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager)">
+        <member name="M:Boxfusion.Health.His.Admissions.Accounts.AccountPaymentAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.BillingClassifications.BillingClassification,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Coverages.CashCoverage,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager)">
             <summary>
             
             </summary>
