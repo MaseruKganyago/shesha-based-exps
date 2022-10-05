@@ -25,7 +25,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions.Dtos
         /// <summary>
          
         /// </summary>
-        public RefListAdmissionStatuses? AdmissionStatus { get; set; }
+        public RefListWardAdmissionStatuses? WardAdmissionStatus { get; set; }
 
         /// <summary>
         /// 

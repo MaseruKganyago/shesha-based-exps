@@ -1,32 +1,35 @@
 ﻿using Abp.Domain.Repositories;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Enum;
 using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
+using Boxfusion.Health.His.Admissions.Domain.Domain.Accounts;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
 using Boxfusion.Health.His.Admissions.Tests;
 using Boxfusion.Health.His.Common;
 using Boxfusion.Health.His.Common.Admissions;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
+//using DevExpress.Web;
 using Shouldly;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using AccountManager = Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager;
 
 namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 {
     public class AdmissionsManager_Test: AdmissionsTestBase
 	{
 		private readonly AdmissionsManager _admissionsManager;
-		private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepository;
-		private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepository;
+        private readonly AccountManager _accountManager;
+        private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepository;
 
 		public AdmissionsManager_Test(): base()
 		{
 			CreateTestData_HealthFacility_And_Ward("UnitTest Hospital", "UnitTest Ward");
 			_admissionsManager = Resolve<AdmissionsManager>();
-			_hospitalAdmissionRepository = Resolve<IRepository<HospitalAdmission, Guid>>();
-			_wardAdmissionRepository = Resolve<IRepository<WardAdmission, Guid>>();
+            _accountManager =	Resolve<AccountManager>();
+            _wardAdmissionRepository = Resolve<IRepository<WardAdmission, Guid>>();
 		}
 
 		[Fact]
@@ -71,7 +74,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 					StartDateTime = DateTime.Now,
 					WardAdmissionNumber = "UnitTest: 12345",
 					AdmissionType = RefListAdmissionTypes.normalAdmission,
-					AdmissionStatus = RefListAdmissionStatuses.admitted
+					WardAdmissionStatus = RefListWardAdmissionStatuses.admitted
 				};
 				#endregion
 
@@ -89,7 +92,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 
 				//Check if admitted into ward
 				admission.Id.ShouldNotBe(Guid.Empty);
-				admission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.admitted);
+				admission.WardAdmissionStatus.ShouldBe(RefListWardAdmissionStatuses.admitted);
 
 				//Check if diagnosis was made for admission
 				diagnosis = await GetTestData_AdmissionDiagnosis(admission, RefListEncounterDiagnosisRoles.AD);
@@ -107,7 +110,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 			}
 		}
 
-		[Fact]
+        [Fact]
 		public async Task Should_be_able_to_update_an_admissions_details()
 		{
 			HisPatient patient = null;
@@ -211,7 +214,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 				#region Assert: Verify if patient is separated and admitted in new ward
 				//Check if patient is separated from previous ward
 				separatedAdmission.Subject.Id.ShouldBe(patient.Id);
-				separatedAdmission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.separated);
+				separatedAdmission.WardAdmissionStatus.ShouldBe(RefListWardAdmissionStatuses.separated);
 
 				var transferedList = await _wardAdmissionRepository.GetAllListAsync(a => a.InternalTransferOriginalWard.Id
 																	== separatedAdmission.Id);
@@ -221,7 +224,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 				transferedAdmission.Ward.Id.ShouldBe(nextWard.Id);
 
 				//Check that newAdmission is inTransit
-				transferedAdmission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.inTransit);
+				transferedAdmission.WardAdmissionStatus.ShouldBe(RefListWardAdmissionStatuses.inTransit);
 
 				//Check that newAdmission is still in the current hospitalAdmission
 				transferedAdmission.PartOf.Id.ShouldBe(hospitalAdmission.Id);
@@ -293,18 +296,18 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 				#region Assert: Verify if admission was Accepected or Rejected
 				//-----On accepected------
 				//Veirify that transferedAdmission is admitted
-				//acceptOrRejectedAdmission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.admitted);
+				//acceptOrRejectedAdmission.WardAdmissionStatus.ShouldBe(RefListWardAdmissionStatuses.admitted);
 
 				////Verify that transferedAdmission admissionType is internalTransfer
 				//acceptOrRejectedAdmission.AdmissionType.ShouldBe(RefListAdmissionTypes.internalTransferIn);
 
 				//-----On Rejected------
 				//Veirify that transferedAdmission is rejected
-				acceptOrRejectedAdmission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.rejected);
+				acceptOrRejectedAdmission.WardAdmissionStatus.ShouldBe(RefListWardAdmissionStatuses.rejected);
 
 				//Verify original wardAdmission is re-admitted
 				var originalWard = await _wardAdmissionRepository.GetAsync(separatedAdmission.Id);
-				originalWard.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.admitted);
+				originalWard.WardAdmissionStatus.ShouldBe(RefListWardAdmissionStatuses.admitted);
 				#endregion
 			}
 			finally
@@ -358,7 +361,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 				await uow.CompleteAsync();
 
 				// Assert: Verify if patient is re-admitted
-				reAdmission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.admitted);
+				reAdmission.WardAdmissionStatus.ShouldBe(RefListWardAdmissionStatuses.admitted);
 			}
 			finally
 			{
@@ -381,7 +384,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Tests.Admissions
 			admission.StartDateTime = DateTime.Now;
 			admission.WardAdmissionNumber = "UnitTest: 12345Update";
 			admission.AdmissionType = RefListAdmissionTypes.internalTransferIn;
-			admission.AdmissionStatus = RefListAdmissionStatuses.admitted;
+			admission.WardAdmissionStatus = RefListWardAdmissionStatuses.admitted;
 		}
 	}
 }

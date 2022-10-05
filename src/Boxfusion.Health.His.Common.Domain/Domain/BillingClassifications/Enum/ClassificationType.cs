@@ -11,9 +11,8 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.BillingClassifications.Enum
     /// </summary>
     public enum ClassificationType
     {
-        medicalAid = 1,
-        cash = 2,
-        roadAccidentFund = 3,
-        iod = 4
+        MedicalAid = 1,
+        Cash = 2,
+        CoveredBySingleOrganisation = 3
     }
 }

@@ -19,7 +19,7 @@ namespace Boxfusion.Health.His.Admissions.Accounts
         /// <summary>
         /// 
         /// </summary>
-        public Guid? SelectedMedicalAidId { get; set; }
+        public Guid? SelectedMedicalAidCoverageId { get; set; }
 
         /// <summary>
         /// 
@@ -34,7 +34,7 @@ namespace Boxfusion.Health.His.Admissions.Accounts
         /// <summary>
         /// 
         /// </summary>
-        public SelfCoverageInput SelfCoverage { get; set; }
+        public BankAccountInput BankAccount { get; set; }
 
         /// <summary>
         /// 

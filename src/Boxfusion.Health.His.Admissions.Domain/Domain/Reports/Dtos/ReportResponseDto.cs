@@ -98,7 +98,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos
         /// <summary>
         /// 
         /// </summary>
-        public ReferenceListItemValueDto AdmissionStatus { get; set; }
+        public ReferenceListItemValueDto WardAdmissionStatus { get; set; }
 
         /// <summary>
         /// 

@@ -4,13 +4,20 @@ using Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir;
 using Boxfusion.Health.His.Admissions.Domain.Domain.Admissions;
 using Boxfusion.Health.His.Admissions.WardAdmissions;
 using Boxfusion.Health.His.Common.Admissions;
+using Boxfusion.Health.His.Common.Beds.BedFees.Enums;
+using Boxfusion.Health.His.Common.Beds.BedOccupations;
+using Boxfusion.Health.His.Common.ChargeItems;
+using Boxfusion.Health.His.Common.Domain.Domain.ChargeItems.Enums;
+using Boxfusion.Health.His.Common.Domain.Domain.Products;
 using Boxfusion.Health.His.Common.Enums;
 using Boxfusion.Health.His.Common.Patients;
 using Boxfusion.Health.His.Hougton.Tests;
 using GraphQL;
+using NHibernate.Linq;
 using Shesha.AutoMapper.Dto;
 using Shesha.DynamicEntities.Dtos;
 using Shesha.Enterprise.Sequences;
+using Shesha.Extensions;
 using Shouldly;
 using System;
 using System.Collections.Generic;
@@ -26,6 +33,9 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 		private readonly WardAdmissionsAppService _wardAdmissionsAppService;
 		private readonly IRepository<WardAdmission, Guid> _wardAdmissionRepositiory;
 		private readonly IRepository<HospitalAdmission, Guid> _hospitalAdmissionRepositiory;
+		private readonly IRepository<HisChargeItem, Guid> _hisChargeItemRepositiory;
+		private readonly HisChargeItemsManager _hisChargeItemManagerRepositiory;
+		private readonly BedOccupationManager _bedOccupationManager;
 
 		public WardAdmissionsAppService_Test(): base()
 		{
@@ -33,6 +43,9 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 			_wardAdmissionsAppService = Resolve<WardAdmissionsAppService>();
 			_hospitalAdmissionRepositiory = Resolve<IRepository<HospitalAdmission, Guid>>();
 			_wardAdmissionRepositiory = Resolve<IRepository<WardAdmission, Guid>>();
+			_hisChargeItemRepositiory = Resolve<IRepository<HisChargeItem, Guid>>();
+			_hisChargeItemManagerRepositiory = Resolve<HisChargeItemsManager>();
+			_bedOccupationManager = Resolve<BedOccupationManager>();
 		}
 
 		/// <summary>
@@ -40,7 +53,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 		/// </summary>
 		/// <returns></returns>
 		[Fact]
-		public async Task Should_AdmitPatient_inWard_and_CreateDiagnosis_and_Notes()
+		public async Task Should_AdmitPatient_inWard_and_CreateDiagnosis_and_Notes_then_CreateBedOccupation_and_ChargeItem()
 		{
 			HisPatient patient = null;
 			WardAdmission admission = null;
@@ -89,7 +102,7 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 
 				//Check if admitted into ward
 				admission.Id.ShouldNotBe(Guid.Empty);
-				admission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.admitted);
+				admission.WardAdmissionStatus.ShouldBe(RefListWardAdmissionStatuses.admitted);
 
 				//Check if diagnosis was made for admission
 				diagnosis = await GetTestData_AdmissionDiagnosisList(admission, RefListEncounterDiagnosisRoles.AD);
@@ -106,6 +119,21 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				//Check if admission note was created
 				var note = await GetTestData_Note(admission.Id.ToString());
 				note.NoteText.ShouldBe(admitPatientInput.AdmissionNotes);
+
+				//Check for open bedOccupation for the wardAdmission
+				using var uowB = _uowManager.Begin();
+				var bedOccupation = (await _bedOccupationManager.repository().GetAllIncluding(a => a.ChargeItem)
+										.Where(a => a.WardAdmission.Id == admission.Id).ToListAsync()).FirstOrDefault();
+				await uowB.CompleteAsync();
+				bedOccupation.ShouldNotBeNull();
+
+				//((RefListBedOccupationStatus)bedOccupation).Status.ShouldBe(RefListBedOccupationStatus.open);
+
+				bedOccupation.Status.Value.ShouldBe(RefListBedOccupationStatus.Open);
+
+				//Check for open ChargeItem for the bedOccupation
+				bedOccupation?.ChargeItem.ShouldNotBeNull();
+				bedOccupation.ChargeItem.Status.Value.ShouldBe(RefListChargeItemStatus.open);
 				#endregion
 			}
 			catch (Exception ex)
@@ -115,6 +143,8 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 			finally
 			{
 				await CleanUpTestData_PatientAdmission(admission);
+				if (diagnosis is not null &&
+					diagnosis.Any()) diagnosis.ForEach(a => DeleteDiagnosisCombo(a));
 				if (patient is not null) CleanUpTestData_Patient(patient.Id);
 			}
 		}
@@ -124,26 +154,41 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 		/// </summary>
 		/// <returns></returns>
 		[Fact]
-		public async Task Should_Discharge_Patient_from_Ward_and_Hospital()
+		public async Task Should_Discharge_Patient_from_Ward_and_Hospital_add_DischargeNote_and_CloseBedOccupation()
 		{
 			HisPatient patient = null;
 			WardAdmission admission = null;
+			HospitalAdmission hospitalAdmission = null;
+			HisChargeItem chargeItem = null;
 			try
 			{
 				#region Prepare data for test-discharge
 				var hospital = await GetTestData_HealthFacility("UnitTest Hospital");
 				var ward = await GetTestData_Ward("UnitTest Ward");
+				var bed = await GetTestData_Bed("UnitTest Bed");
 				patient = await CreateTestData_NewPatient("John Smith" + " :Test2");
 
 				var admissionData = await CreateTestData_NewAdmission(hospital.Id, ward.Id);
 				admissionData.ShouldNotBeNull();
+
+				await CreateWardAdmissionChargeItem(admissionData);
+
+				var newBedFee = new BedOccupation()
+				{
+					StartDate = admissionData.StartDateTime,
+					WardAdmission = admissionData,
+					Bed = bed,
+					ChargeItem = chargeItem
+				};
+				await _bedOccupationManager.CreateBedOccupationAsync(newBedFee);
 
 				var dischargeInput = new WardDischargeDto()
 				{
 					Id = admissionData.Id,
 					DischargeDate = DateTime.Now,
 					DischargeNotes = "UnitTest Note",
-					Physician = "Dave Kate" + " :Test2"
+					SeparationType = (long?)RefListSeparationTypes.dischargeNormal
+					//Physician = new 
 				};
 				#endregion
 
@@ -157,13 +202,25 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				admission.ShouldNotBeNull();
 
 				//Verify wardAdmission was discharged
-				admission.AdmissionStatus.ShouldBe(RefListAdmissionStatuses.separated);
-				admission.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.ToString("MM/dd/yyyy HH:mm"));
+				admission.WardAdmissionStatus.ShouldBe(RefListWardAdmissionStatuses.separated);
+				admission.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.Value.ToString("MM/dd/yyyy HH:mm"));
+
+				//Verify hospitalAdmission was dischaarged
+				hospitalAdmission?.HospitalAdmissionStatus.ShouldBe(RefListHospitalAdmissionStatuses.separated);
+				hospitalAdmission?.EndDateTime?.ToString("MM/dd/yyyy HH:mm").ShouldBe(dischargeInput.DischargeDate.Value.ToString("MM/dd/yyyy HH:mm"));
 
 				//Verify discharge note was created
 				var note = await _noteRepository.FirstOrDefaultAsync(a => a.OwnerId == admission.Id.ToString());
 				note.ShouldNotBeNull();
 				note.NoteText.ShouldBe(dischargeInput.DischargeNotes);
+
+				//Verify that bedOccupation is closed
+				var bedOccupation = await _bedOccupationManager.repository().GetAllListAsync();
+				bedOccupation.ShouldNotBeNull();
+				bedOccupation.ForEach(a =>
+				{
+					a.Status.Value.ShouldBe(RefListBedOccupationStatus.Closed);
+				});
 				#endregion
 			}
 			catch (Exception ex)
@@ -176,6 +233,30 @@ namespace Boxfusion.Health.His.Admissions.Application.Tests.WardAdmissions
 				await CleanUpTestData_PatientAdmission(admission);
 				if (patient is not null) CleanUpTestData_Patient(patient.Id);
 			}
+		}
+
+		private async Task CreateWardAdmissionChargeItem(WardAdmission wardAdmissionEntity)
+		{
+			string productCode = null;
+			if (wardAdmissionEntity.Bed is not null)
+			{
+				var bedList = await _bedRepository.GetAllIncluding(a => a.BedType).Where(a => a.Id == wardAdmissionEntity.Bed.Id).ToListAsync();
+				var bed = bedList.FirstOrDefault();
+
+				productCode = await ProductsHelper.GetProductCode(bed.BedType.Id);
+			}
+
+			var chargeItem = new HisChargeItem()
+			{
+				Status = RefListChargeItemStatus.open,
+				Subject = wardAdmissionEntity.Subject,
+				ContextEncounter = wardAdmissionEntity.PartOf,
+				ServiceId = wardAdmissionEntity.Id,
+				ServiceType = wardAdmissionEntity.GetTypeShortAlias(),
+				Code = productCode
+
+			};
+			await _hisChargeItemManagerRepositiory.CreateChargeItemAsync(chargeItem);
 		}
 
 	}

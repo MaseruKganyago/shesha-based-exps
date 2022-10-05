@@ -20,6 +20,7 @@ namespace Boxfusion.Health.His.Hougton.Tests
     public class HisAdmissionsApplicationTestBase: AdmissionsTestBase
 	{
         protected IRepository<Bed, Guid> _bedRepository;
+        protected IRepository<BedType, Guid> _bedTypeRepository;
         protected IRepository<Room, Guid> _roomRepository;
         protected IRepository<Condition, Guid> _conditionRepository;
         protected IRepository<Note, Guid> _noteRepository;
@@ -29,6 +30,7 @@ namespace Boxfusion.Health.His.Hougton.Tests
             _conditionRepository = Resolve<IRepository<Condition, Guid>>();
             _roomRepository = Resolve<IRepository<Room, Guid>>();
             _bedRepository = Resolve<IRepository<Bed, Guid>>();
+            _bedTypeRepository = Resolve<IRepository<BedType, Guid>>();
             _noteRepository = Resolve<IRepository<Note, Guid>>();
 		}
 
@@ -36,7 +38,7 @@ namespace Boxfusion.Health.His.Hougton.Tests
         /// 
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="wardName"></param>
+        /// <param name="wardName"></param>/
 		protected void CreateTestData_HealthFacility_And_Ward_With_RoomBed(string name, string wardName, string roomName, string bedName)
         {
             LoginAsHost("admin");
@@ -80,18 +82,44 @@ namespace Boxfusion.Health.His.Hougton.Tests
 
         protected Bed CreateTestData_Bed(string name, Room room)
         {
+            var bedType = CreateTestData_BedType("test", "testCode");
+
             var bed = _bedRepository.FirstOrDefault(a => a.Name == name);
             if (bed is null)
             {
                 var newBed = new Bed()
                 {
                     Name = name,
-                    Room = room
+                    Room = room,
+                    BedType = bedType
+                    
                 };
                 bed = _bedRepository.Insert(newBed);
             }
 
             return bed;
+        }
+
+        protected BedType CreateTestData_BedType(string name, string productCode)
+        {
+
+            
+            var bedType = _bedTypeRepository.FirstOrDefault(a => a.Name == name);
+            if (bedType is null)
+            {
+                var newBedType = new BedType()
+                {
+                    Name = name,
+                    ProductCode = productCode
+                   
+                    
+                    
+
+                };
+                bedType = _bedTypeRepository.Insert(newBedType);
+            }
+
+            return bedType;
         }
 
         protected async Task<List<Condition>> CreateTestData_Conditions(HisPatient patient)

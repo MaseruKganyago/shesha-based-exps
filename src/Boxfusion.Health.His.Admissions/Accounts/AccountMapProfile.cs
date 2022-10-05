@@ -23,7 +23,7 @@ namespace Boxfusion.Health.His.Admissions.Accounts
         /// </summary>
         public AccountMapProfile()
         {
-            CreateMap<SelfCoverageInput, BankAccount>()
+            CreateMap<BankAccountInput, BankAccount>()
             .ForMember(@out => @out.Bank, options => options.MapFrom(@in => UtilityHelper.GetRefListItemValue(@in.Bank)))
             .ForMember(@out => @out.AccountType, options => options.MapFrom(@in => UtilityHelper.GetRefListItemValue(@in.AccountType)))
             .IgnoreNotMapped()

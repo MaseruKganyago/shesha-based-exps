@@ -197,8 +197,8 @@ namespace Boxfusion.Health.His.Admissions.Admissions
 																			(RefListTransferRejectionReasons)input.TransferRejectionReason, input.TransferRejectionReasonComment);
 
             var response = new AcceptOrRejectTransfersResponse();
-            if (admissionEntity.AdmissionStatus.Equals(RefListAdmissionStatuses.admitted)) response.Accepted = true;
-            else if (admissionEntity.AdmissionStatus.Equals(RefListAdmissionStatuses.rejected)) response.Rejected = true;
+            if (admissionEntity.WardAdmissionStatus.Equals(RefListWardAdmissionStatuses.admitted)) response.Accepted = true;
+            else if (admissionEntity.WardAdmissionStatus.Equals(RefListWardAdmissionStatuses.rejected)) response.Rejected = true;
 
             return response;
         }

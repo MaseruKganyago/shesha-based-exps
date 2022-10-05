@@ -12,6 +12,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Reports.Dtos
     /// <summary>
     /// 
     /// </summary>
+    [NotMapped]
     public class DashboardModelQuery : Entity<Guid>
     {
         /// <summary>

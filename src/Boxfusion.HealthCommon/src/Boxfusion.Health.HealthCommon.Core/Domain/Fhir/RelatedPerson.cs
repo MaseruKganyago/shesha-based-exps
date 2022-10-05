@@ -12,7 +12,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
     /// <summary>
     /// 
     /// </summary>
-    [Entity(TypeShortAlias = "HealthCommon.Core.RelatedPerson", GenerateApplicationService = false)]
+    [Entity(TypeShortAlias = "HealthCommon.Core.RelatedPerson")]
     public class RelatedPerson : PersonFhirBase
     {
         /// <summary>

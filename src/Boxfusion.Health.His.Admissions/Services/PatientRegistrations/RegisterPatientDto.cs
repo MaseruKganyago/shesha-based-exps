@@ -19,6 +19,16 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		/// <summary>
 		/// 
 		/// </summary>
+		public int? Title { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string PassportNumber { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public long? RegistrationType { get; set; }
 
 		/// <summary>
@@ -54,7 +64,7 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		/// <summary>
 		/// 
 		/// </summary>
-		public DateTime DateOfBirth { get; set; }
+		public DateTime? DateOfBirth { get; set; }
 
 		/// <summary>
 		/// 
@@ -64,12 +74,12 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		/// <summary>
 		/// 
 		/// </summary>
-		public long? Race { get; set; }
+		public long? Ethnicity { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public long? HomeLangauge { get; set; }
+		public List<ReferenceListItemValueDto>? CommunicationLanguage { get; set; }
 
 		/// <summary>
 		/// 
@@ -89,7 +99,7 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		/// <summary>
 		/// 
 		/// </summary>
-		public long? Province { get; set; }
+		public long? PatientProvince { get; set; }
 
 		/// <summary>
 		/// 

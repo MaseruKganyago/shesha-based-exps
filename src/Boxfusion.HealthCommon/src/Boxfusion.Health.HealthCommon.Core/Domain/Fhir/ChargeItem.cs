@@ -1,8 +1,10 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using Boxfusion.Health.HealthCommon.Core.Domain.Fhir;
 using Shesha.Domain.Attributes;
+using Shesha.Enterprise.Products;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 	/// 
 	/// </summary>
 	[Entity(TypeShortAlias = "HealthCommon.Core.ChargeItem")]
+	[Discriminator]
 	public class ChargeItem: FullAuditedEntity<Guid>
 	{
 		/// <summary>
@@ -63,7 +66,7 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual long? QuantityValue { get; set; }
+		public virtual decimal? QuantityValue { get; set; }
 
 		/// <summary>
 		/// 
@@ -73,16 +76,17 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual decimal FactorOverride { get; set; }
+		public virtual decimal? FactorOverride { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual decimal PriceOverride { get; set; }
+		public virtual decimal? PriceOverride { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
+		[StringLength(int.MaxValue)]
 		public virtual string OverrideReason { get; set; }
 
 		/// <summary>
@@ -108,11 +112,11 @@ namespace Boxfusion.Health.HealthCommon.Core.Domain.Fhir
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual Medication ProductMedication { get; set; }
+		public virtual FhirAccount Account { get; set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public virtual FhirAccount Account { get; set; }
+		public virtual Product ChargeableProduct { get; set; }
 	}
 }

@@ -60,7 +60,7 @@ namespace Boxfusion.Health.His.Admissions.Domain.Domain.Admissions
 		/// <summary>
 		/// 
 		/// </summary>
-		[ReferenceList("His", "AdmissionStatuses")]
+		[ReferenceList("His", "WardAdmissionStatuses")]
 		public virtual long? Status { get; set; }
 
 		/// <summary>

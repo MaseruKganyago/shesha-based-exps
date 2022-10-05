@@ -45,10 +45,8 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 		/// <param name="input"></param>
 		/// <returns></returns>
 		[HttpPost, Route("[action]")]
-		public async Task<DynamicDto<HisPatient, Guid>> RegisterPatient(RegisterPatientDto input)
+		public async Task<RegisterPatientResultDto> RegisterPatient(RegisterPatientDto input)
 		{
-			try
-			{
 				var homeAddress = await CreatePatientAddress(input.ResidentialAddress, input.SecondResidentialAddress);
 
 				Address workAddress = null;
@@ -60,28 +58,59 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 					ObjectMapper.Map<RegisterPatientDto, HisPatient>(input, item);
 					item.Address = homeAddress;
 					item.WorkAddress = workAddress;
+					item.PatientMasterIndexNumber = GetPatientFileNumber();
 				});
 
-				var facilityId = RequestContextHelper.FacilityId;
 				HisHealthFacility facility = null;
 				if (RequestContextHelper.HasFacilityId)
+				{
+					var facilityId = RequestContextHelper.FacilityId;
 					facility = await _healthFacilityRepository.GetAsync(facilityId);
+				}
 
-				await SaveOrUpdateEntityAsync<HospitalAdmission>(null, async item =>
+				var hospitalAdmissionEntity = await SaveOrUpdateEntityAsync<HospitalAdmission>(null, async item =>
 				{
 					item.RegistrationType = input.RegistrationType;
 					item.Subject = patientEntity;
 					item.HospitalAdmissionStatus = RefListHospitalAdmissionStatuses.draft;
 					item.HospitalAdmissionNumber = GetAdmissionNumber();
 					item.ServiceProvider = facility;
+					item.StartDateTime = DateTime.UtcNow.AddHours(2);
 				});
 
-				return await MapToDynamicDtoAsync<HisPatient, Guid>(patientEntity);
-			}
-			catch (Exception ex)
+				var patientDto = await MapToDynamicDtoAsync<HisPatient, Guid>(patientEntity);
+				var result = new RegisterPatientResultDto()
+				{
+					Patient = patientDto,
+					HospitalAdmissionId = hospitalAdmissionEntity.Id,
+					Id = patientEntity.Id
+				};
+
+				return result;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="input"></param>
+		/// <returns></returns>
+		[HttpPut, Route("[action]")]
+		public async Task<DynamicDto<HisPatient, Guid>> UpdateRegisteredPatient(RegisterPatientDto input)
+		{
+			var homeAddress = await CreatePatientAddress(input.ResidentialAddress, input.SecondResidentialAddress);
+
+			Address workAddress = null;
+			if (input.IsEmployed)
+				workAddress = await CreatePatientAddress(input.WorkAddress, input.SecondWorkAddress);
+
+			var patientEntity = await SaveOrUpdateEntityAsync<HisPatient>(nullabeId(input.Id), async item =>
 			{
-				throw new UserFriendlyException("An error occured.");
-			}
+				ObjectMapper.Map<RegisterPatientDto, HisPatient>(input, item);
+				item.Address = homeAddress;
+				item.WorkAddress = workAddress;
+			});
+
+			return await MapToDynamicDtoAsync<HisPatient, Guid>(patientEntity);
 		}
 
 		private async Task<Address> CreatePatientAddress(string address, string secondAddress)
@@ -92,6 +121,14 @@ namespace Boxfusion.Health.His.Admissions.PatientRegistrations
 				item.AddressLine2 = secondAddress;
 				item.AddressType = (int?)RefListAddressType.physical;
 			});
+		}
+
+		private string GetPatientFileNumber()
+		{
+			var sequenceManager = new SequenceManager();
+			var seqNumber = sequenceManager.GetNextSequenceNo("BoxHealth.Houghton.FacilityPatientIdentifier");
+
+			return $"{seqNumber:0000000000}".Insert(3, "/").Insert(7, "/");
 		}
 
 		/// <summary>

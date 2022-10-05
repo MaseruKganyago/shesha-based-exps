@@ -8,8 +8,8 @@ namespace Boxfusion.Health.His.Common.Domain.Domain.Accounts.Enum
 {
     public enum AccountType
     {
-        patient = 1,
-        expense = 2,
-        depreciation = 3
+        Patient = 1,
+        Expense = 2,
+        Depreciation = 3
     }
 }

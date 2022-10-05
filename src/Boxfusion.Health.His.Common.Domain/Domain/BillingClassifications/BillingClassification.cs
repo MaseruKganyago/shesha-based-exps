@@ -40,5 +40,11 @@ namespace Boxfusion.Health.His.Common.BillingClassifications
         /// 
         /// </summary>
         public virtual FhirOrganisation DefaultPayor { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [ReferenceList("Fhir", "CoverageType")]
+        public virtual long? DefaultCoverageType { get; set; }
     }
 }

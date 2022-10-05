@@ -27,6 +27,9 @@ using Abp.AspNetCore.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Boxfusion.Health.His.Admissions.Application;
+using Castle.Windsor.MsDependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using Shesha.Identity;
 
 namespace Boxfusion.Health.His.Common.Tests
 {
@@ -67,11 +70,11 @@ namespace Boxfusion.Health.His.Common.Tests
             // mock IWebHostEnvironment
             IocManager.IocContainer.Register(Component.For<IWebHostEnvironment>().ImplementedBy<TestWebHostEnvironment>().LifestyleSingleton());
 
-            IocManager.IocContainer.Register(
-                Component.For<IAbpAspNetCoreConfiguration>()
-                    .ImplementedBy<AbpAspNetCoreConfiguration>()
-                    .LifestyleSingleton()
-            );
+            //IocManager.IocContainer.Register(
+            //    Component.For<IAbpAspNetCoreConfiguration>()
+            //        .ImplementedBy<AbpAspNetCoreConfiguration>()
+            //        .LifestyleSingleton()
+            //);
 
             var appLifetimeMoq = new Mock<IHostApplicationLifetime>();
             IocManager.IocContainer.Register(
@@ -99,8 +102,12 @@ namespace Boxfusion.Health.His.Common.Tests
                     .LifestyleSingleton()
             );
 
-            // Use database for language management
-            Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
+			var services = new ServiceCollection();
+			IdentityRegistrar.Register(services);
+			WindsorRegistrationHelper.CreateServiceProvider(IocManager.IocContainer, services);
+
+			// Use database for language management
+			Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
             RegisterFakeService<SheshaDbMigrator>();
 

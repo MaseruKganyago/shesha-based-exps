@@ -19,44 +19,39 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.Accounts.AccountPaymentAppService.#ctor(Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager)">
+        <member name="M:Boxfusion.Health.His.Admissions.Accounts.AccountPaymentAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.BillingClassifications.BillingClassification,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Coverages.CashCoverage,System.Guid},Boxfusion.Health.His.Admissions.Domain.Domain.Accounts.AccountManager)">
             <summary>
             
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.Accounts.AccountPaymentAppService.SetPaymentAsync(Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput)">
             <summary>
-            Creates a new Appointment to book the first available Slot for the specified schedule and requestedTime.
+            Creates a new account for every visit. Also create Self Coverage. Link the Coverages to the newly created account
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="F:Boxfusion.Health.His.Admissions.Accounts.Enum.BankAccountType.CurrentAccount">
+        <member name="T:Boxfusion.Health.His.Admissions.Accounts.BankAccountInput">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput.Bank">
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.BankAccountInput.Bank">
             <summary>
             The Bank Name
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput.AccountType">
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.BankAccountInput.AccountType">
             <summary>
             The Bank Name
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput.AccountNumber">
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.BankAccountInput.AccountNumber">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SelfCoverageInput.BranchCode">
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.BankAccountInput.BranchCode">
             <summary>
             
             </summary>
@@ -71,7 +66,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput.SelectedMedicalAidId">
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput.SelectedMedicalAidCoverageId">
             <summary>
             
             </summary>
@@ -86,7 +81,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput.SelfCoverage">
+        <member name="P:Boxfusion.Health.His.Admissions.Accounts.SetPaymentInput.BankAccount">
             <summary>
             
             </summary>
@@ -95,6 +90,24 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Coverages.SelfCoverageAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Coverages.SelfCoverageAppService.#ctor(Boxfusion.Health.His.Admissions.Domain.Domain.Coverages.CoverageManager)">
+            <summary>
+            
+            </summary>
+            <param name="coverageManager"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Coverages.SelfCoverageAppService.GetSelfCashCoverage(System.Guid)">
+            <summary>
+            Get coverage Id and it's flattened bank account
+            </summary>
+            <param name="patientId"></param>
+            <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.Application.Domain.Views.AdmittedPatientItems">
             <summary>
@@ -181,7 +194,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Domain.Views.AdmittedPatientItems.AdmissionStatus">
+        <member name="P:Boxfusion.Health.His.Admissions.Application.Domain.Views.AdmittedPatientItems.WardAdmissionStatus">
             <summary>
             
             </summary>
@@ -412,7 +425,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.ReportModelQuery.AdmissionStatus">
+        <member name="P:Boxfusion.Health.His.Admissions.Application.Services.Reports.Dto.ReportModelQuery.WardAdmissionStatus">
             <summary>
             
             </summary>
@@ -709,6 +722,67 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.BedOccupations.BedOccupationsAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.BedOccupations.BedOccupationsAppService.#ctor(Boxfusion.Health.His.Common.Beds.BedOccupations.BedOccupationManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Beds.Bed,System.Guid},Boxfusion.Health.His.Common.ChargeItems.HisChargeItemsManager)">
+            <summary>
+            
+            </summary>
+            <param name="bedOccupationManager"></param>
+            <param name="wardAdmissionRepository"></param>
+            <param name="bedRepository"></param>
+            <param name="chargeItemManager"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.BedOccupations.BedOccupationsAppService.ChangeBedOccupation(System.Guid,System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="wardAdmissionId"></param>
+            <param name="bedId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Invoices.HisInvoicesAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Invoices.HisInvoicesAppService.#ctor(Boxfusion.Health.His.Common.Invoices.HisInvoiceManager,Boxfusion.Health.His.Common.ChargeItems.HisChargeItemsManager)">
+            <summary>
+            
+            </summary>
+            <param name="invoiceManager"></param>
+            <param name="chargeItemsManager"></param>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.Services.Invoices.HisInvoicesAppService.GenerateSplitBillInvoice(Boxfusion.Health.His.Admissions.Services.Invoices.SplitBillInvoiceDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Health.His.Admissions.Services.Invoices.SplitBillInvoiceDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Invoices.SplitBillInvoiceDto.PatientAccountId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Invoices.SplitBillInvoiceDto.OccurenceDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.Services.Invoices.SplitBillInvoiceDto.ChargeItemIds">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationAppService">
             <summary>
             
@@ -720,6 +794,13 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationAppService.RegisterPatient(Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.PatientRegistrations.PatientRegistrationAppService.UpdateRegisteredPatient(Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto)">
             <summary>
             
             </summary>
@@ -743,6 +824,16 @@
             </summary>
         </member>
         <member name="T:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.PassportNumber">
             <summary>
             
             </summary>
@@ -792,12 +883,12 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Race">
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Ethnicity">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.HomeLangauge">
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.CommunicationLanguage">
             <summary>
             
             </summary>
@@ -817,7 +908,7 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.Province">
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientDto.PatientProvince">
             <summary>
             
             </summary>
@@ -887,12 +978,27 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientResultDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientResultDto.Patient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Health.His.Admissions.PatientRegistrations.RegisterPatientResultDto.HospitalAdmissionId">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.Note,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid})">
+        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.WardAdmission,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.Fhir.Condition,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.HealthCommon.Core.Domain.BackBoneElements.Fhir.Diagnosis,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Domain.Note,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Admissions.HospitalAdmission,System.Guid},Boxfusion.Health.His.Common.ChargeItems.HisChargeItemsManager,Abp.Domain.Repositories.IRepository{Boxfusion.Health.His.Common.Beds.Bed,System.Guid},Boxfusion.Health.His.Common.Beds.BedOccupations.BedOccupationManager,Boxfusion.Health.His.Common.ChargeItems.HisChargeItemsManager)">
             <summary>
             
             </summary>
@@ -901,6 +1007,10 @@
             <param name="diagnosisRepository"></param>
             <param name="noteRepository"></param>
             <param name="hospitalAdmissionRepository"></param>
+            <param name="hisChargeItemManager"></param>
+            <param name="bedRepository"></param>
+            <param name="bedOccupationManager"></param>
+            <param name="chargeItemManager"></param>
         </member>
         <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.AdmitPatientAsync(Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsDto)">
             <summary>
@@ -914,6 +1024,13 @@
             
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Health.His.Admissions.WardAdmissions.WardAdmissionsAppService.GetDischargeDetails(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="hospitalAdmissionId"></param>
             <returns></returns>
         </member>
         <member name="T:Boxfusion.Health.HealthCommon.Core.Migrations.M20211108021400">

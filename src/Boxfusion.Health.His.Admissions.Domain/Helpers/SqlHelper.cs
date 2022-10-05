@@ -32,7 +32,7 @@ select
 												,hosEnc.His_ClassificationLkp [Classification]
 												,per.Fhir_NationalityLkp Nationality
 												,hosEnc.His_OtherCategoryLkp OtherCategory
-												,enc.His_AdmissionStatusLkp AdmissionStatus
+												,enc.His_AdmissionStatusLkp WardAdmissionStatus
 												,enc.His_SeparationDate SeparationDate
 												,IIF(enc.His_SeparationDate is null, DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())), DATEDIFF(day, enc.StartDateTime, enc.His_SeparationDate)) AS PatientDays
 												,RN = ROW_NUMBER()OVER(PARTITION BY enc.Id ORDER BY enc.Id)
@@ -61,7 +61,7 @@ select
 												,hosEnc.His_ClassificationLkp [Classification]
 												,per.Fhir_NationalityLkp Nationality
 												,hosEnc.His_OtherCategoryLkp OtherCategory
-												,enc.His_AdmissionStatusLkp AdmissionStatus
+												,enc.His_AdmissionStatusLkp WardAdmissionStatus
 												,enc.His_SeparationDate SeparationDate
 												,IIF(enc.His_SeparationDate is null, DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())), DATEDIFF(day, enc.StartDateTime, enc.His_SeparationDate)) AS PatientDays
 												,RN = ROW_NUMBER()OVER(PARTITION BY enc.Id ORDER BY enc.Id)
@@ -96,7 +96,7 @@ select
 													,hosEnc.His_ClassificationLkp [Classification]
 													,per.Fhir_NationalityLkp Nationality
 													,hosEnc.His_OtherCategoryLkp OtherCategory
-													,enc.His_AdmissionStatusLkp AdmissionStatus
+													,enc.His_AdmissionStatusLkp WardAdmissionStatus
 													,enc.His_SeparationDate SeparationDate
 													,IIF(enc.His_SeparationDate is null, DATEDIFF(day, enc.StartDateTime, dateadd(HOUR, 2, getdate())), DATEDIFF(day, enc.StartDateTime, enc.His_SeparationDate)) AS PatientDays
 												    ,RN = ROW_NUMBER()OVER(PARTITION BY enc.Id ORDER BY enc.Id)
