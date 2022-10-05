@@ -84,6 +84,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.Hought
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Health.His.MpDoh.Customisations", "src\Boxfusion.Health.His.MpDoh.Domain\Boxfusion.Health.His.MpDoh.Customisations.csproj", "{FC06D88F-BF06-4FF7-A28E-46E8B3E7D4ED}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Enterprise.BpmnEngine", "shesha-core-enterprise\src\Shesha.Enterprise.BpmnEngine\Shesha.Enterprise.BpmnEngine.csproj", "{EA57B49B-0199-4304-8B5F-B582D3CF5D3F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Enterprise.Workflow", "shesha-core-enterprise\src\Shesha.Enterprise.Workflow\Shesha.Enterprise.Workflow.csproj", "{5D60B73A-4063-49A2-BCA2-19B14FFF95E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -301,6 +305,18 @@ Global
 		{FC06D88F-BF06-4FF7-A28E-46E8B3E7D4ED}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{FC06D88F-BF06-4FF7-A28E-46E8B3E7D4ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC06D88F-BF06-4FF7-A28E-46E8B3E7D4ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA57B49B-0199-4304-8B5F-B582D3CF5D3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA57B49B-0199-4304-8B5F-B582D3CF5D3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA57B49B-0199-4304-8B5F-B582D3CF5D3F}.DebugLocalShesha|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
+		{EA57B49B-0199-4304-8B5F-B582D3CF5D3F}.DebugLocalShesha|Any CPU.Build.0 = DebugLocalShesha|Any CPU
+		{EA57B49B-0199-4304-8B5F-B582D3CF5D3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA57B49B-0199-4304-8B5F-B582D3CF5D3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D60B73A-4063-49A2-BCA2-19B14FFF95E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D60B73A-4063-49A2-BCA2-19B14FFF95E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D60B73A-4063-49A2-BCA2-19B14FFF95E3}.DebugLocalShesha|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
+		{5D60B73A-4063-49A2-BCA2-19B14FFF95E3}.DebugLocalShesha|Any CPU.Build.0 = DebugLocalShesha|Any CPU
+		{5D60B73A-4063-49A2-BCA2-19B14FFF95E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D60B73A-4063-49A2-BCA2-19B14FFF95E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -330,6 +346,8 @@ Global
 		{197DF5D6-0B8C-4B52-B0F9-48383289DC59} = {9475DB0D-A03B-4EBE-9D83-C0348855056D}
 		{4542A186-5CC5-4EA9-ABF4-ABB9A799EAFF} = {9475DB0D-A03B-4EBE-9D83-C0348855056D}
 		{923EC8A1-6322-414F-BECC-C8AFEC9A7474} = {B79C1E6E-B8C3-4223-B88D-54016676BEF2}
+		{EA57B49B-0199-4304-8B5F-B582D3CF5D3F} = {9475DB0D-A03B-4EBE-9D83-C0348855056D}
+		{5D60B73A-4063-49A2-BCA2-19B14FFF95E3} = {9475DB0D-A03B-4EBE-9D83-C0348855056D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95ED23F3-8DEA-456E-A44B-87A161CB696A}
