@@ -39,6 +39,7 @@ using Shesha.Authorization;
 using Swashbuckle.AspNetCore.Swagger;
 using Shesha.GraphQL;
 using Shesha.GraphQL.Middleware;
+using Shesha.Extensions;
 
 namespace Boxfusion.Health.His.Web.Host.Startup
 {
@@ -149,7 +150,9 @@ namespace Boxfusion.Health.His.Web.Host.Startup
             // note: already registered in the ABP
             AppContextHelper.Configure(app.ApplicationServices.GetRequiredService<IHttpContextAccessor>());
 
-            
+
+            app.UseConfigurationFramework();
+
             app.UseAbp(options =>
             {
                 options.UseAbpRequestLocalization = false;
