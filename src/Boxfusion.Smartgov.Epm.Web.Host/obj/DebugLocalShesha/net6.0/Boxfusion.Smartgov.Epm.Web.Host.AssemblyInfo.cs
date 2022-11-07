@@ -13,7 +13,7 @@ using System.Reflection;
 
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("AbpCompanyName-Shesha-56C2EF2F-ABD6-4EFC-AAF2-2E81C34E8FB1")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e6e117ed092a2201368110f8b3b0a7cddc33641e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Shesha.Enterprise.Web.Host")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("RepositoryUrl", "https://boxfusion@dev.azure.com/boxfusion/Shesha Web v3.0/_git/shesha-core-enterp" +

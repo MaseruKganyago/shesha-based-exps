@@ -11,7 +11,7 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e6e117ed092a2201368110f8b3b0a7cddc33641e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("RepositoryUrl", "https://boxfusion@dev.azure.com/boxfusion/Shesha Web v3.0/_git/shesha-core-enterp" +
     "rise")]
 
