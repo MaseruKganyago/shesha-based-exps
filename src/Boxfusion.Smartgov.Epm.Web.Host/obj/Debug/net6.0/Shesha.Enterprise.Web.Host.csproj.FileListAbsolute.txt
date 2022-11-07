@@ -1,0 +1,7 @@
+C:\Users\maser\source\repos\PD-EPM\PD-EPM-BE\shesha-core-enterprise\src\Shesha.Enterprise.Web.Host\obj\Debug\net6.0\Shesha.Enterprise.Web.Host.csproj.AssemblyReference.cache
+C:\Users\maser\source\repos\PD-EPM\PD-EPM-BE\shesha-core-enterprise\src\Shesha.Enterprise.Web.Host\obj\Debug\net6.0\Shesha.Enterprise.Web.Host.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maser\source\repos\PD-EPM\PD-EPM-BE\shesha-core-enterprise\src\Shesha.Enterprise.Web.Host\obj\Debug\net6.0\Shesha.Enterprise.Web.Host.AssemblyInfoInputs.cache
+C:\Users\maser\source\repos\PD-EPM\PD-EPM-BE\shesha-core-enterprise\src\Shesha.Enterprise.Web.Host\obj\Debug\net6.0\Shesha.Enterprise.Web.Host.AssemblyInfo.cs
+C:\Users\maser\source\repos\PD-EPM\PD-EPM-BE\shesha-core-enterprise\src\Shesha.Enterprise.Web.Host\obj\Debug\net6.0\Shesha.Enterprise.Web.Host.csproj.CoreCompileInputs.cache
+C:\Users\maser\source\repos\PD-EPM\PD-EPM-BE\shesha-core-enterprise\src\Shesha.Enterprise.Web.Host\obj\Debug\net6.0\Shesha.Enterprise.Web.Host.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\maser\source\repos\PD-EPM\PD-EPM-BE\shesha-core-enterprise\src\Shesha.Enterprise.Web.Host\obj\Debug\net6.0\Shesha.Enterprise.Web.Host.sourcelink.json

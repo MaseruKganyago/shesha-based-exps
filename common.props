@@ -1,0 +1,23 @@
+<Project>
+  <PropertyGroup>
+        <NoWarn>$(NoWarn);CS1591</NoWarn>
+        <PackageIconUrl>http://shesha.boxfusion.co.za/images/shesha-enterprise-nupkg.png</PackageIconUrl>
+        <PackageProjectUrl>http://shesha.boxfusion.co.za/enterprise/</PackageProjectUrl>
+        <PackageLicenseUrl>http://shesha.boxfusion.co.za/enterprise/LICENSE</PackageLicenseUrl>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://boxfusion@dev.azure.com/boxfusion/Shesha%20Web%20v3.0/_git/shesha-core-enterprise</RepositoryUrl>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)' == 'Release' ">
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    </PropertyGroup>
+    <PropertyGroup>
+        <!-- Include symbol files (*.pdb) in the built .nupkg -->
+        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    </PropertyGroup>
+    <ItemGroup>
+        <!-- Add PackageReference specific for your source control provider (see below) -->
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.0-beta-20204-02" PrivateAssets="All"/>
+    </ItemGroup>
+</Project>

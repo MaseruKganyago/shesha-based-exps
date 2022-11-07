@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net6.0</TargetFramework>
+	  <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+	  <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+	  <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+	  <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+	  <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+	  <Nullable>enable</Nullable>
+	  <Configurations>Debug;Release;DebugLocalShesha</Configurations>
+    <RootNamespace>Boxfusion.Smartgov.Epm</RootNamespace>
+  </PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<OutputPath></OutputPath>
+		<DocumentationFile>.\SheshaBased.Exp.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>.\SheshaBased.Exp.xml</DocumentationFile>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations - Copy\**" />
+    <EmbeddedResource Remove="Migrations - Copy\**" />
+    <None Remove="Migrations - Copy\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Domain\" />
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Abp.Castle.Log4Net" Version="6.6.2" />
+    <PackageReference Include="Abp.FluentValidation" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Application\Shesha.Application.csproj" />
+    <ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Core\Shesha.Core.csproj" />
+    <ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise\Shesha.Enterprise.csproj" />
+  </ItemGroup>
+
+</Project>

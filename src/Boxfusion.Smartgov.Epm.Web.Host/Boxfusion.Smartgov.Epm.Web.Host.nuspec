@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$authors$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://shesha.boxfusion.co.za/enterprise/LICENSE</licenseUrl>
+    <projectUrl>http://shesha.boxfusion.co.za/shesha/enterprise/</projectUrl>
+    <iconUrl>http://shesha.boxfusion.co.za/images/shesha-enterprise-nupkg.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2022</copyright>
+    <tags>Boxfusion Smartgoc Epm</tags>
+    <dependencies>
+
+    </dependencies>
+  </metadata>
+</package>

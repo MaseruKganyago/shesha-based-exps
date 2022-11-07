@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\..\common.props" />
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AssemblyName>Shesha.Enterprise.Web.Core</AssemblyName>
+		<PackageId>Shesha.Enterprise.Web.Core</PackageId>
+		<RootNamespace>Shesha.Enterprise</RootNamespace>
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+		<GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+		<GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+		<GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+		<GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+		<Configurations>Debug;Release;DebugLocalShesha</Configurations>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="Authentication\**" />
+		<EmbeddedResource Remove="Authentication\**" />
+		<None Remove="Authentication\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Elmah\Shesha.Elmah.csproj" />
+		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Scheduler\Shesha.Scheduler.csproj" />
+		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Web.FormsDesigner\Shesha.Web.FormsDesigner.csproj" />
+		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise.DocumentProcessing\Shesha.Enterprise.DocumentProcessing.csproj" />
+		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise.Reporting\Shesha.Enterprise.Reporting.csproj" />
+		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise.Workflow\Shesha.Enterprise.Workflow.csproj" />
+		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise\Shesha.Enterprise.csproj" />
+		<ProjectReference Include="..\Boxfusion.Smartgov.Epm.Application\Boxfusion.Smartgov.Epm.Application.csproj" />
+		<ProjectReference Include="..\Boxfusion.Smartgov.Epm.Domain\Boxfusion.Smartgov.Epm.Domain.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Abp.AspNetCore" Version="6.6.2" />
+		<PackageReference Include="Abp.AspNetCore.SignalR" Version="6.6.2" />
+		<PackageReference Include="Abp.ZeroCore" Version="6.6.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
+		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Domain\" />
+	</ItemGroup>
+
+  <Choose>
+    <When Condition="'$(Configuration)' == 'DebugLocalShesha' Or '$(UseLocalShesha)' == 'true'" />
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="Shesha.Elmah" Version="3.0.11" />
+        <PackageReference Include="Shesha.Scheduler" Version="3.0.11" />
+        <PackageReference Include="Shesha.Web.FormsDesigner" Version="3.0.11" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+</Project>
