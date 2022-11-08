@@ -1,6 +1,0 @@
-C:\Users\maser\source\repos\PD-EPM\PD-EPM-BE\shesha-core-enterprise\src\Shesha.Enterprise.Web.Core\obj\Debug\net6.0\Shesha.Enterprise.Web.Core.csproj.AssemblyReference.cache
-C:\Users\maser\source\repos\PD-EPM\PD-EPM-BE\shesha-core-enterprise\src\Shesha.Enterprise.Web.Core\obj\Debug\net6.0\Shesha.Enterprise.Web.Core.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\maser\source\repos\PD-EPM\PD-EPM-BE\shesha-core-enterprise\src\Shesha.Enterprise.Web.Core\obj\Debug\net6.0\Shesha.Enterprise.Web.Core.AssemblyInfoInputs.cache
-C:\Users\maser\source\repos\PD-EPM\PD-EPM-BE\shesha-core-enterprise\src\Shesha.Enterprise.Web.Core\obj\Debug\net6.0\Shesha.Enterprise.Web.Core.AssemblyInfo.cs
-C:\Users\maser\source\repos\PD-EPM\PD-EPM-BE\shesha-core-enterprise\src\Shesha.Enterprise.Web.Core\obj\Debug\net6.0\Shesha.Enterprise.Web.Core.csproj.CoreCompileInputs.cache
-C:\Users\maser\source\repos\PD-EPM\PD-EPM-BE\shesha-core-enterprise\src\Shesha.Enterprise.Web.Core\obj\Debug\net6.0\Shesha.Enterprise.Web.Core.sourcelink.json

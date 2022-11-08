@@ -1,5 +1,0 @@
-C:\Users\maser\source\repos\PD-EPM\SheshaBased-Exp-BE\src\SheshaBased.Exp.Domain\obj\Debug\net6.0\SheshaBased.Exp.Domain.csproj.AssemblyReference.cache
-C:\Users\maser\source\repos\PD-EPM\SheshaBased-Exp-BE\src\SheshaBased.Exp.Domain\obj\Debug\net6.0\SheshaBased.Exp.Domain.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\maser\source\repos\PD-EPM\SheshaBased-Exp-BE\src\SheshaBased.Exp.Domain\obj\Debug\net6.0\SheshaBased.Exp.Domain.AssemblyInfoInputs.cache
-C:\Users\maser\source\repos\PD-EPM\SheshaBased-Exp-BE\src\SheshaBased.Exp.Domain\obj\Debug\net6.0\SheshaBased.Exp.Domain.AssemblyInfo.cs
-C:\Users\maser\source\repos\PD-EPM\SheshaBased-Exp-BE\src\SheshaBased.Exp.Domain\obj\Debug\net6.0\SheshaBased.Exp.Domain.csproj.CoreCompileInputs.cache
