@@ -7,7 +7,6 @@
 	  <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 	  <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
 	  <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-	  <Nullable>false</Nullable>
 	  <Configurations>Debug;Release;DebugLocalShesha</Configurations>
     <RootNamespace>Boxfusion.Smartgov.Epm</RootNamespace>
   </PropertyGroup>
