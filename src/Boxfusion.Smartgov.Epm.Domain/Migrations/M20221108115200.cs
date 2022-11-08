@@ -72,8 +72,8 @@ namespace Boxfusion.Smartgov.Epm.Migrations
 				.WithColumn("IndicatorProgressReportingMethodLkp").AsInt64().Nullable()
 				.WithColumn("FinalIndicatorTarget").AsInt64().Nullable()
 				.WithColumn("LatestIndicatorValue").AsInt64().Nullable()
-				.WithColumn("FinalExpenditureTarget").AsInt64().Nullable()
-				.WithColumn("LatestExpenditureActual").AsInt64().Nullable()
+				.WithColumn("FinalExpenditureTarget").AsDecimal().Nullable()
+				.WithColumn("LatestExpenditureActual").AsDecimal().Nullable()
 				.WithColumn("DataSource").AsString(2000).Nullable()
 				.WithColumn("DataLimitations").AsString(2000).Nullable();
 		}

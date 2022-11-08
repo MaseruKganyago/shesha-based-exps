@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Web.Host\\Boxfusion.Smartgov.Epm.Web.Host.csproj": {}
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Web.Host\\Boxfusion.Smartgov.Epm.Web.Host.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj",
         "projectName": "Shesha.Application",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,20 +28,20 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\Shesha.GraphQL.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\Shesha.GraphQL.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\Shesha.GraphQL.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\Shesha.GraphQL.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj"
               }
             }
           }
@@ -100,7 +100,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -109,21 +110,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj",
         "projectName": "Shesha.Core",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -137,8 +138,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
               }
             }
           }
@@ -189,7 +190,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -198,21 +200,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj",
         "projectName": "Shesha.Elmah",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -226,8 +228,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
               }
             }
           }
@@ -274,7 +276,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -283,21 +286,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj",
         "projectName": "Shesha.Framework",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -357,7 +360,7 @@
             },
             "HtmlAgilityPack": {
               "target": "Package",
-              "version": "[1.11.29, )"
+              "version": "[1.11.18, )"
             },
             "JsonLogic.Net": {
               "target": "Package",
@@ -407,7 +410,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -416,21 +420,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\Shesha.GraphQL.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\Shesha.GraphQL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\Shesha.GraphQL.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\Shesha.GraphQL.csproj",
         "projectName": "Shesha.GraphQL",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\Shesha.GraphQL.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\Shesha.GraphQL.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -444,8 +448,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
               }
             }
           }
@@ -483,7 +487,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -492,21 +497,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj",
         "projectName": "Shesha.NHibernate",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -520,8 +525,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj"
               }
             }
           }
@@ -572,7 +577,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -581,21 +587,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\Shesha.Scheduler.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\Shesha.Scheduler.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\Shesha.Scheduler.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\Shesha.Scheduler.csproj",
         "projectName": "Shesha.Scheduler",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\Shesha.Scheduler.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\Shesha.Scheduler.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -609,14 +615,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj"
               }
             }
           }
@@ -671,7 +677,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -680,21 +687,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\Shesha.Web.FormsDesigner.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\Shesha.Web.FormsDesigner.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\Shesha.Web.FormsDesigner.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\Shesha.Web.FormsDesigner.csproj",
         "projectName": "Shesha.Web.FormsDesigner",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\Shesha.Web.FormsDesigner.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\Shesha.Web.FormsDesigner.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -708,14 +715,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.NHibernate\\Shesha.NHibernate.csproj"
               }
             }
           }
@@ -750,7 +757,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -759,21 +767,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.BpmnEngine\\Shesha.Enterprise.BpmnEngine.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.BpmnEngine\\Shesha.Enterprise.BpmnEngine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.BpmnEngine\\Shesha.Enterprise.BpmnEngine.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.BpmnEngine\\Shesha.Enterprise.BpmnEngine.csproj",
         "projectName": "Shesha.Enterprise.BpmnEngine",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.BpmnEngine\\Shesha.Enterprise.BpmnEngine.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.BpmnEngine\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.BpmnEngine\\Shesha.Enterprise.BpmnEngine.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.BpmnEngine\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -827,7 +835,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -836,21 +845,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.DocumentProcessing\\Shesha.Enterprise.DocumentProcessing.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.DocumentProcessing\\Shesha.Enterprise.DocumentProcessing.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.DocumentProcessing\\Shesha.Enterprise.DocumentProcessing.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.DocumentProcessing\\Shesha.Enterprise.DocumentProcessing.csproj",
         "projectName": "Shesha.Enterprise.DocumentProcessing",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.DocumentProcessing\\Shesha.Enterprise.DocumentProcessing.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.DocumentProcessing\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.DocumentProcessing\\Shesha.Enterprise.DocumentProcessing.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.DocumentProcessing\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -864,11 +873,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj"
               }
             }
           }
@@ -903,7 +912,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -912,21 +922,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.Reporting\\Shesha.Enterprise.Reporting.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.Reporting\\Shesha.Enterprise.Reporting.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.Reporting\\Shesha.Enterprise.Reporting.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.Reporting\\Shesha.Enterprise.Reporting.csproj",
         "projectName": "Shesha.Enterprise.Reporting",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.Reporting\\Shesha.Enterprise.Reporting.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.Reporting\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.Reporting\\Shesha.Enterprise.Reporting.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.Reporting\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -940,11 +950,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
               }
             }
           }
@@ -999,7 +1009,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -1008,21 +1019,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.Workflow\\Shesha.Enterprise.Workflow.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.Workflow\\Shesha.Enterprise.Workflow.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.Workflow\\Shesha.Enterprise.Workflow.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.Workflow\\Shesha.Enterprise.Workflow.csproj",
         "projectName": "Shesha.Enterprise.Workflow",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.Workflow\\Shesha.Enterprise.Workflow.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.Workflow\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.Workflow\\Shesha.Enterprise.Workflow.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.Workflow\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -1036,20 +1047,20 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.BpmnEngine\\Shesha.Enterprise.BpmnEngine.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.BpmnEngine\\Shesha.Enterprise.BpmnEngine.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.BpmnEngine\\Shesha.Enterprise.BpmnEngine.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.BpmnEngine\\Shesha.Enterprise.BpmnEngine.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj"
               }
             }
           }
@@ -1084,7 +1095,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -1093,21 +1105,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj",
         "projectName": "Shesha.Enterprise",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -1121,17 +1133,17 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\Shesha.Scheduler.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\Shesha.Scheduler.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\Shesha.Scheduler.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\Shesha.Scheduler.csproj"
               }
             }
           }
@@ -1186,7 +1198,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -1195,21 +1208,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Application\\Boxfusion.Smartgov.Epm.Application.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Application\\Boxfusion.Smartgov.Epm.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Application\\Boxfusion.Smartgov.Epm.Application.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Application\\Boxfusion.Smartgov.Epm.Application.csproj",
         "projectName": "Boxfusion.Smartgov.Epm.Application",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Application\\Boxfusion.Smartgov.Epm.Application.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Application\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Application\\Boxfusion.Smartgov.Epm.Application.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -1223,8 +1236,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Domain\\Boxfusion.Smartgov.Epm.Domain.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Domain\\Boxfusion.Smartgov.Epm.Domain.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Domain\\Boxfusion.Smartgov.Epm.Domain.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Domain\\Boxfusion.Smartgov.Epm.Domain.csproj"
               }
             }
           }
@@ -1244,7 +1257,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -1253,21 +1267,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Domain\\Boxfusion.Smartgov.Epm.Domain.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Domain\\Boxfusion.Smartgov.Epm.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Domain\\Boxfusion.Smartgov.Epm.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Domain\\Boxfusion.Smartgov.Epm.Domain.csproj",
         "projectName": "Boxfusion.Smartgov.Epm.Domain",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Domain\\Boxfusion.Smartgov.Epm.Domain.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Domain\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Domain\\Boxfusion.Smartgov.Epm.Domain.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -1281,14 +1295,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Application\\Shesha.Application.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Core\\Shesha.Core.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj"
               }
             }
           }
@@ -1318,7 +1332,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -1327,21 +1342,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Web.Core\\Boxfusion.Smartgov.Epm.Web.Core.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Web.Core\\Boxfusion.Smartgov.Epm.Web.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Web.Core\\Boxfusion.Smartgov.Epm.Web.Core.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Web.Core\\Boxfusion.Smartgov.Epm.Web.Core.csproj",
         "projectName": "Shesha.Enterprise.Web.Core",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Web.Core\\Boxfusion.Smartgov.Epm.Web.Core.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Web.Core\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Web.Core\\Boxfusion.Smartgov.Epm.Web.Core.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Web.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -1355,32 +1370,32 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\Shesha.Scheduler.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\Shesha.Scheduler.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\Shesha.Scheduler.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Scheduler\\Shesha.Scheduler.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\Shesha.Web.FormsDesigner.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\Shesha.Web.FormsDesigner.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\Shesha.Web.FormsDesigner.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\Shesha.Web.FormsDesigner.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.DocumentProcessing\\Shesha.Enterprise.DocumentProcessing.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.DocumentProcessing\\Shesha.Enterprise.DocumentProcessing.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.DocumentProcessing\\Shesha.Enterprise.DocumentProcessing.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.DocumentProcessing\\Shesha.Enterprise.DocumentProcessing.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.Reporting\\Shesha.Enterprise.Reporting.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.Reporting\\Shesha.Enterprise.Reporting.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.Reporting\\Shesha.Enterprise.Reporting.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.Reporting\\Shesha.Enterprise.Reporting.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.Workflow\\Shesha.Enterprise.Workflow.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise.Workflow\\Shesha.Enterprise.Workflow.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.Workflow\\Shesha.Enterprise.Workflow.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise.Workflow\\Shesha.Enterprise.Workflow.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\src\\Shesha.Enterprise\\Shesha.Enterprise.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Application\\Boxfusion.Smartgov.Epm.Application.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Application\\Boxfusion.Smartgov.Epm.Application.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Application\\Boxfusion.Smartgov.Epm.Application.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Application\\Boxfusion.Smartgov.Epm.Application.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Domain\\Boxfusion.Smartgov.Epm.Domain.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Domain\\Boxfusion.Smartgov.Epm.Domain.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Domain\\Boxfusion.Smartgov.Epm.Domain.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Domain\\Boxfusion.Smartgov.Epm.Domain.csproj"
               }
             }
           }
@@ -1435,7 +1450,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -1444,21 +1460,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Web.Host\\Boxfusion.Smartgov.Epm.Web.Host.csproj": {
+    "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Web.Host\\Boxfusion.Smartgov.Epm.Web.Host.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Web.Host\\Boxfusion.Smartgov.Epm.Web.Host.csproj",
+        "projectUniqueName": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Web.Host\\Boxfusion.Smartgov.Epm.Web.Host.csproj",
         "projectName": "Shesha.Enterprise.Web.Host",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Web.Host\\Boxfusion.Smartgov.Epm.Web.Host.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Web.Host\\obj\\",
+        "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Web.Host\\Boxfusion.Smartgov.Epm.Web.Host.csproj",
+        "packagesPath": "C:\\Users\\maser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Web.Host\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -1472,20 +1488,20 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Elmah\\Shesha.Elmah.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Framework\\Shesha.Framework.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\Shesha.GraphQL.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\Shesha.GraphQL.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\Shesha.GraphQL.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.GraphQL\\Shesha.GraphQL.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\Shesha.Web.FormsDesigner.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\Shesha.Web.FormsDesigner.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\Shesha.Web.FormsDesigner.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\shesha-core-enterprise\\shesha-core\\src\\Shesha.Web.FormsDesigner\\Shesha.Web.FormsDesigner.csproj"
               },
-              "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Web.Core\\Boxfusion.Smartgov.Epm.Web.Core.csproj": {
-                "projectPath": "C:\\Users\\User\\Source\\Repos\\shesha-based-exps\\src\\Boxfusion.Smartgov.Epm.Web.Core\\Boxfusion.Smartgov.Epm.Web.Core.csproj"
+              "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Web.Core\\Boxfusion.Smartgov.Epm.Web.Core.csproj": {
+                "projectPath": "C:\\Users\\maser\\source\\repos\\PD-EPM\\PD-EPM-BE\\src\\Boxfusion.Smartgov.Epm.Web.Core\\Boxfusion.Smartgov.Epm.Web.Core.csproj"
               }
             }
           }
@@ -1568,7 +1584,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -1580,7 +1597,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

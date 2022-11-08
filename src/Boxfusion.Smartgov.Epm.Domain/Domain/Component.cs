@@ -83,8 +83,8 @@ namespace Boxfusion.Smartgov.Epm.Domain
 		public virtual IndicatorDefinition IndicatorDefinition { get; set; }
 		public virtual Single? FinalIndicatorTarget { get; set; }
 		public virtual Single? LatestIndicatorValue { get; set; }
-		public virtual decimal FinalExpenditureTarget { get; set; }
-		public virtual decimal LatestExpenditureActual { get; set; }
+		public virtual decimal? FinalExpenditureTarget { get; set; }
+		public virtual decimal? LatestExpenditureActual { get; set; }
 
 		/// <summary>
 		/// Indicates how the indicator values will be  sourced.
