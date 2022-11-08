@@ -40,7 +40,7 @@ namespace Boxfusion.Smartgov.Epm.Migrations
 				.WithColumn("Name").AsString().Nullable()
 				.WithColumn("ShortName").AsString().Nullable()
 				.WithColumn("StatusLkp").AsInt64().Nullable()
-				.WithForeignKeyColumn("TemplateId", "Epm_PerformanceReport").Nullable()
+				.WithForeignKeyColumn("TemplateId", "Epm_PerformanceReports").Nullable()
 			    .WithForeignKeyColumn("PeriodCoveredId", "Core_Periods").Nullable();
 
 		}
