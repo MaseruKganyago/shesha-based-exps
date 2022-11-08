@@ -33,6 +33,16 @@ namespace Boxfusion.Smartgov.Epm.Migrations
 				.WithColumn("ProgressQA1Required").AsBoolean().Nullable()
 				.WithColumn("ProgressQA2Required").AsBoolean().Nullable()
 				.WithColumn("ProgressAuditRequired").AsBoolean().Nullable();
+
+			Create.Table("Epm_PerformanceReport")
+				.WithIdAsGuid()
+				.WithFullAuditColumns()
+				.WithColumn("Name").AsString().Nullable()
+				.WithColumn("ShortName").AsString().Nullable()
+				.WithColumn("StatusLkp").AsInt64().Nullable()
+				.WithForeignKeyColumn("TemplateId", "Epm_PerformanceReport").Nullable()
+			    .WithForeignKeyColumn("PeriodCoveredId", "Core_Periods").Nullable();
+
 		}
 
 		public override void Down()
