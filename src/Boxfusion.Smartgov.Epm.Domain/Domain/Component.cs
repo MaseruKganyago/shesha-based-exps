@@ -1,10 +1,13 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using Boxfusion.Smartgov.Epm.Domain.Enums;
+using Newtonsoft.Json;
 using Shesha.Domain;
 using Shesha.Domain.Attributes;
+using Shesha.Enterprise.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +46,58 @@ namespace Boxfusion.Smartgov.Epm.Domain
 		public virtual int? PerfIndexWeight { get; set; }
 		public virtual RefListRAGValues? LatestRAGValue { get; set; }
 		public virtual RefListRAGCalculationMethod RAGCalculationMethod { get; set; }
+
 		[StringLength(int.MaxValue)]
-		public virtual string RAGThresholds { get; set; }
+		public virtual string RAGThresholds 
+		{
+			get
+			{
+				if (!string.IsNullOrEmpty(RAGThresholds))
+					RAGThresholdsList = JsonConvert.DeserializeObject<List<RefListRAGValues>>(RAGThresholds);
+
+				return RAGThresholds;
+			}
+			set 
+			{
+				if (RAGThresholdsList.Count > 0)
+					value = JsonConvert.SerializeObject(RAGThresholdsList);
+			} 
+		}
+
+		/// <summary>
+		/// The Indicator the Component relates to. Only applies if ComponentType.IsIndincator = true.
+		/// </summary>
+		public virtual Indicator Indicator { get; set; }
+
+		/// <summary>
+		/// In cases were the Component is specific to an area.
+		/// </summary>
+		public virtual Area Area { get; set; }
+
+		/// <summary>
+		/// In cases were the Component is specific to a Project.
+		/// </summary>
+		public virtual Project Project { get; set; }
+
+		public virtual RefListIndicatorProgressReportingMethod? IndicatorProgressReportingMethod { get; set; }
+		public virtual IndicatorDefinition IndicatorDefinition { get; set; }
+		public virtual Single? FinalIndicatorTarget { get; set; }
+		public virtual Single? LatestIndicatorValue { get; set; }
+		public virtual decimal FinalExpenditureTarget { get; set; }
+		public virtual decimal LatestExpenditureActual { get; set; }
+
+		/// <summary>
+		/// Indicates how the indicator values will be  sourced.
+		/// </summary>
+		[StringLength(2000)]
+		public virtual string DataSource { get; set; }
+
+		/// <summary>
+		/// Identifies any limitation with the indicator data, including factors the might be beyond the departments control.
+		/// </summary>
+		[StringLength(2000)]
+		public virtual string DataLimitations { get; set; }
+		[NotMapped]
+		public List<RefListRAGValues> RAGThresholdsList { get; set; }
 	}
 }

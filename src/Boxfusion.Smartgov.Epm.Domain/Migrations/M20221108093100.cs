@@ -13,7 +13,7 @@ namespace Boxfusion.Smartgov.Epm.Migrations
 	{
 		public override void Up()
 		{
-			//Boxfusion.Smartgov.Epm.Domain
+			//Boxfusion.Smartgov.Epm.Domain.ComponentType
 			Create.Table("Epm_ComponentTypes")
 				.WithIdAsGuid()
 				.WithFullAuditColumns()

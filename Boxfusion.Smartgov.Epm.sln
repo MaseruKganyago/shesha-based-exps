@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shesha-enterprise", "shesha
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F10AA149-2626-486E-85BB-9CD5365F3016}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Enterprise.Tests", "test\Shesha.Tests\Shesha.Enterprise.Tests.csproj", "{0D4C5D00-C144-4213-A007-4B8944113AB1}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-items", "{231B88C8-DA14-45B9-ACC9-BE08151ED28D}"
 	ProjectSection(SolutionItems) = preProject
 		common.props = common.props
@@ -18,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shesha-core", "shesha-core"
 	ProjectSection(SolutionItems) = preProject
 		shesha-core\common.props = shesha-core\common.props
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Tests", "shesha-core\test\Shesha.Tests\Shesha.Tests.csproj", "{A498E058-B907-42CE-94E5-7126442CCE7A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Smartgov.Epm.Application", "src\Boxfusion.Smartgov.Epm.Application\Boxfusion.Smartgov.Epm.Application.csproj", "{EEA059DE-9AF6-4BF8-A7E2-4D9165DF7D2A}"
 EndProject
@@ -75,6 +71,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Sms.Xml2Sms", "shesh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Web.FormsDesigner", "shesha-core-enterprise\shesha-core\src\Shesha.Web.FormsDesigner\Shesha.Web.FormsDesigner.csproj", "{534C684E-FF34-43C9-87A4-D4B815DC9D04}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shesha", "shesha", "{6708090F-E94F-4D2E-B555-8BF9AD87E8E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Enterprise.Tests", "shesha-core-enterprise\test\Shesha.Tests\Shesha.Enterprise.Tests.csproj", "{5AE72772-2C77-448C-AC09-774E716D4461}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Tests", "shesha-core-enterprise\shesha-core\test\Shesha.Tests\Shesha.Tests.csproj", "{BF916446-6113-4A55-BBE8-890D3E308802}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,17 +84,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0D4C5D00-C144-4213-A007-4B8944113AB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D4C5D00-C144-4213-A007-4B8944113AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D4C5D00-C144-4213-A007-4B8944113AB1}.DebugLocalShesha|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
-		{0D4C5D00-C144-4213-A007-4B8944113AB1}.DebugLocalShesha|Any CPU.Build.0 = DebugLocalShesha|Any CPU
-		{0D4C5D00-C144-4213-A007-4B8944113AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A498E058-B907-42CE-94E5-7126442CCE7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A498E058-B907-42CE-94E5-7126442CCE7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A498E058-B907-42CE-94E5-7126442CCE7A}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
-		{A498E058-B907-42CE-94E5-7126442CCE7A}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
-		{A498E058-B907-42CE-94E5-7126442CCE7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A498E058-B907-42CE-94E5-7126442CCE7A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EEA059DE-9AF6-4BF8-A7E2-4D9165DF7D2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EEA059DE-9AF6-4BF8-A7E2-4D9165DF7D2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEA059DE-9AF6-4BF8-A7E2-4D9165DF7D2A}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
@@ -255,13 +246,23 @@ Global
 		{534C684E-FF34-43C9-87A4-D4B815DC9D04}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{534C684E-FF34-43C9-87A4-D4B815DC9D04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{534C684E-FF34-43C9-87A4-D4B815DC9D04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AE72772-2C77-448C-AC09-774E716D4461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AE72772-2C77-448C-AC09-774E716D4461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AE72772-2C77-448C-AC09-774E716D4461}.DebugLocalShesha|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
+		{5AE72772-2C77-448C-AC09-774E716D4461}.DebugLocalShesha|Any CPU.Build.0 = DebugLocalShesha|Any CPU
+		{5AE72772-2C77-448C-AC09-774E716D4461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AE72772-2C77-448C-AC09-774E716D4461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF916446-6113-4A55-BBE8-890D3E308802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF916446-6113-4A55-BBE8-890D3E308802}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF916446-6113-4A55-BBE8-890D3E308802}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF916446-6113-4A55-BBE8-890D3E308802}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
+		{BF916446-6113-4A55-BBE8-890D3E308802}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF916446-6113-4A55-BBE8-890D3E308802}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{0D4C5D00-C144-4213-A007-4B8944113AB1} = {F10AA149-2626-486E-85BB-9CD5365F3016}
-		{A498E058-B907-42CE-94E5-7126442CCE7A} = {F10AA149-2626-486E-85BB-9CD5365F3016}
 		{A1F04331-3D8C-44A3-BB95-D850F13FF0B3} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 		{18964B04-E67F-4E55-B860-F851D4C514D0} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 		{30E9D02F-E869-41F8-A492-A3152F6110C3} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
@@ -285,6 +286,9 @@ Global
 		{F85C5DCC-B348-4206-8C41-D3D49F7CC0F5} = {9C884397-AA15-4B53-A115-74872005E115}
 		{17013979-A17B-4F18-90FA-AC546CD32876} = {9C884397-AA15-4B53-A115-74872005E115}
 		{534C684E-FF34-43C9-87A4-D4B815DC9D04} = {9C884397-AA15-4B53-A115-74872005E115}
+		{6708090F-E94F-4D2E-B555-8BF9AD87E8E2} = {F10AA149-2626-486E-85BB-9CD5365F3016}
+		{5AE72772-2C77-448C-AC09-774E716D4461} = {6708090F-E94F-4D2E-B555-8BF9AD87E8E2}
+		{BF916446-6113-4A55-BBE8-890D3E308802} = {6708090F-E94F-4D2E-B555-8BF9AD87E8E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95ED23F3-8DEA-456E-A44B-87A161CB696A}
