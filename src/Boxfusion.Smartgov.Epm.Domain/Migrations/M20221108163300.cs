@@ -35,7 +35,7 @@ namespace Boxfusion.Smartgov.Epm.Migrations
 				.WithIdAsGuid()
 				.WithFullAuditColumns()
 				.WithForeignKeyColumn("PerformanceReportTemplateId", "Epm_PerformanceReportTemplates").Nullable()
-				.WithForeignKeyColumn("ComponentTypeId", "Epm.ComponentTypes").Nullable()
+				.WithForeignKeyColumn("ComponentTypeId", "Epm_ComponentTypes").Nullable()
 				.WithColumn("CanBeRoot").AsBoolean();
 
 		}
