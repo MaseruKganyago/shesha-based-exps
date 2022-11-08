@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	  <TargetFramework>net6.0</TargetFramework>
@@ -7,7 +7,7 @@
 	  <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 	  <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
 	  <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-	  <Nullable>enable</Nullable>
+	  <Nullable>false</Nullable>
 	  <Configurations>Debug;Release;DebugLocalShesha</Configurations>
     <RootNamespace>Boxfusion.Smartgov.Epm</RootNamespace>
   </PropertyGroup>
@@ -25,11 +25,6 @@
     <Compile Remove="Migrations - Copy\**" />
     <EmbeddedResource Remove="Migrations - Copy\**" />
     <None Remove="Migrations - Copy\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Domain\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
