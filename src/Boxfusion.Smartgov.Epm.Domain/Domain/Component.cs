@@ -65,19 +65,9 @@ namespace Boxfusion.Smartgov.Epm.Domain
 		}
 
 		/// <summary>
-		/// The Indicator the Component relates to. Only applies if ComponentType.IsIndincator = true.
-		/// </summary>
-		public virtual Indicator Indicator { get; set; }
-
-		/// <summary>
 		/// In cases were the Component is specific to an area.
 		/// </summary>
 		public virtual Area Area { get; set; }
-
-		/// <summary>
-		/// In cases were the Component is specific to a Project.
-		/// </summary>
-		public virtual Project Project { get; set; }
 
 		public virtual RefListIndicatorProgressReportingMethod? IndicatorProgressReportingMethod { get; set; }
 		public virtual IndicatorDefinition IndicatorDefinition { get; set; }

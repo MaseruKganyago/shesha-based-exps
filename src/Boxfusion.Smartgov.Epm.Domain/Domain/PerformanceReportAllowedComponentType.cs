@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Smartgov.Epm.Domain
 {
-    [Entity(TypeShortAlias = "Epm.PerformanceReport")]
+    [Entity(TypeShortAlias = "Epm.PerformanceReportAllowedComponentType")]
     public class PerformanceReportAllowedComponentType: FullAuditedEntity<Guid>
     {
         public virtual PerformanceReportTemplate PerformanceReportTemplate { get; set; }

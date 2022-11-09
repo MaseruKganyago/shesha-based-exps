@@ -1,7 +1,7 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using Boxfusion.Smartgov.Epm.Domain.Enums;
-using DocumentFormat.OpenXml.Drawing.Charts;
 using Shesha.Domain.Attributes;
+using Shesha.Enterprise;
 using System;
 using System.Collections.Generic;
 using System.Linq;
