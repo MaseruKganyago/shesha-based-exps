@@ -17,12 +17,9 @@
 		<Configurations>Debug;Release;DebugLocalShesha</Configurations>
 	</PropertyGroup>
 	<ItemGroup>
-		<Compile Remove="Authentication\**" />
-		<EmbeddedResource Remove="Authentication\**" />
-		<None Remove="Authentication\**" />
-	</ItemGroup>
-	<ItemGroup>
+		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.AzureAD\Shesha.AzureAD.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Elmah\Shesha.Elmah.csproj" />
+		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Ldap\Shesha.Ldap.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Scheduler\Shesha.Scheduler.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Web.FormsDesigner\Shesha.Web.FormsDesigner.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise.DocumentProcessing\Shesha.Enterprise.DocumentProcessing.csproj" />
@@ -35,6 +32,7 @@
 	<ItemGroup>
 		<PackageReference Include="Abp.AspNetCore" Version="6.6.2" />
 		<PackageReference Include="Abp.AspNetCore.SignalR" Version="6.6.2" />
+		<PackageReference Include="Abp.HangFire.AspNetCore" Version="6.6.2" />
 		<PackageReference Include="Abp.ZeroCore" Version="6.6.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
 		<PackageReference Include="System.ValueTuple" Version="4.5.0" />

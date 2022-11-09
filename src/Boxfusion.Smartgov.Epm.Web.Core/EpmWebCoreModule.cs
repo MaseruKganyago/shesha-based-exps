@@ -48,7 +48,6 @@ namespace Boxfusion.Smartgov.Epm
         typeof(EpmDomainModule),
         typeof(EpmApplicationModule)
      )]
-    [ConfigurableModule("0FC7F47E-7744-44FA-8369-04C7EBA14C58", "Enterprise.Web.Core", "Enterprise test module")]
     public class EpmWebCoreModule : AbpModule
     {
         private readonly IConfigurationRoot _appConfiguration;
@@ -64,8 +63,10 @@ namespace Boxfusion.Smartgov.Epm
                 SheshaConsts.ConnectionStringName
             );
 
-            // Use database for language management
-            Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
+			Configuration.Authorization.Providers.Add<EpmAuthorizationProvider>();
+
+			// Use database for language management
+			Configuration.Modules.Zero().LanguageManagement.EnableDbLocalization();
 
             Configuration.Modules.AbpAspNetCore()
                  .CreateControllersForAppServices(
