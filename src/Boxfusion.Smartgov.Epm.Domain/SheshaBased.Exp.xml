@@ -70,26 +70,6 @@
             Name of the form used to display Component progress details.
             </summary>
         </member>
-        <member name="T:Boxfusion.Smartgov.Epm.Domain.Enums.RefListPerformanceReportStatus">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Smartgov.Epm.Domain.Enums.RefListPerformanceReportStatus.Planning">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Smartgov.Epm.Domain.Enums.RefListPerformanceReportStatus.ReportingInProgress">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Boxfusion.Smartgov.Epm.Domain.Enums.RefListPerformanceReportStatus.Finalised">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Boxfusion.Smartgov.Epm.Domain.Enums.RefListRAGValues">
             <summary>
             
