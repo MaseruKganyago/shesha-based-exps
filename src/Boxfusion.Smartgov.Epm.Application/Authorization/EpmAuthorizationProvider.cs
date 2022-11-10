@@ -35,7 +35,7 @@ namespace Boxfusion.Smartgov.Epm.Authorization
 
         private static ILocalizableString L(string name)
         {
-            return new LocalizableString(name, "Exp");
+            return new LocalizableString(name, "Epm");
         }
     }
 }

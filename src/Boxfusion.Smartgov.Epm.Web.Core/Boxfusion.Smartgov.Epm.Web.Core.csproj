@@ -45,12 +45,6 @@
 
   <Choose>
     <When Condition="'$(Configuration)' == 'DebugLocalShesha' Or '$(UseLocalShesha)' == 'true'" />
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Include="Shesha.Elmah" Version="3.0.11" />
-        <PackageReference Include="Shesha.Scheduler" Version="3.0.11" />
-        <PackageReference Include="Shesha.Web.FormsDesigner" Version="3.0.11" />
-      </ItemGroup>
-    </Otherwise>
+    <Otherwise />
   </Choose>
 </Project>

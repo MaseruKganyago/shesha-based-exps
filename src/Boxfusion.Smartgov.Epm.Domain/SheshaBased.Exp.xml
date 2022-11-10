@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Boxfusion.Smartgov.Epm.Domain</name>
+    </assembly>
+    <members>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.Predecessor">
+            <summary>
+            Links to equivalent Component from PerformanceReport based on the same template for the previous period,
+            i.e allows for reporting of indicators accross long periods.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.PerfIndexWeight">
+            <summary>
+            Only applies if PerfIndexCalculationMethod of parent Component is 'WeightedChildren'
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.Area">
+            <summary>
+            In cases were the Component is specific to an area.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.DataSource">
+            <summary>
+            Indicates how the indicator values will be  sourced.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.DataLimitations">
+            <summary>
+            Identifies any limitation with the indicator data, including factors the might be beyond the departments control.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.SkipReportingThisPeriod">
+            <summary>
+            If true, indicates reporting is skipped for this particular period.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.ComponentType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentType.Name">
+            <summary>
+            Unique name for this type of component.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentType.Caption">
+            <summary>
+            What will be displayed to the user for this type of component.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentType.IsIndicator">
+            <summary>
+            If true, indicates that the component represents an indicator.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentType.ShowInAdminTree">
+            <summary>
+            If false, will not display this component when viewing as a regular user.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentType.ProgressReportingRequired">
+            <summary>
+            If true, a Progress Reporting for this component and all its child Components is done at this level.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentType.ProgressDetailsSubForm">
+            <summary>
+            Name of the form used to display Component progress details.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.Enums.RefListPerformanceReportStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Smartgov.Epm.Domain.Enums.RefListPerformanceReportStatus.Planning">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Smartgov.Epm.Domain.Enums.RefListPerformanceReportStatus.ReportingInProgress">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Boxfusion.Smartgov.Epm.Domain.Enums.RefListPerformanceReportStatus.Finalised">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.Enums.RefListRAGValues">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.IndicatorDefinition.WhatMeasured">
+            <summary>
+            Identifies whether the indicator is measuring inputs, activities, outputs, outcomes or impact, or some
+            other dimension of performance such as efficiency, economy or equity.
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.EpmDomainModule.Initialize">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.EpmDomainModule.PreInitialize">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.EpmDomainModule.PostInitialize">
+            inheritedDoc
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Localization.EpmLocalizationConfigurer.Configure(Abp.Configuration.Startup.ILocalizationConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="localizationConfiguration"></param>
+        </member>
+    </members>
+</doc>
