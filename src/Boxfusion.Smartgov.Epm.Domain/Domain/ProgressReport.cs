@@ -15,6 +15,6 @@ namespace Boxfusion.Smartgov.Epm.Domain
 	{
 		public virtual PerformanceReport PerformanceReport { get; set; }
 		public virtual Period PeriodCovered { get; set; }
-		public virtual RefListProgressReportingStatus Status { get; set; }
+		public virtual RefListProgressReportingStatus? Status { get; set; }
 	}
 }
