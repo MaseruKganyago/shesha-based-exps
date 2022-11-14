@@ -44,31 +44,15 @@ namespace Boxfusion.Smartgov.Epm.Domain
 		/// Only applies if PerfIndexCalculationMethod of parent Component is 'WeightedChildren'
 		/// </summary>
 		public virtual int? PerfIndexWeight { get; set; }
-		public virtual RefListRAGValues? LatestRAGValue { get; set; }
+		public virtual RefListRAGValues? FinalRAGValue { get; set; }
 		public virtual RefListRAGCalculationMethod RAGCalculationMethod { get; set; }
-
-		[StringLength(int.MaxValue)]
-		public virtual string RAGThresholds 
-		{
-			get
-			{
-				if (!string.IsNullOrEmpty(RAGThresholds))
-					RAGThresholdsList = JsonConvert.DeserializeObject<List<RefListRAGValues>>(RAGThresholds);
-
-				return RAGThresholds;
-			}
-			set 
-			{
-				if (RAGThresholdsList.Count > 0)
-					value = JsonConvert.SerializeObject(RAGThresholdsList);
-			} 
-		}
+		public virtual Single? RAGGreenThreshold { get; set; }
+		public virtual Single? RAGRedThershold { get; set; }
 
 		/// <summary>
 		/// In cases were the Component is specific to an area.
 		/// </summary>
 		public virtual Area Area { get; set; }
-
 		public virtual RefListIndicatorProgressReportingMethod? IndicatorProgressReportingMethod { get; set; }
 		public virtual IndicatorDefinition IndicatorDefinition { get; set; }
 		public virtual Single? FinalIndicatorTarget { get; set; }
@@ -87,7 +71,5 @@ namespace Boxfusion.Smartgov.Epm.Domain
 		/// </summary>
 		[StringLength(2000)]
 		public virtual string DataLimitations { get; set; }
-		[NotMapped]
-		public List<RefListRAGValues> RAGThresholdsList { get; set; }
 	}
 }

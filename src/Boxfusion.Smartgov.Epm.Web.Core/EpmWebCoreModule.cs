@@ -5,7 +5,6 @@ using Abp.AutoMapper;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using Abp.Zero.Configuration;
-using Boxfusion.Smartgov.Epm.Authorization;
 using Boxfusion.Smartgov.Epm.Languages;
 using Castle.MicroKernel.Registration;
 using Microsoft.AspNetCore.Hosting;
@@ -25,12 +24,14 @@ using Shesha.NHibernate;
 using Shesha.Scheduler;
 using Shesha.Startup;
 using Shesha.Web.FormsDesigner;
+using SheshaBased.Epm;
+using SheshaBased.Epm.Authorization;
 using System;
 using System.Text;
 
 namespace Boxfusion.Smartgov.Epm
 {
-    [DependsOn(
+	[DependsOn(
         typeof(SheshaApplicationModule),
         typeof(SheshaNHibernateModule),
         typeof(AbpAspNetCoreModule),
