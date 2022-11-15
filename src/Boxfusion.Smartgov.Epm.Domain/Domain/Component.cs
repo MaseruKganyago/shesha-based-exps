@@ -71,5 +71,10 @@ namespace Boxfusion.Smartgov.Epm.Domain
 		/// </summary>
 		[StringLength(2000)]
 		public virtual string DataLimitations { get; set; }
+
+		/// <summary>
+		/// If component is of ComponentType KPI, choose KPIType.
+		/// </summary>
+		public virtual RefListKPIType? KPIType { get; set; }
 	}
 }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SheshaBased.Epm.PerformanceReportAllowedComponentTypes.Dto
+namespace SheshaBased.Epm.PerformanceReportAllowedComponentTypes.Dtos
 {
 	public class PerformanceReportAllowedComponentTypeMapProfile: ShaProfile
 	{

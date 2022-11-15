@@ -30,6 +30,11 @@
             Identifies any limitation with the indicator data, including factors the might be beyond the departments control.
             </summary>
         </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.KPIType">
+            <summary>
+            If component is of ComponentType KPI, choose KPIType.
+            </summary>
+        </member>
         <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.SkipReportingThisPeriod">
             <summary>
             If true, indicates reporting is skipped for this particular period.
@@ -68,6 +73,11 @@
         <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentType.ProgressDetailsSubForm">
             <summary>
             Name of the form used to display Component progress details.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.Enums.RefListKPIType">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Boxfusion.Smartgov.Epm.Domain.Enums.RefListRAGValues">
