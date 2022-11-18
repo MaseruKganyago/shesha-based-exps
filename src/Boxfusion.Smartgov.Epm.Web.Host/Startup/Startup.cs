@@ -2,7 +2,9 @@
 using Abp.AspNetCore.SignalR.Hubs;
 using Abp.Castle.Logging.Log4Net;
 using Abp.Extensions;
+using Abp.PlugIns;
 using Boxfusion.Smartgov.Epm.Configuration;
+using Boxfusion.Smartgov.Epm.Hangfire;
 using Boxfusion.Smartgov.Epm.Swagger;
 using Castle.Facilities.Logging;
 using ElmahCore;
@@ -21,14 +23,19 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Shesha.Authorization;
 using Shesha.Configuration;
 using Shesha.DynamicEntities;
+using Shesha.DynamicEntities.Swagger;
+using Shesha.Extensions;
 using Shesha.GraphQL;
 using Shesha.GraphQL.Middleware;
 using Shesha.GraphQL.Swagger;
 using Shesha.Identity;
+using Shesha.Scheduler.Extensions;
 using Shesha.Swagger;
 using Shesha.Web;
+using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.IO;
@@ -47,172 +54,219 @@ namespace Boxfusion.Smartgov.Epm.Web.Host.Startup
             _hostEnvironment = hostEnvironment;
         }
 
-        public IServiceProvider ConfigureServices(IServiceCollection services)
-        {
-            // If using IIS:
-            services.Configure<IISServerOptions>(options =>
-            {
-                options.AllowSynchronousIO = true;
-            });
+		public IServiceProvider ConfigureServices(IServiceCollection services)
+		{
+			services.Configure<IISServerOptions>(options =>
+			{
+				options.AllowSynchronousIO = true;
+			});
 
-            services.AddElmah<XmlFileErrorLog>(options =>
-            {
-                options.Path = @"elmah";
-                options.LogPath = Path.Combine(_hostEnvironment.ContentRootPath, "App_Data", "ElmahLogs");
-                //options.CheckPermissionAction = context => context.User.Identity.IsAuthenticated; //note: looks like we have to use cookies for it
-            });
+			services.AddElmah<XmlFileErrorLog>(options =>
+			{
+				options.Path = @"elmah";
+				//options.LogPath = "~/App_Data/ElmahLogs";
+				options.LogPath = Path.Combine(_hostEnvironment.ContentRootPath, "App_Data", "ElmahLogs");
+				//options.CheckPermissionAction = context => context.User.Identity.IsAuthenticated; //note: looks like we have to use cookies for it
+				options.Filters.Add(new ElmahFilter());
+			});
 
-            services.AddMvcCore(options =>
-                {
-                    options.EnableEndpointRouting = false;
-                    options.Conventions.Add(new ApiExplorerGroupPerVersionConvention());
-                    
-                    options.EnableDynamicDtoBinding();
-                    options.AddDynamicAppServices(services);
-                })
-                .AddApiExplorer()
-                .AddNewtonsoftJson(options =>
-                {
-                    options.UseCamelCasing(true);
-                })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+			services.AddMvcCore(options =>
+			{
+				options.EnableEndpointRouting = false;
+				options.Conventions.Add(new Shesha.Swagger.ApiExplorerGroupPerControllerConvention());
 
-            IdentityRegistrar.Register(services);
-            AuthConfigurer.Configure(services, _appConfiguration);
+				options.EnableDynamicDtoBinding();
+				options.AddDynamicAppServices(services);
 
-            // add Shesha GraphQL
-            services.AddSheshaGraphQL();
+				options.Filters.AddService(typeof(SheshaAuthorizationFilter));
+			})
+				.AddApiExplorer()
+				.AddNewtonsoftJson(options =>
+				{
+					options.UseCamelCasing(true);
+				})
+				.SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            services.AddSignalR();
+			IdentityRegistrar.Register(services);
+			AuthConfigurer.Configure(services, _appConfiguration);
 
-            services.AddCors();
+			services.AddSignalR();
 
-            AddApiVersioning(services);
-
-            services.AddHttpContextAccessor();
-            
-            services.AddHangfire(config =>
-            {
-                config.UseSqlServerStorage(_appConfiguration.GetConnectionString("Default"));
-            });
-
-            // Add ABP and initialize 
-            // Configure Abp and Dependency Injection
-            return services.AddAbp<SheshaWebHostModule>(
-                options =>
-                {
-                    // Configure Log4Net logging
-                    options.IocManager.IocContainer.AddFacility<LoggingFacility>(f => f.UseAbpLog4Net().WithConfig("log4net.config"));
-                    // configure plugins
-                    //options.PlugInSources.AddFolder(Path.Combine(_hostingEnvironment.WebRootPath, "Plugins"), SearchOption.AllDirectories);
-                }
+			services.AddCors();
+			/*
+            // Configure CORS for angular2 UI
+            services.AddCors(
+                options => options.AddPolicy(
+                    _defaultCorsPolicyName,
+                    builder => builder
+                        .WithOrigins(
+                            // App:CorsOrigins in appsettings.json can contain more than one address separated by comma.
+                            _appConfiguration["App:CorsOrigins"]
+                                .Split(",", StringSplitOptions.RemoveEmptyEntries)
+                                .Select(o => o.RemovePostFix("/"))
+                                .ToArray()
+                        )
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                )
             );
-        }
+            */
+			AddApiVersioning(services);
 
-        private void AddApiVersioning(IServiceCollection services)
-        {
-            services.Replace(ServiceDescriptor.Singleton<IApiControllerSpecification, AbpAppServiceApiVersionSpecification>());
-            services.Configure<OpenApiInfo>(_appConfiguration.GetSection(nameof(OpenApiInfo)));
+			services.AddHttpContextAccessor();
 
-            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+			services.AddHangfire(config =>
+			{
+				config.UseSqlServerStorage(_appConfiguration.GetConnectionString("Default"));
+			});
 
-            //Swagger - Enable this line and the related lines in Configure method to enable swagger UI
-            services.AddSwaggerGen(options =>
-            {
-                options.DescribeAllParametersInCamelCase();
-                options.IgnoreObsoleteActions();
-                options.AddXmlDocuments();
+			// add Shesha GraphQL
+			services.AddSheshaGraphQL();
 
-                options.OperationFilter<SwaggerOperationFilter>();
-                options.OperationFilter<SwaggerDefaultValues>();
-                options.SchemaFilter<GraphQLSchemaFilter>();
+			// Add ABP and initialize 
+			// Configure Abp and Dependency Injection
+			return services.AddAbp<SheshaWebHostModule>(
+				options =>
+				{
+					// Configure Log4Net logging
+					options.IocManager.IocContainer.AddFacility<LoggingFacility>(f => f.UseAbpLog4Net().WithConfig("log4net.config"));
 
-                options.CustomOperationIds(desc => desc.ActionDescriptor is ControllerActionDescriptor d
-                    ? d.ControllerName.ToCamelCase() + d.ActionName.ToPascalCase()
-                    : null);
+					// configure plugins
+					var pluginsFolder = Path.Combine(_hostEnvironment.ContentRootPath, "Plugins");
+					if (!Directory.Exists(pluginsFolder))
+						Directory.CreateDirectory(pluginsFolder);
+					options.PlugInSources.AddFolder(Path.Combine(_hostEnvironment.ContentRootPath, "Plugins"), SearchOption.AllDirectories);
+				}
+			);
+		}
+
+		public void Configure(IApplicationBuilder app, IBackgroundJobClient backgroundJobs)
+		{
+			app.UseElmah();
+
+			// note: already registered in the ABP
+			AppContextHelper.Configure(app.ApplicationServices.GetRequiredService<IHttpContextAccessor>());
 
 
-                options.AddDocumentsPerService();
+			app.UseConfigurationFramework();
 
-                // Define the BearerAuth scheme that's in use
-                options.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme()
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey
-                });
-            });
+			app.UseAbp(options =>
+			{
+				options.UseAbpRequestLocalization = false;
+			}); // Initializes ABP framework.
 
-            services.AddApiVersioning(options =>
-            {
-                options.AssumeDefaultVersionWhenUnspecified = true;
-                options.DefaultApiVersion = ApiVersion.Default;
-                options.ReportApiVersions = true;
-            });
+			//app.UseCors(_defaultCorsPolicyName); // Enable CORS!
+			// global cors policy
+			app.UseCors(x => x
+				.AllowAnyMethod()
+				.AllowAnyHeader()
+				.SetIsOriginAllowed(origin => true) // allow any origin
+				.AllowCredentials()); // allow credentials
 
-            services.AddVersionedApiExplorer(options =>
-            {
-                options.GroupNameFormat = "'v'VVV";
-                options.SubstituteApiVersionInUrl = true;
-            });
-        }
+			app.UseStaticFiles();
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {
-            app.UseElmah();
+			app.UseAuthentication();
 
-            // note: already registered in the ABP
-            AppContextHelper.Configure(app.ApplicationServices.GetRequiredService<IHttpContextAccessor>());
+			app.UseAbpRequestLocalization();
 
-            app.UseHangfireServer(new BackgroundJobServerOptions());
-            app.UseHangfireDashboard("/hangfire",
-                new DashboardOptions
-                {
-                    //Authorization = new[] { new HangfireAuthorizationFilter() }
-                });
+			app.UseRouting();
 
-            app.UseAbp(options => { options.UseAbpRequestLocalization = false; }); // Initializes ABP framework.
+			app.UseAuthorization();
 
-            // global cors policy
-            app.UseCors(x => x
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .SetIsOriginAllowed(origin => true) // allow any origin
-                .AllowCredentials()); // allow credentials
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllerRoute(
+					name: "defaultWithArea",
+					pattern: "{area}/{controller=Home}/{action=Index}/{id?}");
+				endpoints.MapControllerRoute(
+					name: "default",
+					pattern: "{controller=Home}/{action=Index}/{id?}");
+				endpoints.MapHub<AbpCommonHub>("/signalr");
+				//endpoints.MapHub<HisAdmisSignalRHub>("/signalr-utilityManDashboardHub");
+				endpoints.MapControllers();
+				endpoints.MapSignalRHubs();
+			});
 
-            app.UseStaticFiles();
+			// Enable middleware to serve generated Swagger as a JSON endpoint
+			app.UseSwagger();
 
-            app.UseAuthentication();
+			// Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
+			app.UseSwaggerUI(options =>
+			{
+				options.AddEndpointsPerService();
+				//options.SwaggerEndpoint("swagger/v1/swagger.json", "Shesha API V1");
 
-            app.UseAbpRequestLocalization();
+				// todo: add documents per module with summary about `service:xxx` endpoints
+				//options.SwaggerEndpoint(baseUrl + "swagger/service:Meter/swagger.json", "Meter API");
 
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "defaultWithArea",
-                    pattern: "{area}/{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapHub<AbpCommonHub>("/signalr");
-                endpoints.MapControllers();
-            });
+				options.IndexStream = () => Assembly.GetExecutingAssembly()
+					.GetManifestResourceStream("Boxfusion.Smartgov.Epm.Web.Host.wwwroot.swagger.ui.index.html");
+			}); // URL: /swagger
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint
-            app.UseSwagger();
+			var options = new BackgroundJobServerOptions
+			{
+				//Queues = new[] { "alpha", "beta", "default" }
+			};
+			app.UseHangfireServer(options);
+			app.UseHangfireDashboard("/hangfire",
+				new DashboardOptions
+				{
+					Authorization = new[] { new HangfireAuthorizationFilter() }
+				});
 
-            // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
-            app.UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("swagger/v1/swagger.json", "Shesha API V1");
-                options.IndexStream = () => Assembly.GetExecutingAssembly()
-                    .GetManifestResourceStream("Shesha.Enterprise.Web.Host.wwwroot.swagger.ui.index.html");
-            }); // URL: /swagger
+			app.UseMiddleware<GraphQLMiddleware>();
+			app.UseGraphQLPlayground(); //to explorer API navigate https://*DOMAIN*/ui/playground
+		}
 
-            app.UseMiddleware<GraphQLMiddleware>();
-            app.UseGraphQLPlayground(); //to explorer API navigate https://*DOMAIN*/ui/playground
-        }
-    }
+		private void AddApiVersioning(IServiceCollection services)
+		{
+			services.Replace(ServiceDescriptor.Singleton<IApiControllerSpecification, AbpAppServiceApiVersionSpecification>());
+			services.Configure<OpenApiInfo>(_appConfiguration.GetSection(nameof(OpenApiInfo)));
+
+			services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+
+			//Swagger - Enable this line and the related lines in Configure method to enable swagger UI
+			services.AddSwaggerGen(options =>
+			{
+				options.DescribeAllParametersInCamelCase();
+				options.IgnoreObsoleteActions();
+				options.AddXmlDocuments();
+
+				options.SchemaFilter<DynamicDtoSchemaFilter>();
+
+				options.CustomSchemaIds(type => SwaggerHelper.GetSchemaId(type));
+
+				options.CustomOperationIds(desc => desc.ActionDescriptor is ControllerActionDescriptor d
+					? d.ControllerName.ToCamelCase() + d.ActionName.ToPascalCase()
+					: null);
+
+				options.AddDocumentsPerService();
+
+				// Define the BearerAuth scheme that's in use
+				options.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme()
+				{
+					Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+					Name = "Authorization",
+					In = ParameterLocation.Header,
+					Type = SecuritySchemeType.ApiKey
+				});
+				//options.SchemaFilter<DynamicDtoSchemaFilter>();
+			});
+			services.Replace(ServiceDescriptor.Transient<ISwaggerProvider, CachingSwaggerProvider>());
+
+			services.AddApiVersioning(options =>
+			{
+				options.AssumeDefaultVersionWhenUnspecified = true;
+				options.DefaultApiVersion = ApiVersion.Default;
+				options.ReportApiVersions = true;
+			});
+
+			services.AddVersionedApiExplorer(options =>
+			{
+				options.GroupNameFormat = "'v'VVV";
+				options.SubstituteApiVersionInUrl = true;
+			});
+		}
+	}
 }

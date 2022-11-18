@@ -338,6 +338,12 @@
             
             </summary>
         </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReportManager.repository">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReportManager.GeneratePerformanceReportProgressReportsAsync(Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReport)">
             <summary>
             

@@ -3,9 +3,9 @@
 	<Import Project="..\..\common.props" />
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<AssemblyName>Shesha.Enterprise.Web.Host</AssemblyName>
-		<PackageId>Shesha.Enterprise.Web.Host</PackageId>
-		<RootNamespace>Shesha.Enterprise.Web.Host</RootNamespace>
+		<AssemblyName>Boxfusion.Smartgov.Epm.Web.Host</AssemblyName>
+		<PackageId>Boxfusion.Smartgov.Epm.Web.Host</PackageId>
+		<RootNamespace>Boxfusion.Smartgov.Epm.Web.Host</RootNamespace>
 		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
 		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>

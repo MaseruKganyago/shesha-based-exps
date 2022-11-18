@@ -1,5 +1,6 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using Boxfusion.Smartgov.Epm.Domain.Enums;
+using Boxfusion.Smartgov.Epm.Domain.PerformanceReports;
 using Newtonsoft.Json;
 using Shesha.Domain;
 using Shesha.Domain.Attributes;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Smartgov.Epm.Domain
 {
-	[Entity(TypeShortAlias = "Epm.Component")]
+    [Entity(TypeShortAlias = "Epm.Component")]
 	public class Component: FullAuditedEntity<Guid>
 	{
 		public virtual PerformanceReport PerformanceReport { get; set; }

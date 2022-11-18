@@ -23,11 +23,35 @@ namespace Boxfusion.Smartgov.Epm.Domain
 		/// What will be displayed to the user for this type of component.
 		/// </summary>
 		public virtual string Caption { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual string Description { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual string Icon { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual string AdminTreeCreateForm { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual string AdminTreeDetailsForm { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual string AdminTreeUpdateForm { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual string ViewerTreeDetailsForm { get; set; }
 
 		/// <summary>
@@ -39,6 +63,10 @@ namespace Boxfusion.Smartgov.Epm.Domain
 		/// If false, will not display this component when viewing as a regular user.
 		/// </summary>
 		public virtual bool ShowInAdminTree { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual bool ShowInViewerTree { get; set; }
 
 		/// <summary>
@@ -50,8 +78,20 @@ namespace Boxfusion.Smartgov.Epm.Domain
 		/// Name of the form used to display Component progress details.
 		/// </summary>
 		public virtual string ProgressDetailsSubForm { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual bool ProgressQA1Required { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual bool ProgressQA2Required { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public virtual bool ProgressAuditRequired { get; set; }
 	}
 }

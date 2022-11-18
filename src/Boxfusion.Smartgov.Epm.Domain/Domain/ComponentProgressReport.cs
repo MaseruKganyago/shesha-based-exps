@@ -1,5 +1,6 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using Boxfusion.Smartgov.Epm.Domain.Enums;
+using Boxfusion.Smartgov.Epm.Domain.ProgressReports;
 using Shesha.Domain;
 using Shesha.Domain.Attributes;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Smartgov.Epm.Domain
 {
-	[Entity(TypeShortAlias = "Epm.ComponentProgressReport")]
+    [Entity(TypeShortAlias = "Epm.ComponentProgressReport")]
 	public class ComponentProgressReport: FullAuditedEntity<Guid>
 	{
 		public virtual ProgressReport ProgressReport { get; set; }

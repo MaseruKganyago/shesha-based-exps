@@ -1,4 +1,6 @@
-﻿using Abp.Modules;
+﻿using Abp.Hangfire;
+using Abp.Hangfire.Configuration;
+using Abp.Modules;
 using Abp.Reflection.Extensions;
 using Boxfusion.Smartgov.Epm;
 using Boxfusion.Smartgov.Epm.Configuration;
@@ -9,30 +11,16 @@ using Shesha.Web.FormsDesigner;
 
 namespace Boxfusion.Smartgov.Epm.Web.Host.Startup
 {
-    [DependsOn(typeof(EpmWebCoreModule), typeof(SheshaFormsDesignerModule))]
+    [DependsOn(typeof(EpmWebCoreModule), typeof(AbpHangfireAspNetCoreModule))]
     public class SheshaWebHostModule: AbpModule
     {
-        private readonly IHostingEnvironment _env;
-        private readonly IConfigurationRoot _appConfiguration;
-
-        public SheshaWebHostModule(IHostingEnvironment env)
-        {
-            _env = env;
-            _appConfiguration = env.GetAppConfiguration();
-        }
-
-        public override void PreInitialize()
-        {
-            base.PreInitialize();
-            /*
-            Configuration.BackgroundJobs.IsJobExecutionEnabled = false;
-            Configuration.Auditing.IsEnabled = false;
-            */
-        }
-
-        public override void Initialize()
-        {
-            IocManager.RegisterAssemblyByConvention(typeof(SheshaWebHostModule).GetAssembly());
-        }
-    }
+		public override void Initialize()
+		{
+			IocManager.RegisterAssemblyByConvention(typeof(SheshaWebHostModule).GetAssembly());
+		}
+		public override void PreInitialize()
+		{
+			Configuration.BackgroundJobs.UseHangfire();
+		}
+	}
 }

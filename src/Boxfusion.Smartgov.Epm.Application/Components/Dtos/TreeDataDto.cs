@@ -14,6 +14,8 @@ namespace SheshaBased.Epm.Components.Dtos
 		public string IconLevel { get; set; }
 		public Guid? Parent { get; set; }
 		public Single? OrderIndex { get; set; }
+		public Guid? ComponentType { get; set; }
+		public Guid? PerformanceReport { get; set; }
 		public List<TreeDataDto> Children { get; set; }
 	}
 }

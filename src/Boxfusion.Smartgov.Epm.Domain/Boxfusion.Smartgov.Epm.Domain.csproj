@@ -13,11 +13,11 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<OutputPath></OutputPath>
-		<DocumentationFile>.\SheshaBased.Exp.xml</DocumentationFile>
+		<DocumentationFile>.\Boxfusion.Smartgov.Epm.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DocumentationFile>.\SheshaBased.Exp.xml</DocumentationFile>
+		<DocumentationFile>.\Boxfusion.Smartgov.Epm.xml</DocumentationFile>
 	</PropertyGroup>
 
   <ItemGroup>

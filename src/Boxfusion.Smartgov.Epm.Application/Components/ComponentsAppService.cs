@@ -66,8 +66,10 @@ namespace SheshaBased.Epm.Components
 					Key = item.Id,
 					AdminTreeCreateForm = componentType.AdminTreeCreateForm,
 					IconLevel = componentType.Icon,
-					Parent = item.Parent != null ? item.Parent.Id : null,
+					Parent = item.Parent?.Id,
 					OrderIndex = item.OrderIndex,
+					ComponentType = item.ComponentType?.Id,
+					PerformanceReport = item.PerformanceReport?.Id,
 					Children = await GetChildrenComponents(item.Id),
 				});
 			}
