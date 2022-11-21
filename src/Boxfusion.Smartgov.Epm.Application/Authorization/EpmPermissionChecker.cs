@@ -3,7 +3,7 @@ using NHibernate.Linq;
 using Shesha.Authorization;
 using Shesha.Domain;
 
-namespace SheshaBased.Epm.Authorization
+namespace Boxfusion.Smartgov.Epm.Authorization
 {
 	/// <summary>
 	/// Health.His Permission checker

@@ -34,7 +34,6 @@ namespace Boxfusion.Smartgov.Epm
 		{
 			base.PreInitialize();
 
-			//Configuration.Settings.Providers.Add<HisDomainSettingProvider>();
 		}
 
 		/// inheritedDoc

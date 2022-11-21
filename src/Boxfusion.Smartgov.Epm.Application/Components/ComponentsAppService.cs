@@ -1,9 +1,10 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Boxfusion.Smartgov.Epm;
+using Boxfusion.Smartgov.Epm.Components.Dtos;
 using Boxfusion.Smartgov.Epm.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SheshaBased.Epm.Components.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace SheshaBased.Epm.Components
+namespace Boxfusion.Smartgov.Epm.Components
 {
 	/// <summary>
 	/// 
@@ -19,7 +20,7 @@ namespace SheshaBased.Epm.Components
 	[AbpAuthorize]
 	[ApiVersion("1")]
 	[Route("api/v{version:apiVersion}/Epm/[controller]")]
-	public class ComponentsAppService: EpmAppServiceBase
+	public class ComponentsAppService : EpmAppServiceBase
 	{
 		private readonly IRepository<Component, Guid> _repository;
 		private readonly IRepository<ComponentType, Guid> _componentTypeRepository;
@@ -31,13 +32,14 @@ namespace SheshaBased.Epm.Components
 		}
 
 		/// <summary>
-		/// Temporary unpotimzed, just to allow front-end building flow
+		/// Temporary unOptimzed, just to allow front-end building flow
 		/// </summary>
 		/// <returns></returns>
+		[AbpAllowAnonymous]
 		[HttpGet, Route("[action]")]
-		public async Task<string> GetTreeDataJson()
+		public async Task<string> GetTreeDataJson(Guid performanceReportId)
 		{
-			var components = await _repository.GetAllListAsync();
+			var components = await _repository.GetAllListAsync(a => a.PerformanceReport.Id == performanceReportId);
 			var filteredComponents = components.Where(a => a.ComponentType.Icon == "level-1").ToList();
 
 			var treeDataList = await MapComponentsToTreeDataList(filteredComponents);

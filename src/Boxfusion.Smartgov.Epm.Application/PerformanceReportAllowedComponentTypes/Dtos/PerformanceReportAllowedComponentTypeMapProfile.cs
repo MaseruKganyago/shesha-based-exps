@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SheshaBased.Epm.PerformanceReportAllowedComponentTypes.Dtos
+namespace Boxfusion.Smartgov.Epm.PerformanceReportAllowedComponentTypes.Dtos
 {
-	public class PerformanceReportAllowedComponentTypeMapProfile: ShaProfile
+	public class PerformanceReportAllowedComponentTypeMapProfile : ShaProfile
 	{
 		public PerformanceReportAllowedComponentTypeMapProfile()
 		{

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SheshaBased.Epm.Components.Dtos
+namespace Boxfusion.Smartgov.Epm.Components.Dtos
 {
 	public class TreeDataDto
 	{
@@ -13,7 +13,7 @@ namespace SheshaBased.Epm.Components.Dtos
 		public string AdminTreeCreateForm { get; set; }
 		public string IconLevel { get; set; }
 		public Guid? Parent { get; set; }
-		public Single? OrderIndex { get; set; }
+		public float? OrderIndex { get; set; }
 		public Guid? ComponentType { get; set; }
 		public Guid? PerformanceReport { get; set; }
 		public List<TreeDataDto> Children { get; set; }

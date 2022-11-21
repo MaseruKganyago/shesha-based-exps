@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SheshaBased.Epm.PerformanceReportAllowedComponentTypes.Dtos
+namespace Boxfusion.Smartgov.Epm.PerformanceReportAllowedComponentTypes.Dtos
 {
-	public class FlattenedAllowedComponentTypesDto: Entity<Guid>
+	public class FlattenedAllowedComponentTypesDto : Entity<Guid>
 	{
 		public string FormPath { get; set; }
 		public Guid ComponentTypeId { get; set; }

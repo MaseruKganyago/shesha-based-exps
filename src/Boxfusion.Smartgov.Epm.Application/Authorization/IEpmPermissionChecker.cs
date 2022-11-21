@@ -1,7 +1,7 @@
 ﻿using Shesha.Domain;
 using System.Threading.Tasks;
 
-namespace SheshaBased.Epm.Authorization
+namespace Boxfusion.Smartgov.Epm.Authorization
 {
 	/// <summary>
 	/// Permission checker

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SheshaBased.Epm.Authorization
+namespace Boxfusion.Smartgov.Epm.Authorization
 {
 
 	public static class EpmPermissions

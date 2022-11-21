@@ -1,16 +1,17 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Boxfusion.Smartgov.Epm;
 using Boxfusion.Smartgov.Epm.Domain;
+using Boxfusion.Smartgov.Epm.PerformanceReportAllowedComponentTypes.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Shesha.Utilities;
-using SheshaBased.Epm.PerformanceReportAllowedComponentTypes.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SheshaBased.Epm.PerformanceReportAllowedComponentTypes
+namespace Boxfusion.Smartgov.Epm.PerformanceReportAllowedComponentTypes
 {
 	/// <summary>
 	/// 
@@ -52,10 +53,10 @@ namespace SheshaBased.Epm.PerformanceReportAllowedComponentTypes
 			//var strLength = "level-".Length;
 
 			var aIconLevel = a.Icon;
-			var aIconLevelNum = Int32.Parse(StringHelper.Right(aIconLevel, 1));
+			var aIconLevelNum = int.Parse(aIconLevel.Right(1));
 
 			var bIconLevel = b.Icon;
-			var bIconLevelNum = Int32.Parse(StringHelper.Right(bIconLevel, 1));
+			var bIconLevelNum = int.Parse(bIconLevel.Right(1));
 
 			return aIconLevelNum > bIconLevelNum;
 		}

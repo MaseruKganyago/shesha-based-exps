@@ -27,7 +27,7 @@ namespace Boxfusion.Smartgov.Epm.Tests
 			_uowManager = Resolve<IUnitOfWorkManager>();
 		}
 
-		protected void CreateTestData_PerformanceReportTemplateAndPerformanceReport(string name, RefListPeriodType reportingCycle, string performanceReportName)
+		protected async void CreateTestData_PerformanceReportTemplateAndPerformanceReport(string name, RefListPeriodType reportingCycle, string performanceReportName)
 		{
 			LoginAsHost("admin");
 			using (var uow = _uowManager.Begin())
@@ -45,6 +45,8 @@ namespace Boxfusion.Smartgov.Epm.Tests
 					template = _performanceReportTemplateRepostory.Insert(newTemplate);
 				}
 				CreateTestData_PerformanceReport(performanceReportName, template);
+
+				await uow.CompleteAsync();
 			}
 		}
 

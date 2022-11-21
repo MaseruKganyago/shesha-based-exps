@@ -1,12 +1,11 @@
 ﻿using Abp.AspNetCore.Configuration;
 using Abp.AutoMapper;
 using Abp.Modules;
-using Boxfusion.Smartgov.Epm;
 using Boxfusion.Smartgov.Epm.Localization;
 using Shesha.Startup;
 using System.Reflection;
 
-namespace SheshaBased.Epm
+namespace Boxfusion.Smartgov.Epm
 {
 	[DependsOn(
 		typeof(EpmDomainModule))]

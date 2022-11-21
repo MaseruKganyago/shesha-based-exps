@@ -1,4 +1,4 @@
-﻿namespace SheshaBased.Epm.Authorization
+﻿namespace Boxfusion.Smartgov.Epm.Authorization
 {
 	/// <summary>
 	/// Role Names

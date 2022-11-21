@@ -50,8 +50,8 @@ namespace Boxfusion.Smartgov.Epm.Domain.ProgressReports
 			var performanceReportPeriod = performanceReport.PeriodCovered;
 			var performanceReportTemplate = performanceReport.Template;
 
-			var coveredPeriods = await _periodRepository.GetAllListAsync(a => a.PeriodStart >= performanceReportPeriod.PeriodStart
-													&& a.PeriodEnd <= performanceReportPeriod.PeriodEnd);
+			var coveredPeriods = await _periodRepository.GetAllListAsync(a => a.PeriodStart.Value.Date >= performanceReportPeriod.PeriodStart.Value.Date
+													&& a.PeriodEnd.Value.Date <= performanceReportPeriod.PeriodEnd.Value.Date);
 
 			var validReportingCyclePeriods = coveredPeriods
 					.Where(a => a.PeriodType == performanceReportTemplate.ProgressReportingCycle).ToList();

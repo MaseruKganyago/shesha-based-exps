@@ -4,7 +4,7 @@ using System.Reflection;
 using Abp.Authorization;
 using Abp.Localization;
 
-namespace SheshaBased.Epm.Authorization
+namespace Boxfusion.Smartgov.Epm.Authorization
 {
 	/// <summary>
 	/// Authorization Provider
