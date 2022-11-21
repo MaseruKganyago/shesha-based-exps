@@ -175,9 +175,67 @@
             If component is of ComponentType KPI, choose KPIType.
             </summary>
         </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.SkipReportingThisPeriod">
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReport.SkipReportingThisPeriod">
             <summary>
             If true, indicates reporting is skipped for this particular period.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReport,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.Component,System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="repository"></param>
+            <param name="componentRepository"></param>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.repository">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.GenerateComponentProgressReportsForProgressReportAsync(Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport)">
+            <summary>
+            
+            </summary>
+            <param name="progressReport"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.CreateComponentProgressReportAsync(Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,Boxfusion.Smartgov.Epm.Domain.Component)">
+            <summary>
+            
+            </summary>
+            <param name="progressReport"></param>
+            <param name="component"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport.TemplateName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport.PeriodCoveredName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport.ProgressReportStatus">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Boxfusion.Smartgov.Epm.Domain.ComponentType">
@@ -520,6 +578,11 @@
             
             </summary>
         </member>
+        <member name="T:Boxfusion.Smartgov.Epm.EpmDomainConsts">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:Boxfusion.Smartgov.Epm.EpmDomainModule.Initialize">
             inheritedDoc
         </member>
@@ -534,6 +597,70 @@
             
             </summary>
             <param name="localizationConfiguration"></param>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Migrations.M20221121170400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221121170400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221121170400.Down">
+            <summary>
+            
+            </summary>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Migrations.M20221121171400">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221121171400.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221121171400.Down">
+            <summary>
+            
+            </summary>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Migrations.M20221121183600">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221121183600.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221121183600.Down">
+            <summary>
+            
+            </summary>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Migrations.M20221121191000">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221121191000.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221121191000.Down">
+            <summary>
+            
+            </summary>
+            <exception cref="T:System.NotImplementedException"></exception>
         </member>
     </members>
 </doc>

@@ -75,7 +75,7 @@ namespace Boxfusion.Smartgov.Epm.Domain.ProgressReports
 			{
 				PerformanceReport = performanceReport,
 				PeriodCovered = period,
-				Status = status
+				Status = (long?)status
 			});
 		}
 	}

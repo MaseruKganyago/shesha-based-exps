@@ -27,9 +27,10 @@ namespace Boxfusion.Smartgov.Epm.Domain.ProgressReports
         /// </summary>
         public virtual Period PeriodCovered { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual RefListProgressReportingStatus? Status { get; set; }
+		/// <summary>
+		/// 
+		/// </summary>
+		[ReferenceList("Epm", "ProgressReportingStatus")]
+		public virtual long? Status { get; set; }
     }
 }
