@@ -1,6 +1,7 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Abp.Runtime.Validation;
+using Boxfusion.Smartgov.Epm.Persons.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using NHibernate.Linq;
 using Shesha.Authorization.Users;
@@ -26,10 +27,12 @@ namespace Boxfusion.Smartgov.Epm.Persons
 	public class PersonsAppService : EpmAppServiceBase
 	{
 		private readonly IRepository<Person, Guid> _repository;
+		private readonly IRepository<ShaRoleAppointedPerson, Guid> _shaRoleAppointedPerson;
 
-		public PersonsAppService(IRepository<Person, Guid> repository)
+		public PersonsAppService(IRepository<Person, Guid> repository, IRepository<ShaRoleAppointedPerson, Guid> shaRoleAppointedPerson)
 		{
 			_repository = repository;
+			_shaRoleAppointedPerson = shaRoleAppointedPerson;
 		}
 
 		[HttpPost, Route("CreateWithUserAccount")]
@@ -73,6 +76,21 @@ namespace Boxfusion.Smartgov.Epm.Persons
 			CurrentUnitOfWork.SaveChanges();
 
 			return await MapToDynamicDtoAsync<Person, Guid>(practitioner);
+		}
+
+		[HttpGet, Route("[action]")]
+		public async Task<PersonIdRoleNamesDto> GetCurrentLoggedInPersonIdRoleNames()
+		{
+			var person = await GetCurrentPersonAsync();
+
+			var roles = await _shaRoleAppointedPerson.GetAllListAsync(a => a.Person.Id == person.Id);
+			var roleNames = roles.Select(a => a.Role.Name).ToList();
+
+			return new PersonIdRoleNamesDto()
+			{
+				Id = person.Id,
+				Roles = roleNames
+			};
 		}
 
 

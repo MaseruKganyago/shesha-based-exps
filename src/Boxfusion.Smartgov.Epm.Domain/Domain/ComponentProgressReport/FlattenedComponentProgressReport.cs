@@ -37,5 +37,20 @@ namespace Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport
 		/// </summary>
 		[ReferenceList("Epm", "NodeProgressReportStatus")]
 		public virtual long? ProgressReportStatus { get; protected set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual Guid? ResponsibleReportingPersonId { get; protected set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual Guid? ResponsibleQA1PersonId { get; protected set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public virtual Guid? ResponsibleQA2PersonId { get; protected set; }
 	}
 }

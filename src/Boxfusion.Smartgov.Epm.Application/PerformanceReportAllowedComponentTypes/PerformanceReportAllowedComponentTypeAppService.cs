@@ -2,6 +2,7 @@
 using Abp.Domain.Repositories;
 using Boxfusion.Smartgov.Epm;
 using Boxfusion.Smartgov.Epm.Domain;
+using Boxfusion.Smartgov.Epm.Domain.Components;
 using Boxfusion.Smartgov.Epm.PerformanceReportAllowedComponentTypes.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Shesha.Utilities;
@@ -13,10 +14,10 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Smartgov.Epm.PerformanceReportAllowedComponentTypes
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	[AbpAuthorize]
+    /// <summary>
+    /// 
+    /// </summary>
+    [AbpAuthorize]
 	[ApiVersion("1")]
 	[Route("api/v{version:apiVersion}/Epm/[controller]")]
 	public class PerformanceReportAllowedComponentTypesAppService : EpmAppServiceBase

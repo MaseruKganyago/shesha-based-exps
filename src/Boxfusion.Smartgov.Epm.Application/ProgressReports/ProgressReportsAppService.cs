@@ -36,10 +36,10 @@ namespace Boxfusion.Smartgov.Epm.ComponentProgressReports
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		[HttpPut, Route("[action]")]
-		public async Task<DynamicDto<ProgressReport, Guid>> PublishProgressReport(Guid id)
+		[HttpPut, Route("{progressReportId}/PublishProgressReport")]
+		public async Task<DynamicDto<ProgressReport, Guid>> PublishProgressReport([FromRoute]Guid progressReportId)
 		{
-			var progressReport = await _progressReport.GetAsync(id);
+			var progressReport = await _progressReport.GetAsync(progressReportId);
 
 			await _componentProgressReportManager.GenerateComponentProgressReportsForProgressReportAsync(progressReport);
 

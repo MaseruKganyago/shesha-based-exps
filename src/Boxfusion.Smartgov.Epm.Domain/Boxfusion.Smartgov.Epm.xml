@@ -24,157 +24,6 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Smartgov.Epm.Domain.Component">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.PerformanceReport">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.Name">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.RefNo">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.Description">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.OrderIndex">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.ComponentType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.Parent">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.Predecessor">
-            <summary>
-            Links to equivalent Component from PerformanceReport based on the same template for the previous period,
-            i.e allows for reporting of indicators accross long periods.
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.ResponsibleOrganisation">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.ResponsibleReporting">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.ResponsibleQA1">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.ResponsibleQA2">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.LatestPerfIndex">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.PerfIndexCalculationMethod">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.PerfIndexWeight">
-            <summary>
-            Only applies if PerfIndexCalculationMethod of parent Component is 'WeightedChildren'
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.FinalRAGValue">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.RAGCalculationMethod">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.RAGGreenThreshold">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.RAGRedThershold">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.Area">
-            <summary>
-            In cases were the Component is specific to an area.
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.IndicatorProgressReportingMethod">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.IndicatorDefinition">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.FinalIndicatorTarget">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.LatestIndicatorValue">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.FinalExpenditureTarget">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.LatestExpenditureActual">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.DataSource">
-            <summary>
-            Indicates how the indicator values will be  sourced.
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.DataLimitations">
-            <summary>
-            Identifies any limitation with the indicator data, including factors the might be beyond the departments control.
-            </summary>
-        </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.Component.KPIType">
-            <summary>
-            If component is of ComponentType KPI, choose KPIType.
-            </summary>
-        </member>
         <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReport.SkipReportingThisPeriod">
             <summary>
             If true, indicates reporting is skipped for this particular period.
@@ -185,7 +34,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReport,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.Component,System.Guid})">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReport,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.Components.Component,System.Guid})">
             <summary>
             
             </summary>
@@ -205,7 +54,7 @@
             <param name="progressReport"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.CreateComponentProgressReportAsync(Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,Boxfusion.Smartgov.Epm.Domain.Component)">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.CreateComponentProgressReportAsync(Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,Boxfusion.Smartgov.Epm.Domain.Components.Component)">
             <summary>
             
             </summary>
@@ -237,6 +86,184 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport.ResponsibleReportingPersonId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport.ResponsibleQA1PersonId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport.ResponsibleQA2PersonId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.Components.Component">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.PerformanceReport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.RefNo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.OrderIndex">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.ComponentType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.Parent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.Predecessor">
+            <summary>
+            Links to equivalent Component from PerformanceReport based on the same template for the previous period,
+            i.e allows for reporting of indicators accross long periods.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.ResponsibleOrganisation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.ResponsibleReporting">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.ResponsibleQA1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.ResponsibleQA2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.LatestPerfIndex">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.PerfIndexCalculationMethod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.PerfIndexWeight">
+            <summary>
+            Only applies if PerfIndexCalculationMethod of parent Component is 'WeightedChildren'
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.FinalRAGValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.RAGCalculationMethod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.RAGGreenThreshold">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.RAGRedThershold">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.Area">
+            <summary>
+            In cases were the Component is specific to an area.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.IndicatorProgressReportingMethod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.IndicatorDefinition">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.FinalIndicatorTarget">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.LatestIndicatorValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.FinalExpenditureTarget">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.LatestExpenditureActual">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.DataSource">
+            <summary>
+            Indicates how the indicator values will be  sourced.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.DataLimitations">
+            <summary>
+            Identifies any limitation with the indicator data, including factors the might be beyond the departments control.
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.Components.Component.KPIType">
+            <summary>
+            If component is of ComponentType KPI, choose KPIType.
+            </summary>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.Components.ComponentsHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.Components.ComponentsHelper.GetComponentNodePath(System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="compoentId"></param>
+            <returns></returns>
         </member>
         <member name="T:Boxfusion.Smartgov.Epm.Domain.ComponentType">
             <summary>
@@ -657,6 +684,54 @@
             </summary>
         </member>
         <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221121191000.Down">
+            <summary>
+            
+            </summary>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Migrations.M20221122094700">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221122094700.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221122094700.Down">
+            <summary>
+            
+            </summary>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Migrations.M20221122105100">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221122105100.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221122105100.Down">
+            <summary>
+            
+            </summary>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Migrations.M20221123094600">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221123094600.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Migrations.M20221123094600.Down">
             <summary>
             
             </summary>

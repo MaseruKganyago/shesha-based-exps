@@ -1,4 +1,5 @@
 ﻿using Abp.Domain.Entities.Auditing;
+using Boxfusion.Smartgov.Epm.Domain.Components;
 using Boxfusion.Smartgov.Epm.Domain.Enums;
 using Boxfusion.Smartgov.Epm.Domain.ProgressReports;
 using Shesha.Domain;
@@ -25,8 +26,10 @@ namespace Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport
         public virtual bool SkipReportingThisPeriod { get; set; }
 
         public virtual float? PerfIndex { get; set; }
-        public virtual RefListRAGValues? RAGValue { get; set; }
-        public virtual RefListTrend? Trend { get; set; }
+		[ReferenceList("Epm", "RAGValues")]
+		public virtual long? RAGValue { get; set; }
+		[ReferenceList("Epm", "Trend")]
+		public virtual long? Trend { get; set; }
         public virtual float? IndicatorTarget { get; set; }
         public virtual float? IndicatorActual { get; set; }
         public virtual decimal? ExpenditureTarget { get; set; }
@@ -41,7 +44,8 @@ namespace Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport
         public virtual StoredFile PortfolioOfEvidence { get; set; }
         [StringLength(2000)]
         public virtual string OtherComments { get; set; }
-        public virtual RefListNodeProgressReportStatus? ProgressReportStatus { get; set; }
+		[ReferenceList("Epm", "NodeProgressReportStatus")]
+		public virtual long? ProgressReportStatus { get; set; }
         public virtual Person ReportedBy { get; set; }
         public virtual DateTime? ReportedDate { get; set; }
         public virtual Person QA1CompletedBy { get; set; }
@@ -52,8 +56,10 @@ namespace Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport
         public virtual DateTime? QA2CompletedDate { get; set; }
         [StringLength(2000)]
         public virtual string QA2Comments { get; set; }
-        public virtual RefListIndicatorAuditOutcome? AuditOutcome { get; set; }
-        public virtual RefListIndicatorAuditStatus? AuditStatus { get; set; }
+		[ReferenceList("Epm", "IndicatorAuditOutcome")]
+		public virtual long? AuditOutcome { get; set; }
+		[ReferenceList("Epm", "IndicatorAuditStatus")]
+		public virtual long? AuditStatus { get; set; }
         public virtual Person AuditCompletedBy { get; set; }
         public virtual DateTime? AuditCompletedDate { get; set; }
         [StringLength(2000)]

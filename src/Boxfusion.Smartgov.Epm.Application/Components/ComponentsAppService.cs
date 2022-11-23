@@ -3,8 +3,12 @@ using Abp.Domain.Repositories;
 using Boxfusion.Smartgov.Epm;
 using Boxfusion.Smartgov.Epm.Components.Dtos;
 using Boxfusion.Smartgov.Epm.Domain;
+using Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport;
+using Boxfusion.Smartgov.Epm.Domain.Components;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 using Newtonsoft.Json;
+using Shesha.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +28,15 @@ namespace Boxfusion.Smartgov.Epm.Components
 	{
 		private readonly IRepository<Component, Guid> _repository;
 		private readonly IRepository<ComponentType, Guid> _componentTypeRepository;
+		private readonly IRepository<ComponentProgressReport, Guid> _componentProgressReportReporsitory;
 
-		public ComponentsAppService(IRepository<Component, Guid> repository, IRepository<ComponentType, Guid> componentTypeRepository)
+		public ComponentsAppService(IRepository<Component, Guid> repository, 
+			IRepository<ComponentType, Guid> componentTypeRepository,
+			IRepository<ComponentProgressReport, Guid> componentProgressReportReporsitory)
 		{
 			_repository = repository;
 			_componentTypeRepository = componentTypeRepository;
+			_componentProgressReportReporsitory = componentProgressReportReporsitory;
 		}
 
 		/// <summary>
@@ -52,6 +60,26 @@ namespace Boxfusion.Smartgov.Epm.Components
 			};
 
 			return System.Text.Json.JsonSerializer.Serialize(orderedList, serializeOptions);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="componentProgressReportId"></param>
+		/// <returns></returns>
+		[HttpGet, Route("[action]")]
+		public async Task<ComponentReportingDto> GetComponentReportingDetails(Guid id)
+		{
+			var report = await _componentProgressReportReporsitory.GetAsync(id);
+
+			var path = await ComponentsHelper.GetComponentNodePath(report.Component.Id);
+
+			return new ComponentReportingDto()
+			{
+				NodeName = report.Component.Name,
+				NodePath = path.Left(path.Length -1),
+				NodeTarget = report.Component.FinalIndicatorTarget.ToString()
+			};
 		}
 
 		private async Task<List<TreeDataDto>> MapComponentsToTreeDataList(List<Component> components)

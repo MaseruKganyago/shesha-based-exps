@@ -1,5 +1,6 @@
 ﻿using Abp.Domain.Repositories;
 using Abp.Domain.Services;
+using Boxfusion.Smartgov.Epm.Domain.Components;
 using Boxfusion.Smartgov.Epm.Domain.Enums;
 using Boxfusion.Smartgov.Epm.Domain.ProgressReports;
 using System;
@@ -10,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	public class ComponentProgressReportManager: DomainService
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ComponentProgressReportManager: DomainService
 	{
 		private readonly IRepository<ComponentProgressReport, Guid> _repository;
 		private readonly IRepository<Component, Guid> _componentRepository;
@@ -68,7 +69,9 @@ namespace Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport
 			{
 				ProgressReport = progressReport,
 				Component = component,
-				ProgressReportStatus = RefListNodeProgressReportStatus.AwaitingLevelOneQA
+				ProgressReportStatus = (long?)RefListNodeProgressReportStatus.Outstanding,
+				IndicatorTarget = component.FinalIndicatorTarget,
+				ExpenditureTarget = component.FinalExpenditureTarget
 			});
 		}
 	}
