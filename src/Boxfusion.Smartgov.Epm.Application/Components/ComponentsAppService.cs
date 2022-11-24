@@ -78,7 +78,8 @@ namespace Boxfusion.Smartgov.Epm.Components
 			{
 				NodeName = report.Component.Name,
 				NodePath = path.Left(path.Length -1),
-				NodeTarget = report.Component.FinalIndicatorTarget.ToString()
+				NodeTarget = report.Component.FinalIndicatorTarget.ToString(),
+				Id = report.Id
 			};
 		}
 
