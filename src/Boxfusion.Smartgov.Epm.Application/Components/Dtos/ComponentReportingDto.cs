@@ -12,5 +12,6 @@ namespace Boxfusion.Smartgov.Epm.Components.Dtos
 		public string NodeName { get; set; }
 		public string NodePath { get; set; }
 		public string NodeTarget { get; set; }
+		public Guid ComponentId { get; set; }
 	}
 }
