@@ -44,7 +44,7 @@ namespace Boxfusion.Smartgov.Epm.PerformanceReportAllowedComponentTypes
 			if (parentComponentId == null) return ObjectMapper.Map<List<FlattenedAllowedComponentTypesDto>>(entityList);
 
 			var component = await _componentRepository.GetAsync((Guid)parentComponentId);
-			var filteredList = entityList.Where(a => compareIconLevel(a.ComponentType, component.ComponentType)).ToList();
+			var filteredList = entityList.Where(a => compareIconLevel(a.ComponentType, component.ComponentType) || a.CanBeRoot).ToList();
 
 			return ObjectMapper.Map<List<FlattenedAllowedComponentTypesDto>>(filteredList);
 		}

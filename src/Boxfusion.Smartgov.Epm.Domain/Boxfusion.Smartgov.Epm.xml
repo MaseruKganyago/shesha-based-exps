@@ -34,12 +34,12 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReport,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.Components.Component,System.Guid})">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReport,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,System.Guid})">
             <summary>
             
             </summary>
             <param name="repository"></param>
-            <param name="componentRepository"></param>
+            <param name="progressReport"></param>
         </member>
         <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.repository">
             <summary>
@@ -47,11 +47,11 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.GenerateComponentProgressReportsForProgressReportAsync(Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport)">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.GenerateComponentProgressReportsForComponentAsync(Boxfusion.Smartgov.Epm.Domain.Components.Component)">
             <summary>
             
             </summary>
-            <param name="progressReport"></param>
+            <param name="component"></param>
             <returns></returns>
         </member>
         <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.CreateComponentProgressReportAsync(Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,Boxfusion.Smartgov.Epm.Domain.Components.Component)">
@@ -252,6 +252,22 @@
             <summary>
             If component is of ComponentType KPI, choose KPIType.
             </summary>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.Components.ComponentEntityChangingEventHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.Components.ComponentEntityChangingEventHandler.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.Components.Component,System.Guid},Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.Components.ComponentEntityChangingEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangingEventData{Boxfusion.Smartgov.Epm.Domain.Components.Component})">
+            <summary>
+            
+            </summary>
+            <param name="eventData"></param>
         </member>
         <member name="T:Boxfusion.Smartgov.Epm.Domain.Components.ComponentsHelper">
             <summary>

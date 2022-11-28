@@ -17,17 +17,18 @@ namespace Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport
     public class ComponentProgressReportManager: DomainService
 	{
 		private readonly IRepository<ComponentProgressReport, Guid> _repository;
-		private readonly IRepository<Component, Guid> _componentRepository;
+		private readonly IRepository<ProgressReport, Guid> _progressReport;
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="repository"></param>
-		/// <param name="componentRepository"></param>
-		public ComponentProgressReportManager(IRepository<ComponentProgressReport, Guid> repository, IRepository<Component, Guid> componentRepository)
+		/// <param name="progressReport"></param>
+		public ComponentProgressReportManager(IRepository<ComponentProgressReport, Guid> repository,
+			IRepository<ProgressReport, Guid> progressReport)
 		{
 			_repository = repository;
-			_componentRepository = componentRepository;
+			_progressReport = progressReport;
 		}
 
 		/// <summary>
@@ -42,17 +43,16 @@ namespace Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="progressReport"></param>
+		/// <param name="component"></param>
 		/// <returns></returns>
-		public async Task GenerateComponentProgressReportsForProgressReportAsync(ProgressReport progressReport)
+		public async Task GenerateComponentProgressReportsForComponentAsync(Component component)
 		{
-			var performanceReport = progressReport.PerformanceReport;
+			var performanceReport = component.PerformanceReport;
 
-			var components = await _componentRepository.GetAllListAsync(a => a.PerformanceReport.Id == performanceReport.Id &&
-							 a.ComponentType.Icon == EpmDomainConsts.IconLevel5);
+			var progressReports = await _progressReport.GetAllListAsync(a => a.PerformanceReport.Id == performanceReport.Id);
 
 			var tasks = new List<Task>();
-			components.ForEach(a => tasks.Add(CreateComponentProgressReportAsync(progressReport, a)));
+			progressReports.ForEach(a => tasks.Add(CreateComponentProgressReportAsync(a, component)));
 
 			await Task.WhenAll(tasks);
 		}
@@ -69,7 +69,7 @@ namespace Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport
 			{
 				ProgressReport = progressReport,
 				Component = component,
-				ProgressReportStatus = (long?)RefListNodeProgressReportStatus.Outstanding,
+				ProgressReportStatus = (long?)RefListNodeProgressReportStatus.NotDue,
 				IndicatorTarget = component.FinalIndicatorTarget,
 				ExpenditureTarget = component.FinalExpenditureTarget
 			});

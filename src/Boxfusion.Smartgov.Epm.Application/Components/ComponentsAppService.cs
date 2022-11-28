@@ -1,20 +1,12 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
-using Boxfusion.Smartgov.Epm;
 using Boxfusion.Smartgov.Epm.Components.Dtos;
 using Boxfusion.Smartgov.Epm.Domain;
 using Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport;
 using Boxfusion.Smartgov.Epm.Domain.Components;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
-using Newtonsoft.Json;
 using Shesha.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Boxfusion.Smartgov.Epm.Components
 {
@@ -78,9 +70,8 @@ namespace Boxfusion.Smartgov.Epm.Components
 			{
 				NodeName = report.Component.Name,
 				NodePath = path.Left(path.Length -1),
-				NodeTarget = report.Component.FinalIndicatorTarget.ToString(),
 				Id = report.Id,
-				ComponentId = report.Component.Id
+				ComponentProgressReport = await MapToDynamicDtoAsync<ComponentProgressReport, Guid>(report)
 			};
 		}
 

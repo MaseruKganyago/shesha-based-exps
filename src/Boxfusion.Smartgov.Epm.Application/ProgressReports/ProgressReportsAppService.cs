@@ -41,7 +41,7 @@ namespace Boxfusion.Smartgov.Epm.ComponentProgressReports
 		{
 			var progressReport = await _progressReport.GetAsync(progressReportId);
 
-			await _componentProgressReportManager.GenerateComponentProgressReportsForProgressReportAsync(progressReport);
+			//await _componentProgressReportManager.GenerateComponentProgressReportsForProgressReportAsync(progressReport);
 
 			progressReport.Status = (long?)RefListProgressReportingStatus.Open;
 			var updatedEntity = await _progressReport.UpdateAsync(progressReport);

@@ -6,7 +6,7 @@ using Shesha.Domain;
 namespace Boxfusion.Smartgov.Epm.Authorization
 {
 	/// <summary>
-	/// Health.His Permission checker
+	/// 
 	/// </summary>
 	public class EpmPermissionChecker : ICustomPermissionChecker, IEpmPermissionChecker
 	{
