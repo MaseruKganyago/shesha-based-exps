@@ -62,13 +62,9 @@ namespace Boxfusion.Smartgov.Epm.Domain.ProgressReports
 			var validReportingCyclePeriods = coveredPeriods
 					.Where(a => a.PeriodType == performanceReportTemplate.ProgressReportingCycle).ToList();
 
-			foreach (var period in validReportingCyclePeriods.ToList())
+			foreach (var period in validReportingCyclePeriods)
 			{
-				using (var uow = _uowManager.Begin())
-				{
-					await CreateProgressReportAsync(performanceReport, period);
-					await uow.CompleteAsync();
-				}
+				await CreateProgressReportAsync(performanceReport, period);
 			}
 		}
 
@@ -82,13 +78,26 @@ namespace Boxfusion.Smartgov.Epm.Domain.ProgressReports
 		public async Task CreateProgressReportAsync(PerformanceReport performanceReport, Period period,
 			RefListProgressReportingStatus status = RefListProgressReportingStatus.Draft)
 		{
-			var newProgressReport = new ProgressReport()
+			try
 			{
-				PerformanceReport = performanceReport,
-				PeriodCovered = period,
-				Status = (long?)status
-			};
-			await _repository.InsertAsync(newProgressReport);
+				using (var uow = _uowManager.Begin())
+				{
+					var localReport = await _performanceReport.GetAsync(performanceReport.Id);
+					var newProgressReport = new ProgressReport()
+					{
+						PerformanceReport = localReport,
+						PeriodCovered = period,
+						Status = (long?)status
+					};
+					await _repository.InsertAsync(newProgressReport);
+					await uow.CompleteAsync();
+				}
+			}
+			catch (Exception ex)
+			{
+
+				throw;
+			}
 		}
 	}
 }

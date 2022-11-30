@@ -505,17 +505,17 @@
             
             </summary>
         </member>
-        <member name="T:Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReportEntityChangingEventHandler">
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReportEntityChangedEventHandler">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReportEntityChangingEventHandler.#ctor(Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReportManager,Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReport,System.Guid})">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReportEntityChangedEventHandler.#ctor(Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReportManager,Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReport,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReportEntityChangingEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangingEventData{Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReport})">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReportEntityChangedEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangedEventData{Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReport})">
             <summary>
             
             </summary>
