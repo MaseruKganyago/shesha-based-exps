@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport
+namespace Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports
 {
 	/// <summary>
 	/// 

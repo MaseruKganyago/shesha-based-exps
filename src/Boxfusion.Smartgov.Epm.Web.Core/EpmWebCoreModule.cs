@@ -32,6 +32,7 @@ using System.Text;
 namespace Boxfusion.Smartgov.Epm
 {
 	[DependsOn(
+        typeof(SheshaFrameworkModule),
         typeof(SheshaApplicationModule),
         typeof(SheshaNHibernateModule),
         typeof(AbpAspNetCoreModule),

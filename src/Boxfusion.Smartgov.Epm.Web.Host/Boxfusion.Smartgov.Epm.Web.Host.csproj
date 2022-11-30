@@ -38,7 +38,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Elmah\Shesha.Elmah.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Framework\Shesha.Framework.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.GraphQL\Shesha.GraphQL.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\shesha-core\src\Shesha.Web.FormsDesigner\Shesha.Web.FormsDesigner.csproj" />
 		<ProjectReference Include="..\Boxfusion.Smartgov.Epm.Web.Core\Boxfusion.Smartgov.Epm.Web.Core.csproj" />

@@ -24,37 +24,37 @@
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReport.SkipReportingThisPeriod">
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReport.SkipReportingThisPeriod">
             <summary>
             If true, indicates reporting is skipped for this particular period.
             </summary>
         </member>
-        <member name="T:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager">
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReportManager">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReport,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,System.Guid})">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReportManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReport,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,System.Guid})">
             <summary>
             
             </summary>
             <param name="repository"></param>
             <param name="progressReport"></param>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.repository">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReportManager.repository">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.GenerateComponentProgressReportsForComponentAsync(Boxfusion.Smartgov.Epm.Domain.Components.Component)">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReportManager.GenerateComponentProgressReportsForComponentAsync(Boxfusion.Smartgov.Epm.Domain.Components.Component)">
             <summary>
             
             </summary>
             <param name="component"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager.CreateComponentProgressReportAsync(Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,Boxfusion.Smartgov.Epm.Domain.Components.Component)">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReportManager.CreateComponentProgressReportAsync(Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,Boxfusion.Smartgov.Epm.Domain.Components.Component)">
             <summary>
             
             </summary>
@@ -62,42 +62,75 @@
             <param name="component"></param>
             <returns></returns>
         </member>
-        <member name="T:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport">
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.OutstandingReportSpecification">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport.TemplateName">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.OutstandingReportSpecification.BuildExpression">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.AwaitingLevelOneQAReportSpecification">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport.PeriodCoveredName">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.AwaitingLevelOneQAReportSpecification.BuildExpression">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.AwaitingLevelTwoQAReportSpecification">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport.Name">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.AwaitingLevelTwoQAReportSpecification.BuildExpression">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.FlattenedComponentProgressReport">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport.ProgressReportStatus">
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.FlattenedComponentProgressReport.TemplateName">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport.ResponsibleReportingPersonId">
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.FlattenedComponentProgressReport.PeriodCoveredName">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport.ResponsibleQA1PersonId">
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.FlattenedComponentProgressReport.Name">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.FlattenedComponentProgressReport.ResponsibleQA2PersonId">
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.FlattenedComponentProgressReport.ProgressReportStatus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.FlattenedComponentProgressReport.ResponsibleReportingPersonId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.FlattenedComponentProgressReport.ResponsibleQA1PersonId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.FlattenedComponentProgressReport.ResponsibleQA2PersonId">
             <summary>
             
             </summary>
@@ -258,7 +291,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.Components.ComponentEntityChangingEventHandler.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.Components.Component,System.Guid},Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport.ComponentProgressReportManager)">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.Components.ComponentEntityChangingEventHandler.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.Components.Component,System.Guid},Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReportManager)">
             <summary>
             
             </summary>
@@ -554,7 +587,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReportManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Enterprise.Period,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReport,System.Guid})">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReportManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Enterprise.Period,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReport,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager)">
             <summary>
             
             </summary>
@@ -572,7 +605,7 @@
             <param name="performanceReport"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReportManager.CreateProgressReport(Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReport,Shesha.Enterprise.Period,Boxfusion.Smartgov.Epm.Domain.Enums.RefListProgressReportingStatus)">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReportManager.CreateProgressReportAsync(Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReport,Shesha.Enterprise.Period,Boxfusion.Smartgov.Epm.Domain.Enums.RefListProgressReportingStatus)">
             <summary>
             
             </summary>

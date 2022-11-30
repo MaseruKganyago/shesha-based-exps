@@ -1,6 +1,6 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
-using Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport;
+using Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports;
 using Boxfusion.Smartgov.Epm.Domain.Enums;
 using Boxfusion.Smartgov.Epm.Domain.ProgressReports;
 using Microsoft.AspNetCore.Mvc;

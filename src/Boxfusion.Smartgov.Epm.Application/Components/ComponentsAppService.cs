@@ -2,7 +2,7 @@
 using Abp.Domain.Repositories;
 using Boxfusion.Smartgov.Epm.Components.Dtos;
 using Boxfusion.Smartgov.Epm.Domain;
-using Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport;
+using Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports;
 using Boxfusion.Smartgov.Epm.Domain.Components;
 using Microsoft.AspNetCore.Mvc;
 using Shesha.Utilities;
@@ -66,13 +66,10 @@ namespace Boxfusion.Smartgov.Epm.Components
 
 			var path = await ComponentsHelper.GetComponentNodePath(report.Component.Id);
 
-			return new ComponentReportingDto()
-			{
-				NodeName = report.Component.Name,
-				NodePath = path.Left(path.Length -1),
-				Id = report.Id,
-				ComponentProgressReport = await MapToDynamicDtoAsync<ComponentProgressReport, Guid>(report)
-			};
+			var result = ObjectMapper.Map<ComponentReportingDto>(report);
+			result.NodePath = path;
+
+			return result;
 		}
 
 		private async Task<List<TreeDataDto>> MapComponentsToTreeDataList(List<Component> components)

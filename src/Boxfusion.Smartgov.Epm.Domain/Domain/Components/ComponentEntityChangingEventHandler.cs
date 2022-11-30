@@ -2,7 +2,7 @@
 using Abp.Domain.Repositories;
 using Abp.Events.Bus.Entities;
 using Abp.Events.Bus.Handlers;
-using Boxfusion.Smartgov.Epm.Domain.ComponentProgressReport;
+using Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports;
 using System;
 using System.Collections.Generic;
 using System.Linq;

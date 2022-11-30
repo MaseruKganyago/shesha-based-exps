@@ -1,5 +1,6 @@
 ﻿using Abp.Domain.Repositories;
 using Abp.Domain.Services;
+using Abp.Domain.Uow;
 using Boxfusion.Smartgov.Epm.Domain.Enums;
 using Boxfusion.Smartgov.Epm.Domain.PerformanceReports;
 using Shesha.Enterprise;
@@ -20,15 +21,20 @@ namespace Boxfusion.Smartgov.Epm.Domain.ProgressReports
 		private readonly IRepository<ProgressReport, Guid> _repository;
 		private readonly IRepository<Period, Guid> _periodRepository;
 		private readonly IRepository<PerformanceReport, Guid> _performanceReport;
+		private readonly IUnitOfWorkManager _uowManager;
 
 		/// <summary>
 		/// 
 		/// </summary>
-		public ProgressReportManager(IRepository<ProgressReport, Guid> repository, IRepository<Period, Guid> periodRepository, IRepository<PerformanceReport, Guid> performanceReport)
+		public ProgressReportManager(IRepository<ProgressReport, Guid> repository,
+			IRepository<Period, Guid> periodRepository,
+			IRepository<PerformanceReport, Guid> performanceReport,
+			IUnitOfWorkManager uowManager)
 		{
 			_repository = repository;
 			_periodRepository = periodRepository;
 			_performanceReport = performanceReport;
+			_uowManager = uowManager;
 		}
 
 		/// <summary>
@@ -56,9 +62,14 @@ namespace Boxfusion.Smartgov.Epm.Domain.ProgressReports
 			var validReportingCyclePeriods = coveredPeriods
 					.Where(a => a.PeriodType == performanceReportTemplate.ProgressReportingCycle).ToList();
 
-			var tasks = new List<Task>();
-			validReportingCyclePeriods.ForEach(a => tasks.Add(CreateProgressReport(performanceReport, a)));
-			await Task.WhenAll(tasks);
+			foreach (var period in validReportingCyclePeriods.ToList())
+			{
+				using (var uow = _uowManager.Begin())
+				{
+					await CreateProgressReportAsync(performanceReport, period);
+					await uow.CompleteAsync();
+				}
+			}
 		}
 
 		/// <summary>
@@ -68,15 +79,16 @@ namespace Boxfusion.Smartgov.Epm.Domain.ProgressReports
 		/// <param name="period"></param>
 		/// <param name="status"></param>
 		/// <returns></returns>
-		public async Task<ProgressReport> CreateProgressReport(PerformanceReport performanceReport, Period period,
+		public async Task CreateProgressReportAsync(PerformanceReport performanceReport, Period period,
 			RefListProgressReportingStatus status = RefListProgressReportingStatus.Draft)
 		{
-			return await _repository.InsertAsync(new ProgressReport() 
+			var newProgressReport = new ProgressReport()
 			{
 				PerformanceReport = performanceReport,
 				PeriodCovered = period,
 				Status = (long?)status
-			});
+			};
+			await _repository.InsertAsync(newProgressReport);
 		}
 	}
 }
