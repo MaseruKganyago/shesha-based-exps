@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Entity(TypeShortAlias = "Epm.ComponentProgressReport")]
     public class ComponentProgressReport : FullAuditedEntity<Guid>
     {
