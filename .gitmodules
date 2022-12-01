@@ -1,4 +1,4 @@
 [submodule "shesha-core-enterprise"]
 	path = shesha-core-enterprise
 	url = https://dev.azure.com/boxfusion/Shesha%20Web%20v3.0/_git/shesha-core-enterprise
-    branch = f/configuration-framework
+    branch = IntentFix
