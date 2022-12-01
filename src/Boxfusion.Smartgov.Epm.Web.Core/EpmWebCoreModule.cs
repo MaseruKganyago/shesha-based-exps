@@ -19,6 +19,7 @@ using Shesha.Bootstrappers;
 using Shesha.Configuration;
 using Shesha.ConfigurationItems;
 using Shesha.Elmah;
+using Shesha.Enterprise;
 using Shesha.Enterprise.Reporting;
 using Shesha.Enterprise.Workflow;
 using Shesha.GraphQL;

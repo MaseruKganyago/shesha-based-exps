@@ -4,6 +4,7 @@ using Abp.Domain.Uow;
 using Boxfusion.Smartgov.Epm.Domain.Enums;
 using Boxfusion.Smartgov.Epm.Domain.PerformanceReports;
 using Shesha.Enterprise;
+using Shesha.Enterprise.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

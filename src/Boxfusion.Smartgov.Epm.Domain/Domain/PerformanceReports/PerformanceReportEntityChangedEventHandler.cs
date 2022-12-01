@@ -45,8 +45,6 @@ namespace Boxfusion.Smartgov.Epm.Domain.PerformanceReports
 			{
 				var entity = eventData.Entity;
 
-				var repo = IocManager.Instance.Resolve<IRepository<PerformanceReport, Guid>>();
-
 				var progressReports = await _progressReportManager.repository().GetAllListAsync(a => a.PerformanceReport.Id == entity.Id);
 				if (progressReports.Any())
 					return;

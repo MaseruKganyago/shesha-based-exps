@@ -4,7 +4,6 @@ using Boxfusion.Smartgov.Epm.Domain.PerformanceReports;
 using Newtonsoft.Json;
 using Shesha.Domain;
 using Shesha.Domain.Attributes;
-using Shesha.Enterprise.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

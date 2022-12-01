@@ -26,7 +26,6 @@
 		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise.DocumentProcessing\Shesha.Enterprise.DocumentProcessing.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise.Reporting\Shesha.Enterprise.Reporting.csproj" />
 		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise.Workflow\Shesha.Enterprise.Workflow.csproj" />
-		<ProjectReference Include="..\..\shesha-core-enterprise\src\Shesha.Enterprise\Shesha.Enterprise.csproj" />
 		<ProjectReference Include="..\Boxfusion.Smartgov.Epm.Application\Boxfusion.Smartgov.Epm.Application.csproj" />
 		<ProjectReference Include="..\Boxfusion.Smartgov.Epm.Domain\Boxfusion.Smartgov.Epm.Domain.csproj" />
 	</ItemGroup>

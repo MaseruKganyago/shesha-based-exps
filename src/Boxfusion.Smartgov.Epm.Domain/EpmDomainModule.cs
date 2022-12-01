@@ -1,6 +1,7 @@
 ﻿using Abp.AutoMapper;
 using Abp.Modules;
 using Shesha;
+using Shesha.Enterprise;
 using System.Reflection;
 
 namespace Boxfusion.Smartgov.Epm

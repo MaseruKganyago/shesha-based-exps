@@ -25,8 +25,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Smartgov.Epm.Web.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Smartgov.Epm.Web.Host", "src\Boxfusion.Smartgov.Epm.Web.Host\Boxfusion.Smartgov.Epm.Web.Host.csproj", "{F1E0BE41-1B30-4769-9F64-C90E2A8356BB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Enterprise", "shesha-core-enterprise\src\Shesha.Enterprise\Shesha.Enterprise.csproj", "{A1F04331-3D8C-44A3-BB95-D850F13FF0B3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Enterprise.BpmnEngine", "shesha-core-enterprise\src\Shesha.Enterprise.BpmnEngine\Shesha.Enterprise.BpmnEngine.csproj", "{18964B04-E67F-4E55-B860-F851D4C514D0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Enterprise.DocumentProcessing", "shesha-core-enterprise\src\Shesha.Enterprise.DocumentProcessing\Shesha.Enterprise.DocumentProcessing.csproj", "{30E9D02F-E869-41F8-A492-A3152F6110C3}"
@@ -77,7 +75,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Enterprise.Tests", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Tests", "shesha-core-enterprise\shesha-core\test\Shesha.Tests\Shesha.Tests.csproj", "{BF916446-6113-4A55-BBE8-890D3E308802}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boxfusion.Smartgov.Epm.Domain.Tests", "test\Boxfusion.Smartgov.Epm.Domain.Tests\Boxfusion.Smartgov.Epm.Domain.Tests.csproj", "{1C54CF0C-2BFC-4714-8499-AEEFAB7B9A34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxfusion.Smartgov.Epm.Domain.Tests", "test\Boxfusion.Smartgov.Epm.Domain.Tests\Boxfusion.Smartgov.Epm.Domain.Tests.csproj", "{1C54CF0C-2BFC-4714-8499-AEEFAB7B9A34}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Enterprise.Domain", "shesha-core-enterprise\src\Shesha.Enterprise.Domain\Shesha.Enterprise.Domain.csproj", "{F51AC050-FA17-4FBD-9664-B028600EA907}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shesha.Enterprise.Application", "shesha-core-enterprise\src\Shesha.Enterprise.Application\Shesha.Enterprise.Application.csproj", "{DFA7CA0F-0655-4528-9BF5-1FDB790DB2BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,12 +112,6 @@ Global
 		{F1E0BE41-1B30-4769-9F64-C90E2A8356BB}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{F1E0BE41-1B30-4769-9F64-C90E2A8356BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1E0BE41-1B30-4769-9F64-C90E2A8356BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A1F04331-3D8C-44A3-BB95-D850F13FF0B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1F04331-3D8C-44A3-BB95-D850F13FF0B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1F04331-3D8C-44A3-BB95-D850F13FF0B3}.DebugLocalShesha|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
-		{A1F04331-3D8C-44A3-BB95-D850F13FF0B3}.DebugLocalShesha|Any CPU.Build.0 = DebugLocalShesha|Any CPU
-		{A1F04331-3D8C-44A3-BB95-D850F13FF0B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1F04331-3D8C-44A3-BB95-D850F13FF0B3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{18964B04-E67F-4E55-B860-F851D4C514D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{18964B04-E67F-4E55-B860-F851D4C514D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18964B04-E67F-4E55-B860-F851D4C514D0}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
@@ -266,12 +262,23 @@ Global
 		{1C54CF0C-2BFC-4714-8499-AEEFAB7B9A34}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
 		{1C54CF0C-2BFC-4714-8499-AEEFAB7B9A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C54CF0C-2BFC-4714-8499-AEEFAB7B9A34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F51AC050-FA17-4FBD-9664-B028600EA907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F51AC050-FA17-4FBD-9664-B028600EA907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F51AC050-FA17-4FBD-9664-B028600EA907}.DebugLocalShesha|Any CPU.ActiveCfg = DebugLocalShesha|Any CPU
+		{F51AC050-FA17-4FBD-9664-B028600EA907}.DebugLocalShesha|Any CPU.Build.0 = DebugLocalShesha|Any CPU
+		{F51AC050-FA17-4FBD-9664-B028600EA907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F51AC050-FA17-4FBD-9664-B028600EA907}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFA7CA0F-0655-4528-9BF5-1FDB790DB2BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFA7CA0F-0655-4528-9BF5-1FDB790DB2BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFA7CA0F-0655-4528-9BF5-1FDB790DB2BF}.DebugLocalShesha|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFA7CA0F-0655-4528-9BF5-1FDB790DB2BF}.DebugLocalShesha|Any CPU.Build.0 = Debug|Any CPU
+		{DFA7CA0F-0655-4528-9BF5-1FDB790DB2BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFA7CA0F-0655-4528-9BF5-1FDB790DB2BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A1F04331-3D8C-44A3-BB95-D850F13FF0B3} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 		{18964B04-E67F-4E55-B860-F851D4C514D0} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 		{30E9D02F-E869-41F8-A492-A3152F6110C3} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 		{5B4B1D48-23C9-4088-8F35-C60E9F824930} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
@@ -298,6 +305,8 @@ Global
 		{5AE72772-2C77-448C-AC09-774E716D4461} = {6708090F-E94F-4D2E-B555-8BF9AD87E8E2}
 		{BF916446-6113-4A55-BBE8-890D3E308802} = {6708090F-E94F-4D2E-B555-8BF9AD87E8E2}
 		{1C54CF0C-2BFC-4714-8499-AEEFAB7B9A34} = {F10AA149-2626-486E-85BB-9CD5365F3016}
+		{F51AC050-FA17-4FBD-9664-B028600EA907} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
+		{DFA7CA0F-0655-4528-9BF5-1FDB790DB2BF} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95ED23F3-8DEA-456E-A44B-87A161CB696A}

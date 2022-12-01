@@ -3,6 +3,7 @@ using Boxfusion.Smartgov.Epm.Domain.Enums;
 using Boxfusion.Smartgov.Epm.Domain.PerformanceReports;
 using Shesha.Domain.Attributes;
 using Shesha.Enterprise;
+using Shesha.Enterprise.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

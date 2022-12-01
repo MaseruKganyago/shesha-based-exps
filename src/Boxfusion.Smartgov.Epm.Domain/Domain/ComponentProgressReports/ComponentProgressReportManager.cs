@@ -1,5 +1,6 @@
 ﻿using Abp.Domain.Repositories;
 using Abp.Domain.Services;
+using Abp.Domain.Uow;
 using Boxfusion.Smartgov.Epm.Domain.Components;
 using Boxfusion.Smartgov.Epm.Domain.Enums;
 using Boxfusion.Smartgov.Epm.Domain.ProgressReports;
@@ -18,17 +19,25 @@ namespace Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports
 	{
 		private readonly IRepository<ComponentProgressReport, Guid> _repository;
 		private readonly IRepository<ProgressReport, Guid> _progressReport;
+		private readonly IUnitOfWorkManager _uowManager;
+		private readonly IRepository<Component, Guid> _componentRepository;
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="repository"></param>
 		/// <param name="progressReport"></param>
+		/// <param name="componentRepository"></param>
+		/// <param name="uowManager"></param>
 		public ComponentProgressReportManager(IRepository<ComponentProgressReport, Guid> repository,
-			IRepository<ProgressReport, Guid> progressReport)
+			IRepository<ProgressReport, Guid> progressReport,
+			IRepository<Component, Guid> componentRepository,
+			IUnitOfWorkManager uowManager)
 		{
 			_repository = repository;
 			_progressReport = progressReport;
+			_uowManager = uowManager;
+			_componentRepository = componentRepository;
 		}
 
 		/// <summary>
@@ -63,16 +72,21 @@ namespace Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports
 		/// <param name="progressReport"></param>
 		/// <param name="component"></param>
 		/// <returns></returns>
-		public async Task<ComponentProgressReport> CreateComponentProgressReportAsync(ProgressReport progressReport, Component component)
+		public async Task CreateComponentProgressReportAsync(ProgressReport progressReport, Component component)
 		{
-			return await _repository.InsertAsync(new ComponentProgressReport()
+			using (var uow = _uowManager.Begin())
 			{
-				ProgressReport = progressReport,
-				Component = component,
-				ProgressReportStatus = (long?)RefListNodeProgressReportStatus.NotDue,
-				IndicatorTarget = component.FinalIndicatorTarget,
-				ExpenditureTarget = component.FinalExpenditureTarget
-			});
+				var localComponent = await _componentRepository.GetAsync(component.Id);
+
+				await _repository.InsertAsync(new ComponentProgressReport()
+				{
+					ProgressReport = progressReport,
+					Component = localComponent,
+					ProgressReportStatus = (long?)RefListNodeProgressReportStatus.NotDue
+				});
+
+				await uow.CompleteAsync();
+			}
 		}
 	}
 }

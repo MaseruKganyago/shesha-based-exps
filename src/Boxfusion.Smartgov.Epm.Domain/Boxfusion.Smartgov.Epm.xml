@@ -34,12 +34,14 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReportManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReport,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,System.Guid})">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReportManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReport,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.Components.Component,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager)">
             <summary>
             
             </summary>
             <param name="repository"></param>
             <param name="progressReport"></param>
+            <param name="componentRepository"></param>
+            <param name="uowManager"></param>
         </member>
         <member name="M:Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReportManager.repository">
             <summary>
@@ -286,17 +288,17 @@
             If component is of ComponentType KPI, choose KPIType.
             </summary>
         </member>
-        <member name="T:Boxfusion.Smartgov.Epm.Domain.Components.ComponentEntityChangingEventHandler">
+        <member name="T:Boxfusion.Smartgov.Epm.Domain.Components.ComponentEntityChangedEventHandler">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.Components.ComponentEntityChangingEventHandler.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.Components.Component,System.Guid},Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReportManager)">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.Components.ComponentEntityChangedEventHandler.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.Components.Component,System.Guid},Boxfusion.Smartgov.Epm.Domain.ComponentProgressReports.ComponentProgressReportManager,Abp.Domain.Uow.IUnitOfWorkManager)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.Components.ComponentEntityChangingEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangingEventData{Boxfusion.Smartgov.Epm.Domain.Components.Component})">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.Components.ComponentEntityChangedEventHandler.HandleEvent(Abp.Events.Bus.Entities.EntityChangedEventData{Boxfusion.Smartgov.Epm.Domain.Components.Component})">
             <summary>
             
             </summary>
@@ -587,7 +589,7 @@
             
             </summary>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReportManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Enterprise.Period,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReport,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager)">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReportManager.#ctor(Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReport,System.Guid},Abp.Domain.Repositories.IRepository{Shesha.Enterprise.Domain.Period,System.Guid},Abp.Domain.Repositories.IRepository{Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReport,System.Guid},Abp.Domain.Uow.IUnitOfWorkManager)">
             <summary>
             
             </summary>
@@ -605,7 +607,7 @@
             <param name="performanceReport"></param>
             <returns></returns>
         </member>
-        <member name="M:Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReportManager.CreateProgressReportAsync(Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReport,Shesha.Enterprise.Period,Boxfusion.Smartgov.Epm.Domain.Enums.RefListProgressReportingStatus)">
+        <member name="M:Boxfusion.Smartgov.Epm.Domain.ProgressReports.ProgressReportManager.CreateProgressReportAsync(Boxfusion.Smartgov.Epm.Domain.PerformanceReports.PerformanceReport,Shesha.Enterprise.Domain.Period,Boxfusion.Smartgov.Epm.Domain.Enums.RefListProgressReportingStatus)">
             <summary>
             
             </summary>
